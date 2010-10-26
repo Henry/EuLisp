@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-08-29 23:31:00" /> 
+<meta name="date" content="2010-10-23 20:05:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -33,7 +33,7 @@ class="cmr-7">ISP</span>&#x00A0;module scheme has several influences: LeLisp&#82
 module system and module compiler (complice), Haskell<a 
  id="dx12-59003"></a>, ML<a 
  id="dx12-59004"></a>&#x00A0;[<a 
-href="eulisp.html#x1-124301313">13<!--tex4ht:ref: ML-modules --></a>],
+href="eulisp.html#x1-123101313">13<!--tex4ht:ref: ML-modules --></a>],
 MIT-Scheme&#8217;s <span 
 class="cmtt-9">make-environment </span>and T&#8217;s locales.
 </p><!--l. 6--><p class="noindent" >All bindings of objects in <span 
@@ -74,7 +74,7 @@ smaller units than modules. A module defines a mapping between
 a set of names and either local or imported bindings of those
 names. Most such bindings are immutable. The exception are
 those bindings created by <a 
-href="eulispcl16.html#x20-209006r5"><span 
+href="eulispcl12.html#x16-124006r5"><span 
 class="cmtt-9">deflocal</span></a> which may be modified
 by both the defining and importing modules. There are no
 implicit imports into a module&#8212;not even the special forms are
@@ -137,17 +137,13 @@ class="cmti-9">syntax</span><a
  id="x12-6100010.1.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
  id="dx12-61001"></a>
-  <a 
- id="dx12-61002"></a>
   <!--l. 45--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">defmodule-0-form</span><a 
- id="dx12-61003"></a><a 
- id="dx12-61004"></a><span 
+class="cmti-9">defmodule-0-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -185,9 +181,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">module-name</span><a 
- id="dx12-61005"></a><a 
- id="dx12-61006"></a><span 
+class="cmti-9">module-name</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -202,9 +196,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">module-directives</span><a 
- id="dx12-61007"></a><a 
- id="dx12-61008"></a><span 
+class="cmti-9">module-directives</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -222,9 +214,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">module-directive</span><a 
- id="dx12-61009"></a><a 
- id="dx12-61010"></a><span 
+class="cmti-9">module-directive</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -283,9 +273,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">level-0-module-form</span><a 
- id="dx12-61011"></a><a 
- id="dx12-61012"></a><span 
+class="cmti-9">level-0-module-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -323,7 +311,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">         </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl16.html#x20-300003r7"><span 
+href="eulispcl12.html#x16-215003r7"><span 
 class="cmtt-9">progn</span></a> <a 
 href="#x12-6100010.1.1.1"><span 
 class="cmti-9">level-0-module-form</span><span 
@@ -334,9 +322,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">module-descriptor</span><a 
- id="dx12-61013"></a><a 
- id="dx12-61014"></a><span 
+class="cmti-9">module-descriptor</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -359,9 +345,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">module-filter</span><a 
- id="dx12-61015"></a><a 
- id="dx12-61016"></a><span 
+class="cmti-9">module-filter</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -419,9 +403,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">rename-pair</span><a 
- id="dx12-61017"></a><a 
- id="dx12-61018"></a><span 
+class="cmti-9">rename-pair</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -440,9 +422,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">level-0-form</span><a 
- id="dx12-61019"></a><a 
- id="dx12-61020"></a><span 
+class="cmti-9">level-0-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -474,16 +454,14 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-23200016.2.4.1"><span 
+href="eulispcl12.html#x16-14700012.2.4.1"><span 
 class="cmti-9">function-call-form</span></a></td></tr></table>
 <!--l.10 45-->                                                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">form</span><a 
- id="dx12-61021"></a><a 
- id="dx12-61022"></a><span 
+class="cmti-9">form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -498,9 +476,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">special-form</span><a 
- id="dx12-61023"></a><a 
- id="dx12-61024"></a><span 
+class="cmti-9">special-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 45-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -519,9 +495,9 @@ class="tabbing"></td></tr></table>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x12-6200010.1.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
+  <!--l. 47--><p class="noindent" >
                                                                                                   
                                                                                                   
-<!--l. 47--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
 <span 
 class="cmti-9">module name </span>: </dt><dd 
@@ -1214,8 +1190,9 @@ class="cmtt-9">&#x00A0;...)</span>
 <h5 class="ssclauseHead"> 10.2.1 <a 
  id="x12-6600010.2.1"></a><span 
 class="cmtt-9">export</span><a 
- id="dx12-66001"></a> Directive</h5> <a 
- id="dx12-66002"></a>
+ id="dx12-66001"></a><a 
+ id="dx12-66002"></a> Directive</h5> <a 
+ id="dx12-66003"></a>
 This is denoted by the keyword <a 
 href="#x12-6600010.2.1"><span 
 class="cmtt-9">export</span></a> followed by a sequence of
@@ -1228,8 +1205,9 @@ modules.
 <h5 class="ssclauseHead"> 10.2.2 <a 
  id="x12-6700010.2.2"></a><span 
 class="cmtt-9">import</span><a 
- id="dx12-67001"></a> Directive</h5> <a 
- id="dx12-67002"></a>
+ id="dx12-67001"></a><a 
+ id="dx12-67002"></a> Directive</h5> <a 
+ id="dx12-67003"></a>
 This is denoted by the keyword <a 
 href="#x12-6700010.2.2"><span 
 class="cmtt-9">import</span></a> followed by a sequence of
@@ -1285,10 +1263,11 @@ class="cmti-9">module-name</span></a>.
     </dd> <dt class="description">
     <span 
 class="cmtt-9">except</span><a 
- id="dx12-67003"></a><span 
+ id="dx12-67004"></a><a 
+ id="dx12-67005"></a> <span 
 class="cmbx-9">:</span> </dt><dd 
 class="description"><a 
- id="dx12-67004"></a> Filters the names from each <a 
+ id="dx12-67006"></a> Filters the names from each <a 
 href="#x12-6100010.1.1.1"><span 
 class="cmti-9">module-descriptor</span></a>
     discarding those specified and keeping all other names.
@@ -1301,10 +1280,11 @@ class="cmtt-9">except</span></a> directive  is  convenient  when  almost  all  o
     </dd> <dt class="description">
     <span 
 class="cmtt-9">only</span><a 
- id="dx12-67005"></a><span 
+ id="dx12-67007"></a><a 
+ id="dx12-67008"></a> <span 
 class="cmbx-9">:</span> </dt><dd 
 class="description"><a 
- id="dx12-67006"></a>  Filters  the  names  from  each  <a 
+ id="dx12-67009"></a> Filters  the  names  from  each  <a 
 href="#x12-6100010.1.1.1"><span 
 class="cmti-9">module-descriptor</span></a>
     keeping only those names specified and discarding all other
@@ -1316,10 +1296,11 @@ class="cmtt-9">only</span></a> directive is convenient when only a few
     </dd> <dt class="description">
     <span 
 class="cmtt-9">rename</span><a 
- id="dx12-67007"></a><span 
+ id="dx12-67010"></a><a 
+ id="dx12-67011"></a> <span 
 class="cmbx-9">:</span> </dt><dd 
 class="description"><a 
- id="dx12-67008"></a> Filters the names from each <a 
+ id="dx12-67012"></a> Filters the names from each <a 
 href="#x12-6100010.1.1.1"><span 
 class="cmti-9">module-descriptor</span></a>
     replacing those with <span 
@@ -1337,8 +1318,9 @@ class="cmtt-9">rename</span></a>
   <h5 class="ssclauseHead"> 10.2.3 <a 
  id="x12-6800010.2.3"></a><span 
 class="cmtt-9">expose</span><a 
- id="dx12-68001"></a> Directive</h5> <a 
- id="dx12-68002"></a>
+ id="dx12-68001"></a><a 
+ id="dx12-68002"></a> Directive</h5> <a 
+ id="dx12-68003"></a>
   This is denoted by the keyword <a 
 href="#x12-6800010.2.3"><span 
 class="cmtt-9">expose</span></a> followed by a list of
@@ -1361,8 +1343,7 @@ class="cmti-9">local-name </span>with
   <a 
 href="#x12-6800010.2.3"><span 
 class="cmtt-9">expose</span></a>, a possible implementation of the <span 
-class="cmtt-9">eulisp0</span> <a 
- id="dx12-68003"></a>module
+class="cmtt-9">level-0 </span>module
   is shown in example&#x00A0;<a 
 href="#x12-68004r1">1<!--tex4ht:ref: example:exposes --></a>.          <a 
  id="x12-68005"></a><br /> <div align="center" class="caption"><table class="caption" 
@@ -1373,7 +1354,7 @@ href="#x12-6800010.2.3"><span
 class="cmtt-9">expose</span></a></td></tr></table></div>
     <div class="obeylines-v"><span 
 class="cmtt-9">(defmodule</span><span 
-class="cmtt-9">&#x00A0;eulisp-level-0</span>
+class="cmtt-9">&#x00A0;level-0</span>
     <br /><span 
 class="cmtt-9">&#x00A0;</span><span 
 class="cmtt-9">&#x00A0;(expose</span>
@@ -1441,8 +1422,9 @@ exported.
 <h5 class="ssclauseHead"> 10.2.4 <a 
  id="x12-6900010.2.4"></a><span 
 class="cmtt-9">syntax</span><a 
- id="dx12-69001"></a> Directive</h5> <a 
- id="dx12-69002"></a>
+ id="dx12-69001"></a><a 
+ id="dx12-69002"></a> Directive</h5> <a 
+ id="dx12-69003"></a>
 This directive is processed in the same way as an import directive,
 except that the bindings are added to the syntax environment.
 This environment is used in the second phase of module
@@ -1461,16 +1443,13 @@ Definitions in a module only contain unqualified names&#8212;that is,
 <span 
 class="cmti-9">local-name</span>s, using the above terminology and are created by defining
 forms:  <a 
- id="dx12-70001"></a><a 
- id="dx12-70002"></a><div class="framebox-l" 
+ id="dx12-70001"></a><div class="framebox-l" 
 style="width:27.14em;"> <div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">defining-0-form</span><a 
- id="dx12-70003"></a><a 
- id="dx12-70004"></a><span 
+class="cmti-9">defining-0-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 15-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1486,7 +1465,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-16100014.0.6.1"><span 
+href="eulispcl13.html#x17-24300013.0.1.1"><span 
 class="cmti-9">defcondition-form</span></a></td></tr></table>
 <!--l.10 15-->                                               <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1494,7 +1473,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-20600016.1.2.1"><span 
+href="eulispcl12.html#x16-12100012.1.2.1"><span 
 class="cmti-9">defconstant-form</span></a></td></tr></table>
 <!--l.10 15-->                                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1502,7 +1481,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-21000016.1.5.1"><span 
+href="eulispcl12.html#x16-12500012.1.5.1"><span 
 class="cmti-9">deflocal-form</span></a></td></tr></table>
 <!--l.10 15-->                                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1518,7 +1497,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-22400016.2.2.1"><span 
+href="eulispcl12.html#x16-13900012.2.2.1"><span 
 class="cmti-9">defmacro-form</span></a></td></tr></table>
 <!--l.10 15-->                                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1526,7 +1505,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-22800016.2.3.1"><span 
+href="eulispcl12.html#x16-14300012.2.3.1"><span 
 class="cmti-9">defun-form</span></a></td></tr></table>
 <!--l.10 15-->                                                                            </div></div>
                                                                                                   
@@ -1537,7 +1516,7 @@ created the binding. A name clash can arise in the top-lexical
 environment from interaction between local definitions and
 between local definitions and imported modules. Only top-lexical
 bindings created by <a 
-href="eulispcl16.html#x20-209006r5"><span 
+href="eulispcl12.html#x16-124006r5"><span 
 class="cmtt-9">deflocal</span></a> are mutable&#8212;both in the defining
 module and in any importing module. It is a violation to modify an
 immutable binding. Expressions, that is non-defining forms, are
@@ -1545,14 +1524,14 @@ collected and evaluated in order of appearance at the end of the
 module definition process when the top-lexical environment is
 complete&#8212;that is after the creation and initialization of the
 top-lexical bindings. The exception to this is the <a 
-href="eulispcl16.html#x20-300003r7"><span 
+href="eulispcl12.html#x16-215003r7"><span 
 class="cmtt-9">progn</span></a> form, which
 is descended and the forms within it are treated as if the <a 
-href="eulispcl16.html#x20-300003r7"><span 
+href="eulispcl12.html#x16-215003r7"><span 
 class="cmtt-9">progn</span></a>
 were not present. Definitions may only appear either at top-level
 within a module definition or inside any number of <a 
-href="eulispcl16.html#x20-300003r7"><span 
+href="eulispcl12.html#x16-215003r7"><span 
 class="cmtt-9">progn</span></a> forms.
 This is specified more precisely in the grammar for a module in
 syntax table&#x00A0;<a 
@@ -1564,17 +1543,13 @@ href="#x12-6100010.1.1.1">10.1.1.1<!--tex4ht:ref: defmodule-syntax --></a>.
 ***HGW Say something!
 <a 
  id="dx12-71001"></a>
-<a 
- id="dx12-71002"></a>
 <!--l. 34--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">special-0-form</span><a 
- id="dx12-71003"></a><a 
- id="dx12-71004"></a><span 
+class="cmti-9">special-0-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 34-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1590,7 +1565,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl18.html#x23-94700018.3.1.1"><span 
+href="eulispcl17.html#x22-93300017.3.1.1"><span 
 class="cmti-9">generic-lambda-form</span></a></td></tr></table>
 <!--l.10 34-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1598,7 +1573,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-21400016.1.6.1"><span 
+href="eulispcl12.html#x16-12900012.1.6.1"><span 
 class="cmti-9">quote-form</span></a></td></tr></table>
 <!--l.10 34-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1606,7 +1581,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-22000016.2.1.1"><span 
+href="eulispcl12.html#x16-13500012.2.1.1"><span 
 class="cmti-9">lambda-form</span></a></td></tr></table>
 <!--l.10 34-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1614,7 +1589,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-24400016.3.1.1"><span 
+href="eulispcl12.html#x16-15900012.3.1.1"><span 
 class="cmti-9">setq-form</span></a></td></tr></table>
 <!--l.10 34-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1622,7 +1597,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-25800016.4.1.1"><span 
+href="eulispcl12.html#x16-17300012.4.1.1"><span 
 class="cmti-9">if-form</span></a></td></tr></table>
 <!--l.10 34-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1630,7 +1605,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-27800016.5.1.1"><span 
+href="eulispcl12.html#x16-19300012.5.1.1"><span 
 class="cmti-9">let/cc-form</span></a></td></tr></table>
 <!--l.10 34-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1638,7 +1613,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-29200016.5.4.1"><span 
+href="eulispcl12.html#x16-20700012.5.4.1"><span 
 class="cmti-9">labels-form</span></a></td></tr></table>
 <!--l.10 34-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1646,7 +1621,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-30100016.5.7.1"><span 
+href="eulispcl12.html#x16-21600012.5.7.1"><span 
 class="cmti-9">progn-form</span></a></td></tr></table>
 <!--l.10 34-->                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1654,7 +1629,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-30500016.5.8.1"><span 
+href="eulispcl12.html#x16-22000012.5.8.1"><span 
 class="cmti-9">unwind-protect-form</span></a></td></tr></table>
 <!--l.10 34-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1662,7 +1637,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-31100016.6.1.1"><span 
+href="eulispcl12.html#x16-22600012.6.1.1"><span 
 class="cmti-9">quasiquote-form</span></a></td></tr></table>
 <!--l.10 34-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1670,7 +1645,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-31400016.6.3.1"><span 
+href="eulispcl12.html#x16-22900012.6.3.1"><span 
 class="cmti-9">unquote-form</span></a></td></tr></table>
 <!--l.10 34-->                          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1678,7 +1653,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-31700016.6.5.1"><span 
+href="eulispcl12.html#x16-23200012.6.5.1"><span 
 class="cmti-9">unquote-splicing-form</span></a></td></tr></table>
 <!--l.10 34-->                         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1686,7 +1661,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl15.html#x19-18900015.0.22.1"><span 
+href="eulispcl14.html#x18-27100014.0.17.1"><span 
 class="cmti-9">call-next-handler-form</span></a></td></tr></table>
 <!--l.10 34-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1694,7 +1669,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl15.html#x19-19100015.0.23.1"><span 
+href="eulispcl14.html#x18-27300014.0.18.1"><span 
 class="cmti-9">with-handler-form</span></a></td></tr></table>
 <!--l.10 34-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1702,7 +1677,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-26100016.4.2.1"><span 
+href="eulispcl12.html#x16-17600012.4.2.1"><span 
 class="cmti-9">cond-form</span></a></td></tr></table>
 <!--l.10 34-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1710,7 +1685,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-27100016.4.6.1"><span 
+href="eulispcl12.html#x16-18600012.4.6.1"><span 
 class="cmti-9">and-form</span></a></td></tr></table>
 <!--l.10 34-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1718,7 +1693,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-27400016.4.7.1"><span 
+href="eulispcl12.html#x16-18900012.4.7.1"><span 
 class="cmti-9">or-form</span></a></td></tr></table>
 <!--l.10 34-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1726,7 +1701,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-28400016.5.2.1"><span 
+href="eulispcl12.html#x16-19900012.5.2.1"><span 
 class="cmti-9">block-form</span></a></td></tr></table>
 <!--l.10 34-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1734,7 +1709,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-28800016.5.3.1"><span 
+href="eulispcl12.html#x16-20300012.5.3.1"><span 
 class="cmti-9">return-from-form</span></a></td></tr></table>
 <!--l.10 34-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1742,7 +1717,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-29500016.5.5.1"><span 
+href="eulispcl12.html#x16-21000012.5.5.1"><span 
 class="cmti-9">let-form</span></a></td></tr></table>
 <!--l.10 34-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1750,7 +1725,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-29800016.5.6.1"><span 
+href="eulispcl12.html#x16-21300012.5.6.1"><span 
 class="cmti-9">let-star-form</span></a></td></tr></table>
 <!--l.10 34-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1758,7 +1733,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl17.html#x21-86300017.15.62.1"><span 
+href="eulispcl16.html#x20-84900016.15.58.1"><span 
 class="cmti-9">with-input-file-form</span></a></td></tr></table>
 <!--l.10 34-->                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1766,7 +1741,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl17.html#x21-86400017.15.63.1"><span 
+href="eulispcl16.html#x20-85000016.15.59.1"><span 
 class="cmti-9">with-output-file-form</span></a></td></tr></table>
 <!--l.10 34-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1774,7 +1749,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl17.html#x21-86500017.15.64.1"><span 
+href="eulispcl16.html#x20-85100016.15.60.1"><span 
 class="cmti-9">with-source-form</span></a></td></tr></table>
 <!--l.10 34-->                               <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1782,7 +1757,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl17.html#x21-86600017.15.65.1"><span 
+href="eulispcl16.html#x20-85200016.15.61.1"><span 
 class="cmti-9">with-sink-form</span></a></td></tr></table>
 <!--l.10 34-->                                                </div></div>
 <!--l. 406--><p class="noindent" >
@@ -1799,8 +1774,7 @@ class="cmsy-9">§</span>&#x00A0;<a
 href="#x12-6500010.2">10.2<!--tex4ht:ref: directives --></a>&#8211;<a 
 href="#x12-6900010.2.4">10.2.4<!--tex4ht:ref: syntax-directive --></a>.   This   step   creates   and   initializes   the
     top-lexical, syntax and external environments.
-                                                         </dd> <dt class="description">
-        <span 
+    </dd> <dt class="description">                                                     <span 
 class="cmbx-9">syntax expansion:</span> </dt><dd 
 class="description"><a 
  id="dx12-72001"></a> <a 
@@ -1866,7 +1840,7 @@ class="cmr-8">&#x00A0;3</span>   <span
 class="cmr-8">In  this  sense,  a  module  can  be  regarded  as  a</span>
         <span 
 class="cmr-8">generalization of the </span><a 
-href="eulispcl16.html#x20-291001r4"><span 
+href="eulispcl12.html#x16-206001r4"><span 
 class="cmtt-8">labels</span></a> <span 
 class="cmr-8">form of this and other Lisp dialects.</span></div>
         </dd> <dt class="description">
@@ -1875,7 +1849,7 @@ class="cmbx-9">expression evaluation:</span> </dt><dd
 class="description">The expressions in the body of
         the module are evaluated in the order in which they
         appear.</dd></dl>
-  <!--l. 110--><p class="noindent" >
+  <!--l. 108--><p class="noindent" >
                                                                                                   
                                                                                                   
                                                  

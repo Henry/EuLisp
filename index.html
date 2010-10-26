@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*EuLisp*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-08-29 23:25:59 BST"/>
+<meta name="generated" content="2010-10-20 22:47:36 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -67,6 +67,7 @@ lang="en" xml:lang="en">
  }
 /*]]>*///-->
 </script>
+
 </head>
 <body>
 <div id="content">
@@ -82,11 +83,9 @@ lang="en" xml:lang="en">
 <li><a href="#sec-2">2 Aim </a></li>
 <li><a href="#sec-3">3 Original Sources </a></li>
 <li><a href="#sec-4">4 General Description </a></li>
-<li><a href="#sec-5">5 Installation </a></li>
-<li><a href="#sec-6">6 Getting Started with EuXLisp </a></li>
-<li><a href="#sec-7">7 Getting Started with Youtoo </a></li>
-<li><a href="#sec-8">8 Getting Started with Eu2C </a></li>
-<li><a href="#sec-9">9 To Do </a></li>
+<li><a href="#sec-5">5 Installation of EuXLisp, Youtoo and Eu2C </a></li>
+<li><a href="#sec-6">6 Getting Started </a></li>
+<li><a href="#sec-7">7 To Do </a></li>
 </ul>
 </div>
 </div>
@@ -170,7 +169,10 @@ Julian Padget:
 <a href="ftp://ftp.bath.ac.uk/pub/eulisp/WG/stream.ps.gz">stream.ps.gz</a>
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-3_2">EuXLisp <br/>
 EuXLisp started life as
 <a href="http://www.bath.ac.uk/~masrjb/Sources/euscheme.html">Euscheme</a> based on
@@ -181,6 +183,8 @@ which the 3-clause BSD licence is compatible and all further developments
 will be made under the terms of the GPL version 2, see
 <a href="COPYING">COPYING</a>.
 </li>
+</ul>
+<ul>
 <li id="sec-3_3">Youtoo <br/>
 This release of Youtoo started life as
 <a href="http://www.cs.bath.ac.uk/~jap/EuLisp/youtoo/youtoo0.93.tar.gz">Youtoo-0.93</a>
@@ -191,6 +195,8 @@ available from the original <a href="Youtoo/README.orig">README</a> file and
 and provided by
 <a href="http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition">T. Kurt Bond</a>.
 </li>
+</ul>
+<ul>
 <li id="sec-3_4">Eu2C <br/>
 Eu2C was originally developed at Fraunhofer ISST in the joint research
 project APPLY funded by the German Ministry of Research and Technology under
@@ -234,7 +240,10 @@ is provided in both HTML and PDF formats:
 <a href="Doc/EuLisp-0.991/eulisp.pdf">EuLisp Definition Version 0.991 (PDF)</a>
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-4_1_2">EuLisp-1.0 Proposals <br/>
 are in the folowing <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a> and discussed in the minutes of the
 <a href="Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt">meeting on 19/11/93</a> and in the <a href="Doc/EuLisp-0.991/Proposals/nov93.txt">preceding</a> and <a href="Doc/EuLisp-0.991/Proposals/dec93.txt">subsequent</a> Email
@@ -253,9 +262,12 @@ correspondence.  The following reports are discussed in the above:
 <a href="Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps">eulisp-ffi.ps</a>
 </li>
 </ul>
+
 </li>
 </ul>
 </li>
+</ul>
+<ul>
 <li id="sec-4_2">EuXLisp <br/>
 EuXLisp is a simple EuLisp Level-0 interpreter.  EuLisp Level-0 is a small
 and compact Lisp, but nevertheless has many interesting features, such as
@@ -263,6 +275,8 @@ modules, an object system, and multithreading.  EuLisp Level-1 has extra
 features, the most notable being a full metaobject system which is
 implemented in Youtoo not in EuXLisp.
 </li>
+</ul>
+<ul>
 <li id="sec-4_3">Youtoo <br/>
 The Youtoo compiler/interpreter compiles EuLisp Level-1 into C-embedded
 virtual machine code which can be statically or dynamically linked with the
@@ -284,6 +298,8 @@ collector written by Hans Boehm and Alan Demers is used.
 </li>
 </ul>
 </li>
+</ul>
+<ul>
 <li id="sec-4_4">Eu2C <br/>
 Eu2C is a EuLisp Level-0 to C compiler originally developed at Fraunhofer
 ISST in the joint research project APPLY funded by the German Ministry of
@@ -300,39 +316,106 @@ Research and Technology under the project code ITW9102D5.
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Installation </h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> Installation of EuXLisp, Youtoo and Eu2C </h2>
 <div class="outline-text-2" id="text-5">
 
 <ul>
+<li id="sec-5_1">Prerequisites <br/>
+<ul>
+<li id="sec-5_1_1">C Compiler <br/>
+All three EuLisp implementations require a C-compiler, in particular <code>gcc</code>
+on most platforms.  It is likely that a suitable <code>gcc</code> is already
+installed, if not install the development package which includes it.
+</li>
+</ul>
+<ul>
+<li id="sec-5_1_2">Garbage Collector <br/>
+EuXLisp and Eu2C include their own garbage collectors bu Youtoo uses the
+Boehm-Demers garbage collector which must be installed before compilation:
+<ul>
 <li>
+On SuSE: <code>sudo zypper install gc-devel</code>.
+</li>
+<li>
+On Ubuntu: <code>sudo apt-get install libgc-dev</code>.
+</li>
+<li>
+On RedHat&hellip;: install the appropriate package.
+</li>
+<li>
+From sources: download
+<a href="http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/gc-7.2alpha4.tar.gz">http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/gc-7.2alpha4.tar.gz</a>
+and unpack, configure, make and install in <code>/usr/local</code>.
+</li>
+</ul>
+
+</li>
+</ul>
+<ul>
+<li id="sec-5_1_3">Common Lisp Compiler <br/>
+Eu2C bootstraps from Common Lisp and currently requires a recent version
+of CMUCL which may be obtained from
+<a href="http://www.cons.org/cmucl/download.html">http://www.cons.org/cmucl/download.html</a>.  SBCL support is expected in the
+future.
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li id="sec-5_2">Download <br/>
 Pull the latest version from the GitHub repository:
 <ul>
 <li>
 <code>git clone git://github.com/Henry/EuLisp.git</code>
 </li>
 </ul>
+
+</li>
+</ul>
+<ul>
+<li id="sec-5_3">Configuration <br/>
+<ul>
+<li>
+<code>cd</code> into the <code>EuLisp</code> directory
 </li>
 <li>
-"cd" into the <code>EuLisp</code> directory
-</li>
-<li>
-Run
+Configure for the default architecture
 <ul>
 <li>
 <code>./configure</code>
 </li>
-</ul>
-
-<p>and check the settings.  Edit the configure file to reflect your system if
+<li>
+Check the settings and edit the configure file to reflect your system if
 necessary and re-run
-</p><ul>
+</li>
 <li>
 <code>./configure</code>.
 </li>
 </ul>
 </li>
 <li>
-Run
+To configure for a specified architecture,
+<ul>
+<li>
+<code>./configure &lt;arch&gt;</code>
+</li>
+<li>
+<i>e.g.</i> to configure for a 32bit build on a <code>x86_64</code> 64bit machine:
+</li>
+<li>
+<code>./configure i686</code>
+</li>
+</ul>
+</li>
+</ul>
+
+</li>
+</ul>
+<ul>
+<li id="sec-5_4">Build <br/>
+<ul>
+<li>
+Build EuXLisp, Youtoo and Eu2C for the default architecture
 <ul>
 <li>
 <code>make</code>
@@ -340,27 +423,74 @@ Run
 </ul>
 </li>
 <li>
-If you want to use shared libraries for Youtoo (which we really recommend on
-Linux, FreeBSD, Solaris and IRIX), run
+Build EuXLisp, Youtoo and Eu2C for a specified architecture
 <ul>
 <li>
-<code>make shared</code>
+<code>make ARCH=&lt;arch&gt;</code>
+</li>
+<li>
+<i>e.g.</i> to build 32bit on a <code>x86_64</code> 64bit machine:
+</li>
+<li>
+<code>make ARCH=i686</code>
+</li>
+</ul>
+</li>
+<li>
+Alternatively you can build <code>euxlisp</code>, <code>youtoo</code> or <code>eu2c</code> by specifying
+the target and optionally the target architecture <i>e.g.</i>:
+<ul>
+<li>
+<code>make euxlisp</code>
+</li>
+<li>
+<code>make youtoo</code>
+</li>
+<li>
+<code>make eu2c</code>
+</li>
+</ul>
+</li>
+<li>
+For more details and more options for building Youtoo see <a href="Youtoo/README.html">README</a>.
+</li>
+<li>
+For more details and more options for building Eu2C see <a href="Eu2C/README.html">README</a>.
 </li>
 </ul>
 
-<p>and add the directory <code>.../EuLisp/Lib.${ARCH}</code> to the environment variable
-<code>$LD_LIBRARY_PATH</code>.
-</p></li>
-<li>
-You should now be able to run the <code>youtoo</code> executable
+</li>
+</ul>
+<ul>
+<li id="sec-5_5">Run <br/>
 <ul>
 <li>
-<code>Bin.${ARCH}/youtoo</code>
+Run the <code>euxlisp</code> executable
+<ul>
+<li>
+<code>Bin.$ARCH/euxlisp</code>
+</li>
+</ul>
+</li>
+<li>
+Run the <code>youtoo</code> executable
+<ul>
+<li>
+<code>Bin.$ARCH/youtoo</code>
+</li>
+</ul>
+</li>
+<li>
+Run the <code>eu2c</code> compiler script
+<ul>
+<li>
+<code>Eu2C/Bin/eu2c</code>
+</li>
+</ul>
 </li>
 </ul>
 
-<p>(see next section).
-</p>
+
 </li>
 </ul>
 </div>
@@ -368,43 +498,34 @@ You should now be able to run the <code>youtoo</code> executable
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started with <a href="Doc/EuLispIntroRef.html#sec-3">EuXLisp</a> </h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started </h2>
 <div class="outline-text-2" id="text-6">
 
-<p>See <a href="Doc/EuLispIntroRef.html#sec-3">An Introduction to EuLisp, EuXLisp and Youtoo</a>.
-</p>
+<ul>
+<li>
+<a href="Doc/EuLispIntroRef.html#sec-3">EuXLisp</a>
+</li>
+<li>
+<a href="Doc/EuLispIntroRef.html#sec-4">Youtoo</a>
+</li>
+<li>
+<a href="Eu2C/README.html">Eu2C</a>
+</li>
+</ul>
+
+
 </div>
 
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Getting Started with <a href="Doc/EuLispIntroRef.html#sec-4">Youtoo</a> </h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> <a href="TODO.html">To Do</a> </h2>
 <div class="outline-text-2" id="text-7">
-
-<p>See <a href="Doc/EuLispIntroRef.html#sec-4">An Introduction to EuLisp, EuXLisp and Youtoo</a>.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Getting Started with <a href="Eu2C/Readme.html">Eu2C</a> </h2>
-<div class="outline-text-2" id="text-8">
-
-<p>See <a href="Eu2C/README.html">README</a>.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> <a href="TODO.html">To Do</a> </h2>
-<div class="outline-text-2" id="text-9">
 
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-08-29 23:25:59 BST</p>
+<p class="date"> Date: 2010-10-20 22:47:36 BST</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

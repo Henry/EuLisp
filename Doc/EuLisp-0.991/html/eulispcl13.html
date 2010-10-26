@@ -4,314 +4,659 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>13 Conditions</title> 
+<head><title>13 Condition Classes</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-08-29 23:31:00" /> 
+<meta name="date" content="2010-10-23 20:05:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 88--><div class="crosslinks"><p class="noindent">[<a 
 href="eulispcl14.html" >next</a>] [<a 
 href="eulispcl12.html" >prev</a>] [<a 
 href="eulispcl12.html#taileulispcl12.html" >prev-tail</a>] [<a 
 href="#taileulispcl13.html">tail</a>] [<a 
 href="eulisp.html#eulispcl13.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 13 <a 
- id="x17-15900013"></a>Conditions</h3>
+ id="x17-24200013"></a>Condition Classes</h3>
+<!--l. 2--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-242001r1"></a><span 
+class="cmbx-9">13.0.1   </span><span 
+class="cmtt-9">defcondition</span>
 <a 
- id="dx17-159001"></a>
-<a 
- id="dx17-159002"></a>
-<!--l. 1--><p class="noindent" >The defined name of this module is <span 
-class="cmtt-9">condition</span>.
-</p><!--l. 3--><p class="noindent" >The condition system was influenced by the Common Lisp error
-system &#x00A0;[<a 
-href="eulisp.html#x1-124301616">16<!--tex4ht:ref: Pit-errors --></a>] <a 
- id="dx17-159003"></a>and the Standard ML<a 
- id="dx17-159004"></a> exception mechanism. It is a
-simplification of the former and an extension of the latter.
-Following standard practice, this text defines the actions
-of functions in terms of their normal behaviour. Where an
-exceptional behaviour might arise, this has been defined in terms
-of a condition. However, not all exceptional situations are
-errors. Following Pitman, we use <span 
-class="cmti-9">condition</span> <a 
- id="dx17-159005"></a>to be a kind of
-occasion in a program when an exceptional situation has
-been signalled. An error is a kind of condition&#8212;error and
-condition are also used as terms for the objects that represent
-exceptional situations. A condition can be signalled continuably
-by passing a continuation for the resumption to signal. If a
-continuation is not supplied then the condition cannot be
-continued.
-</p><!--l. 17--><p class="noindent" >These two categories are characterized as follows:
-</p><!--l. 19--><p class="noindent" >
-    </p><ol  class="enumerate1" >
-    <li 
-  class="enumerate" id="x17-159007x1"><a 
- id="dx17-159008"></a> A  condition  might  be  signalled  when  some  limit  has
-    been transgressed and some corrective action is needed
-    before processing can resume. For example, memory zone
-    exhaustion on attempting to heap-allocate an item can be
-    corrected by calling the memory management scheme to
-    recover dead space. However, if no space was recovered a
-    new kind of condition has arisen. Another example arises
-    in  the  use  of  IEEE  floating  point  arithmetic,  where  a
-    condition might be signalled to indicate divergence of an
-    operation.  A  condition  should  be  signalled  continuably
-    when there is a strategy for recovery from the condition.
-    </li>
-    <li 
-  class="enumerate" id="x17-159010x2"><a 
- id="dx17-159011"></a> Alternatively, a condition might be signalled when some
-    catastrophic situation is recognized, such as the memory
-    manager being unable to allocate more memory or unable
-    to recover sufficient memory from that already allocated.
-    A  condition  should  be  signalled  non-continuably  when
-    there is no reasonable way to resume processing.</li></ol>
-<!--l. 38--><p class="noindent" >A condition class is defined using <a 
-href="eulispcl14.html#x18-160001r6"><span 
-class="cmtt-9">defcondition</span></a> (see <span 
-class="cmsy-9">§</span>&#x00A0;<a 
-href="eulispcl14.html#x18-160001r6">14.0.6<!--tex4ht:ref: defcondition --></a>). The
-definition of a condition causes the creation of a new class of
-condition. A condition is signalled using the function <a 
-href="eulispcl15.html#x19-184002r21"><span 
-class="cmtt-9">signal</span></a>,
-which has two required arguments and one optional argument: an
-instance of a condition, a resume continuation or the empty
-list&#8212;the latter signifying a non-continuable signal&#8212;and a thread.
-A condition can be handled using the special form <span 
-class="cmtt-9">with-handler</span>,
-which takes a function&#8212;the handler function&#8212;and a sequence of
-forms to be protected. The initial condition class hierarchy is
-shown in table&#x00A0;<a 
-href="#x17-1590122">2<!--tex4ht:ref: condition-class-hierarchy --></a>.                                     </p><!--l. 50--><p class="noindent" ><a 
- id="x17-1590122"></a><a 
- id="x19-195007r1"></a><a 
- id="x20-282001r1"></a><a 
- id="x20-309001r2"></a></p><hr class="float" /><div class="float" 
->
-                                                                                                  
-                                                                                                  
- <div align="center" class="caption"><table class="caption" 
-><tr valign="baseline" class="caption"><td class="id">Table&#x00A0;2: </td><td  
-class="content">Condition class hierarchy</td></tr></table></div>
-<table  
+ id="Q1-17-309"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">defining operator</span><a 
+ id="dx17-242002"></a><a 
+ id="dx17-242003"></a> </i></b></div><br /> <hr />
+</p>
+<h5 class="syntaxssclauseHead"> 13.0.1.1 <a 
+ id="x17-24300013.0.1.1"></a><span 
+class="cmbx-8">Syntax</span></h5><a 
+ id="dx17-243001"></a>
+<!--l. 18--><p class="noindent" ><div class="framebox-l" 
+style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-163001r7"><span 
-class="cmtt-9">&#x003C;condition&#x003E;</span></a>
-</td></tr></table>
-<!--l.10 55-->                             <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-170001r10"><span 
-class="cmtt-9">&#x003C;general-condition&#x003E;</span></a></td></tr></table>
-<!--l.10 56-->                            <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl16.html#x20-236001r5"><span 
-class="cmtt-9">&#x003C;invalid-operator&#x003E;</span></a></td></tr></table>
-<!--l.10 57-->                        <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl16.html#x20-253001r4"><span 
-class="cmtt-9">&#x003C;cannot-update-setter&#x003E;</span></a></td></tr></table>
-<!--l.10 58-->                                  <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl16.html#x20-251001r3"><span 
-class="cmtt-9">&#x003C;no-setter&#x003E;</span></a></td></tr></table>
-<!--l.10 59-->                         <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-172001r13"><span 
-class="cmtt-9">&#x003C;environment-condition&#x003E;</span></a></td></tr></table>
-<!--l.10 60-->                          <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl17.html#x21-663001r3"><span 
-class="cmtt-9">&#x003C;arithmetic-condition&#x003E;</span></a></td></tr></table>
-<!--l.10 61-->                            <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl17.html#x21-665001r4"><span 
-class="cmtt-9">&#x003C;division-by-zero&#x003E;</span></a></td></tr></table>
-<!--l.10 62-->                          <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl17.html#x21-476003r2"><span 
-class="cmtt-9">&#x003C;conversion-condition&#x003E;</span></a></td></tr></table>
-<!--l.10 63-->                                <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl17.html#x21-478001r3"><span 
-class="cmtt-9">&#x003C;no-converter&#x003E;</span></a></td></tr></table>
-<!--l.10 64-->                                            <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
 class="tabbing"><span 
-class="cmbx-9">??</span></td></tr></table>
-<!--l.10 65-->                               <table  
+class="cmti-9">defcondition-form</span><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 18-->             <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">   </td><td style="width:14px;" 
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
+class="tabbing"><span 
+class="cmtt-9">( </span><a 
+href="#x17-242001r1"><span 
+class="cmtt-9">defcondition</span></a> <a 
+href="#x17-24300013.0.1.1"><span 
+class="cmti-9">condition-class-name</span></a></td></tr></table>
+<!--l.10 18-->                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">         </td><td style="width:14px;" 
 class="tabbing">   </td><td  
 class="tabbing"><a 
-href="eulispcl17.html#x21-772001r31"><span 
-class="cmtt-9">&#x003C;end-of-stream&#x003E;</span></a></td></tr></table>
-<!--l.10 66-->                                   <table  
+href="#x17-24300013.0.1.1"><span 
+class="cmti-9">condition-superclass-name</span></a></td></tr></table>
+<!--l.10 18-->                     <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl17.html#x21-782001r35"><span 
-class="cmtt-9">&#x003C;read-error&#x003E;</span></a></td></tr></table>
-<!--l.10 67-->                              <table  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">         </td><td style="width:14px;" 
+class="tabbing">   </td><td  
+class="tabbing"><span 
+class="cmtt-9">( </span><a 
+href="eulispcl11.html#x13-7700011.3.1.1"><span 
+class="cmti-9">slot</span><span 
+class="cmsy-6">*</span></a> <span 
+class="cmtt-9">) </span><a 
+href="eulispcl11.html#x13-7700011.3.1.1"><span 
+class="cmti-9">class-option</span><span 
+class="cmsy-6">*</span></a> <span 
+class="cmtt-9">)</span></td></tr></table>
+<!--l.10 18-->                               <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl12.html#x16-141005r10"><span 
-class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a></td></tr></table>
-<!--l.10 68-->                       <table  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmti-9">condition-class-name</span><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 18-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
 class="tabbing"><a 
-href="eulispcl12.html#x16-145001r12"><span 
-class="cmtt-9">&#x003C;thread-already-started&#x003E;</span></a></td></tr></table>
-<!--l.10 69-->                    <table  
+href="eulispcl9.html#x11-540009.3.0.3"><span 
+class="cmti-9">identifier</span></a></td></tr></table>
+<!--l.10 18-->                           <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl12.html#x16-143001r11"><span 
-class="cmtt-9">&#x003C;wrong-thread-continuation&#x003E;</span></a></td></tr></table>
-<!--l.10 70-->                        <table  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmti-9">condition-superclass-name</span><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 18-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-172003r14"><span 
-class="cmtt-9">&#x003C;wrong-condition-class&#x003E;</span></a></td></tr></table>
-<!--l.10 71-->                     <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-173001r15"><span 
-class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a></td></tr></table>
-<!--l.10 72-->                              <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-181001r20"><span 
-class="cmtt-9">&#x003C;no-next-method&#x003E;</span></a></td></tr></table>
-<!--l.10 73-->                   <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-177001r18"><span 
-class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a></td></tr></table>
-<!--l.10 74-->                   <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-175001r17"><span 
-class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a></td></tr></table>
-<!--l.10 75-->                        <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-173003r16"><span 
-class="cmtt-9">&#x003C;no-applicable-method&#x003E;</span></a></td></tr></table>
-<!--l.10 76-->                         <table  
-cellpadding="0" border="0" cellspacing="0" 
-class="tabbing"><tr  
-style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">  </td><td style="width:14px;" 
-class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl14.html#x18-179001r19"><span 
-class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a></td></tr></table>
-<!--l.10 78-->
+href="eulispcl9.html#x11-540009.3.0.3"><span 
+class="cmti-9">identifier</span></a></td></tr></table>
+<!--l.10 18-->                                                </div></div>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-24400013.0.1.1"></a><span 
+class="cmbx-8">Arguments</span></h5>
+<!--l. 20--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<a 
+href="#x17-24300013.0.1.1"><span 
+class="cmti-9">condition-class-name</span></a> : </dt><dd 
+class="arguments">
+    <!--l. 21--><p class="noindent" >A symbol naming a binding to be initialized with the new
+    condition class.
+    </p></dd><dt class="arguments">
+<a 
+href="#x17-24300013.0.1.1"><span 
+class="cmti-9">condition-superclass-name</span></a> : </dt><dd 
+class="arguments">
+    <!--l. 24--><p class="noindent" >A symbol naming a binding of a class to be used as the
+    superclass of the new condition class.
+    </p></dd><dt class="arguments">
+<a 
+href="eulispcl11.html#x13-7700011.3.1.1"><span 
+class="cmti-9">slot</span></a> : </dt><dd 
+class="arguments">
+    <!--l. 27--><p class="noindent" >Either a <a 
+href="eulispcl11.html#x13-7700011.3.1.1"><span 
+class="cmti-9">slot-name</span></a> or a list of <a 
+href="eulispcl11.html#x13-7700011.3.1.1"><span 
+class="cmti-9">slot-name</span></a> followed by some
+    <a 
+href="eulispcl11.html#x13-7700011.3.1.1"><span 
+class="cmti-9">slot-option</span></a>s.
+    </p></dd><dt class="arguments">
+<a 
+href="eulispcl11.html#x13-7700011.3.1.1"><span 
+class="cmti-9">class-option</span></a> : </dt><dd 
+class="arguments">
+    <!--l. 30--><p class="noindent" >A key and a value which, taken together, apply to the
+    condition as a whole.</p></dd></dl>
+<!--l. 34--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-24500013.0.1.1"></a><span 
+class="cmbx-8">Remarks</span></h5>                                           <!--l. 35--><p class="noindent" >This defining form defines a new condition class, it is analogous to
+  <a 
+href="eulispcl17.html#x22-928001r1"><span 
+class="cmtt-9">defclass</span></a> except in the in the specification of and default
+  superclass. The first argument is the name to which the new
+  condition class will be bound, the second is the name of the
+  superclass of the new condition class. If <span 
+class="cmti-9">superclass-name </span>is
+  <a 
+href="eulispcl16.html#x20-587009r2"><span 
+class="cmtt-9">()</span></a>, the superclass is taken to be <a 
+href="#x17-245001r2"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a>. Otherwise
+  <span 
+class="cmti-9">superclass-name </span>must be <a 
+href="#x17-245001r2"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;or the name of one of its
+  subclasses.
+  </p><!--l. 43--><p class="noindent" >
+  </p><!--l. 43--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-245001r2"></a><span 
+class="cmbx-9">13.0.2   </span><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span>
+ <a 
+ id="Q1-17-313"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="eulispcl11.html#x13-74002r1"><span 
+class="cmtt-9">&#x003C;object&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">class</span><a 
+ id="dx17-245002"></a><a 
+ id="dx17-245003"></a> </i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2460002"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+  <!--l. 46--><p class="noindent" >
+       </p><dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">message </span><a 
+href="eulispcl16.html#x20-854005r2"><span 
+class="cmtt-9">&#x003C;string&#x003E;</span></a> :  </dt><dd 
+class="initoptions">
+        <!--l. 47--><p class="noindent" >A string, containing information which should pertain to
+        the situation which caused the condition to be signalled.</p></dd></dl>
+  <!--l. 51--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2470002"></a><span 
+class="cmbx-8">Remarks</span></h5>
+  <!--l. 52--><p class="noindent" >The class which is the superclass of all condition classes.
+  </p><!--l. 54--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-247001r3"></a><span 
+class="cmbx-9">13.0.3   </span><span 
+class="cmtt-9">condition?</span>
+ <a 
+ id="Q1-17-316"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function</span><a 
+ id="dx17-247002"></a><a 
+ id="dx17-247003"></a> </i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2480003"></a><span 
+class="cmbx-8">Arguments</span></h5>
+  <!--l. 56--><p class="noindent" >
+       </p><dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">object </span>:  </dt><dd 
+class="arguments">
+        <!--l. 57--><p class="noindent" >An object to examine.</p></dd></dl>
+  <!--l. 60--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2490003"></a><span 
+class="cmbx-8">Result</span></h5>
+  <!--l. 61--><p class="noindent" >Returns <span 
+class="cmti-9">object </span>if it is a condition, otherwise <a 
+href="eulispcl16.html#x20-587009r2"><span 
+class="cmtt-9">()</span></a>.
+  </p><!--l. 63--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-249001r4"></a><span 
+class="cmbx-9">13.0.4   </span><span 
+class="cmtt-9">initialize &#x003C;condition&#x003E;</span>
+ <a 
+ id="Q1-17-319"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">method</span><a 
+ id="dx17-249002"></a><a 
+ id="dx17-249003"></a> </i></b></div><br /> <hr />
+                                                                                                  
+                                                                                                  
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2500004"></a><span 
+class="cmbx-8">Specialized Arguments</span></h5>
+<!--l. 65--><p class="noindent" >
+    </p><dl class="specargs1"><dt class="specargs">
+<span 
+class="cmti-9">condition </span><span 
+class="cmtt-9">&#x003C;condition&#x003E; </span>: </dt><dd 
+class="specargs">
+    <!--l. 66--><p class="noindent" >a condition.
+    </p></dd><dt class="specargs">
+<span 
+class="cmti-9">initlist </span>: </dt><dd 
+class="specargs">
+    <!--l. 67--><p class="noindent" >A list of initialization options as follows:
+    </p><!--l. 68--><p class="noindent" >
+       </p><dl class="options2"><dt class="options">
+    <span 
+class="cmtt-9">message </span><a 
+href="eulispcl16.html#x20-854005r2"><span 
+class="cmtt-9">&#x003C;string&#x003E;</span></a> : </dt><dd 
+class="options">
+       <!--l. 69--><p class="noindent" >A string, containing information which should pertain
+       to  the  situation  which  caused  the  condition  to  be
+       signalled.
+       </p></dd><dt class="options">
+    <span 
+class="cmtt-9">message-arguments </span><a 
+href="eulispcl16.html#x20-587006r1"><span 
+class="cmtt-9">&#x003C;list&#x003E;</span></a> : </dt><dd 
+class="options">
+       <!--l. 73--><p class="noindent" >A list of objects to be used in processing the message
+       format string.</p></dd></dl>
+    </dd></dl>
+<!--l. 78--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2510004"></a><span 
+class="cmbx-8">Result</span></h5>
+<!--l. 79--><p class="noindent" >A new, initialized condition.
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2520004"></a><span 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 82--><p class="noindent" >First calls <a 
+href="eulispcl11.html#x13-95002r1"><span 
+class="cmtt-9">call-next-method</span></a> to carry out initialization specified
+by superclasses then does the <a 
+href="#x17-245001r2"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a> specific initialization.
+</p><!--l. 86--><p class="noindent" >
+</p><!--l. 86--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-252001r5"></a><span 
+class="cmbx-9">13.0.5   </span><span 
+class="cmtt-9">&#x003C;general-condition&#x003E;</span>
+<a 
+ id="Q1-17-323"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-245001r2"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-252002"></a> </i></b></div><br /> <hr />
+</p><!--l. 88--><p class="noindent" >This is the general condition class for conditions arising from the
+execution of programs by the processor.
+</p><!--l. 91--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-252003r6"></a><span 
+class="cmbx-9">13.0.6   </span><span 
+class="cmtt-9">&#x003C;domain-condition&#x003E;</span>
+<a 
+ id="Q1-17-324"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-252001r5"><span 
+class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-252004"></a> </i></b></div><br /> <hr />
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2530006"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+<!--l. 93--><p class="noindent" >
+    </p><dl class="initoptions1"><dt class="initoptions">
+<span 
+class="cmtt-9">argument </span><a 
+href="eulispcl11.html#x13-74002r1"><span 
+class="cmtt-9">&#x003C;object&#x003E;</span></a> : </dt><dd 
+class="initoptions">                                        <!--l. 94--><p class="noindent" >An  argument,  which  was  not  of  the  expected  class,  or
+        outside a defined range and therefore lead to the signalling
+        of this condition.</p></dd></dl>
+  <!--l. 99--><p class="noindent" >
+  </p><!--l. 99--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-253001r7"></a><span 
+class="cmbx-9">13.0.7   </span><span 
+class="cmtt-9">&#x003C;range-condition&#x003E;</span>
+ <a 
+ id="Q1-17-326"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-252001r5"><span 
+class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-253002"></a> </i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2540007"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+  <!--l. 101--><p class="noindent" >
+       </p><dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">result </span><a 
+href="eulispcl11.html#x13-74002r1"><span 
+class="cmtt-9">&#x003C;object&#x003E;</span></a> :  </dt><dd 
+class="initoptions">
+        <!--l. 102--><p class="noindent" >A result, which was not of the expected class, or outside
+        a defined range and therefore lead to the signalling of this
+        condition.</p></dd></dl>
+  <!--l. 107--><p class="noindent" >
+  </p><!--l. 107--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-254001r8"></a><span 
+class="cmbx-9">13.0.8   </span><span 
+class="cmtt-9">&#x003C;environment-condition&#x003E;</span>
+ <a 
+ id="Q1-17-328"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-245001r2"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-254002"></a> </i></b></div><br /> <hr />
+  </p><!--l. 109--><p class="noindent" >This is the general condition class for conditions arising from the
+  environment of the processor.
+  </p><!--l. 112--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-254003r9"></a><span 
+class="cmbx-9">13.0.9   </span><span 
+class="cmtt-9">&#x003C;wrong-condition-class&#x003E;</span>
+ <a 
+ id="Q1-17-329"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="eulispcl15.html#x19-308006r10"><span 
+class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-254004"></a> </i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-2550009"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+  <!--l. 114--><p class="noindent" >
+       </p><dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">condition </span><span 
+class="cmti-9">condition </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 115--><p class="noindent" >A condition.</p></dd></dl>
+  <!--l. 118--><p class="noindent" >Signalled by <a 
+href="eulispcl14.html#x18-266002r16"><span 
+class="cmtt-9">signal</span></a> if the given condition is not an instance of the
+  condition class <a 
+href="eulispcl15.html#x19-308006r10"><span 
+class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>.
+  </p><!--l. 121--><p class="noindent" >
+  </p><!--l. 121--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-255001r10"></a><span 
+class="cmbx-9">13.0.10   </span><span 
+class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span>
+ <a 
+ id="Q1-17-331"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-245001r2"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-255002"></a> </i></b></div><br /> <hr />
+  </p><!--l. 123--><p class="noindent" >This is the general condition class for conditions arising from
+  operations in the object system at level 0. The following direct
+  subclasses of <a 
+href="#x17-255001r10"><span 
+class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a> are defined at level
+  0:
+  <span 
+class="cmtt-9">&#x003C;no-applicable-method&#x003E; </span>:  signalled  by  a  generic  function
+        when  there  is  no  method  which  is  applicable  to  the
+        arguments.
+                                                                                                  
+                                                                                                  
+<span 
+class="cmtt-9">&#x003C;incompatible-method-domain&#x003E; </span>: signalled by if the domain
+    of the method being added to a generic function is not a
+    subdomain of the generic function&#8217;s domain.
+<span 
+class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E; </span>: signalled if the lambda list
+    of the method being added to a generic function is not
+    congruent to that of the generic function.
+<span 
+class="cmtt-9">&#x003C;method-domain-clash&#x003E; </span>: signalled if the method being added
+    to a generic function has the same domain as a method
+    already attached to the generic function.
+<span 
+class="cmtt-9">&#x003C;no-next-method&#x003E; </span>: signalled by call-next-method if there is
+    no next most specific method.
+</p><!--l. 147--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-255003r11"></a><span 
+class="cmbx-9">13.0.11   </span><span 
+class="cmtt-9">&#x003C;no-applicable-method&#x003E;</span>
+<a 
+ id="Q1-17-332"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-255001r10"><span 
+class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-255004"></a> </i></b></div><br /> <hr />
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-25600011"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+<!--l. 149--><p class="noindent" >
+    </p><dl class="initoptions1"><dt class="initoptions">
+<span 
+class="cmtt-9">generic </span><span 
+class="cmti-9">function </span>: </dt><dd 
+class="initoptions">
+    <!--l. 150--><p class="noindent" >The generic function which was applied.
+    </p></dd><dt class="initoptions">
+<span 
+class="cmtt-9">arguments </span><span 
+class="cmti-9">list </span>: </dt><dd 
+class="initoptions">
+    <!--l. 151--><p class="noindent" >The arguments of the generic function which was applied.</p></dd></dl>
+<!--l. 155--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-25700011"></a><span 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 156--><p class="noindent" >Signalled by a generic function when there is no method which is
+applicable to the arguments.
+</p><!--l. 159--><p class="noindent" >
+</p><!--l. 159--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-257001r12"></a><span 
+class="cmbx-9">13.0.12   </span><span 
+class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span>
+<a 
+ id="Q1-17-335"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-255001r10"><span 
+class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-257002"></a> </i></b></div><br /> <hr />
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-25800012"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+<!--l. 161--><p class="noindent" >
+    </p><dl class="initoptions1"><dt class="initoptions">
+<span 
+class="cmtt-9">generic </span><span 
+class="cmti-9">function </span>: </dt><dd 
+class="initoptions">
+    <!--l. 162--><p class="noindent" >The generic function to be extended.
+    </p></dd><dt class="initoptions">
+<span 
+class="cmtt-9">method </span><span 
+class="cmti-9">method </span>: </dt><dd 
+class="initoptions">                                            <!--l. 163--><p class="noindent" >The method to be added.</p></dd></dl>
+  <!--l. 166--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-25900012"></a><span 
+class="cmbx-8">Remarks</span></h5>
+  <!--l. 167--><p class="noindent" >Signalled by one of <a 
+href="eulispcl17.html#x22-938001r2"><span 
+class="cmtt-9">defgeneric</span></a>, <a 
+href="eulispcl17.html#x22-947001r2"><span 
+class="cmtt-9">defmethod</span></a> or <a 
+href="eulispcl17.html#x22-932001r1"><span 
+class="cmtt-9">generic-lambda</span></a> if
+  the domain of the method would not be a subdomain of the generic
+  function&#8217;s domain.
+  </p><!--l. 171--><p class="noindent" >
+  </p><!--l. 171--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-259001r13"></a><span 
+class="cmbx-9">13.0.13   </span><span 
+class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span>
+ <a 
+ id="Q1-17-338"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-255001r10"><span 
+class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-259002"></a> </i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-26000013"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+  <!--l. 173--><p class="noindent" >
+       </p><dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">generic </span><span 
+class="cmti-9">function </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 174--><p class="noindent" >The generic function to be extended.
+        </p></dd><dt class="initoptions">
+  <span 
+class="cmtt-9">method </span><span 
+class="cmti-9">method </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 175--><p class="noindent" >The method to be added.</p></dd></dl>
+  <!--l. 178--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-26100013"></a><span 
+class="cmbx-8">Remarks</span></h5>
+  <!--l. 179--><p class="noindent" >Signalled by one of <a 
+href="eulispcl17.html#x22-938001r2"><span 
+class="cmtt-9">defgeneric</span></a>, <a 
+href="eulispcl17.html#x22-947001r2"><span 
+class="cmtt-9">defmethod</span></a> or <a 
+href="eulispcl17.html#x22-932001r1"><span 
+class="cmtt-9">generic-lambda</span></a> if
+  the lambda list of the method is not congruent to that of the
+  generic function.
+  </p><!--l. 183--><p class="noindent" >
+  </p><!--l. 183--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-261001r14"></a><span 
+class="cmbx-9">13.0.14   </span><span 
+class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span>
+ <a 
+ id="Q1-17-341"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-255001r10"><span 
+class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-261002"></a> </i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x17-26200014"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+  <!--l. 185--><p class="noindent" >
+       </p><dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">generic </span><span 
+class="cmti-9">function </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 186--><p class="noindent" >The generic function to be extended.
+        </p></dd><dt class="initoptions">
+  <span 
+class="cmtt-9">methods </span><span 
+class="cmti-9">list </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 187--><p class="noindent" >The methods with the same domain.</p></dd></dl>
+  <!--l. 190--><p class="noindent" >
+                                                                                                  
+                                                                                                  
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-26300014"></a><span 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 191--><p class="noindent" >Signalled by one of <a 
+href="eulispcl17.html#x22-938001r2"><span 
+class="cmtt-9">defgeneric</span></a>, <a 
+href="eulispcl17.html#x22-947001r2"><span 
+class="cmtt-9">defmethod</span></a> or <a 
+href="eulispcl17.html#x22-932001r1"><span 
+class="cmtt-9">generic-lambda</span></a> if
+there would be methods with the same domain attached to the
+generic function.
+</p><!--l. 195--><p class="noindent" >
+</p><!--l. 195--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x17-263001r15"></a><span 
+class="cmbx-9">13.0.15   </span><span 
+class="cmtt-9">&#x003C;no-next-method&#x003E;</span>
+<a 
+ id="Q1-17-344"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x17-255001r10"><span 
+class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">condition</span><a 
+ id="dx17-263002"></a> </i></b></div><br /> <hr />
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-26400015"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+<!--l. 197--><p class="noindent" >
+    </p><dl class="initoptions1"><dt class="initoptions">
+<span 
+class="cmtt-9">method </span><span 
+class="cmti-9">method </span>: </dt><dd 
+class="initoptions">
+    <!--l. 200--><p class="noindent" >The method which called <a 
+href="eulispcl11.html#x13-95002r1"><span 
+class="cmtt-9">call-next-method</span></a>.
+    </p></dd><dt class="initoptions">
+<span 
+class="cmtt-9">operand-list </span><span 
+class="cmti-9">list </span>: </dt><dd 
+class="initoptions">
+    <!--l. 202--><p class="noindent" >A list of the arguments to have been passed to the next
+    method.</p></dd></dl>
+<!--l. 206--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x17-26500015"></a><span 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 207--><p class="noindent" >Signalled by <a 
+href="eulispcl11.html#x13-95002r1"><span 
+class="cmtt-9">call-next-method</span></a> if there is no next most specific
+method.
                                                  
                                                                                                   
                                                                                                   
-</div><hr class="endfloat" />
-                                                 
-                                                                                                  
-                                                                                                  
-<!--l. 91--><div class="crosslinks"><p class="noindent">[<a 
+</p>
+<!--l. 302--><div class="crosslinks"><p class="noindent">[<a 
 href="eulispcl14.html" >next</a>] [<a 
 href="eulispcl12.html" >prev</a>] [<a 
 href="eulispcl12.html#taileulispcl12.html" >prev-tail</a>] [<a 
 href="eulispcl13.html" >front</a>] [<a 
 href="eulisp.html#eulispcl13.html" >up</a>] </p></div>
-<!--l. 91--><p class="noindent" ><a 
+<!--l. 302--><p class="noindent" ><a 
  id="taileulispcl13.html"></a> </p> 
 </body></html> 

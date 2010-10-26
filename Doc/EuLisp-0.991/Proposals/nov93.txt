@@ -99,6 +99,35 @@ Common to both cases is that <arithmetic-condition>'s are not continuable!!!!
 
 --ulrich
 
+* defcondition
+  :From: E. Ulrich Kriegel
+
+Hi there,
+there is another problem with conditions which should be discussed in Bruxelles.
+Now conditions are something like structures in level-0. In 0.99 for most
+of the conditions there are initialization options.
+However, it is not yet defined, how to acces the information stored in
+conditions.
+If one creates accessors (reader should be sufficient) named as the init
+args there are name clashes for 3 conditions:
+<no-next-method>
+                with slot method
+<non-congruent-lambda-lists>
+                with slots method and generic
+<incompatible-method-domain>
+                with slots method and generic
+<method-domain-clash>
+                with slot generic
+
+IMHO, there are 3 solutions
+1. specification of the names of all accessor fcn's
+2. definition of a common super-condition
+3. neglect slot reader and use some table-based mechanism instead to access
+the values.
+
+
+--ulrich
+
 * Pre-Eulisp meeting proposals
 :From: jap
 
@@ -431,35 +460,6 @@ modules, namely the need to import whatever the expansion might depend
 upon.
 
 ------------------------------------------------------------------------
-
-* again about conditions
-  :From: E. Ulrich Kriegel
-
-Hi there,
-there is another problem with conditions which should be discussed in Bruxelles.
-Now conditions are something like structures in level-0. In 0.99 for most
-of the conditions there are initialization options.
-However, it is not yet defined, how to acces the information stored in
-conditions.
-If one creates accessors (reader should be sufficient) named as the init
-args there are name clashes for 3 conditions:
-<no-next-method>
-                with slot method
-<non-congruent-lambda-lists>
-                with slots method and generic
-<incompatible-method-domain>
-                with slots method and generic
-<method-domain-clash>
-                with slot generic
-
-IMHO, there are 3 solutions
-1. specification of the names of all accessor fcn's
-2. definition of a common super-condition
-3. neglect slot reader and use some table-based mechanism instead to access
-the values.
-
-
---ulrich
 
 * topics
   :From: Peter A. Broadbery

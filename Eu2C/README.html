@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*Eu2C*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-08-29 23:27:55 BST"/>
+<meta name="generated" content="2010-10-20 10:28:21 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -67,6 +67,7 @@ lang="en" xml:lang="en">
  }
 /*]]>*///-->
 </script>
+
 </head>
 <body>
 <div id="content">
@@ -87,7 +88,7 @@ lang="en" xml:lang="en">
 <li><a href="#sec-7">7 Necessary module imports </a></li>
 <li><a href="#sec-8">8 Compiler log </a></li>
 <li><a href="#sec-9">9 Examples </a></li>
-<li><a href="#sec-10">10 (This list is no where near complete) </a></li>
+<li><a href="#sec-10">10 To Do </a></li>
 </ul>
 </div>
 </div>
@@ -129,7 +130,7 @@ APPLY funded by the German Ministry of Research and Technology under the
 project code ITW9102D5.  The final release in July 1994 is publicly available
 from <a href="http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c/v94_07/eu2c.tgz">eu2c.tgz</a> however the terms of use are not specified.  This release of
 Eu2C is derived from the eu2c-94-07-EUPL version kindly prepared and provided
-by E. Ulrich Kriegel and released by Fraunhofer ISST under the <a href="http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1">EUPL version 1.1 </a> (see <a href="#sec-2">README.orig</a>).  However, due to the inclusion of EuLisp code from
+by E. Ulrich Kriegel and released by Fraunhofer ISST under the <a href="http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1">EUPL version 1.1 </a> (see <a href="#README.orig">README.orig</a>).  However, due to the inclusion of EuLisp code from
 Youtoo, which is released under the GPL version 2, this version of Eu2C
 inherits the GPL version 2 (see above) as specifically permitted under the
 compatibility terms of the EUPL version 1.1.  Future versions of the EUPL may
@@ -211,6 +212,9 @@ Lisp data types are represented similar to C datatypes in order to avoid
 incompatibility with hardwara datatypes and in order to enable easy data
 exchange with non-Lisp programs.
 </li>
+</ul>
+
+<ul>
 <li id="sec-3_1">Project Partners <br/>
 <ul>
 <li>
@@ -226,7 +230,10 @@ VW-GEDAS (Berlin, Germany)
 CAU Kiel (Kiel, Germany)
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-3_2">GC <br/>
 These decisions require to use a conservative pointer finding strategy for
 gc.
@@ -235,6 +242,8 @@ gc.
 The implementation comprises EuLisp-0.99 level-0.
 </p>
 </li>
+</ul>
+<ul>
 <li id="sec-3_3">Compilation strategies <br/>
 Two compilation strategies are supported:
 <ul>
@@ -243,7 +252,7 @@ total compilation of an application including all the runtime modules
 </li>
 <li>
 total compilation of an application using a precompiled runtime system,
-<i>e.g.</i> <code>eulisp-level-0</code>.
+<i>e.g.</i> <code>level-0</code>.
 
 </li>
 </ul>
@@ -255,11 +264,15 @@ runtime system is not possible, but due to the precompiled runtime-system
 the compilation process is much faster.
 </p>
 </li>
+</ul>
+<ul>
 <li id="sec-3_4">Threads are supported <br/>
 but use setjmp/longjmp rather than pthreads or equivalent so do not
 currently take advantage of multi-core CPUs.
 
 </li>
+</ul>
+<ul>
 <li id="sec-3_5">Reports and Papers <br/>
 <ul>
 <li>
@@ -281,7 +294,10 @@ Heicking, Winfried; Rosenmüller, Rainer: „Machine description“, Berlin
 </ol>
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-3_6">See Also <br/>
 <ul>
 <li>
@@ -300,6 +316,7 @@ Heicking, Winfried; Rosenmüller, Rainer: „Machine description“, Berlin
 <a href="http://www.rhinocerus.net/forum/lang-lisp/47271-need-help-building-eu2c.html">Previous compilation attempt</a>
 </li>
 </ul>
+
 </li>
 </ul>
 </div>
@@ -333,12 +350,16 @@ Eu2C but the indications are that this should be possible with a modest
 amount of work.
 </p>
 </li>
+</ul>
+<ul>
 <li id="sec-4_1_2">GNU c compiler gcc <br/>
 Tested with version gcc-4.4.3 but older and newer should work.
 
 </li>
 </ul>
 </li>
+</ul>
+<ul>
 <li id="sec-4_2">Installation Procedure <br/>
 <ul>
 <li>
@@ -350,16 +371,39 @@ Pull the latest version from the GitHub repository:
 </ul>
 </li>
 <li>
-"cd" into the <code>EuLisp/Eu2C</code> directory.
+"cd" into the <code>EuLisp</code> directory
 </li>
 <li>
-Define an environment variable Eu2CROOT to be the path of the
-distribution directory:
+Configure for the default architecture
 <ul>
 <li>
-<code>export Eu2CROOT=`pwd`</code>
+<code>./configure</code>
+</li>
+<li>
+Check the settings and edit the configure file to reflect your system if
+necessary and re-run
+</li>
+<li>
+<code>./configure</code>.
 </li>
 </ul>
+</li>
+<li>
+To configure for a specified architecture,
+<ul>
+<li>
+<code>./configure &lt;arch&gt;</code>
+</li>
+<li>
+<i>e.g.</i> to configure for a 32bit build on a <code>x86_64</code> 64bit machine:
+</li>
+<li>
+<code>./configure i686</code>
+</li>
+</ul>
+</li>
+<li>
+<code>cd</code> into the <code>EuLisp/Eu2C</code> directory.
 </li>
 <li>
 For complete installation, run the command make without any arguments,
@@ -382,19 +426,22 @@ independent conservative garbage collector will be created.
 </li>
 <li>
 The eu2c-compiler is started first time to compile the basic module
-which is in the default case the module <code>eulisp-level-0</code>.
+which is in the default case the module <code>level-0</code>.
 </li>
 <li>
 The eu2c-compiler is started again to be enhanced with the precompiled
-eulisp-level-0 module. A new CMUCL image is created. Its name is
+level-0 module. A new CMUCL image is created. Its name is
 composed of the name of the eu2c-compiler and the name of the basic
 module. Therefore, he default name will be
-<code>Lib/eu2c.eulisp-level-0.cmu</code>.
+<code>Lib/eu2c.level-0.cmu</code>.
 </li>
 </ul>
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-4_3">Compilation of EuLisp-Modules <br/>
 There are 2 different strategies for the compilation of EuLisp modules:
 <ul>
@@ -403,7 +450,7 @@ total compilation of an application including all the runtime modules
 </li>
 <li>
 total compilation of an application using a precompiled runtime system,
-<i>e.g.</i> <code>eulisp-level-0</code>.
+<i>e.g.</i> <code>level-0</code>.
 
 </li>
 </ul>
@@ -420,14 +467,15 @@ compilation process.  In order to compile an EuLisp Module into C and then
 create an application simply call:
 </p><ul>
 <li>
-<code>Bin/eu2c [switches] &lt;path expression&gt; [C-compiler switches and additional     C files]</code>
+=Bin/eu2c [switches] &lt;path expression&gt; [C-compiler switches and additional
 </li>
 </ul>
 
-<p><i>e.g.</i> in the <code>Examples</code> sub-directory
+<p>C files]=
+<i>e.g.</i> in the <code>Examples</code> sub-directory
 </p><ul>
 <li>
-<code>../Bin/eu2c -bs eulisp-level-0 hello</code>
+<code>../Bin/eu2c -bs level-0 hello</code>
 
 </li>
 </ul>
@@ -471,9 +519,9 @@ compilation The default is without precompiled runtime system, <i>i.e.</i> all
 run-time system modules needed system is compiled together with the
 application. As a tradeoff between compilation time and run-time we
 strongly recommend to use a precompiled run-time system for
-compilation. There is a module <code>eulisp-level-0</code> containing everything
+compilation. There is a module <code>level-0</code> containing everything
 defined in <code>level-0</code> of EuLisp-0.99. In addition we provide a module
-<code>eulis0x</code> which exposes <code>eulisp-level-0</code> and contains the following
+<code>eulis0x</code> which exposes <code>level-0</code> and contains the following
 enhancements: command-line-interface and the base of an interface to C.
 </li>
 <li>
@@ -482,7 +530,7 @@ security features. In the default case a gc-library with security features
 off is used.
 </li>
 <li>
-<code>-threads</code> : The precompiled run-time system <code>eulisp-level0</code> supports
+<code>-threads</code> : The precompiled run-time system <code>eulisp-level-0</code> supports
 threads.  However, threads require special care during memory management
 activities like allocation of space. For the sake of efficiency we decided
 to assume as a default case that there are single threaded applications
@@ -501,18 +549,21 @@ increased on demand in correspondence with the configuration of the
 Mem4C[++]-library.
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-4_4">Examples <br/>
-In the subdirectory $Eu2CROOT/Examples some example EuLisp programs are
-given, some of them require to be compiled with the module <code>eulisp-level-0</code>
-and some must be compiled with the <code>eulisp0x</code>-module.
+In the sub-directory <code>Examples</code> some example EuLisp programs are
+given, some of them require to be compiled with the module <code>level-0</code>
+and some must be compiled with the <code>level-0x</code>-module.
 
 <p>
-A basic system with precompiled <code>eulisp0x</code> can be generated by calling make
+A basic system with precompiled <code>level-0x</code> can be generated by calling make
 with:
 </p><ul>
 <li>
-<code>make basic_module=eulisp0x</code>
+<code>make basic_module=level-0x</code>
 
 </li>
 </ul>
@@ -523,10 +574,13 @@ with:
 cd Examples
 </li>
 <li>
-../Bin/eu2c -bs eulisp0x command-line
+../Bin/eu2c -bs level-0x command-line
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-4_5">Makefile <br/>
 For the easy installation we provide a script for make. The following macros
 are used:
@@ -538,8 +592,8 @@ value will be used, otherwise the name is assumed to be <code>eu2c.cmu</code>.
 </li>
 <li>
 <code>basic_module</code>: The name of the EuLisp-module which contain the basic
-run-time system. The default value is <code>eulisp-level-0</code>. Another possible
-basic module is <code>eulisp0x</code>.
+run-time system. The default value is <code>level-0</code>. Another possible
+basic module is <code>level-0x</code>.
 
 </li>
 </ul>
@@ -601,27 +655,30 @@ system.
 If you plan to use Eu2C with the precompiled basic system we recommend to
 run make with the targets clean_runtime_sources and clean_eu2c_image.
 </p></li>
+</ul>
+<ul>
 <li id="sec-4_6">Building 32bit on a 64bit machine: <br/>
-It is possible to compile 32bit on 64bit machines using the "WL=32" option
-to build the run-time and the -m32 option when building the applications,
-e.g.
+It is possible to compile 32bit on 64bit machines using the <code>ARCH=i686</code>
+option to build the run-time and the <code>-arch i686</code> option when building the
+applications, e.g.
 <ul>
 <li>
-make clean
+<code>make clean</code>
 </li>
 <li>
-make WL=32
+<code>make ARCH=i686</code>
 </li>
 <li>
-cd Examples
+<code>cd Examples</code>
 </li>
 <li>
-../Bin/eu2c -m32 -bs eulisp-level-0 gtakl2
+<code>../Bin/eu2c -arch i686 -bs level-0 gtakl2</code>
 </li>
 <li>
-./gtakl2
+<code>./gtakl2</code>
 </li>
 </ul>
+
 </li>
 </ul>
 </div>
@@ -642,14 +699,20 @@ cd Examples
 <code>scan</code>: the function read can be used instead.
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-5_2">Not yet complete: <br/>
 <ul>
 <li>
 <code>format</code>: the directives <code>~e</code>, <code>~f</code> and <code>~g</code> are not yet present.
 </li>
 </ul>
+
 </li>
+</ul>
+<ul>
 <li id="sec-5_3">Known problems: <br/>
 <ul>
 <li>
@@ -678,6 +741,8 @@ function level is incorrect:
 
 </li>
 </ul>
+</li>
+</ul>
 
 <p>But in all other cases the right code is generated:
 </p>
@@ -689,12 +754,13 @@ function level is incorrect:
 </pre>
 
 
-</li>
+<ul>
 <li>
 Tables can not currently be used.
-
 </li>
 </ul>
+
+
 </li>
 </ul>
 </div>
@@ -732,14 +798,14 @@ be used to compile Eu2C.
 <div class="outline-text-2" id="text-7">
 
 <p>The whole functionality of level 0 of EuLisp is contained in the module
-<code>eulisp-level-0</code>. Therefore the module <code>eulisp-level-0</code> should be imported
+<code>level-0</code>. Therefore the module <code>level-0</code> should be imported
 as in the following example.
 </p>
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">test-module</span>
-  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span> user-module)
-   <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span> user-module-with-macro-definition)
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span> user-module)
+   <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span> user-module-with-macro-definition)
    <span style="color: #0000ff; font-weight: bold;">export</span> (<span style="color: #0000ff; font-weight: bold;">fct1</span> fct2 ...)
    <span style="color: #0000ff; font-weight: bold;">expose</span> (<span style="color: #0000ff; font-weight: bold;">...</span>))
   .
@@ -758,13 +824,13 @@ as in the following example.
 <h2 id="sec-8"><span class="section-number-2">8</span> Compiler log </h2>
 <div class="outline-text-2" id="text-8">
 
-<p><code>../Bin/eu2c -bs eulisp-level-0 hello</code> generates (comments are enclosed in
+<p><code>../Bin/eu2c -bs level-0 hello</code> generates (comments are enclosed in
 <a name="&hellip;" class="target">&hellip;</a> ):
 </p>
 
 
 <pre class="src src-eulisp"><span style="color: #000000;">Eu2C:</span> (<span style="color: #0000ff; font-weight: bold;">compile-application</span> hello)
-      using compiler image /home/dm2/henry/EuLisp/Eu2C/Eu2C/Lib/eu2c.eulisp-level-0
+      using compiler image /home/dm2/henry/EuLisp/Eu2C/Eu2C/Lib/eu2c.level-0
 
 &lt;&lt;After the creation of the '.c' and '.inst' files the compilation and linking
   of the <span style="color: #000000;">C-sources</span> with the help of the <span style="color: #000000;">GNU-C-Compilers</span> is made:&gt;&gt;
@@ -772,7 +838,7 @@ as in the following example.
 <span style="color: #000000;">Eu2C:</span> successful conversion of hello.em to hello.c
 
 + gcc -m64 -c -o hello.o -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.c
-+ gcc -m64 -z muldefs -o hello -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.o /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/eulisp-level-0.a /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/platforms/x86_64m64/eu2c.a -lm
++ gcc -m64 -z muldefs -o hello -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.o /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/level-0.a /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/platforms/x86_64m64/eu2c.a -lm
 + set +x
 
 &lt;&lt;In this phase warnings may appear both from the compiler and the linker. <span style="color: #000000;">In</span>
@@ -869,7 +935,7 @@ hello.inst...
 <p>In module <code>takl</code> (contained in the Examples directory) the functions <code>takl</code>
 and <code>gtakl</code> are defined and exported. <code>takl</code> is a simple function without
 generic functions, <code>gtakl</code> is written with the generic function <code>gshorterp</code>.
-With the import of the module <code>eulisp-level-0</code> the whole functionality of
+With the import of the module <code>level-0</code> the whole functionality of
 level-0 of EuLisp is given.
 </p>
 <p>
@@ -878,8 +944,8 @@ The file associated with the module <code>takl</code> has to have the name <code
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">takl</span>              <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">definition of module takl
-</span>    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
-     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
+</span>    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>)
+     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>)
      <span style="color: #0000ff; font-weight: bold;">export</span> (<span style="color: #0000ff; font-weight: bold;">takl</span> gtakl)     <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">export of functions takl and gtakl
 </span>     )
 
@@ -941,12 +1007,12 @@ The file associated with the module <code>test-takl</code> has to have the name
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">test-takl</span>
-    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>
+    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>
              (<span style="color: #0000ff; font-weight: bold;">only</span> (<span style="color: #0000ff; font-weight: bold;">%void</span>
                     %string)
                    tail)
              takl)
-     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
+     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>)
      c-import (<span style="color: #00ff00;">"timing.h"</span>)      <span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">extension of module syntax
 </span>     )
 
@@ -997,41 +1063,19 @@ The file associated with the module <code>test-takl</code> has to have the name
 </span></pre>
 
 
+
 </div>
 
 </div>
 
 <div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> <span class="todo TODO"> TODO</span> (This list is no where near complete) </h2>
+<h2 id="sec-10"><span class="section-number-2">10</span> <a href="../TODO.html">To Do</a> </h2>
 <div class="outline-text-2" id="text-10">
 
-<ul>
-<li id="sec-10_1">Correct case handling for symbols <br/>
-<ul>
-<li>
-Currently symbols or interned with capitalised names.
-</li>
-<li>
-This can only be corrected by enabling case-preservation in CL:
-</li>
-<li>
-(setf (readtable-case <b>readtable</b>) :preserve)
-</li>
-<li>
-The consequence is that all standard CL symbols must be written in
-uppercase.
-</li>
-</ul>
-</li>
-<li id="sec-10_2">Change location of the [cho] and {inst,def} files generated <br/>
-Currently the top-level <code>Makefile</code> does not set the location of the files
-which are build-dependant.
-</li>
-</ul>
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-08-29 23:27:55 BST</p>
+<p class="date"> Date: 2010-10-20 10:28:21 BST</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

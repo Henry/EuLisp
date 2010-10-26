@@ -244,7 +244,7 @@
                 function A S
                         continuation C
                         simple-function C
-                        generic function A S1
+                        generic-function A S1
                                 simple-generic-function C
                 collection A S
                         sequence A S

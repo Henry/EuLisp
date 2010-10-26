@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-08-29 23:31:00" /> 
+<meta name="date" content="2010-10-23 20:05:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -100,30 +100,30 @@ indirect instances of this class. The inheritance rules, the
 applicability of methods and the generic dispatch are described in
 detail later in this section.
 </p><!--l. 43--><p class="noindent" >Classes are defined using the <a 
-href="eulispcl18.html#x23-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> (<a 
 href="#x13-76001r1">11.3.1<!--tex4ht:ref: defclass --></a>) and <a 
-href="eulispcl14.html#x18-160001r6"><span 
+href="eulispcl13.html#x17-242001r1"><span 
 class="cmtt-9">defcondition</span></a>
 (<a 
-href="eulispcl14.html#x18-160001r6">14.0.6<!--tex4ht:ref: defcondition --></a>) defining forms, both of which create top-lexical bindings.
+href="eulispcl13.html#x17-242001r1">13.0.1<!--tex4ht:ref: defcondition --></a>) defining forms, both of which create top-lexical bindings.
 </p><!--l. 47--><p class="noindent" >Generic functions are defined using the <a 
-href="eulispcl18.html#x23-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a><a 
  id="dx13-73004"></a> defining form,which creates a named generic function in the top-lexical environment
  of the module in which it appears and <a 
-href="eulispcl18.html#x23-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a><a 
  id="dx13-73005"></a>, which
  creates an anonymous generic function. These forms are described
  in detail later in this section.
  </p><!--l. 54--><p class="noindent" >Methods can either be defined at the same time as the generic
  function, or else defined separately using the <a 
-href="eulispcl18.html#x23-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a> macro,
  which adds a new method to an existing generic function. This
  macro is described in detail later in this section.
- </p><!--l. 94--><p class="noindent" >
+ </p><!--l. 95--><p class="noindent" >
  </p>
  <h4 class="sclauseHead"> 11.1 <a 
  id="x13-7400011.1"></a>System Defined Classes</h4>
@@ -137,7 +137,9 @@ href="#x13-740011">1<!--tex4ht:ref: level-0-class-hierarchy --></a>.
                                                                                                   
                                                                                                   
 <!--l. 6--><p class="noindent" ><a 
- id="x13-740011"></a></p><hr class="float" /><div class="float" 
+ id="x13-740011"></a><a 
+ id="x16-197001r1"></a><a 
+ id="x16-224001r2"></a></p><hr class="float" /><div class="float" 
 >
                                                  
                                                                                                   
@@ -163,7 +165,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-328012r2"><span 
+href="eulispcl16.html#x20-328003r2"><span 
 class="cmtt-9">&#x003C;character&#x003E;</span></a></td></tr></table>
 <!--l.10 12-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -173,9 +175,9 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl14.html#x18-163001r7"><span 
+href="eulispcl13.html#x17-245001r2"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a> See table&#x00A0;<a 
-href="eulispcl13.html#x17-1590122">2<!--tex4ht:ref: condition-class-hierarchy --></a></td></tr></table>
+href="eulispcl12.html#x16-2410132">2<!--tex4ht:ref: condition-class-hierarchy --></a></td></tr></table>
 <!--l.10 14-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -205,7 +207,7 @@ class="tabbing">   </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="#x13-82005r2"><span 
+href="#x13-82004r2"><span 
 class="cmtt-9">&#x003C;simple-function&#x003E;</span></a></td></tr></table>
 <!--l.10 17-->                          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -216,7 +218,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-50.png" alt="P" class="9x-x-50" /> </span><a 
-href="#x13-82009r3"><span 
+href="#x13-82007r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a></td></tr></table>
 <!--l.10 18-->                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -228,7 +230,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="#x13-82013r4"><span 
+href="#x13-82010r4"><span 
 class="cmtt-9">&#x003C;simple-generic-function&#x003E;</span></a></td></tr></table>
 <!--l.10 19-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -238,7 +240,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-353005r1"><span 
+href="eulispcl16.html#x20-353005r1"><span 
 class="cmtt-9">&#x003C;collection&#x003E;</span></a></td></tr></table>
 <!--l.10 20-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -249,7 +251,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-353009r2"><span 
+href="eulispcl16.html#x20-353008r2"><span 
 class="cmtt-9">&#x003C;sequence&#x003E;</span></a></td></tr></table>
 <!--l.10 21-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -261,7 +263,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-50.png" alt="P" class="9x-x-50" /> </span><a 
-href="eulispcl17.html#x21-619005r1"><span 
+href="eulispcl16.html#x20-587006r1"><span 
 class="cmtt-9">&#x003C;list&#x003E;</span></a></td></tr></table>
 <!--l.10 22-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -274,7 +276,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-630001r8"><span 
+href="eulispcl16.html#x20-598001r8"><span 
 class="cmtt-9">&#x003C;cons&#x003E;</span></a></td></tr></table>
 <!--l.10 23-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -287,7 +289,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-620002r3"><span 
+href="eulispcl16.html#x20-588002r3"><span 
 class="cmtt-9">&#x003C;null&#x003E;</span></a></td></tr></table>
 <!--l.10 24-->                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -299,7 +301,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-353013r3"><span 
+href="eulispcl16.html#x20-353011r3"><span 
 class="cmtt-9">&#x003C;character-sequence&#x003E;</span></a></td></tr></table>
 <!--l.10 25-->                               <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -312,7 +314,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-868016r2"><span 
+href="eulispcl16.html#x20-854005r2"><span 
 class="cmtt-9">&#x003C;string&#x003E;</span></a></td></tr></table>
 <!--l.10 26-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -324,7 +326,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-922005r2"><span 
+href="eulispcl16.html#x20-908002r2"><span 
 class="cmtt-9">&#x003C;vector&#x003E;</span></a></td></tr></table>
 <!--l.10 27-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -335,7 +337,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-914004r1"><span 
+href="eulispcl16.html#x20-900004r1"><span 
 class="cmtt-9">&#x003C;table&#x003E;</span></a></td></tr></table>
 <!--l.10 28-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -347,7 +349,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-920001r4"><span 
+href="eulispcl16.html#x20-906001r4"><span 
 class="cmtt-9">&#x003C;hash-table&#x003E;</span></a></td></tr></table>
 <!--l.10 29-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -357,7 +359,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl12.html#x16-148002r1"><span 
+href="eulispcl15.html#x19-315004r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a></td></tr></table>
 <!--l.10 30-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -367,7 +369,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-661009r1"><span 
+href="eulispcl16.html#x20-661008r1"><span 
 class="cmtt-9">&#x003C;number&#x003E;</span></a></td></tr></table>
 <!--l.10 31-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -378,7 +380,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-593034r2"><span 
+href="eulispcl16.html#x20-561003r2"><span 
 class="cmtt-9">&#x003C;integer&#x003E;</span></a></td></tr></table>
 <!--l.10 32-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -390,8 +392,8 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-565030r1"><span 
-class="cmtt-9">&#x003C;int&#x003E;</span></a></td></tr></table>
+href="eulispcl16.html#x20-545017r1"><span 
+class="cmtt-9">&#x003C;fpi&#x003E;</span></a></td></tr></table>
 <!--l.10 33-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -401,7 +403,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-554016r2"><span 
+href="eulispcl16.html#x20-522003r2"><span 
 class="cmtt-9">&#x003C;float&#x003E;</span></a></td></tr></table>
 <!--l.10 35-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -413,7 +415,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-502060r1"><span 
+href="eulispcl16.html#x20-502032r1"><span 
 class="cmtt-9">&#x003C;double-float&#x003E;</span></a></td></tr></table>
 <!--l.10 36-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -423,7 +425,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-713001r1"><span 
+href="eulispcl16.html#x20-713001r1"><span 
 class="cmtt-9">&#x003C;stream&#x003E;</span></a></td></tr></table>
 <!--l.10 37-->                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -434,7 +436,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl17.html#x21-716007r5"><span 
+href="eulispcl16.html#x20-716007r5"><span 
 class="cmtt-9">&#x003C;buffered-stream&#x003E;</span></a></td></tr></table>
 <!--l.10 38-->                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -446,7 +448,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-718001r9"><span 
+href="eulispcl16.html#x20-718001r9"><span 
 class="cmtt-9">&#x003C;string-stream&#x003E;</span></a></td></tr></table>
 <!--l.10 39-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -458,7 +460,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-716015r7"><span 
+href="eulispcl16.html#x20-716013r7"><span 
 class="cmtt-9">&#x003C;file-stream&#x003E;</span></a></td></tr></table>
 <!--l.10 40-->                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -479,7 +481,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-894005r2"><span 
+href="eulispcl16.html#x20-880002r2"><span 
 class="cmtt-9">&#x003C;symbol&#x003E;</span></a></td></tr></table>
 <!--l.10 42-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -490,7 +492,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl17.html#x21-601005r2"><span 
+href="eulispcl16.html#x20-569002r2"><span 
 class="cmtt-9">&#x003C;keyword&#x003E;</span></a></td></tr></table>
 <!--l.10 43-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -500,7 +502,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl12.html#x16-119002r1"><span 
+href="eulispcl15.html#x19-286004r1"><span 
 class="cmtt-9">&#x003C;thread&#x003E;</span></a></td></tr></table>
 <!--l.10 44-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -511,7 +513,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl12.html#x16-158001r5"><span 
+href="eulispcl15.html#x19-325001r5"><span 
 class="cmtt-9">&#x003C;simple-thread&#x003E;</span></a></td></tr></table>
 <!--l.10 46-->
                                                  
@@ -520,7 +522,7 @@ class="cmtt-9">&#x003C;simple-thread&#x003E;</span></a></td></tr></table>
 </div><hr class="endfloat" />
 <!--l. 50--><p class="noindent" >Indentation indicates a subclass relationship to the class under
 which the line has been indented, for example, <a 
-href="eulispcl14.html#x18-163001r7"><span 
+href="eulispcl13.html#x17-245001r2"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;is a
 subclass of <a 
 href="#x13-74002r1"><span 
@@ -529,10 +531,10 @@ bindings of names to classes as they are exported from the
 level-0 modules. Classes directly relevant to the object system
 are described in this section while others are described in
 corresponding sections, e.g. <a 
-href="eulispcl14.html#x18-163001r7"><span 
+href="eulispcl13.html#x17-245001r2"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;is described in <span 
 class="cmsy-9">§</span>&#x00A0;<a 
-href="eulispcl13.html#x17-15900013">13<!--tex4ht:ref: condition --></a>. In
+href="eulispcl12.html#x16-24100012.8">12.8<!--tex4ht:ref: condition --></a>. In
 this definition, unless otherwise specified, classes declared to be
 subclasses of other classes may be indirect subclasses. Classes
 not declared to be in a subclass relationship are disjoint.
@@ -549,9 +551,7 @@ class="cmtt-9">&#x003C;object&#x003E;</span>
 class="cmti-9">class</span><a 
  id="dx13-74003"></a><a 
  id="dx13-74004"></a> </i></b></div><br /> <hr />
-<a 
- id="dx13-74005"></a>
-</p><!--l. 67--><p class="noindent" >The root of the inheritance hierarchy. <a 
+</p><!--l. 66--><p class="noindent" >The root of the inheritance hierarchy. <a 
 href="#x13-74002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a>&#x00A0;defines the basic
 methods for initialization and external representation of objects.
@@ -559,22 +559,20 @@ No initialization options are specified for <a
 href="#x13-74002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a>.
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x13-74006r2"></a><span 
+ id="x13-74005r2"></a><span 
 class="cmbx-9">11.1.2   </span><span 
 class="cmtt-9">&#x003C;class&#x003E;</span>
 <a 
  id="Q1-13-85"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">class</span><a 
- id="dx13-74007"></a><a 
- id="dx13-74008"></a> </i></b></div><br /> <hr />
-<a 
- id="dx13-74009"></a>
-</p><!--l. 74--><p class="noindent" >The default super-class including for itself. All classes defined using
+ id="dx13-74006"></a><a 
+ id="dx13-74007"></a> </i></b></div><br /> <hr />
+</p><!--l. 72--><p class="noindent" >The default super-class including for itself. All classes defined using
 the <a 
-href="eulispcl18.html#x23-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> form are direct or indirect subclasses of <a 
-href="#x13-74006r2"><span 
+href="#x13-74005r2"><span 
 class="cmtt-9">&#x003C;class&#x003E;</span></a>.
 Thus, this class is specializable by user-defined classes at
 level-0.
@@ -621,12 +619,13 @@ concerning:
 </p><!--l. 24--><p class="noindent" >
     </p><ol  class="enumerate1" >
     <li 
-  class="enumerate" id="x13-75008x1">inheritance of slot and class options when initializing a         class;
-        </li>
+  class="enumerate" id="x13-75008x1">inheritance of slot and class options when initializing a
+    class;
+                                                         </li>
         <li 
   class="enumerate" id="x13-75010x2">method  lookup  and  generic  dispatch  when  applying  a
         generic function.</li></ol>
-  <!--l. 244--><p class="noindent" >
+  <!--l. 243--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 11.3 <a 
  id="x13-7600011.3"></a>Defining Classes</h4>
@@ -645,17 +644,13 @@ class="cmti-9">defining operator</span><a
  id="x13-7700011.3.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
  id="dx13-77001"></a>
-  <a 
- id="dx13-77002"></a>
   <!--l. 36--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">defclass-form</span><a 
- id="dx13-77003"></a><a 
- id="dx13-77004"></a><span 
+class="cmti-9">defclass-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -664,7 +659,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl18.html#x23-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> <a 
 href="#x13-7700011.3.1.1"><span 
 class="cmti-9">class-name</span></a> <a 
@@ -691,9 +686,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">class-name</span><a 
- id="dx13-77005"></a><a 
- id="dx13-77006"></a><span 
+class="cmti-9">class-name</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -708,9 +701,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">superclass-name</span><a 
- id="dx13-77007"></a><a 
- id="dx13-77008"></a><span 
+class="cmti-9">superclass-name</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -725,9 +716,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">slot</span><a 
- id="dx13-77009"></a><a 
- id="dx13-77010"></a><span 
+class="cmti-9">slot</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -755,9 +744,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">slot-name</span><a 
- id="dx13-77011"></a><a 
- id="dx13-77012"></a><span 
+class="cmti-9">slot-name</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -772,9 +759,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">slot-option</span><a 
- id="dx13-77013"></a><a 
- id="dx13-77014"></a><span 
+class="cmti-9">slot-option</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -847,9 +832,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">class-option</span><a 
- id="dx13-77015"></a><a 
- id="dx13-77016"></a><span 
+class="cmti-9">class-option</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -902,9 +885,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">constructor-specification</span><a 
- id="dx13-77017"></a><a 
- id="dx13-77018"></a><span 
+class="cmti-9">constructor-specification</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -924,9 +905,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">initlist</span><a 
- id="dx13-77019"></a><a 
- id="dx13-77020"></a><span 
+class="cmti-9">initlist</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 36-->                               <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -958,9 +937,9 @@ class="arguments">
 href="#x13-7700011.3.1.1"><span 
 class="cmti-9">superclass-name</span></a> :  </dt><dd 
 class="arguments">
+        <!--l. 42--><p class="noindent" >A symbol naming a binding of a class to be used as the
                                                                                                   
                                                                                                   
-    <!--l. 42--><p class="noindent" >A symbol naming a binding of a class to be used as the
     direct superclass of the new structure class.
     </p></dd><dt class="arguments">
 <a 
@@ -988,7 +967,7 @@ class="arguments">
  id="x13-7900011.3.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 53--><p class="noindent" ><a 
-href="eulispcl18.html#x23-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> defines a new structure class. Structure classes support
 single inheritance as described above. Neither class redefinition nor
 changing the class of an instance is supported by structure
@@ -1002,7 +981,8 @@ class="cmti-9">slot-option</span></a>s are interpreted as follows:
     </p><dl class="options1"><dt class="options">
 <span 
 class="cmtt-9">keyword</span><a 
- id="dx13-79002"></a><span 
+ id="dx13-79002"></a><a 
+ id="dx13-79003"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> : </dt><dd 
@@ -1017,42 +997,43 @@ href="#x13-102003r1"><span
 class="cmtt-9">make</span></a> is the initial value
     of the slot. This option must only be specified once for a
     particular slot. The same <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a> name may be used for
     several slots, in which case they will share the same initial
     value if the <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a> is given to <a 
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a>. Subclasses inherit
     the <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>. Each slot must have at most one <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>
     including the inherited one. That means, a subclass can
     not  shadow  or  add  a  new  <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>,  if  a  superclass  has
     already defined one.
     </p></dd><dt class="options">
 <span 
 class="cmtt-9">default</span><a 
- id="dx13-79003"></a><span 
+ id="dx13-79004"></a><a 
+ id="dx13-79005"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl10.html#x12-6100010.1.1.1"><span 
 class="cmti-9">level-0-form</span></a> : </dt><dd 
 class="options">
     <!--l. 76--><p class="noindent" >The value of this option is a form, which is evaluated as
     the default value of the slot, to be used if no <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>
     is  defined  for  the  slot  or  given  to  a  call  to  <a 
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a>.  The
     expression is evaluated in the lexical environment of the
     call to <a 
-href="eulispcl18.html#x23-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> and the dynamic environment of the call
     to <a 
 href="#x13-102003r1"><span 
@@ -1070,14 +1051,15 @@ class="cmtt-9">initialize</span></a>. This option must only be specified once fo
     </p></dd><dt class="options">
 <span 
 class="cmtt-9">reader</span><a 
- id="dx13-79004"></a><span 
+ id="dx13-79006"></a><a 
+ id="dx13-79007"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> : </dt><dd 
 class="options">
     <!--l. 88--><p class="noindent" >The value is the identifier of the variable to which the
-    reader function will be bound. The binding is immutable.         The reader function is a means to access the slot. The
-        reader  function  is  a  function  of  one  argument,  which
+    reader function will be bound. The binding is immutable.
+    The reader function is a means to access the slot. The         reader  function  is  a  function  of  one  argument,  which
         should be an instance of the new class. No writer function
         is automatically bound with this option. This option can
         be specified more than once for a slot, creating several
@@ -1087,7 +1069,8 @@ class="options">
         </p></dd><dt class="options">
   <span 
 class="cmtt-9">writer</span><a 
- id="dx13-79005"></a><span 
+ id="dx13-79008"></a><a 
+ id="dx13-79009"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> :  </dt><dd 
@@ -1105,7 +1088,8 @@ class="options">
         </p></dd><dt class="options">
   <span 
 class="cmtt-9">accessor</span><a 
- id="dx13-79006"></a><span 
+ id="dx13-79010"></a><a 
+ id="dx13-79011"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> :  </dt><dd 
@@ -1117,7 +1101,7 @@ href="#x13-7700011.3.1.1"><span
 class="cmti-9">slot-option</span></a> causes the writer function to be associated to
         the reader <span 
 class="cmti-9">via </span>the <a 
-href="eulispcl16.html#x20-247001r2"><span 
+href="eulispcl12.html#x16-162001r2"><span 
 class="cmtt-9">setter</span></a> mechanism. This option can be
         specified more than once for a slot. It is a violation to
         specify the same reader, writer, or accessor name for two
@@ -1125,24 +1109,26 @@ class="cmtt-9">setter</span></a> mechanism. This option can be
         </p></dd><dt class="options">
   <span 
 class="cmtt-9">required?</span><a 
- id="dx13-79007"></a><span 
+ id="dx13-79012"></a><a 
+ id="dx13-79013"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl9.html#x11-580009.5.0.5"><span 
 class="cmti-9">boolean</span></a> :  </dt><dd 
 class="options">
         <!--l. 116--><p class="noindent" >The value is either <a 
-href="eulispcl16.html#x20-208001r3"><span 
+href="eulispcl12.html#x16-123001r3"><span 
 class="cmtt-9">t</span></a> or <a 
-href="eulispcl17.html#x21-619009r2"><span 
+href="eulispcl16.html#x20-587009r2"><span 
 class="cmtt-9">()</span></a>. <a 
-href="eulispcl16.html#x20-208001r3"><span 
+href="eulispcl12.html#x16-123001r3"><span 
 class="cmtt-9">t</span></a> indicates that an initialization
         argument must be supplied for this slot.</p></dd></dl>
   <!--l. 121--><p class="noindent" >The class-options are interpreted as follows:
         </p><dl class="options1"><dt class="options">
   <span 
 class="cmtt-9">keywords</span><a 
- id="dx13-79008"></a><span 
+ id="dx13-79014"></a><a 
+ id="dx13-79015"></a> <span 
 class="cmtt-9">: </span><span 
 class="cmti-9">( </span><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
@@ -1160,7 +1146,7 @@ class="cmtt-9">make</span></a> on the new class. Keywords are
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a> are the initial values of corresponding
         slots if they name a slot <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a> or are ignored by the
         default  <a 
 href="#x13-111001r4"><span 
@@ -1169,7 +1155,8 @@ class="cmtt-9">initialize &#x003C;object&#x003E;</span></a> method,  otherwise. 
         </p></dd><dt class="options">
   <span 
 class="cmtt-9">constructor</span><a 
- id="dx13-79009"></a><span 
+ id="dx13-79016"></a><a 
+ id="dx13-79017"></a> <span 
 class="cmtt-9">: </span><a 
 href="#x13-7700011.3.1.1"><span 
 class="cmti-9">constructor-specification</span></a> :  </dt><dd 
@@ -1178,69 +1165,71 @@ class="options">
         constructor  specification  gives  the  name  to  which  the
         constructor function will be bound, followed by a sequence
         of legal <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>s for the class. The new function creates
         an instance of the class and fills in the slots according to
         the match between the specified <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>s and the given
         arguments to the constructor function. This option may
         be specified any number of times for a class.
         </p></dd><dt class="options">
   <span 
 class="cmtt-9">predicate</span><a 
- id="dx13-79010"></a><span 
+ id="dx13-79018"></a><a 
+ id="dx13-79019"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> :  </dt><dd 
 class="options">
         <!--l. 144--><p class="noindent" >Creates a function which tests whether an object is an
         instance of the new class. The predicate specification gives
+        the name to which the predicate function will be bound.
                                                                                                   
                                                                                                   
-    the name to which the predicate function will be bound.
     This option may be specified any number of times for a
     class.
     </p></dd><dt class="options">
 <span 
 class="cmtt-9">abstract?</span><a 
- id="dx13-79011"></a><span 
+ id="dx13-79020"></a><a 
+ id="dx13-79021"></a> <span 
 class="cmtt-9">: </span><a 
 href="eulispcl9.html#x11-580009.5.0.5"><span 
 class="cmti-9">boolean</span></a> : </dt><dd 
 class="options">
     <!--l. 152--><p class="noindent" >The value is either <a 
-href="eulispcl16.html#x20-208001r3"><span 
+href="eulispcl12.html#x16-123001r3"><span 
 class="cmtt-9">t</span></a> or <a 
-href="eulispcl17.html#x21-619009r2"><span 
+href="eulispcl16.html#x20-587009r2"><span 
 class="cmtt-9">()</span></a>. <a 
-href="eulispcl16.html#x20-208001r3"><span 
+href="eulispcl12.html#x16-123001r3"><span 
 class="cmtt-9">t</span></a> indicates that the class being
     defined is abstract.</p></dd></dl>
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x13-79012r2"></a><span 
+ id="x13-79022r2"></a><span 
 class="cmbx-9">11.3.2   </span><span 
 class="cmtt-9">abstract-class?</span>
 <a 
  id="Q1-13-92"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function</span><a 
- id="dx13-79013"></a><a 
- id="dx13-79014"></a> </i></b></div><br /> <hr />
+ id="dx13-79023"></a><a 
+ id="dx13-79024"></a> </i></b></div><br /> <hr />
 <h5 class="syntaxssclauseHead"> 11.3.2.1 <a 
  id="x13-8000011.3.2.1"></a><span 
 class="cmbx-8">Signature</span></h5><a 
  id="dx13-80001"></a>
 <a 
  id="dx13-80002"></a>
-<!--l. 418--><p class="noindent" ><div class="framebox-l" 
+<!--l. 417--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmtt-9">(</span><a 
-href="#x13-79012r2"><span 
+href="#x13-79022r2"><span 
 class="cmtt-9">abstract-class?</span></a> <a 
 href="eulispcl9.html#x11-560009.4.0.4"><span 
 class="cmti-9">object</span></a><span 
@@ -1249,34 +1238,34 @@ class="cmsy-9">&#x2192; </span><a
 href="#x13-74002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a>
 </td></tr></table>
-<!--l.10 418-->                                                </div></div>
+<!--l.10 417-->                                                </div></div>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-8100011.3.2.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
-<!--l. 420--><p class="noindent" >
+<!--l. 419--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
 <a 
 href="eulispcl9.html#x11-560009.4.0.4"><span 
 class="cmti-9">object</span></a> : </dt><dd 
 class="arguments">
-    <!--l. 421--><p class="noindent" >Returns <a 
+    <!--l. 420--><p class="noindent" >Returns <a 
 href="eulispcl9.html#x11-560009.4.0.4"><span 
 class="cmti-9">object</span></a>, if it is an abstract class, otherwise <a 
-href="eulispcl17.html#x21-619009r2"><span 
+href="eulispcl16.html#x20-587009r2"><span 
 class="cmtt-9">()</span></a>.</p></dd></dl>
 <a 
  id="x13-81001r1"></a>
-<!--l. 425--><p class="noindent" >
+<!--l. 424--><p class="noindent" >
 </p><div class="note">
 <span 
 class="cmr-8">NOTE</span><span 
 class="cmr-8">&#x00A0;1</span>  <a 
-href="#x13-79012r2"><span 
+href="#x13-79022r2"><span 
 class="cmtt-8">abstract-class?</span></a>  <span 
 class="cmr-8">is   not   currently   implemented   in</span>
 <span 
 class="cmr-8">Youtoo.</span></div>
-<!--l. 429--><p class="noindent" >
+<!--l. 428--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 11.4 <a 
  id="x13-8200011.4"></a>Defining Generic Functions and Methods</h4>
@@ -1292,11 +1281,9 @@ class="cmtt-9">&#x003C;object&#x003E;</span></a>&#x00A0;&#x00A0;<span
 class="cmti-9">class</span><a 
  id="dx13-82002"></a><a 
  id="dx13-82003"></a> </i></b></div><br /> <hr />
-<a 
- id="dx13-82004"></a>
-</p><!--l. 5--><p class="noindent" >The class of all functions.
-</p><!--l. 7--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x13-82005r2"></a><span 
+</p><!--l. 4--><p class="noindent" >The class of all functions.
+</p><!--l. 6--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x13-82004r2"></a><span 
 class="cmbx-9">11.4.2   </span><span 
 class="cmtt-9">&#x003C;simple-function&#x003E;</span>
 <a 
@@ -1305,15 +1292,13 @@ class="cmtt-9">&#x003C;simple-function&#x003E;</span>
 href="#x13-82001r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a>&#x00A0;&#x00A0;<span 
 class="cmti-9">class</span><a 
- id="dx13-82006"></a><a 
- id="dx13-82007"></a> </i></b></div><br /> <hr />
-<a 
- id="dx13-82008"></a>
-</p><!--l. 10--><p class="noindent" >Place holder for <a 
-href="#x13-82005r2"><span 
+ id="dx13-82005"></a><a 
+ id="dx13-82006"></a> </i></b></div><br /> <hr />
+</p><!--l. 8--><p class="noindent" >Place holder for <a 
+href="#x13-82004r2"><span 
 class="cmtt-9">&#x003C;simple-function&#x003E;</span></a> class.
-</p><!--l. 12--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x13-82009r3"></a><span 
+</p><!--l. 10--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x13-82007r3"></a><span 
 class="cmbx-9">11.4.3   </span><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span>
 <a 
@@ -1322,37 +1307,34 @@ class="cmtt-9">&#x003C;generic-function&#x003E;</span>
 href="#x13-82001r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a>&#x00A0;&#x00A0;<span 
 class="cmti-9">class</span><a 
- id="dx13-82010"></a><a 
- id="dx13-82011"></a> </i></b></div><br /> <hr />
-<a 
- id="dx13-82012"></a>
-                                                   </p><!--l. 15--><p class="noindent" >The class of all generic functions.
-  </p><!--l. 17--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x13-82013r4"></a><span 
+ id="dx13-82008"></a><a 
+ id="dx13-82009"></a> </i></b></div><br /> <hr />
+</p><!--l. 12--><p class="noindent" >The class of all generic functions.
+                                                   </p><!--l. 14--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x13-82010r4"></a><span 
 class="cmbx-9">11.4.4   </span><span 
 class="cmtt-9">&#x003C;simple-generic-function&#x003E;</span>
  <a 
  id="Q1-13-99"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
-href="#x13-82009r3"><span 
+href="#x13-82007r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a>&#x00A0;&#x00A0;<span 
 class="cmti-9">class</span><a 
- id="dx13-82014"></a><a 
- id="dx13-82015"></a> </i></b></div><br /> <hr /> <a 
- id="dx13-82016"></a>
-  </p><!--l. 20--><p class="noindent" >Place holder for <a 
-href="#x13-82013r4"><span 
+ id="dx13-82011"></a><a 
+ id="dx13-82012"></a> </i></b></div><br /> <hr />
+  </p><!--l. 16--><p class="noindent" >Place holder for <a 
+href="#x13-82010r4"><span 
 class="cmtt-9">&#x003C;simple-generic-function&#x003E;</span></a> class..
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x13-82017r5"></a><span 
+ id="x13-82013r5"></a><span 
 class="cmbx-9">11.4.5   </span><span 
 class="cmtt-9">defgeneric</span>
  <a 
  id="Q1-13-100"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">defining operator</span><a 
- id="dx13-82018"></a><a 
- id="dx13-82019"></a> </i></b></div><br /> <hr />
+ id="dx13-82014"></a><a 
+ id="dx13-82015"></a> </i></b></div><br /> <hr />
   </p>
   <h5 class="syntaxssclauseHead"> 11.4.5.1 <a 
  id="x13-8300011.4.5.1"></a><span 
@@ -1362,32 +1344,28 @@ class="cmbx-8">Syntax</span></h5> <a
  id="dx13-83002"></a>
   <a 
  id="dx13-83003"></a>
-  <a 
- id="dx13-83004"></a>
-  <!--l. 48--><p class="noindent" ><div class="framebox-l" 
+  <!--l. 44--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">defgeneric-form</span><a 
- id="dx13-83005"></a><a 
- id="dx13-83006"></a><span 
+class="cmti-9">defgeneric-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 48-->               <table  
+<!--l.10 44-->               <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl18.html#x23-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-name</span></a> <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a></td></tr></table>
-<!--l.10 48-->                                        <table  
+<!--l.10 44-->                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1397,16 +1375,14 @@ class="tabbing"><a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 48-->                                             <table  
+<!--l.10 44-->                                             <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">gf-name</span><a 
- id="dx13-83007"></a><a 
- id="dx13-83008"></a><span 
+class="cmti-9">gf-name</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 48-->                                       <table  
+<!--l.10 44-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1414,16 +1390,14 @@ class="tabbing">      </td><td
 class="tabbing"><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 48-->                                                          <table  
+<!--l.10 44-->                                                          <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">gf-lambda-list</span><a 
- id="dx13-83009"></a><a 
- id="dx13-83010"></a><span 
+class="cmti-9">gf-lambda-list</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 48-->                             <table  
+<!--l.10 44-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1431,16 +1405,14 @@ class="tabbing">      </td><td
 class="tabbing"><a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
-<!--l.10 48-->                                                     <table  
+<!--l.10 44-->                                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">level-0-init-option</span><a 
- id="dx13-83011"></a><a 
- id="dx13-83012"></a><span 
+class="cmti-9">level-0-init-option</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 48-->                        <table  
+<!--l.10 44-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1450,16 +1422,14 @@ href="#x13-8400011.4.5.1"><span
 class="cmtt-9">method</span></a> <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">method-description</span></a></td></tr></table>
-<!--l.10 48-->                                                   <table  
+<!--l.10 44-->                                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">method-description</span><a 
- id="dx13-83013"></a><a 
- id="dx13-83014"></a><span 
+class="cmti-9">method-description</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 48-->                   <table  
+<!--l.10 44-->                   <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1468,20 +1438,18 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a> <a 
-href="eulispcl18.html#x23-94100018.1"><span 
+href="eulispcl17.html#x22-92700017.1"><span 
 class="cmti-9">form</span><span 
 class="cmsy-6">*</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 48-->                                  <table  
+<!--l.10 44-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">specialized-lambda-list</span><a 
- id="dx13-83015"></a><a 
- id="dx13-83016"></a><span 
+class="cmti-9">specialized-lambda-list</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 48-->          <table  
+<!--l.10 44-->          <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1499,16 +1467,14 @@ class="cmsy-9">}</span>
 <span 
 class="cmmi-6">opt</span>  <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 48-->                                  <table  
+<!--l.10 44-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">specialized-parameter</span><a 
- id="dx13-83017"></a><a 
- id="dx13-83018"></a><span 
+class="cmti-9">specialized-parameter</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 48-->                         <table  
+<!--l.10 44-->                         <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1520,7 +1486,7 @@ class="cmti-9">identifier</span></a> <a
 href="#x13-7700011.3.1.1"><span 
 class="cmti-9">class-name</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 48-->                                       <table  
+<!--l.10 44-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1528,24 +1494,24 @@ class="tabbing">      </td><td
 class="tabbing"><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 48-->                                                                            </div></div>
+<!--l.10 44-->                                                                            </div></div>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x13-8400011.4.5.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
-  <!--l. 50--><p class="noindent" >
+  <!--l. 46--><p class="noindent" >
        </p><dl class="arguments1"><dt class="arguments">
   <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-name</span></a> :  </dt><dd 
 class="arguments">
-        <!--l. 51--><p class="noindent" >One of a symbol, or a form denoting a setter function or
+        <!--l. 47--><p class="noindent" >One of a symbol, or a form denoting a setter function or
         a converter function.
         </p></dd><dt class="arguments">
   <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a> :  </dt><dd 
 class="arguments">
-        <!--l. 54--><p class="noindent" >The  parameter  list  of  the  generic  function,  which  may
+        <!--l. 50--><p class="noindent" >The  parameter  list  of  the  generic  function,  which  may
         be specialized to restrict the domain of methods to be
         attached to the generic function.
         </p></dd><dt class="arguments">
@@ -1553,9 +1519,10 @@ class="arguments">
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a> :  </dt><dd 
 class="arguments">
-        <!--l. 58--><p class="noindent" >is <span 
+        <!--l. 54--><p class="noindent" >is <span 
 class="cmtt-9">method</span><a 
- id="dx13-84001"></a> <a 
+ id="dx13-84001"></a><a 
+ id="dx13-84002"></a> <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">method-description</span></a> <br 
 class="newline" />where   <a 
@@ -1568,14 +1535,14 @@ class="cmti-9">specialized-lambda-list</span></a>  of  the  method,  which  deno
         method body. The method body is closed in the lexical
         environment  in  which  the  generic  function  definition
         appears. This option may be specified more than once.</p></dd></dl>
+  <!--l. 63--><p class="noindent" >
+  </p>
                                                                                                   
                                                                                                   
-<!--l. 67--><p class="noindent" >
-</p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-8500011.4.5.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 68--><p class="noindent" >This defining form defines a new generic function. The resulting
+<!--l. 64--><p class="noindent" >This defining form defines a new generic function. The resulting
 generic function will be bound to <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-name</span></a>. The second argument is
@@ -1583,7 +1550,7 @@ the formal parameter list. The method&#8217;s specialized lamba list
 must be congruent to that of the generic function. Two lambda
 lists are said to be <span 
 class="cmti-9">congruent </span>iff:
-</p><!--l. 74--><p class="noindent" >
+</p><!--l. 70--><p class="noindent" >
     </p><ol  class="enumerate1" >
     <li 
   class="enumerate" id="x13-85002x1">both have the same number of formal parameters, and
@@ -1592,36 +1559,36 @@ class="cmti-9">congruent </span>iff:
   class="enumerate" id="x13-85004x2">if one lambda list has a rest formal parameter then the
     other lambda list has a rest formal parameter too, and vice
     versa.</li></ol>
-<!--l. 80--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-177001r18"><span 
+<!--l. 76--><p class="noindent" >An error is signalled (condition class: <a 
+href="eulispcl13.html#x17-259001r13"><span 
 class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a>
 <a 
  id="dx13-85005"></a>) if any method defined on this generic function does not have a
 lambda list <span 
 class="cmti-9">congruent </span>to that of the generic function.
-</p><!--l. 86--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-175001r17"><span 
+</p><!--l. 82--><p class="noindent" >An error is signalled (condition class: <a 
+href="eulispcl13.html#x17-257001r12"><span 
 class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a>
 <a 
  id="dx13-85006"></a>) if the method&#8217;s specialized lambda list widens the domain of the
 generic function. In other words, the lambda lists of all methods
 must specialize on subclasses of the classes in the lambda list of the
 generic function.
-</p><!--l. 93--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-179001r19"><span 
+</p><!--l. 89--><p class="noindent" >An error is signalled (condition class: <a 
+href="eulispcl13.html#x17-261001r14"><span 
 class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a> <a 
  id="dx13-85007"></a>) if
 any methods defined on this generic function have the same
 domain. These conditions apply both to methods defined at the
 same time as the generic function and to any methods added
 subsequently by <a 
-href="eulispcl18.html#x23-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a>. An <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a> is an identifier
 followed by a corresponding value.
-</p><!--l. 100--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-173003r16"><span 
+</p><!--l. 96--><p class="noindent" >An error is signalled (condition class: <a 
+href="eulispcl13.html#x17-255003r11"><span 
 class="cmtt-9">&#x003C;no-applicable-method&#x003E;</span></a>
 <a 
  id="dx13-85008"></a>) if an attempt is made to apply a generic function which
@@ -1646,11 +1613,11 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
-href="eulispcl18.html#x23-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 115-->                                <table  
+<!--l.10 111-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
@@ -1661,7 +1628,7 @@ class="cmti-9">gf-lambda-list</span></a> <a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span><span 
 class="cmsy-6">*</span></a>)</td></tr></table>
-<!--l.10 117-->                                                                                                              </div></td>
+<!--l.10 113-->                                                                                                              </div></td>
 </tr><tr  
  style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-1"  
 class="td11">&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;                  <span 
@@ -1671,19 +1638,19 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
-href="eulispcl16.html#x20-205001r2"><span 
+href="eulispcl12.html#x16-120001r2"><span 
 class="cmtt-9">defconstant</span></a> <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 123-->                                                    <table  
+<!--l.10 119-->                                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">   </td><td  
 class="tabbing">(<a 
-href="eulispcl18.html#x23-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a></td></tr></table>
-<!--l.10 124-->                    <table  
+<!--l.10 120-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
@@ -1695,7 +1662,7 @@ class="cmti-9">gf-lambda-list</span></a> <a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span><span 
 class="cmsy-6">*</span></a>))</td></tr></table>
-<!--l.10 126-->                                                                                 </div></td>
+<!--l.10 122-->                                                                                 </div></td>
 </tr><tr  
  style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-1"  
 class="td11"><div class="minipage">
@@ -1704,19 +1671,19 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
-href="eulispcl18.html#x23-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a></td></tr></table>
-<!--l.10 132-->                                   <table  
+<!--l.10 128-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">  </td><td  
 class="tabbing">(<a 
-href="eulispcl16.html#x20-247001r2"><span 
+href="eulispcl12.html#x16-162001r2"><span 
 class="cmtt-9">setter</span></a> <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>)</td></tr></table>
-<!--l.10 133-->                                  <table  
+<!--l.10 129-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
@@ -1727,7 +1694,7 @@ class="cmti-9">gf-lambda-list</span></a> <a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span><span 
 class="cmsy-6">*</span></a>)</td></tr></table>
-<!--l.10 135-->                                                                                                               </div></td>
+<!--l.10 131-->                                                                                                               </div></td>
 </tr><tr  
  style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-1"  
 class="td11">&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;                  <span 
@@ -1737,21 +1704,21 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">((<a 
-href="eulispcl16.html#x20-247001r2"><span 
+href="eulispcl12.html#x16-162001r2"><span 
 class="cmtt-9">setter</span></a> <a 
-href="eulispcl16.html#x20-247001r2"><span 
+href="eulispcl12.html#x16-162001r2"><span 
 class="cmtt-9">setter</span></a>) <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 141-->                                                    <table  
+<!--l.10 137-->                                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">   </td><td  
 class="tabbing">(<a 
-href="eulispcl18.html#x23-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a></td></tr></table>
-<!--l.10 142-->                    <table  
+<!--l.10 138-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
@@ -1763,7 +1730,7 @@ class="cmti-9">gf-lambda-list</span></a> <a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span><span 
 class="cmsy-6">*</span></a>))</td></tr></table>
-<!--l.10 144-->                                                                                 </div></td>
+<!--l.10 140-->                                                                                 </div></td>
 </tr><tr  
  style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-1"  
 class="td11"><div class="minipage">
@@ -1772,19 +1739,19 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
-href="eulispcl18.html#x23-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a></td></tr></table>
-<!--l.10 150-->                                <table  
+<!--l.10 146-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">  </td><td  
 class="tabbing">(<a 
-href="eulispcl17.html#x21-480001r4"><span 
+href="eulispcl16.html#x20-480001r4"><span 
 class="cmtt-9">converter</span></a> <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>)</td></tr></table>
-<!--l.10 151-->                                  <table  
+<!--l.10 147-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
@@ -1795,7 +1762,7 @@ class="cmti-9">gf-lambda-list</span></a> <a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span><span 
 class="cmsy-6">*</span></a>)</td></tr></table>
-<!--l.10 153-->                                                                                                               </div></td>
+<!--l.10 149-->                                                                                                               </div></td>
 </tr><tr  
  style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-1"  
 class="td11">&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;                  <span 
@@ -1805,11 +1772,11 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">((<a 
-href="eulispcl16.html#x20-247001r2"><span 
+href="eulispcl12.html#x16-162001r2"><span 
 class="cmtt-9">setter</span></a> <a 
-href="eulispcl17.html#x21-480001r4"><span 
+href="eulispcl16.html#x20-480001r4"><span 
 class="cmtt-9">converter</span></a>)</td></tr></table>
-<!--l.10 159-->                                                                   <table  
+<!--l.10 155-->                                                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
@@ -1817,15 +1784,15 @@ class="tabbing">   </td><td
 class="tabbing"><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 160-->                                                    <table  
+<!--l.10 156-->                                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">   </td><td  
 class="tabbing">(<a 
-href="eulispcl18.html#x23-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a></td></tr></table>
-<!--l.10 161-->                    <table  
+<!--l.10 157-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
@@ -1837,13 +1804,13 @@ class="cmti-9">gf-lambda-list</span></a> <a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span><span 
 class="cmsy-6">*</span></a>))</td></tr></table>
-<!--l.10 163-->                                                                                 </div></td>
+<!--l.10 159-->                                                                                 </div></td>
 </tr></table></div>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x13-8700011.4.5.2"></a><span 
 class="cmbx-8">Examples</span></h5>
-  <!--l. 168--><p class="noindent" >In the following example of the use of <a 
-href="eulispcl18.html#x23-952001r2"><span 
+  <!--l. 164--><p class="noindent" >In the following example of the use of <a 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> a generic
   function named <span 
 class="cmtt-9">gf-0 </span>is defined with three methods attached to it.
@@ -1855,7 +1822,7 @@ class="cmsy-9">&#x00D7; </span><span
 class="cmtt-9">&#x003C;class-a&#x003E;</span>.
   In consequence, each method added to the generic function, both
   here and later (by <a 
-href="eulispcl18.html#x23-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a>), must have a domain which is a
   subclass of <a 
 href="#x13-74002r1"><span 
@@ -1933,20 +1900,20 @@ class="cmtt-9">&#x00A0;(m3-arg2</span><span
 class="cmtt-9">&#x00A0;&#x003C;class-g&#x003E;))</span><span 
 class="cmtt-9">&#x00A0;...))</span>
     <br /> </div>
-<!--l. 187--><p class="noindent" >
+<!--l. 183--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-8800011.4.5.2"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
-<!--l. 188--><p class="noindent" ><a 
-href="eulispcl18.html#x23-961001r2"><span 
+<!--l. 184--><p class="noindent" ><a 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a>, <a 
-href="eulispcl18.html#x23-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a>.
                                                                                                   
                                                                                                   
-</p><!--l. 190--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+</p><!--l. 186--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x13-88001r6"></a><span 
 class="cmbx-9">11.4.6   </span><span 
 class="cmtt-9">defmethod</span>
@@ -1961,30 +1928,26 @@ class="cmti-9">defining operator</span><a
  id="x13-8900011.4.6.1"></a><span 
 class="cmbx-8">Syntax</span></h5><a 
  id="dx13-89001"></a>
-<a 
- id="dx13-89002"></a>
-<!--l. 203--><p class="noindent" ><div class="framebox-l" 
+<!--l. 199--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">defmethod-form</span><a 
- id="dx13-89003"></a><a 
- id="dx13-89004"></a><span 
+class="cmti-9">defmethod-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 203-->                         <table  
+<!--l.10 199-->                         <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl18.html#x23-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a> <a 
 href="#x13-8900011.4.6.1"><span 
 class="cmti-9">gf-locator</span></a></td></tr></table>
-<!--l.10 203-->                        <table  
+<!--l.10 199-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1993,26 +1956,24 @@ class="tabbing">   </td><td
 class="tabbing"><a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
-<!--l.10 203-->                                    <table  
+<!--l.10 199-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td style="width:14px;" 
 class="tabbing">   </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-22000016.2.1.1"><span 
+href="eulispcl12.html#x16-13500012.2.1.1"><span 
 class="cmti-9">body</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 203-->                                        <table  
+<!--l.10 199-->                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">gf-locator</span><a 
- id="dx13-89005"></a><a 
- id="dx13-89006"></a><span 
+class="cmti-9">gf-locator</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 203-->                                    <table  
+<!--l.10 199-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -2020,35 +1981,35 @@ class="tabbing">      </td><td
 class="tabbing"><a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 203-->                          <table  
+<!--l.10 199-->                          <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl16.html#x20-247001r2"><span 
+href="eulispcl12.html#x16-162001r2"><span 
 class="cmtt-9">setter</span></a> <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 203-->                       <table  
+<!--l.10 199-->                       <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl17.html#x21-480001r4"><span 
+href="eulispcl16.html#x20-480001r4"><span 
 class="cmtt-9">converter</span></a> <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 203-->                                                </div></div>
+<!--l.10 199-->                                                </div></div>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-9000011.4.6.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 206--><p class="noindent" >This macro is used for defining new methods on generic functions.
+<!--l. 202--><p class="noindent" >This macro is used for defining new methods on generic functions.
 A new method object is defined with the specified body and with
 the domain given by the specialized-lambda-list. This method is
 added to the generic function bound to <a 
@@ -2058,21 +2019,21 @@ identifier, or a form denoting a setter function or a converter
 function. If the specialized-lambda-list is not congruent with that
 of the generic function, an error is signalled (condition class:
 <a 
-href="eulispcl14.html#x18-177001r18"><span 
+href="eulispcl13.html#x17-259001r13"><span 
 class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a> <a 
  id="dx13-90001"></a>). An error is signalled (condition
 class: <a 
-href="eulispcl14.html#x18-175001r17"><span 
+href="eulispcl13.html#x17-257001r12"><span 
 class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a> <a 
  id="dx13-90002"></a>) if the method&#8217;s specialized
 lambda list would widen the domain of the generic function. If
 there is a method with the same domain already defined on
 this gneric function, an error is signalled (condition class:
 <a 
-href="eulispcl14.html#x18-179001r19"><span 
+href="eulispcl13.html#x17-261001r14"><span 
 class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a><a 
  id="dx13-90003"></a>).
-</p><!--l. 221--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+</p><!--l. 217--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x13-90004r7"></a><span 
 class="cmbx-9">11.4.7   </span><span 
 class="cmtt-9">generic-lambda</span>
@@ -2087,30 +2048,26 @@ class="cmti-9">special operator</span><a
  id="x13-9100011.4.7.1"></a><span 
 class="cmbx-8">Syntax</span></h5><a 
  id="dx13-91001"></a>
-<a 
- id="dx13-91002"></a>
-<!--l. 229--><p class="noindent" ><div class="framebox-l" 
+<!--l. 225--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">generic-lambda-form</span><a 
- id="dx13-91003"></a><a 
- id="dx13-91004"></a><span 
+class="cmti-9">generic-lambda-form</span><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 229-->                 <table  
+<!--l.10 225-->                 <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl18.html#x23-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a> <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a></td></tr></table>
-<!--l.10 229-->                        <table  
+<!--l.10 225-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -2121,32 +2078,31 @@ href="#x13-8300011.4.5.1"><span
 class="cmti-9">level-0-init-option</span><span 
 class="cmsy-6">*</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 229-->                                                </div></div>
+<!--l.10 225-->                                                </div></div>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-9200011.4.7.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 232--><p class="noindent" ><a 
-href="eulispcl18.html#x23-946001r1"><span 
+<!--l. 228--><p class="noindent" ><a 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a> creates and returns an anonymous generic
 function that can be applied immediately, much like the normal
 <a 
-href="eulispcl16.html#x20-219001r1"><span 
+href="eulispcl12.html#x16-134001r1"><span 
 class="cmtt-9">lambda</span></a>. The <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a> and the <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a>s are
 interpreted exactly as for the level-0 definition of <a 
-href="eulispcl18.html#x23-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a>.
 </p>
-                                                   <h5 class="likesyntaxssclauseHead"><a 
+<h5 class="likesyntaxssclauseHead"><a 
  id="x13-9300011.4.7.1"></a><span 
 class="cmbx-8">Examples</span></h5>
-  <!--l. 235--><p class="noindent" >In the following example an anonymous version of <span 
-class="cmtt-9">gf-0 </span>(see
-  <a 
-href="eulispcl18.html#x23-952001r2"><span 
+<!--l. 231--><p class="noindent" >In the following example an anonymous version of <span 
+class="cmtt-9">gf-0 </span>(see    <a 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> above) is defined. In all other respects the resulting
   object is the same as <span 
 class="cmtt-9">gf-0</span>.
@@ -2232,16 +2188,16 @@ class="cmtt-9">&#x00A0;(m3-arg2</span><span
 class="cmtt-9">&#x00A0;&#x003C;class-g&#x003E;))</span><span 
 class="cmtt-9">&#x00A0;...))</span>
     <br /> </div>
-<!--l. 251--><p class="noindent" >
+<!--l. 247--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-9400011.4.7.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
-<!--l. 252--><p class="noindent" ><a 
-href="eulispcl18.html#x23-952001r2"><span 
+<!--l. 248--><p class="noindent" ><a 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a>.
-</p><!--l. 686--><p class="noindent" >
+</p><!--l. 681--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 11.5 <a 
  id="x13-9500011.5"></a>Specializing Methods</h4>
@@ -2295,13 +2251,13 @@ class="cmbx-8">Result</span></h5>
 class="cmbx-8">Remarks</span></h5>
 <!--l. 21--><p class="noindent" >The next most specific applicable method is called with the same
 arguments as the current method. An error is signalled (condition
-                                                                                                  
-                                                                                                  
 class: <a 
-href="eulispcl14.html#x18-181001r20"><span 
+href="eulispcl13.html#x17-263001r15"><span 
 class="cmtt-9">&#x003C;no-next-method&#x003E;</span></a><a 
  id="dx13-98001"></a>) if there is no next most specific
 method.
+                                                                                                  
+                                                                                                  
 </p><!--l. 26--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x13-98002r2"></a><span 
 class="cmbx-9">11.5.2   </span><span 
@@ -2341,11 +2297,11 @@ class="cmbx-8">Result</span></h5>
 href="#x13-98002r2"><span 
 class="cmtt-9">next-method?</span></a> returns a
 non-<a 
-href="eulispcl17.html#x21-619009r2"><span 
+href="eulispcl16.html#x20-587009r2"><span 
 class="cmtt-9">()</span></a> value, otherwise, it returns <a 
-href="eulispcl17.html#x21-619009r2"><span 
+href="eulispcl16.html#x20-587009r2"><span 
 class="cmtt-9">()</span></a>.
-</p><!--l. 738--><p class="noindent" >
+</p><!--l. 733--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 11.6 <a 
  id="x13-10100011.6"></a>Method Lookup and Generic Dispatch</h4>
@@ -2390,9 +2346,10 @@ class="cmr-8">2</span></a></span>.
 method lookup and generic dispatch: (i) whether a method
 is <span 
 class="cmti-9">applicable</span>, (ii) how <span 
-class="cmti-9">specific </span>it is in relation to the other      applicable methods. The definitions of each of these terms is now
-  given.
-  </p><!--l. 36--><p class="noindent" >A method with the domain <span 
+class="cmti-9">specific </span>it is in relation to the other
+applicable methods. The definitions of each of these terms is now
+given.
+                                                   </p><!--l. 36--><p class="noindent" >A method with the domain <span 
 class="cmmi-9">D</span><sub><span 
 class="cmr-6">1</span></sub> <span 
 class="cmsy-9">&#x00D7;</span><span 
@@ -2594,12 +2551,12 @@ class="cmti-9">function</span><a
  id="dx13-102004"></a><a 
  id="dx13-102005"></a> </i></b></div><br /> <hr />
   </p>
-                                                                                                  
-                                                                                                  
-<h5 class="likesyntaxssclauseHead"><a 
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x13-1030001"></a><span 
 class="cmbx-8">Arguments</span></h5>
-<!--l. 11--><p class="noindent" >
+  <!--l. 11--><p class="noindent" >
+                                                                                                  
+                                                                                                  
     </p><dl class="arguments1"><dt class="arguments">
 <span 
 class="cmti-9">class </span>: </dt><dd 
@@ -2633,14 +2590,14 @@ class="cmbx-8">Remarks</span></h5>
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a> creates a new object calling
 <a 
-href="eulispcl18.html#x23-1026001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a> and initializes it by calling <a 
 href="#x13-108001r3"><span 
 class="cmtt-9">initialize</span></a>. <a 
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a> returns
 whatever <a 
-href="eulispcl18.html#x23-1026001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a> returns as its result.
 </p><!--l. 26--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x13-105001r2"></a><span 
@@ -2683,20 +2640,20 @@ class="cmti-9">class </span>must be a structure class, the <a
 href="#x13-7700011.3.1.1"><span 
 class="cmti-9">initlist</span></a> is ignored. The
 behaviour of <a 
-href="eulispcl18.html#x23-1026001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a> is extended at level-1 for classes not
 accessible at level-0. The level-0 behaviour is not affected by the
 level-1 extension.
-                                                   </p><!--l. 42--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+</p><!--l. 42--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x13-108001r3"></a><span 
 class="cmbx-9">11.7.3   </span><span 
 class="cmtt-9">initialize</span>
- <a 
- id="Q1-13-133"></a>
- </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+<a 
+ id="Q1-13-133"></a>                                                  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function</span><a 
  id="dx13-108002"></a><a 
- id="dx13-108003"></a> </i></b></div><br /> <hr />
+ id="dx13-108003"></a><a 
+ id="dx13-108004"></a> </i></b></div><br /> <hr />
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x13-1090003"></a><span 
@@ -2731,7 +2688,7 @@ class="cmbx-8">Remarks</span></h5>
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a> on a new uninitialized object created by calling
   <a 
-href="eulispcl18.html#x23-1026001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a>.
   </p><!--l. 57--><p class="noindent" >Users may extend <a 
 href="#x13-108001r3"><span 
@@ -2772,9 +2729,9 @@ class="specargs">
  id="x13-1130004"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 68--><p class="noindent" >The initialized object.
+  </p>
                                                                                                   
                                                                                                   
-</p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-1140004"></a><span 
 class="cmbx-8">Remarks</span></h5>
@@ -2786,37 +2743,37 @@ performs the following steps:
     </p><ol  class="enumerate1" >
     <li 
   class="enumerate" id="x13-114002x1">Checks if the supplied <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>s are legal and signals an
     error otherwise. Legal <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>s are those specified in the
     class  definition  directly  or  inherited  from  a  superclass.
     An  <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>  may  be  specified  as  a  slot-option  or  as  a
     class-option.
     </li>
     <li 
   class="enumerate" id="x13-114004x2">Initializes the slots of the object according to the <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>,
     if supplied, or according to the most specific <span 
 class="cmtt-9">default</span>, if
     specified. Otherwise, the slot remains &#8220;unbound&#8221;.</li></ol>
 <!--l. 86--><p class="noindent" >Legal <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>s which do not initialize a slot are ignored by the
 default <a 
 href="#x13-111001r4"><span 
 class="cmtt-9">initialize &#x003C;object&#x003E;</span></a> method. More specific methods may
 handle these <a 
-href="eulispcl17.html#x21-60100017.12.1.1"><span 
+href="eulispcl16.html#x20-56900016.11.1.1"><span 
 class="cmti-9">keyword</span></a>s and call the default method by calling
 <a 
 href="#x13-95002r1"><span 
 class="cmtt-9">call-next-method</span></a>.
-</p><!--l. 943--><p class="noindent" >
+</p><!--l. 938--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 11.8 <a 
  id="x13-11500011.8"></a>Accessing Slots</h4>
@@ -2824,7 +2781,7 @@ Object components (slots) can be accessed using reader and writer
 functions (accessors) only. For system defined object classes there
 are predefined readers and writers. Some of the writers are
 accessible using the <a 
-href="eulispcl16.html#x20-247001r2"><span 
+href="eulispcl12.html#x16-162001r2"><span 
 class="cmtt-9">setter</span></a> function. If there is no writer for a slot,
 its value cannot be changed. When users define new classes, they
 can specify which readers and writers should be accessible in a
@@ -2847,18 +2804,16 @@ class="cmtt-9">&#x003C;object&#x003E;</span></a>&#x00A0;&#x00A0;<span
 class="cmti-9">class</span><a 
  id="dx13-116002"></a><a 
  id="dx13-116003"></a> </i></b></div><br /> <hr />
-<a 
- id="dx13-116004"></a>
-</p><!--l. 15--><p class="noindent" >The class of all &#8220;names&#8221;.
+</p><!--l. 14--><p class="noindent" >The class of all &#8220;names&#8221;.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-1170001"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
-<!--l. 18--><p class="noindent" ><a 
-href="eulispcl17.html#x21-894005r2"><span 
+<!--l. 17--><p class="noindent" ><a 
+href="eulispcl16.html#x20-880002r2"><span 
 class="cmtt-9">&#x003C;symbol&#x003E;</span></a> and <a 
-href="eulispcl17.html#x21-601005r2"><span 
+href="eulispcl16.html#x20-569002r2"><span 
 class="cmtt-9">&#x003C;keyword&#x003E;</span></a>.
                                                  
                                                                                                   
