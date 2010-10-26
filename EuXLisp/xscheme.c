@@ -587,6 +587,12 @@ static void trace_function(LVAL fun, LVAL env)
     }
     xlterpri(errout);
 
+    // Check to see if the trace has reached the top-level and return
+    if (getcname(fun) ==  xlenter_module("*TOPLEVEL*", root_module))
+    {
+        return;
+    }
+
     if (env != NIL)
     {
         if (envp(env))
@@ -620,7 +626,6 @@ static void trace_function(LVAL fun, LVAL env)
     }
 
     xlterpri(errout);
-
 }
 
 // print a backtrace
