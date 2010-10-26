@@ -337,7 +337,7 @@
 (defmethod convert-constant ((value <fpi>))
   (make-symbol (fmt "c_int_as_eul_fpi(~a)" value)))
 
-(defmethod convert-constant ((value <double>))
+(defmethod convert-constant ((value <double-float>))
   (let ((loc (gensym "dbl_")))
     (add-decl loc)
     (add-initialization "  eul_allocate_double(~a,~a)\;\n" loc value)

@@ -180,7 +180,7 @@
     `(let* ((,x (cpu-time))
             (,res ,expr))
        (setq ,x (map (lambda (x y)
-                       (/ (binary- x y) (convert ticks-per-second <double>)))
+                       (/ (binary- x y) (convert ticks-per-second <double-float>)))
                      (cpu-time) ,x))
        (sprint ,stream
                "real: "     (vector-ref ,x 0)

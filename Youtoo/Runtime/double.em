@@ -35,8 +35,7 @@
            float
            double1)
    export (<double-float>
-           <double>
-           double?
+           double-float?
            most-positive-double-float
            least-positive-double-float
            most-negative-double-float
@@ -50,10 +49,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Limits
 ;;;-----------------------------------------------------------------------------
-(defextern get-double-float-max () <double> "eul_get_dbl_max")
-(defextern get-double-float-min () <double> "eul_get_dbl_min")
-(defextern get-double-float-epsilon () <double> "eul_get_dbl_epsilon")
-(defextern get-negative-double-float-epsilon () <double>
+(defextern get-double-float-max () <double-float> "eul_get_dbl_max")
+(defextern get-double-float-min () <double-float> "eul_get_dbl_min")
+(defextern get-double-float-epsilon () <double-float> "eul_get_dbl_epsilon")
+(defextern get-negative-double-float-epsilon () <double-float>
            "eul_get_neg_dbl_epsilon")
 
 (defconstant most-positive-double-float (get-double-float-max))
@@ -64,48 +63,48 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Comparison
 ;;;-----------------------------------------------------------------------------
-(defextern double-binary= (<double> <double>) ptr
+(defextern double-binary= (<double-float> <double-float>) ptr
            "eul_dbl_equal")
 
-(defextern double-binary< (<double> <double>) ptr
+(defextern double-binary< (<double-float> <double-float>) ptr
            "eul_dbl_less")
 
-(defmethod binary= ((x <double>) (y <double>))
+(defmethod binary= ((x <double-float>) (y <double-float>))
   (double-binary= x y))
 
-(defmethod binary= ((x <fpi>) (y <double>))
+(defmethod binary= ((x <fpi>) (y <double-float>))
   (double-binary= (fpi-as-double x) y))
 
-(defmethod binary= ((x <double>) (y <fpi>))
+(defmethod binary= ((x <double-float>) (y <fpi>))
   (double-binary= x (fpi-as-double y)))
 
-(defmethod binary< ((x <double>) (y <double>))
+(defmethod binary< ((x <double-float>) (y <double-float>))
   (double-binary< x y))
 
-(defmethod binary< ((x <fpi>) (y <double>))
+(defmethod binary< ((x <fpi>) (y <double-float>))
   (double-binary< (fpi-as-double x) y))
 
-(defmethod binary< ((x <double>) (y <fpi>))
+(defmethod binary< ((x <double-float>) (y <fpi>))
   (double-binary< x (fpi-as-double y)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Rounding ...
 ;;;-----------------------------------------------------------------------------
-(defmethod ceiling ((x <double>)) (double-ceiling x))
-(defmethod floor ((x <double>)) (double-floor x))
-(defmethod round ((x <double>)) (double-round x))
-(defmethod truncate ((x <double>)) (double-truncate x))
+(defmethod ceiling ((x <double-float>)) (double-ceiling x))
+(defmethod floor ((x <double-float>)) (double-floor x))
+(defmethod round ((x <double-float>)) (double-round x))
+(defmethod truncate ((x <double-float>)) (double-truncate x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Gcd and lcm
 ;;;-----------------------------------------------------------------------------
-(defmethod binary-gcd ((x <double>) (y <double>))
+(defmethod binary-gcd ((x <double-float>) (y <double-float>))
   (double-binary-gcd x y))
 
-(defmethod binary-gcd ((x <fpi>) (y <double>))
+(defmethod binary-gcd ((x <fpi>) (y <double-float>))
   (double-binary-gcd (fpi-as-double x) y))
 
-(defmethod binary-gcd ((x <double>) (y <fpi>))
+(defmethod binary-gcd ((x <double-float>) (y <fpi>))
   (double-binary-gcd x (fpi-as-double y)))
 
 (defun double-binary-gcd (x y)
@@ -119,13 +118,13 @@
              (double-binary-gcd (double-binary- x p) y))))
         (t x)))
 
-(defmethod binary-lcm ((x <double>) (y <double>))
+(defmethod binary-lcm ((x <double-float>) (y <double-float>))
   (double-binary-lcm x y))
 
-(defmethod binary-lcm ((x <fpi>) (y <double>))
+(defmethod binary-lcm ((x <fpi>) (y <double-float>))
   (double-binary-lcm (fpi-as-double x) y))
 
-(defmethod binary-lcm ((x <double>) (y <fpi>))
+(defmethod binary-lcm ((x <double-float>) (y <fpi>))
   (double-binary-lcm x (fpi-as-double y)))
 
 (defun double-binary-lcm (x y)
@@ -136,7 +135,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-(defmethod zero? ((x <double>)) (double-binary= x 0.0))
+(defmethod zero? ((x <double-float>)) (double-binary= x 0.0))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module double

@@ -48,7 +48,7 @@
            ((setter bigint-value) x (mpz-init-set (bigint-value val))))
           ((fpi? val)
            ((setter bigint-value) x (mpz-init-set-si val)))
-          ((double? val)
+          ((double-float? val)
            ((setter bigint-value) x (mpz-init-set-d val)))
           ((string? val)
            ((setter bigint-value) x (mpz-init-set-str val 10)))
@@ -162,19 +162,19 @@
 ;;; Division overflows to doubles
 ;;;-----------------------------------------------------------------------------
 (defmethod binary/ ((x <bigint>) (y <bigint>))
-  (binary/ (convert x <double>) (convert y <double>)))
+  (binary/ (convert x <double-float>) (convert y <double-float>)))
 
 (defmethod binary/ ((x <bigint>) (y <fpi>))
-  (binary/ (convert x <double>) (convert y <double>)))
+  (binary/ (convert x <double-float>) (convert y <double-float>)))
 
 (defmethod binary/ ((x <fpi>) (y <bigint>))
-  (binary/ (convert x <double>) (convert y <double>)))
+  (binary/ (convert x <double-float>) (convert y <double-float>)))
 
-(defmethod binary/ ((x <bigint>) (y <double>))
-  (binary/ (convert x <double>) y))
+(defmethod binary/ ((x <bigint>) (y <double-float>))
+  (binary/ (convert x <double-float>) y))
 
-(defmethod binary/ ((x <double>) (y <bigint>))
-  (binary/ x (convert y <double>)))
+(defmethod binary/ ((x <double-float>) (y <bigint>))
+  (binary/ x (convert y <double-float>)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc

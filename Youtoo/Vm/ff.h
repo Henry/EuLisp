@@ -88,7 +88,7 @@
 
 #define eul_double_as_c_double_checked(x)                                      \
     (eul_is_double(x) ? eul_double_as_c_double(x) :                            \
-    (ff_notify_arg_error(x, <double>), 0.0))
+    (ff_notify_arg_error(x, <double-float>), 0.0))
 
 #define eul_char_as_c_char_checked(x)                                          \
     (eul_is_char(x) ? eul_char_as_c_char(x) :                                  \

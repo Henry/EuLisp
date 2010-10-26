@@ -36,7 +36,7 @@
 ;;; Argument converters
 ;;;-----------------------------------------------------------------------------
 (defconstant *argument-converters*
-  #(<fpi> <character> <double> <string> <vector> <file-stream>
+  #(<fpi> <character> <double-float> <string> <vector> <file-stream>
           <symbol> boolean ptr <int*> <double*> <string*>))
 
 (defconstant *argument-converter-C-types*
@@ -54,7 +54,7 @@
 ;;; Result value converters
 ;;;-----------------------------------------------------------------------------
 (defconstant *result-converters*
-  #(<fpi> <character> <double> <string> <symbol> boolean ptr
+  #(<fpi> <character> <double-float> <string> <symbol> boolean ptr
           <int*> <double*> <string*> void))
 
 (defconstant *result-converter-C-types*

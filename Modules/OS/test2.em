@@ -45,7 +45,7 @@
 (defgeneric boz (x y))
 (defmethod boz ((x <fpi>) (y <string>))
   (format "method1: ~a ~a\n" x y))
-(defmethod boz ((x <double>) (y <symbol>))
+(defmethod boz ((x <double-float>) (y <symbol>))
   (format "method1: ~a ~a\n" x y))
 
 ;;;-----------------------------------------------------------------------------

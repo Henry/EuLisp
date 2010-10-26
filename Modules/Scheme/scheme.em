@@ -39,7 +39,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; To be removed
 ;;;-----------------------------------------------------------------------------
-(defmethod (converter <double>) ((x <double>)) x)
+(defmethod (converter <double-float>) ((x <double-float>)) x)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Not yet implemented
@@ -286,7 +286,7 @@
   (convert x <fpi>))
 
 (defun inexact? (x)
-  (double? x))
+  (double-float? x))
 (declare-inline inexact?)
 
 (defun input-port? (x)

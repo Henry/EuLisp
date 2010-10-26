@@ -54,7 +54,7 @@ A        <list>
            <null>
 A    <number>
 A      <float>
-         <double>
+         <double-float>
 A      <integer>
          <fpi>
      <condition>

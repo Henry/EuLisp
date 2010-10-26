@@ -21,7 +21,7 @@
     (<string*> . 76)
     (|(method string*?)| . 75)
     (string* . 74)
-    (|(method (converter <double>))| . 73)
+    (|(method (converter <double-float>))| . 73)
     (|(method (converter <double*>))| . 72)
     ((converter <double*>) . 71)
     (<double*> . 70)

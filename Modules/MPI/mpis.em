@@ -89,7 +89,7 @@
         (error <condition> (fmt "mpi write error with ~a" x))
       s)))
 
-(defmethod generic-write ((x <double>) (s <mpi-stream>))
+(defmethod generic-write ((x <double-float>) (s <mpi-stream>))
   (let* ((rank (mpi-stream-rank s))
          (tag (mpi-stream-tag s))
          (res (eul-mpi-send x rank tag)))

@@ -147,7 +147,8 @@
 *** DONE Reconsider =<int>=, should it be =<fpi>=?
     Yes.
     CLOSED: [2010-10-23 Sat 23:10]
-*** TODO What should =<double-float>= be called?
+*** DONE What should =<double-float>= be called? =<double-float>=
+    CLOSED: [2010-10-26 Tue 22:30]
     =<double>= as in Youtoo?  If so then the name =<float>= as the abstract base
     class is odd.
 * Youtoo
@@ -291,7 +292,7 @@
     for the default clause of =cond= forms.  =else= is simply an alias for =t=.
 *** TODO Develop =map= and =do= to handle more than 2 sequences
     for =<list>=, =<vector>= /etc./
-*** TODO Fix output of very large and very small =<double>= numbers
+*** TODO Fix output of very large and very small =<double-float>= numbers
     =print= can output numbers of the order of 1e30 but does not use exponential
     format.  There appears to be a limit on the number of decimal places that
     can be output which might relate to the size of on output formatting buffer.

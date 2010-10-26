@@ -31,8 +31,7 @@
    export (<float>
            float?
            <double-float>
-           <double>
-           double?
+           double-float?
            ceiling
            floor
            round
@@ -44,10 +43,8 @@
 (defclass <float> <number>
   () abstract?: t predicate: float?)
 
-(defprimclass <double> double-class (<float>) ()
-              predicate: double?)
-
-(defconstant <double-float> <double>)
+(defprimclass <double-float> double-float-class (<float>) ()
+              predicate: double-float?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Around floats
@@ -56,7 +53,7 @@
 (defgeneric floor ((x <float>)))
 (defgeneric round ((x <float>)))
 (defgeneric truncate ((x <float>)))
-(defgeneric (converter <double>) (x))
+(defgeneric (converter <double-float>) (x))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module float

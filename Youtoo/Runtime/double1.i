@@ -23,7 +23,7 @@
     (top-level . 46)
     (|(method (converter <fpi>))| . 44)
     (|(method (converter <string>))| . 43)
-    (|(method (converter <double>))| . 42)
+    (|(method (converter <double-float>))| . 42)
     (|(method binary-mod)| . 41)
     (|(method binary%)| . 40)
     (|(method binary/)| . 39)

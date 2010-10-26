@@ -87,7 +87,7 @@
 (defmethod generic-write ((x <integer>) (s <buffered-stream>))
   (fprintf s "%i" x) s)
 
-(defmethod generic-write ((x <double>) (s <buffered-stream>))
+(defmethod generic-write ((x <double-float>) (s <buffered-stream>))
   (fprintf s "%f" x) s)
 
 ;  (defmethod generic-write ((x <integer>) (s <buffered-stream>))
@@ -97,7 +97,7 @@
 ;          (n (eul_sprintf_int (control-block-buffer scb) pos "%i" x)))
 ;      ((setter control-block-buffer-pos) scb (fpi-binary+ pos n)))
 ;    x)
-;  (defmethod generic-write ((x <double>) (s <buffered-stream>))
+;  (defmethod generic-write ((x <double-float>) (s <buffered-stream>))
 ;    (make-space s *double-size-in-decimal-digits*)
 ;    (let* ((scb (stream-sink s))
 ;          (pos (control-block-buffer-pos scb))

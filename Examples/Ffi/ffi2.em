@@ -34,7 +34,7 @@
 ;;; External functions using C pointers
 ;;;-----------------------------------------------------------------------------
 (defextern ext_foo_int (<int*>) <fpi>)
-(defextern ext_foo_double (<double*>) <double>)
+(defextern ext_foo_double (<double*>) <double-float>)
 (defextern ext_foo_string (<string*>) <string>)
 (defextern ext_foo_int2 () <int*>)
 (defextern ext_foo_double2 () <double*>)
@@ -49,14 +49,14 @@
   (print (convert x <fpi>) nl))
 (let ((x (convert 3.0 <double*>)))
   (ext_foo_double x)
-  (print (convert x <double>) nl))
+  (print (convert x <double-float>) nl))
 (let ((x (convert "abc" <string*>)))
   (ext_foo_string x)
   (print (convert x <string>) nl))
 (let ((x (ext_foo_int2)))
   (print (convert x <fpi>) nl))
 (let ((x (ext_foo_double2)))
-  (print (convert x <double>) nl))
+  (print (convert x <double-float>) nl))
 (let ((x (ext_foo_string2)))
   (print (convert x <string>) nl))
 

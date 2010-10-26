@@ -75,15 +75,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <double*>
 ;;;-----------------------------------------------------------------------------
-(defprimclass <double*> double-ref-class (<handler>) ()
+(defprimclass <double*> double-float-ref-class (<handler>) ()
               predicate: double*?)
 
 (defgeneric (converter <double*>) (x))
 
-(defmethod (converter <double*>) ((x <double>))
+(defmethod (converter <double*>) ((x <double-float>))
   (eul_double_as_eul_double_ref x))
 
-(defmethod (converter <double>) ((x <double*>))
+(defmethod (converter <double-float>) ((x <double*>))
   (eul_double_ref_as_c_double x))
 
 (defmethod element ((x <double*>) (i <fpi>))
@@ -93,9 +93,9 @@
   (eul_double_ref_set x i y))
 
 (defextern eul_double_as_eul_double_ref (ptr) ptr)
-(defextern eul_double_ref_as_c_double (ptr) <double>)
-(defextern eul_double_ref_ref (<double*> <fpi>) <double> "eul_c_vector_ref")
-(defextern eul_double_ref_set (<double*> <fpi> <double>) <double>
+(defextern eul_double_ref_as_c_double (ptr) <double-float>)
+(defextern eul_double_ref_ref (<double*> <fpi>) <double-float> "eul_c_vector_ref")
+(defextern eul_double_ref_set (<double*> <fpi> <double-float>) <double-float>
            "eul_c_vector_set")
 
 ;;;-----------------------------------------------------------------------------

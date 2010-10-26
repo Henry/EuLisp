@@ -148,19 +148,20 @@
 
 ***** Automatic type conversion
       The following automatic converters are available:
-      |---------------+-----------|
-      | Lisp          | C (C99)   |
-      |---------------+-----------|
-      | =<fpi>=       | =int=     |
-      | =<character>= | =char=    |
-      | =<double>=    | =double=  |
-      | =<string>=    | =char*=   |
-      | =boolean=     | =bool=    |
-      | =ptr=         | =void*=   |
-      | =<int*>=      | =int*=    |
-      | =<double*>=   | =double*= |
-      | =<string*>=   | =char**=  |
-      |---------------+-----------|
+      |------------------+-----------|
+      | Lisp             | C (C99)   |
+      |------------------+-----------|
+      | =<fpi>=          | =int=     |
+      | =<character>=    | =char=    |
+      | =<double-float>= | =double=  |
+      | =<string>=       | =char*=   |
+      | =boolean=        | =bool=    |
+      | =ptr=            | =void*=   |
+      | =<int*>=         | =int*=    |
+      | =<double*>=      | =double*= |
+      | =<string*>=      | =char**=  |
+      |------------------+-----------|
+      #+TBLFM: $1=<double-float>=
 
       The =ptr= converter can be used to pass arbitrary C99 structures to Lisp,
       so that they can be passed back to C at a later stage. The ptr converter

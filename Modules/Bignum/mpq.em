@@ -65,7 +65,7 @@
 (defextern mpq-clear (ptr) boolean "C_mpq_clear")
 (defextern mpq-get-num (ptr) ptr "C_mpq_get_num_init")
 (defextern mpq-get-den (ptr) ptr "C_mpq_get_den_init")
-(defextern mpq-get-d (ptr) <double> "C_mpq_get_d")
+(defextern mpq-get-d (ptr) <double-float> "C_mpq_get_d")
 (defextern mpq-set-num (ptr ptr) boolean "C_mpq_set_num")
 (defextern mpq-set-den (ptr ptr) boolean "C_mpq_set_den")
 (defextern mpq-mul (ptr ptr ptr) boolean "C_mpq_mul")

@@ -242,7 +242,7 @@
     (generic-print data sink)
     os))
 
-(defmethod generic-write ((x <double>) (os <object-stream>))
+(defmethod generic-write ((x <double-float>) (os <object-stream>))
   (let ((sink (stream-sink os))
         (data (eul-serial-double-data x)))
     (generic-print TC_DOUBLE sink)

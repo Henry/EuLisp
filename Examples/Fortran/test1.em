@@ -33,7 +33,7 @@
 ;;; Out-call to FORTRAN
 ;;; Future: (defextern ... language: FORTRAN) and no ref types
 ;;;-----------------------------------------------------------------------------
-(defextern foo (<int*> <double*>) <double> "foo_")
+(defextern foo (<int*> <double*>) <double-float> "foo_")
 (print (foo (convert 42 <int*>) (convert 1.0 <double*>)) nl)
 
 ;;;-----------------------------------------------------------------------------

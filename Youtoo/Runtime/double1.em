@@ -48,70 +48,70 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Arithmetic
 ;;;-----------------------------------------------------------------------------
-(defextern double-binary+ (<double> <double>) <double>
+(defextern double-binary+ (<double-float> <double-float>) <double-float>
            "eul_dbl_sum")
-(defextern double-binary- (<double> <double>) <double>
+(defextern double-binary- (<double-float> <double-float>) <double-float>
            "eul_dbl_difference")
-(defextern double-binary* (<double> <double>) <double>
+(defextern double-binary* (<double-float> <double-float>) <double-float>
            "eul_dbl_product")
-(defextern double-binary/ (<double> <double>) <double>
+(defextern double-binary/ (<double-float> <double-float>) <double-float>
            "eul_dbl_quotient")
-(defextern double-binary% (<double> <double>) <double>
+(defextern double-binary% (<double-float> <double-float>) <double-float>
            "eul_dbl_remainder")
-(defextern double-binary-mod (<double> <double>) <fpi>
+(defextern double-binary-mod (<double-float> <double-float>) <fpi>
            "eul_dbl_mod")
 
-(defmethod binary+ ((x <double>) (y <double>))
+(defmethod binary+ ((x <double-float>) (y <double-float>))
   (double-binary+ x y))
-(defmethod binary+ ((x <fpi>) (y <double>))
+(defmethod binary+ ((x <fpi>) (y <double-float>))
   (double-binary+ (fpi-as-double x) y))
-(defmethod binary+ ((x <double>) (y <fpi>))
+(defmethod binary+ ((x <double-float>) (y <fpi>))
   (double-binary+ x (fpi-as-double y)))
-(defmethod binary- ((x <double>) (y <double>))
+(defmethod binary- ((x <double-float>) (y <double-float>))
   (double-binary- x y))
-(defmethod binary- ((x <fpi>) (y <double>))
+(defmethod binary- ((x <fpi>) (y <double-float>))
   (double-binary- (fpi-as-double x) y))
-(defmethod binary- ((x <double>) (y <fpi>))
+(defmethod binary- ((x <double-float>) (y <fpi>))
   (double-binary- x (fpi-as-double y)))
-(defmethod binary* ((x <double>) (y <double>))
+(defmethod binary* ((x <double-float>) (y <double-float>))
   (double-binary* x y))
-(defmethod binary* ((x <fpi>) (y <double>))
+(defmethod binary* ((x <fpi>) (y <double-float>))
   (double-binary* (fpi-as-double x) y))
-(defmethod binary* ((x <double>) (y <fpi>))
+(defmethod binary* ((x <double-float>) (y <fpi>))
   (double-binary* x (fpi-as-double y)))
-(defmethod binary/ ((x <double>) (y <double>))
+(defmethod binary/ ((x <double-float>) (y <double-float>))
   (double-binary/ x y))
-(defmethod binary/ ((x <fpi>) (y <double>))
+(defmethod binary/ ((x <fpi>) (y <double-float>))
   (double-binary/ (fpi-as-double x) y))
-(defmethod binary/ ((x <double>) (y <fpi>))
+(defmethod binary/ ((x <double-float>) (y <fpi>))
   (double-binary/ x (fpi-as-double y)))
-(defmethod binary% ((x <double>) (y <double>))
+(defmethod binary% ((x <double-float>) (y <double-float>))
   (double-binary% x y))
-(defmethod binary% ((x <fpi>) (y <double>))
+(defmethod binary% ((x <fpi>) (y <double-float>))
   (double-binary% (fpi-as-double x) y))
-(defmethod binary% ((x <double>) (y <fpi>))
+(defmethod binary% ((x <double-float>) (y <fpi>))
   (double-binary% x (fpi-as-double y)))
-(defmethod binary-mod ((x <double>) (y <double>))
+(defmethod binary-mod ((x <double-float>) (y <double-float>))
   (double-truncate (double-binary% x y)))
-(defmethod binary-mod ((x <fpi>) (y <double>))
+(defmethod binary-mod ((x <fpi>) (y <double-float>))
   (double-binary-mod (fpi-as-double x) y))
-(defmethod binary-mod ((x <double>) (y <fpi>))
+(defmethod binary-mod ((x <double-float>) (y <fpi>))
   (double-binary-mod x (fpi-as-double y)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion
 ;;;-----------------------------------------------------------------------------
-(defextern double-ceiling (<double>) <double> "eul_dbl_ceiling")
-(defextern double-floor (<double>) <double> "eul_dbl_floor")
-(defextern double-round (<double>) <fpi> "eul_dbl_round")
-(defextern double-truncate (<double>) <fpi> "eul_dbl_truncate")
-(defextern double-as-string (<double>) <string> "eul_dbl_as_str")
-(defextern fpi-as-double (<fpi>) <double> "eul_fpi_as_dbl")
-;;(defgeneric (converter <double>) (x))
-(defmethod (converter <double>) ((x <double>)) x)
-(defmethod (converter <double>) ((x <fpi>)) (fpi-as-double x))
-(defmethod (converter <string>) ((x <double>)) (double-as-string x))
-(defmethod (converter <fpi>) ((x <double>)) (double-round x))
+(defextern double-ceiling (<double-float>) <double-float> "eul_dbl_ceiling")
+(defextern double-floor (<double-float>) <double-float> "eul_dbl_floor")
+(defextern double-round (<double-float>) <fpi> "eul_dbl_round")
+(defextern double-truncate (<double-float>) <fpi> "eul_dbl_truncate")
+(defextern double-as-string (<double-float>) <string> "eul_dbl_as_str")
+(defextern fpi-as-double (<fpi>) <double-float> "eul_fpi_as_dbl")
+;;(defgeneric (converter <double-float>) (x))
+(defmethod (converter <double-float>) ((x <double-float>)) x)
+(defmethod (converter <double-float>) ((x <fpi>)) (fpi-as-double x))
+(defmethod (converter <string>) ((x <double-float>)) (double-as-string x))
+(defmethod (converter <fpi>) ((x <double-float>)) (double-round x))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module double1

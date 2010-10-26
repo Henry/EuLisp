@@ -8,7 +8,7 @@
    export (
     ((name . connection?) (pos . 4) (origin socket . connection?))
     ((name . socket-host) (pos . 11) (origin socket . socket-host) (inline (G005772 (static-ref2) (binding-ref ? <socket>) (primitive-relative-ref))) (setter (G005784 (stack-ref 1) (static-ref2) (stack-ref 2) (binding-ref ? <socket>) (set-primitive-relative-ref) (nobble 2))))
-    ((name . socket-port) (pos . 9) (origin socket . socket-port) (inline (G005774 (static-fpi-ref 3) (binding-ref ? <socket>) (primitive-relative-ref))) (setter (G005786 (stack-ref 1) (static-fpi-ref 3) (stack-ref 2) (binding-ref ? <socket>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . socket-port) (pos . 9) (origin socket . socket-port) (inline (G005774 (static-fpi-byte-ref 3) (binding-ref ? <socket>) (primitive-relative-ref))) (setter (G005786 (stack-ref 1) (static-fpi-byte-ref 3) (stack-ref 2) (binding-ref ? <socket>) (set-primitive-relative-ref) (nobble 2))))
     ((name . socket-queue-size) (pos . 6) (origin socket . socket-queue-size) (inline (G005768 (static-ref0) (binding-ref ? <socket>) (primitive-relative-ref))) (setter (G005780 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <socket>) (set-primitive-relative-ref) (nobble 2))))
     ((name . connection-host) (pos . 5) (origin socket . connection-host) (inline (G005778 (static-ref1) (binding-ref ? <connection>) (primitive-relative-ref))) (setter (G005790 (stack-ref 1) (static-ref1) (stack-ref 2) (binding-ref ? <connection>) (set-primitive-relative-ref) (nobble 2))))
     ((name . <connection>) (pos . 2) (origin socket . <connection>) (class . constant))
