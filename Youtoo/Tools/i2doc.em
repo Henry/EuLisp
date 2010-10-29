@@ -26,14 +26,14 @@
 ;;    Organization of the file bindings.txt:
 ;;      Header
 ;;      0. Legend
-;;      1. Bindings in level1 (Lib.${ARCH}/liblevel1.i)
+;;      1. Bindings in level-1 (Lib.${ARCH}/liblevel-1.i)
 ;;      2. Bindings in macros (Runtime/macros.i)
 ;;      3. Bindings in eval (Lib.${ARCH}/libeval.i)
 ;;;-----------------------------------------------------------------------------
 
 (defmodule i2doc
   (syntax (macros)
-   import (level1)
+   import (level-1)
    export (main))
 
 (defextern strftime (<string>) <string> "eul_strftime")
@@ -147,7 +147,7 @@
   (print "  Global variables begin with * and end with * (e.g. *foo*)." nl)
   (print "  Classes begin with < and end with > (e.g. <foo>)." nl)
   (print "" nl)
-  (print "  Not all of the level1 and macro functions are mentioned in the" nl)
+  (print "  Not all of the level-1 and macro functions are mentioned in the" nl)
   (print "  EuLisp Definition. Please, consult the EuLisp Definition for further" nl)
   (print "  details." nl)
   (setq header-index 1))

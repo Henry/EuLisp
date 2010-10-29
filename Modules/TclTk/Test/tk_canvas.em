@@ -26,7 +26,7 @@
 
 (defmodule tk_canvas
   (syntax (macros)
-   import (level1
+   import (level-1
            tcltk))
 
 ;;;-----------------------------------------------------------------------------

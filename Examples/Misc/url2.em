@@ -22,13 +22,13 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo url2 -l level1
+;;    youtoo url2 -l level-1
 ;;;  Run
 ;;    url2
 ;;;-----------------------------------------------------------------------------
 (defmodule url2
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 (let ((c (make <connection> host: "www.cs.bath.ac.uk" port: 80))
       x)

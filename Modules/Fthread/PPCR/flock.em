@@ -26,7 +26,7 @@
 
 (defmodule flock
   (syntax (macros)
-   import (level1)
+   import (level-1)
    export (<ppcr-lock>
            ppcr-lock?
            <thread-lock>

@@ -22,14 +22,14 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo url3 -l level1
+;;    youtoo url3 -l level-1
 ;;;  Run
 ;;    url3 http://www.cs.bath.ac.uk/~jap/ak1/youtoo/home.html
 ;;;-----------------------------------------------------------------------------
 
 (defmodule url3
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 (defun open-url (url)
   (system (fmt "firefox ~a" url)))

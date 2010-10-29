@@ -28,7 +28,7 @@
 
 (defmodule b2h-aux
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 (defmacro with-input-file* (file-name . body)
   (let ((res (gensym))

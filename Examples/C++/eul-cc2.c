@@ -22,10 +22,10 @@
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///  Compilation:
-//    ../youtoo -c test2 -l level1
+//    ../youtoo -c test2 -l level-1
 //    gcc -c -I../Gc eul-cc2.c
 //    g++ -c eul-cc3.cc
-//    ../youtoo test2 -l level1 -fff eul-cc2 -fff eul-cc3 -recompile
+//    ../youtoo test2 -l level-1 -fff eul-cc2 -fff eul-cc3 -recompile
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"

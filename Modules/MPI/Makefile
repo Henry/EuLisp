@@ -86,12 +86,12 @@ test:	${TEST_SOURCES}
 .SUFFIXES: .c .em
 
 .em.a:
-	${U2} ${U2FLAGS} -ar $* -l level1 -l serial -recompile
+	${U2} ${U2FLAGS} -ar $* -l level-1 -l serial -recompile
 	rm -f ${*}.a
 	ln -sf lib${*}.a ${*}.a
 
 .em.c:
-	${U2} ${U2FLAGS} $* -l level1 -l serial -l mpis -ld mpicc -static
+	${U2} ${U2FLAGS} $* -l level-1 -l serial -l mpis -ld mpicc -static
 
 ###-----------------------------------------------------------------------------
 ### Misc

@@ -26,7 +26,7 @@
 
 (defmodule tk_menu
   (syntax (macros)
-   import (level1
+   import (level-1
            tcltk)
    export (test-menu))
 

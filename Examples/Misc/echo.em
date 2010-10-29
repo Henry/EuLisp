@@ -22,12 +22,12 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo echo -l level1
+;;    youtoo echo -l level-1
 ;;;-----------------------------------------------------------------------------
 
 (defmodule echo
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 (let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
        (c (make <connection> port: port))

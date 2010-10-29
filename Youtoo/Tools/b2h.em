@@ -43,7 +43,7 @@
   (syntax (macros
            vmeta
            b2h-aux)
-   import (level1))
+   import (level-1))
 
 (deflocal old-style ())
 (deflocal verbose ())

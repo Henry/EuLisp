@@ -26,7 +26,7 @@
 
 (defmodule you2tk
   (syntax (macros)
-   import (level1
+   import (level-1
            math
            eval
            tcltk

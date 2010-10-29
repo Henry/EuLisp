@@ -75,7 +75,7 @@ FF_O = $(FF_C:%.c=$(ARCH_DIR)/%.o)
 lib: $(EUL_MODULE_LIB)
 
 $(MODULE_C) $(EUL_MODULE_LIB_I): $(MODULE_EM) $(OTHER_EM) | $(ARCH_DIR)/.
-	$(U2) $(U2FLAGS) -ar $(MODULE_EM) -od $(ARCH_DIR) -l level1 -recompile
+	$(U2) $(U2FLAGS) -ar $(MODULE_EM) -od $(ARCH_DIR) -l level-1 -recompile
 	mv -f $(MODULE_LIB_I) $(EUL_MODULE_LIB_I)
 
 $(EUL_MODULE_LIB): $(EUL_MODULE_LIB_I) $(MODULE_O) $(OTHER_O) $(FF_O)
@@ -92,7 +92,7 @@ you2tk:	$(EUL_BIN_DIR)/you2tk
 
 $(EUL_BIN_DIR)/you2tk: $(EUL_MODULE_LIB) you2tk.em You2tk_.c | $(ARCH_DIR)/.
 	$(U2) $(U2FLAGS) -c you2tk -od $(ARCH_DIR) \
-		-l level1 -l math -l eval -l tcltk -no_recompile
+		-l level-1 -l math -l eval -l tcltk -no_recompile
 	./you2tki2c $(ARCH)
 	$(CC) $(CFLAGS) $(EUL_TK_FLAGS) -o $(EUL_BIN_DIR)/you2tk \
 		you2tk.c You2tk_.c you2tki.c \

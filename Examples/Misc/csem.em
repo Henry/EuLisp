@@ -22,12 +22,12 @@
 ;;;  Authors: Andreas Kind, Chris Murphy
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo -c csem -l level1
+;;    youtoo -c csem -l level-1
 ;;;-----------------------------------------------------------------------------
 
 (defmodule csem
   (syntax (macros)
-   import (level1)
+   import (level-1)
    export (<csemaphore>
            cwait
            csignal))

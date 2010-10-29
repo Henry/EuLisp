@@ -23,12 +23,12 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation:
-;;    youtoo -ar mpis -l level1
+;;    youtoo -ar mpis -l level-1
 ;;;-----------------------------------------------------------------------------
 
 (defmodule mpis
   (syntax (macros)
-   import (level1
+   import (level-1
            serial)
    export (<mpi-stream>
            mpi-stream?

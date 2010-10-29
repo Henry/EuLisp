@@ -41,7 +41,7 @@ TESTS_EXE = $(TESTS:%=$(ARCH_DIR)/%)
 U2TKFLAGS = -cflags -ltk$(EUL_TK_VERSION) -cflags -ltcl$(EUL_TK_VERSION)
 
 $(ARCH_DIR)/% : %.em $(EUL_LIB_DIR)/libtcltk.i | $(ARCH_DIR)/.
-	${U2} $(U2FLAGS) $< -od $(ARCH_DIR) ${U2TKFLAGS} -l level1 -l tcltk
+	${U2} $(U2FLAGS) $< -od $(ARCH_DIR) ${U2TKFLAGS} -l level-1 -l tcltk
 
 all: $(TESTS_EXE)
 

@@ -122,7 +122,7 @@ lib%.i : $(EUL_LIB_DIR)/lib%.i
 .PHONY: boot-final
 boot-final:
 	@echo "---- CREATING youtoo.em module for final, proper youtoo executable"
-	@sed 	-e 's@#modules#@level-0 level1 math eval i-aux0 macros syntax-0@' \
+	@sed 	-e 's@#modules#@level-0 level-1 level1 math eval i-aux0 macros syntax-0@' \
 		-e 's@#which#@Final, proper executable!@' \
 		<youtoo.em.in >youtoo.em
 	@echo "---- CREATING final youtoo executable"

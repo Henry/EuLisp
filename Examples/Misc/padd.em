@@ -22,12 +22,12 @@
 ;;;  Authors: Andreas Kind, Liam Wickins
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation:
-;;    youtoo padd -l level1
+;;    youtoo padd -l level-1
 ;;;-----------------------------------------------------------------------------
 
 (defmodule padd
   (syntax (macros)
-   import (level1)
+   import (level-1)
    export (p-add))
 
 (defun p-add args

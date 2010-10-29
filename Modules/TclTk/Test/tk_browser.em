@@ -26,7 +26,7 @@
 
 (defmodule tk_browser
   (syntax (macros)
-   import (level1
+   import (level-1
            tcltk)
    export (inspect))
 

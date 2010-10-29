@@ -23,13 +23,13 @@
 ;;;  Authors: Andreas Kind, Liam Wickins
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo -ar fthread -l level1
+;;    youtoo -ar fthread -l level-1
 ;;    make
 ;;;-----------------------------------------------------------------------------
 
 (defmodule fthread
   (syntax (macros)
-   import (level1)
+   import (level-1)
    expose (flock)
    export (<ppcr-thread>
            ppcr-thread-p))

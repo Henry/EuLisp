@@ -28,7 +28,7 @@
 
 (defmodule fcsem
   (syntax (macros)
-   import (level1)
+   import (level-1)
    export (<csemaphore>
            csemaphorep
            cwait

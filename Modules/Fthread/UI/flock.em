@@ -28,7 +28,7 @@
 
 (defmodule flock
   (syntax (macros)
-   import (level1
+   import (level-1
            fcsem)
    export (<thread-lock>
            thread-lock?

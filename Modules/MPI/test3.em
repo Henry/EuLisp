@@ -23,7 +23,7 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation:
-;;    youtoo test3 -l level1 -l mpis -ld mpicc -static
+;;    youtoo test3 -l level-1 -l mpis -ld mpicc -static
 ;;;  Run:
 ;;    edit ./mpi-configure then mpirun -p4pg mpi-configure test3
 ;;    or see Makefile
@@ -31,7 +31,7 @@
 
 (defmodule test3
   (syntax (macros)
-   import (level1
+   import (level-1
            mpis))
 
 ;;;-----------------------------------------------------------------------------

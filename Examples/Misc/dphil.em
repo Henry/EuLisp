@@ -22,14 +22,14 @@
 ;;;  Authors: Andreas Kind, Chris Murphy
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation (default)
-;;    youtoo dphil -l level1
+;;    youtoo dphil -l level-1
 ;;;  Compilation (with foreign thread library)
-;;    youtoo dphil -l level1 -l fthread
+;;    youtoo dphil -l level-1 -l fthread
 ;;;-----------------------------------------------------------------------------
 
 (defmodule dphil
   (syntax (macros)
-   import (level1
+   import (level-1
            csem))
 
 ;;;-----------------------------------------------------------------------------

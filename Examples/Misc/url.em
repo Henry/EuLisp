@@ -22,13 +22,13 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo url -l level1
+;;    youtoo url -l level-1
 ;;;  Run
 ;;    url www.cs.bath.ac.uk /~jap/ak1/youtoo/home.html
 ;;;-----------------------------------------------------------------------------
 (defmodule url
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 (let* ((host (vector-ref *argv* 1))
        (file-name (vector-ref *argv* 2))

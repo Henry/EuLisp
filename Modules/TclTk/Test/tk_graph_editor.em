@@ -29,7 +29,7 @@
 
 (defmodule tk_graph_editor
   (syntax (macros)
-   import (level1
+   import (level-1
            tcltk))
 
 (deflocal *canvas* ())

@@ -22,12 +22,12 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo echod -l level1
+;;    youtoo echod -l level-1
 ;;;-----------------------------------------------------------------------------
 
 (defmodule echod
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 (let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
        (s (make <socket> port: port))

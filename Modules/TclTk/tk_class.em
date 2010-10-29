@@ -26,7 +26,7 @@
 
 (defmodule tk_class
   (syntax (macros)
-   import (level1
+   import (level-1
            tk_general)
    export (tk-make-button
            tk-make-label

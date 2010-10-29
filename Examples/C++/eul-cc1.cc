@@ -24,7 +24,7 @@
 ///  Description: C++ interoperability
 ///  Compilation:
 //    g++ -c eul-cc1.cc
-//    ../youtoo test1 -l level1 -fff eul-cc1
+//    ../youtoo test1 -l level-1 -fff eul-cc1
 ///-----------------------------------------------------------------------------
 
 extern "C" char foo(char *, int);

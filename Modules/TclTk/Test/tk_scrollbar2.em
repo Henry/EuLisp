@@ -26,7 +26,7 @@
 
 (defmodule tk_scrollbar2
   (syntax (macros)
-   import (level1
+   import (level-1
            tcltk))
 
 (deflocal *lb1* ())

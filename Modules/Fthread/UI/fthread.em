@@ -28,7 +28,7 @@
   (syntax (macros)
    import ((except (thread-return-value
                     thread-returned?)
-                   level1))
+                   level-1))
    expose (flock
            fcsem)
    export (<ui-thread>

@@ -47,7 +47,7 @@ all: b2h i2doc
 b2h: $(EUL_BIN_DIR)/b2h
 
 $(EUL_BIN_DIR)/b2h: $(B2H_EM) | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} b2h -od $(ARCH_DIR) -l level1 \
+	${U2} ${U2FLAGS} b2h -od $(ARCH_DIR) -l level1 -l level-1 \
 		-load_path $(EUL_DIR)/Modules/Vmeta
 	mv $(ARCH_DIR)/b2h $(EUL_BIN_DIR)/b2h
 
@@ -58,7 +58,7 @@ $(EUL_BIN_DIR)/b2h: $(B2H_EM) | $(ARCH_DIR)/.
 i2doc: $(EUL_BIN_DIR)/i2doc
 
 $(EUL_BIN_DIR)/i2doc: $(I2DOC_EM) $(ARCH_DIR)/i2doc-ext.o | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} i2doc -od $(ARCH_DIR) -l level1 -fff i2doc-ext
+	${U2} ${U2FLAGS} i2doc -od $(ARCH_DIR) -l level1 -l level-1 -fff i2doc-ext
 	mv $(ARCH_DIR)/i2doc $(EUL_BIN_DIR)/i2doc
 
 ###-----------------------------------------------------------------------------

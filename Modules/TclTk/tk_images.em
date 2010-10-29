@@ -26,7 +26,7 @@
 
 (defmodule tk_images
   (syntax (macros)
-   import (level1
+   import (level-1
            tk_general)
    export (tk-create-image
            tk-delete-image

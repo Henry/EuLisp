@@ -29,7 +29,7 @@
 
 (defmodule tk_class_hierchy
   (syntax (macros)
-   import (level1 tcltk))
+   import (level-1 tcltk))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Callback Functions
