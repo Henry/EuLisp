@@ -144,7 +144,7 @@
     #+END_SRC
 *** Compiling
     In directory =Examples/Misc= run
-    - =Bin.${ARCH}/youtoo fact -l level1=
+    - =Bin.${ARCH}/youtoo fact -l level-1=
     to compile module fact into a stand-alone executable. With shared libraries
     the executable should be less the 40K.
 *** [[file:../Youtoo/README.org][See also]]
