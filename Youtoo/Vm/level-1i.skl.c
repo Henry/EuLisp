@@ -28,30 +28,30 @@
 ///-----------------------------------------------------------------------------
 #include "eulisp.h"
 
-static LispRef level1_tab;
-static LispRef level1_syntax_tab;
-static char *eul_level1_module_names;
-static char *eul_level1_lexical_module_name;
-static char *eul_level1_syntax_module_name;
+static LispRef level_1_tab;
+static LispRef level_1_syntax_tab;
+static char *eul_level_1_module_names;
+static char *eul_level_1_lexical_module_name;
+static char *eul_level_1_syntax_module_name;
 
-void fill_level1_table();
-void fill_level1_syntax_table();
+void fill_level_1_table();
+void fill_level_1_syntax_table();
 
-LispRef eul_dyn_level1_binding_info(LispRef binding_name)
+LispRef eul_dyn_level_1_binding_info(LispRef binding_name)
 {
     char *binding_name_str = eul_symbol_as_c_string(binding_name);
-    return eul_fast_table_ref(level1_tab, binding_name_str);
+    return eul_fast_table_ref(level_1_tab, binding_name_str);
 }
 
-LispRef eul_dyn_level1_syntax_binding_info(LispRef binding_name)
+LispRef eul_dyn_level_1_syntax_binding_info(LispRef binding_name)
 {
     char *binding_name_str = eul_symbol_as_c_string(binding_name);
-    return eul_fast_table_ref(level1_syntax_tab, binding_name_str);
+    return eul_fast_table_ref(level_1_syntax_tab, binding_name_str);
 }
 
-LispRef eul_dyn_level1_binding_ref(LispRef binding_name, LispRef absent)
+LispRef eul_dyn_level_1_binding_ref(LispRef binding_name, LispRef absent)
 {
-    LispRef entry = eul_dyn_level1_binding_info(binding_name);
+    LispRef entry = eul_dyn_level_1_binding_info(binding_name);
 
     if (eul_null(entry))
     {
@@ -64,7 +64,7 @@ LispRef eul_dyn_level1_binding_ref(LispRef binding_name, LispRef absent)
     return eul_dyn_binding_ref(module_name_str, pos);
 }
 
-LispRef eul_initialize_level1_tables()
+LispRef eul_initialize_level_1_tables()
 {
     LispRef res;
 
@@ -72,27 +72,27 @@ LispRef eul_initialize_level1_tables()
     eul_dyn_create_module("user", 1024);
     // eul_dyn_create_module("macros", 1024);
 
-    // Initialize the fast lookup table for level1/user bindings
-    eul_allocate_table(level1_tab, eul_nil);
-    eul_allocate_table(level1_syntax_tab, eul_nil);
-    fill_level1_table();
-    fill_level1_syntax_table();
+    // Initialize the fast lookup table for level_1/user bindings
+    eul_allocate_table(level_1_tab, eul_nil);
+    eul_allocate_table(level_1_syntax_tab, eul_nil);
+    fill_level_1_table();
+    fill_level_1_syntax_table();
 
     eul_allocate_vector(res, 5, eul_nil);
-    slot_ref(res, 0) = level1_tab;
-    slot_ref(res, 1) = level1_syntax_tab;
-    eul_allocate_string(slot_ref(res, 2), eul_level1_module_names);
-    eul_allocate_string(slot_ref(res, 3), eul_level1_lexical_module_name);
-    eul_allocate_string(slot_ref(res, 4), eul_level1_syntax_module_name);
+    slot_ref(res, 0) = level_1_tab;
+    slot_ref(res, 1) = level_1_syntax_tab;
+    eul_allocate_string(slot_ref(res, 2), eul_level_1_module_names);
+    eul_allocate_string(slot_ref(res, 3), eul_level_1_lexical_module_name);
+    eul_allocate_string(slot_ref(res, 4), eul_level_1_syntax_module_name);
 
     return res;
 }
 
 
 ///-----------------------------------------------------------------------------
-/// Initialize level1_tab with liblevel1.i contents
+/// Initialize level_1_tab with liblevel_1.i contents
 //    e.g.
-//    eul_fast_table_set(level1_tab, <key>, make_entry(<pos>, <module_name>));
+//    eul_fast_table_set(level_1_tab, <key>, make_entry(<pos>, <module_name>));
 ///-----------------------------------------------------------------------------
 
 LispRef make_entry(int pos, char *module_str, char *origin_str)

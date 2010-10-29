@@ -31,10 +31,10 @@ include ../../Lib.$(ARCH)/Makefile
 all: lambda-rest simple
 
 lambda-rest: lambda-rest.em
-	$(U2) $(U2FLAGS) lambda-rest -l level1
+	$(U2) $(U2FLAGS) lambda-rest -l level-1
 
 simple: simple.em
-	$(U2) $(U2FLAGS) simple -l level1
+	$(U2) $(U2FLAGS) simple -l level-1
 
 clean:
 	rm *.i *.h *.c *.o lambda-rest simple

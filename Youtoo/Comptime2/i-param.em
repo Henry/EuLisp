@@ -27,7 +27,7 @@
 (defmodule i-param
   (syntax (_macros
            _i-aux0)
-   import (i-level1)
+   import (i-level-1)
    export (*version*
            *ostype*
            *interpreter*

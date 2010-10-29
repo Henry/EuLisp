@@ -2,7 +2,7 @@
 ;;; ---                         EuLisp System 'youtoo'
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Pseudo-random number generator
-;;;  Library: level1
+;;;  Library: level-1
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

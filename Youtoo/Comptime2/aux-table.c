@@ -9,8 +9,8 @@
 
 
 /* Imported modules */
-extern void initialize_module_level1();
-extern LispRef level1_bindings[];
+extern void initialize_module_level_1();
+extern LispRef level_1_bindings[];
 extern LispRef boot_bindings[];
 extern LispRef mop_gf_bindings[];
 extern LispRef table_bindings[];
@@ -40,7 +40,7 @@ static int is_initialized = 0;
 void initialize_module_aux_table()
 {
   if (is_initialized) return;
-  initialize_module_level1();
+  initialize_module_level_1();
   eul_fast_table_set(eul_modules,"aux_table",(LispRef) aux_table_bindings);
   is_initialized = 1;
   {
@@ -51,14 +51,14 @@ void initialize_module_aux_table()
   /* Byte-vector with size: 4 is_init: 0 index: 11 binding: anonymous */
   static const void *G0028[] = {I(aa,47,00,00),I(10,27,0a,24),B(stream ,13),I(3d,03,00,00)};
 
-  /* Byte-vector with size: 23 is_init: 0 index: 13 binding: access-table-print */
-  static const void *G0030[] = {I(a7,46,01,1b),I(48,00,00,1c),I(24,00,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(44,22,1c,8a),I(03,24,00,00),B(table1 ,3),I(08,24,00,00),B(stream ,13),I(1c,24,00,00),B(vector ,16),I(3d,02,06,22),I(01,36,19,23),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,16),I(3d,01,05,45),I(05,00,00,00)};
+  /* Byte-vector with size: 28 is_init: 0 index: 13 binding: access-table-print */
+  static const void *G0030[] = {I(43,fe,46,01),I(1b,48,00,00),I(1c,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(34,00,00,00),I(00,00,00,34),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(table1 ,3),I(08,24,00,00),B(stream ,13),I(1c,24,00,00),B(vector ,16),I(3d,02,06,22),I(01,32,00,00),I(00,00,00,22),I(23,00,00,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,16),I(3d,01,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 14 binding: access-table-keys */
   static const void *G0033[] = {I(aa,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,2),I(3d,01,01,00)};
 
-  /* Byte-vector with size: 11 is_init: 0 index: 15 binding: anonymous */
-  static const void *G0035[] = {I(ab,1c,44,24),I(24,00,00,00),B(table ,7),I(24,00,00,00),B(boot1 ,42),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,36,04,47),I(00,00,45,02)};
+  /* Byte-vector with size: 14 is_init: 0 index: 15 binding: anonymous */
+  static const void *G0035[] = {I(ab,1c,34,00),I(00,00,00,2e),I(24,00,00,00),B(table ,7),I(24,00,00,00),B(boot1 ,42),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,32,00,00),I(00,00,00,0a),I(47,00,00,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 16 binding: anonymous */
   static const void *G0037[] = {I(aa,47,00,00),I(1c,24,00,00),B(table ,7),I(3d,02,01,00)};
@@ -82,7 +82,7 @@ void initialize_module_aux_table()
   static const void *G0049[] = {I(aa,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,14),I(3d,01,01,00)};
 
   /* Byte-vector with size: 56 is_init: 1 index: 0 binding: initialize-aux-table */
-  static const void *G0051[] = {I(87,25,00,00),B(aux_table ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(aux_table ,23),I(23,00,00,00),B(aux_table ,22),I(3b,01,25,00),B(aux_table ,9),I(23,00,00,00),B(aux_table ,24),I(23,00,00,00),B(aux_table ,21),I(3b,01,25,00),B(aux_table ,8),I(23,00,00,00),B(aux_table ,25),I(23,00,00,00),B(aux_table ,20),I(3b,02,25,00),B(aux_table ,7),I(23,00,00,00),B(aux_table ,26),I(23,00,00,00),B(aux_table ,19),I(3b,02,25,00),B(aux_table ,6),I(23,00,00,00),B(aux_table ,27),I(23,00,00,00),B(aux_table ,18),I(3b,01,25,00),B(aux_table ,5),I(23,00,00,00),B(aux_table ,28),I(23,00,00,00),B(aux_table ,17),I(3b,ff,25,00),B(aux_table ,4),I(23,00,00,00),B(aux_table ,29),I(23,00,00,00),B(aux_table ,14),I(3b,01,25,00),B(aux_table ,3),I(23,00,00,00),B(aux_table ,30),I(23,00,00,00),B(aux_table ,13),I(3b,fe,25,00),B(aux_table ,2),I(86,ac,00,00)};
+  static const void *G0051[] = {I(87,25,00,00),B(aux_table ,1),I(24,00,00,00),B(level_1 ,1),I(3e,0b,24,00),B(level_1 ,0),I(3c,00,21,01),I(23,00,00,00),B(aux_table ,23),I(23,00,00,00),B(aux_table ,22),I(3b,01,25,00),B(aux_table ,9),I(23,00,00,00),B(aux_table ,24),I(23,00,00,00),B(aux_table ,21),I(3b,01,25,00),B(aux_table ,8),I(23,00,00,00),B(aux_table ,25),I(23,00,00,00),B(aux_table ,20),I(3b,02,25,00),B(aux_table ,7),I(23,00,00,00),B(aux_table ,26),I(23,00,00,00),B(aux_table ,19),I(3b,02,25,00),B(aux_table ,6),I(23,00,00,00),B(aux_table ,27),I(23,00,00,00),B(aux_table ,18),I(3b,01,25,00),B(aux_table ,5),I(23,00,00,00),B(aux_table ,28),I(23,00,00,00),B(aux_table ,17),I(3b,ff,25,00),B(aux_table ,4),I(23,00,00,00),B(aux_table ,29),I(23,00,00,00),B(aux_table ,14),I(3b,01,25,00),B(aux_table ,3),I(23,00,00,00),B(aux_table ,30),I(23,00,00,00),B(aux_table ,13),I(3b,fe,25,00),B(aux_table ,2),I(86,ac,00,00)};
 
 
   /* Initializations */

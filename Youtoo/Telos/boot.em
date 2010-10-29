@@ -268,7 +268,7 @@
   (if *error*
       (apply *error* condclass str args)
     (progn
-      (write-object "*** ERROR [level1]: " stderr)
+      (write-object "*** ERROR [level-1]: " stderr)
       (apply format stderr str args)
       (write-object "\n" stderr)  ; #\\n stderr)
       (write-object "***    See Backtrace? (y/n) " stderr)
@@ -283,7 +283,7 @@
   (if *warning*
       (apply *warning* str args)
     (progn
-      (write-object "*** WARNING [level1]: " stderr)
+      (write-object "*** WARNING [level-1]: " stderr)
       (apply format stderr str args)
       (write-object "\n" stderr))))
 

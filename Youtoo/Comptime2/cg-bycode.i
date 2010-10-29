@@ -2,19 +2,19 @@
 ;;;   Interface file for module cg-bycode
 
 (definterface cg-bycode
-  (import (i-level1)
+  (import (i-level-1)
    syntax (_macros _cg-bycode0 _sx-obj0)
-   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1)
+   full-import (aux-table level-1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level-1)
    export (
-    ((name . bytecode-args!) (pos . 2) (origin cg-bycode . bytecode-args!) (inline (G004284 (stack-ref 1) (static-fpi-byte-ref 4) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . bytecode-args!) (pos . 2) (origin cg-bycode . bytecode-args!) (inline (G004284 (stack-ref 1) (static-fpi-ref 4) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
     ((name . bytecode-size!) (pos . 4) (origin cg-bycode . bytecode-size!) (inline (G004272 (stack-ref 1) (static-ref1) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
-    ((name . bytecode-name!) (pos . 17) (origin cg-bycode . bytecode-name!) (inline (G004288 (stack-ref 1) (static-fpi-byte-ref 5) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
-    ((name . bytecode-code?) (pos . 13) (origin cg-bycode . bytecode-code?) (inline (G004278 (static-fpi-byte-ref 3) (binding-ref ? <bytecode>) (primitive-relative-ref))))
+    ((name . bytecode-name!) (pos . 17) (origin cg-bycode . bytecode-name!) (inline (G004288 (stack-ref 1) (static-fpi-ref 5) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . bytecode-code?) (pos . 13) (origin cg-bycode . bytecode-code?) (inline (G004278 (static-fpi-ref 3) (binding-ref ? <bytecode>) (primitive-relative-ref))))
     ((name . bytecode-modus!) (pos . 9) (origin cg-bycode . bytecode-modus!) (inline (G004268 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
-    ((name . bytecode-args?) (pos . 7) (origin cg-bycode . bytecode-args?) (inline (G004282 (static-fpi-byte-ref 4) (binding-ref ? <bytecode>) (primitive-relative-ref))))
-    ((name . bytecode-code!) (pos . 14) (origin cg-bycode . bytecode-code!) (inline (G004280 (stack-ref 1) (static-fpi-byte-ref 3) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . bytecode-args?) (pos . 7) (origin cg-bycode . bytecode-args?) (inline (G004282 (static-fpi-ref 4) (binding-ref ? <bytecode>) (primitive-relative-ref))))
+    ((name . bytecode-code!) (pos . 14) (origin cg-bycode . bytecode-code!) (inline (G004280 (stack-ref 1) (static-fpi-ref 3) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
     ((name . bytecode-properties!) (pos . 10) (origin cg-bycode . bytecode-properties!) (inline (G004276 (stack-ref 1) (static-ref2) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
-    ((name . bytecode-name?) (pos . 11) (origin cg-bycode . bytecode-name?) (inline (G004286 (static-fpi-byte-ref 5) (binding-ref ? <bytecode>) (primitive-relative-ref))))
+    ((name . bytecode-name?) (pos . 11) (origin cg-bycode . bytecode-name?) (inline (G004286 (static-fpi-ref 5) (binding-ref ? <bytecode>) (primitive-relative-ref))))
     ((name . get-bytecode) (pos . 18) (origin cg-bycode . get-bytecode) (class . constant))
     ((name . get-stream-primitive) (pos . 8) (origin cg-bycode . get-stream-primitive) (class . constant))
     ((name . bytecode-size?) (pos . 12) (origin cg-bycode . bytecode-size?) (inline (G004270 (static-ref1) (binding-ref ? <bytecode>) (primitive-relative-ref))))

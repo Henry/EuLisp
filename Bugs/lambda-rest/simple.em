@@ -1,6 +1,6 @@
 (defmodule simple
   (syntax (macros)
-   import (level1))
+   import (level-1))
 (defconstant f (lambda fargs fargs))
 (print (f 61 62 63 64))
 (print (list 31 32 33 34))

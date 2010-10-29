@@ -221,7 +221,7 @@
 ;;;-----------------------------------------------------------------------------
 (setq *error*
       (named-lambda error (condclass str . args)
-                    (format 2 "*** ERROR [level1]: ")
+                    (format 2 "*** ERROR [level-1]: ")
                     (apply format 2 str args)
                     (format 2 "\n")
                     (format 2 "***    See Backtrace? (y/n) ")
@@ -230,7 +230,7 @@
 
 (setq *warning*
       (named-lambda warning (str . args)
-                    (format 2 "*** WARNING [level1]: ")
+                    (format 2 "*** WARNING [level-1]: ")
                     (apply format 2 str args)
                     (format 2 "\n")))
 

@@ -124,13 +124,13 @@
     (member1-list . 93)
     ("
 " . 78)
-    ("*** WARNING [level1]: " . 77)
+    ("*** WARNING [level-1]: " . 77)
     ("       ~a: ~a
 " . 72)
     ("***    See Backtrace? (y/n) " . 58)
     ("
 " . 57)
-    ("*** ERROR [level1]: " . 56)
+    ("*** ERROR [level-1]: " . 56)
     ("*** BACKTRACE:" . 50)
     ("*** STACK VALUES:" . 43)
     ("       ~a: ~a

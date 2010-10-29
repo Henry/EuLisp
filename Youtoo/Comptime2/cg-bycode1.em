@@ -28,7 +28,7 @@
   (syntax (_macros
            _cg-bycode0
            _sx-obj0)
-   import (i-level1
+   import (i-level-1
            cg-bycode)
    expose (cg-bycode))
 

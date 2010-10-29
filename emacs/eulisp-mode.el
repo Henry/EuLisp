@@ -241,7 +241,7 @@ and named constant values.")
        (concat
         "("
         (regexp-opt
-         '(;; Bindings in Lib.x86_64/liblevel1
+         '(;; Bindings in Lib.x86_64/liblevel-1
            "%"
            "*"
            "+"

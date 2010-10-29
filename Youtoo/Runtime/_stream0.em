@@ -19,14 +19,14 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: stream syntax functions
-;;;  Library: level1
+;;;  Library: level-1
 ;;;  Authors: Julian Padget, Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule _stream0
   (syntax (_boot0)
-   import (level1))
+   import (level-1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; (match-let (expression default-initializers) form*)

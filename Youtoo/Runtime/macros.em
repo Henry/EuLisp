@@ -18,14 +18,14 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: level1 macros
-;;;  Library: level1
+;;; Title: level-1 macros
+;;;  Library: level-1
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule macros
-  (import (level1)
+  (import (level-1)
    expose (telos0
            stream0)
    syntax (boot0))

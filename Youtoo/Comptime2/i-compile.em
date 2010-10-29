@@ -191,7 +191,7 @@
 ;;; Written as method to avoid mutual module imports.
 ;;;-----------------------------------------------------------------------------
 (defmethod compile-module (name)
-  (if (member1-list name '(telos level1 math))
+  (if (member1-list name '(telos level-1 math))
       (load-module-interface name t)
     (dynamic-let ((*indent* (fmt "  ~a" (dynamic *indent*))))
                  (compile name))))

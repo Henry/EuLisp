@@ -4,7 +4,7 @@
 (definterface i-ffi
   (import (i-all)
    syntax (_macros)
-   full-import (i-error i-notify i-param i-level1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level1 aux-table i-all)
+   full-import (i-error i-notify i-param i-level-1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level-1 aux-table i-all)
    export (
     ((name . arg-converter-as-C-type) (pos . 8) (origin i-ffi . arg-converter-as-C-type))
     ((name . arg-converter-index) (pos . 7) (origin i-ffi . arg-converter-index))

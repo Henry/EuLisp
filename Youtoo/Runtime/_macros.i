@@ -2,9 +2,9 @@
 ;;;   Interface file for module _macros
 
 (definterface _macros
-  (import (level1 _telos0 _stream0)
+  (import (level-1 _telos0 _stream0)
    syntax (_boot0)
-   full-import (symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level1 _mop-defcl0 _mop-meth0 _mop-gf0 _boot0 _telos0 _stream0)
+   full-import (symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level-1 _mop-defcl0 _mop-meth0 _mop-gf0 _boot0 _telos0 _stream0)
    export (
     ((name . defgeneric) (pos . 2) (origin _mop-gf0 . defgeneric))
     ((name . dynamic-let) (pos . 11) (origin _macros . dynamic-let))

@@ -155,7 +155,7 @@ fi
 ###-----------------------------------------------------------------------------
 ### Set basic flags and libraries
 ###-----------------------------------------------------------------------------
-CLIBS="-leval -lmath -llevel1 -llevel-0 -llevel-1 -leval -ltelos -lboot -leulvm -lm"
+CLIBS="-leval -lmath -llevel-0 -llevel-1 -leval -ltelos -lboot -leulvm -lm"
 CFLAGS="$CFLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm"
 
 ###-----------------------------------------------------------------------------
@@ -489,9 +489,6 @@ create_script(){
 
 create_script youtoo
 create_script you2tk
-create_script scmtoo
-create_script scm2tk
-create_script check
 
 ###-----------------------------------------------------------------------------
 ### Create script to set LD_LIBRARY_PATH

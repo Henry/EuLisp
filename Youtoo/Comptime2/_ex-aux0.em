@@ -26,7 +26,7 @@
 
 (defmodule _ex-aux0
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 (defmacro get-name (form)
   `(let ((x (cadr ,form)))

@@ -27,7 +27,7 @@
 (defmodule sx-obj1
   (syntax (_macros
            _sx-obj0)
-   import (i-level1)
+   import (i-level-1)
    ;; generated accessors and predicates are automatically exported
    )
 

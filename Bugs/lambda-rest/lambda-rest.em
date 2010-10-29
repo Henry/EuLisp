@@ -1,6 +1,6 @@
 (defmodule lambda-rest
   (syntax (macros)
-   import (level1))
+   import (level-1))
 (defun f args1 (cons 'args1 args1))
 
 (defun g (a . rest) (cons 'a-rest (list a rest)))

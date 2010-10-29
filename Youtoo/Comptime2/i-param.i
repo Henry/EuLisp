@@ -2,9 +2,9 @@
 ;;;   Interface file for module i-param
 
 (definterface i-param
-  (import (i-level1)
+  (import (i-level-1)
    syntax (_macros _i-aux0)
-   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1)
+   full-import (aux-table level-1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level-1)
    export (
     ((name . *get-loaded-syntax-module*) (pos . 30) (origin i-param . *get-loaded-syntax-module*))
     ((name . *ostype*) (pos . 49) (origin i-param . *ostype*))

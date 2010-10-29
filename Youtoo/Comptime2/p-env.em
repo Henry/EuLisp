@@ -60,7 +60,7 @@
                           (binding (env name)))
                      (if binding
                          (let ((proper-binding
-                                (expand-hard-coded-level1-binding
+                                (expand-hard-coded-level-1-binding
                                  binding name env)))
                            (setq res proper-binding))
                        ()))))
@@ -77,7 +77,7 @@
     (if module
         (let* ((env (module-lexical-env? module))
                (proper-binding
-                (expand-hard-coded-level1-binding binding name env))
+                (expand-hard-coded-level-1-binding binding name env))
                (binding-name (binding-local-name? proper-binding))
                (proper-module-name (save-binding-module-name? proper-binding))
                (old-lexical-binding (get-lexical-binding binding-name))
@@ -123,7 +123,7 @@
                           (binding (env name)))
                      (if binding
                          (let ((proper-binding
-                                (expand-hard-coded-level1-binding
+                                (expand-hard-coded-level-1-binding
                                  binding name env)))
                            (setq res proper-binding))
                        ()))))
@@ -134,7 +134,7 @@
     (if module
         (let* ((env (module-external-env? module))
                (proper-binding
-                (expand-hard-coded-level1-binding binding name env))
+                (expand-hard-coded-level-1-binding binding name env))
                (binding-name (binding-local-name? proper-binding))
                (proper-module-name (save-binding-module-name? proper-binding))
                (old-binding (get-external-binding binding-name)))
@@ -155,8 +155,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Syntax environment
 ;;;-----------------------------------------------------------------------------
-(defextern dynamic-level1-syntax-binding-info (ptr) ptr
-           "eul_dyn_level1_syntax_binding_info")
+(defextern dynamic-level-1-syntax-binding-info (ptr) ptr
+           "eul_dyn_level_1_syntax_binding_info")
 
 (defun get-syntax-binding (name . modules)
   (let ((search-modules (or modules
@@ -170,7 +170,7 @@
                      (if binding
                          (let ((proper-binding
                                 (expand-interpreter-defined-syntax-binding
-                                 (expand-hard-coded-level1-binding
+                                 (expand-hard-coded-level-1-binding
                                   binding name env)
                                  module)))
                            (setq res proper-binding))
@@ -183,7 +183,7 @@
         (let* ((env (module-syntax-env? module))
                (proper-binding
                 (expand-interpreter-defined-syntax-binding
-                 (expand-hard-coded-level1-binding binding name env)
+                 (expand-hard-coded-level-1-binding binding name env)
                  module))
                (proper-module-name (save-binding-module-name? proper-binding))
                (binding-name (binding-local-name? proper-binding))
@@ -213,10 +213,10 @@
       (error <ct-error> "no actual module specified"))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Expand hard-code level1 bindings
+;;; Expand hard-code level-1 bindings
 ;;;-----------------------------------------------------------------------------
-(defun expand-hard-coded-level1-binding (binding name env)
-  ;; Hard-coded level1 bindings may still be not expanded
+(defun expand-hard-coded-level-1-binding (binding name env)
+  ;; Hard-coded level-1 bindings may still be not expanded
   (if (cons? binding)
       (let* ((pos (car binding))
              (origin-module-name (car (cdr binding)))

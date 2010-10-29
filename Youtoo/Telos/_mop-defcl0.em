@@ -26,7 +26,7 @@
 
 (defmodule _mop-defcl0
   (syntax (boot0)
-   import (level1))
+   import (level-1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Syntax: (defclass name supers (slots) {keywords}*), where

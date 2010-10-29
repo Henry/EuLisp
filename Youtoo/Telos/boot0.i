@@ -2,9 +2,9 @@
 ;;;   Interface file for module boot0
 
 (definterface boot0
-  (import (level1)
+  (import (level-1)
    syntax ()
-   full-import (symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level1)
+   full-import (symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level-1)
    export (
     ((name . get-global-register) (pos . 5) (origin boot0 . get-global-register))
     ((name . unless) (pos . 7) (origin boot0 . unless))

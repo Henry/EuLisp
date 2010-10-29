@@ -49,10 +49,10 @@
     ("***    See Backtrace? (y/n) " . 22)
     ("
 " . 21)
-    ("*** ERROR [level1]: " . 20)
+    ("*** ERROR [level-1]: " . 20)
     ("
 " . 18)
-    ("*** WARNING [level1]: " . 17)
+    ("*** WARNING [level-1]: " . 17)
    )
    literals (
    )

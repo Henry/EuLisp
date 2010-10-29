@@ -9,8 +9,8 @@
 
 
 /* Imported modules */
-extern void initialize_module_level1();
-extern LispRef level1_bindings[];
+extern void initialize_module_level_1();
+extern LispRef level_1_bindings[];
 
 /* Module bindings with size 18 */
 LispRef cg_bycode0_bindings[18];
@@ -24,7 +24,7 @@ static int is_initialized = 0;
 void initialize_module_cg_bycode0()
 {
   if (is_initialized) return;
-  initialize_module_level1();
+  initialize_module_level_1();
   eul_fast_table_set(eul_modules,"cg_bycode0",(LispRef) cg_bycode0_bindings);
   is_initialized = 1;
   {
@@ -39,7 +39,7 @@ void initialize_module_cg_bycode0()
   static const void *G001226[] = {I(43,fc,23,00),B(cg_bycode0 ,8),I(86,0f,23,00),B(cg_bycode0 ,5),I(1c,0f,1f,05),I(86,0f,23,00),B(cg_bycode0 ,6),I(1c,0f,1f,07),I(86,0f,23,00),B(cg_bycode0 ,6),I(1c,0f,1f,08),I(86,0f,23,00),B(cg_bycode0 ,6),I(1c,0f,1f,08),I(86,0f,23,00),B(cg_bycode0 ,6),I(1c,0f,1b,86),I(0f,23,00,00),B(cg_bycode0 ,9),I(1c,0f,1f,0d),I(1c,0f,23,00),B(cg_bycode0 ,10),I(1c,0f,1f,06),I(1c,0f,23,00),B(cg_bycode0 ,11),I(1c,0f,1f,0a),I(1c,0f,23,00),B(cg_bycode0 ,12),I(1c,0f,23,00),B(cg_bycode0 ,13),I(1c,0f,23,00),B(cg_bycode0 ,14),I(1c,0f,1b,86),I(0f,1f,11,1c),I(0f,1f,14,1c),I(0f,45,1a,00)};
 
   /* Byte-vector with size: 20 is_init: 1 index: 0 binding: initialize-cg-bycode0 */
-  static const void *G001235[] = {I(87,25,00,00),B(cg_bycode0 ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_bycode0 ,16),I(23,00,00,00),B(cg_bycode0 ,15),I(3b,fc,25,00),B(cg_bycode0 ,3),I(23,00,00,00),B(cg_bycode0 ,17),I(23,00,00,00),B(cg_bycode0 ,7),I(3b,02,25,00),B(cg_bycode0 ,2),I(86,ac,00,00)};
+  static const void *G001235[] = {I(87,25,00,00),B(cg_bycode0 ,1),I(24,00,00,00),B(level_1 ,1),I(3e,0b,24,00),B(level_1 ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_bycode0 ,16),I(23,00,00,00),B(cg_bycode0 ,15),I(3b,fc,25,00),B(cg_bycode0 ,3),I(23,00,00,00),B(cg_bycode0 ,17),I(23,00,00,00),B(cg_bycode0 ,7),I(3b,02,25,00),B(cg_bycode0 ,2),I(86,ac,00,00)};
 
 
   /* Initializations */

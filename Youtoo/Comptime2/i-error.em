@@ -27,7 +27,7 @@
 (defmodule i-error
   (syntax (_macros
            _i-aux0)
-   import (i-level1
+   import (i-level-1
            i-param
            i-notify)
    export (<ct-error>

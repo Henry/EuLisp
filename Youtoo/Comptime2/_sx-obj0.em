@@ -26,7 +26,7 @@
 
 (defmodule _sx-obj0
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  All syntax objects are defined with this macro

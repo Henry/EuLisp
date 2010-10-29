@@ -18,19 +18,19 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: Fast access to level1 bindings
+/// Title: Fast access to level-1 bindings
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-#ifndef LEVEL1I_H
-#define LEVEL1I_H
+#ifndef LEVEL_1I_H
+#define LEVEL_1I_H
 
-extern LispRef eul_initialize_level1_tables();
-extern LispRef eul_dyn_level1_binding_ref (LispRef, LispRef);
-extern LispRef eul_dyn_level1_binding_info (LispRef);
-extern LispRef eul_dyn_level1_syntax_binding_info (LispRef);
+extern LispRef eul_initialize_level_1_tables();
+extern LispRef eul_dyn_level_1_binding_ref (LispRef, LispRef);
+extern LispRef eul_dyn_level_1_binding_info (LispRef);
+extern LispRef eul_dyn_level_1_syntax_binding_info (LispRef);
 
 ///-----------------------------------------------------------------------------
-#endif // LEVEL1I_H
+#endif // LEVEL_1I_H
 ///-----------------------------------------------------------------------------

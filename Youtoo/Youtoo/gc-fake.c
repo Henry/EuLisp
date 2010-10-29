@@ -18,8 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: used if no gc is used
-///  Library: boot, telos, level1, eval, youtoo
+/// Title: Fake GC for testing: allocated but does not free
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------

@@ -25,11 +25,11 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule i-all
-  (import (i-level1
+  (import (i-level-1
            i-param
            i-error
            i-notify)
-   expose (i-level1
+   expose (i-level-1
            i-param
            i-error
            i-notify))

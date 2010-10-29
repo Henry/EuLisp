@@ -26,7 +26,7 @@
 
 (defmodule mop-gf0
   (syntax (boot0)
-   import (level1))
+   import (level-1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Syntax: (defgeneric gfname (arglist) {keyword}*), where

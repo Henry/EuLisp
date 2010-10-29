@@ -38,13 +38,13 @@ Example
   (tk-wm "title" () "Test Scrollbar")
   (let ((text (tk-make-text () relief: "sunken" bd: "2"))
         (scroll-1 (tk-make-scrollbar ())))
-   
+
     (eul-associate text scroll-1 'vertical)
-    
+
     (tk-pack text side: "left")
     (tk-pack scroll-1 side: "right" fill: "y")
   )
-  
+
   (Tk_MainLoop)
 )
 </pre>
@@ -71,7 +71,7 @@ Example
 <pre>
 (defmodule tk_scrollbar2
   (syntax (macros)
-  import (level1 tcl-tk)
+  import (level-1 tcl-tk)
    )
 (deflocal *lb1* ())
 (deflocal *lb2* ())
@@ -91,13 +91,13 @@ Example
 
 (defun prove ()
   (setq *scroll* (tk-make-scrollbar () command: Fun-scroll-callback))
-  (setq *lb1* (tk-make-listbox () relief: "sunken"  
+  (setq *lb1* (tk-make-listbox () relief: "sunken"
 			       yscrollcommand: Fun-listbox-callback))
-  (setq *lb2* (tk-make-listbox () relief: "sunken"  
+  (setq *lb2* (tk-make-listbox () relief: "sunken"
 			       yscrollcommand: Fun-listbox-callback))
-  (setq *lb3* (tk-make-listbox () relief: "sunken"  
+  (setq *lb3* (tk-make-listbox () relief: "sunken"
 			       yscrollcommand: Fun-listbox-callback))
-  (setq *lb4* (tk-make-listbox () relief: "sunken"  
+  (setq *lb4* (tk-make-listbox () relief: "sunken"
 			       yscrollcommand: Fun-listbox-callback))
 
   (tk-pack *lb1* *lb2* *lb3* *lb4* side: "left")
@@ -133,7 +133,7 @@ This example is available in the module <code>scrolls-example.em</code> in <a hr
 <P>
 There are different ways where callback functions are required. Tcl/Tk
 is a package that works over X system. That means that almost everything
-is event-driven. 
+is event-driven.
 <P>
 Callback is a procedure whose address is store in advance, and later, at
 some significant time, the address is used to invoke the procedure. The idea
@@ -160,7 +160,7 @@ There are two differents situations where callback functions can be set:
 </u></h5>
 <dl><dt><dd>
 <P>
-There are several widgets that support this option. We are going to use the button widget 
+There are several widgets that support this option. We are going to use the button widget
 for the examples, but everything works with all the widgets supporting this option. It works for
 creation and configuration operation.
 
@@ -180,12 +180,12 @@ This is the simplest case:
   (tk-make-button () text: "Hello World" command: button-callback)
 </pre>
 <h5>
-Callback with several arguments 
+Callback with several arguments
 </h5>
 <p>
 However, not everything is that easy. Most of the times the callback function requires arguments.<br>
 To give back arguments to the callback the <b><em>args:</b></em> accessor is needed. It can be seen as another pair option value. <br>
-The option is args: and the value should be a list with all of the arguments 
+The option is args: and the value should be a list with all of the arguments
 that the callback expect to receive. <br>
 The only restriction is that the pair <b><em>args: list</em></b> has to be after the pair <b><em>command: function</em></b>, otherwise<br>
 an error will be reported.
@@ -209,8 +209,8 @@ So that:
     (tk-conf-button but text: name))
 
 
-  (tk-make-button () text: "Hello World" 
-                     command: button-callback 
+  (tk-make-button () text: "Hello World"
+                     command: button-callback
                      args: (list self: "Xec"))
 
 </pre>
@@ -244,13 +244,13 @@ This is the simplest case:
   (tk-bind label "<Enter>" enter-label-callback)
 </pre>
 <h5>
-Callback with several arguments 
+Callback with several arguments
 </h5>
-<p> 
+<p>
 Nevertheless, arguments back to the callback will be required most of the times.<br>
 And the user also needs to know some information about the produced event.<br>
 So that, if the user wants to use the position of the mouse in a Button click, the binding
-need to have the next syntax: 
+need to have the next syntax:
 <pre>
   (tk-bind-item-canvas item "&lt;Button-1&gt;" draw-point x: y:)
 </pre>
@@ -258,9 +258,9 @@ where <b><em>x: y:</em></b> represent the same as "%x" "%y" in Tcl/Tk world.
 <p>
 The function draw-point will receive a couple of arguments (x and y position of the mouse).
 <p>
-There is also the possibility of giving back arguments with the accessor <b><em>args:</b></em>. 
+There is also the possibility of giving back arguments with the accessor <b><em>args:</b></em>.
 Following this accessor a list with the arguments has to be given. If the user want to use this accessor
-and the previous ones (information of the event), they have to appear in order. That is, first the 
+and the previous ones (information of the event), they have to appear in order. That is, first the
 accessors to event information and then <b><em>args:</em></b> accessor with the list of arguments.
 <p>
 Let's see a couple of examples to illustrate that:
@@ -270,8 +270,8 @@ Let's see a couple of examples to illustrate that:
    (defun draw-point (it)
    ...
    )
-   
-   (tk-bind-item-canvas item "&lt;Button-1&gt;" draw-point args: (list item)) 
+
+   (tk-bind-item-canvas item "&lt;Button-1&gt;" draw-point args: (list item))
 </pre>
 <li>Other arguments.
 <pre>
@@ -296,9 +296,9 @@ Let's see a couple of examples to illustrate that:
 Menus are a common tool when the user wants to build an interface. The next example will show how
 the creation and configuration of menus should be done in <b>youtoo/Tk</b>.
 <p>
-<b>youtoo/Tk</b> system does not allow to construct pull-down menus in the way that Tcl does. 
-The menu widget has to be descendent of the menubutton, but menubutton will not be able to be 
-constructed before the creation of the menu. 
+<b>youtoo/Tk</b> system does not allow to construct pull-down menus in the way that Tcl does.
+The menu widget has to be descendent of the menubutton, but menubutton will not be able to be
+constructed before the creation of the menu.
 <p>
 The suggestion to solve this problem is given in the following list of steps:
 <ol>
@@ -318,36 +318,36 @@ The suggestion to solve this problem is given in the following list of steps:
 </pre>
 </ol>
 <p>
-A complete version with descendent menus is available in the module <code>tk_test_menu.em</code> in 
+A complete version with descendent menus is available in the module <code>tk_test_menu.em</code> in
 <a href="examples/index.html">Examples</a> section.
 <p>
 Example:
 <pre>
 (defun test-menu ()
-  (let* 
+  (let*
     ((mbar (tk-make-frame () relief: "raised" bd: "2"))
      (dummy (tk-make-frame () width: "10c" height: "5c"))
      (file (tk-make-menubutton mbar))
      (edit (tk-make-menubutton mbar))
      (help (tk-make-menubutton mbar))
-       
+
      (menu-file (tk-make-menu file tearoff: "0"))
      (menu-edit (tk-make-menu edit tearoff: "0"))
      (menu-help (tk-make-menu help tearoff: "0"))
-      
-    (tk-pack mbar dummy side: "top" fill: "x") 
-       
+
+    (tk-pack mbar dummy side: "top" fill: "x")
+
     ;;  Because is necessary that the menus were descendents of the menubutton
     ;;  we have to put on the widgets.
-  
-    (tk-conf-widget file text: "File" underline: "0" menu: menu-file) 
-    (tk-conf-widget edit text: "Edit" underline: "0" menu: menu-edit) 
+
+    (tk-conf-widget file text: "File" underline: "0" menu: menu-file)
+    (tk-conf-widget edit text: "Edit" underline: "0" menu: menu-edit)
     (tk-conf-widget help text: "Help" underline: "0" menu: menu-help)
 
     ;; Creation of the File menu.
- 
+
     (tk-menu-add menu-file 'command label: "Exit" command: tk-exit)
-       
+
     (tk-pack file edit side: "left")
     (tk-pack help side: "right"))
   (Tk_MainLoop))

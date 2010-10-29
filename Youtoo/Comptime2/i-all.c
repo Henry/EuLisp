@@ -9,14 +9,14 @@
 
 
 /* Imported modules */
-extern void initialize_module_i_level1();
+extern void initialize_module_i_level_1();
 extern void initialize_module_i_param();
 extern void initialize_module_i_error();
 extern void initialize_module_i_notify();
 extern LispRef i_notify_bindings[];
 extern LispRef i_error_bindings[];
 extern LispRef i_param_bindings[];
-extern LispRef i_level1_bindings[];
+extern LispRef i_level_1_bindings[];
 
 /* Module bindings with size 2 */
 LispRef i_all_bindings[2];
@@ -30,7 +30,7 @@ static int is_initialized = 0;
 void initialize_module_i_all()
 {
   if (is_initialized) return;
-  initialize_module_i_level1();
+  initialize_module_i_level_1();
   initialize_module_i_param();
   initialize_module_i_error();
   initialize_module_i_notify();
@@ -42,7 +42,7 @@ void initialize_module_i_all()
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 23 is_init: 1 index: 0 binding: initialize-i-all */
-  static const void *G00413[] = {I(87,25,00,00),B(i_all ,1),I(24,00,00,00),B(i_notify ,1),I(3e,0b,24,00),B(i_notify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_error ,1),I(3e,0b,24,00),B(i_error ,0),I(3c,00,21,01),I(24,00,00,00),B(i_param ,1),I(3e,0b,24,00),B(i_param ,0),I(3c,00,21,01),I(24,00,00,00),B(i_level1 ,1),I(3e,0b,24,00),B(i_level1 ,0),I(3c,00,21,01),I(86,ac,00,00)};
+  static const void *G00413[] = {I(87,25,00,00),B(i_all ,1),I(24,00,00,00),B(i_notify ,1),I(3e,0b,24,00),B(i_notify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_error ,1),I(3e,0b,24,00),B(i_error ,0),I(3c,00,21,01),I(24,00,00,00),B(i_param ,1),I(3e,0b,24,00),B(i_param ,0),I(3c,00,21,01),I(24,00,00,00),B(i_level_1 ,1),I(3e,0b,24,00),B(i_level_1 ,0),I(3c,00,21,01),I(86,ac,00,00)};
 
 
   /* Initializations */

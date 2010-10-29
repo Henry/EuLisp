@@ -9,8 +9,8 @@
 
 
 /* Imported modules */
-extern void initialize_module_level1();
-extern LispRef level1_bindings[];
+extern void initialize_module_level_1();
+extern LispRef level_1_bindings[];
 
 /* Module bindings with size 48 */
 LispRef _ex_aux0_bindings[48];
@@ -24,7 +24,7 @@ static int is_initialized = 0;
 void initialize_module__ex_aux0()
 {
   if (is_initialized) return;
-  initialize_module_level1();
+  initialize_module_level_1();
   eul_fast_table_set(eul_modules,"_ex_aux0",(LispRef) _ex_aux0_bindings);
   is_initialized = 1;
   {
@@ -60,7 +60,7 @@ void initialize_module__ex_aux0()
   static const void *G00237[] = {I(aa,86,0f,23),B(_ex_aux0 ,10),I(1c,0f,45,01)};
 
   /* Byte-vector with size: 56 is_init: 1 index: 0 binding: initialize-_ex-aux0 */
-  static const void *G00239[] = {I(87,25,00,00),B(_ex_aux0 ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(_ex_aux0 ,40),I(23,00,00,00),B(_ex_aux0 ,39),I(3b,01,25,00),B(_ex_aux0 ,9),I(23,00,00,00),B(_ex_aux0 ,41),I(23,00,00,00),B(_ex_aux0 ,38),I(3b,01,25,00),B(_ex_aux0 ,8),I(23,00,00,00),B(_ex_aux0 ,42),I(23,00,00,00),B(_ex_aux0 ,37),I(3b,01,25,00),B(_ex_aux0 ,7),I(23,00,00,00),B(_ex_aux0 ,43),I(23,00,00,00),B(_ex_aux0 ,36),I(3b,01,25,00),B(_ex_aux0 ,6),I(23,00,00,00),B(_ex_aux0 ,44),I(23,00,00,00),B(_ex_aux0 ,33),I(3b,01,25,00),B(_ex_aux0 ,5),I(23,00,00,00),B(_ex_aux0 ,45),I(23,00,00,00),B(_ex_aux0 ,28),I(3b,01,25,00),B(_ex_aux0 ,4),I(23,00,00,00),B(_ex_aux0 ,46),I(23,00,00,00),B(_ex_aux0 ,27),I(3b,01,25,00),B(_ex_aux0 ,3),I(23,00,00,00),B(_ex_aux0 ,47),I(23,00,00,00),B(_ex_aux0 ,11),I(3b,01,25,00),B(_ex_aux0 ,2),I(86,ac,00,00)};
+  static const void *G00239[] = {I(87,25,00,00),B(_ex_aux0 ,1),I(24,00,00,00),B(level_1 ,1),I(3e,0b,24,00),B(level_1 ,0),I(3c,00,21,01),I(23,00,00,00),B(_ex_aux0 ,40),I(23,00,00,00),B(_ex_aux0 ,39),I(3b,01,25,00),B(_ex_aux0 ,9),I(23,00,00,00),B(_ex_aux0 ,41),I(23,00,00,00),B(_ex_aux0 ,38),I(3b,01,25,00),B(_ex_aux0 ,8),I(23,00,00,00),B(_ex_aux0 ,42),I(23,00,00,00),B(_ex_aux0 ,37),I(3b,01,25,00),B(_ex_aux0 ,7),I(23,00,00,00),B(_ex_aux0 ,43),I(23,00,00,00),B(_ex_aux0 ,36),I(3b,01,25,00),B(_ex_aux0 ,6),I(23,00,00,00),B(_ex_aux0 ,44),I(23,00,00,00),B(_ex_aux0 ,33),I(3b,01,25,00),B(_ex_aux0 ,5),I(23,00,00,00),B(_ex_aux0 ,45),I(23,00,00,00),B(_ex_aux0 ,28),I(3b,01,25,00),B(_ex_aux0 ,4),I(23,00,00,00),B(_ex_aux0 ,46),I(23,00,00,00),B(_ex_aux0 ,27),I(3b,01,25,00),B(_ex_aux0 ,3),I(23,00,00,00),B(_ex_aux0 ,47),I(23,00,00,00),B(_ex_aux0 ,11),I(3b,01,25,00),B(_ex_aux0 ,2),I(86,ac,00,00)};
 
 
   /* Initializations */

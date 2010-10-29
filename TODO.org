@@ -86,7 +86,8 @@
 *** TODO Introduce the "Level-1" library and describe "module-1"
 *** TODO Re-reference definitions in the "Level-1" library
     so that they do not clash with those in the "Level-0" library.
-*** TODO Remove the "syntax-category" entries from the index
+*** DONE Remove the "syntax-category" entries from the index
+    CLOSED: [2010-10-29 Fri 22:44]
 *** DONE Add =slice= generic function and methods
     CLOSED: [2010-07-01 Thu 22:48]
 *** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
@@ -117,7 +118,8 @@
 *** TODO Consider renaming =labels= -> =flet*=
 *** TODO Consider including =append=
     either in generic form or just for lists and perhaps strings.
-*** TODO Add support for Level-0 style super-class specification
+*** DONE Add support for Level-0 style super-class specification
+    CLOSED: [2010-10-29 Fri 22:53]
     If only one super-class is specified allow single-inheritance syntax of
     specifying the class directly rather than as a list.
 * Youtoo and EuXLisp
@@ -228,9 +230,6 @@
     CLOSED: [2010-02-16 Tue 15:06]
     into the two parts to make the preliminary and final executables.
     Also move the "driver" part into the top-level Makefile.
-*** TODO Change the /Modules/Pipe/test1.em app/
-    to obtain the path of the youtoo script from the global settings obtained
-    from the /.eulrc.${ARCH}/ file.
 *** DONE Clean all .em files
     CLOSED: [2010-02-26 Fri 15:01]
     to remove blank line at beginning, tabs and trailing white-space.
@@ -321,10 +320,10 @@
     =/home/dm2/henry/EuLisp/EuLisp/Bin.x86_64/youto o.sh= does not, nor does the
     relative path =../../Bin.x86_64/youtoo.sh= which should.
 *** TODO Consider replacing the built-in GC with =xalloc= in Eu2C
-*** TODO Change =level1= -> =level-1= [1/3]
+*** TODO Change =level1= -> =level-1= [3/3]
     + [X] Add =level-1= as copy of =level1=
-    + [ ] Change all uses of =level1= =level-1=
-    + [ ] Remove =level1=
+    + [X] Change all uses of =level1= =level-1=
+    + [X] Remove =level1=
 
 * EuXLisp
 *** DONE Finish reformatting the C source files

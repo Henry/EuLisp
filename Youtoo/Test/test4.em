@@ -18,16 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Test executable with linked level1 library
+;;; Title: Test executable with linked level-1 library
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;    youtoo test4 -l level1
+;;    youtoo test4 -l level-1
 ;;;-----------------------------------------------------------------------------
 
 (defmodule test4
-  (import (level1))
-(print "Testing module level1 ... OK.")
+  (import (level-1))
+
+(print "Testing module level-1 ... OK." nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module test4

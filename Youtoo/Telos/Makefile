@@ -42,11 +42,6 @@ TELOS_LIB_I = $(EUL_LIB_DIR)/libtelos.i
 TELOS_SHARED_LIB = $(EUL_LIB_DIR)/libtelos.so
 
 ###-----------------------------------------------------------------------------
-### Library dependencies
-###-----------------------------------------------------------------------------
-LEVEL1_LIB_I = $(EUL_LIB_DIR)/liblevel1.i
-
-###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
 BOOT_EM = boot.em boot1.em
@@ -101,10 +96,10 @@ boot:	boot0.i _telos0.i libboot.i libtelos.i
 # --- Called from ../Runtime/Makefile:boot during bootstrap building
 # --- Should not be called directly
 .PHONY: boot-syntax
-boot-syntax: liblevel1.i
+boot-syntax: liblevel-1.i
 	$(U2) $(U2FLAGS) -c telos0 -od $(ARCH_DIR) \
-		-load_path $(U2_DIR)/Telos -l level1
-	@rm -f liblevel1.i
+		-load_path $(U2_DIR)/Telos -l level-1
+	@rm -f liblevel-1.i
 	$(MAKE)
 
 $(BOOT_LIB_I): $(BOOT_EM) $(BOOT_MAC_EM)
@@ -122,7 +117,7 @@ ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
-		-load_path $(U2_DIR)/Telos -l level1
+		-load_path $(U2_DIR)/Telos -l level-1
 endif
 
 ###-----------------------------------------------------------------------------

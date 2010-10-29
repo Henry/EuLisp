@@ -27,7 +27,7 @@
 ;;    And we don't need generic arithmetic/reversal.
 ;;;-----------------------------------------------------------------------------
 
-(defmodule i-level1
+(defmodule i-level-1
   (import ((rename ((reverse-list reverse))
                    boot))
    expose ((except (+
@@ -38,7 +38,7 @@
                     =
                     <
                     reverse)
-                   level1)
+                   level-1)
            aux-table)
    export (+
            -
@@ -50,5 +50,5 @@
            reverse))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module i-level1
+)  ;; End of module i-level-1
 ;;;-----------------------------------------------------------------------------

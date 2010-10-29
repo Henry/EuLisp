@@ -26,7 +26,7 @@
 
 (defmodule cg-bycode0
   (syntax (macros)
-   import (level1))
+   import (level-1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; General instructions

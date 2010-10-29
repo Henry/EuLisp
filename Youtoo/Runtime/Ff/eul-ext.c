@@ -19,7 +19,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Built-in foreign functions
-///  Library: boot, telos, level1, eval, youtoo
+///  Library: boot, telos, level-1, eval, youtoo
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------

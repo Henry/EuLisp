@@ -27,7 +27,7 @@
 (defmodule sx-obj
   (syntax (_macros
            _sx-obj0)
-   import (i-level1
+   import (i-level-1
            sx-obj1)
    expose (sx-obj1
            sx-obj2)
@@ -97,7 +97,7 @@
       (and x (binding-local-name? x)))))
 
 (defun save-binding-local-name? (x)
-  ;; Sometimes x is a hard-code level1 binding (i.e. a list)
+  ;; Sometimes x is a hard-code level-1 binding (i.e. a list)
   (if (cons? x)
       (cdr (cdr x))
     (if (binding? x)
@@ -105,7 +105,7 @@
       x)))
 
 (defun save-binding-module-name? (x)
-  ;; Sometimes x is a hard-code level1 binding (i.e. a list)
+  ;; Sometimes x is a hard-code level-1 binding (i.e. a list)
   (if (cons? x)
       (car (cdr x))
     (if (binding? x)

@@ -19,7 +19,7 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: dynamic (i.e. fluid) variables
-;;;  Library: level1
+;;;  Library: level-1
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

@@ -45,7 +45,7 @@ EVAL_EM := \
     cg-dld.em cg-exec.em cg-gen.em cg-interf.em cg-link.em cg-stack.em cg-state.em eval.em \
     ex-body.em ex-direct.em ex-expose.em ex-expr.em ex-import.em ex-module.em \
     ex-syntax.em i-all.em i-args.em i-compile.em i-error.em i-ffi.em \
-    i-level1.em i-modify.em i-notify.em i-param.em i-rep.em op-peep-r.em op-peep.em \
+    i-level-1.em i-modify.em i-notify.em i-param.em i-rep.em op-peep-r.em op-peep.em \
     p-env.em p-parse.em p-read.em sx-node.em sx-obj.em sx-obj1.em sx-obj2.em \
     sx-write.em youtoo.em i-aux0.em
 EVAL_C := $(EVAL_EM:%.em=%.c)
@@ -59,7 +59,7 @@ EVAL_C += $(EVAL_FF_C)
 EVAL_O += $(EVAL_FF_C:%.c=$(ARCH_DIR)/%.o)
 
 ###-----------------------------------------------------------------------------
-### Link level1 libraries
+### Link level-1 libraries
 ###-----------------------------------------------------------------------------
 .PHONY: static
 static:	$(EVAL_LIB)
@@ -83,17 +83,17 @@ boot: static
 
 .PHONY: boot-preliminary
 boot-preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
-		libboot.i liblevel1.i libmath.i | $(ARCH_DIR)/.
+		libboot.i liblevel-1.i libmath.i | $(ARCH_DIR)/.
 	$(U2) $(U2FLAGS) -od $(ARCH_DIR) -c ex-aux0 op-peep0 cg-bycode0 i-aux0 sx-obj0 \
 	       -load_path $(U2_DIR)/Comptime2 \
 	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
-	       -l level1
+	       -l level-1
 	$(U2) $(U2FLAGS) -c ex-expr -od $(ARCH_DIR) \
 	       -load_path $(U2_DIR)/Comptime2 \
 	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
 	       -load_path $(U2_DIR)/Runtime \
 	       -load_path $(U2_DIR)/Telos \
-	       -l boot -l level1 -l math
+	       -l boot -l level-1 -l math
 	@ln -fs ../../$(WORD_LENGTH)bit/$(ARCH_DIR)/cg-exec-word-length.o \
 		$(ARCH_DIR)/cg-exec-word-length.o
 	$(U2) $(U2FLAGS) -ar eval -od $(ARCH_DIR) \
@@ -101,17 +101,17 @@ boot-preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
 	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
 	       -load_path $(U2_DIR)/Runtime \
 	       -load_path $(U2_DIR)/Telos \
-	       -l boot -l level1 -l math
+	       -l boot -l level-1 -l math
 	@echo "---- CREATING youtoo.em module for preliminary youtoo executable"
-	@sed 	-e 's@#modules#@level1 math eval@' \
+	@sed 	-e 's@#modules#@level-1 math eval@' \
 		-e 's@#which#@Preliminary executable!@' \
 		<youtoo.em.in >youtoo.em
 	@echo "---- CREATING preliminary youtoo executable files"
 	$(U2) $(U2FLAGS) -c youtoo -od $(ARCH_DIR) \
 	       -load_path $(U2_DIR)/Comptime2 \
 	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
-	       -l level1 -l math -l eval -recompile
-	@rm -f libboot.i liblevel1.i libmath.i
+	       -l level-1 -l math -l eval -recompile
+	@rm -f libboot.i liblevel-1.i libmath.i
 	@mv libeval.i $(EUL_LIB_DIR)
 	@rm -f $(ARCH_DIR)/libeval.a $(EUL_LIB_DIR)/libeval.a $(ARCH_DIR)/youtoo.o
 	@echo "---- DONE."
@@ -122,11 +122,11 @@ lib%.i : $(EUL_LIB_DIR)/lib%.i
 .PHONY: boot-final
 boot-final:
 	@echo "---- CREATING youtoo.em module for final, proper youtoo executable"
-	@sed 	-e 's@#modules#@level-0 level-1 level1 math eval i-aux0 macros syntax-0@' \
+	@sed 	-e 's@#modules#@level-0 level-1 math eval i-aux0 macros syntax-0@' \
 		-e 's@#which#@Final, proper executable!@' \
 		<youtoo.em.in >youtoo.em
 	@echo "---- CREATING final youtoo executable"
-	$(U2_DEV) $(U2FLAGS) -c youtoo -od $(ARCH_DIR) -l level1 -l math -l eval -no_recompile
+	$(U2_DEV) $(U2FLAGS) -c youtoo -od $(ARCH_DIR) -l level-1 -l math -l eval -no_recompile
 	rm -f $(ARCH_DIR)/libeval.a $(EUL_LIB_DIR)/libeval.a $(ARCH_DIR)/youtoo.o
 	@echo "---- DONE."
 
@@ -144,7 +144,7 @@ ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 		-load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
 		-load_path $(U2_DIR)/Runtime \
 		-load_path $(U2_DIR)/Telos \
-		-l level1
+		-l level-1
 endif
 
 ###-----------------------------------------------------------------------------

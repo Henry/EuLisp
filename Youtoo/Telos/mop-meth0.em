@@ -26,7 +26,7 @@
 
 (defmodule mop-meth0
   (syntax (boot0)
-   import (level1))
+   import (level-1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Syntax: (defmethod gfname {key val}* (arglist) {form}*), where

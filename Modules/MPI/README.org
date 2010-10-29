@@ -32,7 +32,7 @@
   + Add the mpi library load path,
     e.g. -L/net/dominica/denton_export/MPI/mpich/lib/IRIX/ch_p4 to CFLAGS in
     your /~/\.eulrc.${ARCH}/
-  + Bin.${ARCH}/youtoo -ar mpis -l level1
+  + Bin.${ARCH}/youtoo -ar mpis -l level-1
   + make
   + The headers in the examples will give you enough information how to compile
     them.

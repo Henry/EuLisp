@@ -179,7 +179,7 @@
          (default-syntax-table (vector-ref info 1))
          (default-lexical-module-names (listify-env-string (vector-ref info 2)))
          (default-lexical-module-name
-          (make <symbol> name: (vector-ref info 3))) ;; default level1
+          (make <symbol> name: (vector-ref info 3))) ;; default level-1
          (default-syntax-module-name
           (make <symbol> name: (vector-ref info 4)))  ;; default macros
          (default-lexical-module
@@ -188,7 +188,6 @@
          (user-module (make-module 'user))
          (math-module (make-module 'math)) ;; is empty, bindings are in default
          (level-0-module (make-module 'level-0))
-         (level-1-module (make-module 'level-1))
          (default-lexical-env (make-module-env default-lexical-table))
          (default-syntax-env (make-module-env default-syntax-table))
          (syntax-0-module (make-module 'syntax-0)))
@@ -199,15 +198,10 @@
     (module-binding-vector-size! default-syntax-module ())
     (module-external-env! default-syntax-module default-syntax-env)
     ;; Set level-0 lexical environment to be the same as the default (level-1)
-    ;; This is to allow modules which (import level-0) to run with level1
+    ;; This is to allow modules which (import level-0) to run with level-1
     (module-lexical-env! level-0-module default-lexical-env)
     (module-external-env! level-0-module default-lexical-env)
     (module-syntax-env! level-0-module default-syntax-env)
-    ;; Set level-1 lexical environment to be the same as the default (level-1)
-    ;; This is to allow modules which (import level-1) to run with level1
-    (module-lexical-env! level-1-module default-lexical-env)
-    (module-external-env! level-1-module default-lexical-env)
-    (module-syntax-env! level-1-module default-syntax-env)
     ;; Set syntax-0 syntax environments to be the same as the default (syntax-1)
     ;; This is to allow modules which (syntax syntax-0) to run with syntax-1
     (module-binding-vector-size! syntax-0-module ())
@@ -235,13 +229,13 @@
 ;;; With a little external help
 ;;;-----------------------------------------------------------------------------
 (defextern initialize-default-binding-tables () ptr
-           "eul_initialize_level1_tables")
+           "eul_initialize_level_1_tables")
 
 (defextern dynamic-binding-ref1 (<string> <fpi>) ptr
            "eul_dyn_binding_ref")
 
-;  (defextern dynamic-level1-binding-ref (ptr ptr) ptr
-;    "eul_dyn_level1_binding_ref")
+;  (defextern dynamic-level-1-binding-ref (ptr ptr) ptr
+;    "eul_dyn_level-1_binding_ref")
 
 (defextern dynamic-binding-set1 (<string> <fpi> ptr) ptr
            "eul_dyn_binding_set")

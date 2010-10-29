@@ -19,7 +19,7 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: sockets
-;;;  Library: level1
+;;;  Library: level-1
 ;;;  Authors: Julian Padget, Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

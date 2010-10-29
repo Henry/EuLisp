@@ -19,7 +19,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: foreign function support for double precision floats
-///  Library: level1, eval, youtoo
+///  Library: level-1, eval, youtoo
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------

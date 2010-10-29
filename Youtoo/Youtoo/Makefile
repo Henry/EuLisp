@@ -41,7 +41,7 @@ FAKE_GC_O = $(GC_FAKE_C:%.c=$(EUL_LIB_DIR)/%.o)
 
 ALL_C = $(EUL_APPL_C) $(GC_FAKE_C)
 
-LIBS = libeulvm libboot libtelos liblevel1 libmath libeval
+LIBS = libeulvm libboot libtelos liblevel-1 libmath libeval
 YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.a)
 
 ifeq ($(MAKECMDGOALS),shared)

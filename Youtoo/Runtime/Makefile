@@ -41,10 +41,6 @@ LEVEL_1_LIB = $(EUL_LIB_DIR)/liblevel-1.a
 LEVEL_1_LIB_I = $(EUL_LIB_DIR)/liblevel-1.i
 LEVEL_1_SHARED_LIB = $(EUL_LIB_DIR)/liblevel-1.so
 
-LEVEL1_LIB = $(EUL_LIB_DIR)/liblevel1.a
-LEVEL1_LIB_I = $(EUL_LIB_DIR)/liblevel1.i
-LEVEL1_SHARED_LIB = $(EUL_LIB_DIR)/liblevel1.so
-
 MATH_LIB = $(EUL_LIB_DIR)/libmath.a
 MATH_LIB_I = $(EUL_LIB_DIR)/libmath.i
 MATH_SHARED_LIB = $(EUL_LIB_DIR)/libmath.so
@@ -88,18 +84,6 @@ LEVEL_1_MAC_EM = $(LEVEL_0_MAC_EM)
 LEVEL_1_MAC_C = $(LEVEL_1_MAC_EM:%.em=%.c)
 LEVEL_1_MAC_O = ${LEVEL_1_MAC_C:%.c=$(ARCH_DIR)/%.o}
 
-LEVEL1_EM = $(LEVELN_EM) level1.em
-LEVEL1_C := $(LEVEL1_EM:%.em=%.c)
-LEVEL1_O := ${LEVEL1_C:%.c=$(ARCH_DIR)/%.o}
-
-LEVEL1_FF_C = $(LEVEL_0_FF_C)
-LEVEL1_C += $(LEVEL1_FF_C)
-LEVEL1_O += ${LEVEL1_FF_C:%.c=$(ARCH_DIR)/%.o}
-
-LEVEL1_MAC_EM = $(LEVEL_0_MAC_EM)
-LEVEL1_MAC_C = $(LEVEL1_MAC_EM:%.em=%.c)
-LEVEL1_MAC_O = ${LEVEL1_MAC_C:%.c=$(ARCH_DIR)/%.o}
-
 MATH_EM := double1.em double.em math.em
 MATH_C := $(MATH_EM:%.em=%.c)
 MATH_O := ${MATH_C:%.c=$(ARCH_DIR)/%.o}
@@ -112,7 +96,7 @@ MATH_O += $(ARCH_DIR)/Ff/eul-dbl.o
 ### Commands to build library object files
 ###-----------------------------------------------------------------------------
 .PHONY: lib
-lib:	$(LEVEL_0_LIB) $(LEVEL_1_LIB) $(LEVEL1_LIB) $(MATH_LIB)
+lib:	$(LEVEL_0_LIB) $(LEVEL_1_LIB) $(MATH_LIB)
 
 $(LEVEL_0_LIB): $(LEVEL_0_MAC_O) $(LEVEL_0_O)
 	$(AR) $(LEVEL_0_LIB) $(LEVEL_0_MAC_O) $(LEVEL_0_O)
@@ -122,16 +106,12 @@ $(LEVEL_1_LIB): $(LEVEL_1_MAC_O) $(LEVEL_1_O)
 	$(AR) $(LEVEL_1_LIB) $(LEVEL_1_MAC_O) $(LEVEL_1_O)
 	@$(RANLIB) $(LEVEL_1_LIB)
 
-$(LEVEL1_LIB): $(LEVEL1_MAC_O) $(LEVEL1_O)
-	$(AR) $(LEVEL1_LIB) $(LEVEL1_MAC_O) $(LEVEL1_O)
-	@$(RANLIB) $(LEVEL1_LIB)
-
 $(MATH_LIB): $(MATH_O)
 	$(AR) $(MATH_LIB) $(MATH_O)
 	@$(RANLIB) $(MATH_LIB)
 
 .PHONY: shared
-shared:	$(LEVEL_0_SHARED_LIB) $(LEVEL_1_SHARED_LIB) $(LEVEL1_SHARED_LIB) $(MATH_SHARED_LIB)
+shared:	$(LEVEL_0_SHARED_LIB) $(LEVEL_1_SHARED_LIB) $(MATH_SHARED_LIB)
 
 $(LEVEL_0_SHARED_LIB): $(LEVEL_0_MAC_O) $(LEVEL_0_O)
 	$(U2_DIR)/Tools/makeso.$(OSTYPE) \
@@ -143,11 +123,6 @@ $(LEVEL_1_SHARED_LIB): $(LEVEL_1_MAC_O) $(LEVEL_1_O)
 		$(CC) $(LEVEL_1_SHARED_LIB) \
 		$(LEVEL_1_MAC_O) $(LEVEL_1_O)
 
-$(LEVEL1_SHARED_LIB): $(LEVEL1_MAC_O) $(LEVEL1_O)
-	$(U2_DIR)/Tools/makeso.$(OSTYPE) \
-		$(CC) $(LEVEL1_SHARED_LIB) \
-		$(LEVEL1_MAC_O) $(LEVEL1_O)
-
 $(MATH_SHARED_LIB): $(MATH_O)
 	$(U2_DIR)/Tools/makeso.$(OSTYPE) \
 		$(CC) $(MATH_SHARED_LIB) \
@@ -157,7 +132,7 @@ $(MATH_SHARED_LIB): $(MATH_O)
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
 .PHONY: boot
-boot:	libtelos.i _macros.i liblevel-0.i liblevel-1.i liblevel1.i libmath.i
+boot:	libtelos.i _macros.i liblevel-0.i liblevel-1.i libmath.i
 	@rm -f libtelos.i
 	$(MAKE) -C ../Telos boot-syntax
 	$(MAKE) boot-syntax
@@ -167,16 +142,15 @@ boot-syntax:
 	$(U2) $(U2FLAGS) -c macros -od $(ARCH_DIR) \
 		-load_path $(U2_DIR)/Runtime \
 		-load_path $(U2_DIR)/Telos \
-		-l level1
+		-l level-1
 	$(U2) $(U2FLAGS) -c syntax-0 -od $(ARCH_DIR) \
 		-load_path $(U2_DIR)/Runtime \
 		-load_path $(U2_DIR)/Telos \
-		-l level1
+		-l level-1
 	$(MAKE)
 
 $(LEVEL_0_LIB_I): $(LEVEL_0_MAC_EM) $(LEVEL_0_EM)
 $(LEVEL_1_LIB_I): $(LEVEL_0_MAC_EM) $(LEVEL_0_EM)
-$(LEVEL1_LIB_I): $(LEVEL1_MAC_EM) $(LEVEL1_EM)
 $(MATH_LIB_I): $(MATH_EM)
 
 lib%.i : $(EUL_LIB_DIR)/lib%.i
@@ -195,7 +169,7 @@ ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
 		-load_path $(U2_DIR)/Runtime \
 		-load_path $(U2_DIR)/Telos \
-		-l level1
+		-l level-1
 endif
 
 ###-----------------------------------------------------------------------------

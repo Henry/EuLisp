@@ -9,10 +9,10 @@
 
 
 /* Imported modules */
-extern void initialize_module_i_level1();
+extern void initialize_module_i_level_1();
 extern void initialize_module_i_param();
 extern void initialize_module_i_notify();
-extern LispRef i_level1_bindings[];
+extern LispRef i_level_1_bindings[];
 extern LispRef format_bindings[];
 extern LispRef stream2_bindings[];
 extern LispRef mop_meth_bindings[];
@@ -36,7 +36,7 @@ static int is_initialized = 0;
 void initialize_module_i_error()
 {
   if (is_initialized) return;
-  initialize_module_i_level1();
+  initialize_module_i_level_1();
   initialize_module_i_param();
   initialize_module_i_notify();
   eul_fast_table_set(eul_modules,"i_error",(LispRef) i_error_bindings);
@@ -56,13 +56,13 @@ void initialize_module_i_error()
   static const void *G00383[] = {I(ab,1c,82,1d),I(24,00,00,00),B(i_error ,5),I(09,45,02,00)};
 
   eul_allocate_static_cons(cons_395, NULL, NULL);
-  /* Byte-vector with size: 101 is_init: 0 index: 21 binding: top-level */
-  static const void *G00385[] = {I(a9,24,00,00),B(condition ,8),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(i_error ,9),I(23,00,00,00),B(i_error ,10),I(23,00,00,00),B(i_error ,11),I(23,00,00,00),B(i_error ,12),I(24,00,00,00),B(boot1 ,26),I(3c,04,1b,24),B(boot1 ,26),I(3c,01,24,00),B(mop_class ,81),I(23,00,00,00),B(i_error ,9),I(23,00,00,00),B(i_error ,13),I(23,00,00,00),B(i_error ,14),I(1f,06,23,00),B(i_error ,15),I(1f,06,23,00),B(i_error ,16),I(23,00,00,00),B(i_error ,17),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(i_error ,5),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(i_error ,3),I(23,00,00,00),B(i_error ,18),I(23,00,00,00),B(i_error ,8),I(3b,02,1d,3c),I(02,2a,24,00),B(i_error ,5),I(2a,24,00,00),B(i_param ,4),I(8a,03,02,83),I(86,24,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(i_param ,4),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(i_error ,19),I(23,00,00,00),B(i_error ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(i_param ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,30),I(8a,03,02,84),I(24,00,00,00),B(i_error ,5),I(24,00,00,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,30),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(i_error ,20),I(23,00,00,00),B(i_error ,6),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,30),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,11,45),I(11,00,00,00)};
+  /* Byte-vector with size: 105 is_init: 0 index: 21 binding: top-level */
+  static const void *G00385[] = {I(a9,24,00,00),B(condition ,8),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(i_error ,9),I(23,00,00,00),B(i_error ,10),I(23,00,00,00),B(i_error ,11),I(23,00,00,00),B(i_error ,12),I(24,00,00,00),B(boot1 ,26),I(3c,04,1b,24),B(boot1 ,26),I(3c,01,24,00),B(mop_class ,81),I(23,00,00,00),B(i_error ,9),I(23,00,00,00),B(i_error ,13),I(23,00,00,00),B(i_error ,14),I(1f,06,23,00),B(i_error ,15),I(1f,06,23,00),B(i_error ,16),I(23,00,00,00),B(i_error ,17),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(i_error ,5),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(i_error ,3),I(23,00,00,00),B(i_error ,18),I(23,00,00,00),B(i_error ,8),I(3b,02,1d,3c),I(02,2a,24,00),B(i_error ,5),I(2a,24,00,00),B(i_param ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,86,24),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(i_param ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(i_error ,19),I(23,00,00,00),B(i_error ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(i_param ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,30),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(24,00,00,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,30),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(i_error ,20),I(23,00,00,00),B(i_error ,6),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,30),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,11,45),I(11,00,00,00)};
 
   eul_allocate_static_string(str_401, "*** TOTAL NUMBER OF WARNINGS: ~a\n", 33);
   eul_allocate_static_string(str_402, "*** TOTAL NUMBER OF ERRORS: ~a\n", 31);
-  /* Byte-vector with size: 34 is_init: 0 index: 24 binding: ct-exit */
-  static const void *G00399[] = {I(a8,1b,44,05),I(1b,10,36,02),I(86,24,00,00),B(i_param ,40),I(82,19,1b,44),I(04,86,36,23),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,22),I(24,00,00,00),B(i_param ,40),I(24,00,00,00),B(format ,4),I(3c,03,2a,24),B(i_param ,46),I(82,19,1b,44),I(04,86,36,30),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,23),I(24,00,00,00),B(i_param ,46),I(24,00,00,00),B(format ,4),I(3c,03,2a,1f),I(03,44,04,86),I(36,06,85,20),I(04,1f,03,2a),I(1d,24,00,00),B(boot1 ,20),I(3d,01,04,45),I(04,00,00,00)};
+  /* Byte-vector with size: 41 is_init: 0 index: 24 binding: ct-exit */
+  static const void *G00399[] = {I(a8,1b,34,00),I(00,00,00,0e),I(1b,10,32,00),I(00,00,00,07),I(86,24,00,00),B(i_param ,40),I(82,19,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,29),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,22),I(24,00,00,00),B(i_param ,40),I(24,00,00,00),B(format ,4),I(3c,03,2a,24),B(i_param ,46),I(82,19,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,40),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,23),I(24,00,00,00),B(i_param ,46),I(24,00,00,00),B(format ,4),I(3c,03,2a,1f),I(03,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,0c),I(85,20,04,1f),I(03,2a,1d,24),B(boot1 ,20),I(3d,01,04,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 25 binding: ct-error-value */
   static const void *G00403[] = {I(aa,82,24,00),B(i_error ,5),I(08,45,00,00)};
@@ -71,7 +71,7 @@ void initialize_module_i_error()
   static const void *G00405[] = {I(43,fd,24,00),B(format ,2),I(1d,1d,24,00),B(boot ,5),I(3c,03,24,00),B(i_error ,5),I(1c,23,00,00),B(i_error ,12),I(1f,06,24,00),B(boot ,13),I(3d,04,04,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 43 is_init: 1 index: 0 binding: initialize-i-error */
-  static const void *G00407[] = {I(87,25,00,00),B(i_error ,1),I(24,00,00,00),B(i_notify ,1),I(3e,0b,24,00),B(i_notify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_param ,1),I(3e,0b,24,00),B(i_param ,0),I(3c,00,21,01),I(24,00,00,00),B(i_level1 ,1),I(3e,0b,24,00),B(i_level1 ,0),I(3c,00,21,01),I(86,25,00,00),B(i_error ,5),I(23,00,00,00),B(i_error ,13),I(23,00,00,00),B(i_error ,26),I(3b,fd,25,00),B(i_error ,4),I(23,00,00,00),B(i_error ,27),I(23,00,00,00),B(i_error ,25),I(3b,01,25,00),B(i_error ,3),I(23,00,00,00),B(i_error ,28),I(23,00,00,00),B(i_error ,24),I(3b,ff,25,00),B(i_error ,2),I(23,00,00,00),B(i_error ,29),I(23,00,00,00),B(i_error ,21),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G00407[] = {I(87,25,00,00),B(i_error ,1),I(24,00,00,00),B(i_notify ,1),I(3e,0b,24,00),B(i_notify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_param ,1),I(3e,0b,24,00),B(i_param ,0),I(3c,00,21,01),I(24,00,00,00),B(i_level_1 ,1),I(3e,0b,24,00),B(i_level_1 ,0),I(3c,00,21,01),I(86,25,00,00),B(i_error ,5),I(23,00,00,00),B(i_error ,13),I(23,00,00,00),B(i_error ,26),I(3b,fd,25,00),B(i_error ,4),I(23,00,00,00),B(i_error ,27),I(23,00,00,00),B(i_error ,25),I(3b,01,25,00),B(i_error ,3),I(23,00,00,00),B(i_error ,28),I(23,00,00,00),B(i_error ,24),I(3b,ff,25,00),B(i_error ,2),I(23,00,00,00),B(i_error ,29),I(23,00,00,00),B(i_error ,21),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
