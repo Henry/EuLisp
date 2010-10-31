@@ -31,6 +31,7 @@
    export (*version*
            *ostype*
            *interpreter*
+           *eval-module*
            *C-cc*
            *C-ld*
            *C-cc-flags*
@@ -130,6 +131,7 @@
 (deflocal *version* (get-config-info 'VERSION))
 (deflocal *ostype* (get-config-info 'OSTYPE))
 (deflocal *interpreter* ())       ; start interpreter
+(deflocal *eval-module* ())       ; Evaluate the module
 (deflocal *C-cc* (get-config-info 'CC)) ; used C compiler
 (deflocal *C-ld* *C-cc*)          ; used C linker
 (deflocal *C-cc-flags* (get-cc-flags))  ; C compiler flags

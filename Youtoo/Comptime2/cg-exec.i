@@ -33,7 +33,7 @@
     ("body of inlined function contains non exported binding ~a" . 49)
     (? . 47)
     ("  compute-binding ~a ~a" . 46)
-    (|(method G008026)| . 45)
+    (|(method G008222)| . 45)
     (ct-error-value: . 43)
     ("can't compute binding ~a of module ~a" . 42)
     ("compile time error condition: " . 41)

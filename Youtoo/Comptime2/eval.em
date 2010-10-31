@@ -73,24 +73,26 @@
 (defun start-eulysses ()
   (notify "")  ; newline
   (notify0 "Start EuLysses ...")
-  (if *interpreter*
-      ;; Invoke interpreter
-      (progn
-        (rep)
-        (exit 0))
-    ;; Invoke compiler
-    (progn
-      (load-library-interfaces)
-      (do1-list
-       (lambda (module-name)
-         (setq *tmp-start-source-file-name* module-name)
-         ;; Check if recompilation is necessary
-         (if (directly-or-indirectly-modified? module-name)
-             (compile module-name)
-           (notify "Module ~a need not be recompiled." module-name))
-         (link module-name))
-       *source-file-names*)
-      (ct-exit))))
+  (cond (*interpreter* ;; Invoke interpreter
+         (progn
+           (rep)
+           (exit 0)))
+        (*eval-module* ;; Evaluate the specified module
+         (dynamic-load-module (make <symbol> name: *script-file*) t)
+         (exit 0))
+        (t ;; Invoke compiler
+         (progn
+           (load-library-interfaces)
+           (do1-list
+            (lambda (module-name)
+              (setq *tmp-start-source-file-name* module-name)
+              ;; Check if recompilation is necessary
+              (if (directly-or-indirectly-modified? module-name)
+                  (compile module-name)
+                (notify "Module ~a need not be recompiled." module-name))
+              (link module-name))
+            *source-file-names*)
+           (ct-exit)))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module eval

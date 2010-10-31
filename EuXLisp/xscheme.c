@@ -205,7 +205,11 @@ void xlmain(int argc, char **argv)
                 {
                     image_name = IMAGE_MOD;
                 }
-                filein = osaopen(optarg, "r");
+                // Add the .em extension to the module name provided
+                char module_file_name[256];
+                strcpy(module_file_name ,optarg);
+                strcat(module_file_name, ".em");
+                filein = osaopen(module_file_name, "r");
                 if (filein == NULL)
                 {
                     fprintf
@@ -213,7 +217,7 @@ void xlmain(int argc, char **argv)
                         stderr,
                         "%s: can't open module file '%s'\n",
                         program_name,
-                        optarg
+                        module_file_name
                     );
                     print_usage(stderr, 6);
                 }
@@ -333,18 +337,18 @@ void xlmain(int argc, char **argv)
 ///-----------------------------------------------------------------------------
 static void print_usage(FILE* stream, int exit_code)
 {
-    fprintf(stream, "Usage: %s options [ files ... ]\n", program_name);
+    fprintf(stream, "Usage: euxlisp [OPTION]... [FILE]...\n");
     fprintf
     (
         stream,
-        "  -h  --help             Display this usage information.\n"
-        "  -q  --quiet            Print no messages, prompts or values.\n"
-        "  -n  --no-image         Do not read in the initial Lisp image.\n"
-        "  -N  --no-sys-calls     Disable system calls.\n"
-        "  -s  --script file      Read and execute script from file.\n"
-        "  -m  --module file      Read and execute module from file.\n"
-        "  -i  --image file       Read the given image file rather than the default.\n"
-        "  -t  --trace            Switch on byte-code level tracing.\n"
+        "  -h  --help               Print this usage information.\n"
+        "  -q  --quiet              Print no messages, prompts or values.\n"
+        "  -n  --no-image           Do not read in the initial Lisp image.\n"
+        "  -N  --no-sys-calls       Disable system calls.\n"
+        "  -s  --script file        Read and execute script from file.\n"
+        "  -m  --module module-name Read and execute module from module-name.em.\n"
+        "  -i  --image file         Read the given image file rather than the default.\n"
+        "  -t  --trace              Switch on byte-code level tracing.\n"
     );
     exit(exit_code);
 }

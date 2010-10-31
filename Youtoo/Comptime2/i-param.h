@@ -26,11 +26,11 @@ extern LispRef i_param_bindings[];
 #define _create_C_library__X42_X42_fn_index 28 
 #define _no_ct_handlers__X42_X42_fn_index 55 
 #define _no_recompile__X42_X42_fn_index 35 
-#define _C_ld__X42_X42_fn_index 65 
+#define _C_ld__X42_X42_fn_index 66 
 #define _C_cc_flags__X42_X42_fn_index 54 
 #define _debug__X42_X42_fn_index 45 
 #define _linked_C_libraries__X42_X42_fn_index 14 
-#define _inline_level__X42_X42_fn_index 64 
+#define _inline_level__X42_X42_fn_index 65 
 #define _C_library_load_path__X42_X42_fn_index 9 
 #define _C_ranlib__X42_X42_fn_index 8 
 #define load_syntax_module_fn_index 5 
@@ -38,6 +38,7 @@ extern LispRef i_param_bindings[];
 #define _tmp_start_source_file_name__X42_X42_fn_index 23 
 #define _dest_file_name__X42_X42_fn_index 6 
 #define _no_else__X42_X42_fn_index 13 
+#define _eval_module__X42_X42_fn_index 64 
 #define ct_reset_fn_index 63 
 #define _main_link_string__X42_X42_fn_index 53 
 #define _delimiter__X42_X42_fn_index 22 

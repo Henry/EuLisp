@@ -35,152 +35,152 @@ void initialize_module_cg_bycode()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_4410, sym_4409, sym_4408, sym_4407, sym_4406, sym_4405, sym_4404, sym_4403, sym_4402, sym_4401, sym_4400, sym_4399, sym_4398, G004397, G004395, G004393, G004391, G004389, G004387, G004385, G004383, G004381, G004379, G004377, G004375, G004373, sym_4371, sym_4370, key_4363, key_4362, key_4361, sym_4360, key_4359, sym_4358, key_4357, sym_4356, key_4355, sym_4354, key_4353, sym_4352, key_4351, sym_4350, key_4349, sym_4348, key_4347, sym_4346, key_4345, G004344, G004342, G004340, G004338, G004336, G004334, G004332, G004330, G004328;
+  LispRef sym_4616, sym_4615, sym_4614, sym_4613, sym_4612, sym_4611, sym_4610, sym_4609, sym_4608, sym_4607, sym_4606, sym_4605, sym_4604, G004603, G004601, G004599, G004597, G004595, G004593, G004591, G004589, G004587, G004585, G004583, G004581, G004579, sym_4577, sym_4576, key_4569, key_4568, key_4567, sym_4566, key_4565, sym_4564, key_4563, sym_4562, key_4561, sym_4560, key_4559, sym_4558, key_4557, sym_4556, key_4555, sym_4554, key_4553, sym_4552, key_4551, G004550, G004548, G004546, G004544, G004542, G004540, G004538, G004536, G004534;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 1 is_init: 0 index: 19 binding: (method-bytecode?) */
-  static const void *G004327[] = {I(aa,1b,45,01)};
+  static const void *G004533[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 20 binding: (method-bytecode?) */
-  static const void *G004329[] = {I(aa,86,45,01)};
+  static const void *G004535[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 21 binding: anonymous */
-  static const void *G004331[] = {I(a9,86,45,00)};
+  static const void *G004537[] = {I(a9,86,45,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 22 binding: anonymous */
-  static const void *G004333[] = {I(a9,86,45,00)};
+  static const void *G004539[] = {I(a9,86,45,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 23 binding: anonymous */
-  static const void *G004335[] = {I(a9,86,45,00)};
+  static const void *G004541[] = {I(a9,86,45,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 24 binding: anonymous */
-  static const void *G004337[] = {I(a9,86,45,00)};
+  static const void *G004543[] = {I(a9,86,45,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 25 binding: anonymous */
-  static const void *G004339[] = {I(a9,86,45,00)};
+  static const void *G004545[] = {I(a9,86,45,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 26 binding: anonymous */
-  static const void *G004341[] = {I(a9,86,45,00)};
+  static const void *G004547[] = {I(a9,86,45,00)};
 
-  eul_allocate_static_cons(cons_4369, NULL, NULL);
-  eul_allocate_static_cons(cons_4368, NULL, eul_as_static(cons_4369));
-  eul_allocate_static_cons(cons_4367, NULL, eul_as_static(cons_4368));
-  eul_allocate_static_cons(cons_4366, NULL, eul_as_static(cons_4367));
-  eul_allocate_static_cons(cons_4365, NULL, eul_as_static(cons_4366));
-  eul_allocate_static_cons(cons_4364, NULL, eul_as_static(cons_4365));
-  /* Byte-vector with size: 215 is_init: 0 index: 49 binding: top-level */
-  static const void *G004343[] = {I(a9,24,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,28),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,26),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,27),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,32),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,25),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,33),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,34),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,24),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,35),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,36),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,23),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,37),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,38),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,22),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,39),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,40),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,21),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,41),I(24,00,00,00),B(boot1 ,26),I(3c,06,1f,05),I(1f,05,1f,05),I(1f,05,1f,05),I(1f,05,24,00),B(boot1 ,26),I(3c,06,24,00),B(mop_class ,81),I(23,00,00,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,42),I(23,00,00,00),B(cg_bycode ,43),I(1f,0b,23,00),B(cg_bycode ,44),I(1f,06,23,00),B(cg_bycode ,45),I(23,00,00,00),B(cg_bycode ,46),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_bycode ,5),I(2a,24,00,00),B(aux_table ,4),I(3c,00,1b,89),B(cg_bycode ,18),I(2a,24,00,00),B(aux_table ,4),I(3c,00,1b,89),B(cg_bycode ,6),I(2a,24,00,00),B(aux_table ,4),I(3c,00,1b,89),B(cg_bycode ,8),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_bycode ,47),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_bycode ,16),I(2a,24,00,00),B(cg_bycode ,16),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_bycode ,16),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(cg_bycode ,48),I(23,00,00,00),B(cg_bycode ,20),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_bycode ,16),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_bycode ,16),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_bycode ,5),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_bycode ,16),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(cg_bycode ,48),I(23,00,00,00),B(cg_bycode ,19),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_bycode ,16),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_bycode ,16),I(2a,24,00,00),B(cg_bycode ,5),I(45,1c,00,00)};
+  eul_allocate_static_cons(cons_4575, NULL, NULL);
+  eul_allocate_static_cons(cons_4574, NULL, eul_as_static(cons_4575));
+  eul_allocate_static_cons(cons_4573, NULL, eul_as_static(cons_4574));
+  eul_allocate_static_cons(cons_4572, NULL, eul_as_static(cons_4573));
+  eul_allocate_static_cons(cons_4571, NULL, eul_as_static(cons_4572));
+  eul_allocate_static_cons(cons_4570, NULL, eul_as_static(cons_4571));
+  /* Byte-vector with size: 211 is_init: 0 index: 49 binding: top-level */
+  static const void *G004549[] = {I(a9,24,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,28),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,26),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,27),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,32),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,25),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,33),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,34),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,24),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,35),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,36),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,23),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,37),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,38),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,22),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,39),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,40),I(23,00,00,00),B(cg_bycode ,29),I(23,00,00,00),B(cg_bycode ,30),I(23,00,00,00),B(cg_bycode ,21),I(3b,00,23,00),B(cg_bycode ,31),I(23,00,00,00),B(cg_bycode ,41),I(24,00,00,00),B(boot1 ,26),I(3c,06,1f,05),I(1f,05,1f,05),I(1f,05,1f,05),I(1f,05,24,00),B(boot1 ,26),I(3c,06,24,00),B(mop_class ,81),I(23,00,00,00),B(cg_bycode ,27),I(23,00,00,00),B(cg_bycode ,42),I(23,00,00,00),B(cg_bycode ,43),I(1f,0b,23,00),B(cg_bycode ,44),I(1f,06,23,00),B(cg_bycode ,45),I(23,00,00,00),B(cg_bycode ,46),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_bycode ,5),I(2a,24,00,00),B(aux_table ,4),I(3c,00,1b,89),B(cg_bycode ,18),I(2a,24,00,00),B(aux_table ,4),I(3c,00,1b,89),B(cg_bycode ,6),I(2a,24,00,00),B(aux_table ,4),I(3c,00,1b,89),B(cg_bycode ,8),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_bycode ,47),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_bycode ,16),I(2a,24,00,00),B(cg_bycode ,16),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_bycode ,16),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(cg_bycode ,48),I(23,00,00,00),B(cg_bycode ,20),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_bycode ,16),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_bycode ,16),I(8a,03,02,83),I(24,00,00,00),B(cg_bycode ,5),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_bycode ,16),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(cg_bycode ,48),I(23,00,00,00),B(cg_bycode ,19),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_bycode ,16),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_bycode ,16),I(2a,24,00,00),B(cg_bycode ,5),I(45,1c,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 50 binding: bytecode-args! */
-  static const void *G004372[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(cg_bycode ,5),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 50 binding: bytecode-args! */
+  static const void *G004578[] = {I(ab,1c,8a,04),I(1d,24,00,00),B(cg_bycode ,5),I(09,45,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 51 binding: bytecode-properties? */
-  static const void *G004374[] = {I(aa,84,24,00),B(cg_bycode ,5),I(08,45,00,00)};
+  static const void *G004580[] = {I(aa,84,24,00),B(cg_bycode ,5),I(08,45,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 52 binding: bytecode-size! */
-  static const void *G004376[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_bycode ,5),I(09,45,02,00)};
+  static const void *G004582[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_bycode ,5),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 53 binding: bytecode-args? */
-  static const void *G004378[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(cg_bycode ,5),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 53 binding: bytecode-args? */
+  static const void *G004584[] = {I(aa,8a,04,24),B(cg_bycode ,5),I(08,45,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 54 binding: bytecode-modus! */
-  static const void *G004380[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_bycode ,5),I(09,45,02,00)};
+  static const void *G004586[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_bycode ,5),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 55 binding: bytecode-properties! */
-  static const void *G004382[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_bycode ,5),I(09,45,02,00)};
+  static const void *G004588[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_bycode ,5),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 56 binding: bytecode-name? */
-  static const void *G004384[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(cg_bycode ,5),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 56 binding: bytecode-name? */
+  static const void *G004590[] = {I(aa,8a,05,24),B(cg_bycode ,5),I(08,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 57 binding: bytecode-size? */
-  static const void *G004386[] = {I(aa,83,24,00),B(cg_bycode ,5),I(08,45,00,00)};
+  static const void *G004592[] = {I(aa,83,24,00),B(cg_bycode ,5),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 58 binding: bytecode-code? */
-  static const void *G004388[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_bycode ,5),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 58 binding: bytecode-code? */
+  static const void *G004594[] = {I(aa,8a,03,24),B(cg_bycode ,5),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 59 binding: bytecode-code! */
-  static const void *G004390[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(cg_bycode ,5),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 59 binding: bytecode-code! */
+  static const void *G004596[] = {I(ab,1c,8a,03),I(1d,24,00,00),B(cg_bycode ,5),I(09,45,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 60 binding: bytecode-modus? */
-  static const void *G004392[] = {I(aa,82,24,00),B(cg_bycode ,5),I(08,45,00,00)};
+  static const void *G004598[] = {I(aa,82,24,00),B(cg_bycode ,5),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 61 binding: bytecode-name! */
-  static const void *G004394[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(cg_bycode ,5),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 61 binding: bytecode-name! */
+  static const void *G004600[] = {I(ab,1c,8a,05),I(1d,24,00,00),B(cg_bycode ,5),I(09,45,02,00)};
 
   /* Byte-vector with size: 95 is_init: 1 index: 0 binding: initialize-cg-bycode */
-  static const void *G004396[] = {I(87,25,00,00),B(cg_bycode ,1),I(24,00,00,00),B(i_level_1 ,1),I(3e,0b,24,00),B(i_level_1 ,0),I(3c,00,21,01),I(86,25,00,00),B(cg_bycode ,18),I(23,00,00,00),B(cg_bycode ,62),I(23,00,00,00),B(cg_bycode ,61),I(3b,02,25,00),B(cg_bycode ,17),I(86,25,00,00),B(cg_bycode ,16),I(23,00,00,00),B(cg_bycode ,63),I(23,00,00,00),B(cg_bycode ,60),I(3b,01,25,00),B(cg_bycode ,15),I(23,00,00,00),B(cg_bycode ,64),I(23,00,00,00),B(cg_bycode ,59),I(3b,02,25,00),B(cg_bycode ,14),I(23,00,00,00),B(cg_bycode ,65),I(23,00,00,00),B(cg_bycode ,58),I(3b,01,25,00),B(cg_bycode ,13),I(23,00,00,00),B(cg_bycode ,66),I(23,00,00,00),B(cg_bycode ,57),I(3b,01,25,00),B(cg_bycode ,12),I(23,00,00,00),B(cg_bycode ,67),I(23,00,00,00),B(cg_bycode ,56),I(3b,01,25,00),B(cg_bycode ,11),I(23,00,00,00),B(cg_bycode ,68),I(23,00,00,00),B(cg_bycode ,55),I(3b,02,25,00),B(cg_bycode ,10),I(23,00,00,00),B(cg_bycode ,69),I(23,00,00,00),B(cg_bycode ,54),I(3b,02,25,00),B(cg_bycode ,9),I(86,25,00,00),B(cg_bycode ,8),I(23,00,00,00),B(cg_bycode ,70),I(23,00,00,00),B(cg_bycode ,53),I(3b,01,25,00),B(cg_bycode ,7),I(86,25,00,00),B(cg_bycode ,6),I(86,25,00,00),B(cg_bycode ,5),I(23,00,00,00),B(cg_bycode ,71),I(23,00,00,00),B(cg_bycode ,52),I(3b,02,25,00),B(cg_bycode ,4),I(23,00,00,00),B(cg_bycode ,72),I(23,00,00,00),B(cg_bycode ,51),I(3b,01,25,00),B(cg_bycode ,3),I(23,00,00,00),B(cg_bycode ,73),I(23,00,00,00),B(cg_bycode ,50),I(3b,02,25,00),B(cg_bycode ,2),I(23,00,00,00),B(cg_bycode ,74),I(23,00,00,00),B(cg_bycode ,49),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G004602[] = {I(87,25,00,00),B(cg_bycode ,1),I(24,00,00,00),B(i_level_1 ,1),I(3e,0b,24,00),B(i_level_1 ,0),I(3c,00,21,01),I(86,25,00,00),B(cg_bycode ,18),I(23,00,00,00),B(cg_bycode ,62),I(23,00,00,00),B(cg_bycode ,61),I(3b,02,25,00),B(cg_bycode ,17),I(86,25,00,00),B(cg_bycode ,16),I(23,00,00,00),B(cg_bycode ,63),I(23,00,00,00),B(cg_bycode ,60),I(3b,01,25,00),B(cg_bycode ,15),I(23,00,00,00),B(cg_bycode ,64),I(23,00,00,00),B(cg_bycode ,59),I(3b,02,25,00),B(cg_bycode ,14),I(23,00,00,00),B(cg_bycode ,65),I(23,00,00,00),B(cg_bycode ,58),I(3b,01,25,00),B(cg_bycode ,13),I(23,00,00,00),B(cg_bycode ,66),I(23,00,00,00),B(cg_bycode ,57),I(3b,01,25,00),B(cg_bycode ,12),I(23,00,00,00),B(cg_bycode ,67),I(23,00,00,00),B(cg_bycode ,56),I(3b,01,25,00),B(cg_bycode ,11),I(23,00,00,00),B(cg_bycode ,68),I(23,00,00,00),B(cg_bycode ,55),I(3b,02,25,00),B(cg_bycode ,10),I(23,00,00,00),B(cg_bycode ,69),I(23,00,00,00),B(cg_bycode ,54),I(3b,02,25,00),B(cg_bycode ,9),I(86,25,00,00),B(cg_bycode ,8),I(23,00,00,00),B(cg_bycode ,70),I(23,00,00,00),B(cg_bycode ,53),I(3b,01,25,00),B(cg_bycode ,7),I(86,25,00,00),B(cg_bycode ,6),I(86,25,00,00),B(cg_bycode ,5),I(23,00,00,00),B(cg_bycode ,71),I(23,00,00,00),B(cg_bycode ,52),I(3b,02,25,00),B(cg_bycode ,4),I(23,00,00,00),B(cg_bycode ,72),I(23,00,00,00),B(cg_bycode ,51),I(3b,01,25,00),B(cg_bycode ,3),I(23,00,00,00),B(cg_bycode ,73),I(23,00,00,00),B(cg_bycode ,50),I(3b,02,25,00),B(cg_bycode ,2),I(23,00,00,00),B(cg_bycode ,74),I(23,00,00,00),B(cg_bycode ,49),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G004328,G004327);
-  eul_allocate_bytevector( G004330,G004329);
-  eul_allocate_bytevector( G004332,G004331);
-  eul_allocate_bytevector( G004334,G004333);
-  eul_allocate_bytevector( G004336,G004335);
-  eul_allocate_bytevector( G004338,G004337);
-  eul_allocate_bytevector( G004340,G004339);
-  eul_allocate_bytevector( G004342,G004341);
-  eul_intern_keyword(key_4345,"name");
-  eul_intern_symbol(sym_4346,"name");
-  eul_intern_keyword(key_4347,"default");
-  eul_intern_symbol(sym_4348,"anonymous");
-  eul_intern_keyword(key_4349,"keyword");
-  eul_intern_symbol(sym_4350,"args");
-  eul_intern_keyword(key_4351,"args");
-  eul_intern_symbol(sym_4352,"code");
-  eul_intern_keyword(key_4353,"code");
-  eul_intern_symbol(sym_4354,"properties");
-  eul_intern_keyword(key_4355,"properties");
-  eul_intern_symbol(sym_4356,"size");
-  eul_intern_keyword(key_4357,"size");
-  eul_intern_symbol(sym_4358,"modus");
-  eul_intern_keyword(key_4359,"modus");
-  eul_intern_symbol(sym_4360,"bytecode");
-  eul_intern_keyword(key_4361,"direct-superclasses");
-  eul_intern_keyword(key_4362,"direct-slots");
-  eul_intern_keyword(key_4363,"direct-keywords");
-  object_class(cons_4369) = eul_static_cons_class;
-  eul_car(cons_4369) = key_4345;
-  eul_cdr(cons_4369) = eul_nil;
-  object_class(cons_4368) = eul_static_cons_class;
-  eul_car(cons_4368) = key_4351;
-  object_class(cons_4367) = eul_static_cons_class;
-  eul_car(cons_4367) = key_4353;
-  object_class(cons_4366) = eul_static_cons_class;
-  eul_car(cons_4366) = key_4355;
-  object_class(cons_4365) = eul_static_cons_class;
-  eul_car(cons_4365) = key_4357;
-  object_class(cons_4364) = eul_static_cons_class;
-  eul_car(cons_4364) = key_4359;
-  eul_intern_symbol(sym_4370,"bytecode?");
-  eul_intern_symbol(sym_4371,"(method bytecode?)");
-  eul_allocate_bytevector( G004344,G004343);
-  eul_allocate_bytevector( G004373,G004372);
-  eul_allocate_bytevector( G004375,G004374);
-  eul_allocate_bytevector( G004377,G004376);
-  eul_allocate_bytevector( G004379,G004378);
-  eul_allocate_bytevector( G004381,G004380);
-  eul_allocate_bytevector( G004383,G004382);
-  eul_allocate_bytevector( G004385,G004384);
-  eul_allocate_bytevector( G004387,G004386);
-  eul_allocate_bytevector( G004389,G004388);
-  eul_allocate_bytevector( G004391,G004390);
-  eul_allocate_bytevector( G004393,G004392);
-  eul_allocate_bytevector( G004395,G004394);
-  eul_intern_symbol(sym_4398,"bytecode-name!");
-  eul_intern_symbol(sym_4399,"bytecode-modus?");
-  eul_intern_symbol(sym_4400,"bytecode-code!");
-  eul_intern_symbol(sym_4401,"bytecode-code?");
-  eul_intern_symbol(sym_4402,"bytecode-size?");
-  eul_intern_symbol(sym_4403,"bytecode-name?");
-  eul_intern_symbol(sym_4404,"bytecode-properties!");
-  eul_intern_symbol(sym_4405,"bytecode-modus!");
-  eul_intern_symbol(sym_4406,"bytecode-args?");
-  eul_intern_symbol(sym_4407,"bytecode-size!");
-  eul_intern_symbol(sym_4408,"bytecode-properties?");
-  eul_intern_symbol(sym_4409,"bytecode-args!");
-  eul_intern_symbol(sym_4410,"top-level");
-  eul_allocate_bytevector( G004397,G004396);
+  eul_allocate_bytevector( G004534,G004533);
+  eul_allocate_bytevector( G004536,G004535);
+  eul_allocate_bytevector( G004538,G004537);
+  eul_allocate_bytevector( G004540,G004539);
+  eul_allocate_bytevector( G004542,G004541);
+  eul_allocate_bytevector( G004544,G004543);
+  eul_allocate_bytevector( G004546,G004545);
+  eul_allocate_bytevector( G004548,G004547);
+  eul_intern_keyword(key_4551,"name");
+  eul_intern_symbol(sym_4552,"name");
+  eul_intern_keyword(key_4553,"default");
+  eul_intern_symbol(sym_4554,"anonymous");
+  eul_intern_keyword(key_4555,"keyword");
+  eul_intern_symbol(sym_4556,"args");
+  eul_intern_keyword(key_4557,"args");
+  eul_intern_symbol(sym_4558,"code");
+  eul_intern_keyword(key_4559,"code");
+  eul_intern_symbol(sym_4560,"properties");
+  eul_intern_keyword(key_4561,"properties");
+  eul_intern_symbol(sym_4562,"size");
+  eul_intern_keyword(key_4563,"size");
+  eul_intern_symbol(sym_4564,"modus");
+  eul_intern_keyword(key_4565,"modus");
+  eul_intern_symbol(sym_4566,"bytecode");
+  eul_intern_keyword(key_4567,"direct-superclasses");
+  eul_intern_keyword(key_4568,"direct-slots");
+  eul_intern_keyword(key_4569,"direct-keywords");
+  object_class(cons_4575) = eul_static_cons_class;
+  eul_car(cons_4575) = key_4551;
+  eul_cdr(cons_4575) = eul_nil;
+  object_class(cons_4574) = eul_static_cons_class;
+  eul_car(cons_4574) = key_4557;
+  object_class(cons_4573) = eul_static_cons_class;
+  eul_car(cons_4573) = key_4559;
+  object_class(cons_4572) = eul_static_cons_class;
+  eul_car(cons_4572) = key_4561;
+  object_class(cons_4571) = eul_static_cons_class;
+  eul_car(cons_4571) = key_4563;
+  object_class(cons_4570) = eul_static_cons_class;
+  eul_car(cons_4570) = key_4565;
+  eul_intern_symbol(sym_4576,"bytecode?");
+  eul_intern_symbol(sym_4577,"(method bytecode?)");
+  eul_allocate_bytevector( G004550,G004549);
+  eul_allocate_bytevector( G004579,G004578);
+  eul_allocate_bytevector( G004581,G004580);
+  eul_allocate_bytevector( G004583,G004582);
+  eul_allocate_bytevector( G004585,G004584);
+  eul_allocate_bytevector( G004587,G004586);
+  eul_allocate_bytevector( G004589,G004588);
+  eul_allocate_bytevector( G004591,G004590);
+  eul_allocate_bytevector( G004593,G004592);
+  eul_allocate_bytevector( G004595,G004594);
+  eul_allocate_bytevector( G004597,G004596);
+  eul_allocate_bytevector( G004599,G004598);
+  eul_allocate_bytevector( G004601,G004600);
+  eul_intern_symbol(sym_4604,"bytecode-name!");
+  eul_intern_symbol(sym_4605,"bytecode-modus?");
+  eul_intern_symbol(sym_4606,"bytecode-code!");
+  eul_intern_symbol(sym_4607,"bytecode-code?");
+  eul_intern_symbol(sym_4608,"bytecode-size?");
+  eul_intern_symbol(sym_4609,"bytecode-name?");
+  eul_intern_symbol(sym_4610,"bytecode-properties!");
+  eul_intern_symbol(sym_4611,"bytecode-modus!");
+  eul_intern_symbol(sym_4612,"bytecode-args?");
+  eul_intern_symbol(sym_4613,"bytecode-size!");
+  eul_intern_symbol(sym_4614,"bytecode-properties?");
+  eul_intern_symbol(sym_4615,"bytecode-args!");
+  eul_intern_symbol(sym_4616,"top-level");
+  eul_allocate_bytevector( G004603,G004602);
 
   /* Set local bindings */
   {
@@ -189,64 +189,64 @@ void initialize_module_cg_bycode()
       cg_bycode_bindings[i] = eul_nil;
   }
 
-  cg_bycode_bindings[ 19] = G004328;
-  cg_bycode_bindings[ 20] = G004330;
-  cg_bycode_bindings[ 21] = G004332;
-  cg_bycode_bindings[ 22] = G004334;
-  cg_bycode_bindings[ 23] = G004336;
-  cg_bycode_bindings[ 24] = G004338;
-  cg_bycode_bindings[ 25] = G004340;
-  cg_bycode_bindings[ 26] = G004342;
-  cg_bycode_bindings[ 27] = key_4345;
-  cg_bycode_bindings[ 28] = sym_4346;
-  cg_bycode_bindings[ 29] = key_4347;
-  cg_bycode_bindings[ 30] = sym_4348;
-  cg_bycode_bindings[ 31] = key_4349;
-  cg_bycode_bindings[ 32] = sym_4350;
-  cg_bycode_bindings[ 33] = key_4351;
-  cg_bycode_bindings[ 34] = sym_4352;
-  cg_bycode_bindings[ 35] = key_4353;
-  cg_bycode_bindings[ 36] = sym_4354;
-  cg_bycode_bindings[ 37] = key_4355;
-  cg_bycode_bindings[ 38] = sym_4356;
-  cg_bycode_bindings[ 39] = key_4357;
-  cg_bycode_bindings[ 40] = sym_4358;
-  cg_bycode_bindings[ 41] = key_4359;
-  cg_bycode_bindings[ 42] = sym_4360;
-  cg_bycode_bindings[ 43] = key_4361;
-  cg_bycode_bindings[ 44] = key_4362;
-  cg_bycode_bindings[ 45] = key_4363;
-  cg_bycode_bindings[ 46] = cons_4364;
-  cg_bycode_bindings[ 47] = sym_4370;
-  cg_bycode_bindings[ 48] = sym_4371;
-  cg_bycode_bindings[ 49] = G004344;
-  cg_bycode_bindings[ 50] = G004373;
-  cg_bycode_bindings[ 51] = G004375;
-  cg_bycode_bindings[ 52] = G004377;
-  cg_bycode_bindings[ 53] = G004379;
-  cg_bycode_bindings[ 54] = G004381;
-  cg_bycode_bindings[ 55] = G004383;
-  cg_bycode_bindings[ 56] = G004385;
-  cg_bycode_bindings[ 57] = G004387;
-  cg_bycode_bindings[ 58] = G004389;
-  cg_bycode_bindings[ 59] = G004391;
-  cg_bycode_bindings[ 60] = G004393;
-  cg_bycode_bindings[ 61] = G004395;
+  cg_bycode_bindings[ 19] = G004534;
+  cg_bycode_bindings[ 20] = G004536;
+  cg_bycode_bindings[ 21] = G004538;
+  cg_bycode_bindings[ 22] = G004540;
+  cg_bycode_bindings[ 23] = G004542;
+  cg_bycode_bindings[ 24] = G004544;
+  cg_bycode_bindings[ 25] = G004546;
+  cg_bycode_bindings[ 26] = G004548;
+  cg_bycode_bindings[ 27] = key_4551;
+  cg_bycode_bindings[ 28] = sym_4552;
+  cg_bycode_bindings[ 29] = key_4553;
+  cg_bycode_bindings[ 30] = sym_4554;
+  cg_bycode_bindings[ 31] = key_4555;
+  cg_bycode_bindings[ 32] = sym_4556;
+  cg_bycode_bindings[ 33] = key_4557;
+  cg_bycode_bindings[ 34] = sym_4558;
+  cg_bycode_bindings[ 35] = key_4559;
+  cg_bycode_bindings[ 36] = sym_4560;
+  cg_bycode_bindings[ 37] = key_4561;
+  cg_bycode_bindings[ 38] = sym_4562;
+  cg_bycode_bindings[ 39] = key_4563;
+  cg_bycode_bindings[ 40] = sym_4564;
+  cg_bycode_bindings[ 41] = key_4565;
+  cg_bycode_bindings[ 42] = sym_4566;
+  cg_bycode_bindings[ 43] = key_4567;
+  cg_bycode_bindings[ 44] = key_4568;
+  cg_bycode_bindings[ 45] = key_4569;
+  cg_bycode_bindings[ 46] = cons_4570;
+  cg_bycode_bindings[ 47] = sym_4576;
+  cg_bycode_bindings[ 48] = sym_4577;
+  cg_bycode_bindings[ 49] = G004550;
+  cg_bycode_bindings[ 50] = G004579;
+  cg_bycode_bindings[ 51] = G004581;
+  cg_bycode_bindings[ 52] = G004583;
+  cg_bycode_bindings[ 53] = G004585;
+  cg_bycode_bindings[ 54] = G004587;
+  cg_bycode_bindings[ 55] = G004589;
+  cg_bycode_bindings[ 56] = G004591;
+  cg_bycode_bindings[ 57] = G004593;
+  cg_bycode_bindings[ 58] = G004595;
+  cg_bycode_bindings[ 59] = G004597;
+  cg_bycode_bindings[ 60] = G004599;
+  cg_bycode_bindings[ 61] = G004601;
   cg_bycode_bindings[ 1] = eul_nil;
-  cg_bycode_bindings[ 62] = sym_4398;
-  cg_bycode_bindings[ 63] = sym_4399;
-  cg_bycode_bindings[ 64] = sym_4400;
-  cg_bycode_bindings[ 65] = sym_4401;
-  cg_bycode_bindings[ 66] = sym_4402;
-  cg_bycode_bindings[ 67] = sym_4403;
-  cg_bycode_bindings[ 68] = sym_4404;
-  cg_bycode_bindings[ 69] = sym_4405;
-  cg_bycode_bindings[ 70] = sym_4406;
-  cg_bycode_bindings[ 71] = sym_4407;
-  cg_bycode_bindings[ 72] = sym_4408;
-  cg_bycode_bindings[ 73] = sym_4409;
-  cg_bycode_bindings[ 74] = sym_4410;
-  eul_allocate_lambda( cg_bycode_bindings[0], "initialize-cg-bycode", 0, G004397);
+  cg_bycode_bindings[ 62] = sym_4604;
+  cg_bycode_bindings[ 63] = sym_4605;
+  cg_bycode_bindings[ 64] = sym_4606;
+  cg_bycode_bindings[ 65] = sym_4607;
+  cg_bycode_bindings[ 66] = sym_4608;
+  cg_bycode_bindings[ 67] = sym_4609;
+  cg_bycode_bindings[ 68] = sym_4610;
+  cg_bycode_bindings[ 69] = sym_4611;
+  cg_bycode_bindings[ 70] = sym_4612;
+  cg_bycode_bindings[ 71] = sym_4613;
+  cg_bycode_bindings[ 72] = sym_4614;
+  cg_bycode_bindings[ 73] = sym_4615;
+  cg_bycode_bindings[ 74] = sym_4616;
+  eul_allocate_lambda( cg_bycode_bindings[0], "initialize-cg-bycode", 0, G004603);
 
   }
 }

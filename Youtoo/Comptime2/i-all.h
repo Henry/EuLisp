@@ -52,8 +52,8 @@ extern LispRef i_all_bindings[];
 #define O_EXCL_fn_index 12 
 #define simple_thread__X63_fn_index 39 
 #define access_table_clear_fn_index 9 
-#define _C_ld__X42_X42_fn_index 65 
-#define _inline_level__X42_X42_fn_index 64 
+#define _C_ld__X42_X42_fn_index 66 
+#define _inline_level__X42_X42_fn_index 65 
 #define character_as_fpi_fn_index () 
 #define _metaclass__X60_X62_fn_index 71 
 #define thread_returned__X63_fn_index 38 
@@ -64,6 +64,7 @@ extern LispRef i_all_bindings[];
 #define generic_function_domain_fn_index 68 
 #define sf_size_fn_index 67 
 #define eul_make_socket_fn_index 21 
+#define _eval_module__X42_X42_fn_index 64 
 #define ct_reset_fn_index 63 
 #define random_seed_fn_index 5 
 #define stream__X63_fn_index 40 

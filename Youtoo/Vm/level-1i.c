@@ -743,11 +743,11 @@ void fill_level_1_table() {
   eul_fast_table_set(level_1_tab,"*create-C-library*", make_entry(28, "i-param", "*create-C-library*"));
   eul_fast_table_set(level_1_tab,"*no-ct-handlers*", make_entry(55, "i-param", "*no-ct-handlers*"));
   eul_fast_table_set(level_1_tab,"*no-recompile*", make_entry(35, "i-param", "*no-recompile*"));
-  eul_fast_table_set(level_1_tab,"*C-ld*", make_entry(65, "i-param", "*C-ld*"));
+  eul_fast_table_set(level_1_tab,"*C-ld*", make_entry(66, "i-param", "*C-ld*"));
   eul_fast_table_set(level_1_tab,"*C-cc-flags*", make_entry(54, "i-param", "*C-cc-flags*"));
   eul_fast_table_set(level_1_tab,"*debug*", make_entry(45, "i-param", "*debug*"));
   eul_fast_table_set(level_1_tab,"*linked-C-libraries*", make_entry(14, "i-param", "*linked-C-libraries*"));
-  eul_fast_table_set(level_1_tab,"*inline-level*", make_entry(64, "i-param", "*inline-level*"));
+  eul_fast_table_set(level_1_tab,"*inline-level*", make_entry(65, "i-param", "*inline-level*"));
   eul_fast_table_set(level_1_tab,"*C-library-load-path*", make_entry(9, "i-param", "*C-library-load-path*"));
   eul_fast_table_set(level_1_tab,"*C-ranlib*", make_entry(8, "i-param", "*C-ranlib*"));
   eul_fast_table_set(level_1_tab,"load-syntax-module", make_entry(5, "i-param", "load-syntax-module"));
@@ -755,6 +755,7 @@ void fill_level_1_table() {
   eul_fast_table_set(level_1_tab,"*tmp-start-source-file-name*", make_entry(23, "i-param", "*tmp-start-source-file-name*"));
   eul_fast_table_set(level_1_tab,"*dest-file-name*", make_entry(6, "i-param", "*dest-file-name*"));
   eul_fast_table_set(level_1_tab,"*no-else*", make_entry(13, "i-param", "*no-else*"));
+  eul_fast_table_set(level_1_tab,"*eval-module*", make_entry(64, "i-param", "*eval-module*"));
   eul_fast_table_set(level_1_tab,"ct-reset", make_entry(63, "i-param", "ct-reset"));
   eul_fast_table_set(level_1_tab,"*main-link-string*", make_entry(53, "i-param", "*main-link-string*"));
   eul_fast_table_set(level_1_tab,"*delimiter*", make_entry(22, "i-param", "*delimiter*"));
