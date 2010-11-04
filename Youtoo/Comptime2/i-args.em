@@ -64,7 +64,7 @@
                           (make-symbol (vector-ref argv (+ i 1))))
                     (loop (+ i 2)))
                    ((or (string-equal arg "-od") (string-equal arg "-O")
-                        (string-equal arg "-object-dir"))
+                        (string-equal arg "--object-dir"))
                     (setq *object-dir*
                           (make-symbol (vector-ref argv (+ i 1))))
                     (loop (+ i 2)))
@@ -107,7 +107,7 @@
                         (string-equal arg "--no-errors"))
                     (setq *errors* ())
                     (loop (+ i 1)))
-                   ((or (string-equal arg "-i") (string-equal arg "-interpret"))
+                   ((or (string-equal arg "-i") (string-equal arg "--interpret"))
                     (setq *interpreter* t)
                     (setq *silent* t)
                     (setq *verbose* ())

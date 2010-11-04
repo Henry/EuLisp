@@ -68,41 +68,43 @@
 *** Options
     to see the command-line options type
     #+BEGIN_SRC eulisp
-    Bin.x86_64/youtoo -help
-    Usage: youtoo [<options>] <source-file(s)> [<options>]
-    -help                 --  show usage
-    -version              --  show current release
-    -params               --  show current parameter setting
-    -load_path <dir>      --  add <dir> to load path
-    -c                    --  create C linkable module file only
-    -ar                   --  create C linkable library file
-    -l <lib>              --  specify C linkable library
-    -L <dir>              --  extent C linkable library load path
-    -fff <file>           --  specify C foreign function file
-    -ffl <lib>            --  specify C foreign function library
-    -o <file>             --  destination file
-    -od <dir>             --  destination directory for object files
-    --script <file>       --  script mode
-    -silent               --  silent mode
-    -verbose              --  verbose mode
-    -no_warnings          --  no warning messages
-    -no_errors            --  no error messages
-    -no_else              --  omit warning for if without else
-    -redefine             --  redefine imported bindings
-    -no_inline            --  ignore inline declarations
-    -stop_after <phase>   --  stop after compilation phase (e.g. read)
-    -recompile            --  recompile imported modules
-    -no_recompile         --  no automatic recompilation of imports
-    -no_gc                --  garbage collection library not linked
-    -cc                   --  used C compiler
-    -ld                   --  used C linker
-    -ar_cmd               --  used C ar command
-    -ranlib_cmd           --  used C ranlib command
-    -cflags               --  additional C flag
-    -static               --  no shared libraries used
-    -g                    --  C debug info
-    -i                    --  force interpretation mode
-    -no_ct_handlers       --  no compile-time error handling
+    Bin.x86_64/youtoo --help
+    Usage: youtoo [OPTION]... [FILE]...
+      -h --help               Print this usage information.
+      -V --version            Print current release.
+      -p --params             Print current parameter setting.
+         --load-path dir      Add dir to load path.
+      -c --c-module           Create C linkable module file only.
+         --stand-alone        Create a stand-alone application.
+         --archive            Create C linkable library file.
+      -l --library lib        Link with library lib.
+      -L --library-path dir   Add dir to library load path.
+         --fff file           Provide C foreign function file.
+         --ffl lib            Provide C foreign function library lib.
+      -o --object file        Generated object file.
+      -O --object-dir dir     Set destination directory for object files to dir.
+      -s --script file        Read and execute script from file.
+      -m --module module-name Read and execute module from file module-name.em.
+      -q --quiet              Print no messages, prompts or values..
+      -v --verbose            Set verbose mode.
+         --no-warnings        Set no warning messages.
+         --no-errors          Set no error messages.
+         --no-else            Set no warning for if without else.
+         --redefine           Redefine imported bindings.
+         --no-inline          Ignore inline declarations.
+         --stop-after phase   Stop after specified compilation phase (e.g. read).
+         --recompile          Recompile imported modules.
+         --no-recompile       No automatic recompilation of imports.
+         --no-gc              Link without garbage collection library.
+         --cc cc              Set C compiler to cc.
+         --ld ld              Set C linker to ld.
+         --ar-cmd ar          Set C ar command to ar.
+         --ranlib-cmd ranlib  Set C ranlib command to ranlib.
+         --cflags             Set ddditional C flags.
+         --static             Link with static libraries.
+      -g --debug              Generate C debug information.
+      -i --interpret          Set interpretation mode.
+         --no-ct-handlers     Set no compile-time error handling.
     #+END_SRC
 *** Running Interactively
     type

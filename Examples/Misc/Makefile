@@ -27,7 +27,6 @@ include ../../Lib.$(ARCH)/Makefile
 EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl triang \
 	random2
 #	macro-dispatch-char
-EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
 ###  EuLisp Level-1 examples
 EXAMPLES_1 = dphil echo echod padd url url2 url3
@@ -39,8 +38,8 @@ EXAMPLES = $(EXAMPLES_0) $(EXAMPLES_1)
 EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
 ###  Youtoo default compile rules for Level-0 and Level-1
-makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level-0 -l math
-makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level-1 -l math
+makeExe0 = ${U2} ${U2FLAGS} $(1) --object-dir $(ARCH_DIR) -l level-0 -l math
+makeExe1 = ${U2} ${U2FLAGS} $(1) --object-dir $(ARCH_DIR) -l level-1 -l math
 
 ###-----------------------------------------------------------------------------
 ### Youtoo compile rules for all examples
@@ -48,7 +47,7 @@ makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level-1 -l math
 all: $(EXAMPLES_EXE)
 
 # A stress test
-$(ARCH_DIR)/append: append.em | $(ARCH_DIR)/.
+$(ARCH_DIR)/append: append.em
 	$(call makeExe0,append)
 
 $(ARCH_DIR)/div: div.em
@@ -115,8 +114,8 @@ $(ARCH_DIR)/url3: url3.em
 ### Run the examples
 ###-----------------------------------------------------------------------------
 .PHONY: runeuxlisp
-runeuxlisp: $(EXAMPLES_0_EM)
-	@$(foreach example, $(EXAMPLES_0_EM), \
+runeuxlisp:
+	@$(foreach example, $(EXAMPLES_0), \
 		echo "EuXLisp running " $(example); \
 		$(EUL_BIN_DIR)/euxlisp -m $(example);)
 
@@ -143,11 +142,9 @@ run: runeuxlisp runyoutoo
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
-	@rm -f $(EXAMPLES:%=%.c) $(EXAMPLES:%=%_.c) $(EXAMPLES:%=%.h) *.i
-	@rm -f $(OTHERS_EM:%=%.c) $(OTHERS_EM:%=%_.c) $(OTHERS_EM:%=%.h)
 
 .PHONY: distclean
 distclean: clean
-	@rm -rf platforms
+	@rm -rf platforms $(U2_C_DIR)
 
 ###-----------------------------------------------------------------------------

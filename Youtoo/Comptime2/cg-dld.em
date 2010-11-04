@@ -56,7 +56,6 @@
                       (error <condition>
                              (fmt "binding ~a not available in module ~a"
                                   binding-name) module-name))))
-    ;      (pprint binding) (flush)
     (as-dynamic-binding binding)))
 
 (defun as-dynamic-binding (binding)

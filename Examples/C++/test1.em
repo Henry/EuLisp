@@ -23,7 +23,7 @@
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;   g++ -c eul-cc1.cc
-;;   youtoo test1 -l level-0 -fff eul-cc1
+;;   youtoo test1 -l level-0 --fff eul-cc1
 ;;;-----------------------------------------------------------------------------
 (defmodule test1
   (syntax (syntax-0)

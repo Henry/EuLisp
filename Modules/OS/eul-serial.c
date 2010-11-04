@@ -26,8 +26,7 @@
 #include "eulisp.h"
 #include "eul-serial.h"
 #include "eul-serial2.h"
-#include "serial.h"
-
+#include "u2/serial.h"
 
 ///-----------------------------------------------------------------------------
 /// Primitive serialization (should use xdr soon!)

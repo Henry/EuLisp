@@ -101,6 +101,7 @@ THRTYPE=DEFAULT
 ### Set paths for Youtoo, binaries, scripts and libraries
 ###-----------------------------------------------------------------------------
 U2_DIR=$EUL_DIR/Youtoo
+U2_C_DIR=u2
 EUL_BIN_DIR=$EUL_DIR/Bin.$ARCH
 EUL_LIB_DIR=$EUL_DIR/Lib.$ARCH
 
@@ -377,6 +378,7 @@ echo \(CLIBS \. \"${CLIBS}\"\) >> $name_rc
 echo \(AR \. \"${AR}\"\) >> $name_rc
 echo \(RANLIB \. \"${RANLIB}\"\) >> $name_rc
 echo \(ARCH \. \"${ARCH}\"\) >> $name_rc
+echo \(U2_C_DIR \. \"${U2_C_DIR}\"\) >> $name_rc
 echo \(OSTYPE \. \"${OSTYPE}\"\) >> $name_rc
 echo \(VERSION \. \"${EUL_VERSION}\"\) >> $name_rc
 echo \) >> $name_rc
@@ -420,6 +422,7 @@ echo EUL_LIB_DIR = ${EUL_LIB_DIR} >> $name
 echo U2_DIR = ${EUL_DIR}/Youtoo >> $name
 echo U2 = ${EUL_BIN_DIR}/youtoo >> $name
 echo U2_BOOT = ${EUL_BOOT_BIN_DIR}/youtoo.sh >> $name
+echo U2_C_DIR = ${U2_C_DIR} >> $name
 echo EUL_GC_DIR = ${EUL_GC_DIR} >> $name
 echo EUL_GC_CFLAGS = ${EUL_GC_CFLAGS} >> $name
 echo UNIX_DIR = ${UNIX_DIR} >> $name

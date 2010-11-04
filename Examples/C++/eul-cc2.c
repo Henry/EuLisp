@@ -25,11 +25,11 @@
 //    ../youtoo -c test2 -l level-1
 //    gcc -c -I../Gc eul-cc2.c
 //    g++ -c eul-cc3.cc
-//    ../youtoo test2 -l level-1 -fff eul-cc2 -fff eul-cc3 -recompile
+//    ../youtoo test2 -l level-1 --fff eul-cc2 --fff eul-cc3 --recompile
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
-#include "test2.h"
+#include "u2/test2.h"
 
 EUL_DEFINTERN(bar, "bar", 2, test2)
 extern void *baz(void *, void *);

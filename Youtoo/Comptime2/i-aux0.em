@@ -46,7 +46,7 @@
                              (if *no-ct-handlers* ()
                                (error <ct-error>
                                        ,str ct-error-value: ,error-value)))
-                    method: (((c <ct-error>) f)))   ; pass signal to next handler
+                    method: (((c <ct-error>) f))) ;; pass signal to next handler
     (progn ,@forms)))
 
 ;;;-----------------------------------------------------------------------------
@@ -56,32 +56,44 @@
   `(string-append (or (string? ,name) (symbol-name ,name)) ".em"))
 
 (defmacro as-interface-file-name (name)
-  `(string-append (or (string? ,name) (symbol-name ,name)) ".i"))
+  `(string-append *u2-C-dir*
+                  (string-append (or (string? ,name)
+                                     (symbol-name ,name)) ".i")))
 
 (defmacro as-C-file-name (name)
-  `(string-append (or (string? ,name) (symbol-name ,name)) ".c"))
+  `(string-append *u2-C-dir*
+                  (string-append (or (string? ,name)
+                                     (symbol-name ,name)) ".c")))
 
 (defmacro as-compiled-C-file-name (name)
   `(if *object-dir*
        (string-append *object-dir*
                       (string-append *delimiter*
-                                     (string-append (or (string? ,name) (symbol-name ,name)) ".o")))
+                                     (string-append
+                                      (or (string? ,name)
+                                          (symbol-name ,name)) ".o")))
      (string-append (or (string? ,name) (symbol-name ,name)) ".o")))
 
 (defmacro as-included-C-file-name (name)
-  `(string-append (or (string? ,name) (symbol-name ,name)) ".h"))
+  `(string-append *u2-C-dir*
+                  (string-append (or (string? ,name)
+                                     (symbol-name ,name)) ".h")))
 
 (defmacro as-C-hook-name (name)
   `(string-append (or (string? ,name) (symbol-name ,name)) "_"))
 
 (defmacro as-C-hook-source-file-name (name)
-  `(string-append (or (string? ,name) (symbol-name ,name)) "_.c"))
+  `(string-append *u2-C-dir*
+                  (string-append (or (string? ,name)
+                                     (symbol-name ,name)) "_.c")))
 
 (defmacro as-C-hook-object-file-name (name)
   `(if *object-dir*
        (string-append *object-dir*
                       (string-append *delimiter*
-                                     (string-append (or (string? ,name) (symbol-name ,name)) "_.o")))
+                                     (string-append
+                                      (or (string? ,name)
+                                          (symbol-name ,name)) "_.o")))
      (string-append (or (string? ,name) (symbol-name ,name)) "_.o")))
 
 (defmacro as-C-library-file-name (name)
@@ -110,7 +122,7 @@
        (make-symbol
         (string-append (or (string? ,name) (symbol-name ,name))
                        "-init-fun"))
-     ()))  ; no lambda naming
+     ()))  ;; no lambda naming
 
 (defmacro as-module-init-flag-name (name)
   `(make-symbol
@@ -170,23 +182,26 @@
        (setq *redefine-imported-bindings*
              (list *redefine-imported-bindings*))
        (setq ,tmp-name ,function-name)
-       (setq ,function-name (named-lambda ,function-name args
-                                          ,(if pre-action
-                                               `(apply ,pre-action ,function-name args)
-                                             `(sformat stderr
-                                                       ,(fmt ">>> ~~aTRACE [~a]: ~~a\n" function-name)
-                                                       (dynamic *trace-indent*) args))
-                                          (let ((res (dynamic-let ((*trace-indent*
-                                                                    (concatenate (dynamic *trace-indent*)
-                                                                                 " ")))
-                                                                  (apply ,tmp-name args))))
-                                            ,(if post-action
-                                                 `(apply ,post-action ,function-name args)
-                                               `(sformat stderr
-                                                         ,(fmt "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
-                                                               function-name)
-                                                         (dynamic *trace-indent*) args res))
-                                            res)))
+       (setq ,function-name
+             (named-lambda
+              ,function-name args
+              ,(if pre-action
+                   `(apply ,pre-action ,function-name args)
+                 `(sformat stderr
+                           ,(fmt ">>> ~~aTRACE [~a]: ~~a\n" function-name)
+                           (dynamic *trace-indent*) args))
+              (let ((res (dynamic-let
+                          ((*trace-indent*
+                            (concatenate (dynamic *trace-indent*)
+                                         " ")))
+                          (apply ,tmp-name args))))
+                ,(if post-action
+                     `(apply ,post-action ,function-name args)
+                   `(sformat stderr
+                             ,(fmt "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
+                                   function-name)
+                             (dynamic *trace-indent*) args res))
+                res)))
        ;; retrieve previous value
        (setq *redefine-imported-bindings*
              (car *redefine-imported-bindings*))

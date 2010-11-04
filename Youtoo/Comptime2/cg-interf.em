@@ -46,7 +46,9 @@
            link-string
            fff-link-string
            ffl-link-string
-           directly-or-indirectly-modified?))
+           directly-or-indirectly-modified?
+           string-append-with-space
+           mkdir))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read interface file
@@ -149,6 +151,7 @@
          (all-used-module-names
           (module-all-used-module-names? module)))
     (notify "  Creating ~a ..." file-name)
+    (mkdir *u2-C-dir*)
     (with-output-file
      (stream absolute-file-name)
      (sformat stream ";;; EuLisp system 'youtoo'\n")
@@ -176,6 +179,7 @@
          (all-used-module-names
           (cons module-name (module-all-used-module-names? module))))
     (notify "  Writing library interface file ~a" file-name)
+    (mkdir *u2-C-dir*)
     (with-output-file
      (stream absolute-file-name)
      (sformat stream ";;; EuLisp system 'youtoo'\n")
@@ -378,7 +382,7 @@
     (if (null? names) ""
       (let ((str-list
              (map1-list (lambda (name)
-                          (let* ((file-name (as-compiled-C-file-name name))
+                          (let* ((file-name (as-compiled-fff-C-file-name name))
                                  (dir (external-file-exist? file-name)))
                             (if dir
                                 (fmt "~a~a~a " dir *delimiter* file-name)
@@ -402,6 +406,25 @@
                                file-name))))
                         names)))
         (apply concatenate str-list)))))
+
+;;;-----------------------------------------------------------------------------
+;;; Directory support functions
+;;;-----------------------------------------------------------------------------
+(defun string-append-with-space l
+  (labels
+   ((loop (ll res)
+          (if (null? ll) res
+            (loop (cdr ll)
+                  (string-append
+                   res (string-append
+                        " " (convert (car ll) <string>)))))))
+   (loop (cdr l) (convert (car l) <string>))))
+
+(defun mkdir (dir-name)
+  (and dir-name
+       (> (size dir-name) 0)
+       (or (zero? (system (string-append-with-space "mkdir -p" dir-name)))
+           (ct-error -2 "cannot make directory ~a " dir-name))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module cg-interf

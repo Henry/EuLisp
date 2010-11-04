@@ -71,6 +71,7 @@
            *tmp-source-file-name*
            *tmp-start-source-file-name*
            *dest-file-name*
+           *u2-C-dir*
            *object-dir*
            *script-file*
            *eulysses-dir*
@@ -166,6 +167,7 @@
 (deflocal *tmp-source-file-name* ())
 (deflocal *tmp-start-source-file-name* ())
 (deflocal *dest-file-name* ())
+(deflocal *u2-C-dir* (get-config-info 'U2_C_DIR))
 (deflocal *object-dir* ())
 (deflocal *script-file* ())
 (deflocal *get-loaded-module* (make-access-table))
@@ -214,6 +216,7 @@
   (setq *number-of-errors* 0)
   (setq *source-file-names* ())
   (setq *dest-file-name* ())
+  (setq *u2-C-dir* (get-config-info 'U2_C_DIR))
   (setq *object-dir* ())
   ;  (access-table-clear *get-loaded-module*)
   ;  (access-table-clear *get-loaded-syntax-module*)

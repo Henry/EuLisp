@@ -284,7 +284,8 @@
 *** DONE Include default environment variables directly into =youtoo=
     CLOSED: [2010-06-21 Mon 17:12]
     to avoid the need for the start-up script to set them.
-*** TODO Add the =-m= load module option
+*** DONE Add the =-m= load module option
+    CLOSED: [2010-11-04 Thu 16:22]
     compatible with the equivalent option added to EuXLisp.|
 *** DONE Add a Scheme-style =else=
     CLOSED: [2010-06-22 Tue 22:34]
@@ -320,7 +321,8 @@
     =/home/dm2/henry/EuLisp/EuLisp/Bin.x86_64/youto o.sh= does not, nor does the
     relative path =../../Bin.x86_64/youtoo.sh= which should.
 *** TODO Consider replacing the built-in GC with =xalloc= in Eu2C
-*** TODO Change =level1= -> =level-1= [3/3]
+*** DONE Change =level1= -> =level-1= [3/3]
+    CLOSED: [2010-11-04 Thu 16:23]
     + [X] Add =level-1= as copy of =level1=
     + [X] Change all uses of =level1= =level-1=
     + [X] Remove =level1=
@@ -365,6 +367,7 @@
 *** TODO Complete =double-float= functionality in =arith.em=
     See =Youtoo/Runtime/double.em=
 *** TODO Consider replacing the built-in GC with =xalloc= in Eu2C
+
 * Eu2C
 *** DONE Hack CMUCL to write exponent "e"
     CLOSED: [2010-08-30 Mon 11:15]
@@ -466,6 +469,7 @@
     + Rename <syntax-error> as <read-error>
     + Rename <slot-description> as <slot> (and all other such references)
     + To remove <structure> and <structure-class>
+
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]

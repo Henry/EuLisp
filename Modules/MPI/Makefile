@@ -37,15 +37,15 @@ MPI_CFLAGS = -I${MPI_DIR}/include
 ###-----------------------------------------------------------------------------
 
 TARGET_LIB = libmpis.a
-TARGET_LIB_I = libmpis.i
+TARGET_LIB_I = $(U2_C_DIR)/libmpis.i
 
 ###-----------------------------------------------------------------------------
 ### Files
 ###-----------------------------------------------------------------------------
 
 LISP_MODULES = mpis.em
-LISP_SOURCES = mpis.c
-LISP_OBJECTS = mpis.o
+LISP_SOURCES = $(U2_C_DIR)/mpis.c
+LISP_OBJECTS = $(U2_C_DIR)/mpis.o
 FF_SOURCES = eul-mpi.c
 FF_OBJECTS = eul-mpi.o
 SOURCES = ${LISP_SOURCES} ${FF_SOURCES}
@@ -86,12 +86,12 @@ test:	${TEST_SOURCES}
 .SUFFIXES: .c .em
 
 .em.a:
-	${U2} ${U2FLAGS} -ar $* -l level-1 -l serial -recompile
+	${U2} ${U2FLAGS} -ar $* -l level-1 -l serial --recompile
 	rm -f ${*}.a
 	ln -sf lib${*}.a ${*}.a
 
 .em.c:
-	${U2} ${U2FLAGS} $* -l level-1 -l serial -l mpis -ld mpicc -static
+	${U2} ${U2FLAGS} $* -l level-1 -l serial -l mpis --ld mpicc --static
 
 ###-----------------------------------------------------------------------------
 ### Misc
@@ -102,11 +102,11 @@ README: README.html
 
 .PHONY: clean
 clean:
-	rm -f ${OBJECTS}
+	@rm -rf $(ARCH_DIR)
 
 .PHONY: distclean
 distclean: clean
-	@rm -rf platforms
+	@rm -rf platforms $(U2_C_DIR)
 	@rm -f $(EUL_MODULE_LIB) $(EUL_MODULE_LIB_I)
 
 ###-----------------------------------------------------------------------------

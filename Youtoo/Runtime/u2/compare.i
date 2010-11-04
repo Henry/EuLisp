@@ -1,0 +1,40 @@
+;;; EuLisp system 'youtoo'
+;;;   Interface file for module compare
+
+(definterface compare
+  (import (telos callback)
+   syntax (_telos0)
+   full-import ()
+   export (
+    ((name . >=) (pos . 11) (origin compare . >=))
+    ((name . <=) (pos . 8) (origin compare . <=))
+    ((name . >) (pos . 4) (origin compare . >))
+    ((name . min) (pos . 10) (origin compare . min))
+    ((name . max) (pos . 5) (origin compare . max))
+    ((name . =) (pos . 2) (origin compare . =))
+    ((name . eq) (pos . 22) (origin boot1 . eq) (inline (G0035 (eq))))
+    ((name . eql) (pos . 45) (origin boot1 . eql) (inline (G0037 (eql))))
+    ((name . !=) (pos . 7) (origin compare . !=))
+    ((name . <) (pos . 3) (origin compare . <))
+    ((name . binary=) (pos . 9) (origin compare . binary=))
+    ((name . binary<) (pos . 6) (origin compare . binary<))
+   )
+   local-literals (
+    (top-level . 40)
+    (= . 39)
+    (< . 38)
+    (> . 37)
+    (max . 36)
+    (!= . 35)
+    (<= . 34)
+    (min . 33)
+    (>= . 32)
+    (anonymous . 19)
+    ("=" . 18)
+    (|(method binary=)| . 15)
+    (binary< . 14)
+    (binary= . 13)
+   )
+   literals (
+   )
+))

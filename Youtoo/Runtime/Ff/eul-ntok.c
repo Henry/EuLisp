@@ -26,7 +26,7 @@
 #include "eulisp.h"
 #include <limits.h>
 #include "eul-ext.h"
-#include "../Runtime/stream2.h"
+#include "../Runtime/u2/stream2.h"
 
 #ifdef WITH_PCR_THREADS
     // See alse Vm/stdc.h

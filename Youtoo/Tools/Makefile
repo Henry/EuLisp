@@ -47,8 +47,11 @@ all: b2h i2doc
 b2h: $(EUL_BIN_DIR)/b2h
 
 $(EUL_BIN_DIR)/b2h: $(B2H_EM) | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} b2h -od $(ARCH_DIR) -l level-1 \
-		-load_path $(EUL_DIR)/Modules/Vmeta
+	$(MAKE) -C $(EUL_DIR)/Modules/Vmeta
+	${U2} ${U2FLAGS} b2h \
+		--object-dir $(ARCH_DIR) \
+		-l level-1 \
+		--load-path $(EUL_DIR)/Modules/Vmeta
 	mv $(ARCH_DIR)/b2h $(EUL_BIN_DIR)/b2h
 
 ###-----------------------------------------------------------------------------
@@ -58,7 +61,7 @@ $(EUL_BIN_DIR)/b2h: $(B2H_EM) | $(ARCH_DIR)/.
 i2doc: $(EUL_BIN_DIR)/i2doc
 
 $(EUL_BIN_DIR)/i2doc: $(I2DOC_EM) $(ARCH_DIR)/i2doc-ext.o | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} i2doc -od $(ARCH_DIR) -l level-1 -fff i2doc-ext
+	${U2} ${U2FLAGS} i2doc --object-dir $(ARCH_DIR) -l level-1 --fff i2doc-ext
 	mv $(ARCH_DIR)/i2doc $(EUL_BIN_DIR)/i2doc
 
 ###-----------------------------------------------------------------------------
@@ -69,11 +72,9 @@ boot-clean: clean
 
 clean:
 	@rm -rf $(ARCH_DIR)
-	@rm -f *.{h,i} *_.{c,h}
-	@rm -f $(B2H_C) $(I2DOC_C)
 
 distclean: clean
-	@rm -rf platforms
+	@rm -rf platforms $(U2_C_DIR)
 	@rm -f $(EUL_BIN_DIR)/b2h $(EUL_BIN_DIR)/i2doc
 
 ###-----------------------------------------------------------------------------

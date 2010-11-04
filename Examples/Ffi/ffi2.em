@@ -23,7 +23,7 @@
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    cc $(CFLAGS) -c eul-ffi2.c
-;;    youtoo ffi2 -l level-0 -fff eul-ffi2
+;;    youtoo ffi2 -l level-0 --fff eul-ffi2
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ffi2

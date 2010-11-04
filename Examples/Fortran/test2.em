@@ -24,7 +24,7 @@
 ;;;  Compilation
 ;;   youtoo -c test2 -l level-0
 ;;   f77 -c eul-f2.f
-;;   youtoo test2 -l level-0 -fff eul-f2 -recompile
+;;   youtoo test2 -l level-0 --fff eul-f2 --recompile
 ;;;-----------------------------------------------------------------------------
 
 (defmodule test2

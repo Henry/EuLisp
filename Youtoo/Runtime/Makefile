@@ -34,21 +34,21 @@ U2 = $(U2_BOOT)
 ### Output file names
 ###-----------------------------------------------------------------------------
 LEVEL_0_LIB = $(EUL_LIB_DIR)/liblevel-0.a
-LEVEL_0_LIB_I = $(EUL_LIB_DIR)/liblevel-0.i
+LEVEL_0_LIB_I = $(EUL_LIB_DIR)/$(U2_C_DIR)/liblevel-0.i
 LEVEL_0_SHARED_LIB = $(EUL_LIB_DIR)/liblevel-0.so
 
 LEVEL_1_LIB = $(EUL_LIB_DIR)/liblevel-1.a
-LEVEL_1_LIB_I = $(EUL_LIB_DIR)/liblevel-1.i
+LEVEL_1_LIB_I = $(EUL_LIB_DIR)/$(U2_C_DIR)/liblevel-1.i
 LEVEL_1_SHARED_LIB = $(EUL_LIB_DIR)/liblevel-1.so
 
 MATH_LIB = $(EUL_LIB_DIR)/libmath.a
-MATH_LIB_I = $(EUL_LIB_DIR)/libmath.i
+MATH_LIB_I = $(EUL_LIB_DIR)/$(U2_C_DIR)/libmath.i
 MATH_SHARED_LIB = $(EUL_LIB_DIR)/libmath.so
 
 ###-----------------------------------------------------------------------------
 ### Library dependencies
 ###-----------------------------------------------------------------------------
-TELOS_LIB_I = $(EUL_LIB_DIR)/libtelos.i
+TELOS_LIB_I = $(EUL_LIB_DIR)/$(U2_C_DIR)/libtelos.i
 
 ###-----------------------------------------------------------------------------
 ### Source and object files
@@ -61,7 +61,7 @@ LEVELN_EM = bit.em callback.em character.em collect.em compare.em condition.em \
 	string.em symbol.em table.em table1.em let-cc.em thread.em vector.em
 
 LEVEL_0_EM = $(LEVELN_EM) level-0.em
-LEVEL_0_C := $(LEVEL_0_EM:%.em=%.c)
+LEVEL_0_C := $(LEVEL_0_EM:%.em=$(U2_C_DIR)/%.c)
 LEVEL_0_O := ${LEVEL_0_C:%.c=$(ARCH_DIR)/%.o}
 
 LEVEL_0_FF_C = Ff/eul-ext.c Ff/eul-ntok.c Ff/eul-read.c Ff/eul-sock.c
@@ -69,11 +69,11 @@ LEVEL_0_C += $(LEVEL_0_FF_C)
 LEVEL_0_O += ${LEVEL_0_FF_C:%.c=$(ARCH_DIR)/%.o}
 
 LEVEL_0_MAC_EM = stream0.em macros.em syntax-0.em
-LEVEL_0_MAC_C = $(LEVEL_0_MAC_EM:%.em=%.c)
+LEVEL_0_MAC_C = $(LEVEL_0_MAC_EM:%.em=$(U2_C_DIR)/%.c)
 LEVEL_0_MAC_O = ${LEVEL_0_MAC_C:%.c=$(ARCH_DIR)/%.o}
 
 LEVEL_1_EM = $(LEVELN_EM) level-1.em
-LEVEL_1_C := $(LEVEL_1_EM:%.em=%.c)
+LEVEL_1_C := $(LEVEL_1_EM:%.em=$(U2_C_DIR)/%.c)
 LEVEL_1_O := ${LEVEL_1_C:%.c=$(ARCH_DIR)/%.o}
 
 LEVEL_1_FF_C = $(LEVEL_0_FF_C)
@@ -81,11 +81,11 @@ LEVEL_1_C += $(LEVEL_1_FF_C)
 LEVEL_1_O += ${LEVEL_1_FF_C:%.c=$(ARCH_DIR)/%.o}
 
 LEVEL_1_MAC_EM = $(LEVEL_0_MAC_EM)
-LEVEL_1_MAC_C = $(LEVEL_1_MAC_EM:%.em=%.c)
+LEVEL_1_MAC_C = $(LEVEL_1_MAC_EM:%.em=$(U2_C_DIR)/%.c)
 LEVEL_1_MAC_O = ${LEVEL_1_MAC_C:%.c=$(ARCH_DIR)/%.o}
 
 MATH_EM := double1.em double.em math.em
-MATH_C := $(MATH_EM:%.em=%.c)
+MATH_C := $(MATH_EM:%.em=$(U2_C_DIR)/%.c)
 MATH_O := ${MATH_C:%.c=$(ARCH_DIR)/%.o}
 
 MATH_FF_C = Ff/eul-dbl.c
@@ -132,43 +132,51 @@ $(MATH_SHARED_LIB): $(MATH_O)
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
 .PHONY: boot
-boot:	libtelos.i _macros.i liblevel-0.i liblevel-1.i libmath.i
+boot:	libtelos.i $(U2_C_DIR)/_macros.i liblevel-0.i liblevel-1.i libmath.i
 	@rm -f libtelos.i
 	$(MAKE) -C ../Telos boot-syntax
 	$(MAKE) boot-syntax
 
 .PHONY: boot-syntax
 boot-syntax:
-	$(U2) $(U2FLAGS) -c macros -od $(ARCH_DIR) \
-		-load_path $(U2_DIR)/Runtime \
-		-load_path $(U2_DIR)/Telos \
+	$(U2) $(U2FLAGS) -c macros \
+		--object-dir $(ARCH_DIR) \
+		--load-path $(U2_DIR)/Runtime \
+		--load-path $(U2_DIR)/Telos \
 		-l level-1
-	$(U2) $(U2FLAGS) -c syntax-0 -od $(ARCH_DIR) \
-		-load_path $(U2_DIR)/Runtime \
-		-load_path $(U2_DIR)/Telos \
+	$(U2) $(U2FLAGS) -c syntax-0 \
+		--object-dir $(ARCH_DIR) \
+		--load-path $(U2_DIR)/Runtime \
+		--load-path $(U2_DIR)/Telos \
 		-l level-1
+	$(MAKE) boot-all
+
+.PHONY: boot-all
+boot-all: $(LEVEL_0_MAC_C) $(LEVEL_0_C) $(LEVEL_1_MAC_C) $(LEVEL_1_C) $(MATH_C)
 	$(MAKE)
 
 $(LEVEL_0_LIB_I): $(LEVEL_0_MAC_EM) $(LEVEL_0_EM)
 $(LEVEL_1_LIB_I): $(LEVEL_0_MAC_EM) $(LEVEL_0_EM)
 $(MATH_LIB_I): $(MATH_EM)
 
-lib%.i : $(EUL_LIB_DIR)/lib%.i
-	@ln -s $(EUL_LIB_DIR)/$@ $@
+lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
+	@ln -s $< $@
 
-$(EUL_LIB_DIR)/lib%.i : %.em
-	$(U2) $(U2FLAGS) -ar $* -od $(ARCH_DIR) \
-		-load_path $(U2_DIR)/Telos \
-		-load_path $(U2_DIR)/Runtime \
+$(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i : %.em
+	$(U2) $(U2FLAGS) --archive $* \
+		--object-dir $(ARCH_DIR) \
+		--load-path $(U2_DIR)/Telos \
+		--load-path $(U2_DIR)/Runtime \
 		-l telos
-	@mv $(@F) $@
+	@mv $(U2_C_DIR)/$(@F) $@
 
 ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
-.PRECIOUS: %.i %.c %.h
-%.i %.c %.h : %.em
-	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
-		-load_path $(U2_DIR)/Runtime \
-		-load_path $(U2_DIR)/Telos \
+.PRECIOUS: $(U2_C_DIR)/%.i $(U2_C_DIR)/%.c $(U2_C_DIR)/%.h
+$(U2_C_DIR)/%.i $(U2_C_DIR)/%.c $(U2_C_DIR)/%.h : %.em
+	$(U2) $(U2FLAGS) -c $< \
+		--object-dir $(ARCH_DIR) \
+		--load-path $(U2_DIR)/Runtime \
+		--load-path $(U2_DIR)/Telos \
 		-l level-1
 endif
 
@@ -177,7 +185,7 @@ endif
 ###-----------------------------------------------------------------------------
 .PHONY: boot-clean
 boot-clean: clean
-	@rm -f *.[ihc]
+	@rm -rf $(U2_C_DIR)
 
 .PHONY: clean
 clean:

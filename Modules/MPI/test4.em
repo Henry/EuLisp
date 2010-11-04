@@ -23,7 +23,7 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation:
-;;    youtoo test4 -l level-1 -l mpis -ld mpicc -static
+;;    youtoo test4 -l level-1 -l mpis -ld mpicc --static
 ;;;  Run:
 ;;    edit ./mpi-configure then mpirun -p4pg mpi-configure test3
 ;;    or see Makefile

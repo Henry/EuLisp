@@ -169,22 +169,11 @@
                          *C-cc* *C-cc-flags* "-o" dest "-c" abs-file-name)))
           (notify "  Compiling ~a using ~a ..." file-name *C-cc*)
           (notify0 sys-str)
-          (or (zero? (system (string-append-with-space "mkdir -p" dest-dir)))
-              (ct-error -2 "cannot make directory ~a " dest-dir))
+          (mkdir dest-dir)
           (or (zero? (system sys-str))
               (ct-error -2 "file ~a can't be compiled correctly"
                         file-name)))
       (notify "  Module file ~a need not be recompiled." file-name))))
-
-(defun string-append-with-space l
-  (labels
-   ((loop (ll res)
-          (if (null? ll) res
-            (loop (cdr ll)
-                  (string-append
-                   res (string-append
-                        " " (convert (car ll) <string>)))))))
-   (loop (cdr l) (convert (car l) <string>))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Subsequent loading and compiling

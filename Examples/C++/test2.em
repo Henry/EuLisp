@@ -25,7 +25,7 @@
 ;;   youtoo -c test2 -l level-0
 ;;   gcc -c -I../Gc eul-cc2.c
 ;;   g++ -c eul-cc3.cc
-;;   youtoo test2 -l level-0 -fff eul-cc2 -fff eul-cc3 -recompile
+;;   youtoo test2 -l level-0 --fff eul-cc2 --fff eul-cc3 --recompile
 ;;;-----------------------------------------------------------------------------
 
 (defmodule test2

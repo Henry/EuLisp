@@ -35,14 +35,16 @@ SYS_DIRS = Vm Telos Runtime Comptime2 Youtoo
 .PHONY: static
 static:
 	@echo "COMPILING youtoo ..."
-	@cp Lib/lib*.i $(EUL_LIB_DIR)
+	@mkdir -p $(EUL_LIB_DIR)/$(U2_C_DIR)
+	@cp Lib/lib*.i $(EUL_LIB_DIR)/$(U2_C_DIR)
 	@$(call makeAll,$(SYS_DIRS),)
 	@echo "DONE"
 
 .PHONY: shared
 shared:
 	@echo "COMPILING youtoo with shared libraries ..."
-	@cp Lib/lib*.i $(EUL_LIB_DIR)
+	@mkdir -p $(EUL_LIB_DIR)/$(U2_C_DIR)
+	@cp Lib/lib*.i $(EUL_LIB_DIR)/$(U2_C_DIR)
 	@$(call makeAll,$(SYS_DIRS),$@)
 	@echo "DONE"
 
@@ -71,7 +73,7 @@ boot: $(U2_BOOT) $(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h
 	$(MAKE) -C Youtoo
 	$(MAKE) -C Comptime2 bytecode2
 	$(MAKE) -C $(EUL_DIR)/Youtoo/Tools
-	mkdir -p Lib; cp $(EUL_LIB_DIR)/lib{boot,eval,level-0,level-1,math,telos}.i Lib
+	mkdir -p Lib ; cp $(EUL_LIB_DIR)/$(U2_C_DIR)/lib{boot,eval,level-0,level-1,math,telos}.i Lib
 	rm -f {Telos,Runtime,Comptime2}/lib*.i
 	@echo "DONE"
 

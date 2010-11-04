@@ -22,21 +22,18 @@
 ###-----------------------------------------------------------------------------
 ### EuLisp virtual-machine Makefile
 ###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include ../../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
 ### Output file names
 ###-----------------------------------------------------------------------------
-
 TARGET_LIB = libfthread.a
 TARGET_LIB_I = libfthread.i
 
 ###-----------------------------------------------------------------------------
 ### Files
 ###-----------------------------------------------------------------------------
-
 LISP_MODULES = fthread.em flock.em fcsem.em
 LISP_SOURCES = fthread.c flock.c fcsem.c
 LISP_OBJECTS = fthread.o flock.o fcsem.o
@@ -48,7 +45,6 @@ OBJECTS = ${LISP_OBJECTS} ${FF_OBJECTS}
 ###-----------------------------------------------------------------------------
 ### Library object file
 ###-----------------------------------------------------------------------------
-
 .PHONY: lib
 lib:	fthread.a ${FF_OBJECTS}
 	${AR} ${TARGET_LIB} ${OBJECTS}
@@ -62,19 +58,22 @@ lib:	fthread.a ${FF_OBJECTS}
 .SUFFIXES: .c .em
 
 .em.a:
-	${U2} ${U2FLAGS} -ar $* -l level-1 -recompile
+	${U2} ${U2FLAGS} -ar $* -l level-1 --recompile
 	rm -f ${*}.a
 	ln -sf lib${*}.a ${*}.a
 
 .em.c:
-	${U2} ${U2FLAGS} $* -l level-1 -l serial -no_recompile
+	${U2} ${U2FLAGS} $* -l level-1 -l serial --no-recompile
 
 ###-----------------------------------------------------------------------------
-### Misc
+### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 .PHONY: clean
 clean:
-	rm -f ${LISP_SOURCES} ${TEST_SOURCES} ${OBJECTS}
+	@rm -rf $(ARCH_DIR)
+
+.PHONY: distclean
+distclean: clean
+	@rm -rf platforms $(U2_C_DIR)
 
 ###-----------------------------------------------------------------------------

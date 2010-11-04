@@ -35,16 +35,16 @@ TESTS_EXE = $(TESTS:%=$(ARCH_DIR)/%)
 all: $(TESTS_EXE)
 
 $(ARCH_DIR)/test1: test1.em | $(ARCH_DIR)/.
-	$(U2) ${U2FLAGS} -od $(ARCH_DIR) test1
+	$(U2) ${U2FLAGS} --object-dir $(ARCH_DIR) test1
 
 $(ARCH_DIR)/test2: test2.em | $(ARCH_DIR)/.
-	$(U2) ${U2FLAGS} -od $(ARCH_DIR) test2 -l boot
+	$(U2) ${U2FLAGS} --object-dir $(ARCH_DIR) test2 -l boot
 
 $(ARCH_DIR)/test3: test3.em | $(ARCH_DIR)/.
-	$(U2) ${U2FLAGS} -od $(ARCH_DIR) test3 -l telos
+	$(U2) ${U2FLAGS} --object-dir $(ARCH_DIR) test3 -l telos
 
 $(ARCH_DIR)/test4: test4.em | $(ARCH_DIR)/.
-	$(U2) ${U2FLAGS} -od $(ARCH_DIR) test4 -l level-1
+	$(U2) ${U2FLAGS} --object-dir $(ARCH_DIR) test4 -l level-1
 
 test: $(TESTS_EXE)
 	@$(foreach test, $(TESTS_EXE), \
@@ -57,9 +57,9 @@ test: $(TESTS_EXE)
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
-	@rm -f *.i *.c *.h
 
 .PHONY: distclean
 distclean: clean
+	@rm -rf platforms $(U2_C_DIR)
 
 ###-----------------------------------------------------------------------------

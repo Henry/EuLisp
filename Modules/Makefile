@@ -13,7 +13,7 @@ include ../Lib.$(ARCH)/Makefile
 ### Modules directories
 ###-----------------------------------------------------------------------------
 
-EXTRAS_DIRS = Bignum OS OPS5 Pipe Match Vmeta TclTk
+EXTRAS_DIRS = Bignum Case OS OPS5 Pipe Match Vmeta TclTk
 EXTRAS_DOC_DIRS = $(EXTRAS_DIRS) MPI
 
 ###-----------------------------------------------------------------------------

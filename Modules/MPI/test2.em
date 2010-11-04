@@ -23,7 +23,7 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation:
-;;    youtoo test2 -l level-1 -l mpis -ld mpicc -static
+;;    youtoo test2 -l level-1 -l mpis -ld mpicc --static
 ;;;  Run:
 ;;    mpirun -np 2 mpi-example
 ;;;-----------------------------------------------------------------------------

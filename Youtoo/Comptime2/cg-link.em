@@ -470,18 +470,19 @@
     (set-fixed-bytes module-name local-index)))
 
 (defun compute-binding (module-name binding-name)
-  (with-ct-handler (fmt "can't compute binding ~a of module ~a"
-                        binding-name module-name) binding-name
-                        (notify0 "compute-binding ~a ~a" module-name binding-name)
-                        (let* ((binding (get-lexical-binding binding-name))
-                               (origin-module-name
-                                (if (eq module-name '?)
-                                    (save-binding-module-name? binding)
-                                  module-name))
-                               (local-index (binding-local-index? binding)))
-                          (notify0 "set-fixed-byes ~a ~a ~a"
-                                   binding-name origin-module-name local-index)
-                          (set-fixed-bytes origin-module-name local-index))))
+  (with-ct-handler
+   (fmt "can't compute binding ~a of module ~a"
+        binding-name module-name) binding-name
+        (notify0 "compute-binding ~a ~a" module-name binding-name)
+        (let* ((binding (get-lexical-binding binding-name))
+               (origin-module-name
+                (if (eq module-name '?)
+                    (save-binding-module-name? binding)
+                  module-name))
+               (local-index (binding-local-index? binding)))
+          (notify0 "set-fixed-byes ~a ~a ~a"
+                   binding-name origin-module-name local-index)
+          (set-fixed-bytes origin-module-name local-index))))
 
 (defun compute-static (obj)
   ;; Static symbols
@@ -592,22 +593,25 @@
                                   (module-load-dir? module)
                                   *delimiter*
                                   file-name)))
-    (with-output-file (stream absolute-file-name)
-                      (dynamic-let  ((*c-stream* stream))
-                                    (notify0 "Writing link state of module ~a" module-name)
-                                    (write-C-file-header module state)
-                                    (write-to-C-file "  /* Declarations */\n")
-                                    (write-decls-to-C-file state)
-                                    (write-to-C-file "\n  /* Code vector and literal definitions */\n")
-                                    (do1-list write-to-C-file
-                                              (reverse (C-state-code-vector-defs? state)))
-                                    (write-to-C-file "\n  /* Initializations */\n")
-                                    (do1-list write-to-C-file
-                                              (reverse (C-state-initializations? state)))
-                                    (write-to-C-file "\n  /* Set local bindings */\n")
-                                    (do1-list write-to-C-file (reverse (C-state-globals? state)))
-                                    (do1-list write-to-C-file (reverse (C-state-statements? state)))
-                                    (write-C-file-end module state)))))
+    (mkdir *u2-C-dir*)
+    (with-output-file
+     (stream absolute-file-name)
+     (dynamic-let
+      ((*c-stream* stream))
+      (notify0 "Writing link state of module ~a" module-name)
+      (write-C-file-header module state)
+      (write-to-C-file "  /* Declarations */\n")
+      (write-decls-to-C-file state)
+      (write-to-C-file "\n  /* Code vector and literal definitions */\n")
+      (do1-list write-to-C-file
+                (reverse (C-state-code-vector-defs? state)))
+      (write-to-C-file "\n  /* Initializations */\n")
+      (do1-list write-to-C-file
+                (reverse (C-state-initializations? state)))
+      (write-to-C-file "\n  /* Set local bindings */\n")
+      (do1-list write-to-C-file (reverse (C-state-globals? state)))
+      (do1-list write-to-C-file (reverse (C-state-statements? state)))
+      (write-C-file-end module state)))))
 
 (defun write-decls-to-C-file (state)
   (let ((decls (C-state-decls? state)))
@@ -630,22 +634,25 @@
                                   (module-load-dir? module)
                                   *delimiter*
                                   file-name)))
-    (with-output-file (stream absolute-file-name)
-                      (dynamic-let  ((*c-stream* stream))
-                                    (notify "  Creating ~a ..." file-name)
-                                    (write-copyright-to-C-file module-name "C include file")
-                                    (write-to-C-file "extern LispRef ~a_bindings[]\;\n\n" C-module-name)
-                                    (write-to-C-file "/* Module binding indices */\n")
-                                    (access-table-do
-                                     (lambda (name binding)
-                                       ;; Attention -- name is ptr to C string!
-                                       ;            (write-to-C-file "#define eul_~a_~a_fn_index ~a \n"
-                                       ;                             C-module-name
-                                       (write-to-C-file "#define ~a_fn_index ~a \n"
-                                                        (as-C-string (binding-local-name? binding))
-                                                        (binding-local-index? binding)))
-                                     (module-external-env? module))
-                                    (write-to-C-file "\n\n\n/* eof */\n")))))
+    (mkdir *u2-C-dir*)
+    (with-output-file
+     (stream absolute-file-name)
+     (dynamic-let
+      ((*c-stream* stream))
+      (notify "  Creating ~a ..." file-name)
+      (write-copyright-to-C-file module-name "C include file")
+      (write-to-C-file "extern LispRef ~a_bindings[]\;\n\n" C-module-name)
+      (write-to-C-file "/* Module binding indices */\n")
+      (access-table-do
+       (lambda (name binding)
+         ;; Attention -- name is ptr to C string!
+         ;            (write-to-C-file "#define eul_~a_~a_fn_index ~a \n"
+         ;                             C-module-name
+         (write-to-C-file "#define ~a_fn_index ~a \n"
+                          (as-C-string (binding-local-name? binding))
+                          (binding-local-index? binding)))
+       (module-external-env? module))
+      (write-to-C-file "\n\n\n/* eof */\n")))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Compute C signature string
@@ -682,20 +689,23 @@
                                   *delimiter*
                                   file-name))
          (n (+ (list-size (module-all-used-module-names? module)) 1)))
-    (with-output-file (stream absolute-file-name)
-                      (dynamic-let ((*c-stream* stream))
-                                   (notify "  Creating hook ~a ..." file-name)
-                                   (write-copyright-to-C-file module-name "C hook file")
-                                   (write-to-C-file "\#include \"eulisp.h\"\n\n")
-                                   (write-to-C-file "\n/* Initialize module ~a ... */\n" module-name)
-                                   (write-to-C-file "extern void initialize_module_~a()\;\n" C-module-name)
-                                   (write-to-C-file "extern LispRef ~a_bindings[]\;\n" C-module-name)
-                                   (write-to-C-file "\n/* Run application ~a ... */\n" module-name)
-                                   (write-to-C-file "void run_application()\n{\n")
-                                   (write-to-C-file "  initialize_module_~a()\;\n" C-module-name)
-                                   (write-to-C-file "  execute_lambda(~a_bindings[0])\;\n}"
-                                                    C-module-name)
-                                   (write-to-C-file "\n\n\n/* eof */\n")))))
+    (mkdir *u2-C-dir*)
+    (with-output-file
+     (stream absolute-file-name)
+     (dynamic-let
+      ((*c-stream* stream))
+      (notify "  Creating hook ~a ..." file-name)
+      (write-copyright-to-C-file module-name "C hook file")
+      (write-to-C-file "\#include \"eulisp.h\"\n\n")
+      (write-to-C-file "\n/* Initialize module ~a ... */\n" module-name)
+      (write-to-C-file "extern void initialize_module_~a()\;\n" C-module-name)
+      (write-to-C-file "extern LispRef ~a_bindings[]\;\n" C-module-name)
+      (write-to-C-file "\n/* Run application ~a ... */\n" module-name)
+      (write-to-C-file "void run_application()\n{\n")
+      (write-to-C-file "  initialize_module_~a()\;\n" C-module-name)
+      (write-to-C-file "  execute_lambda(~a_bindings[0])\;\n}"
+                       C-module-name)
+      (write-to-C-file "\n\n\n/* eof */\n")))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Formatted write to C file
@@ -725,8 +735,8 @@
     (write-to-C-file "LispRef ~a_bindings[~a]\;\n" C-module-name n)
     (write-to-C-file "\n/* Foreign functions */\n")
     (do1-list (lambda (binding)
-                ;;          (write-to-C-file "extern ~a\;\n\n"
-                ;;                           (compute-C-signature-string binding))
+                ;; (write-to-C-file "extern ~a\;\n\n"
+                ;;   (compute-C-signature-string binding))
                 (write-ff-stub-to-C-file binding))
               (module-foreign-functions? module))
     (write-to-C-file "\n/* Initialize module only once */\n")

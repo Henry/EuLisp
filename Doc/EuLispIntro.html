@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*An Introduction to EuLisp, EuXLisp and Youtoo*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-10-29 12:43:53 BST"/>
+<meta name="generated" content="2010-11-04 14:51:13 GMT"/>
 <meta name="author" content="of original Euscheme notes Russell Bradford"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -245,41 +245,43 @@ to see the command-line options type
 
 
 
-<pre class="src src-eulisp"><span style="color: #000000;">Bin.x86_64/youtoo</span> -help
-<span style="color: #000000;">Usage:</span> youtoo [<span style="color: #0000ff;">&lt;options&gt;</span>] &lt;source-file(<span style="color: #0000ff; font-weight: bold;">s</span>)&gt; [<span style="color: #0000ff;">&lt;options&gt;</span>]
--help                 --  show usage
--version              --  show current release
--params               --  show current parameter setting
--load_path <span style="color: #0000ff;">&lt;dir&gt;</span>      --  add <span style="color: #0000ff;">&lt;dir&gt;</span> to load path
--c                    --  create <span style="color: #000000;">C</span> linkable module file only
--ar                   --  create <span style="color: #000000;">C</span> linkable library file
--l <span style="color: #0000ff;">&lt;lib&gt;</span>              --  specify <span style="color: #000000;">C</span> linkable library
--L <span style="color: #0000ff;">&lt;dir&gt;</span>              --  extent <span style="color: #000000;">C</span> linkable library load path
--fff <span style="color: #0000ff;">&lt;file&gt;</span>           --  specify <span style="color: #000000;">C</span> foreign function file
--ffl <span style="color: #0000ff;">&lt;lib&gt;</span>            --  specify <span style="color: #000000;">C</span> foreign function library
--o <span style="color: #0000ff;">&lt;file&gt;</span>             --  destination file
--od <span style="color: #0000ff;">&lt;dir&gt;</span>             --  destination directory for object files
---script <span style="color: #0000ff;">&lt;file&gt;</span>       --  script mode
--silent               --  silent mode
--verbose              --  verbose mode
--no_warnings          --  no warning messages
--no_errors            --  no <span style="font-weight: bold;">error messages</span>
--no_else              --  omit warning for if without else
--redefine             --  redefine imported bindings
--no_inline            --  ignore inline declarations
--stop_after <span style="color: #0000ff;">&lt;phase&gt;</span>   --  stop after compilation phase (<span style="color: #0000ff; font-weight: bold;">e.g.</span> read)
--recompile            --  recompile imported modules
--no_recompile         --  no automatic recompilation of imports
--no_gc                --  garbage collection library not linked
--cc                   --  used <span style="color: #000000;">C</span> compiler
--ld                   --  used <span style="color: #000000;">C</span> linker
--ar_cmd               --  used <span style="color: #000000;">C</span> ar command
--ranlib_cmd           --  used <span style="color: #000000;">C</span> ranlib command
--cflags               --  additional <span style="color: #000000;">C</span> flag
--static               --  no shared libraries used
--g                    --  <span style="color: #000000;">C</span> debug info
--i                    --  force interpretation mode
--no_ct_handlers       --  no compile-time <span style="font-weight: bold;">error handling</span>
+<pre class="src src-eulisp"><span style="color: #000000;">Bin.x86_64/youtoo</span> --help
+<span style="color: #000000;">Usage:</span> youtoo [<span style="color: #000000;">OPTION</span>]... [<span style="color: #000000;">FILE</span>]...
+  -h --help               <span style="color: #000000;">Print</span> this usage information.
+  -V --version            <span style="color: #000000;">Print</span> current release.
+  -p --params             <span style="color: #000000;">Print</span> current parameter setting.
+     --load-path dir      <span style="color: #000000;">Add</span> dir to load path.
+  -c --c-module           <span style="color: #000000;">Create</span> <span style="color: #000000;">C</span> linkable module file only.
+     --stand-alone        <span style="color: #000000;">Create</span> a stand-alone application.
+     --archive            <span style="color: #000000;">Create</span> <span style="color: #000000;">C</span> linkable library file.
+  -l --library lib        <span style="color: #000000;">Link</span> with library lib.
+  -L --library-path dir   <span style="color: #000000;">Add</span> dir to library load path.
+     --fff file           <span style="color: #000000;">Provide</span> <span style="color: #000000;">C</span> foreign function file.
+     --ffl lib            <span style="color: #000000;">Provide</span> <span style="color: #000000;">C</span> foreign function library lib.
+  -o --object file        <span style="color: #000000;">Generated</span> object file.
+  -O --object-dir dir     <span style="color: #000000;">Set</span> destination directory for object files to dir.
+  -s --script file        <span style="color: #000000;">Read</span> and execute script from file.
+  -m --module module-name <span style="color: #000000;">Read</span> and execute module from file module-name.em.
+  -q --quiet              <span style="color: #000000;">Print</span> no messages, prompts or values..
+  -v --verbose            <span style="color: #000000;">Set</span> verbose mode.
+     --no-warnings        <span style="color: #000000;">Set</span> no warning messages.
+     --no-errors          <span style="color: #000000;">Set</span> no <span style="font-weight: bold;">error messages.</span>
+     --no-else            <span style="color: #000000;">Set</span> no warning for if without else.
+     --redefine           <span style="color: #000000;">Redefine</span> imported bindings.
+     --no-inline          <span style="color: #000000;">Ignore</span> inline declarations.
+     --stop-after phase   <span style="color: #000000;">Stop</span> after specified compilation phase (<span style="color: #0000ff; font-weight: bold;">e.g.</span> read).
+     --recompile          <span style="color: #000000;">Recompile</span> imported modules.
+     --no-recompile       <span style="color: #000000;">No</span> automatic recompilation of imports.
+     --no-gc              <span style="color: #000000;">Link</span> without garbage collection library.
+     --cc cc              <span style="color: #000000;">Set</span> <span style="color: #000000;">C</span> compiler to cc.
+     --ld ld              <span style="color: #000000;">Set</span> <span style="color: #000000;">C</span> linker to ld.
+     --ar-cmd ar          <span style="color: #000000;">Set</span> <span style="color: #000000;">C</span> ar command to ar.
+     --ranlib-cmd ranlib  <span style="color: #000000;">Set</span> <span style="color: #000000;">C</span> ranlib command to ranlib.
+     --cflags             <span style="color: #000000;">Set</span> ddditional <span style="color: #000000;">C</span> flags.
+     --static             <span style="color: #000000;">Link</span> with static libraries.
+  -g --debug              <span style="color: #000000;">Generate</span> <span style="color: #000000;">C</span> debug information.
+  -i --interpret          <span style="color: #000000;">Set</span> interpretation mode.
+     --no-ct-handlers     <span style="color: #000000;">Set</span> no compile-time <span style="font-weight: bold;">error handling.</span>
 </pre>
 
 
@@ -3575,7 +3577,7 @@ See <i>Examples/Misc/script.em</i>.
 <div id="postamble">
 <p class="author"> Author: of original Euscheme notes Russell Bradford
 </p>
-<p class="date"> Date: 2010-10-29 12:43:53 BST</p>
+<p class="date"> Date: 2010-11-04 14:51:13 GMT</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

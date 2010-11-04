@@ -23,7 +23,7 @@
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;   f77 -c eul-f1.f
-;;   youtoo test1 -l level-0 -fff eul-f1
+;;   youtoo test1 -l level-0 --fff eul-f1
 ;;;-----------------------------------------------------------------------------
 (defmodule test1
   (syntax (syntax-0)

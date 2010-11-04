@@ -38,10 +38,10 @@ TESTS_EXE = $(TESTS:%=$(ARCH_DIR)/%)
 
 ###-----------------------------------------------------------------------------
 
-U2TKFLAGS = -cflags -ltk$(EUL_TK_VERSION) -cflags -ltcl$(EUL_TK_VERSION)
+U2TKFLAGS = --cflags -ltk$(EUL_TK_VERSION) --cflags -ltcl$(EUL_TK_VERSION)
 
-$(ARCH_DIR)/% : %.em $(EUL_LIB_DIR)/libtcltk.i | $(ARCH_DIR)/.
-	${U2} $(U2FLAGS) $< -od $(ARCH_DIR) ${U2TKFLAGS} -l level-1 -l tcltk
+$(ARCH_DIR)/% : %.em $(EUL_LIB_DIR)/$(U2_C_DIR)/libtcltk.i | $(ARCH_DIR)/.
+	${U2} $(U2FLAGS) $< --object-dir $(ARCH_DIR) ${U2TKFLAGS} -l level-1 -l tcltk
 
 all: $(TESTS_EXE)
 
@@ -52,10 +52,9 @@ all: $(TESTS_EXE)
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
-	@rm -f *.{c,h,i} *_.{c,h,i}
 
 .PHONY: distclean
 distclean: clean
-	@rm -rf platforms
+	@rm -rf platforms $(U2_C_DIR)
 
 ###-----------------------------------------------------------------------------
