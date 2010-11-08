@@ -71,7 +71,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmethod print-ces ((ce-man <ce-manager>))
   (sformat ops-out  "~a Condition Elements: ~%" (size (cond-els ce-man)))
-  (labels ((loop (ces)
+  (letfuns ((loop (ces)
                  (cond
                    ((null? ces))
                    (t
@@ -131,7 +131,7 @@
 
 (defun exists (cond-els ce)
   ;;(print "exists" nl)
-  (labels ((loop (rest)
+  (letfuns ((loop (rest)
                  (cond
                    ((null? rest) ())
                    (t
@@ -289,7 +289,7 @@
 (defun const-match (wme ce)
   ;;(print "const-match" nl)
   (let ((const-tests (ce-c-tests ce)))
-    (labels ((test (tests)
+    (letfuns ((test (tests)
                    (cond
                      ((null? tests) t)
                      (t
@@ -316,7 +316,7 @@
 (defun test-succeeds (x pred y)
   ;;(format "test-succeeds: ~a ~a ~a~%" x pred y)
   (let ((res (cond
-               ((list? y) (labels ((find-success (val val-list)
+               ((list? y) (letfuns ((find-success (val val-list)
                                                  (cond
                                                    ((null? val-list) ())
                                                    ((eql val (car val-list)) t) ; only pred allowed
@@ -365,7 +365,7 @@
 (defun match-remove-njoin (ts ce)
   ;;(sformat ops-out "match-remove-njoin: ~a~%" ts)
   (let ((num-matches (ce-num-matched ce)))
-    (labels ((rem-wme (ts match-list res)
+    (letfuns ((rem-wme (ts match-list res)
                       (cond
                         ((null? match-list) res)
                         ((binary= (caar match-list) ts)

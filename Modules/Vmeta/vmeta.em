@@ -207,7 +207,7 @@
 ;;   Baker's `!'.
 ;; * I wonder if it is worth it to worry about name capture?
 (defun compile-match (x)
-  (labels
+  (letfuns
    ((helper
      (x in-seq-p)
      (cond

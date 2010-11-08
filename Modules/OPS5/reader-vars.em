@@ -48,7 +48,7 @@
 (defun get-join-vars (prod-rest)
   ;;(sformat ops-out "get-join-vars: ~a~%" prod-rest)
   ;; loop to determine join variables
-  (let ((res (labels ((loop (rest vars join-vars new-prod)
+  (let ((res (letfuns ((loop (rest vars join-vars new-prod)
                             ;;(format "next elt: ~a~%" (car rest))
                             (cond
                               ((eql '--> (car rest))
@@ -84,7 +84,7 @@
 
 (defun split-symbols (ce)
   ;;(sformat ops-out "split-symbols: ~a~%" ce)
-  (labels
+  (letfuns
    ((loop (rest)
           (cond
             ((null? rest)
@@ -154,7 +154,7 @@
   ;;(sformat ops-out "old: ~a first: ~a last: ~a~%" old-str first last)
   (let ((end (if last (+ (car last) 1) (size old-str)))
         (init-str (make <string> size: 0)))
-    (labels
+    (letfuns
      ((loop (indx new-str)
             (cond
               ((eql indx end) new-str)

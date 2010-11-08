@@ -193,7 +193,7 @@ indentation for the following lines until the end of the list."))))
       (cons
        (concat
         "(" (regexp-opt
-             '("if" "let/cc" "labels" "progn" "unwind-protect" "apply"
+             '("if" "let/cc" "letfuns" "labels" "progn" "unwind-protect" "apply"
                "cond" "and" "or" "block" "return-from"  "let" "let*"
                "while") t) "\\>")
        '(1 font-lock-builtin-face))

@@ -115,7 +115,8 @@
 *** DONE Add =when= and =unless= conditional expressions
     CLOSED: [2010-07-02 Fri 10:16]
 *** TODO Add =while= loop construct
-*** TODO Consider renaming =labels= -> =flet*=
+*** DONE Rename =labels= -> =letfuns=
+    CLOSED: [2010-11-08 Mon 22:42]
 *** TODO Consider including =append=
     either in generic form or just for lists and perhaps strings.
 *** DONE Add support for Level-0 style super-class specification
@@ -327,6 +328,7 @@
     + [X] Change all uses of =level1= =level-1=
     + [X] Remove =level1=
 
+*** TODO Rename =labels= -> =letfuns=
 * EuXLisp
 *** DONE Finish reformatting the C source files
     CLOSED: [2010-10-23 Sat 19:03]
@@ -368,6 +370,8 @@
     See =Youtoo/Runtime/double.em=
 *** TODO Consider replacing the built-in GC with =xalloc= in Eu2C
 
+*** DONE Rename =labels= -> =letfuns=
+    CLOSED: [2010-11-08 Mon 22:43]
 * Eu2C
 *** DONE Hack CMUCL to write exponent "e"
     CLOSED: [2010-08-30 Mon 11:15]
@@ -470,6 +474,8 @@
     + Rename <slot-description> as <slot> (and all other such references)
     + To remove <structure> and <structure-class>
 
+*** DONE Rename =labels= -> =letfuns=
+    CLOSED: [2010-11-08 Mon 22:43]
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]

@@ -29,7 +29,7 @@
    syntax (syntax-0 cl-ext))
 
 (defun apropos (word table)
-  (labels ((get-words-with-char
+  (letfuns ((get-words-with-char
             (i)
             (remove-if
              (lambda (word-in-table)

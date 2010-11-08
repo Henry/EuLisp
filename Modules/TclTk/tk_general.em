@@ -126,7 +126,7 @@
 
 (defun as-c-options (l . clientdata)
   (let (x auxlist)
-    (labels
+    (letfuns
      ((loop (ll i res)
             (if (null? ll)
                 (cons i (reverse res))
@@ -219,7 +219,7 @@
 
 (defun as-c-accessors (l)
   (let (x)
-    (labels
+    (letfuns
      ((loop (ll res)
             (cond ((null? ll)
                    (list (reverse res) ()))

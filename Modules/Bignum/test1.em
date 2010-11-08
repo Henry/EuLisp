@@ -64,7 +64,7 @@
 (format "19: ... == ~a\n" (fact 100))
 
 (defun fact2 (x)
-  (labels
+  (letfuns
    ((loop (xx res)
           (if (< xx two)
               res

@@ -19,6 +19,9 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Towers of Hanoi
+;;;  Description:
+;;    Example use of classes in the algorithm to solve the "Towers of Hanoi"
+;;    problem.
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
@@ -44,7 +47,7 @@
    (blocks accessor: tower-blocks)))
 
 (defun build-tower (x n)
-  (labels ((loop (i res)
+  (letfuns ((loop (i res)
                  (if (= i 0) res
                    (loop (- i 1) (cons i res)))))
           ((setter tower-blocks) x (loop n ()))
@@ -85,7 +88,7 @@
   (if (= n 1)
       (progn
         (push x2 (pop x1))
-        (print x1 nl) (print x2 nl) (print x3 nl nl))
+        (print x1 nl x2 nl x3 nl nl))
     (progn
       (move (- n 1) x1 x3 x2)
       (move 1 x1 x2 x3)
@@ -101,7 +104,7 @@
     (build-tower x1 *max-tower-height*)
     (build-tower x2 0)
     (build-tower x3 0)
-    (print x1 nl) (print x2 nl) (print x3 nl nl)
+    (print x1 nl x2 nl x3 nl nl)
     (move *max-tower-height* x1 x2 x3)))
 
 (hanoi)

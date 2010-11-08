@@ -39,30 +39,31 @@
          (pred-name (make <symbol> name: pred-str))
          (export-names ()))
     (labels
-     ((def-syntax-slots (struct-name slots)
-                        (if slots
-                            (let* ((str (symbol-name struct-name))
-                                   (pre-str (concatenate
-                                             (substring str 1
-                                                        (- (string-size str) 1))
-                                             "-"))
-                                   (slot-name (symbol-name (car slots)))
-                                   (keywd (make <keyword> name: slot-name))
-                                   (reader-name
-                                    (make <symbol>
-                                          name: (concatenate pre-str slot-name "?")))
-                                   (writer-name
-                                    (make <symbol>
-                                          name: (concatenate pre-str slot-name "!"))))
-                              (setq export-names
-                                    (cons reader-name (cons writer-name export-names)))
-                              (cons (list (car slots)
-                                          keyword: keywd
-                                          default: ()
-                                          reader: reader-name
-                                          writer: writer-name)
-                                    (def-syntax-slots struct-name (cdr slots))))
-                          ())))
+     ((def-syntax-slots
+       (struct-name slots)
+       (if slots
+           (let* ((str (symbol-name struct-name))
+                  (pre-str (concatenate
+                            (substring str 1
+                                       (- (string-size str) 1))
+                            "-"))
+                  (slot-name (symbol-name (car slots)))
+                  (keywd (make <keyword> name: slot-name))
+                  (reader-name
+                   (make <symbol>
+                         name: (concatenate pre-str slot-name "?")))
+                  (writer-name
+                   (make <symbol>
+                         name: (concatenate pre-str slot-name "!"))))
+             (setq export-names
+                   (cons reader-name (cons writer-name export-names)))
+             (cons (list (car slots)
+                         keyword: keywd
+                         default: ()
+                         reader: reader-name
+                         writer: writer-name)
+                   (def-syntax-slots struct-name (cdr slots))))
+         ())))
      ;; labels body ...
      `(progn
         (defclass ,cl-name ,super

@@ -266,7 +266,7 @@
 (defun test-succeeds (x pred y)
   ;;(format "test-succeeds: ~a ~a ~a~%" x pred y)
   (let ((res (cond
-               ((list? y) (labels ((find-success (val val-list)
+               ((list? y) (letfuns ((find-success (val val-list)
                                                  (cond
                                                    ((null? val-list) ())
                                                    ((eql val (car val-list)) t) ; only pred allowed

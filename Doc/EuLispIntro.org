@@ -780,7 +780,7 @@
   #+BEGIN_SRC eulisp
   (defmacro while (test .  body)
     `(let/cc {break}
-       (labels
+       (letfuns
          ((loop ()
             (when ,test
                   ,@body
@@ -848,10 +848,10 @@
     the two generic functions =binary<= and =binary==.
 
 *** Local Functions
-    Just like =let= introduces local variables, the =labels= form can introduce
+    Just like =let= introduces local variables, the =letfuns= form can introduce
     local functions.
     #+BEGIN_SRC eulisp
-    (labels
+    (letfuns
       ((foo (a b)
          ...  (bar a) ...  )
        (bar (x)
@@ -861,14 +861,14 @@
       ...
     )
     #+END_SRC
-    The =labels= takes a list of function definitions.  They may be self and
+    The =letfuns= takes a list of function definitions.  They may be self and
     mutually recursive.  These functions may be used within the body of the
-    =labels= just like global functions.  Iterating functions are often most
-    conveniently written in terms of =labels= as the bodies of the function
+    =letfuns= just like global functions.  Iterating functions are often most
+    conveniently written in terms of =letfuns= as the bodies of the function
     definitions can refer to local variables:
     #+BEGIN_SRC eulisp
     (let ((a 1))
-      (labels
+      (letfuns
         ((addit (x)
            (if (null x)
                ()
@@ -1172,7 +1172,7 @@
     + =lambda=
     + =let=
     + =let*=
-    + =labels=
+    + =letfuns=
     + =setq=
     + =if=
     + =cond=

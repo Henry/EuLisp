@@ -954,21 +954,21 @@ is returned as the value of the block named by \scref{identifier}.
 \seealso%
 \specopref{block}.
 
-\specop{labels}
+\specop{letfuns}
 %
 \Syntax
-\defSyntax{labels}{
+\defSyntax{letfuns}{
 \begin{syntax}
-    \scdef{labels-form}: \ra{} \classref{object} \\
-    \>  ( \specopref{labels} \\
+    \scdef{letfuns-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{letfuns} \\
     \>\>  ( \scseqref{function-definition} ) \\
-    \>\>  \scref{labels-body} ) \\
+    \>\>  \scref{letfuns-body} ) \\
     \scdef{function-definition}: \\
     \>  ( \scref{identifier} \scref{lambda-list} \scref{body} ) \\
-    \scdef{labels-body}: \\
+    \scdef{letfuns-body}: \\
     \>  \scseqref{form}
 \end{syntax}}%
-\showSyntaxBox{labels}
+\showSyntaxBox{letfuns}
 %
 \begin{arguments}
     \item[identifier] A symbol naming a new inner-lexical binding to be
@@ -980,20 +980,20 @@ is returned as the value of the block named by \scref{identifier}.
 
     \item[body] A sequence of forms.
 
-    \item[labels-body] A sequence of forms.
+    \item[letfuns-body] A sequence of forms.
 \end{arguments}
 %
 \result%
-The \specopref{labels} operator provides for local mutually recursive function
+The \specopref{letfuns} operator provides for local mutually recursive function
 creation.  Each \scref{identifier} is bound to a new inner-lexical binding
 initialized with the function constructed from \scref{lambda-list} and
 \scref{body}.  The scope of the \scref{identifier}s is the entire
-\specopref{labels} form\index{general}{scope and extent!in \specopref{labels}
+\specopref{letfuns} form\index{general}{scope and extent!in \specopref{letfuns}
     expressions}.  The \scref{lambda-list} is either a single variable or a list
-of variables---see \specopref{lambda}.  Each form in \scref{labels-body} is
+of variables---see \specopref{lambda}.  Each form in \scref{letfuns-body} is
 evaluated in order in the lexical environment extended with the bindings of the
 \scref{identifier}s.  The result of evaluating the last form in
-\scref{labels-body} is returned as the result of the \specopref{labels} form.
+\scref{letfuns-body} is returned as the result of the \specopref{letfuns} form.
 
 \specop{let}
 %
@@ -1015,7 +1015,7 @@ evaluated in order in the lexical environment extended with the bindings of the
 %
 \remarks%
 The optional \scref{identifier}\/ denotes that the let form can be called from
-within its \scref{body}.  This is an abbreviation for \specopref{labels} form in
+within its \scref{body}.  This is an abbreviation for \specopref{letfuns} form in
 which \scref{identifier} is bound to a function whose parameters are the
 identifiers of the \scref{binding}s of the \specopref{let}, whose body is that of
 the \specopref{let} and whose initial call passes the values of the initializing
@@ -1065,7 +1065,7 @@ the \specopref{let} form.
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     00\= \kill
-    (\specopref{labels}\\
+    (\specopref{letfuns}\\
     \>(\=(\scref{var}$_0$ (\scref{var}$_1$ \scref{var}$_2$ \ldots) \\
     \>\>\scref{body})) \\
     \>(\scref{var}$_0$ \scref{form}$_1$ () \ldots))
@@ -1219,7 +1219,7 @@ dynamic extent of the target of control transfer and the current
 {\codeExample
 (progn
   (let/cc k1
-    (labels
+    (letfuns
       ((loop
          (let/cc k2
            (unwind-protect (k1 10) (k2 99))
@@ -1236,7 +1236,7 @@ of \specopref{unwind-protect} and of a difference between the semantics of
 \eulisp\ and some other Lisps.  Stepping through the evaluation of this form:
 {\tt k1} is bound to the continuation of its \specopref{let/cc} form; a
 recursive function named {\tt loop} is constructed, {\tt loop} is called from
-the body of the \specopref{labels} form; {\tt k2} is bound to the continuation
+the body of the \specopref{letfuns} form; {\tt k2} is bound to the continuation
 of its \specopref{let/cc} form; \specopref{unwind-protect} calls {\tt k1}; the
 after forms of \specopref{unwind-protect} are evaluated in order; {\tt k2} is
 called; {\tt loop} is called; etc..  This program loops indefinitely.
@@ -1394,7 +1394,7 @@ section~\ref{object-syntax-summary}.
 \showSyntax{and}
 \showSyntax{or}
 \showSyntax{let/cc}
-\showSyntax{labels}
+\showSyntax{letfuns}
 \showSyntax{progn}
 \showSyntax{unwind-protect}
 \showSyntax{apply}

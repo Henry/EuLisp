@@ -872,6 +872,32 @@
              (labelssetq (cdr decls)))))
 
 ;;;-----------------------------------------------------------------------------
+;;; Install LETFUNS expander
+;;;-----------------------------------------------------------------------------
+(install-expr-expander
+ 'letfuns
+ (lambda (x env e)
+   (with-ct-handler
+    "bad letfuns syntax" x
+    (let ((decls (car (cdr x)))
+          (body (cdr (cdr x))))
+      (expand-expr `(let ,(letfunsvar decls)
+                      ,@(letfunssetq decls)
+                      ,@body) env)))))
+
+(defun letfunsvar (decls)
+  (and decls
+       (cons (list (car (car decls)) ())
+             (letfunsvar (cdr decls)))))
+
+(defun letfunssetq (decls)
+  (and decls
+       (cons `(setq ,(car (car decls))
+                    (lambda ,(car (cdr (car decls)))
+                      ,@(cdr (cdr (car decls)))))
+             (letfunssetq (cdr decls)))))
+
+;;;-----------------------------------------------------------------------------
 ;;; Expand LOCAL-STATIC-VARS
 ;;;-----------------------------------------------------------------------------
 (defun expand-local-static-vars (var-names init-forms env)

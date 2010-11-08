@@ -130,7 +130,7 @@
         (ops-warn "Literalize statement after start of productions"))
   (add-class reader (car stment))
   (let ((class-name (car stment)))
-    (labels ((loop (attribs index)
+    (letfuns ((loop (attribs index)
                    (cond
                      ((null? attribs) reader)
                      (t
@@ -174,7 +174,7 @@
          (curr-prod (make-production prod-name)))
     ;;(format "Prod: ~a~%" new-prod)
     (set-prods reader (cons curr-prod (prods reader)))
-    (labels ((get-ce (ce-rest is-neg)
+    (letfuns ((get-ce (ce-rest is-neg)
                      (let ((attrib-table (lits reader)))
                        (cond
                          ((eql (car ce-rest) '-->)

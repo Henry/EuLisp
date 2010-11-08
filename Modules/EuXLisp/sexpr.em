@@ -112,7 +112,7 @@
 (defun recv-vector (stream)
   (let* ((len (recv-int stream))
          (vec (make-vector len)))
-    (labels ((loop (n)
+    (letfuns ((loop (n)
                    (when (< n len)
                          ((setter vector-ref) vec n (recv stream))
                          (loop (+ n 1)))))

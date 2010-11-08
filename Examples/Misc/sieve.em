@@ -35,7 +35,7 @@
     (cons m (interval-list (+ 1 m) n))))
 
 (defun sieve (l)
-  (labels
+  (letfuns
    ((remove-multiples (n l)
                       (if (null? l)
                           ()

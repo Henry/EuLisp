@@ -40,7 +40,7 @@
    (blocks accessor tower-blocks)))
 
 (defun build-tower (x n)
-  (labels ((loop (i res)
+  (letfuns ((loop (i res)
                  (if (= i 0) res
                    (loop (- i 1) (cons i res)))))
           ((setter tower-blocks) x (loop n ()))

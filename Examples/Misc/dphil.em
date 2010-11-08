@@ -42,7 +42,7 @@
 (deflocal *chopsticks* (make-vector *no-chopsticks*))
 
 (defun initialize-dining-philosophers ()
-  (labels
+  (letfuns
    ((loop (i)
           (if (< i 5)
               (let ((lk (make <lock>)))
@@ -56,7 +56,7 @@
 ;;; Perform dinner of one philosopher
 ;;;-----------------------------------------------------------------------------
 (defun philosopher (id)
-  (labels
+  (letfuns
    ((loop (i)
           (if (< i *no-meals*)
               (progn
@@ -108,7 +108,7 @@
     ()))
 
 (defun start-dining-philosophers ()
-  (labels
+  (letfuns
    ((create-threads
      (n l)
      (if (= n 0) l

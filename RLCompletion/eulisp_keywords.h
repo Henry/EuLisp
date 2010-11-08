@@ -37,7 +37,7 @@ char *eulisp_keywords[] =
     "map-list",
     "block",
     "return-from",
-    "labels",
+    "letfuns",
     "generic-lambda",
     "method-lambda",
     "syntax",

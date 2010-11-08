@@ -48,7 +48,7 @@
 ((setter vector-ref) *board* 5 0)
 
 (defun last-position ()
-  (labels
+  (letfuns
    ((loop (i)
           (cond ((= i (vector-size *board*)) 0)
                 ((= 1 (vector-ref *board* i)) i)
@@ -70,7 +70,7 @@
          ((setter vector-ref) *board* (vector-ref *b i) 0)
          ((setter vector-ref) *board* (vector-ref *c i) 1)
          ((setter vector-ref) *sequence* depth i)
-         (labels
+         (letfuns
           ((loop (j d)
                  (if (or (= j 36) (try j d))
                      ()

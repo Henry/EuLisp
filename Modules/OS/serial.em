@@ -501,7 +501,7 @@
              direct-keywords: keys)))))
 
 (defun get-class (name)
-  (labels
+  (letfuns
    ((loop (cl)
           (if (eq (class-name cl) name)
               cl
@@ -587,7 +587,7 @@
 (defun eul-serial-read-bytes (os n eos-error? eos-value)
   (let ((s (stream-source os))
         (str (make <string> size: n)))
-    (labels
+    (letfuns
      ((loop (i)
             (if (< i n)
                 (let ((c (generic-read s eos-error? eos-value)))
@@ -620,7 +620,7 @@
 ;;      (select-list fun c)
 ;;      (call-next-method)))
 ;;  (defun select-list (pred l . args)
-;;    (labels
+;;    (letfuns
 ;;     ((loop (ll res)
 ;;          (if (null? ll)
 ;;              (reverse-list res)

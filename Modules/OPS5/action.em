@@ -100,7 +100,7 @@
   (let* ((class (mk-wme-name action))
          (a-vals (mk-attribs action))
          (new-attrib-vals
-          (labels
+          (letfuns
            ((set-attribs (alist newlist)
                          (cond
                            ((null? alist) newlist)
@@ -156,7 +156,7 @@
   ;;(print "*** remove-action" nl)
   (let ((ce-ts (ce-ts-list pi))
         (ce-nums (rm-elt-desigs action)))
-    (labels ((loop (elt-desigs)
+    (letfuns ((loop (elt-desigs)
                    (cond
                      ((null? elt-desigs))
                      (t (let ((ce-des (car elt-desigs)))
@@ -179,7 +179,7 @@
          (class (wme-class-name wme))
          (prev-attrib-vals (wme-attrib-vals wme))
          (new-attrib-vals
-          (labels
+          (letfuns
            ((set-attribs (alist newlist)
                          ;;(print alist nl)
                          (cond

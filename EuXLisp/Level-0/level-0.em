@@ -50,6 +50,7 @@
            defmethod
            quote
            lambda
+           .l
            progn
            let
            let*
@@ -64,7 +65,7 @@
            apply
            block
            return-from
-           labels
+           letfuns
            generic-lambda
            method-lambda
 
@@ -380,7 +381,9 @@
            <bad-type>
            <unbound-error>
            <compilation-error>
+           <compilation-general-error>
            <macro-error>
+           <socket-error>
            <syntax-error>
            <user-interrupt>
 

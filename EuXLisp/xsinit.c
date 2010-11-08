@@ -45,7 +45,7 @@ LVAL s_direct_slots, s_direct_keywords, s_name, s_default, s_requiredp;
 LVAL s_keyword;
 LVAL s_abstractp, s_predicate, s_constructor, s_keywords, s_superclasses;
 LVAL s_reader, s_writer, s_accessor, s_class, s_defclass, s_find_slot_index;
-LVAL s_getivar, s_setivar, s_list, s_lambda, s_defun, s_object, s_value;
+LVAL s_getivar, s_setivar, s_list, s_lambda, s_lda, s_defun, s_object, s_value;
 LVAL s_backtracep, s_eq, s_eqv, s_equal, s_equals;
 LVAL s_import, s_only, s_except, s_rename, s_rename_flag;
 LVAL s_syntax, s_export;
@@ -500,6 +500,7 @@ void xlsymbols()
     s_setivar = xlenter("%SETIVAR");
     s_list = xlenter("list");
     s_lambda = xlenter("lambda");
+    s_lda = xlenter(".l");
     s_defun = xlenter("defun");
     s_object = xlenter("object");
     s_value = xlenter("value");

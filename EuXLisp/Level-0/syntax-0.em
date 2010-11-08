@@ -25,10 +25,11 @@
 (defmodule syntax-0
   (import (root
            macros
-           thread)
+           thread
+           condition)
    export (block
            return-from
-           labels
+           letfuns
            when
            unless
            while
@@ -62,7 +63,7 @@
          (car binding)
          (cons 'lambda (cdr binding))))
 
-(defmacro labels (bindings . body)
+(defmacro letfuns (bindings . body)
   `(letrec
     ,(map-list letrec-binding bindings)
     ,@body))

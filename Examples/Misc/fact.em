@@ -29,7 +29,7 @@
    export (fact))
 
 (defun fact (x)
-  (labels
+  (letfuns
    ((loop (xx res)
           (if (< xx 2)
               res

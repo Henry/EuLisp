@@ -42,7 +42,7 @@
 
 (defun fill-vector (vec)
   (let ((n (size vec)))
-    (labels
+    (letfuns
      ((loop (i)
             (if (< n i)
                 ()

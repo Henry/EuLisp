@@ -104,7 +104,7 @@
   (set-prod-pos-ces prod (append (prod-pos-ces prod) (list ce)))
   ;;   (set-prod-ordered-ces prod (cons ce (prod-ordered-ces prod)))
   (set-prod-ordered-ces prod
-                        (labels ((loop (res)
+                        (letfuns ((loop (res)
                                        (cond
                                          ((null? res) (list ce))
                                          ((or (eql (class-of (car res)) <neg-join-ce>)
@@ -122,7 +122,7 @@
   (when (eql (class-of ce) <neg-join-ce>)
         ;;(format "(nj) ~a " ce)
         (set-prod-ordered-ces prod
-                              (labels ((loop (res)
+                              (letfuns ((loop (res)
                                              (cond
                                                ((null? res) (list ce))
                                                ((eql (class-of (car res)) <pos-njoin-ce>)
@@ -349,7 +349,7 @@
          (all-ces (cons curr-ce ce-list))
          (res
           (if (eql (class-of curr-ce) <neg-join-ce>)
-              (labels ((loop (ces)
+              (letfuns ((loop (ces)
                              (when (null? ces)
                                    (print "Error: Unable to continue join" nl))
                              (let ((jtest (find-shared-jv join-tests
@@ -357,7 +357,7 @@
                                (if jtest (cons jtest (car ces))
                                  (loop (cdr ces))))))
                       (loop all-ces))
-            (labels ((loop (ces)
+            (letfuns ((loop (ces)
                            (cond
                              ((null? ces) ())
                              ((eql (class-of (car ces)) <neg-join-ce>) ())
@@ -443,7 +443,7 @@
   ;;(print "solve-join-neg" nl)
   ;;(print "N ")   (print matching-tstamps nl)
   ;;(sflush stdout)
-  (let ((res (labels
+  (let ((res (letfuns
               ((find-consis (tstamps jtests ce)
                             (cond
                               ((null? tstamps) ())
@@ -466,7 +466,7 @@
   ;;(sformat ops-out "j-tests0: ~a~%j-tests1 ~a~%" j-tests0 j-tests1)
   ; At present this will only work if there is only one test
   ; per join variable in a condition element
-  (let ((res (labels
+  (let ((res (letfuns
               ((consis (join0 join1 new-join)
                        ;;(format "join0: ~a join1: ~a new-join: ~a~%"
                        ;;      join0 join1 new-join)
@@ -535,7 +535,7 @@
       ;; All jvs must be in list by now
       (let ((var (caddr (car (ce-j-tests curr-ce)))))
         ;; (format "Var: ~a~%" var) (sflush stdout)
-        (labels ((loop (jlist)
+        (letfuns ((loop (jlist)
                        ;;(when jlist (print (car jlist) nl)
                        ;;    (print (cadadr (car jlist)) nl))
                        (cond
@@ -550,12 +550,12 @@
       ;;(format "m: ~a~%"  (ce-matches curr-ce))
       ;;(format "join0: ~a~%" join0)
       ;;(format "restricts: ~a~%" restricts)
-      (labels ((loop1 (jlist)
+      (letfuns ((loop1 (jlist)
                       (cond
                         ((null? jlist) ())
                         (t
                          (let ((jtest
-                                (labels ((loop2 (test jlist2)
+                                (letfuns ((loop2 (test jlist2)
                                                 (cond
                                                   ((null? jlist2) ())
                                                   (t
@@ -623,7 +623,7 @@
                  wm-manager ce-manager cr-manager)
   (let ((prod (pi-prod prod-inst)))
     (sformat ops-out "Firing production: ~a~%" (p-name prod))
-    (labels ((loop (actions)
+    (letfuns ((loop (actions)
                    (cond
                      ((null? actions)
                       (fire-prod-inst cr-manager wm-manager ce-manager))

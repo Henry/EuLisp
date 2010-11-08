@@ -195,6 +195,7 @@ FTDEF ftab[] =
 {
     {"quote", do_quote},
     {"lambda", do_lambda},
+    {".l", do_lambda},
     {"delay", do_delay},
     {"let", do_let},
     {"let*", do_letstar},
@@ -468,7 +469,15 @@ static void define1(LVAL list, LVAL body, int cont)
         }
 
         // check for a procedure definition
-        if (consp(body) && consp(car(body)) && car(car(body)) == s_lambda)
+        if
+        (
+            consp(body)
+         && consp(car(body))
+         && (
+             car(car(body)) == s_lambda
+          || car(car(body)) == s_lda
+            )
+        )
         {
             LVAL fargs = car(cdr(car(body)));
             body = cdr(cdr(car(body)));

@@ -31,7 +31,7 @@
    import (level-0))
 
 (defmacro and-let* (vars . body)
-  (labels ((expand (vars body)
+  (letfuns ((expand (vars body)
                    (cond
                      ((null? vars)
                       `(progn ,@body))

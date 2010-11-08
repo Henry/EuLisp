@@ -11,13 +11,13 @@ extern LispRef ex_expr_bindings[];
 #define _nil__X42_X42_fn_index 2 
 #define expand_exprs_fn_index 14 
 #define filter_vars_fn_index 6 
-#define expand_expr_fn_index 27 
-#define protect_newline_fn_index 33 
+#define expand_expr_fn_index 29 
+#define protect_newline_fn_index 35 
 #define protect_backslash_fn_index 3 
-#define complete_lambda_node_fn_index 26 
-#define filter_init_forms_fn_index 30 
-#define protect_doublequote_fn_index 25 
-#define get_macro_expander_fn_index 29 
+#define complete_lambda_node_fn_index 28 
+#define filter_init_forms_fn_index 32 
+#define protect_doublequote_fn_index 27 
+#define get_macro_expander_fn_index 31 
 #define protect_tilde_fn_index 15 
 
 

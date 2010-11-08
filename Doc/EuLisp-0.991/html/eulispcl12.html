@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-10-29 12:40:00" /> 
+<meta name="date" content="2010-11-08 17:49:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -3349,7 +3349,7 @@ class="cmtt-9">block</span></a>.
 </p><!--l. 151--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x16-206001r4"></a><span 
 class="cmbx-9">12.5.4   </span><span 
-class="cmtt-9">labels</span>
+class="cmtt-9">letfuns</span>
 <a 
  id="Q1-16-261"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -3367,12 +3367,12 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">labels-form</span><span 
+class="cmti-9">letfuns-form</span><span 
 class="cmtt-9">: </span><span 
 class="cmsy-9">&#x2192; </span><a 
 href="eulispcl11.html#x13-74002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a></td></tr></table>
-<!--l.10 165-->                                   <table  
+<!--l.10 165-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -3380,7 +3380,7 @@ class="tabbing">      </td><td
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a></td></tr></table>
+class="cmtt-9">letfuns</span></a></td></tr></table>
 <!--l.10 165-->                      <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -3393,7 +3393,7 @@ href="#x16-20700012.5.4.1"><span
 class="cmti-9">function-definition</span><span 
 class="cmsy-6">*</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 165-->                               <table  
+<!--l.10 165-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -3401,7 +3401,7 @@ class="tabbing">      </td><td style="width:14px;"
 class="tabbing">  </td><td  
 class="tabbing"><a 
 href="#x16-20700012.5.4.1"><span 
-class="cmti-9">labels-body</span></a> <span 
+class="cmti-9">letfuns-body</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
 <!--l.10 165-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -3424,12 +3424,12 @@ class="cmti-9">lambda-list</span></a> <a
 href="#x16-13500012.2.1.1"><span 
 class="cmti-9">body</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 165-->                                       <table  
+<!--l.10 165-->                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmti-9">labels-body</span><span 
+class="cmti-9">letfuns-body</span><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 165-->                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -3468,7 +3468,7 @@ class="cmti-9">body </span>: </dt><dd
 class="arguments">                                                    <!--l. 175--><p class="noindent" >A sequence of forms.
         </p></dd><dt class="arguments">
   <span 
-class="cmti-9">labels-body </span>:  </dt><dd 
+class="cmti-9">letfuns-body </span>:  </dt><dd 
 class="arguments">
         <!--l. 177--><p class="noindent" >A sequence of forms.</p></dd></dl>
   <!--l. 180--><p class="noindent" >
@@ -3478,38 +3478,38 @@ class="arguments">
 class="cmbx-8">Result</span></h5>
   <!--l. 181--><p class="noindent" >The <a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a> operator provides for local mutually recursive function
-  creation. Each <a 
+class="cmtt-9">letfuns</span></a> operator provides for local mutually recursive
+  function creation. Each <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
-class="cmti-9">identifier</span></a> is bound to a new inner-lexical binding
-  initialized with the function constructed from <a 
+class="cmti-9">identifier</span></a> is bound to a new inner-lexical
+  binding initialized with the function constructed from <a 
 href="#x16-13500012.2.1.1"><span 
-class="cmti-9">lambda-list</span></a> and <a 
+class="cmti-9">lambda-list</span></a>
+  and <a 
 href="#x16-13500012.2.1.1"><span 
-class="cmti-9">body</span></a>.
-  The scope of the <a 
+class="cmti-9">body</span></a>. The scope of the <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>s is the entire <a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a> form<a 
- id="dx16-209001"></a>. The
-  <a 
+class="cmtt-9">letfuns</span></a> form<a 
+ id="dx16-209001"></a>.
+  The <a 
 href="#x16-13500012.2.1.1"><span 
 class="cmti-9">lambda-list</span></a> is either a single variable or a list of variables&#8212;see
   <a 
 href="#x16-134001r1"><span 
 class="cmtt-9">lambda</span></a>. Each form in <a 
 href="#x16-20700012.5.4.1"><span 
-class="cmti-9">labels-body</span></a> is evaluated in order in the lexical
-  environment extended with the bindings of the <a 
+class="cmti-9">letfuns-body</span></a> is evaluated in order in the
+  lexical environment extended with the bindings of the <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
-class="cmti-9">identifier</span></a>s. The
-  result of evaluating the last form in <a 
+class="cmti-9">identifier</span></a>s.
+  The result of evaluating the last form in <a 
 href="#x16-20700012.5.4.1"><span 
-class="cmti-9">labels-body</span></a> is returned as the
-  result of the <a 
+class="cmti-9">letfuns-body</span></a> is returned as
+  the result of the <a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a> form.
+class="cmtt-9">letfuns</span></a> form.
   </p><!--l. 192--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x16-209002r5"></a><span 
 class="cmbx-9">12.5.5   </span><span 
@@ -3626,7 +3626,7 @@ class="cmti-9">identifier</span></a> denotes that the let form can be called fro
 href="#x16-13500012.2.1.1"><span 
 class="cmti-9">body</span></a>. This is an abbreviation for <a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a> form in which
+class="cmtt-9">letfuns</span></a> form in which
   <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> is bound to a function whose parameters are the
@@ -3846,7 +3846,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a></td></tr></table>
+class="cmtt-9">letfuns</span></a></td></tr></table>
 <!--l.10 262-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -4352,7 +4352,7 @@ class="cmtt-9">&#x00A0;k1</span>
 class="cmtt-9">&#x00A0;</span><span 
 class="cmtt-9">&#x00A0;</span><span 
 class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;(labels</span>
+class="cmtt-9">&#x00A0;(letfuns</span>
    <br /><span 
 class="cmtt-9">&#x00A0;</span><span 
 class="cmtt-9">&#x00A0;</span><span 
@@ -4448,9 +4448,9 @@ class="cmtt-9">loop </span>is constructed, <span
 class="cmtt-9">loop </span>is called from
 the body of the <a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a> form; <span 
-class="cmtt-9">k2 </span>is bound to the continuation of its
-<a 
+class="cmtt-9">letfuns</span></a> form; <span 
+class="cmtt-9">k2 </span>is bound to the continuation of
+its <a 
 href="#x16-192001r1"><span 
 class="cmtt-9">let/cc</span></a> form; <a 
 href="#x16-219001r8"><span 
@@ -6354,14 +6354,14 @@ class="tabbing">         </td><td
 class="tabbing"><a 
 href="#x16-19300012.5.1.1"><span 
 class="cmti-9">let/cc-form</span></a></td></tr></table>
-<!--l.10 30-->                                                      <table  
+<!--l.10 30-->                                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
 href="#x16-20700012.5.4.1"><span 
-class="cmti-9">labels-form</span></a></td></tr></table>
+class="cmti-9">letfuns-form</span></a></td></tr></table>
 <!--l.10 30-->                                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -7011,12 +7011,12 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><a 
 href="#x16-20700012.5.4.1"><span 
-class="cmti-9">labels-form</span></a><span 
+class="cmti-9">letfuns-form</span></a><span 
 class="cmtt-9">: </span><span 
 class="cmsy-9">&#x2192; </span><a 
 href="eulispcl11.html#x13-74002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a></td></tr></table>
-<!--l.10 42-->                                       <table  
+<!--l.10 42-->                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -7024,7 +7024,7 @@ class="tabbing">      </td><td
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
 href="#x16-206001r4"><span 
-class="cmtt-9">labels</span></a></td></tr></table>
+class="cmtt-9">letfuns</span></a></td></tr></table>
 <!--l.10 42-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -7037,7 +7037,7 @@ href="#x16-20700012.5.4.1"><span
 class="cmti-9">function-definition</span><span 
 class="cmsy-6">*</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 42-->                                  <table  
+<!--l.10 42-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -7045,7 +7045,7 @@ class="tabbing">      </td><td style="width:14px;"
 class="tabbing">  </td><td  
 class="tabbing"><a 
 href="#x16-20700012.5.4.1"><span 
-class="cmti-9">labels-body</span></a> <span 
+class="cmti-9">letfuns-body</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
 <!--l.10 42-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -7069,13 +7069,13 @@ class="cmti-9">lambda-list</span></a> <a
 href="#x16-13500012.2.1.1"><span 
 class="cmti-9">body</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 42-->                                           <table  
+<!--l.10 42-->                                          <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><a 
 href="#x16-20700012.5.4.1"><span 
-class="cmti-9">labels-body</span></a><span 
+class="cmti-9">letfuns-body</span></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 42-->                                          <table  
 cellpadding="0" border="0" cellspacing="0" 

@@ -76,7 +76,7 @@
 
 (define (identity form) form)
 
-(put-syntax 'quote '%syntax identity)
+;;(put-syntax 'quote '%syntax identity)
 
 (define (%expand-arg-list form)
         (if (atom? form)
@@ -89,13 +89,21 @@
              (%expand-list (car form)))
            (%expand-arg-list (cdr form)))))
 
-(put-syntax 'lambda '%syntax
-            (lambda (form)
-              (cons
-               'lambda
-               (cons
-                (%expand-arg-list (cadr form))
-                (%expand-list (cddr form))))))
+;; (put-syntax 'lambda '%syntax
+;;             (lambda (form)
+;;               (cons
+;;                'lambda
+;;                (cons
+;;                 (%expand-arg-list (cadr form))
+;;                 (%expand-list (cddr form))))))
+
+;; (put-syntax '.l '%syntax
+;;             (lambda (form)
+;;               (cons
+;;                '.l
+;;                (cons
+;;                 (%expand-arg-list (cadr form))
+;;                 (%expand-list (cddr form))))))
 
 (put-syntax 'define '%syntax
             (lambda (form)
@@ -105,35 +113,35 @@
                 (%expand-arg-list (cadr form))
                 (%expand-list (cddr form))))))
 
-(put-syntax 'setq '%syntax
-            (lambda (form)
-              (cons
-               'setq
-               (cons
-                (or (getprop (cadr form) '%rename) (cadr form))
-                (%expand-list (cddr form))))))
+;; (put-syntax 'setq '%syntax
+;;             (lambda (form)
+;;               (cons
+;;                'setq
+;;                (cons
+;;                 (or (getprop (cadr form) '%rename) (cadr form))
+;;                 (%expand-list (cddr form))))))
 
-(put-syntax 'cond '%syntax
-            (lambda (form)
-              (cons 'cond (map-list %expand-list (cdr form)))))
+;; (put-syntax 'cond '%syntax
+;;             (lambda (form)
+;;               (cons 'cond (map-list %expand-list (cdr form)))))
 
-(define (%expand-let-form form)
-        (cons
-         (car form)
-         (let ((bindings (cadr form)))
-           (cond ((symbol? bindings)
-                  (cons (or (get-syntax bindings '%rename) bindings)
-                        (cons (map-list %expand-list-or-symbol
-                                        (caddr form))
-                              (%expand-list (cdddr form)))))
-                 ((list? bindings)
-                  (cons (map-list %expand-list-or-symbol (cadr form))
-                        (%expand-list (cddr form))))
-                 (t (raise-macro-error "bad let form" form))))))
+;; (define (%expand-let-form form)
+;;         (cons
+;;          (car form)
+;;          (let ((bindings (cadr form)))
+;;            (cond ((symbol? bindings)
+;;                   (cons (or (get-syntax bindings '%rename) bindings)
+;;                         (cons (map-list %expand-list-or-symbol
+;;                                         (caddr form))
+;;                               (%expand-list (cdddr form)))))
+;;                  ((list? bindings)
+;;                   (cons (map-list %expand-list-or-symbol (cadr form))
+;;                         (%expand-list (cddr form))))
+;;                  (t (raise-macro-error "bad let form" form))))))
 
-(put-syntax 'let '%syntax %expand-let-form)
-(put-syntax 'let* '%syntax %expand-let-form)
-(put-syntax 'letrec '%syntax %expand-let-form)
+;; (put-syntax 'let '%syntax %expand-let-form)
+;; (put-syntax 'let* '%syntax %expand-let-form)
+;; (put-syntax 'letrec '%syntax %expand-let-form)
 
 (define (%defmacro-binds arglist n)
         (cond ((null? arglist) ())
@@ -157,13 +165,13 @@
 ; delay if progn sequence and or while access
 
 (put-syntax 'defmodule '%syntax identity)
-(put-syntax 'export '%syntax identity)
-(put-syntax 'expose '%syntax identity)
-(put-syntax 'enter-module '%syntax identity)
-(put-syntax '!> '%syntax identity)
-(put-syntax 'reenter-module '%syntax identity)
-(put-syntax '!>> '%syntax identity)
-(put-syntax '%IMPORT '%syntax identity)
+;; (put-syntax 'export '%syntax identity)
+;; (put-syntax 'expose '%syntax identity)
+;; (put-syntax 'enter-module '%syntax identity)
+;; (put-syntax '!> '%syntax identity)
+;; (put-syntax 'reenter-module '%syntax identity)
+;; (put-syntax '!>> '%syntax identity)
+;; (put-syntax '%IMPORT '%syntax identity)
 
 (put-syntax 'define-generic '%syntax
             (lambda (form)
@@ -179,12 +187,12 @@
 
 ; call-next-method next-method?
 
-(put-syntax 'defclass '%syntax
-            (lambda (form)
-              (cons 'defclass
-                    (cons (or (getprop (cadr form) '%rename) (cadr form))
-                          (cons (%expand-arg-list (caddr form))
-                                (%expand-list (cdddr form)))))))
+;; (put-syntax 'defclass '%syntax
+;;             (lambda (form)
+;;               (cons 'defclass
+;;                     (cons (or (getprop (cadr form) '%rename) (cadr form))
+;;                           (cons (%expand-arg-list (caddr form))
+;;                                 (%expand-list (cdddr form)))))))
 
 ; let/cc with-handler unwind-protect
 
@@ -193,12 +201,12 @@
 ;;               (cons 'defcondition
 ;;                     (%expand-list (cdr form)))))
 
-(put-syntax 'defcondition '%syntax
-            (lambda (form)
-              (cons 'defcondition
-                    (cons (or (getprop (cadr form) '%rename) (cadr form))
-                          (cons (%expand-arg-list (caddr form))
-                                (%expand-list (cdddr form)))))))
+;; (put-syntax 'defcondition '%syntax
+;;             (lambda (form)
+;;               (cons 'defcondition
+;;                     (cons (or (getprop (cadr form) '%rename) (cadr form))
+;;                           (cons (%expand-arg-list (caddr form))
+;;                                 (%expand-list (cdddr form)))))))
 
 ;; the following is the original xscheme macro code
 ;;

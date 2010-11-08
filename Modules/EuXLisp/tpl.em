@@ -58,7 +58,7 @@
 (defun make-index (size)
   (let* ((v (make-vector size 0))
          (new-field (make-field value: v)))
-    (labels
+    (letfuns
      ((init-field-value (i)
                         (if (< i 0) nil
                           (progn

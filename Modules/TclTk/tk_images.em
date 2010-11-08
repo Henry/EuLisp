@@ -81,7 +81,7 @@
 (defextern eul_tk_image_photo_cmd (<string>) ptr)
 
 (defun tk-photo (img cmd . options)
-  (labels
+  (letfuns
    ((loop (l str)
           (if l
               (let* ((x (car l))

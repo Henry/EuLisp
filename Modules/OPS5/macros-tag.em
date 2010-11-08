@@ -34,7 +34,7 @@
 
 ;  (defmacro while (condition . body)
 ;    `(let/cc break                      ; (syntax break)
-;       (labels ((| do it again | ()
+;       (letfuns ((| do it again | ()
 ;                 (when ,condition
 ;                      ,@body
 ;                      (| do it again |))))

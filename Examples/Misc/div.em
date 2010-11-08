@@ -41,7 +41,7 @@
            *ll*))
 
 (defun create-n (n)
-  (labels
+  (letfuns
    ((loop (m res)
           (if (< 0 m)
               (loop (- m 1) (cons () res))
@@ -51,7 +51,7 @@
 (deflocal *ll* (create-n 200))
 
 (defun iterative-div2 (l)
-  (labels
+  (letfuns
    ((loop (ll a)
           (if (null? ll)
               a
@@ -63,7 +63,7 @@
         (t (cons (car l) (recursive-div2 (cddr l))))))
 
 (defun test-1 (l)
-  (labels
+  (letfuns
    ((loop (ll i)
           (if (< 0 i)
               (progn
@@ -76,7 +76,7 @@
    (loop l 10000)))
 
 (defun test-2 (l)
-  (labels
+  (letfuns
    ((loop (ll i)
           (if (< 0 i)
               (progn

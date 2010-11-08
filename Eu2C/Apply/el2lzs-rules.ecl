@@ -173,6 +173,11 @@
       (transsyn-progn BODY)
     `(,^labels ,(transsyn-funs FUNS) ,(transsyn-progn BODY))))
 
+(deftranssyn (letfuns FUNS . BODY)
+  (if (null? FUNS)
+      (transsyn-progn BODY)
+    `(,^letfuns ,(transsyn-funs FUNS) ,(transsyn-progn BODY))))
+
 (deftranssyn (let/cc ID . BODY)
   (progn (setf (cdr (cdr (whole-form)))
                (list (transsyn-progn BODY)))
@@ -766,6 +771,9 @@
     fun-obj))
 
 (deftrans (labels FUNS BODY)
+  (trans-labels BODY FUNS))
+
+(deftrans (letfuns FUNS BODY)
   (trans-labels BODY FUNS))
 
 ;;;-----------------------------------------------------------------------------

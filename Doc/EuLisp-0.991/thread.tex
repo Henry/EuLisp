@@ -289,7 +289,7 @@ current output stream until no data is received on the stream for a
 period of at least 1 second.
 %
 {\codeExample
-(labels
+(letfuns
   ((loop ()
      (when (wait s (round ticks-per-second))
            (print (read-char s))

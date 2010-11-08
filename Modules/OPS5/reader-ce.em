@@ -83,7 +83,7 @@
            (make-tests attrib-table ce-after (cddr tests)
                        join-vars curr-attrib)))
         ((eql first '<<)
-         (labels
+         (letfuns
           ((loop (tests-left vals)
                  ;;(sformat ops-out "tests-left: ~a  vals: ~a~%" tests-left vals)
                  (cond
@@ -165,7 +165,7 @@
 (defun insert-test1 (ce attrib-table test reader writer)
   ;;(format "insert-test1: ~a ~a ~a~%" test reader writer)
   (let ((index (element attrib-table (test-attrib test))))
-    (writer ce (labels
+    (writer ce (letfuns
                 ((loop (tests)
                        (let ((index2 (if tests
                                          (element attrib-table (caar tests))
