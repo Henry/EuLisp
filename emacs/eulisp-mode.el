@@ -530,7 +530,7 @@ and named constant values.")
            "int-binary="
            "int-zero?"
            "integer?"
-           "int?"
+           "fpi?"
            "keyword-name"
            "keyword?"
            "lcm"
