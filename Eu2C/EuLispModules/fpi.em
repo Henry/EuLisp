@@ -65,8 +65,8 @@
            equal
            fpi?
            <fpi>
-           most-positive-int
-           most-negative-int))
+           most-positive-fpi
+           most-negative-fpi))
 
 #-(:int :big)
 (defconstant most-positive-fpi #xffff)
