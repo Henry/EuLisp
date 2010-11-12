@@ -40,24 +40,17 @@ MODULE_LIB = lib$(MODULE).a
 ###-----------------------------------------------------------------------------
 MODULE_EM = $(MODULE).em
 
-OTHER_EM = match0.em match-support.em
-
 ###-----------------------------------------------------------------------------
 ### Test source files
 ###-----------------------------------------------------------------------------
 TEST_EM = test-match.em
 TEST_EXE = $(TEST_EM:%.em=$(ARCH_DIR)/%)
 
-TEST_MACROS_EM = test-match-macros.em
-
-ALL_EM = $(MODULE_EM) $(OTHER_EM) $(TEST_EM) $(TEST_MACROS_EM)
-
 ###-----------------------------------------------------------------------------
 ### Build library
 ###-----------------------------------------------------------------------------
 .PHONY: $(MODULE)
 $(MODULE): $(U2_C_DIR)/match.i
-$(U2_C_DIR)/match.i: $(U2_C_DIR)/match0.i $(U2_C_DIR)/match-support.i
 
 $(U2_C_DIR)/%.i : %.em
 	${U2} -c ${U2FLAGS} $< -l level-0
@@ -67,8 +60,6 @@ $(U2_C_DIR)/%.i : %.em
 ###-----------------------------------------------------------------------------
 $(ARCH_DIR)/% : %.em | $(ARCH_DIR)/.
 	${U2} ${U2FLAGS} $< --object-dir $(ARCH_DIR) -l level-0
-
-$(ARCH_DIR)/test-match: $(U2_C_DIR)/match.i $(U2_C_DIR)/test-match-macros.i
 
 .PHONY: test
 test: $(ARCH_DIR)/test-match
