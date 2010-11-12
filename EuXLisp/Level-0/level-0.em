@@ -264,6 +264,7 @@
            prin1
            princ
            t
+           else
            eval                             ; no guarantees this one will work
            system
            getenv
