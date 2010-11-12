@@ -148,6 +148,9 @@ indentation for the following lines until the end of the list."))))
 (add-to-list 'auto-mode-alist '("\\.em\\'" . eulisp-mode))
 
 ;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.es\\'" . eulisp-mode))
+
+;;;###autoload
 (add-to-list 'same-window-buffer-names "*EuLisp*")
 
 ;; -----------------------------------------------------------------------------
@@ -1321,6 +1324,7 @@ given symbol SYM."
     (export . lisp-indent-directive)
     (let . 1)
     (let* . 1)
+    (letfuns . 1)
     (match-let . 1)
     (while . 1)
     (progn . 0)
