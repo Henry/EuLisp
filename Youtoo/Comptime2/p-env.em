@@ -237,7 +237,6 @@
 
 ;;;-----------------------------------------------------------------------------
 ;;; Expand interpreter defined syntax bindings (i.e. defmacro in interpreter)
-
 ;;;-----------------------------------------------------------------------------
 (defun expand-interpreter-defined-syntax-binding (binding module)
   (if (and *interpreter* (symbol? binding))

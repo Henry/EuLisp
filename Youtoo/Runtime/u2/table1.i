@@ -12,7 +12,7 @@
     ((name . table-size) (pos . 5) (origin table1 . table-size) (inline (G004586 (static-ref1) (binding-ref ? <table>) (primitive-relative-ref))) (setter (G004598 (stack-ref 1) (static-ref1) (stack-ref 2) (binding-ref ? <table>) (set-primitive-relative-ref) (nobble 2))))
     ((name . <hash-table>) (pos . 13) (origin table1 . <hash-table>) (class . constant))
     ((name . table-threshold) (pos . 16) (origin table1 . table-threshold) (inline (G004584 (static-ref0) (binding-ref ? <table>) (primitive-relative-ref))) (setter (G004596 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <table>) (set-primitive-relative-ref) (nobble 2))))
-    ((name . table-entries) (pos . 19) (origin table1 . table-entries) (inline (G004590 (static-fpi-byte-ref 3) (binding-ref ? <table>) (primitive-relative-ref))) (setter (G004600 (stack-ref 1) (static-fpi-byte-ref 3) (stack-ref 2) (binding-ref ? <table>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . table-entries) (pos . 19) (origin table1 . table-entries) (inline (G004590 (static-fpi-ref 3) (binding-ref ? <table>) (primitive-relative-ref))) (setter (G004600 (stack-ref 1) (static-fpi-ref 3) (stack-ref 2) (binding-ref ? <table>) (set-primitive-relative-ref) (nobble 2))))
     ((name . table-comparator) (pos . 12) (origin table1 . table-comparator) (inline (G004594 (static-ref1) (binding-ref ? <hash-table>) (primitive-relative-ref))) (setter (G004604 (stack-ref 1) (static-ref1) (stack-ref 2) (binding-ref ? <hash-table>) (set-primitive-relative-ref) (nobble 2))))
     ((name . table?) (pos . 7) (origin table1 . table?))
     ((name . *table-fill-factor*) (pos . 11) (origin table1 . *table-fill-factor*) (class . constant) (value 2))

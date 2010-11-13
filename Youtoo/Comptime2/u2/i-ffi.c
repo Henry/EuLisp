@@ -109,15 +109,15 @@ void initialize_module_i_ffi()
   static const void *G002767[] = {I(a9,23,00,00),B(i_ffi ,22),I(89,00,00,00),B(i_ffi ,9),I(2a,23,00,00),B(i_ffi ,23),I(89,00,00,00),B(i_ffi ,2),I(2a,23,00,00),B(i_ffi ,25),I(89,00,00,00),B(i_ffi ,5),I(2a,23,00,00),B(i_ffi ,27),I(89,00,00,00),B(i_ffi ,4),I(45,00,00,00)};
 
   eul_allocate_static_string(str_2860, "bad defextern result converter ~a", 33);
-  /* Byte-vector with size: 12 is_init: 0 index: 30 binding: res-converter-index */
-  static const void *G002858[] = {I(aa,1b,24,00),B(i_ffi ,5),I(24,00,00,00),B(collect ,14),I(3c,02,1b,44),I(04,1b,36,14),I(82,23,00,00),B(i_ffi ,29),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
+  /* Byte-vector with size: 14 is_init: 0 index: 30 binding: res-converter-index */
+  static const void *G002858[] = {I(aa,1b,24,00),B(i_ffi ,5),I(24,00,00,00),B(collect ,14),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,1a),I(82,23,00,00),B(i_ffi ,29),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 31 binding: res-converter-as-C-type */
   static const void *G002861[] = {I(aa,24,00,00),B(i_ffi ,4),I(1c,02,45,01)};
 
   eul_allocate_static_string(str_2865, "bad defextern argument converter ~a", 35);
-  /* Byte-vector with size: 12 is_init: 0 index: 33 binding: arg-converter-index */
-  static const void *G002863[] = {I(aa,1b,24,00),B(i_ffi ,9),I(24,00,00,00),B(collect ,14),I(3c,02,1b,44),I(04,1b,36,14),I(82,23,00,00),B(i_ffi ,32),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
+  /* Byte-vector with size: 14 is_init: 0 index: 33 binding: arg-converter-index */
+  static const void *G002863[] = {I(aa,1b,24,00),B(i_ffi ,9),I(24,00,00,00),B(collect ,14),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,1a),I(82,23,00,00),B(i_ffi ,32),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 34 binding: arg-converter-as-C-type */
   static const void *G002866[] = {I(aa,24,00,00),B(i_ffi ,2),I(1c,02,45,01)};

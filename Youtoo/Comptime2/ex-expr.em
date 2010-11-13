@@ -19,7 +19,7 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: expanding expressions into syntax nodes
-;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
+;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -39,6 +39,7 @@
    export (expand-expr
            expand-exprs
            get-macro-expander
+           macroexpand
            complete-lambda-node
            filter-vars
            filter-init-forms
@@ -61,11 +62,13 @@
     (map1-list (lambda (expr)
                  (expr-expander expr env expr-expander))
                x)))
+
 (defun install-expr-expander (key fun)
   (let ((x (get-expr-expander key)))
     (and x
          (ct-warning () "redefinition of expander ~a" key))
     ((setter get-expr-expander) key fun)))
+
 (defun expr-expander (x env e)
   (notify0 "    Expanding ~a" x)
   (let ((expander
@@ -99,6 +102,19 @@
                                        (apply macro-fun (cdr x)))))
                            (notify0 "RESULT: ~a" macro-expanded-form)
                            (e macro-expanded-form env e)))))))))
+
+(defun macroexpand (expr)
+  (let ((binding (get-syntax-binding (car expr))))
+    (if binding
+        (let ((macro-fun (as-dynamic-binding binding)))
+          (if macro-fun
+              (apply macro-fun (cdr expr))
+            (error <condition>
+                   (fmt "macroexpand cannot find dynamic binding ~a for syntax binding ~a"
+                        binding (car expr)))))
+      (error <condition>
+             (fmt "macroexpand: cannot find syntax binding ~a"
+                  (car expr))))))
 
 (defun protect-tilde (str)
   (let ((i (member1-string #\~ str))

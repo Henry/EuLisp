@@ -40,14 +40,14 @@ void initialize_module_let_cc()
   LispRef sym_772, G00771, sym_769, G00768, sym_766, sym_765, G00764, G00762;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 9 is_init: 0 index: 3 binding: anonymous */
-  static const void *G00761[] = {I(ab,47,01,01),I(1d,1a,1b,44),I(17,1c,10,1b),I(3c,00,2a,1f),I(03,2c,1f,03),I(11,47,00,00),I(3d,02,04,22),I(01,36,02,86),I(45,03,00,00)};
+  /* Byte-vector with size: 11 is_init: 0 index: 3 binding: anonymous */
+  static const void *G00761[] = {I(ab,47,01,01),I(1d,1a,1b,34),I(00,00,00,21),I(1c,10,1b,3c),I(00,2a,1f,03),I(2c,1f,03,11),I(47,00,00,3d),I(02,04,22,01),I(32,00,00,00),I(00,00,00,09),I(86,45,03,00)};
 
   /* Byte-vector with size: 28 is_init: 0 index: 6 binding: k */
   static const void *G00763[] = {I(aa,46,02,86),I(1b,48,00,00),I(23,00,00,00),B(let_cc ,4),I(23,00,00,00),B(let_cc ,3),I(3b,02,48,00),I(00,23,00,00),B(let_cc ,5),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,24),B(boot ,19),I(3c,01,1b,1d),I(47,00,00,3c),I(02,2a,24,00),B(dynamic ,4),I(47,01,02,15),I(24,00,00,00),B(dynamic ,6),I(3c,01,2a,24),B(dynamic ,7),I(47,01,03,15),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,47),I(01,00,1f,04),I(5d,45,04,00)};
 
-  /* Byte-vector with size: 28 is_init: 0 index: 8 binding: call/ep */
-  static const void *G00767[] = {I(aa,46,04,24),B(thread ,25),I(24,00,00,00),B(mop_gf ,2),I(3c,01,23,00),B(let_cc ,5),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,24),B(boot ,19),I(3c,01,1d,1c),I(24,00,00,00),B(dynamic ,4),I(24,00,00,00),B(dynamic ,7),I(1f,03,48,00),I(00,1d,48,00),I(01,1c,48,00),I(02,1b,48,00),I(03,47,00,00),I(5c,2a,23,00),B(let_cc ,7),I(23,00,00,00),B(let_cc ,6),I(3b,01,1f,08),I(3c,01,1b,44),I(04,1b,36,02),I(86,45,09,00)};
+  /* Byte-vector with size: 30 is_init: 0 index: 8 binding: call/ep */
+  static const void *G00767[] = {I(aa,46,04,24),B(thread ,25),I(24,00,00,00),B(mop_gf ,2),I(3c,01,23,00),B(let_cc ,5),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,24),B(boot ,19),I(3c,01,1d,1c),I(24,00,00,00),B(dynamic ,4),I(24,00,00,00),B(dynamic ,7),I(1f,03,48,00),I(00,1d,48,00),I(01,1c,48,00),I(02,1b,48,00),I(03,47,00,00),I(5c,2a,23,00),B(let_cc ,7),I(23,00,00,00),B(let_cc ,6),I(3b,01,1f,08),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,08),I(86,45,09,00)};
 
   /* Byte-vector with size: 24 is_init: 1 index: 0 binding: initialize-let-cc */
   static const void *G00770[] = {I(87,25,00,00),B(let_cc ,1),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(thread ,1),I(3e,0b,24,00),B(thread ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(let_cc ,9),I(23,00,00,00),B(let_cc ,8),I(3b,01,25,00),B(let_cc ,2),I(86,ac,00,00)};

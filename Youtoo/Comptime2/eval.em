@@ -45,7 +45,8 @@
            dynamic-binding-ref1
            dynamic-binding-set1
            dynamic-load-module1
-           *redefine-imported-bindings*))
+           *redefine-imported-bindings*
+           macroexpand))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Main function to invoke the interpreter or compiler

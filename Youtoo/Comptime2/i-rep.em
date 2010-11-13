@@ -46,7 +46,8 @@
            show-module-bindings
            ?
            show-help
-           show-class-hierarchy)
+           show-class-hierarchy
+           macroexpand)
    expose (cg-dld))
 
 ;;;-----------------------------------------------------------------------------
