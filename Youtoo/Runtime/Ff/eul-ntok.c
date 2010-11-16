@@ -81,7 +81,8 @@ EUL_DEFINTERN(fill_buffer, "fill-buffer", 1, stream2)
 #define EOB (c>=maxc)
 #define EOB_LOOKAHEAD(n) ((c+n)>=maxc)
 #define FILL_BUFFER() (eul_fpi_as_c_int(fill_buffer(stream)))
-#define BUFFER_RESET() (c = buffer, c[n] = (char)0, maxc = c+n)
+#define BUFFER_RESET() \
+    (pos += (c - buffer), c = buffer, c[n] = (char)0, maxc = c+n)
 
 /*
   #define SHOW_STATE(x) \
@@ -92,7 +93,8 @@ EUL_DEFINTERN(fill_buffer, "fill-buffer", 1, stream2)
 
 #define UPDATE_FCB_POS(y)                                                      \
     {                                                                          \
-        CONTROL_BLOCK_BUFFER_POS(fcb) = c_int_as_eul_fpi(c-buffer);            \
+        CONTROL_BLOCK_BUFFER_POS(fcb) = c_int_as_eul_fpi(c - buffer);          \
+        CONTROL_BLOCK_STREAM_POS(fcb) = c_int_as_eul_fpi(pos + c - buffer);    \
         return y;                                                              \
     }
 
@@ -207,6 +209,7 @@ void syntax_error(char *buffer, char *c, char *msg)
 #define CONTROL_BLOCK_BUFFER_SIZE(x) (slot_ref(x, 1))
 #define CONTROL_BLOCK_BUFFER_POS(x) (slot_ref(x, 2))
 #define CONTROL_BLOCK_BUFFER_CNT(x) (slot_ref(x, 3))
+#define CONTROL_BLOCK_STREAM_POS(x) (slot_ref(x, 4))
 
 #define STREAM_SINK(x) (slot_ref(x, 0))
 #define STREAM_SOURCE(x) (slot_ref(x, 1))
@@ -313,6 +316,12 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
     // ntok state variables
     char *c = buffer + eul_fpi_as_c_int(CONTROL_BLOCK_BUFFER_POS(fcb));
     char *maxc = buffer + eul_fpi_as_c_int(CONTROL_BLOCK_BUFFER_CNT(fcb));
+
+    // Initialise the current character position in the stream to the previous
+    // minus the current buffer offset (the new buffer offset is added on
+    // return).
+    int pos = eul_fpi_as_c_int(CONTROL_BLOCK_STREAM_POS(fcb)) - (c - buffer);
+
     int negative = 0;
     int token_overflow = 0;
 

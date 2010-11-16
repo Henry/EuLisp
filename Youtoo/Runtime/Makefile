@@ -132,8 +132,8 @@ $(MATH_SHARED_LIB): $(MATH_O)
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
 .PHONY: boot
-boot:	libtelos.i $(U2_C_DIR)/_macros.i liblevel-0.i liblevel-1.i libmath.i
-	@rm -f libtelos.i
+boot:	$(U2_C_DIR)/libtelos.i $(U2_C_DIR)/_macros.i $(U2_C_DIR)/liblevel-0.i $(U2_C_DIR)/liblevel-1.i $(U2_C_DIR)/libmath.i
+	@rm -f $(U2_C_DIR)/libtelos.i
 	$(MAKE) -C ../Telos boot-syntax
 	$(MAKE) boot-syntax
 
@@ -159,8 +159,9 @@ $(LEVEL_0_LIB_I): $(LEVEL_0_MAC_EM) $(LEVEL_0_EM)
 $(LEVEL_1_LIB_I): $(LEVEL_0_MAC_EM) $(LEVEL_0_EM)
 $(MATH_LIB_I): $(MATH_EM)
 
-lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
-	@ln -s $< $@
+$(U2_C_DIR)/lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
+	@mkdir -p $(U2_C_DIR)
+	@cp -p $< $@
 
 $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i : %.em
 	$(U2) $(U2FLAGS) --archive $* \
@@ -189,7 +190,7 @@ boot-clean: clean
 
 .PHONY: clean
 clean:
-	@rm -f libtelos.i
+	@rm -f $(U2_C_DIR)/lib*.i
 	@rm -rf $(ARCH_DIR)
 
 .PHONY: distclean

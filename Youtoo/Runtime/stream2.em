@@ -55,6 +55,7 @@
            control-block-buffer-size
            control-block-buffer-pos
            control-block-buffer-cnt
+           control-block-stream-pos
            <file-control-block>
            control-block-file-name
            control-block-mode
@@ -84,18 +85,28 @@
 ;;; Control block classes
 ;;;-----------------------------------------------------------------------------
 (defclass <stream-control-block> ()
-  ((buffer accessor: control-block-buffer keyword: buffer:)
-   (buffer-size accessor: control-block-buffer-size keyword: size:
+  ((buffer accessor: control-block-buffer
+           keyword: buffer:)
+   (buffer-size accessor: control-block-buffer-size
+                keyword: size:
                 default: 1024)
-   (buffer-pos accessor: control-block-buffer-pos default: 0)
-   (buffer-cnt accessor: control-block-buffer-cnt default: 0))
+   (buffer-pos accessor: control-block-buffer-pos
+               default: 0)
+   (buffer-cnt accessor: control-block-buffer-cnt
+               default: 0)
+   (stream-pos accessor: control-block-stream-pos
+               default: 0))
   predicate: stream-control-block?)
 
 (defclass <file-control-block> <stream-control-block>
-  ((file-name accessor: control-block-file-name keyword: file-name:
+  ((file-name accessor: control-block-file-name
+              keyword: file-name:
               default: "")
-   (mode accessor: control-block-mode keyword: mode: default: 'r)
-   (descriptor accessor: control-block-descriptor keyword: descriptor:))
+   (mode accessor: control-block-mode
+         keyword: mode:
+         default: 'r)
+   (descriptor accessor: control-block-descriptor
+               keyword: descriptor:))
   predicate: file-control-block?)
 
 (defmethod initialize ((fcb <file-control-block>) inits)
@@ -114,14 +125,20 @@
 ;;  "a+" open for update (reading and writing) at end of file
 ;;;-----------------------------------------------------------------------------
 (defclass <stream> ()
-  ((sink keyword: sink: accessor: stream-sink)
-   (source keyword: source: accessor: stream-source)
-   (read-action keyword: read-action: accessor: stream-read-action
+  ((sink keyword: sink:
+         accessor: stream-sink)
+   (source keyword: source:
+           accessor: stream-source)
+   (read-action keyword: read-action:
+                accessor: stream-read-action
                 default: default-read-action)
-   (write-action keyword: write-action: accessor: stream-write-action
+   (write-action keyword: write-action:
+                 accessor: stream-write-action
                  default: default-write-action)
-   (lock default: (make <lock>) reader: stream-lock)
-   (mode reader: stream-mode keyword: mode: default: 'r))
+   (lock default: (make <lock>)
+         reader: stream-lock)
+   (mode reader: stream-mode keyword:
+         mode: default: 'r))
   predicate: stream?
   constructor: (from-stream read-action:)
   constructor: (to-stream write-action:))

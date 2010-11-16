@@ -83,7 +83,7 @@ boot: static
 
 .PHONY: boot-preliminary
 boot-preliminary: $(U2_C_DIR)/_ex-aux0.i $(U2_C_DIR)/_op-peep0.i $(U2_C_DIR)/_cg-bycode0.i $(U2_C_DIR)/_i-aux0.i $(U2_C_DIR)/_sx-obj0.i \
-		libboot.i liblevel-1.i libmath.i | $(ARCH_DIR)/.
+		$(U2_C_DIR)/libboot.i $(U2_C_DIR)/liblevel-1.i $(U2_C_DIR)/libmath.i | $(ARCH_DIR)/.
 	$(U2) $(U2FLAGS) --object-dir $(ARCH_DIR) \
 		-c ex-aux0 op-peep0 cg-bycode0 i-aux0 sx-obj0 \
 		--load-path $(U2_DIR)/Comptime2 \
@@ -111,16 +111,17 @@ boot-preliminary: $(U2_C_DIR)/_ex-aux0.i $(U2_C_DIR)/_op-peep0.i $(U2_C_DIR)/_cg
 		<youtoo.em.in >youtoo.em
 	@echo "---- CREATING preliminary youtoo executable files"
 	$(U2) $(U2FLAGS) -c youtoo --object-dir $(ARCH_DIR) \
-	       --load-path $(U2_DIR)/Comptime2 \
-	       --load-path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
-	       -l level-1 -l math -l eval --recompile
-	@rm -f libboot.i liblevel-1.i libmath.i
+		--load-path $(U2_DIR)/Comptime2 \
+		--load-path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
+		-l level-1 -l math -l eval --recompile
+	@rm -f $(U2_C_DIR)/libboot.i $(U2_C_DIR)/liblevel-1.i $(U2_C_DIR)/libmath.i
 	@mv $(U2_C_DIR)/libeval.i $(EUL_LIB_DIR)/$(U2_C_DIR)
 	@rm -f $(ARCH_DIR)/libeval.a $(EUL_LIB_DIR)/libeval.a $(ARCH_DIR)/youtoo.o
 	@echo "---- DONE."
 
-lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
-	@ln -s $< $@
+$(U2_C_DIR)/lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
+	@mkdir -p $(U2_C_DIR)
+	@cp -p $< $@
 
 .PHONY: boot-final
 boot-final:
@@ -162,10 +163,11 @@ boot-clean: clean
 
 .PHONY: clean
 clean:
+	@rm -f $(U2_C_DIR)/lib*.i
 	@rm -rf $(ARCH_DIR) $(WORD_LENGTH)bit/$(ARCH_DIR)
 
 .PHONY: distclean
-distclean:
+distclean: clean
 	@rm -rf platforms 64bit/platforms 32bit/platforms
 
 ###-----------------------------------------------------------------------------

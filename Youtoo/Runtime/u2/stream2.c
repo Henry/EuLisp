@@ -29,8 +29,8 @@ extern LispRef string_bindings[];
 extern LispRef mop_gf_bindings[];
 extern LispRef boot_bindings[];
 
-/* Module bindings with size 225 */
-LispRef stream2_bindings[225];
+/* Module bindings with size 232 */
+LispRef stream2_bindings[232];
 
 /* Foreign functions */
 
@@ -52,604 +52,625 @@ void initialize_module_stream2()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_3272, sym_3271, sym_3270, sym_3269, sym_3268, sym_3267, sym_3266, sym_3265, sym_3264, sym_3263, sym_3262, sym_3261, sym_3260, sym_3259, sym_3258, sym_3257, sym_3256, sym_3255, sym_3254, sym_3253, sym_3252, G003251, G003249, G003247, G003245, G003243, G003241, G003239, G003237, G003235, G003233, G003231, G003229, G003227, G003225, G003223, G003221, G003219, G003217, G003215, G003213, G003211, sym_3209, G003207, sym_3205, sym_3201, sym_3200, sym_3199, sym_3198, sym_3197, sym_3196, sym_3195, sym_3194, sym_3193, sym_3192, sym_3191, sym_3190, sym_3189, sym_3188, sym_3187, sym_3186, sym_3185, sym_3184, sym_3183, sym_3182, sym_3181, sym_3180, sym_3179, sym_3178, sym_3177, sym_3176, sym_3175, sym_3174, sym_3173, sym_3172, sym_3171, sym_3170, sym_3169, sym_3168, sym_3166, sym_3165, sym_3163, sym_3161, sym_3160, sym_3159, sym_3153, sym_3152, key_3151, sym_3150, key_3149, sym_3148, key_3147, sym_3146, key_3145, sym_3144, sym_3140, sym_3139, sym_3138, sym_3137, key_3134, key_3133, key_3132, sym_3131, sym_3130, sym_3129, key_3128, sym_3127, key_3126, sym_3125, key_3124, G003123, G003121, G003119, G003117, G003114, G003112, G003110, G003108, G003106, G003104, G003102, G003100, G003098, G003096, G003094, G003092, G003090, G003088, G003086, G003084, G003082, G003080, G003078, G003076, G003074, G003072, G003070, G003068, G003066, G003064, G003062, G003060, G003058, G003056, G003054, G003052, sym_3050, sym_3049, sym_3048, sym_3047, sym_3046, key_3045, key_3044, key_3043, key_3041, G003040, G003038, key_3036, key_3035, key_3033, G003032, G003030;
+  LispRef sym_3292, sym_3291, sym_3290, sym_3289, sym_3288, sym_3287, sym_3286, sym_3285, sym_3284, sym_3283, sym_3282, sym_3281, sym_3280, sym_3279, sym_3278, sym_3277, sym_3276, sym_3275, sym_3274, sym_3273, sym_3272, sym_3271, G003270, G003268, G003266, G003264, G003262, G003260, G003258, G003256, G003254, G003252, G003250, G003248, G003246, G003244, G003242, G003240, G003238, G003236, G003234, G003232, G003230, G003228, sym_3226, G003224, sym_3222, sym_3218, sym_3217, sym_3216, sym_3215, sym_3214, sym_3213, sym_3212, sym_3211, sym_3210, sym_3209, sym_3208, sym_3207, sym_3206, sym_3205, sym_3204, sym_3203, sym_3202, sym_3201, sym_3200, sym_3199, sym_3198, sym_3197, sym_3196, sym_3195, sym_3194, sym_3193, sym_3192, sym_3191, sym_3190, sym_3189, sym_3188, sym_3187, sym_3186, sym_3185, sym_3184, sym_3182, sym_3181, sym_3179, sym_3177, sym_3176, sym_3175, sym_3169, sym_3168, key_3167, sym_3166, key_3165, sym_3164, key_3163, sym_3162, key_3161, sym_3160, sym_3156, sym_3155, sym_3154, sym_3153, key_3150, key_3149, key_3148, sym_3147, sym_3146, sym_3145, sym_3144, key_3143, sym_3142, key_3141, sym_3140, key_3139, G003138, G003136, G003134, G003132, G003130, G003127, G003125, G003123, G003121, G003119, G003117, G003115, G003113, G003111, G003109, G003107, G003105, G003103, G003101, G003099, G003097, G003095, G003093, G003091, G003089, G003087, G003085, G003083, G003081, G003079, G003077, G003075, G003073, G003071, G003069, G003067, G003065, G003063, sym_3061, sym_3060, sym_3059, sym_3058, sym_3057, key_3056, key_3055, key_3054, key_3052, G003051, G003049, key_3047, key_3046, key_3044, G003043, G003041;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 4 is_init: 0 index: 51 binding: (setter-value) */
-  static const void *G003029[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,38),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 52 binding: (setter-value) */
+  static const void *G003040[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,39),I(09,45,02,00)};
 
-  eul_allocate_static_string(str_3034, "", 0);
-  /* Byte-vector with size: 50 is_init: 0 index: 56 binding: (method-initialize) */
-  static const void *G003031[] = {I(ab,1c,1c,37),I(02,2a,1b,23),B(stream2 ,52),I(24,00,00,00),B(boot ,32),I(3c,02,1b,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(stream2 ,53),I(24,00,00,00),B(stream2 ,22),I(23,00,00,00),B(stream2 ,54),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,05),I(1c,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(24,00,00,00),B(stream2 ,22),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,84),I(24,00,00,00),B(stream2 ,22),I(08,1f,07,1d),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(24,00,00,00),B(string ,13),I(23,00,00,00),B(stream2 ,55),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1d,1c),I(1c,26,00,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,08,45,09)};
+  eul_allocate_static_string(str_3045, "", 0);
+  /* Byte-vector with size: 51 is_init: 0 index: 57 binding: (method-initialize) */
+  static const void *G003042[] = {I(ab,1c,1c,37),I(02,2a,1b,23),B(stream2 ,53),I(24,00,00,00),B(boot ,32),I(3c,02,1b,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(stream2 ,54),I(24,00,00,00),B(stream2 ,23),I(23,00,00,00),B(stream2 ,55),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,05),I(1c,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(24,00,00,00),B(stream2 ,23),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,26),I(00,00,00,03),I(24,00,00,00),B(stream2 ,23),I(08,1f,07,1d),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(24,00,00,00),B(string ,13),I(23,00,00,00),B(stream2 ,56),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1d,1c),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,23),I(09,22,02,2a),I(1f,08,45,09)};
 
-  /* Byte-vector with size: 7 is_init: 0 index: 57 binding: anonymous */
-  static const void *G003037[] = {I(a9,47,00,00),I(24,00,00,00),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  /* Byte-vector with size: 7 is_init: 0 index: 58 binding: anonymous */
+  static const void *G003048[] = {I(a9,47,00,00),I(24,00,00,00),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_3042, "", 0);
-  /* Byte-vector with size: 141 is_init: 0 index: 68 binding: (method-initialize) */
-  static const void *G003039[] = {I(ab,46,03,1c),I(1c,37,02,2a),I(1c,04,24,00),B(stream2 ,4),I(50,1b,34,00),I(00,00,02,1a),I(1d,82,24,00),B(stream2 ,20),I(08,1d,23,00),B(stream2 ,58),I(23,00,00,00),B(stream2 ,59),I(24,00,00,00),B(boot ,32),I(3c,03,24,00),B(stream1 ,5),I(1d,24,00,00),B(stream1 ,4),I(24,00,00,00),B(boot ,32),I(3c,03,1c,1c),I(26,00,00,00),I(00,00,01,b6),I(41,00,00,00),B(stream1 ,15),I(22,03,1b,85),I(19,1b,34,00),I(00,00,00,32),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,38),I(1c,23,00,00),B(stream2 ,60),I(1f,0b,24,00),B(boot ,13),I(3c,04,22,01),I(32,00,00,00),I(00,00,01,8e),I(24,00,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,58),I(1f,05,23,00),B(stream2 ,61),I(1f,08,23,00),B(stream2 ,62),I(1f,07,24,00),B(mop_gf ,2),I(3c,07,1f,05),I(23,00,00,00),B(stream2 ,63),I(50,1b,34,00),I(00,00,00,22),I(1f,09,1d,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,b8),I(1f,06,23,00),B(stream2 ,64),I(50,1b,34,00),I(00,00,00,22),I(1f,0a,1f,03),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,8a),I(1f,07,23,00),B(stream2 ,65),I(50,1b,34,00),I(00,00,00,22),I(1f,0b,1f,04),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,5c),I(1f,0b,1f,04),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(24,00,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,58),I(1f,09,23,00),B(stream2 ,61),I(1f,0c,23,00),B(stream2 ,62),I(1f,0b,24,00),B(mop_gf ,2),I(3c,07,1f,0c),I(1c,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,03,22),I(01,22,01,2a),I(24,00,00,00),B(stream2 ,11),I(1b,48,00,00),I(23,00,00,00),B(stream2 ,66),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,57),I(3b,00,1c,0f),I(23,00,00,00),B(stream2 ,66),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(0c,24,00,00),B(stream2 ,36),I(0f,1b,89,00),B(stream2 ,36),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(22,07,22,05),I(32,00,00,00),I(00,00,00,09),I(86,2a,1d,45),I(03,00,00,00)};
+  eul_allocate_static_string(str_3053, "", 0);
+  /* Byte-vector with size: 141 is_init: 0 index: 69 binding: (method-initialize) */
+  static const void *G003050[] = {I(ab,46,03,1c),I(1c,37,02,2a),I(1c,04,24,00),B(stream2 ,4),I(50,1b,34,00),I(00,00,02,1a),I(1d,82,24,00),B(stream2 ,20),I(08,1d,23,00),B(stream2 ,59),I(23,00,00,00),B(stream2 ,60),I(24,00,00,00),B(boot ,32),I(3c,03,24,00),B(stream1 ,5),I(1d,24,00,00),B(stream1 ,4),I(24,00,00,00),B(boot ,32),I(3c,03,1c,1c),I(26,00,00,00),I(00,00,01,b6),I(41,00,00,00),B(stream1 ,15),I(22,03,1b,85),I(19,1b,34,00),I(00,00,00,32),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,39),I(1c,23,00,00),B(stream2 ,61),I(1f,0b,24,00),B(boot ,13),I(3c,04,22,01),I(32,00,00,00),I(00,00,01,8e),I(24,00,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,59),I(1f,05,23,00),B(stream2 ,62),I(1f,08,23,00),B(stream2 ,63),I(1f,07,24,00),B(mop_gf ,2),I(3c,07,1f,05),I(23,00,00,00),B(stream2 ,64),I(50,1b,34,00),I(00,00,00,22),I(1f,09,1d,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,b8),I(1f,06,23,00),B(stream2 ,65),I(50,1b,34,00),I(00,00,00,22),I(1f,0a,1f,03),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,8a),I(1f,07,23,00),B(stream2 ,66),I(50,1b,34,00),I(00,00,00,22),I(1f,0b,1f,04),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,5c),I(1f,0b,1f,04),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(24,00,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,59),I(1f,09,23,00),B(stream2 ,62),I(1f,0c,23,00),B(stream2 ,63),I(1f,0b,24,00),B(mop_gf ,2),I(3c,07,1f,0c),I(1c,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,03,22),I(01,22,01,2a),I(24,00,00,00),B(stream2 ,11),I(1b,48,00,00),I(23,00,00,00),B(stream2 ,67),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,58),I(3b,00,1c,0f),I(23,00,00,00),B(stream2 ,67),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(0c,24,00,00),B(stream2 ,37),I(0f,1b,89,00),B(stream2 ,37),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(22,07,22,05),I(32,00,00,00),I(00,00,00,09),I(86,2a,1d,45),I(03,00,00,00)};
 
-  /* Byte-vector with size: 45 is_init: 0 index: 69 binding: (method-initialize) */
-  static const void *G003051[] = {I(ab,1c,1c,37),I(02,2a,1c,24),B(stream2 ,15),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,98),I(1d,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,2e),I(24,00,00,00),B(stream2 ,22),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1f,04),I(1c,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,03,2a),I(1f,03,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,2e),I(24,00,00,00),B(stream2 ,22),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1f,05),I(1c,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,03,22),I(02,2a,1d,45),I(03,00,00,00)};
-
-  /* Byte-vector with size: 1 is_init: 0 index: 70 binding: (method-file-stream?) */
-  static const void *G003053[] = {I(aa,1b,45,01)};
+  /* Byte-vector with size: 45 is_init: 0 index: 70 binding: (method-initialize) */
+  static const void *G003062[] = {I(ab,1c,1c,37),I(02,2a,1c,24),B(stream2 ,15),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,98),I(1d,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,2e),I(24,00,00,00),B(stream2 ,23),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1f,04),I(1c,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,03,2a),I(1f,03,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,2e),I(24,00,00,00),B(stream2 ,23),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1f,05),I(1c,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,03,22),I(02,2a,1d,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 71 binding: (method-file-stream?) */
-  static const void *G003055[] = {I(aa,86,45,01)};
+  static const void *G003064[] = {I(aa,1b,45,01)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 72 binding: (method-string-stream?) */
-  static const void *G003057[] = {I(aa,1b,45,01)};
+  /* Byte-vector with size: 1 is_init: 0 index: 72 binding: (method-file-stream?) */
+  static const void *G003066[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 73 binding: (method-string-stream?) */
-  static const void *G003059[] = {I(aa,86,45,01)};
+  static const void *G003068[] = {I(aa,1b,45,01)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 74 binding: (setter-string-stream-string-list) */
-  static const void *G003061[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,45),I(09,45,02,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 74 binding: (method-string-stream?) */
+  static const void *G003070[] = {I(aa,86,45,01)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 75 binding: (method-buffered-stream?) */
-  static const void *G003063[] = {I(aa,1b,45,01)};
+  /* Byte-vector with size: 4 is_init: 0 index: 75 binding: (setter-string-stream-string-list) */
+  static const void *G003072[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,46),I(09,45,02,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 76 binding: (method-buffered-stream?) */
-  static const void *G003065[] = {I(aa,86,45,01)};
+  static const void *G003074[] = {I(aa,1b,45,01)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 77 binding: (method-stream?) */
-  static const void *G003067[] = {I(aa,1b,45,01)};
+  /* Byte-vector with size: 1 is_init: 0 index: 77 binding: (method-buffered-stream?) */
+  static const void *G003076[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 78 binding: (method-stream?) */
-  static const void *G003069[] = {I(aa,86,45,01)};
+  static const void *G003078[] = {I(aa,1b,45,01)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 79 binding: (setter-stream-sink) */
-  static const void *G003071[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 79 binding: (method-stream?) */
+  static const void *G003080[] = {I(aa,86,45,01)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 80 binding: (setter-stream-source) */
-  static const void *G003073[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 80 binding: (setter-stream-sink) */
+  static const void *G003082[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 81 binding: (setter-stream-read-action) */
-  static const void *G003075[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 81 binding: (setter-stream-source) */
+  static const void *G003084[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 82 binding: (setter-stream-write-action) */
-  static const void *G003077[] = {I(ab,1c,84,1d),I(24,00,00,00),B(stream2 ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 82 binding: (setter-stream-read-action) */
+  static const void *G003086[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,20),I(09,45,02,00)};
 
-  /* Byte-vector with size: 17 is_init: 0 index: 83 binding: (method-initialize) */
-  static const void *G003079[] = {I(ab,1c,1c,37),I(02,2a,1c,84),I(24,00,00,00),B(stream2 ,22),I(08,24,00,00),B(string ,13),I(23,00,00,00),B(stream2 ,55),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,03),I(1c,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,03,45,04)};
+  /* Byte-vector with size: 4 is_init: 0 index: 83 binding: (setter-stream-write-action) */
+  static const void *G003088[] = {I(ab,1c,84,1d),I(24,00,00,00),B(stream2 ,20),I(09,45,02,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 84 binding: (method-file-control-block?) */
-  static const void *G003081[] = {I(aa,1b,45,01)};
+  /* Byte-vector with size: 18 is_init: 0 index: 84 binding: (method-initialize) */
+  static const void *G003090[] = {I(ab,1c,1c,37),I(02,2a,1c,26),I(00,00,00,03),I(24,00,00,00),B(stream2 ,23),I(08,24,00,00),B(string ,13),I(23,00,00,00),B(stream2 ,56),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,03),I(1c,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,23),I(09,22,02,2a),I(1f,03,45,04)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 85 binding: (method-file-control-block?) */
-  static const void *G003083[] = {I(aa,86,45,01)};
+  static const void *G003092[] = {I(aa,1b,45,01)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 86 binding: (setter-control-block-file-name) */
-  static const void *G003085[] = {I(ab,1c,84,1d),I(24,00,00,00),B(stream2 ,3),I(09,45,02,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 86 binding: (method-file-control-block?) */
+  static const void *G003094[] = {I(aa,86,45,01)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 87 binding: (setter-control-block-mode) */
-  static const void *G003087[] = {I(ab,1c,83,1d),I(24,00,00,00),B(stream2 ,3),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 87 binding: (setter-control-block-file-name) */
+  static const void *G003096[] = {I(ab,1c,84,1d),I(24,00,00,00),B(stream2 ,3),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 88 binding: (setter-control-block-descriptor) */
-  static const void *G003089[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,3),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 88 binding: (setter-control-block-mode) */
+  static const void *G003098[] = {I(ab,1c,83,1d),I(24,00,00,00),B(stream2 ,3),I(09,45,02,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 89 binding: (method-stream-control-block?) */
-  static const void *G003091[] = {I(aa,1b,45,01)};
+  /* Byte-vector with size: 4 is_init: 0 index: 89 binding: (setter-control-block-descriptor) */
+  static const void *G003100[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,3),I(09,45,02,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 90 binding: (method-stream-control-block?) */
-  static const void *G003093[] = {I(aa,86,45,01)};
+  static const void *G003102[] = {I(aa,1b,45,01)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 91 binding: (setter-control-block-buffer) */
-  static const void *G003095[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,45,02,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 91 binding: (method-stream-control-block?) */
+  static const void *G003104[] = {I(aa,86,45,01)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 92 binding: (setter-control-block-buffer-size) */
-  static const void *G003097[] = {I(ab,1c,84,1d),I(24,00,00,00),B(stream2 ,22),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 92 binding: (setter-control-block-buffer) */
+  static const void *G003106[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,23),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 93 binding: (setter-control-block-buffer-pos) */
-  static const void *G003099[] = {I(ab,1c,83,1d),I(24,00,00,00),B(stream2 ,22),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 93 binding: (setter-control-block-buffer-size) */
+  static const void *G003108[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,23),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 94 binding: (setter-control-block-buffer-cnt) */
-  static const void *G003101[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,22),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 94 binding: (setter-control-block-buffer-pos) */
+  static const void *G003110[] = {I(ab,1c,84,1d),I(24,00,00,00),B(stream2 ,23),I(09,45,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 95 binding: anonymous */
-  static const void *G003103[] = {I(a9,23,00,00),B(stream2 ,63),I(45,00,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 95 binding: (setter-control-block-buffer-cnt) */
+  static const void *G003112[] = {I(ab,1c,83,1d),I(24,00,00,00),B(stream2 ,23),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 96 binding: anonymous */
-  static const void *G003105[] = {I(a9,24,00,00),B(lock ,2),I(24,00,00,00),B(mop_gf ,2),I(3d,01,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 96 binding: (setter-control-block-stream-pos) */
+  static const void *G003114[] = {I(ab,1c,82,1d),I(24,00,00,00),B(stream2 ,23),I(09,45,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 97 binding: anonymous */
-  static const void *G003107[] = {I(a9,24,00,00),B(stream2 ,41),I(45,00,00,00)};
+  static const void *G003116[] = {I(a9,23,00,00),B(stream2 ,64),I(45,00,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 98 binding: anonymous */
-  static const void *G003109[] = {I(a9,24,00,00),B(stream2 ,35),I(45,00,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 98 binding: anonymous */
+  static const void *G003118[] = {I(a9,24,00,00),B(lock ,2),I(24,00,00,00),B(mop_gf ,2),I(3d,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 99 binding: anonymous */
-  static const void *G003111[] = {I(a9,23,00,00),B(stream2 ,63),I(45,00,00,00)};
+  static const void *G003120[] = {I(a9,24,00,00),B(stream2 ,42),I(45,00,00,00)};
 
-  eul_allocate_static_string(str_3115, "", 0);
+  /* Byte-vector with size: 3 is_init: 0 index: 100 binding: anonymous */
+  static const void *G003122[] = {I(a9,24,00,00),B(stream2 ,36),I(45,00,00,00)};
+
   /* Byte-vector with size: 3 is_init: 0 index: 101 binding: anonymous */
-  static const void *G003113[] = {I(a9,23,00,00),B(stream2 ,100),I(45,00,00,00)};
+  static const void *G003124[] = {I(a9,23,00,00),B(stream2 ,64),I(45,00,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 102 binding: anonymous */
-  static const void *G003116[] = {I(a9,82,45,00)};
+  eul_allocate_static_string(str_3128, "", 0);
+  /* Byte-vector with size: 3 is_init: 0 index: 103 binding: anonymous */
+  static const void *G003126[] = {I(a9,23,00,00),B(stream2 ,102),I(45,00,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 103 binding: anonymous */
-  static const void *G003118[] = {I(a9,82,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 104 binding: anonymous */
+  static const void *G003129[] = {I(a9,82,45,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 104 binding: anonymous */
-  static const void *G003120[] = {I(a9,26,00,00),I(00,00,04,00),I(45,00,00,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 105 binding: anonymous */
+  static const void *G003131[] = {I(a9,82,45,00)};
 
-  eul_allocate_static_cons(cons_3136, NULL, NULL);
-  eul_allocate_static_cons(cons_3135, NULL, eul_as_static(cons_3136));
-  eul_allocate_static_cons(cons_3143, NULL, NULL);
-  eul_allocate_static_cons(cons_3142, NULL, eul_as_static(cons_3143));
-  eul_allocate_static_cons(cons_3141, NULL, eul_as_static(cons_3142));
-  eul_allocate_static_cons(cons_3158, NULL, NULL);
+  /* Byte-vector with size: 1 is_init: 0 index: 106 binding: anonymous */
+  static const void *G003133[] = {I(a9,82,45,00)};
+
+  /* Byte-vector with size: 3 is_init: 0 index: 107 binding: anonymous */
+  static const void *G003135[] = {I(a9,26,00,00),I(00,00,04,00),I(45,00,00,00)};
+
+  eul_allocate_static_cons(cons_3152, NULL, NULL);
+  eul_allocate_static_cons(cons_3151, NULL, eul_as_static(cons_3152));
+  eul_allocate_static_cons(cons_3159, NULL, NULL);
+  eul_allocate_static_cons(cons_3158, NULL, eul_as_static(cons_3159));
   eul_allocate_static_cons(cons_3157, NULL, eul_as_static(cons_3158));
-  eul_allocate_static_cons(cons_3156, NULL, eul_as_static(cons_3157));
-  eul_allocate_static_cons(cons_3155, NULL, eul_as_static(cons_3156));
-  eul_allocate_static_cons(cons_3154, NULL, eul_as_static(cons_3155));
-  eul_allocate_static_cons(cons_3162, NULL, NULL);
-  eul_allocate_static_cons(cons_3164, NULL, NULL);
-  eul_allocate_static_cons(cons_3167, NULL, NULL);
-  eul_allocate_static_string(str_3202, "stdin", 5);
-  eul_allocate_static_string(str_3203, "stdout", 6);
-  eul_allocate_static_string(str_3204, "stderr", 6);
-  /* Byte-vector with size: 1415 is_init: 0 index: 180 binding: top-level */
-  static const void *G003122[] = {I(a9,24,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,106),I(23,00,00,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,54),I(24,00,00,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,104),I(3b,00,23,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,55),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,103),I(3b,00,24,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,111),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,102),I(3b,00,24,00),B(boot1 ,26),I(3c,04,1f,03),I(1f,03,1f,03),I(1f,03,24,00),B(boot1 ,26),I(3c,04,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,113),I(1f,09,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(23,00,00,00),B(stream2 ,116),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,22),I(2a,24,00,00),B(stream2 ,22),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,117),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,101),I(3b,00,23,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,58),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,118),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,99),I(3b,00,23,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,61),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,119),I(23,00,00,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,62),I(24,00,00,00),B(boot1 ,26),I(3c,04,1d,1d),I(1d,24,00,00),B(boot1 ,26),I(3c,03,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,120),I(23,00,00,00),B(stream2 ,113),I(1f,08,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(23,00,00,00),B(stream2 ,121),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,3),I(2a,24,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,122),I(23,00,00,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,123),I(24,00,00,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,124),I(23,00,00,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,125),I(24,00,00,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,126),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,98),I(3b,00,23,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,127),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,128),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,97),I(3b,00,23,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,129),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,130),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,96),I(3b,00,24,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,118),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,67),I(23,00,00,00),B(stream2 ,95),I(3b,00,23,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,61),I(24,00,00,00),B(boot1 ,26),I(3c,06,1f,05),I(1f,05,1f,05),I(1f,05,1f,05),I(1f,05,24,00),B(boot1 ,26),I(3c,06,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,131),I(23,00,00,00),B(stream2 ,113),I(1f,0b,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(23,00,00,00),B(stream2 ,132),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,20),I(2a,24,00,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,133),I(23,00,00,00),B(stream2 ,113),I(1f,05,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(86,24,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,19),I(2a,24,00,00),B(stream2 ,19),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,134),I(24,00,00,00),B(boot1 ,26),I(3c,02,1b,24),B(boot1 ,26),I(3c,01,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,135),I(23,00,00,00),B(stream2 ,113),I(1f,06,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(23,00,00,00),B(stream2 ,136),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,45),I(2a,24,00,00),B(stream2 ,19),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,137),I(23,00,00,00),B(stream2 ,113),I(1f,05,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(23,00,00,00),B(stream2 ,138),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,4),I(2a,24,00,00),B(condition ,8),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,139),I(23,00,00,00),B(stream2 ,107),I(23,00,00,00),B(stream2 ,60),I(24,00,00,00),B(boot1 ,26),I(3c,04,1b,24),B(boot1 ,26),I(3c,01,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,140),I(23,00,00,00),B(stream2 ,113),I(1f,06,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(23,00,00,00),B(stream2 ,141),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,38),I(2a,24,00,00),B(stream2 ,38),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,105),I(23,00,00,00),B(stream2 ,142),I(23,00,00,00),B(stream2 ,113),I(1f,05,23,00),B(stream2 ,114),I(1f,06,23,00),B(stream2 ,115),I(86,24,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,6),I(2a,24,00,00),B(lock ,2),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,89),B(stream2 ,11),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,143),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,29),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,144),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,24),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,145),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,40),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,146),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,15),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,147),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,14),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,148),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,49),I(2a,86,89,00),B(stream2 ,50),I(2a,86,89,00),B(stream2 ,34),I(2a,86,89,00),B(stream2 ,9),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,149),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,30),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,150),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,27),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,04,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,151),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,43),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,142),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,18),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,152),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,2),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,153),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,23),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,04,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,154),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,44),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,155),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,17),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,156),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,39),I(2a,86,89,00),B(stream2 ,36),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,47),I(23,00,00,00),B(stream2 ,157),I(23,00,00,00),B(stream2 ,94),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,10),I(23,00,00,00),B(stream2 ,158),I(23,00,00,00),B(stream2 ,93),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,8),I(23,00,00,00),B(stream2 ,159),I(23,00,00,00),B(stream2 ,92),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,32),I(23,00,00,00),B(stream2 ,160),I(23,00,00,00),B(stream2 ,91),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,161),I(23,00,00,00),B(stream2 ,90),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,161),I(23,00,00,00),B(stream2 ,89),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,29),I(2a,24,00,00),B(stream2 ,22),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,42),I(23,00,00,00),B(stream2 ,162),I(23,00,00,00),B(stream2 ,88),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,28),I(23,00,00,00),B(stream2 ,163),I(23,00,00,00),B(stream2 ,87),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,33),I(23,00,00,00),B(stream2 ,164),I(23,00,00,00),B(stream2 ,86),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,24),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,24),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,165),I(23,00,00,00),B(stream2 ,85),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,24),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,24),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,3),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,24),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,165),I(23,00,00,00),B(stream2 ,84),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,24),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,24),I(2a,24,00,00),B(stream2 ,3),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,3),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,166),I(23,00,00,00),B(stream2 ,83),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,12),I(23,00,00,00),B(stream2 ,167),I(23,00,00,00),B(stream2 ,82),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,7),I(23,00,00,00),B(stream2 ,168),I(23,00,00,00),B(stream2 ,81),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,21),I(23,00,00,00),B(stream2 ,169),I(23,00,00,00),B(stream2 ,80),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,37),I(23,00,00,00),B(stream2 ,170),I(23,00,00,00),B(stream2 ,79),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,40),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,40),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,171),I(23,00,00,00),B(stream2 ,78),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,40),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,40),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,40),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,171),I(23,00,00,00),B(stream2 ,77),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,40),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,40),I(2a,24,00,00),B(stream2 ,20),I(2a,24,00,00),B(stream2 ,15),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,15),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,172),I(23,00,00,00),B(stream2 ,76),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,15),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,15),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,19),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,15),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,172),I(23,00,00,00),B(stream2 ,75),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,15),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,15),I(2a,24,00,00),B(stream2 ,19),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,48),I(23,00,00,00),B(stream2 ,173),I(23,00,00,00),B(stream2 ,74),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,14),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,14),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,174),I(23,00,00,00),B(stream2 ,73),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,14),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,14),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,45),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,14),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,174),I(23,00,00,00),B(stream2 ,72),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,14),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,14),I(2a,24,00,00),B(stream2 ,45),I(2a,24,00,00),B(stream2 ,49),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,49),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,175),I(23,00,00,00),B(stream2 ,71),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,49),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,49),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,49),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,175),I(23,00,00,00),B(stream2 ,70),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,49),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,49),I(2a,24,00,00),B(stream2 ,4),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,20),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,166),I(23,00,00,00),B(stream2 ,69),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,3),I(23,00,00,00),B(stream2 ,58),I(23,00,00,00),B(stream2 ,176),I(23,00,00,00),B(stream2 ,61),I(23,00,00,00),B(stream2 ,63),I(23,00,00,00),B(stream2 ,62),I(82,24,00,00),B(mop_gf ,2),I(3c,07,24,00),B(stream2 ,4),I(23,00,00,00),B(stream2 ,125),I(1d,23,00,00),B(stream2 ,61),I(23,00,00,00),B(stream2 ,63),I(24,00,00,00),B(mop_gf ,2),I(3c,05,1b,89),B(stream2 ,50),I(2a,24,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,58),I(23,00,00,00),B(stream2 ,177),I(23,00,00,00),B(stream2 ,61),I(23,00,00,00),B(stream2 ,64),I(23,00,00,00),B(stream2 ,62),I(83,24,00,00),B(mop_gf ,2),I(3c,07,24,00),B(stream2 ,4),I(23,00,00,00),B(stream2 ,123),I(1d,23,00,00),B(stream2 ,61),I(23,00,00,00),B(stream2 ,64),I(24,00,00,00),B(mop_gf ,2),I(3c,05,1b,89),B(stream2 ,34),I(2a,24,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,58),I(23,00,00,00),B(stream2 ,178),I(23,00,00,00),B(stream2 ,61),I(23,00,00,00),B(stream2 ,64),I(23,00,00,00),B(stream2 ,62),I(84,24,00,00),B(mop_gf ,2),I(3c,07,24,00),B(stream2 ,4),I(23,00,00,00),B(stream2 ,123),I(1d,23,00,00),B(stream2 ,61),I(23,00,00,00),B(stream2 ,64),I(24,00,00,00),B(mop_gf ,2),I(3c,05,1b,89),B(stream2 ,9),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,4),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,166),I(23,00,00,00),B(stream2 ,68),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,45),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,166),I(23,00,00,00),B(stream2 ,56),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,30),I(2a,24,00,00),B(stream2 ,27),I(2a,24,00,00),B(stream2 ,43),I(2a,24,00,00),B(stream2 ,18),I(2a,24,00,00),B(stream2 ,2),I(2a,24,00,00),B(stream2 ,23),I(2a,24,00,00),B(stream2 ,44),I(2a,24,00,00),B(stream2 ,17),I(2a,24,00,00),B(stream2 ,39),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,25),I(23,00,00,00),B(stream2 ,179),I(23,00,00,00),B(stream2 ,51),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,38),I(2a,24,00,00),B(stream2 ,6),I(45,d7,00,00)};
+  eul_allocate_static_cons(cons_3174, NULL, NULL);
+  eul_allocate_static_cons(cons_3173, NULL, eul_as_static(cons_3174));
+  eul_allocate_static_cons(cons_3172, NULL, eul_as_static(cons_3173));
+  eul_allocate_static_cons(cons_3171, NULL, eul_as_static(cons_3172));
+  eul_allocate_static_cons(cons_3170, NULL, eul_as_static(cons_3171));
+  eul_allocate_static_cons(cons_3178, NULL, NULL);
+  eul_allocate_static_cons(cons_3180, NULL, NULL);
+  eul_allocate_static_cons(cons_3183, NULL, NULL);
+  eul_allocate_static_string(str_3219, "stdin", 5);
+  eul_allocate_static_string(str_3220, "stdout", 6);
+  eul_allocate_static_string(str_3221, "stderr", 6);
+  /* Byte-vector with size: 1439 is_init: 0 index: 185 binding: top-level */
+  static const void *G003137[] = {I(a9,24,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,109),I(23,00,00,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,55),I(24,00,00,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,111),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,107),I(3b,00,23,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,56),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,113),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,106),I(3b,00,24,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,114),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,105),I(3b,00,24,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,115),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,104),I(3b,00,24,00),B(boot1 ,26),I(3c,04,1f,04),I(1f,04,1f,04),I(1f,04,1f,04),I(24,00,00,00),B(boot1 ,26),I(3c,05,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,116),I(23,00,00,00),B(stream2 ,117),I(1f,0a,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(23,00,00,00),B(stream2 ,120),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,23),I(2a,24,00,00),B(stream2 ,23),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,121),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,103),I(3b,00,23,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,59),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,122),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,101),I(3b,00,23,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,62),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,123),I(23,00,00,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,63),I(24,00,00,00),B(boot1 ,26),I(3c,04,1d,1d),I(1d,24,00,00),B(boot1 ,26),I(3c,03,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,124),I(23,00,00,00),B(stream2 ,117),I(1f,08,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(23,00,00,00),B(stream2 ,125),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,3),I(2a,24,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,126),I(23,00,00,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,127),I(24,00,00,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,128),I(23,00,00,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,129),I(24,00,00,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,130),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,100),I(3b,00,23,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,131),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,132),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,99),I(3b,00,23,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,133),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,134),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,98),I(3b,00,24,00),B(boot1 ,26),I(3c,04,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,122),I(23,00,00,00),B(stream2 ,112),I(23,00,00,00),B(stream2 ,68),I(23,00,00,00),B(stream2 ,97),I(3b,00,23,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,62),I(24,00,00,00),B(boot1 ,26),I(3c,06,1f,05),I(1f,05,1f,05),I(1f,05,1f,05),I(1f,05,24,00),B(boot1 ,26),I(3c,06,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,135),I(23,00,00,00),B(stream2 ,117),I(1f,0b,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(23,00,00,00),B(stream2 ,136),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,20),I(2a,24,00,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,137),I(23,00,00,00),B(stream2 ,117),I(1f,05,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(86,24,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,19),I(2a,24,00,00),B(stream2 ,19),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,138),I(24,00,00,00),B(boot1 ,26),I(3c,02,1b,24),B(boot1 ,26),I(3c,01,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,139),I(23,00,00,00),B(stream2 ,117),I(1f,06,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(23,00,00,00),B(stream2 ,140),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,46),I(2a,24,00,00),B(stream2 ,19),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,141),I(23,00,00,00),B(stream2 ,117),I(1f,05,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(23,00,00,00),B(stream2 ,142),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,4),I(2a,24,00,00),B(condition ,8),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,143),I(23,00,00,00),B(stream2 ,110),I(23,00,00,00),B(stream2 ,61),I(24,00,00,00),B(boot1 ,26),I(3c,04,1b,24),B(boot1 ,26),I(3c,01,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,144),I(23,00,00,00),B(stream2 ,117),I(1f,06,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(23,00,00,00),B(stream2 ,145),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,39),I(2a,24,00,00),B(stream2 ,39),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(stream2 ,108),I(23,00,00,00),B(stream2 ,146),I(23,00,00,00),B(stream2 ,117),I(1f,05,23,00),B(stream2 ,118),I(1f,06,23,00),B(stream2 ,119),I(86,24,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(stream2 ,6),I(2a,24,00,00),B(lock ,2),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,89),B(stream2 ,11),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,147),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,30),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,148),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,25),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,149),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,41),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,150),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,15),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,151),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,14),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,152),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,50),I(2a,86,89,00),B(stream2 ,51),I(2a,86,89,00),B(stream2 ,35),I(2a,86,89,00),B(stream2 ,9),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,153),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,31),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,154),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,28),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,04,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,155),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,44),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,146),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,18),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,156),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,2),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,157),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,24),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,04,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,158),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,45),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,159),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,17),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(stream2 ,160),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(stream2 ,40),I(2a,86,89,00),B(stream2 ,37),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,21),I(23,00,00,00),B(stream2 ,161),I(23,00,00,00),B(stream2 ,96),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,48),I(23,00,00,00),B(stream2 ,162),I(23,00,00,00),B(stream2 ,95),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,10),I(23,00,00,00),B(stream2 ,163),I(23,00,00,00),B(stream2 ,94),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,8),I(23,00,00,00),B(stream2 ,164),I(23,00,00,00),B(stream2 ,93),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,33),I(23,00,00,00),B(stream2 ,165),I(23,00,00,00),B(stream2 ,92),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,30),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,30),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,166),I(23,00,00,00),B(stream2 ,91),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,30),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,30),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,23),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,30),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,166),I(23,00,00,00),B(stream2 ,90),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,30),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,30),I(2a,24,00,00),B(stream2 ,23),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,43),I(23,00,00,00),B(stream2 ,167),I(23,00,00,00),B(stream2 ,89),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,29),I(23,00,00,00),B(stream2 ,168),I(23,00,00,00),B(stream2 ,88),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,34),I(23,00,00,00),B(stream2 ,169),I(23,00,00,00),B(stream2 ,87),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,25),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,25),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,170),I(23,00,00,00),B(stream2 ,86),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,25),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,25),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,3),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,25),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,170),I(23,00,00,00),B(stream2 ,85),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,25),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,25),I(2a,24,00,00),B(stream2 ,3),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,3),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,171),I(23,00,00,00),B(stream2 ,84),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,12),I(23,00,00,00),B(stream2 ,172),I(23,00,00,00),B(stream2 ,83),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,7),I(23,00,00,00),B(stream2 ,173),I(23,00,00,00),B(stream2 ,82),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,22),I(23,00,00,00),B(stream2 ,174),I(23,00,00,00),B(stream2 ,81),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,38),I(23,00,00,00),B(stream2 ,175),I(23,00,00,00),B(stream2 ,80),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,41),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,41),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,176),I(23,00,00,00),B(stream2 ,79),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,41),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,41),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,41),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,176),I(23,00,00,00),B(stream2 ,78),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,41),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,41),I(2a,24,00,00),B(stream2 ,20),I(2a,24,00,00),B(stream2 ,15),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,15),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,177),I(23,00,00,00),B(stream2 ,77),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,15),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,15),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,19),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,15),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,177),I(23,00,00,00),B(stream2 ,76),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,15),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,15),I(2a,24,00,00),B(stream2 ,19),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,49),I(23,00,00,00),B(stream2 ,178),I(23,00,00,00),B(stream2 ,75),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,14),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,14),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,179),I(23,00,00,00),B(stream2 ,74),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,14),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,14),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,46),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,14),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,179),I(23,00,00,00),B(stream2 ,73),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,14),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,14),I(2a,24,00,00),B(stream2 ,46),I(2a,24,00,00),B(stream2 ,50),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,50),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,180),I(23,00,00,00),B(stream2 ,72),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,50),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,50),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,50),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,180),I(23,00,00,00),B(stream2 ,71),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,50),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,50),I(2a,24,00,00),B(stream2 ,4),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,20),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,171),I(23,00,00,00),B(stream2 ,70),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,3),I(23,00,00,00),B(stream2 ,59),I(23,00,00,00),B(stream2 ,181),I(23,00,00,00),B(stream2 ,62),I(23,00,00,00),B(stream2 ,64),I(23,00,00,00),B(stream2 ,63),I(82,24,00,00),B(mop_gf ,2),I(3c,07,24,00),B(stream2 ,4),I(23,00,00,00),B(stream2 ,129),I(1d,23,00,00),B(stream2 ,62),I(23,00,00,00),B(stream2 ,64),I(24,00,00,00),B(mop_gf ,2),I(3c,05,1b,89),B(stream2 ,51),I(2a,24,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,59),I(23,00,00,00),B(stream2 ,182),I(23,00,00,00),B(stream2 ,62),I(23,00,00,00),B(stream2 ,65),I(23,00,00,00),B(stream2 ,63),I(83,24,00,00),B(mop_gf ,2),I(3c,07,24,00),B(stream2 ,4),I(23,00,00,00),B(stream2 ,127),I(1d,23,00,00),B(stream2 ,62),I(23,00,00,00),B(stream2 ,65),I(24,00,00,00),B(mop_gf ,2),I(3c,05,1b,89),B(stream2 ,35),I(2a,24,00,00),B(stream2 ,3),I(23,00,00,00),B(stream2 ,59),I(23,00,00,00),B(stream2 ,183),I(23,00,00,00),B(stream2 ,62),I(23,00,00,00),B(stream2 ,65),I(23,00,00,00),B(stream2 ,63),I(84,24,00,00),B(mop_gf ,2),I(3c,07,24,00),B(stream2 ,4),I(23,00,00,00),B(stream2 ,127),I(1d,23,00,00),B(stream2 ,62),I(23,00,00,00),B(stream2 ,65),I(24,00,00,00),B(mop_gf ,2),I(3c,05,1b,89),B(stream2 ,9),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,4),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,171),I(23,00,00,00),B(stream2 ,69),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,46),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(stream2 ,171),I(23,00,00,00),B(stream2 ,57),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,31),I(2a,24,00,00),B(stream2 ,28),I(2a,24,00,00),B(stream2 ,44),I(2a,24,00,00),B(stream2 ,18),I(2a,24,00,00),B(stream2 ,2),I(2a,24,00,00),B(stream2 ,24),I(2a,24,00,00),B(stream2 ,45),I(2a,24,00,00),B(stream2 ,17),I(2a,24,00,00),B(stream2 ,40),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(stream2 ,26),I(23,00,00,00),B(stream2 ,184),I(23,00,00,00),B(stream2 ,52),I(3b,02,1d,3c),I(02,2a,24,00),B(stream2 ,39),I(2a,24,00,00),B(stream2 ,6),I(45,d9,00,00)};
 
-  eul_allocate_static_cons(cons_3208, NULL, NULL);
-  /* Byte-vector with size: 3 is_init: 0 index: 183 binding: eos-default-value */
-  static const void *G003206[] = {I(a9,23,00,00),B(stream2 ,182),I(45,00,00,00)};
+  eul_allocate_static_cons(cons_3225, NULL, NULL);
+  /* Byte-vector with size: 3 is_init: 0 index: 188 binding: eos-default-value */
+  static const void *G003223[] = {I(a9,23,00,00),B(stream2 ,187),I(45,00,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 184 binding: stream-read-action */
-  static const void *G003210[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 189 binding: stream-read-action */
+  static const void *G003227[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,20),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 185 binding: control-block-buffer-size */
-  static const void *G003212[] = {I(aa,84,24,00),B(stream2 ,22),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 190 binding: control-block-buffer-size */
+  static const void *G003229[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,23),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 186 binding: control-block-buffer-pos */
-  static const void *G003214[] = {I(aa,83,24,00),B(stream2 ,22),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 191 binding: control-block-buffer-pos */
+  static const void *G003231[] = {I(aa,84,24,00),B(stream2 ,23),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 187 binding: stream-write-action */
-  static const void *G003216[] = {I(aa,84,24,00),B(stream2 ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 192 binding: stream-write-action */
+  static const void *G003233[] = {I(aa,84,24,00),B(stream2 ,20),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 188 binding: open-file-streams */
-  static const void *G003218[] = {I(a9,24,00,00),B(stream2 ,36),I(45,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 193 binding: open-file-streams */
+  static const void *G003235[] = {I(a9,24,00,00),B(stream2 ,37),I(45,00,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 189 binding: stream-mode */
-  static const void *G003220[] = {I(aa,82,24,00),B(stream2 ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 194 binding: stream-mode */
+  static const void *G003237[] = {I(aa,82,24,00),B(stream2 ,20),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 190 binding: stream-source */
-  static const void *G003222[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 195 binding: control-block-stream-pos */
+  static const void *G003239[] = {I(aa,82,24,00),B(stream2 ,23),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 191 binding: value */
-  static const void *G003224[] = {I(aa,82,24,00),B(stream2 ,38),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 196 binding: stream-source */
+  static const void *G003241[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,45,00,00)};
 
-  /* Byte-vector with size: 7 is_init: 0 index: 192 binding: to-stream */
-  static const void *G003226[] = {I(aa,24,00,00),B(stream2 ,20),I(23,00,00,00),B(stream2 ,129),I(1d,24,00,00),B(mop_gf ,2),I(3d,03,01,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 197 binding: value */
+  static const void *G003243[] = {I(aa,82,24,00),B(stream2 ,39),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 193 binding: control-block-mode */
-  static const void *G003228[] = {I(aa,83,24,00),B(stream2 ,3),I(08,45,00,00)};
+  /* Byte-vector with size: 7 is_init: 0 index: 198 binding: to-stream */
+  static const void *G003245[] = {I(aa,24,00,00),B(stream2 ,20),I(23,00,00,00),B(stream2 ,133),I(1d,24,00,00),B(mop_gf ,2),I(3d,03,01,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 194 binding: stream-lock */
-  static const void *G003230[] = {I(aa,83,24,00),B(stream2 ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 199 binding: control-block-mode */
+  static const void *G003247[] = {I(aa,83,24,00),B(stream2 ,3),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 195 binding: control-block-buffer */
-  static const void *G003232[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 200 binding: stream-lock */
+  static const void *G003249[] = {I(aa,83,24,00),B(stream2 ,20),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 196 binding: control-block-file-name */
-  static const void *G003234[] = {I(aa,84,24,00),B(stream2 ,3),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 201 binding: control-block-buffer */
+  static const void *G003251[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,23),I(08,45,00,00)};
 
-  /* Byte-vector with size: 37 is_init: 0 index: 197 binding: default-read-action */
-  static const void *G003236[] = {I(43,03,1d,26),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1b,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,12,1b,34),I(00,00,00,15),I(1f,04,24,00),B(stream2 ,2),I(3c,01,2d,32),I(00,00,00,06),I(86,1b,34,00),I(00,00,00,26),I(1f,04,34,00),I(00,00,00,16),I(1f,05,24,00),B(stream2 ,18),I(3d,01,06,32),I(00,00,00,07),I(1f,03,32,00),I(00,00,00,35),I(1d,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,10,1c),I(11,1f,05,1c),I(1c,26,00,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1c,22,03,45),I(06,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 202 binding: control-block-file-name */
+  static const void *G003253[] = {I(aa,84,24,00),B(stream2 ,3),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 198 binding: stream-sink */
-  static const void *G003238[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 37 is_init: 0 index: 203 binding: default-read-action */
+  static const void *G003255[] = {I(43,03,1d,26),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1b,26,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,23),I(08,12,1b,34),I(00,00,00,15),I(1f,04,24,00),B(stream2 ,2),I(3c,01,2d,32),I(00,00,00,06),I(86,1b,34,00),I(00,00,00,26),I(1f,04,34,00),I(00,00,00,16),I(1f,05,24,00),B(stream2 ,18),I(3d,01,06,32),I(00,00,00,07),I(1f,03,32,00),I(00,00,00,35),I(1d,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,23),I(08,1b,10,1c),I(11,1f,05,1c),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,23),I(09,22,02,2a),I(1c,22,03,45),I(06,00,00,00)};
 
-  /* Byte-vector with size: 15 is_init: 0 index: 199 binding: default-write-action */
-  static const void *G003240[] = {I(ab,26,00,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1d,1c,0f),I(1d,1c,1c,26),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,03,45,04)};
+  /* Byte-vector with size: 5 is_init: 0 index: 204 binding: stream-sink */
+  static const void *G003257[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 200 binding: control-block-descriptor */
-  static const void *G003242[] = {I(aa,82,24,00),B(stream2 ,3),I(08,45,00,00)};
+  /* Byte-vector with size: 15 is_init: 0 index: 205 binding: default-write-action */
+  static const void *G003259[] = {I(ab,26,00,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,26,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,23),I(08,1d,1c,0f),I(1d,1c,1c,26),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,23),I(09,22,02,2a),I(1f,03,45,04)};
 
-  /* Byte-vector with size: 7 is_init: 0 index: 201 binding: from-stream */
-  static const void *G003244[] = {I(aa,24,00,00),B(stream2 ,20),I(23,00,00,00),B(stream2 ,127),I(1d,24,00,00),B(mop_gf ,2),I(3d,03,01,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 206 binding: control-block-descriptor */
+  static const void *G003261[] = {I(aa,82,24,00),B(stream2 ,3),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 202 binding: control-block-buffer-cnt */
-  static const void *G003246[] = {I(aa,82,24,00),B(stream2 ,22),I(08,45,00,00)};
+  /* Byte-vector with size: 7 is_init: 0 index: 207 binding: from-stream */
+  static const void *G003263[] = {I(aa,24,00,00),B(stream2 ,20),I(23,00,00,00),B(stream2 ,131),I(1d,24,00,00),B(mop_gf ,2),I(3d,03,01,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 203 binding: string-stream-string-list */
-  static const void *G003248[] = {I(aa,82,24,00),B(stream2 ,45),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 208 binding: control-block-buffer-cnt */
+  static const void *G003265[] = {I(aa,83,24,00),B(stream2 ,23),I(08,45,00,00)};
 
-  /* Byte-vector with size: 225 is_init: 1 index: 0 binding: initialize-stream2 */
-  static const void *G003250[] = {I(87,25,00,00),B(stream2 ,1),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(stream1 ,1),I(3e,0b,24,00),B(stream1 ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(stream2 ,50),I(86,25,00,00),B(stream2 ,49),I(23,00,00,00),B(stream2 ,204),I(23,00,00,00),B(stream2 ,203),I(3b,01,25,00),B(stream2 ,48),I(23,00,00,00),B(stream2 ,205),I(23,00,00,00),B(stream2 ,202),I(3b,01,25,00),B(stream2 ,47),I(23,00,00,00),B(stream2 ,206),I(23,00,00,00),B(stream2 ,201),I(3b,01,25,00),B(stream2 ,46),I(86,25,00,00),B(stream2 ,45),I(86,25,00,00),B(stream2 ,44),I(86,25,00,00),B(stream2 ,43),I(23,00,00,00),B(stream2 ,207),I(23,00,00,00),B(stream2 ,200),I(3b,01,25,00),B(stream2 ,42),I(23,00,00,00),B(stream2 ,208),I(23,00,00,00),B(stream2 ,199),I(3b,02,25,00),B(stream2 ,41),I(86,25,00,00),B(stream2 ,40),I(86,25,00,00),B(stream2 ,39),I(86,25,00,00),B(stream2 ,38),I(23,00,00,00),B(stream2 ,209),I(23,00,00,00),B(stream2 ,198),I(3b,01,25,00),B(stream2 ,37),I(86,25,00,00),B(stream2 ,36),I(23,00,00,00),B(stream2 ,210),I(23,00,00,00),B(stream2 ,197),I(3b,03,25,00),B(stream2 ,35),I(86,25,00,00),B(stream2 ,34),I(23,00,00,00),B(stream2 ,211),I(23,00,00,00),B(stream2 ,196),I(3b,01,25,00),B(stream2 ,33),I(23,00,00,00),B(stream2 ,212),I(23,00,00,00),B(stream2 ,195),I(3b,01,25,00),B(stream2 ,32),I(23,00,00,00),B(stream2 ,213),I(23,00,00,00),B(stream2 ,194),I(3b,01,25,00),B(stream2 ,31),I(86,25,00,00),B(stream2 ,30),I(86,25,00,00),B(stream2 ,29),I(23,00,00,00),B(stream2 ,214),I(23,00,00,00),B(stream2 ,193),I(3b,01,25,00),B(stream2 ,28),I(86,25,00,00),B(stream2 ,27),I(23,00,00,00),B(stream2 ,215),I(23,00,00,00),B(stream2 ,192),I(3b,01,25,00),B(stream2 ,26),I(23,00,00,00),B(stream2 ,139),I(23,00,00,00),B(stream2 ,191),I(3b,01,25,00),B(stream2 ,25),I(86,25,00,00),B(stream2 ,24),I(86,25,00,00),B(stream2 ,23),I(86,25,00,00),B(stream2 ,22),I(23,00,00,00),B(stream2 ,216),I(23,00,00,00),B(stream2 ,190),I(3b,01,25,00),B(stream2 ,21),I(86,25,00,00),B(stream2 ,20),I(86,25,00,00),B(stream2 ,19),I(86,25,00,00),B(stream2 ,18),I(86,25,00,00),B(stream2 ,17),I(23,00,00,00),B(stream2 ,217),I(23,00,00,00),B(stream2 ,189),I(3b,01,25,00),B(stream2 ,16),I(86,25,00,00),B(stream2 ,15),I(86,25,00,00),B(stream2 ,14),I(23,00,00,00),B(stream2 ,218),I(23,00,00,00),B(stream2 ,188),I(3b,00,25,00),B(stream2 ,13),I(23,00,00,00),B(stream2 ,219),I(23,00,00,00),B(stream2 ,187),I(3b,01,25,00),B(stream2 ,12),I(86,25,00,00),B(stream2 ,11),I(23,00,00,00),B(stream2 ,220),I(23,00,00,00),B(stream2 ,186),I(3b,01,25,00),B(stream2 ,10),I(86,25,00,00),B(stream2 ,9),I(23,00,00,00),B(stream2 ,221),I(23,00,00,00),B(stream2 ,185),I(3b,01,25,00),B(stream2 ,8),I(23,00,00,00),B(stream2 ,222),I(23,00,00,00),B(stream2 ,184),I(3b,01,25,00),B(stream2 ,7),I(86,25,00,00),B(stream2 ,6),I(23,00,00,00),B(stream2 ,223),I(23,00,00,00),B(stream2 ,183),I(3b,00,25,00),B(stream2 ,5),I(86,25,00,00),B(stream2 ,4),I(86,25,00,00),B(stream2 ,3),I(86,25,00,00),B(stream2 ,2),I(23,00,00,00),B(stream2 ,224),I(23,00,00,00),B(stream2 ,180),I(3b,00,3d,00),I(00,ac,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 209 binding: string-stream-string-list */
+  static const void *G003267[] = {I(aa,82,24,00),B(stream2 ,46),I(08,45,00,00)};
+
+  /* Byte-vector with size: 231 is_init: 1 index: 0 binding: initialize-stream2 */
+  static const void *G003269[] = {I(87,25,00,00),B(stream2 ,1),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(stream1 ,1),I(3e,0b,24,00),B(stream1 ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(stream2 ,51),I(86,25,00,00),B(stream2 ,50),I(23,00,00,00),B(stream2 ,210),I(23,00,00,00),B(stream2 ,209),I(3b,01,25,00),B(stream2 ,49),I(23,00,00,00),B(stream2 ,211),I(23,00,00,00),B(stream2 ,208),I(3b,01,25,00),B(stream2 ,48),I(23,00,00,00),B(stream2 ,212),I(23,00,00,00),B(stream2 ,207),I(3b,01,25,00),B(stream2 ,47),I(86,25,00,00),B(stream2 ,46),I(86,25,00,00),B(stream2 ,45),I(86,25,00,00),B(stream2 ,44),I(23,00,00,00),B(stream2 ,213),I(23,00,00,00),B(stream2 ,206),I(3b,01,25,00),B(stream2 ,43),I(23,00,00,00),B(stream2 ,214),I(23,00,00,00),B(stream2 ,205),I(3b,02,25,00),B(stream2 ,42),I(86,25,00,00),B(stream2 ,41),I(86,25,00,00),B(stream2 ,40),I(86,25,00,00),B(stream2 ,39),I(23,00,00,00),B(stream2 ,215),I(23,00,00,00),B(stream2 ,204),I(3b,01,25,00),B(stream2 ,38),I(86,25,00,00),B(stream2 ,37),I(23,00,00,00),B(stream2 ,216),I(23,00,00,00),B(stream2 ,203),I(3b,03,25,00),B(stream2 ,36),I(86,25,00,00),B(stream2 ,35),I(23,00,00,00),B(stream2 ,217),I(23,00,00,00),B(stream2 ,202),I(3b,01,25,00),B(stream2 ,34),I(23,00,00,00),B(stream2 ,218),I(23,00,00,00),B(stream2 ,201),I(3b,01,25,00),B(stream2 ,33),I(23,00,00,00),B(stream2 ,219),I(23,00,00,00),B(stream2 ,200),I(3b,01,25,00),B(stream2 ,32),I(86,25,00,00),B(stream2 ,31),I(86,25,00,00),B(stream2 ,30),I(23,00,00,00),B(stream2 ,220),I(23,00,00,00),B(stream2 ,199),I(3b,01,25,00),B(stream2 ,29),I(86,25,00,00),B(stream2 ,28),I(23,00,00,00),B(stream2 ,221),I(23,00,00,00),B(stream2 ,198),I(3b,01,25,00),B(stream2 ,27),I(23,00,00,00),B(stream2 ,143),I(23,00,00,00),B(stream2 ,197),I(3b,01,25,00),B(stream2 ,26),I(86,25,00,00),B(stream2 ,25),I(86,25,00,00),B(stream2 ,24),I(86,25,00,00),B(stream2 ,23),I(23,00,00,00),B(stream2 ,222),I(23,00,00,00),B(stream2 ,196),I(3b,01,25,00),B(stream2 ,22),I(23,00,00,00),B(stream2 ,223),I(23,00,00,00),B(stream2 ,195),I(3b,01,25,00),B(stream2 ,21),I(86,25,00,00),B(stream2 ,20),I(86,25,00,00),B(stream2 ,19),I(86,25,00,00),B(stream2 ,18),I(86,25,00,00),B(stream2 ,17),I(23,00,00,00),B(stream2 ,224),I(23,00,00,00),B(stream2 ,194),I(3b,01,25,00),B(stream2 ,16),I(86,25,00,00),B(stream2 ,15),I(86,25,00,00),B(stream2 ,14),I(23,00,00,00),B(stream2 ,225),I(23,00,00,00),B(stream2 ,193),I(3b,00,25,00),B(stream2 ,13),I(23,00,00,00),B(stream2 ,226),I(23,00,00,00),B(stream2 ,192),I(3b,01,25,00),B(stream2 ,12),I(86,25,00,00),B(stream2 ,11),I(23,00,00,00),B(stream2 ,227),I(23,00,00,00),B(stream2 ,191),I(3b,01,25,00),B(stream2 ,10),I(86,25,00,00),B(stream2 ,9),I(23,00,00,00),B(stream2 ,228),I(23,00,00,00),B(stream2 ,190),I(3b,01,25,00),B(stream2 ,8),I(23,00,00,00),B(stream2 ,229),I(23,00,00,00),B(stream2 ,189),I(3b,01,25,00),B(stream2 ,7),I(86,25,00,00),B(stream2 ,6),I(23,00,00,00),B(stream2 ,230),I(23,00,00,00),B(stream2 ,188),I(3b,00,25,00),B(stream2 ,5),I(86,25,00,00),B(stream2 ,4),I(86,25,00,00),B(stream2 ,3),I(86,25,00,00),B(stream2 ,2),I(23,00,00,00),B(stream2 ,231),I(23,00,00,00),B(stream2 ,185),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G003030,G003029);
-  eul_intern_keyword(key_3033,"string");
-  object_class(str_3034) = eul_static_string_class;
-  eul_intern_keyword(key_3035,"buffer");
-  eul_intern_keyword(key_3036,"size");
-  eul_allocate_bytevector( G003032,G003031);
-  eul_allocate_bytevector( G003038,G003037);
-  eul_intern_keyword(key_3041,"file-name");
-  object_class(str_3042) = eul_static_string_class;
-  eul_intern_keyword(key_3043,"value");
-  eul_intern_keyword(key_3044,"mode");
-  eul_intern_keyword(key_3045,"descriptor");
-  eul_intern_symbol(sym_3046,"r");
-  eul_intern_symbol(sym_3047,"w");
-  eul_intern_symbol(sym_3048,"a");
-  eul_intern_symbol(sym_3049,"*clean-ups*");
-  eul_intern_symbol(sym_3050,"anonymous");
-  eul_allocate_bytevector( G003040,G003039);
-  eul_allocate_bytevector( G003052,G003051);
-  eul_allocate_bytevector( G003054,G003053);
-  eul_allocate_bytevector( G003056,G003055);
-  eul_allocate_bytevector( G003058,G003057);
-  eul_allocate_bytevector( G003060,G003059);
-  eul_allocate_bytevector( G003062,G003061);
-  eul_allocate_bytevector( G003064,G003063);
-  eul_allocate_bytevector( G003066,G003065);
-  eul_allocate_bytevector( G003068,G003067);
-  eul_allocate_bytevector( G003070,G003069);
-  eul_allocate_bytevector( G003072,G003071);
-  eul_allocate_bytevector( G003074,G003073);
-  eul_allocate_bytevector( G003076,G003075);
-  eul_allocate_bytevector( G003078,G003077);
-  eul_allocate_bytevector( G003080,G003079);
-  eul_allocate_bytevector( G003082,G003081);
-  eul_allocate_bytevector( G003084,G003083);
-  eul_allocate_bytevector( G003086,G003085);
-  eul_allocate_bytevector( G003088,G003087);
-  eul_allocate_bytevector( G003090,G003089);
-  eul_allocate_bytevector( G003092,G003091);
-  eul_allocate_bytevector( G003094,G003093);
-  eul_allocate_bytevector( G003096,G003095);
-  eul_allocate_bytevector( G003098,G003097);
-  eul_allocate_bytevector( G003100,G003099);
-  eul_allocate_bytevector( G003102,G003101);
-  eul_allocate_bytevector( G003104,G003103);
-  eul_allocate_bytevector( G003106,G003105);
-  eul_allocate_bytevector( G003108,G003107);
-  eul_allocate_bytevector( G003110,G003109);
-  eul_allocate_bytevector( G003112,G003111);
-  object_class(str_3115) = eul_static_string_class;
-  eul_allocate_bytevector( G003114,G003113);
+  eul_allocate_bytevector( G003041,G003040);
+  eul_intern_keyword(key_3044,"string");
+  object_class(str_3045) = eul_static_string_class;
+  eul_intern_keyword(key_3046,"buffer");
+  eul_intern_keyword(key_3047,"size");
+  eul_allocate_bytevector( G003043,G003042);
+  eul_allocate_bytevector( G003049,G003048);
+  eul_intern_keyword(key_3052,"file-name");
+  object_class(str_3053) = eul_static_string_class;
+  eul_intern_keyword(key_3054,"value");
+  eul_intern_keyword(key_3055,"mode");
+  eul_intern_keyword(key_3056,"descriptor");
+  eul_intern_symbol(sym_3057,"r");
+  eul_intern_symbol(sym_3058,"w");
+  eul_intern_symbol(sym_3059,"a");
+  eul_intern_symbol(sym_3060,"*clean-ups*");
+  eul_intern_symbol(sym_3061,"anonymous");
+  eul_allocate_bytevector( G003051,G003050);
+  eul_allocate_bytevector( G003063,G003062);
+  eul_allocate_bytevector( G003065,G003064);
+  eul_allocate_bytevector( G003067,G003066);
+  eul_allocate_bytevector( G003069,G003068);
+  eul_allocate_bytevector( G003071,G003070);
+  eul_allocate_bytevector( G003073,G003072);
+  eul_allocate_bytevector( G003075,G003074);
+  eul_allocate_bytevector( G003077,G003076);
+  eul_allocate_bytevector( G003079,G003078);
+  eul_allocate_bytevector( G003081,G003080);
+  eul_allocate_bytevector( G003083,G003082);
+  eul_allocate_bytevector( G003085,G003084);
+  eul_allocate_bytevector( G003087,G003086);
+  eul_allocate_bytevector( G003089,G003088);
+  eul_allocate_bytevector( G003091,G003090);
+  eul_allocate_bytevector( G003093,G003092);
+  eul_allocate_bytevector( G003095,G003094);
+  eul_allocate_bytevector( G003097,G003096);
+  eul_allocate_bytevector( G003099,G003098);
+  eul_allocate_bytevector( G003101,G003100);
+  eul_allocate_bytevector( G003103,G003102);
+  eul_allocate_bytevector( G003105,G003104);
+  eul_allocate_bytevector( G003107,G003106);
+  eul_allocate_bytevector( G003109,G003108);
+  eul_allocate_bytevector( G003111,G003110);
+  eul_allocate_bytevector( G003113,G003112);
+  eul_allocate_bytevector( G003115,G003114);
   eul_allocate_bytevector( G003117,G003116);
   eul_allocate_bytevector( G003119,G003118);
   eul_allocate_bytevector( G003121,G003120);
-  eul_intern_keyword(key_3124,"name");
-  eul_intern_symbol(sym_3125,"buffer");
-  eul_intern_keyword(key_3126,"keyword");
-  eul_intern_symbol(sym_3127,"buffer-size");
-  eul_intern_keyword(key_3128,"default");
-  eul_intern_symbol(sym_3129,"buffer-pos");
-  eul_intern_symbol(sym_3130,"buffer-cnt");
-  eul_intern_symbol(sym_3131,"stream-control-block");
-  eul_intern_keyword(key_3132,"direct-superclasses");
-  eul_intern_keyword(key_3133,"direct-slots");
-  eul_intern_keyword(key_3134,"direct-keywords");
-  object_class(cons_3136) = eul_static_cons_class;
-  eul_car(cons_3136) = key_3035;
-  eul_cdr(cons_3136) = eul_nil;
-  object_class(cons_3135) = eul_static_cons_class;
-  eul_car(cons_3135) = key_3036;
-  eul_intern_symbol(sym_3137,"file-name");
-  eul_intern_symbol(sym_3138,"mode");
-  eul_intern_symbol(sym_3139,"descriptor");
-  eul_intern_symbol(sym_3140,"file-control-block");
-  object_class(cons_3143) = eul_static_cons_class;
-  eul_car(cons_3143) = key_3041;
-  eul_cdr(cons_3143) = eul_nil;
-  object_class(cons_3142) = eul_static_cons_class;
-  eul_car(cons_3142) = key_3044;
-  object_class(cons_3141) = eul_static_cons_class;
-  eul_car(cons_3141) = key_3045;
-  eul_intern_symbol(sym_3144,"sink");
-  eul_intern_keyword(key_3145,"sink");
-  eul_intern_symbol(sym_3146,"source");
-  eul_intern_keyword(key_3147,"source");
-  eul_intern_symbol(sym_3148,"read-action");
-  eul_intern_keyword(key_3149,"read-action");
-  eul_intern_symbol(sym_3150,"write-action");
-  eul_intern_keyword(key_3151,"write-action");
-  eul_intern_symbol(sym_3152,"lock");
-  eul_intern_symbol(sym_3153,"stream");
-  object_class(cons_3158) = eul_static_cons_class;
-  eul_car(cons_3158) = key_3145;
-  eul_cdr(cons_3158) = eul_nil;
-  object_class(cons_3157) = eul_static_cons_class;
-  eul_car(cons_3157) = key_3147;
-  object_class(cons_3156) = eul_static_cons_class;
-  eul_car(cons_3156) = key_3149;
-  object_class(cons_3155) = eul_static_cons_class;
-  eul_car(cons_3155) = key_3151;
-  object_class(cons_3154) = eul_static_cons_class;
-  eul_car(cons_3154) = key_3044;
-  eul_intern_symbol(sym_3159,"buffered-stream");
-  eul_intern_symbol(sym_3160,"string-list");
-  eul_intern_symbol(sym_3161,"string-stream");
-  object_class(cons_3162) = eul_static_cons_class;
-  eul_car(cons_3162) = key_3033;
-  eul_cdr(cons_3162) = eul_nil;
-  eul_intern_symbol(sym_3163,"file-stream");
-  object_class(cons_3164) = eul_static_cons_class;
-  eul_car(cons_3164) = key_3041;
-  eul_cdr(cons_3164) = eul_nil;
-  eul_intern_symbol(sym_3165,"value");
-  eul_intern_symbol(sym_3166,"stream-condition");
-  object_class(cons_3167) = eul_static_cons_class;
-  eul_car(cons_3167) = key_3043;
-  eul_cdr(cons_3167) = eul_nil;
-  eul_intern_symbol(sym_3168,"end-of-stream");
-  eul_intern_symbol(sym_3169,"stream-control-block?");
-  eul_intern_symbol(sym_3170,"file-control-block?");
-  eul_intern_symbol(sym_3171,"stream?");
-  eul_intern_symbol(sym_3172,"buffered-stream?");
-  eul_intern_symbol(sym_3173,"string-stream?");
-  eul_intern_symbol(sym_3174,"file-stream?");
-  eul_intern_symbol(sym_3175,"generic-print");
-  eul_intern_symbol(sym_3176,"generic-write");
-  eul_intern_symbol(sym_3177,"generic-read");
-  eul_intern_symbol(sym_3178,"fill-buffer");
-  eul_intern_symbol(sym_3179,"flush-buffer");
-  eul_intern_symbol(sym_3180,"generic-connect");
-  eul_intern_symbol(sym_3181,"reconnect");
-  eul_intern_symbol(sym_3182,"disconnect");
-  eul_intern_symbol(sym_3183,"(setter control-block-buffer-cnt)");
-  eul_intern_symbol(sym_3184,"(setter control-block-buffer-pos)");
-  eul_intern_symbol(sym_3185,"(setter control-block-buffer-size)");
-  eul_intern_symbol(sym_3186,"(setter control-block-buffer)");
-  eul_intern_symbol(sym_3187,"(method stream-control-block?)");
-  eul_intern_symbol(sym_3188,"(setter control-block-descriptor)");
-  eul_intern_symbol(sym_3189,"(setter control-block-mode)");
-  eul_intern_symbol(sym_3190,"(setter control-block-file-name)");
-  eul_intern_symbol(sym_3191,"(method file-control-block?)");
-  eul_intern_symbol(sym_3192,"(method initialize)");
-  eul_intern_symbol(sym_3193,"(setter stream-write-action)");
-  eul_intern_symbol(sym_3194,"(setter stream-read-action)");
-  eul_intern_symbol(sym_3195,"(setter stream-source)");
-  eul_intern_symbol(sym_3196,"(setter stream-sink)");
-  eul_intern_symbol(sym_3197,"(method stream?)");
-  eul_intern_symbol(sym_3198,"(method buffered-stream?)");
-  eul_intern_symbol(sym_3199,"(setter string-stream-string-list)");
-  eul_intern_symbol(sym_3200,"(method string-stream?)");
-  eul_intern_symbol(sym_3201,"(method file-stream?)");
-  object_class(str_3202) = eul_static_string_class;
-  object_class(str_3203) = eul_static_string_class;
-  object_class(str_3204) = eul_static_string_class;
-  eul_intern_symbol(sym_3205,"(setter value)");
   eul_allocate_bytevector( G003123,G003122);
-  eul_intern_symbol(sym_3209,"*end-of-stream*");
-  object_class(cons_3208) = eul_static_cons_class;
-  eul_car(cons_3208) = sym_3209;
-  eul_cdr(cons_3208) = eul_nil;
-  eul_allocate_bytevector( G003207,G003206);
-  eul_allocate_bytevector( G003211,G003210);
-  eul_allocate_bytevector( G003213,G003212);
-  eul_allocate_bytevector( G003215,G003214);
-  eul_allocate_bytevector( G003217,G003216);
-  eul_allocate_bytevector( G003219,G003218);
-  eul_allocate_bytevector( G003221,G003220);
-  eul_allocate_bytevector( G003223,G003222);
-  eul_allocate_bytevector( G003225,G003224);
-  eul_allocate_bytevector( G003227,G003226);
-  eul_allocate_bytevector( G003229,G003228);
-  eul_allocate_bytevector( G003231,G003230);
-  eul_allocate_bytevector( G003233,G003232);
-  eul_allocate_bytevector( G003235,G003234);
-  eul_allocate_bytevector( G003237,G003236);
-  eul_allocate_bytevector( G003239,G003238);
-  eul_allocate_bytevector( G003241,G003240);
-  eul_allocate_bytevector( G003243,G003242);
-  eul_allocate_bytevector( G003245,G003244);
-  eul_allocate_bytevector( G003247,G003246);
-  eul_allocate_bytevector( G003249,G003248);
-  eul_intern_symbol(sym_3252,"string-stream-string-list");
-  eul_intern_symbol(sym_3253,"control-block-buffer-cnt");
-  eul_intern_symbol(sym_3254,"from-stream");
-  eul_intern_symbol(sym_3255,"control-block-descriptor");
-  eul_intern_symbol(sym_3256,"default-write-action");
-  eul_intern_symbol(sym_3257,"stream-sink");
-  eul_intern_symbol(sym_3258,"default-read-action");
-  eul_intern_symbol(sym_3259,"control-block-file-name");
-  eul_intern_symbol(sym_3260,"control-block-buffer");
-  eul_intern_symbol(sym_3261,"stream-lock");
-  eul_intern_symbol(sym_3262,"control-block-mode");
-  eul_intern_symbol(sym_3263,"to-stream");
-  eul_intern_symbol(sym_3264,"stream-source");
-  eul_intern_symbol(sym_3265,"stream-mode");
-  eul_intern_symbol(sym_3266,"open-file-streams");
-  eul_intern_symbol(sym_3267,"stream-write-action");
-  eul_intern_symbol(sym_3268,"control-block-buffer-pos");
-  eul_intern_symbol(sym_3269,"control-block-buffer-size");
-  eul_intern_symbol(sym_3270,"stream-read-action");
-  eul_intern_symbol(sym_3271,"eos-default-value");
-  eul_intern_symbol(sym_3272,"top-level");
-  eul_allocate_bytevector( G003251,G003250);
+  eul_allocate_bytevector( G003125,G003124);
+  object_class(str_3128) = eul_static_string_class;
+  eul_allocate_bytevector( G003127,G003126);
+  eul_allocate_bytevector( G003130,G003129);
+  eul_allocate_bytevector( G003132,G003131);
+  eul_allocate_bytevector( G003134,G003133);
+  eul_allocate_bytevector( G003136,G003135);
+  eul_intern_keyword(key_3139,"name");
+  eul_intern_symbol(sym_3140,"buffer");
+  eul_intern_keyword(key_3141,"keyword");
+  eul_intern_symbol(sym_3142,"buffer-size");
+  eul_intern_keyword(key_3143,"default");
+  eul_intern_symbol(sym_3144,"buffer-pos");
+  eul_intern_symbol(sym_3145,"buffer-cnt");
+  eul_intern_symbol(sym_3146,"stream-pos");
+  eul_intern_symbol(sym_3147,"stream-control-block");
+  eul_intern_keyword(key_3148,"direct-superclasses");
+  eul_intern_keyword(key_3149,"direct-slots");
+  eul_intern_keyword(key_3150,"direct-keywords");
+  object_class(cons_3152) = eul_static_cons_class;
+  eul_car(cons_3152) = key_3046;
+  eul_cdr(cons_3152) = eul_nil;
+  object_class(cons_3151) = eul_static_cons_class;
+  eul_car(cons_3151) = key_3047;
+  eul_intern_symbol(sym_3153,"file-name");
+  eul_intern_symbol(sym_3154,"mode");
+  eul_intern_symbol(sym_3155,"descriptor");
+  eul_intern_symbol(sym_3156,"file-control-block");
+  object_class(cons_3159) = eul_static_cons_class;
+  eul_car(cons_3159) = key_3052;
+  eul_cdr(cons_3159) = eul_nil;
+  object_class(cons_3158) = eul_static_cons_class;
+  eul_car(cons_3158) = key_3055;
+  object_class(cons_3157) = eul_static_cons_class;
+  eul_car(cons_3157) = key_3056;
+  eul_intern_symbol(sym_3160,"sink");
+  eul_intern_keyword(key_3161,"sink");
+  eul_intern_symbol(sym_3162,"source");
+  eul_intern_keyword(key_3163,"source");
+  eul_intern_symbol(sym_3164,"read-action");
+  eul_intern_keyword(key_3165,"read-action");
+  eul_intern_symbol(sym_3166,"write-action");
+  eul_intern_keyword(key_3167,"write-action");
+  eul_intern_symbol(sym_3168,"lock");
+  eul_intern_symbol(sym_3169,"stream");
+  object_class(cons_3174) = eul_static_cons_class;
+  eul_car(cons_3174) = key_3161;
+  eul_cdr(cons_3174) = eul_nil;
+  object_class(cons_3173) = eul_static_cons_class;
+  eul_car(cons_3173) = key_3163;
+  object_class(cons_3172) = eul_static_cons_class;
+  eul_car(cons_3172) = key_3165;
+  object_class(cons_3171) = eul_static_cons_class;
+  eul_car(cons_3171) = key_3167;
+  object_class(cons_3170) = eul_static_cons_class;
+  eul_car(cons_3170) = key_3055;
+  eul_intern_symbol(sym_3175,"buffered-stream");
+  eul_intern_symbol(sym_3176,"string-list");
+  eul_intern_symbol(sym_3177,"string-stream");
+  object_class(cons_3178) = eul_static_cons_class;
+  eul_car(cons_3178) = key_3044;
+  eul_cdr(cons_3178) = eul_nil;
+  eul_intern_symbol(sym_3179,"file-stream");
+  object_class(cons_3180) = eul_static_cons_class;
+  eul_car(cons_3180) = key_3052;
+  eul_cdr(cons_3180) = eul_nil;
+  eul_intern_symbol(sym_3181,"value");
+  eul_intern_symbol(sym_3182,"stream-condition");
+  object_class(cons_3183) = eul_static_cons_class;
+  eul_car(cons_3183) = key_3054;
+  eul_cdr(cons_3183) = eul_nil;
+  eul_intern_symbol(sym_3184,"end-of-stream");
+  eul_intern_symbol(sym_3185,"stream-control-block?");
+  eul_intern_symbol(sym_3186,"file-control-block?");
+  eul_intern_symbol(sym_3187,"stream?");
+  eul_intern_symbol(sym_3188,"buffered-stream?");
+  eul_intern_symbol(sym_3189,"string-stream?");
+  eul_intern_symbol(sym_3190,"file-stream?");
+  eul_intern_symbol(sym_3191,"generic-print");
+  eul_intern_symbol(sym_3192,"generic-write");
+  eul_intern_symbol(sym_3193,"generic-read");
+  eul_intern_symbol(sym_3194,"fill-buffer");
+  eul_intern_symbol(sym_3195,"flush-buffer");
+  eul_intern_symbol(sym_3196,"generic-connect");
+  eul_intern_symbol(sym_3197,"reconnect");
+  eul_intern_symbol(sym_3198,"disconnect");
+  eul_intern_symbol(sym_3199,"(setter control-block-stream-pos)");
+  eul_intern_symbol(sym_3200,"(setter control-block-buffer-cnt)");
+  eul_intern_symbol(sym_3201,"(setter control-block-buffer-pos)");
+  eul_intern_symbol(sym_3202,"(setter control-block-buffer-size)");
+  eul_intern_symbol(sym_3203,"(setter control-block-buffer)");
+  eul_intern_symbol(sym_3204,"(method stream-control-block?)");
+  eul_intern_symbol(sym_3205,"(setter control-block-descriptor)");
+  eul_intern_symbol(sym_3206,"(setter control-block-mode)");
+  eul_intern_symbol(sym_3207,"(setter control-block-file-name)");
+  eul_intern_symbol(sym_3208,"(method file-control-block?)");
+  eul_intern_symbol(sym_3209,"(method initialize)");
+  eul_intern_symbol(sym_3210,"(setter stream-write-action)");
+  eul_intern_symbol(sym_3211,"(setter stream-read-action)");
+  eul_intern_symbol(sym_3212,"(setter stream-source)");
+  eul_intern_symbol(sym_3213,"(setter stream-sink)");
+  eul_intern_symbol(sym_3214,"(method stream?)");
+  eul_intern_symbol(sym_3215,"(method buffered-stream?)");
+  eul_intern_symbol(sym_3216,"(setter string-stream-string-list)");
+  eul_intern_symbol(sym_3217,"(method string-stream?)");
+  eul_intern_symbol(sym_3218,"(method file-stream?)");
+  object_class(str_3219) = eul_static_string_class;
+  object_class(str_3220) = eul_static_string_class;
+  object_class(str_3221) = eul_static_string_class;
+  eul_intern_symbol(sym_3222,"(setter value)");
+  eul_allocate_bytevector( G003138,G003137);
+  eul_intern_symbol(sym_3226,"*end-of-stream*");
+  object_class(cons_3225) = eul_static_cons_class;
+  eul_car(cons_3225) = sym_3226;
+  eul_cdr(cons_3225) = eul_nil;
+  eul_allocate_bytevector( G003224,G003223);
+  eul_allocate_bytevector( G003228,G003227);
+  eul_allocate_bytevector( G003230,G003229);
+  eul_allocate_bytevector( G003232,G003231);
+  eul_allocate_bytevector( G003234,G003233);
+  eul_allocate_bytevector( G003236,G003235);
+  eul_allocate_bytevector( G003238,G003237);
+  eul_allocate_bytevector( G003240,G003239);
+  eul_allocate_bytevector( G003242,G003241);
+  eul_allocate_bytevector( G003244,G003243);
+  eul_allocate_bytevector( G003246,G003245);
+  eul_allocate_bytevector( G003248,G003247);
+  eul_allocate_bytevector( G003250,G003249);
+  eul_allocate_bytevector( G003252,G003251);
+  eul_allocate_bytevector( G003254,G003253);
+  eul_allocate_bytevector( G003256,G003255);
+  eul_allocate_bytevector( G003258,G003257);
+  eul_allocate_bytevector( G003260,G003259);
+  eul_allocate_bytevector( G003262,G003261);
+  eul_allocate_bytevector( G003264,G003263);
+  eul_allocate_bytevector( G003266,G003265);
+  eul_allocate_bytevector( G003268,G003267);
+  eul_intern_symbol(sym_3271,"string-stream-string-list");
+  eul_intern_symbol(sym_3272,"control-block-buffer-cnt");
+  eul_intern_symbol(sym_3273,"from-stream");
+  eul_intern_symbol(sym_3274,"control-block-descriptor");
+  eul_intern_symbol(sym_3275,"default-write-action");
+  eul_intern_symbol(sym_3276,"stream-sink");
+  eul_intern_symbol(sym_3277,"default-read-action");
+  eul_intern_symbol(sym_3278,"control-block-file-name");
+  eul_intern_symbol(sym_3279,"control-block-buffer");
+  eul_intern_symbol(sym_3280,"stream-lock");
+  eul_intern_symbol(sym_3281,"control-block-mode");
+  eul_intern_symbol(sym_3282,"to-stream");
+  eul_intern_symbol(sym_3283,"stream-source");
+  eul_intern_symbol(sym_3284,"control-block-stream-pos");
+  eul_intern_symbol(sym_3285,"stream-mode");
+  eul_intern_symbol(sym_3286,"open-file-streams");
+  eul_intern_symbol(sym_3287,"stream-write-action");
+  eul_intern_symbol(sym_3288,"control-block-buffer-pos");
+  eul_intern_symbol(sym_3289,"control-block-buffer-size");
+  eul_intern_symbol(sym_3290,"stream-read-action");
+  eul_intern_symbol(sym_3291,"eos-default-value");
+  eul_intern_symbol(sym_3292,"top-level");
+  eul_allocate_bytevector( G003270,G003269);
 
   /* Set local bindings */
   {
     int i;
-    for (i = 2; i < 51; i++)
+    for (i = 2; i < 52; i++)
       stream2_bindings[i] = eul_nil;
   }
 
-  stream2_bindings[ 51] = G003030;
-  stream2_bindings[ 52] = key_3033;
-  stream2_bindings[ 53] = str_3034;
-  stream2_bindings[ 54] = key_3035;
-  stream2_bindings[ 55] = key_3036;
-  stream2_bindings[ 56] = G003032;
-  stream2_bindings[ 57] = G003038;
-  stream2_bindings[ 58] = key_3041;
-  stream2_bindings[ 59] = str_3042;
-  stream2_bindings[ 60] = key_3043;
-  stream2_bindings[ 61] = key_3044;
-  stream2_bindings[ 62] = key_3045;
-  stream2_bindings[ 63] = sym_3046;
-  stream2_bindings[ 64] = sym_3047;
-  stream2_bindings[ 65] = sym_3048;
-  stream2_bindings[ 66] = sym_3049;
-  stream2_bindings[ 67] = sym_3050;
-  stream2_bindings[ 68] = G003040;
-  stream2_bindings[ 69] = G003052;
-  stream2_bindings[ 70] = G003054;
-  stream2_bindings[ 71] = G003056;
-  stream2_bindings[ 72] = G003058;
-  stream2_bindings[ 73] = G003060;
-  stream2_bindings[ 74] = G003062;
-  stream2_bindings[ 75] = G003064;
-  stream2_bindings[ 76] = G003066;
-  stream2_bindings[ 77] = G003068;
-  stream2_bindings[ 78] = G003070;
-  stream2_bindings[ 79] = G003072;
-  stream2_bindings[ 80] = G003074;
-  stream2_bindings[ 81] = G003076;
-  stream2_bindings[ 82] = G003078;
-  stream2_bindings[ 83] = G003080;
-  stream2_bindings[ 84] = G003082;
-  stream2_bindings[ 85] = G003084;
-  stream2_bindings[ 86] = G003086;
-  stream2_bindings[ 87] = G003088;
-  stream2_bindings[ 88] = G003090;
-  stream2_bindings[ 89] = G003092;
-  stream2_bindings[ 90] = G003094;
-  stream2_bindings[ 91] = G003096;
-  stream2_bindings[ 92] = G003098;
-  stream2_bindings[ 93] = G003100;
-  stream2_bindings[ 94] = G003102;
-  stream2_bindings[ 95] = G003104;
-  stream2_bindings[ 96] = G003106;
-  stream2_bindings[ 97] = G003108;
-  stream2_bindings[ 98] = G003110;
-  stream2_bindings[ 99] = G003112;
-  stream2_bindings[ 100] = str_3115;
-  stream2_bindings[ 101] = G003114;
-  stream2_bindings[ 102] = G003117;
-  stream2_bindings[ 103] = G003119;
-  stream2_bindings[ 104] = G003121;
-  stream2_bindings[ 105] = key_3124;
-  stream2_bindings[ 106] = sym_3125;
-  stream2_bindings[ 107] = key_3126;
-  stream2_bindings[ 108] = sym_3127;
-  stream2_bindings[ 109] = key_3128;
-  stream2_bindings[ 110] = sym_3129;
-  stream2_bindings[ 111] = sym_3130;
-  stream2_bindings[ 112] = sym_3131;
-  stream2_bindings[ 113] = key_3132;
-  stream2_bindings[ 114] = key_3133;
-  stream2_bindings[ 115] = key_3134;
-  stream2_bindings[ 116] = cons_3135;
-  stream2_bindings[ 117] = sym_3137;
-  stream2_bindings[ 118] = sym_3138;
-  stream2_bindings[ 119] = sym_3139;
-  stream2_bindings[ 120] = sym_3140;
-  stream2_bindings[ 121] = cons_3141;
-  stream2_bindings[ 122] = sym_3144;
-  stream2_bindings[ 123] = key_3145;
-  stream2_bindings[ 124] = sym_3146;
-  stream2_bindings[ 125] = key_3147;
-  stream2_bindings[ 126] = sym_3148;
-  stream2_bindings[ 127] = key_3149;
-  stream2_bindings[ 128] = sym_3150;
-  stream2_bindings[ 129] = key_3151;
-  stream2_bindings[ 130] = sym_3152;
-  stream2_bindings[ 131] = sym_3153;
-  stream2_bindings[ 132] = cons_3154;
-  stream2_bindings[ 133] = sym_3159;
-  stream2_bindings[ 134] = sym_3160;
-  stream2_bindings[ 135] = sym_3161;
-  stream2_bindings[ 136] = cons_3162;
-  stream2_bindings[ 137] = sym_3163;
-  stream2_bindings[ 138] = cons_3164;
-  stream2_bindings[ 139] = sym_3165;
-  stream2_bindings[ 140] = sym_3166;
-  stream2_bindings[ 141] = cons_3167;
-  stream2_bindings[ 142] = sym_3168;
-  stream2_bindings[ 143] = sym_3169;
-  stream2_bindings[ 144] = sym_3170;
-  stream2_bindings[ 145] = sym_3171;
-  stream2_bindings[ 146] = sym_3172;
-  stream2_bindings[ 147] = sym_3173;
-  stream2_bindings[ 148] = sym_3174;
-  stream2_bindings[ 149] = sym_3175;
-  stream2_bindings[ 150] = sym_3176;
-  stream2_bindings[ 151] = sym_3177;
-  stream2_bindings[ 152] = sym_3178;
-  stream2_bindings[ 153] = sym_3179;
-  stream2_bindings[ 154] = sym_3180;
-  stream2_bindings[ 155] = sym_3181;
-  stream2_bindings[ 156] = sym_3182;
-  stream2_bindings[ 157] = sym_3183;
-  stream2_bindings[ 158] = sym_3184;
-  stream2_bindings[ 159] = sym_3185;
-  stream2_bindings[ 160] = sym_3186;
-  stream2_bindings[ 161] = sym_3187;
-  stream2_bindings[ 162] = sym_3188;
-  stream2_bindings[ 163] = sym_3189;
-  stream2_bindings[ 164] = sym_3190;
-  stream2_bindings[ 165] = sym_3191;
-  stream2_bindings[ 166] = sym_3192;
-  stream2_bindings[ 167] = sym_3193;
-  stream2_bindings[ 168] = sym_3194;
-  stream2_bindings[ 169] = sym_3195;
-  stream2_bindings[ 170] = sym_3196;
-  stream2_bindings[ 171] = sym_3197;
-  stream2_bindings[ 172] = sym_3198;
-  stream2_bindings[ 173] = sym_3199;
-  stream2_bindings[ 174] = sym_3200;
-  stream2_bindings[ 175] = sym_3201;
-  stream2_bindings[ 176] = str_3202;
-  stream2_bindings[ 177] = str_3203;
-  stream2_bindings[ 178] = str_3204;
-  stream2_bindings[ 179] = sym_3205;
-  stream2_bindings[ 180] = G003123;
-  stream2_bindings[ 181] = sym_3209;
-  stream2_bindings[ 182] = cons_3208;
-  stream2_bindings[ 183] = G003207;
-  stream2_bindings[ 184] = G003211;
-  stream2_bindings[ 185] = G003213;
-  stream2_bindings[ 186] = G003215;
-  stream2_bindings[ 187] = G003217;
-  stream2_bindings[ 188] = G003219;
-  stream2_bindings[ 189] = G003221;
-  stream2_bindings[ 190] = G003223;
-  stream2_bindings[ 191] = G003225;
-  stream2_bindings[ 192] = G003227;
-  stream2_bindings[ 193] = G003229;
-  stream2_bindings[ 194] = G003231;
-  stream2_bindings[ 195] = G003233;
-  stream2_bindings[ 196] = G003235;
-  stream2_bindings[ 197] = G003237;
-  stream2_bindings[ 198] = G003239;
-  stream2_bindings[ 199] = G003241;
-  stream2_bindings[ 200] = G003243;
-  stream2_bindings[ 201] = G003245;
-  stream2_bindings[ 202] = G003247;
-  stream2_bindings[ 203] = G003249;
+  stream2_bindings[ 52] = G003041;
+  stream2_bindings[ 53] = key_3044;
+  stream2_bindings[ 54] = str_3045;
+  stream2_bindings[ 55] = key_3046;
+  stream2_bindings[ 56] = key_3047;
+  stream2_bindings[ 57] = G003043;
+  stream2_bindings[ 58] = G003049;
+  stream2_bindings[ 59] = key_3052;
+  stream2_bindings[ 60] = str_3053;
+  stream2_bindings[ 61] = key_3054;
+  stream2_bindings[ 62] = key_3055;
+  stream2_bindings[ 63] = key_3056;
+  stream2_bindings[ 64] = sym_3057;
+  stream2_bindings[ 65] = sym_3058;
+  stream2_bindings[ 66] = sym_3059;
+  stream2_bindings[ 67] = sym_3060;
+  stream2_bindings[ 68] = sym_3061;
+  stream2_bindings[ 69] = G003051;
+  stream2_bindings[ 70] = G003063;
+  stream2_bindings[ 71] = G003065;
+  stream2_bindings[ 72] = G003067;
+  stream2_bindings[ 73] = G003069;
+  stream2_bindings[ 74] = G003071;
+  stream2_bindings[ 75] = G003073;
+  stream2_bindings[ 76] = G003075;
+  stream2_bindings[ 77] = G003077;
+  stream2_bindings[ 78] = G003079;
+  stream2_bindings[ 79] = G003081;
+  stream2_bindings[ 80] = G003083;
+  stream2_bindings[ 81] = G003085;
+  stream2_bindings[ 82] = G003087;
+  stream2_bindings[ 83] = G003089;
+  stream2_bindings[ 84] = G003091;
+  stream2_bindings[ 85] = G003093;
+  stream2_bindings[ 86] = G003095;
+  stream2_bindings[ 87] = G003097;
+  stream2_bindings[ 88] = G003099;
+  stream2_bindings[ 89] = G003101;
+  stream2_bindings[ 90] = G003103;
+  stream2_bindings[ 91] = G003105;
+  stream2_bindings[ 92] = G003107;
+  stream2_bindings[ 93] = G003109;
+  stream2_bindings[ 94] = G003111;
+  stream2_bindings[ 95] = G003113;
+  stream2_bindings[ 96] = G003115;
+  stream2_bindings[ 97] = G003117;
+  stream2_bindings[ 98] = G003119;
+  stream2_bindings[ 99] = G003121;
+  stream2_bindings[ 100] = G003123;
+  stream2_bindings[ 101] = G003125;
+  stream2_bindings[ 102] = str_3128;
+  stream2_bindings[ 103] = G003127;
+  stream2_bindings[ 104] = G003130;
+  stream2_bindings[ 105] = G003132;
+  stream2_bindings[ 106] = G003134;
+  stream2_bindings[ 107] = G003136;
+  stream2_bindings[ 108] = key_3139;
+  stream2_bindings[ 109] = sym_3140;
+  stream2_bindings[ 110] = key_3141;
+  stream2_bindings[ 111] = sym_3142;
+  stream2_bindings[ 112] = key_3143;
+  stream2_bindings[ 113] = sym_3144;
+  stream2_bindings[ 114] = sym_3145;
+  stream2_bindings[ 115] = sym_3146;
+  stream2_bindings[ 116] = sym_3147;
+  stream2_bindings[ 117] = key_3148;
+  stream2_bindings[ 118] = key_3149;
+  stream2_bindings[ 119] = key_3150;
+  stream2_bindings[ 120] = cons_3151;
+  stream2_bindings[ 121] = sym_3153;
+  stream2_bindings[ 122] = sym_3154;
+  stream2_bindings[ 123] = sym_3155;
+  stream2_bindings[ 124] = sym_3156;
+  stream2_bindings[ 125] = cons_3157;
+  stream2_bindings[ 126] = sym_3160;
+  stream2_bindings[ 127] = key_3161;
+  stream2_bindings[ 128] = sym_3162;
+  stream2_bindings[ 129] = key_3163;
+  stream2_bindings[ 130] = sym_3164;
+  stream2_bindings[ 131] = key_3165;
+  stream2_bindings[ 132] = sym_3166;
+  stream2_bindings[ 133] = key_3167;
+  stream2_bindings[ 134] = sym_3168;
+  stream2_bindings[ 135] = sym_3169;
+  stream2_bindings[ 136] = cons_3170;
+  stream2_bindings[ 137] = sym_3175;
+  stream2_bindings[ 138] = sym_3176;
+  stream2_bindings[ 139] = sym_3177;
+  stream2_bindings[ 140] = cons_3178;
+  stream2_bindings[ 141] = sym_3179;
+  stream2_bindings[ 142] = cons_3180;
+  stream2_bindings[ 143] = sym_3181;
+  stream2_bindings[ 144] = sym_3182;
+  stream2_bindings[ 145] = cons_3183;
+  stream2_bindings[ 146] = sym_3184;
+  stream2_bindings[ 147] = sym_3185;
+  stream2_bindings[ 148] = sym_3186;
+  stream2_bindings[ 149] = sym_3187;
+  stream2_bindings[ 150] = sym_3188;
+  stream2_bindings[ 151] = sym_3189;
+  stream2_bindings[ 152] = sym_3190;
+  stream2_bindings[ 153] = sym_3191;
+  stream2_bindings[ 154] = sym_3192;
+  stream2_bindings[ 155] = sym_3193;
+  stream2_bindings[ 156] = sym_3194;
+  stream2_bindings[ 157] = sym_3195;
+  stream2_bindings[ 158] = sym_3196;
+  stream2_bindings[ 159] = sym_3197;
+  stream2_bindings[ 160] = sym_3198;
+  stream2_bindings[ 161] = sym_3199;
+  stream2_bindings[ 162] = sym_3200;
+  stream2_bindings[ 163] = sym_3201;
+  stream2_bindings[ 164] = sym_3202;
+  stream2_bindings[ 165] = sym_3203;
+  stream2_bindings[ 166] = sym_3204;
+  stream2_bindings[ 167] = sym_3205;
+  stream2_bindings[ 168] = sym_3206;
+  stream2_bindings[ 169] = sym_3207;
+  stream2_bindings[ 170] = sym_3208;
+  stream2_bindings[ 171] = sym_3209;
+  stream2_bindings[ 172] = sym_3210;
+  stream2_bindings[ 173] = sym_3211;
+  stream2_bindings[ 174] = sym_3212;
+  stream2_bindings[ 175] = sym_3213;
+  stream2_bindings[ 176] = sym_3214;
+  stream2_bindings[ 177] = sym_3215;
+  stream2_bindings[ 178] = sym_3216;
+  stream2_bindings[ 179] = sym_3217;
+  stream2_bindings[ 180] = sym_3218;
+  stream2_bindings[ 181] = str_3219;
+  stream2_bindings[ 182] = str_3220;
+  stream2_bindings[ 183] = str_3221;
+  stream2_bindings[ 184] = sym_3222;
+  stream2_bindings[ 185] = G003138;
+  stream2_bindings[ 186] = sym_3226;
+  stream2_bindings[ 187] = cons_3225;
+  stream2_bindings[ 188] = G003224;
+  stream2_bindings[ 189] = G003228;
+  stream2_bindings[ 190] = G003230;
+  stream2_bindings[ 191] = G003232;
+  stream2_bindings[ 192] = G003234;
+  stream2_bindings[ 193] = G003236;
+  stream2_bindings[ 194] = G003238;
+  stream2_bindings[ 195] = G003240;
+  stream2_bindings[ 196] = G003242;
+  stream2_bindings[ 197] = G003244;
+  stream2_bindings[ 198] = G003246;
+  stream2_bindings[ 199] = G003248;
+  stream2_bindings[ 200] = G003250;
+  stream2_bindings[ 201] = G003252;
+  stream2_bindings[ 202] = G003254;
+  stream2_bindings[ 203] = G003256;
+  stream2_bindings[ 204] = G003258;
+  stream2_bindings[ 205] = G003260;
+  stream2_bindings[ 206] = G003262;
+  stream2_bindings[ 207] = G003264;
+  stream2_bindings[ 208] = G003266;
+  stream2_bindings[ 209] = G003268;
   stream2_bindings[ 1] = eul_nil;
-  stream2_bindings[ 204] = sym_3252;
-  stream2_bindings[ 205] = sym_3253;
-  stream2_bindings[ 206] = sym_3254;
-  stream2_bindings[ 207] = sym_3255;
-  stream2_bindings[ 208] = sym_3256;
-  stream2_bindings[ 209] = sym_3257;
-  stream2_bindings[ 210] = sym_3258;
-  stream2_bindings[ 211] = sym_3259;
-  stream2_bindings[ 212] = sym_3260;
-  stream2_bindings[ 213] = sym_3261;
-  stream2_bindings[ 214] = sym_3262;
-  stream2_bindings[ 215] = sym_3263;
-  stream2_bindings[ 216] = sym_3264;
-  stream2_bindings[ 217] = sym_3265;
-  stream2_bindings[ 218] = sym_3266;
-  stream2_bindings[ 219] = sym_3267;
-  stream2_bindings[ 220] = sym_3268;
-  stream2_bindings[ 221] = sym_3269;
-  stream2_bindings[ 222] = sym_3270;
-  stream2_bindings[ 223] = sym_3271;
-  stream2_bindings[ 224] = sym_3272;
-  eul_allocate_lambda( stream2_bindings[0], "initialize-stream2", 0, G003251);
+  stream2_bindings[ 210] = sym_3271;
+  stream2_bindings[ 211] = sym_3272;
+  stream2_bindings[ 212] = sym_3273;
+  stream2_bindings[ 213] = sym_3274;
+  stream2_bindings[ 214] = sym_3275;
+  stream2_bindings[ 215] = sym_3276;
+  stream2_bindings[ 216] = sym_3277;
+  stream2_bindings[ 217] = sym_3278;
+  stream2_bindings[ 218] = sym_3279;
+  stream2_bindings[ 219] = sym_3280;
+  stream2_bindings[ 220] = sym_3281;
+  stream2_bindings[ 221] = sym_3282;
+  stream2_bindings[ 222] = sym_3283;
+  stream2_bindings[ 223] = sym_3284;
+  stream2_bindings[ 224] = sym_3285;
+  stream2_bindings[ 225] = sym_3286;
+  stream2_bindings[ 226] = sym_3287;
+  stream2_bindings[ 227] = sym_3288;
+  stream2_bindings[ 228] = sym_3289;
+  stream2_bindings[ 229] = sym_3290;
+  stream2_bindings[ 230] = sym_3291;
+  stream2_bindings[ 231] = sym_3292;
+  eul_allocate_lambda( stream2_bindings[0], "initialize-stream2", 0, G003270);
 
   }
 }

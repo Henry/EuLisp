@@ -198,7 +198,7 @@ indentation for the following lines until the end of the list."))))
         "(" (regexp-opt
              '("if" "let/cc" "letfuns" "labels" "progn" "unwind-protect" "apply"
                "cond" "and" "or" "block" "return-from"  "let" "let*"
-               "while") t) "\\>")
+               "while" "match") t) "\\>")
        '(1 font-lock-builtin-face))
       ;; Control modifiers
       (cons
@@ -1331,6 +1331,7 @@ given symbol SYM."
     (if . 2)
     (cond . 0)
     (unwind-protect . 1)
+    (match . defun)
 
     (install-import-expander . defun)
     (install-directive-expander . defun)

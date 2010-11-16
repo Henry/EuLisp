@@ -91,16 +91,16 @@ $(TELOS_SHARED_LIB): $(TELOS_MAC_O) $(TELOS_O)
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
 .PHONY: boot
-boot:	$(U2_C_DIR)/boot0.i $(U2_C_DIR)/_telos0.i libboot.i libtelos.i
+boot:	$(U2_C_DIR)/boot0.i $(U2_C_DIR)/_telos0.i $(U2_C_DIR)/libboot.i $(U2_C_DIR)/libtelos.i
 
 # --- Called from ../Runtime/Makefile:boot during bootstrap building
 # --- Should not be called directly
 .PHONY: boot-syntax
-boot-syntax: liblevel-1.i
+boot-syntax: $(U2_C_DIR)/liblevel-1.i
 	$(U2) $(U2FLAGS) -c telos0 \
 		--object-dir $(ARCH_DIR) \
 		--load-path $(U2_DIR)/Telos -l level-1
-	@rm -f liblevel-1.i
+	@rm -f $(U2_C_DIR)/liblevel-1.i
 	$(MAKE) boot-all
 
 .PHONY: boot-all
@@ -116,8 +116,9 @@ $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i : %.em
 		--load-path $(U2_DIR)/Telos
 	@mv $(U2_C_DIR)/$(@F) $@
 
-lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
-	@ln -s $< $@
+$(U2_C_DIR)/lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
+	@mkdir -p $(U2_C_DIR)
+	@cp -p $< $@
 
 ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 .PRECIOUS: $(U2_C_DIR)/%.i $(U2_C_DIR)/%.c $(U2_C_DIR)/%.h
@@ -136,10 +137,11 @@ boot-clean: clean
 
 .PHONY: clean
 clean:
+	@rm -f $(U2_C_DIR)/lib*.i
 	@rm -rf $(ARCH_DIR)
 
 .PHONY: distclean
-distclean:
+distclean: clean
 	@rm -rf platforms
 
 ###-----------------------------------------------------------------------------

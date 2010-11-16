@@ -82,6 +82,7 @@ int read_into_buffer(int _file, char *buf, int n)
     #endif
     {
         status = read(_file, buf + (n >> 1), n >> 1);
+        //puts(buf);
 
         if (status == -1)
         {

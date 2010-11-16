@@ -264,10 +264,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Read error
 ;;;-----------------------------------------------------------------------------
-(defcondition <read-error> () ())
+(defcondition <read-error> <stream-condition> ())
 
 (defun read-error (s msg . args)
-  (error <read-error> (apply fmt msg args) value: s))
+  (error <read-error>
+         (apply fmt
+                (string-append msg " at characters ~d")
+                (append args
+                        (list (control-block-stream-pos (stream-source s)))))
+         value: s))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Special tags
