@@ -237,7 +237,8 @@
 *** TODO Add support in the REPL to load dynamically-linked module libraries
 *** DONE Add support for #;(sexp) comments in /Runtime/Ff/eul-ntok.c/
     CLOSED: [2010-04-23 Fri 22:44]
-*** TODO Add line-number counting to /Runtime/Ff/eul-ntok.c/
+*** DONE Add line-number counting to /Runtime/Ff/eul-ntok.c/
+    CLOSED: [2010-11-18 Thu 22:29]
     This also requires the introduction of a line-number counting stream to hold
     the line-number and provide access to the error reporting system.
 *** DONE =read-error=
