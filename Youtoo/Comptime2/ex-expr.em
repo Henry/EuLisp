@@ -242,7 +242,7 @@
   (let* ((arity (get-binding-info binding 'arity))
          (binding-name (binding-local-name? binding))
          (args (dummy-args arity)))
-    (expand-expr `(lambda ,args (,binding-name ,@args)))))
+    (expand-expr `(lambda ,args (,binding-name ,@args)) binding)))
 
 (defun dummy-args (arity)
   (labels
@@ -589,7 +589,7 @@
 (defmethod lift-if ((pred-e <syntax-obj>) then-e else-e env)
   (let ((var-name (gensym)))
     (expand-expr `(let ((,var-name ,pred-e))
-                    (if ,var-name ,then-e ,else-e)) () env)))
+                    (if ,var-name ,then-e ,else-e)) "unknown context" env)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install progn expander
@@ -950,7 +950,7 @@
                    (init-form (car forms))
                    (new-env (add-local-static-bindings
                              (list (var-binding? var)) env)))
-              (var-value! var (expand-expr init-form init-form env))
+              (var-value! var (expand-expr init-form init-forms env))
               (loop (cdr vars) (cdr forms) new-env)))))
    (let* ((vars (map1-list make-local-static-var (as-proper-list var-names)))
           (new-env (if (null? init-forms) env

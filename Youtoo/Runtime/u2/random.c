@@ -63,8 +63,8 @@ void initialize_module_random()
   /* Byte-vector with size: 4 is_init: 0 index: 10 binding: random-true-nil */
   static const void *G0021[] = {I(a9,84,24,00),B(random ,4),I(3c,01,2d,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 12 is_init: 0 index: 11 binding: random */
-  static const void *G0023[] = {I(a8,1b,34,00),I(00,00,00,22),I(41,00,00,00),B(random ,7),I(1c,10,24,00),B(random ,3),I(1c,17,1d,1c),I(17,22,03,32),I(00,00,00,0d),I(41,00,00,00),B(random ,7),I(45,01,00,00)};
+  /* Byte-vector with size: 10 is_init: 0 index: 11 binding: random */
+  static const void *G0023[] = {I(a8,1b,44,1a),I(41,00,00,00),B(random ,7),I(1c,10,24,00),B(random ,3),I(1c,17,1d,1c),I(17,22,03,36),I(08,41,00,00),B(random ,7),I(45,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 12 binding: random-seed */
   static const void *G0025[] = {I(aa,41,00,00),B(random ,8),I(45,01,00,00)};
