@@ -736,7 +736,7 @@
     (let ((node (make-fun <lambda> 'anonymous
                           (get-lambda-params x) (get-lambda-body x)
                           t)))      ; has unknown applications
-      (complete-lambda-node node env)
+      (complete-lambda-node node expr-context env)
       node))))
 
 (install-expr-expander
@@ -748,10 +748,10 @@
            (node (make-fun <lambda> (list name)
                            (get-params x) (get-body x)
                            t)))     ; has unknown applications
-      (complete-lambda-node node env)
+      (complete-lambda-node node expr-context env)
       node))))
 
-(defun complete-lambda-node (fun . envs)
+(defun complete-lambda-node (fun expr-context . envs)
   (let ((env (and envs (car envs)))
         (encl-lambda
          (if (lambda-inlined? fun) (dynamic *encl-lambda*) fun)))
@@ -765,7 +765,9 @@
                         (register-delegated-vars args))
                    (do1-list (lambda (var)
                                (local-static-var-lambda! var fun)) args)
-                   (fun-body! fun (expand-expr (fun-body? fun) fun new-env))))))
+                   (fun-body! fun (expand-expr (fun-body? fun)
+                                               expr-context
+                                               new-env))))))
 
 (defun compute-range-and-domain (fun)
   ;;(let* ((arity (fun-arity? fun))
@@ -789,7 +791,7 @@
                           (get-lambda-params x) (get-lambda-body x)
                           t)))      ; has unknown applications
       (lambda-inlined! node t)
-      (complete-lambda-node node env)
+      (complete-lambda-node node expr-context env)
       node))))
 
 ;;;-----------------------------------------------------------------------------

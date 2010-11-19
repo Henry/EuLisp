@@ -22,14 +22,12 @@
 ###-----------------------------------------------------------------------------
 ## EuLisp TckTk/Test Makefile
 ###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include ../../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
 ### Test executable names
 ###-----------------------------------------------------------------------------
-
 TESTS = \
 	tk_browser tk_button \
 	tk_callback tk_canvas tk_class_hierchy tk_graph_editor tk_image \
@@ -37,7 +35,6 @@ TESTS = \
 TESTS_EXE = $(TESTS:%=$(ARCH_DIR)/%)
 
 ###-----------------------------------------------------------------------------
-
 U2TKFLAGS = --cflags -ltk$(EUL_TK_VERSION) --cflags -ltcl$(EUL_TK_VERSION)
 
 $(ARCH_DIR)/% : %.em $(EUL_LIB_DIR)/$(U2_C_DIR)/libtcltk.i | $(ARCH_DIR)/.
@@ -48,7 +45,6 @@ all: $(TESTS_EXE)
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)

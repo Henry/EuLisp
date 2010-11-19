@@ -44,12 +44,13 @@
     (notify0 "   Complete constant nodes")
     (do1-list complete-constant-node (module-named-constants? module))
     (notify0 "   Complete defun bodies")
-    (do1-list complete-lambda-node (module-named-lambdas? module))
+    (do1-list (lambda (fun) (complete-lambda-node fun "Top-level"))
+              (module-named-lambdas? module))
     (notify0 "   Expand top-level forms")
     (complete-top-level-forms module top-level-lambda)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Complete VARIABLE and CONSTANT nodes as top-level SETQs
+;;; Complete variable and constant nodes as top-level setqs
 ;;;-----------------------------------------------------------------------------
 (defun complete-variable-node (var)
   (new-node `(setq ,(var-name? var) ,(var-value? var))
@@ -62,7 +63,7 @@
   (const-value! const *nil*))
 
 ;;;-----------------------------------------------------------------------------
-;;; Complete TOP-LEVEL FORMS nodes
+;;; Complete top-level forms nodes
 ;;;-----------------------------------------------------------------------------
 (defun set-up-top-level-lambda ()
   (let ((top-level-lambda (make-fun <lambda> 'top-level () ())))
@@ -74,7 +75,7 @@
         (appl (make <appl> fun: top-level-lambda args: ())))
     (notify0 "    Top-level forms: ~a" exprs)
     (fun-body! top-level-lambda `(progn ,@exprs))
-    (complete-lambda-node top-level-lambda)
+    (complete-lambda-node top-level-lambda "Top-level")
     (module-top-level-forms! module appl)))
 
 ;;;-----------------------------------------------------------------------------
