@@ -813,7 +813,7 @@ void fill_level_1_table() {
   eul_fast_table_set(level_1_tab,"prompt-string", make_entry(11, "i-rep", "prompt-string"));
   eul_fast_table_set(level_1_tab,"module-loaded?", make_entry(6, "cg-dld", "module-loaded?"));
   eul_fast_table_set(level_1_tab,"?", make_entry(15, "i-rep", "?"));
-  eul_fast_table_set(level_1_tab,"macroexpand", make_entry(10, "ex-expr", "macroexpand"));
+  eul_fast_table_set(level_1_tab,"macroexpand", make_entry(11, "ex-expr", "macroexpand"));
   eul_fast_table_set(level_1_tab,"debug-eval", make_entry(20, "i-rep", "debug-eval"));
   eul_fast_table_set(level_1_tab,"rep", make_entry(6, "i-rep", "rep"));
   eul_fast_table_set(level_1_tab,"dynamic-load-module", make_entry(3, "cg-dld", "dynamic-load-module"));

@@ -12,7 +12,7 @@
     ((name . prompt-string) (pos . 11) (origin i-rep . prompt-string))
     ((name . module-loaded?) (pos . 6) (origin cg-dld . module-loaded?))
     ((name . ?) (pos . 15) (origin i-rep . ?))
-    ((name . macroexpand) (pos . 10) (origin ex-expr . macroexpand))
+    ((name . macroexpand) (pos . 11) (origin ex-expr . macroexpand))
     ((name . debug-eval) (pos . 20) (origin i-rep . debug-eval))
     ((name . rep) (pos . 6) (origin i-rep . rep))
     ((name . dynamic-load-module) (pos . 3) (origin cg-dld . dynamic-load-module))

@@ -63,11 +63,11 @@ void initialize_module_ex_body()
   eul_allocate_static_string(str_1880, "    Top-level forms: ~a", 23);
   eul_allocate_static_string(str_1882, "Top-level", 9);
   /* Byte-vector with size: 31 is_init: 0 index: 19 binding: complete-top-level-forms */
-  static const void *G001876[] = {I(ab,1c,8a,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(sx_obj ,39),I(23,00,00,00),B(ex_body ,14),I(1f,03,23,00),B(ex_body ,15),I(86,24,00,00),B(mop_gf ,2),I(3c,05,23,00),B(ex_body ,16),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,23),B(ex_body ,17),I(1d,0f,1f,03),I(1c,1c,84,1d),I(24,00,00,00),B(sx_obj ,17),I(09,22,02,2a),I(1f,03,23,00),B(ex_body ,18),I(24,00,00,00),B(ex_expr ,29),I(3c,02,2a,1f),I(04,1d,1c,8a),I(06,1d,24,00),B(sx_obj1 ,59),I(09,45,07,00)};
+  static const void *G001876[] = {I(ab,1c,8a,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(sx_obj ,39),I(23,00,00,00),B(ex_body ,14),I(1f,03,23,00),B(ex_body ,15),I(86,24,00,00),B(mop_gf ,2),I(3c,05,23,00),B(ex_body ,16),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,23),B(ex_body ,17),I(1d,0f,1f,03),I(1c,1c,84,1d),I(24,00,00,00),B(sx_obj ,17),I(09,22,02,2a),I(1f,03,23,00),B(ex_body ,18),I(24,00,00,00),B(ex_expr ,30),I(3c,02,2a,1f),I(04,1d,1c,8a),I(06,1d,24,00),B(sx_obj1 ,59),I(09,45,07,00)};
 
   eul_allocate_static_string(str_1885, "Top-level", 9);
   /* Byte-vector with size: 5 is_init: 0 index: 21 binding: anonymous */
-  static const void *G001883[] = {I(aa,23,00,00),B(ex_body ,20),I(24,00,00,00),B(ex_expr ,29),I(3d,02,00,00)};
+  static const void *G001883[] = {I(aa,23,00,00),B(ex_body ,20),I(24,00,00,00),B(ex_expr ,30),I(3d,02,00,00)};
 
   eul_allocate_static_string(str_1888, "   Complete variable nodes", 26);
   eul_allocate_static_string(str_1889, "   Complete constant nodes", 26);

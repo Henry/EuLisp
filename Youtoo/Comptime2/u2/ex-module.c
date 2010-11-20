@@ -231,7 +231,7 @@ void initialize_module_ex_module()
   eul_allocate_static_string(str_1785, "compile time error condition: ", 30);
   eul_allocate_static_string(str_1786, "bad macro expansion of ~a", 25);
   /* Byte-vector with size: 29 is_init: 0 index: 117 binding: (method-G00839) */
-  static const void *G001783[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(ex_module ,115),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,56),I(44,04,86,36),I(3d,47,00,00),I(11,47,01,00),I(1c,0f,23,00),B(ex_module ,116),I(1c,24,00,00),B(format ,2),I(3c,02,1b,24),B(ex_expr ,16),I(3c,01,24,00),B(i_error ,5),I(1c,23,00,00),B(ex_module ,11),I(47,01,01,24),B(boot ,13),I(3d,04,06,22),I(04,45,02,00)};
+  static const void *G001783[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(ex_module ,115),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,56),I(44,04,86,36),I(3d,47,00,00),I(11,47,01,00),I(1c,0f,23,00),B(ex_module ,116),I(1c,24,00,00),B(format ,2),I(3c,02,1b,24),B(ex_expr ,17),I(3c,01,24,00),B(i_error ,5),I(1c,23,00,00),B(ex_module ,11),I(47,01,01,24),B(boot ,13),I(3d,04,06,22),I(04,45,02,00)};
 
   eul_allocate_static_string(str_1790, "APPLY MACRO: ~a", 15);
   eul_allocate_static_string(str_1791, "RESULT: ~a", 10);

@@ -14,7 +14,7 @@ extern LispRef i_rep_bindings[];
 #define prompt_string_fn_index 11 
 #define module_loaded__X63_fn_index 6 
 #define __X63_fn_index 15 
-#define macroexpand_fn_index 10 
+#define macroexpand_fn_index 11 
 #define debug_eval_fn_index 20 
 #define rep_fn_index 6 
 #define dynamic_load_module_fn_index 3 

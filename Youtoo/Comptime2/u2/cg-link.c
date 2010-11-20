@@ -114,7 +114,7 @@ void initialize_module_cg_link()
   eul_allocate_static_string(str_7739, "  eul_allocate_static_string(~a, ~s, ~a);\n", 42);
   eul_allocate_static_string(str_7740, "  object_class(~a) = eul_static_string_class;~%", 47);
   /* Byte-vector with size: 25 is_init: 0 index: 71 binding: (method-convert-constant) */
-  static const void *G007736[] = {I(aa,23,00,00),B(cg_link ,68),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,24),B(ex_expr ,16),I(3c,01,1b,24),B(ex_expr ,3),I(3c,01,1b,24),B(ex_expr ,28),I(3c,01,1b,24),B(ex_expr ,36),I(3c,01,1f,04),I(1c,1f,07,06),I(23,00,00,00),B(cg_link ,69),I(1f,03,1f,03),I(1f,03,24,00),B(cg_link ,16),I(3c,04,2a,23),B(cg_link ,70),I(1f,03,24,00),B(cg_link ,5),I(3c,02,2a,1d),I(45,09,00,00)};
+  static const void *G007736[] = {I(aa,23,00,00),B(cg_link ,68),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,24),B(ex_expr ,17),I(3c,01,1b,24),B(ex_expr ,3),I(3c,01,1b,24),B(ex_expr ,29),I(3c,01,1b,24),B(ex_expr ,37),I(3c,01,1f,04),I(1c,1f,07,06),I(23,00,00,00),B(cg_link ,69),I(1f,03,1f,03),I(1f,03,24,00),B(cg_link ,16),I(3c,04,2a,23),B(cg_link ,70),I(1f,03,24,00),B(cg_link ,5),I(3c,02,2a,1d),I(45,09,00,00)};
 
   eul_allocate_static_string(str_7743, "cons_", 5);
   eul_allocate_static_string(str_7744, "  eul_allocate_static_cons(~a, ", 31);

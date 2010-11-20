@@ -36,7 +36,8 @@
            ex-syntax
            ex-direct
            cg-dld)
-   export (macroexpand
+   export (macroexpand-1
+           macroexpand
            complete-lambda-node
            filter-vars
            filter-init-forms
@@ -105,18 +106,27 @@
                      (notify0 "RESULT: ~a" macro-expanded-form)
                      (e macro-expanded-form expr-context env e)))))))))
 
-(defun macroexpand (expr)
+(defun macroexpand-1 (expr)
   (let ((binding (get-syntax-binding (car expr))))
     (if binding
         (let ((macro-fun (as-dynamic-binding binding)))
           (if macro-fun
               (apply macro-fun (cdr expr))
             (error <condition>
-                   (fmt "macroexpand cannot find dynamic binding ~a for syntax binding ~a"
+                   (fmt "macroexpand-1 cannot find dynamic binding ~a for syntax binding ~a"
                         binding (car expr)))))
       (error <condition>
-             (fmt "macroexpand: cannot find syntax binding ~a"
+             (fmt "macroexpand-1: cannot find syntax binding ~a"
                   (car expr))))))
+
+(defun macroexpand (expr)
+  (let ((binding (get-syntax-binding (car expr))))
+    (if binding
+        (let ((macro-fun (as-dynamic-binding binding)))
+          (if macro-fun
+              (macroexpand (apply macro-fun (cdr expr)))
+            expr))
+      expr)))
 
 (defun protect-tilde (str)
   (let ((i (member1-string #\~ str))
