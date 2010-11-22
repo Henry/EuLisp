@@ -29,6 +29,7 @@
            unquote
            unquote-splicing
            symbol-macro
+           macroexpand1
            macroexpand
            debugging
            dprint))

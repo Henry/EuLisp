@@ -63,16 +63,21 @@
 (defextern eul-file-newer? (<string> <string>) ptr "eul_file_newer_p")
 
 ;;;-----------------------------------------------------------------------------
-;;; Module sources modified (compared with .i-file)
+;;; Module sources modified (compared with .[ihc] files)
 ;;;-----------------------------------------------------------------------------
 (defun module-modified? (module-name)
-  (or *recompile*
-      (let ((name1 (as-source-file-name module-name))
-            (name2 (as-interface-file-name module-name)))
-        (file-newer? name1 name2))))
+  (or (file-newer?
+       (as-source-file-name module-name)
+       (as-interface-file-name module-name))
+      (file-newer?
+       (as-source-file-name module-name)
+       (as-included-C-file-name module-name))
+      (file-newer?
+       (as-source-file-name module-name)
+       (as-C-file-name module-name))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Library interface file modified (compared with .a-file)
+;;; Library interface file modified (compared with .a file)
 ;;;-----------------------------------------------------------------------------
 (defun library-newer? (lib-name module-name) ())
 ;    (let ((file-name1 (as-C-library-interface-file-name lib-name))
@@ -88,7 +93,7 @@
 ;      result))
 
 ;;;-----------------------------------------------------------------------------
-;;; C linkable module file modified (compared with .bc-file)
+;;; C linkable module file modified (compared with .o file)
 ;;;-----------------------------------------------------------------------------
 (defun C-module-modified? (module-name)
   (let ((name1 (as-C-file-name module-name))

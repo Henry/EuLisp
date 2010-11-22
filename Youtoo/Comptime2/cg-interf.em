@@ -286,7 +286,8 @@
       t
     (and (or (eq module-name *tmp-start-source-file-name*)
              (if *interpreter* t (null? *no-recompile*)))
-         (or (module-modified? module-name)
+         (or *recompile*
+             (module-modified? module-name)
              (null? (file-exist? (as-C-file-name module-name)))
              (let ((full-import (get-full-import-names module-name)))
                (anyp1-list (lambda (name)

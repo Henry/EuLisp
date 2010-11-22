@@ -109,10 +109,9 @@
           (let* ((foo (setq *silent* ()))
                  (module (if (null? reload)
                              (or (get-module module-name)
-                                 (if (file-exist?
-                                      (as-interface-file-name module-name))
-                                     (load-module-interface module-name)
-                                   (compile-module module-name)))
+                                 (if (module-modified? module-name)
+                                     (compile-module module-name)
+                                   (load-module-interface module-name)))
                            (compile-module module-name)))
                  (foo (setq *silent* tmp-silent))
                  (import (module-used-module-names? module))
