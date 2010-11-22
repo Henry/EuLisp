@@ -330,6 +330,17 @@
     + [X] Remove =level1=
 
 *** TODO Rename =labels= -> =letfuns=
+
+*** TODO Add support for hierarchical application of module filters
+    /e.g./
+    #+BEGIN_SRC lisp
+      (defmodule test
+        (import (level-1
+                 (rename ((something something-else))
+                         (only (something)
+                               things))))
+        ) ; end of module
+    #+END_SRC
 * EuXLisp
 *** DONE Finish reformatting the C source files
     CLOSED: [2010-10-23 Sat 19:03]
