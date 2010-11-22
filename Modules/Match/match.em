@@ -162,7 +162,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmodule match
-  (syntax ((except (match-let) syntax-0) match0)
+  (syntax (syntax-0
+           match0)
    import (level-0 match-support)
    export (match match-lambda match-lambda* match-let match-let*))
 

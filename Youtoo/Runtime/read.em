@@ -26,7 +26,8 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule read
-  (syntax (_macros)
+  (syntax (_macros
+           read0)
    import (telos
            condition
            convert

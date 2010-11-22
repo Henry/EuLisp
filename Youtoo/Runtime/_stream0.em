@@ -29,56 +29,6 @@
    import (level-1))
 
 ;;;-----------------------------------------------------------------------------
-;;; (match-let (expression default-initializers) form*)
-;;;-----------------------------------------------------------------------------
-;;;  Examples of use
-;;
-;;;   (match-let foo ((a 1)) bar)
-;;    => (let ((a (if (null? foo) 1 (car foo)))) bar)
-;;
-;;;   (match-let foo ((a 1) (b 2)) bar)
-;;    => (let ((a ()) (b ()))
-;;        (progn (if (null? foo) (setq a 1)
-;;                   (progn (setq a (car foo)) (setq foo (cdr foo))))
-;;               (if (null? foo) (setq b 2)
-;;                   (progn (setq b (car foo)) (setq foo (cdr foo)))))
-;;        bar)
-;;
-;;;   (match-let '(foo bar) ((a 1) (b 2)) baz)
-;;    => (let ((G00055 (foo bar)) (a ()) (b ()))
-;;        (progn (if (null? G00055) (setq a 1)
-;;                   (progn (setq a (car G00055)) (setq G00055 (cdr G00055))))
-;;               (if (null? G00055) (setq b 2)
-;;                   (progn (setq b (car G00055)) (setq G00055 (cdr G00055)))))
-;;        bar)
-;;;-----------------------------------------------------------------------------
-(defmacro match-let (expression default-initializers . body)
-  (if (eql 1 (size default-initializers))
-      `(let ((,(caar default-initializers)
-              (if (null? ,expression)
-                  ,(cadr (car default-initializers))
-                (car ,expression))))
-         ,@body)
-    (let* ((var (if (symbol? expression) expression (gensym)))
-           (update-vars
-            (labels
-             ((loop (l)
-                    (if (null? l)
-                        ()
-                      (cons
-                       `(if (null? ,var)
-                            (setq ,(caar l) ,(cadr (car l)))
-                          (progn
-                            (setq ,(caar l) (car ,var))
-                            (setq ,var (cdr ,var))))
-                       (loop (cdr l))))))
-             (loop default-initializers))))
-      `(let (,@(if (symbol? expression) () `((,var ,expression)))
-             ,@(map (lambda (x) `(,(car x) ())) default-initializers))
-         (progn ,@update-vars)
-         ,@body))))
-
-;;;-----------------------------------------------------------------------------
 ;;; (with-lock (lock-valued-expression) form*)
 ;;;-----------------------------------------------------------------------------
 (defmacro with-lock (lock . body)

@@ -27,8 +27,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule match-support
-  (syntax ((except (match-let)
-                   syntax-0)
+  (syntax (syntax-0
            match0)
    import (level-0)
    export (memq

@@ -8,13 +8,12 @@
 extern LispRef _stream0_bindings[];
 
 /* Module binding indices */
-#define with_input_file_fn_index 8 
-#define with_output_file_fn_index 3 
-#define match_let_fn_index 2 
-#define with_lock_fn_index 7 
-#define with_source_fn_index 5 
-#define with_sink_fn_index 6 
-#define with_input_file_of_path_fn_index 4 
+#define with_input_file_fn_index 7 
+#define with_output_file_fn_index 2 
+#define with_source_fn_index 4 
+#define with_lock_fn_index 6 
+#define with_input_file_of_path_fn_index 3 
+#define with_sink_fn_index 5 
 
 
 

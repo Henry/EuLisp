@@ -11,12 +11,10 @@
 /* Imported modules */
 extern void initialize_module_level_1();
 extern LispRef level_1_bindings[];
-extern LispRef boot_bindings[];
 extern LispRef symbol_bindings[];
-extern LispRef collect_bindings[];
 
-/* Module bindings with size 51 */
-LispRef _stream0_bindings[51];
+/* Module bindings with size 45 */
+LispRef _stream0_bindings[45];
 
 /* Foreign functions */
 
@@ -32,137 +30,118 @@ void initialize_module__stream0()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_524, sym_523, sym_522, sym_521, sym_520, sym_519, G00518, G00516, sym_514, sym_513, G00512, G00510, sym_508, sym_507, G00506, sym_504, sym_503, sym_502, sym_501, sym_499, sym_498, G00497, sym_495, sym_494, sym_493, sym_492, key_491, key_490, sym_489, sym_488, G00487, sym_485, sym_484, G00483, sym_481, sym_480, sym_479, sym_478, sym_477, sym_476, G00475, G00473;
+  LispRef sym_388, sym_387, sym_386, sym_385, sym_384, G00383, G00381, sym_379, sym_378, G00377, G00375, sym_373, sym_372, G00371, sym_369, sym_368, sym_367, sym_366, sym_365, sym_364, sym_363, sym_361, sym_360, sym_359, G00358, sym_356, sym_355, sym_354, sym_353, sym_352, sym_351, sym_350, key_349, key_348, sym_347, sym_346, G00345;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 2 is_init: 0 index: 9 binding: anonymous */
-  static const void *G00472[] = {I(aa,10,86,86),I(0f,0f,45,00)};
+  /* Byte-vector with size: 42 is_init: 0 index: 19 binding: with-output-file */
+  static const void *G00344[] = {I(a7,1c,10,1d),I(11,1b,10,24),B(symbol ,6),I(3c,00,1f,03),I(1d,1d,23,00),B(_stream0 ,8),I(86,0f,23,00),B(_stream0 ,9),I(1c,0f,1b,86),I(0f,23,00,00),B(_stream0 ,10),I(1c,0f,1f,05),I(1c,0f,23,00),B(_stream0 ,11),I(1c,0f,23,00),B(_stream0 ,12),I(1c,0f,23,00),B(_stream0 ,13),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,86,86,0f),I(1f,0b,1c,0f),I(1b,86,0f,1f),I(03,1c,0f,23),B(_stream0 ,14),I(1f,16,0f,1b),I(86,0f,1f,10),I(1c,0f,23,00),B(_stream0 ,15),I(1c,0f,1f,14),I(86,0f,23,00),B(_stream0 ,16),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,1f,17),I(86,0f,1c,1c),I(0f,1f,0b,1c),I(0f,23,00,00),B(_stream0 ,18),I(1c,0f,45,23)};
 
-  /* Byte-vector with size: 40 is_init: 0 index: 16 binding: anonymous */
-  static const void *G00474[] = {I(aa,1b,12,1b),I(44,04,86,36),I(94,47,00,01),I(86,0f,23,00),B(_stream0 ,10),I(1c,0f,1f,03),I(72,1f,04,10),I(1b,73,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,11),I(1c,0f,1f,09),I(72,47,00,01),I(86,0f,23,00),B(_stream0 ,12),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,11),I(1c,0f,47,00),I(01,86,0f,23),B(_stream0 ,13),I(1c,0f,1b,86),I(0f,47,00,01),I(1c,0f,23,00),B(_stream0 ,11),I(1c,0f,1b,86),I(0f,1f,06,1c),I(0f,23,00,00),B(_stream0 ,14),I(1c,0f,1b,86),I(0f,1f,0f,1c),I(0f,1f,16,1c),I(0f,23,00,00),B(_stream0 ,15),I(1c,0f,1f,1b),I(11,1b,47,00),I(00,3c,01,1d),I(1c,0f,22,1c),I(45,02,00,00)};
+  eul_allocate_static_string(str_362, "No such file or directory ~a in ~a", 34);
+  /* Byte-vector with size: 69 is_init: 0 index: 31 binding: with-input-file-of-path */
+  static const void *G00357[] = {I(a7,1c,10,1d),I(11,1b,10,1f),I(04,11,1b,11),I(1b,10,1f,07),I(11,1b,11,1b),I(11,1b,10,24),B(symbol ,6),I(3c,00,24,00),B(symbol ,6),I(3c,00,24,00),B(symbol ,6),I(3c,00,1f,0c),I(1f,0b,1f,09),I(1f,06,1f,06),I(1f,06,1f,06),I(1f,03,86,0f),I(1f,06,1c,0f),I(23,00,00,00),B(_stream0 ,20),I(1c,0f,23,00),B(_stream0 ,21),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1b,86,0f),I(1f,09,86,0f),I(23,00,00,00),B(_stream0 ,22),I(1c,0f,1f,0c),I(86,0f,1f,0f),I(1c,0f,23,00),B(_stream0 ,23),I(1c,0f,23,00),B(_stream0 ,24),I(1c,0f,1b,86),I(0f,23,00,00),B(_stream0 ,25),I(1c,0f,23,00),B(_stream0 ,26),I(1c,0f,1f,12),I(86,0f,23,00),B(_stream0 ,27),I(1c,0f,1b,86),I(0f,1f,14,1c),I(0f,1f,16,86),I(0f,23,00,00),B(_stream0 ,28),I(1c,0f,1b,86),I(0f,1f,1b,1c),I(0f,1b,86,0f),I(1f,05,1c,0f),I(1f,1b,86,0f),I(1f,21,1c,0f),I(1b,1f,31,0f),I(23,00,00,00),B(_stream0 ,29),I(1c,0f,1b,86),I(0f,1f,05,1c),I(0f,23,00,00),B(_stream0 ,18),I(1c,0f,1b,86),I(0f,1f,12,1c),I(0f,1f,1a,1c),I(0f,23,00,00),B(_stream0 ,30),I(1c,0f,1b,86),I(0f,1f,1f,1c),I(0f,23,00,00),B(_stream0 ,18),I(1c,0f,45,3d)};
 
-  /* Byte-vector with size: 61 is_init: 0 index: 19 binding: match-let */
-  static const void *G00482[] = {I(43,fd,46,03),I(1c,24,00,00),B(collect ,9),I(3c,01,83,1c),I(51,1b,44,4f),I(1f,03,72,1f),I(05,86,0f,23),B(_stream0 ,10),I(1c,0f,1f,06),I(10,1b,73,1f),I(09,86,0f,23),B(_stream0 ,12),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,1f,06,1c),I(0f,23,00,00),B(_stream0 ,15),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,1b,86,0f),I(1b,1f,11,0f),I(23,00,00,00),B(_stream0 ,17),I(1c,0f,22,0f),I(36,8f,1f,04),I(7c,1b,44,05),I(1f,05,36,0b),I(24,00,00,00),B(symbol ,6),I(3c,00,1b,48),I(00,01,86,1b),I(48,00,00,23),B(_stream0 ,18),I(23,00,00,00),B(_stream0 ,16),I(3b,01,48,00),I(00,1f,06,47),I(00,00,3c,01),I(1f,08,7c,1b),I(44,04,86,36),I(0e,1f,09,86),I(0f,47,00,01),I(1c,0f,86,0f),I(22,01,23,00),B(_stream0 ,18),I(23,00,00,00),B(_stream0 ,9),I(3b,01,1f,0a),I(24,00,00,00),B(collect ,2),I(3c,02,1c,1c),I(24,00,00,00),B(boot ,8),I(3c,02,23,00),B(_stream0 ,14),I(1f,05,0f,1b),I(1f,0c,0f,1d),I(1c,0f,23,00),B(_stream0 ,17),I(1c,0f,22,0b),I(45,05,00,00)};
+  /* Byte-vector with size: 30 is_init: 0 index: 34 binding: with-source */
+  static const void *G00370[] = {I(a7,24,00,00),B(symbol ,6),I(3c,00,1d,10),I(1b,86,0f,23),B(_stream0 ,32),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,1b,86,0f),I(1f,08,11,1b),I(10,1f,0a,10),I(1b,86,0f,1d),I(1c,0f,23,00),B(_stream0 ,33),I(1c,0f,23,00),B(_stream0 ,14),I(1f,0e,0f,1f),I(0f,10,1b,86),I(0f,1f,0f,1c),I(0f,23,00,00),B(_stream0 ,33),I(1c,0f,1b,86),I(0f,1f,05,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,1f,10,1c),I(0f,23,00,00),B(_stream0 ,18),I(1c,0f,45,1a)};
 
-  /* Byte-vector with size: 42 is_init: 0 index: 28 binding: with-output-file */
-  static const void *G00486[] = {I(a7,1c,10,1d),I(11,1b,10,24),B(symbol ,6),I(3c,00,1f,03),I(1d,1d,23,00),B(_stream0 ,20),I(86,0f,23,00),B(_stream0 ,21),I(1c,0f,1b,86),I(0f,23,00,00),B(_stream0 ,22),I(1c,0f,1f,05),I(1c,0f,23,00),B(_stream0 ,23),I(1c,0f,23,00),B(_stream0 ,24),I(1c,0f,23,00),B(_stream0 ,25),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,86,86,0f),I(1f,0b,1c,0f),I(1b,86,0f,1f),I(03,1c,0f,23),B(_stream0 ,14),I(1f,16,0f,1b),I(86,0f,1f,10),I(1c,0f,23,00),B(_stream0 ,11),I(1c,0f,1f,14),I(86,0f,23,00),B(_stream0 ,26),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,27),I(1c,0f,1f,17),I(86,0f,1c,1c),I(0f,1f,0b,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,45,23)};
+  /* Byte-vector with size: 30 is_init: 0 index: 35 binding: with-sink */
+  static const void *G00374[] = {I(a7,24,00,00),B(symbol ,6),I(3c,00,1d,10),I(1b,86,0f,23),B(_stream0 ,32),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,1b,86,0f),I(1f,08,11,1b),I(10,1f,0a,10),I(1b,86,0f,1d),I(1c,0f,23,00),B(_stream0 ,33),I(1c,0f,23,00),B(_stream0 ,14),I(1f,0e,0f,1f),I(0f,10,1b,86),I(0f,1f,0f,1c),I(0f,23,00,00),B(_stream0 ,33),I(1c,0f,1b,86),I(0f,1f,05,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,1f,10,1c),I(0f,23,00,00),B(_stream0 ,18),I(1c,0f,45,1a)};
 
-  eul_allocate_static_string(str_500, "No such file or directory ~a in ~a", 34);
-  /* Byte-vector with size: 69 is_init: 0 index: 36 binding: with-input-file-of-path */
-  static const void *G00496[] = {I(a7,1c,10,1d),I(11,1b,10,1f),I(04,11,1b,11),I(1b,10,1f,07),I(11,1b,11,1b),I(11,1b,10,24),B(symbol ,6),I(3c,00,24,00),B(symbol ,6),I(3c,00,24,00),B(symbol ,6),I(3c,00,1f,0c),I(1f,0b,1f,09),I(1f,06,1f,06),I(1f,06,1f,06),I(1f,03,86,0f),I(1f,06,1c,0f),I(23,00,00,00),B(_stream0 ,29),I(1c,0f,23,00),B(_stream0 ,30),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1b,86,0f),I(1f,09,86,0f),I(23,00,00,00),B(_stream0 ,10),I(1c,0f,1f,0c),I(86,0f,1f,0f),I(1c,0f,23,00),B(_stream0 ,31),I(1c,0f,23,00),B(_stream0 ,32),I(1c,0f,1b,86),I(0f,23,00,00),B(_stream0 ,33),I(1c,0f,23,00),B(_stream0 ,34),I(1c,0f,1f,12),I(86,0f,23,00),B(_stream0 ,12),I(1c,0f,1b,86),I(0f,1f,14,1c),I(0f,1f,16,86),I(0f,23,00,00),B(_stream0 ,13),I(1c,0f,1b,86),I(0f,1f,1b,1c),I(0f,1b,86,0f),I(1f,05,1c,0f),I(1f,1b,86,0f),I(1f,21,1c,0f),I(1b,1f,31,0f),I(23,00,00,00),B(_stream0 ,35),I(1c,0f,1b,86),I(0f,1f,05,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,1b,86),I(0f,1f,12,1c),I(0f,1f,1a,1c),I(0f,23,00,00),B(_stream0 ,15),I(1c,0f,1b,86),I(0f,1f,1f,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,45,3d)};
+  /* Byte-vector with size: 22 is_init: 0 index: 38 binding: with-lock */
+  static const void *G00376[] = {I(a7,24,00,00),B(symbol ,6),I(3c,00,1d,86),I(0f,1c,1c,0f),I(1b,86,0f,1f),I(03,86,0f,23),B(_stream0 ,36),I(1c,0f,1b,1f),I(07,0f,23,00),B(_stream0 ,14),I(1c,0f,1f,07),I(86,0f,23,00),B(_stream0 ,37),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,1b,86),I(0f,1f,0a,1c),I(0f,23,00,00),B(_stream0 ,18),I(1c,0f,45,11)};
 
-  /* Byte-vector with size: 30 is_init: 0 index: 39 binding: with-source */
-  static const void *G00505[] = {I(a7,24,00,00),B(symbol ,6),I(3c,00,1d,10),I(1b,86,0f,23),B(_stream0 ,37),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,1b,86,0f),I(1f,08,11,1b),I(10,1f,0a,10),I(1b,86,0f,1d),I(1c,0f,23,00),B(_stream0 ,38),I(1c,0f,23,00),B(_stream0 ,14),I(1f,0e,0f,1f),I(0f,10,1b,86),I(0f,1f,0f,1c),I(0f,23,00,00),B(_stream0 ,38),I(1c,0f,1b,86),I(0f,1f,05,1c),I(0f,23,00,00),B(_stream0 ,27),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,1f,10,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,45,1a)};
+  /* Byte-vector with size: 35 is_init: 0 index: 39 binding: with-input-file */
+  static const void *G00380[] = {I(a7,1c,10,1d),I(11,1b,10,24),B(symbol ,6),I(3c,00,1f,03),I(1d,1d,1c,86),I(0f,23,00,00),B(_stream0 ,11),I(1c,0f,23,00),B(_stream0 ,12),I(1c,0f,23,00),B(_stream0 ,13),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,86,86,0f),I(1f,07,1c,0f),I(1b,86,0f,1f),I(03,1c,0f,23),B(_stream0 ,14),I(1f,12,0f,1b),I(86,0f,1f,0c),I(1c,0f,23,00),B(_stream0 ,15),I(1c,0f,1f,10),I(86,0f,23,00),B(_stream0 ,16),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,1f,13),I(86,0f,1c,1c),I(0f,1f,0b,1c),I(0f,23,00,00),B(_stream0 ,18),I(1c,0f,45,1f)};
 
-  /* Byte-vector with size: 30 is_init: 0 index: 40 binding: with-sink */
-  static const void *G00509[] = {I(a7,24,00,00),B(symbol ,6),I(3c,00,1d,10),I(1b,86,0f,23),B(_stream0 ,37),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,1b,86,0f),I(1f,08,11,1b),I(10,1f,0a,10),I(1b,86,0f,1d),I(1c,0f,23,00),B(_stream0 ,38),I(1c,0f,23,00),B(_stream0 ,14),I(1f,0e,0f,1f),I(0f,10,1b,86),I(0f,1f,0f,1c),I(0f,23,00,00),B(_stream0 ,38),I(1c,0f,1b,86),I(0f,1f,05,1c),I(0f,23,00,00),B(_stream0 ,27),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,1f,10,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,45,1a)};
-
-  /* Byte-vector with size: 22 is_init: 0 index: 43 binding: with-lock */
-  static const void *G00511[] = {I(a7,24,00,00),B(symbol ,6),I(3c,00,1d,86),I(0f,1c,1c,0f),I(1b,86,0f,1f),I(03,86,0f,23),B(_stream0 ,41),I(1c,0f,1b,1f),I(07,0f,23,00),B(_stream0 ,14),I(1c,0f,1f,07),I(86,0f,23,00),B(_stream0 ,42),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,27),I(1c,0f,1b,86),I(0f,1f,0a,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,45,11)};
-
-  /* Byte-vector with size: 35 is_init: 0 index: 44 binding: with-input-file */
-  static const void *G00515[] = {I(a7,1c,10,1d),I(11,1b,10,24),B(symbol ,6),I(3c,00,1f,03),I(1d,1d,1c,86),I(0f,23,00,00),B(_stream0 ,23),I(1c,0f,23,00),B(_stream0 ,24),I(1c,0f,23,00),B(_stream0 ,25),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,86,86,0f),I(1f,07,1c,0f),I(1b,86,0f,1f),I(03,1c,0f,23),B(_stream0 ,14),I(1f,12,0f,1b),I(86,0f,1f,0c),I(1c,0f,23,00),B(_stream0 ,11),I(1c,0f,1f,10),I(86,0f,23,00),B(_stream0 ,26),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_stream0 ,27),I(1c,0f,1f,13),I(86,0f,1c,1c),I(0f,1f,0b,1c),I(0f,23,00,00),B(_stream0 ,17),I(1c,0f,45,1f)};
-
-  /* Byte-vector with size: 50 is_init: 1 index: 0 binding: initialize-_stream0 */
-  static const void *G00517[] = {I(87,25,00,00),B(_stream0 ,1),I(24,00,00,00),B(level_1 ,1),I(3e,0b,24,00),B(level_1 ,0),I(3c,00,21,01),I(23,00,00,00),B(_stream0 ,35),I(23,00,00,00),B(_stream0 ,44),I(3b,fe,25,00),B(_stream0 ,8),I(23,00,00,00),B(_stream0 ,45),I(23,00,00,00),B(_stream0 ,43),I(3b,fe,25,00),B(_stream0 ,7),I(23,00,00,00),B(_stream0 ,46),I(23,00,00,00),B(_stream0 ,40),I(3b,fe,25,00),B(_stream0 ,6),I(23,00,00,00),B(_stream0 ,47),I(23,00,00,00),B(_stream0 ,39),I(3b,fe,25,00),B(_stream0 ,5),I(23,00,00,00),B(_stream0 ,48),I(23,00,00,00),B(_stream0 ,36),I(3b,fe,25,00),B(_stream0 ,4),I(23,00,00,00),B(_stream0 ,49),I(23,00,00,00),B(_stream0 ,28),I(3b,fe,25,00),B(_stream0 ,3),I(23,00,00,00),B(_stream0 ,50),I(23,00,00,00),B(_stream0 ,19),I(3b,fd,25,00),B(_stream0 ,2),I(86,ac,00,00)};
+  /* Byte-vector with size: 44 is_init: 1 index: 0 binding: initialize-_stream0 */
+  static const void *G00382[] = {I(87,25,00,00),B(_stream0 ,1),I(24,00,00,00),B(level_1 ,1),I(3e,0b,24,00),B(level_1 ,0),I(3c,00,21,01),I(23,00,00,00),B(_stream0 ,29),I(23,00,00,00),B(_stream0 ,39),I(3b,fe,25,00),B(_stream0 ,7),I(23,00,00,00),B(_stream0 ,40),I(23,00,00,00),B(_stream0 ,38),I(3b,fe,25,00),B(_stream0 ,6),I(23,00,00,00),B(_stream0 ,41),I(23,00,00,00),B(_stream0 ,35),I(3b,fe,25,00),B(_stream0 ,5),I(23,00,00,00),B(_stream0 ,42),I(23,00,00,00),B(_stream0 ,34),I(3b,fe,25,00),B(_stream0 ,4),I(23,00,00,00),B(_stream0 ,43),I(23,00,00,00),B(_stream0 ,31),I(3b,fe,25,00),B(_stream0 ,3),I(23,00,00,00),B(_stream0 ,44),I(23,00,00,00),B(_stream0 ,19),I(3b,fe,25,00),B(_stream0 ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G00473,G00472);
-  eul_intern_symbol(sym_476,"null?");
-  eul_intern_symbol(sym_477,"setq");
-  eul_intern_symbol(sym_478,"car");
-  eul_intern_symbol(sym_479,"cdr");
-  eul_intern_symbol(sym_480,"progn");
-  eul_intern_symbol(sym_481,"if");
-  eul_allocate_bytevector( G00475,G00474);
-  eul_intern_symbol(sym_484,"let");
-  eul_intern_symbol(sym_485,"anonymous");
-  eul_allocate_bytevector( G00483,G00482);
-  eul_intern_symbol(sym_488,"w");
-  eul_intern_symbol(sym_489,"quote");
-  eul_intern_keyword(key_490,"mode");
-  eul_intern_keyword(key_491,"file-name");
-  eul_intern_symbol(sym_492,"<file-stream>");
-  eul_intern_symbol(sym_493,"make");
-  eul_intern_symbol(sym_494,"disconnect");
-  eul_intern_symbol(sym_495,"unwind-protect");
-  eul_allocate_bytevector( G00487,G00486);
-  eul_intern_symbol(sym_498,"file-lookup");
-  eul_intern_symbol(sym_499,"apply");
-  object_class(str_500) = eul_static_string_class;
-  eul_intern_symbol(sym_501,"fmt");
-  eul_intern_symbol(sym_502,"<condition>");
-  eul_intern_symbol(sym_503,"error");
-  eul_intern_symbol(sym_504,"with-input-file");
-  eul_allocate_bytevector( G00497,G00496);
-  eul_intern_symbol(sym_507,"source");
-  eul_intern_symbol(sym_508,"reconnect");
-  eul_allocate_bytevector( G00506,G00505);
-  eul_allocate_bytevector( G00510,G00509);
-  eul_intern_symbol(sym_513,"lock");
-  eul_intern_symbol(sym_514,"unlock");
-  eul_allocate_bytevector( G00512,G00511);
-  eul_allocate_bytevector( G00516,G00515);
-  eul_intern_symbol(sym_519,"with-lock");
-  eul_intern_symbol(sym_520,"with-sink");
-  eul_intern_symbol(sym_521,"with-source");
-  eul_intern_symbol(sym_522,"with-input-file-of-path");
-  eul_intern_symbol(sym_523,"with-output-file");
-  eul_intern_symbol(sym_524,"match-let");
-  eul_allocate_bytevector( G00518,G00517);
+  eul_intern_symbol(sym_346,"w");
+  eul_intern_symbol(sym_347,"quote");
+  eul_intern_keyword(key_348,"mode");
+  eul_intern_keyword(key_349,"file-name");
+  eul_intern_symbol(sym_350,"<file-stream>");
+  eul_intern_symbol(sym_351,"make");
+  eul_intern_symbol(sym_352,"progn");
+  eul_intern_symbol(sym_353,"setq");
+  eul_intern_symbol(sym_354,"disconnect");
+  eul_intern_symbol(sym_355,"unwind-protect");
+  eul_intern_symbol(sym_356,"let");
+  eul_allocate_bytevector( G00345,G00344);
+  eul_intern_symbol(sym_359,"file-lookup");
+  eul_intern_symbol(sym_360,"apply");
+  eul_intern_symbol(sym_361,"null?");
+  object_class(str_362) = eul_static_string_class;
+  eul_intern_symbol(sym_363,"fmt");
+  eul_intern_symbol(sym_364,"<condition>");
+  eul_intern_symbol(sym_365,"error");
+  eul_intern_symbol(sym_366,"car");
+  eul_intern_symbol(sym_367,"cdr");
+  eul_intern_symbol(sym_368,"with-input-file");
+  eul_intern_symbol(sym_369,"if");
+  eul_allocate_bytevector( G00358,G00357);
+  eul_intern_symbol(sym_372,"source");
+  eul_intern_symbol(sym_373,"reconnect");
+  eul_allocate_bytevector( G00371,G00370);
+  eul_allocate_bytevector( G00375,G00374);
+  eul_intern_symbol(sym_378,"lock");
+  eul_intern_symbol(sym_379,"unlock");
+  eul_allocate_bytevector( G00377,G00376);
+  eul_allocate_bytevector( G00381,G00380);
+  eul_intern_symbol(sym_384,"with-lock");
+  eul_intern_symbol(sym_385,"with-sink");
+  eul_intern_symbol(sym_386,"with-source");
+  eul_intern_symbol(sym_387,"with-input-file-of-path");
+  eul_intern_symbol(sym_388,"with-output-file");
+  eul_allocate_bytevector( G00383,G00382);
 
   /* Set local bindings */
   {
     int i;
-    for (i = 2; i < 9; i++)
+    for (i = 2; i < 8; i++)
       _stream0_bindings[i] = eul_nil;
   }
 
-  _stream0_bindings[ 9] = G00473;
-  _stream0_bindings[ 10] = sym_476;
-  _stream0_bindings[ 11] = sym_477;
-  _stream0_bindings[ 12] = sym_478;
-  _stream0_bindings[ 13] = sym_479;
-  _stream0_bindings[ 14] = sym_480;
-  _stream0_bindings[ 15] = sym_481;
-  _stream0_bindings[ 16] = G00475;
-  _stream0_bindings[ 17] = sym_484;
-  _stream0_bindings[ 18] = sym_485;
-  _stream0_bindings[ 19] = G00483;
-  _stream0_bindings[ 20] = sym_488;
-  _stream0_bindings[ 21] = sym_489;
-  _stream0_bindings[ 22] = key_490;
-  _stream0_bindings[ 23] = key_491;
-  _stream0_bindings[ 24] = sym_492;
-  _stream0_bindings[ 25] = sym_493;
-  _stream0_bindings[ 26] = sym_494;
-  _stream0_bindings[ 27] = sym_495;
-  _stream0_bindings[ 28] = G00487;
-  _stream0_bindings[ 29] = sym_498;
-  _stream0_bindings[ 30] = sym_499;
-  _stream0_bindings[ 31] = str_500;
-  _stream0_bindings[ 32] = sym_501;
-  _stream0_bindings[ 33] = sym_502;
-  _stream0_bindings[ 34] = sym_503;
-  _stream0_bindings[ 35] = sym_504;
-  _stream0_bindings[ 36] = G00497;
-  _stream0_bindings[ 37] = sym_507;
-  _stream0_bindings[ 38] = sym_508;
-  _stream0_bindings[ 39] = G00506;
-  _stream0_bindings[ 40] = G00510;
-  _stream0_bindings[ 41] = sym_513;
-  _stream0_bindings[ 42] = sym_514;
-  _stream0_bindings[ 43] = G00512;
-  _stream0_bindings[ 44] = G00516;
+  _stream0_bindings[ 8] = sym_346;
+  _stream0_bindings[ 9] = sym_347;
+  _stream0_bindings[ 10] = key_348;
+  _stream0_bindings[ 11] = key_349;
+  _stream0_bindings[ 12] = sym_350;
+  _stream0_bindings[ 13] = sym_351;
+  _stream0_bindings[ 14] = sym_352;
+  _stream0_bindings[ 15] = sym_353;
+  _stream0_bindings[ 16] = sym_354;
+  _stream0_bindings[ 17] = sym_355;
+  _stream0_bindings[ 18] = sym_356;
+  _stream0_bindings[ 19] = G00345;
+  _stream0_bindings[ 20] = sym_359;
+  _stream0_bindings[ 21] = sym_360;
+  _stream0_bindings[ 22] = sym_361;
+  _stream0_bindings[ 23] = str_362;
+  _stream0_bindings[ 24] = sym_363;
+  _stream0_bindings[ 25] = sym_364;
+  _stream0_bindings[ 26] = sym_365;
+  _stream0_bindings[ 27] = sym_366;
+  _stream0_bindings[ 28] = sym_367;
+  _stream0_bindings[ 29] = sym_368;
+  _stream0_bindings[ 30] = sym_369;
+  _stream0_bindings[ 31] = G00358;
+  _stream0_bindings[ 32] = sym_372;
+  _stream0_bindings[ 33] = sym_373;
+  _stream0_bindings[ 34] = G00371;
+  _stream0_bindings[ 35] = G00375;
+  _stream0_bindings[ 36] = sym_378;
+  _stream0_bindings[ 37] = sym_379;
+  _stream0_bindings[ 38] = G00377;
+  _stream0_bindings[ 39] = G00381;
   _stream0_bindings[ 1] = eul_nil;
-  _stream0_bindings[ 45] = sym_519;
-  _stream0_bindings[ 46] = sym_520;
-  _stream0_bindings[ 47] = sym_521;
-  _stream0_bindings[ 48] = sym_522;
-  _stream0_bindings[ 49] = sym_523;
-  _stream0_bindings[ 50] = sym_524;
-  eul_allocate_lambda( _stream0_bindings[0], "initialize-_stream0", 0, G00518);
+  _stream0_bindings[ 40] = sym_384;
+  _stream0_bindings[ 41] = sym_385;
+  _stream0_bindings[ 42] = sym_386;
+  _stream0_bindings[ 43] = sym_387;
+  _stream0_bindings[ 44] = sym_388;
+  eul_allocate_lambda( _stream0_bindings[0], "initialize-_stream0", 0, G00383);
 
   }
 }

@@ -3,7 +3,7 @@
 
 (definterface read
   (import (telos condition convert convert1 vector string lock dynamic table stream format)
-   syntax (_macros)
+   syntax (_macros read0)
    full-import ()
    export (
     ((name . special-tokens) (pos . 30) (origin read . special-tokens) (class . constant))
