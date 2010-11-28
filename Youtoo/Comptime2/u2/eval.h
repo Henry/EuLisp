@@ -18,6 +18,7 @@ extern LispRef eval_bindings[];
 #define as_C_module_name_fn_index 14 
 #define as_dynamic_binding_fn_index 4 
 #define main_fn_index 3 
+#define macroexpand_1_fn_index 6 
 #define dynamic_load_module1_fn_index 13 
 #define _redefine_imported_bindings__X42_X42_fn_index 31 
 #define dynamic_binding_ref_fn_index 7 

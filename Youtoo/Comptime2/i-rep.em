@@ -47,6 +47,7 @@
            ?
            show-help
            show-class-hierarchy
+           macroexpand-1
            macroexpand)
    expose (cg-dld))
 

@@ -4,7 +4,7 @@
 (definterface cg-link
   (import (i-all i-modify p-env sx-obj sx-node cg-state cg-asm cg-interf i-ffi ex-expr cg-dld)
    syntax (_macros _i-aux0)
-   full-import (i-error i-notify i-param i-level-1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level-1 aux-table i-all i-modify sx-obj sx-obj1 sx-obj2 p-env i-ffi sx-node cg-state op-peep-r op-peep cg-bycode2 cg-bycode1 cg-bycode cg-asm cg-interf cg-dld ex-direct ex-expose ex-syntax ex-import ex-expr)
+   full-import (i-error i-notify i-param i-level-1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level-1 aux-table i-all i-modify sx-obj sx-obj1 sx-obj2 p-env i-ffi sx-node cg-state op-peep-r op-peep cg-bycode2 cg-bycode1 cg-bycode cg-asm cg-interf sx-write cg-dld ex-direct ex-expose ex-syntax ex-import ex-expr)
    export (
     ((name . write-C-module-file) (pos . 4) (origin cg-link . write-C-module-file))
     ((name . decode) (pos . 23) (origin cg-link . decode))
@@ -208,7 +208,7 @@
     ("too many top-level forms after macro expansion" . 196)
     ("00" . 195)
     (decode . 192)
-    (|(method G006760)| . 191)
+    (|(method G006391)| . 191)
     ("decoder error" . 189)
     ("compile time error condition: " . 188)
     ("B(~a ,1)" . 184)
@@ -245,7 +245,7 @@
     ("set-fixed-byes ~a ~a ~a" . 153)
     (? . 152)
     ("compute-binding ~a ~a" . 151)
-    (|(method G006930)| . 150)
+    (|(method G006561)| . 150)
     (ct-error-value: . 148)
     ("can't compute binding ~a of module ~a" . 147)
     ("compile time error condition: " . 146)

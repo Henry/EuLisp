@@ -35,7 +35,8 @@
            ex-import
            ex-syntax
            ex-direct
-           cg-dld)
+           cg-dld
+           sx-write)
    export (macroexpand-1
            macroexpand
            complete-lambda-node
@@ -107,26 +108,45 @@
                      (e macro-expanded-form expr-context env e)))))))))
 
 (defun macroexpand-1 (expr)
-  (let ((binding (get-syntax-binding (car expr))))
-    (if binding
-        (let ((macro-fun (as-dynamic-binding binding)))
-          (if macro-fun
-              (apply macro-fun (cdr expr))
-            (error <condition>
-                   (fmt "macroexpand-1 cannot find dynamic binding ~a for syntax binding ~a"
-                        binding (car expr)))))
-      (error <condition>
-             (fmt "macroexpand-1: cannot find syntax binding ~a"
-                  (car expr))))))
+  (if (cons? expr)
+      (let ((binding (get-syntax-binding (car expr))))
+        (if binding
+            (let ((macro-fun (as-dynamic-binding binding)))
+              (if macro-fun
+                  (progn (setq *pass* 'execute)
+                         (apply macro-fun (cdr expr)))
+                (error <condition>
+                       (fmt "macroexpand-1 cannot find dynamic binding ~a for syntax binding ~a"
+                            binding (car expr)))))
+          (error <condition>
+                 (fmt "macroexpand-1: cannot find syntax binding ~a"
+                      (car expr)))))
+    (error <condition>
+           (fmt "macroexpand-1: expression ~a is not a cons" expr))))
+
+(defun macroexpanded? (expr)
+  (if (cons? expr)
+      (let ((binding (get-syntax-binding (car expr))))
+        (if binding
+            (let ((macro-fun (as-dynamic-binding binding)))
+              (if macro-fun
+                  (progn (setq *pass* 'execute)
+                         (apply macro-fun (cdr expr)))
+                ()))
+          ()))
+    ()))
 
 (defun macroexpand (expr)
-  (let ((binding (get-syntax-binding (car expr))))
-    (if binding
-        (let ((macro-fun (as-dynamic-binding binding)))
-          (if macro-fun
-              (macroexpand (apply macro-fun (cdr expr)))
-            expr))
-      expr)))
+  (if (cons? expr)
+      (let ((eexpr (macroexpanded? expr)))
+        (if eexpr
+            (macroexpand eexpr)
+          (if (and (cons? expr)
+                   (not (eq (car expr) 'quote))
+                   (not (eq (car expr) 'quasiquote)))
+              (cons (macroexpand (car expr)) (macroexpand (cdr expr)))
+            expr)))
+    expr))
 
 (defun protect-tilde (str)
   (let ((i (member1-string #\~ str))
