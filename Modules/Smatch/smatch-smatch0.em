@@ -414,7 +414,7 @@
 
 
 ;; With a vector ellipse pattern we first check to see if the vector
-;; length is at least the required length.
+;; size is at least the required size.
 
 (defmacro match-gen-vector-ellipses x
   ;(print `(match-vector-ellipses ,x) nl)
@@ -457,7 +457,8 @@
                               (match-drop-ids
                                (,loop (+ ,j 1)
                                       ,@(map (lambda (id id-ls)
-                                               `(cons ,id ,id-ls)) id id-ls)))
+                                               `(cons ,id ,id-ls))
+                                             id id-ls)))
                               ,fk ,i))))))))
 
 
@@ -557,7 +558,8 @@
 (defmacro match-gen-ellipses x
   (smatch0 x
     ((abs v p () g+s (sk ...) fk i ((id id-ls) ...))
-     (let ((ls (gensym "ls")) (w (gensym "w")))
+     (let ((ls (gensym "ls"))
+           (w (gensym "w")))
        `(match-check-identifier
          ,p
          ;; simplest case equivalent to (p ...), just bind the list
@@ -578,14 +580,15 @@
                                 (match-drop-ids
                                  (loop (cdr ,ls)
                                        ,@(map (lambda (id id-ls)
-                                                `(cons ,id ,id-ls)) id id-ls)))
+                                                `(cons ,id ,id-ls))
+                                              id id-ls)))
                                 ,fk ,i)))
                   (else
                    (insert-abs ,abs ,fk)))))))
 
     ((abs v p r g+s (sk ...) fk i ((id id-ls) ...))
      ;; general case, trailing patterns to match, keep track of the
-     ;; remaining list length so we don't need any backtracking
+     ;; remaining list size so we don't need any backtracking
      (let ((tail-len (gensym "tail-len"))
            (len      (gensym "len"     ))
            (n        (gensym "n"       ))
@@ -594,14 +597,14 @@
 
        `(match-verify-no-ellipses
          ,r
-         (let* ((,tail-len (length (quote ,r)))
+         (let* ((,tail-len (size (quote ,r)))
                 (,ls       ,v)
-                (,len      (length ,ls)))
+                (,len      (size ,ls)))
            (if (< ,len ,tail-len)
                ,fk
              (recur loop ((,ls ,ls) (,n ,len)
                           ,@(map (lambda (id-ls)
-                                   `(id-ls '())) id-ls))
+                                   `(,id-ls '())) id-ls))
                     (cond
                       ((= ,n ,tail-len)
                        (let ,(map (lambda (id id-ls)
@@ -613,7 +616,8 @@
                                     (match-drop-ids
                                      (loop (cdr ,ls) (- ,n 1)
                                            ,@(map (lambda (id id-ls)
-                                                    `(cons ,id ,id-ls))))
+                                                    `(cons ,id ,id-ls))
+                                                  id id-ls))
                                      ,fk
                                      ,i))))
                       (else ,fk))))))))))
@@ -680,7 +684,7 @@
                               (,fail) ,i)))))
           ;; the initial id-ls binding here is a dummy to get the right
           ;; number of '()s
-          (let ,(map (lambda (id-ls) `(id-ls '())) id-ls)
+          (let ,(map (lambda (id-ls) `(,id-ls '())) id-ls)
             (,try ,v (lambda () (insert-abs ,abs ,fk)) ,@id-ls)))))))
 
 

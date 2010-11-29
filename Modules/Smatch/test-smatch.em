@@ -102,7 +102,7 @@
 (print "Test match from outer context "
        (let ((A 1)) (smatch 1 ((unquote A) 'ok))) nl)
 
-;;(smatch '(a 1 2 b c) ((a ... b c) (list 'var-a...bc a b c)))
+;; (smatch '(1 2 3 4 5) ((a ... b c) (list 'var-a...bc a b c)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module test-smatch

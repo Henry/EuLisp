@@ -36,7 +36,7 @@
 ;; (print (macroexpand '(smatch x ((set s) (s 4)))) nl)
 ;; (print (macroexpand '(smatch x ((get s) (s)))) nl)
 ;; (print (macroexpand '(defmatchfun (setter hmm) ((a (set s)) (s 4)))) nl)
-;; (print (macroexpand '(smatch '(a 1 2 b c) ((a ... b c) (list 'var-a...bc a b c)))) nl)
+;; (print (macroexpand '(smatch x ((a ... b c) (list 'var-a...bc a b c)))) nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module test-smatch-macros
