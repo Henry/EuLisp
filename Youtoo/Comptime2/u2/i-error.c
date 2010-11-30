@@ -61,8 +61,8 @@ void initialize_module_i_error()
 
   eul_allocate_static_string(str_404, "*** TOTAL NUMBER OF WARNINGS: ~a\n", 33);
   eul_allocate_static_string(str_405, "*** TOTAL NUMBER OF ERRORS: ~a\n", 31);
-  /* Byte-vector with size: 34 is_init: 0 index: 24 binding: ct-exit */
-  static const void *G00402[] = {I(a8,1b,44,05),I(1b,10,36,02),I(86,24,00,00),B(i_param ,41),I(82,19,1b,44),I(04,86,36,23),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,22),I(24,00,00,00),B(i_param ,41),I(24,00,00,00),B(format ,4),I(3c,03,2a,24),B(i_param ,47),I(82,19,1b,44),I(04,86,36,30),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,23),I(24,00,00,00),B(i_param ,47),I(24,00,00,00),B(format ,4),I(3c,03,2a,1f),I(03,44,04,86),I(36,06,85,20),I(04,1f,03,2a),I(1d,24,00,00),B(boot1 ,20),I(3d,01,04,45),I(04,00,00,00)};
+  /* Byte-vector with size: 41 is_init: 0 index: 24 binding: ct-exit */
+  static const void *G00402[] = {I(a8,1b,34,00),I(00,00,00,0e),I(1b,10,32,00),I(00,00,00,07),I(86,24,00,00),B(i_param ,41),I(82,19,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,29),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,22),I(24,00,00,00),B(i_param ,41),I(24,00,00,00),B(format ,4),I(3c,03,2a,24),B(i_param ,47),I(82,19,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,40),I(24,00,00,00),B(stream2 ,9),I(23,00,00,00),B(i_error ,23),I(24,00,00,00),B(i_param ,47),I(24,00,00,00),B(format ,4),I(3c,03,2a,1f),I(03,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,0c),I(85,20,04,1f),I(03,2a,1d,24),B(boot1 ,20),I(3d,01,04,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 25 binding: ct-error-value */
   static const void *G00406[] = {I(aa,82,24,00),B(i_error ,5),I(08,45,00,00)};

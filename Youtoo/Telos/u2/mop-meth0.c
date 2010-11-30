@@ -34,32 +34,32 @@ void initialize_module_mop_meth0()
   LispRef sym_452, sym_451, sym_450, sym_449, sym_448, sym_447, sym_446, G00445, sym_443, sym_442, G00441, G00439, G00437, G00435, sym_433, sym_432, G00431, sym_429, sym_428, sym_427, sym_426, sym_425, sym_423, G00421, G00419, sym_417, sym_416, sym_415, sym_414, sym_413, key_412, G00410, G00408;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 20 is_init: 0 index: 11 binding: defmethod-args */
-  static const void *G00407[] = {I(aa,1b,12,1b),I(44,04,86,36),I(43,1c,7a,12),I(1b,44,04,1d),I(36,38,1d,10),I(7a,12,1b,44),I(19,1f,03,10),I(1f,04,11,1b),I(24,00,00,00),B(mop_meth0 ,2),I(3c,01,1d,1c),I(0f,22,03,36),I(17,1f,03,72),I(1f,04,11,1b),I(24,00,00,00),B(mop_meth0 ,2),I(3c,01,1d,1c),I(0f,22,03,22),I(01,22,01,45),I(02,00,00,00)};
+  /* Byte-vector with size: 26 is_init: 0 index: 11 binding: defmethod-args */
+  static const void *G00407[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,56),I(1c,7a,12,1b),I(34,00,00,00),I(00,00,00,10),I(1d,32,00,00),I(00,00,00,40),I(1d,10,7a,12),I(1b,34,00,00),I(00,00,00,1f),I(1f,03,10,1f),I(04,11,1b,24),B(mop_meth0 ,2),I(3c,01,1d,1c),I(0f,22,03,32),I(00,00,00,18),I(1f,03,72,1f),I(04,11,1b,24),B(mop_meth0 ,2),I(3c,01,1d,1c),I(0f,22,03,22),I(01,22,01,45),I(02,00,00,00)};
 
   eul_allocate_static_cons(cons_411, NULL, NULL);
   /* Byte-vector with size: 39 is_init: 0 index: 19 binding: method-lambda */
   static const void *G00409[] = {I(a8,1b,24,00),B(mop_meth0 ,9),I(3c,01,1c,24),B(mop_meth0 ,8),I(3c,01,1d,24),B(mop_meth0 ,7),I(3c,01,1d,23),B(mop_meth0 ,13),I(24,00,00,00),B(mop_key ,3),I(3c,02,23,00),B(mop_meth0 ,12),I(1f,04,23,00),B(mop_meth0 ,14),I(24,00,00,00),B(mop_key ,2),I(3c,03,1f,03),I(24,00,00,00),B(mop_meth0 ,2),I(3c,01,1f,04),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1b,24),B(collect ,9),I(3c,01,1b,1d),I(0f,23,00,00),B(mop_meth0 ,15),I(1c,0f,1f,04),I(1f,08,0f,23),B(mop_meth0 ,16),I(1c,0f,23,00),B(mop_meth0 ,17),I(1f,09,0f,1b),I(86,0f,1d,1c),I(0f,1f,05,1c),I(0f,1f,0b,1c),I(0f,23,00,00),B(mop_meth0 ,18),I(1c,0f,45,12)};
 
-  /* Byte-vector with size: 16 is_init: 0 index: 20 binding: defmethod-domain */
-  static const void *G00418[] = {I(aa,1b,7a,12),I(1b,44,04,86),I(36,34,1c,10),I(7a,12,1b,44),I(15,1d,11,1b),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,86,1c),I(0f,22,02,36),I(17,1d,10,1b),I(73,1f,04,11),I(1b,24,00,00),B(mop_meth0 ,4),I(3c,01,1d,1c),I(0f,22,04,22),I(01,45,02,00)};
+  /* Byte-vector with size: 20 is_init: 0 index: 20 binding: defmethod-domain */
+  static const void *G00418[] = {I(aa,1b,7a,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,40),I(1c,10,7a,12),I(1b,34,00,00),I(00,00,00,1b),I(1d,11,1b,24),B(mop_meth0 ,4),I(3c,01,86,1c),I(0f,22,02,32),I(00,00,00,1c),I(1d,10,1b,73),I(1f,04,11,1b),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1d,1c),I(0f,22,04,22),I(01,45,02,00)};
 
   eul_allocate_static_cons(cons_422, NULL, NULL);
   eul_allocate_static_cons(cons_424, NULL, NULL);
-  /* Byte-vector with size: 60 is_init: 0 index: 29 binding: defmethod */
-  static const void *G00420[] = {I(a7,23,00,00),B(mop_meth0 ,22),I(1c,24,00,00),B(mop_meth0 ,9),I(3c,01,1d,24),B(mop_meth0 ,8),I(3c,01,1f,03),I(24,00,00,00),B(mop_meth0 ,7),I(3c,01,1d,23),B(mop_meth0 ,23),I(24,00,00,00),B(mop_key ,3),I(3c,02,23,00),B(mop_meth0 ,12),I(1f,04,1f,06),I(24,00,00,00),B(mop_key ,2),I(3c,03,1f,03),I(24,00,00,00),B(mop_meth0 ,2),I(3c,01,1f,04),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1d,1f),I(08,50,1b,44),I(12,1f,0a,86),I(0f,23,00,00),B(mop_meth0 ,24),I(1c,0f,22,01),I(36,03,1f,03),I(1d,24,00,00),B(collect ,9),I(3c,01,1b,1f),I(04,0f,23,00),B(mop_meth0 ,15),I(1c,0f,1f,06),I(1f,0a,0f,1f),I(0f,1c,0f,23),B(mop_meth0 ,25),I(1c,0f,23,00),B(mop_meth0 ,17),I(1f,0c,0f,1f),I(12,86,0f,23),B(mop_meth0 ,26),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(mop_meth0 ,27),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1f,0b,1c),I(0f,1f,0f,1c),I(0f,23,00,00),B(mop_meth0 ,18),I(1c,0f,1b,86),I(0f,1f,1d,1c),I(0f,23,00,00),B(mop_meth0 ,28),I(1c,0f,45,1f)};
+  /* Byte-vector with size: 62 is_init: 0 index: 29 binding: defmethod */
+  static const void *G00420[] = {I(43,fe,23,00),B(mop_meth0 ,22),I(1c,24,00,00),B(mop_meth0 ,9),I(3c,01,1d,24),B(mop_meth0 ,8),I(3c,01,1f,03),I(24,00,00,00),B(mop_meth0 ,7),I(3c,01,1d,23),B(mop_meth0 ,23),I(24,00,00,00),B(mop_key ,3),I(3c,02,23,00),B(mop_meth0 ,12),I(1f,04,1f,06),I(24,00,00,00),B(mop_key ,2),I(3c,03,1f,03),I(24,00,00,00),B(mop_meth0 ,2),I(3c,01,1f,04),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1d,1f),I(08,50,1b,34),I(00,00,00,1d),I(1f,0a,86,0f),I(23,00,00,00),B(mop_meth0 ,24),I(1c,0f,22,01),I(32,00,00,00),I(00,00,00,0a),I(1f,03,1d,24),B(collect ,9),I(3c,01,1b,1f),I(04,0f,23,00),B(mop_meth0 ,15),I(1c,0f,1f,06),I(1f,0a,0f,1f),I(0f,1c,0f,23),B(mop_meth0 ,25),I(1c,0f,23,00),B(mop_meth0 ,17),I(1f,0c,0f,1f),I(12,86,0f,23),B(mop_meth0 ,26),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(mop_meth0 ,27),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1f,0b,1c),I(0f,1f,0f,1c),I(0f,23,00,00),B(mop_meth0 ,18),I(1c,0f,1b,86),I(0f,1f,1d,1c),I(0f,23,00,00),B(mop_meth0 ,28),I(1c,0f,45,1f)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 32 binding: method-function-lambda */
-  static const void *G00430[] = {I(a7,23,00,00),B(mop_meth0 ,30),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(mop_meth0 ,31),I(1c,0f,45,05)};
+  static const void *G00430[] = {I(43,fe,23,00),B(mop_meth0 ,30),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(mop_meth0 ,31),I(1c,0f,45,05)};
 
-  /* Byte-vector with size: 8 is_init: 0 index: 33 binding: defmethod-body */
-  static const void *G00434[] = {I(aa,1b,10,7a),I(12,1b,44,14),I(1c,11,1b,11),I(24,00,00,00),B(mop_meth0 ,7),I(3d,01,03,22),I(01,36,03,1c),I(11,45,02,00)};
+  /* Byte-vector with size: 10 is_init: 0 index: 33 binding: defmethod-body */
+  static const void *G00434[] = {I(aa,1b,10,7a),I(12,1b,34,00),I(00,00,00,1e),I(1c,11,1b,11),I(24,00,00,00),B(mop_meth0 ,7),I(3d,01,03,22),I(01,32,00,00),I(00,00,00,09),I(1c,11,45,02)};
 
-  /* Byte-vector with size: 8 is_init: 0 index: 34 binding: defmethod-sig */
-  static const void *G00436[] = {I(aa,1b,10,7a),I(12,1b,44,14),I(1c,11,1b,11),I(24,00,00,00),B(mop_meth0 ,8),I(3d,01,03,22),I(01,36,03,1c),I(10,45,02,00)};
+  /* Byte-vector with size: 10 is_init: 0 index: 34 binding: defmethod-sig */
+  static const void *G00436[] = {I(aa,1b,10,7a),I(12,1b,34,00),I(00,00,00,1e),I(1c,11,1b,11),I(24,00,00,00),B(mop_meth0 ,8),I(3d,01,03,22),I(01,32,00,00),I(00,00,00,09),I(1c,10,45,02)};
 
-  /* Byte-vector with size: 12 is_init: 0 index: 35 binding: defmethod-keywords */
-  static const void *G00438[] = {I(aa,1b,10,7a),I(12,1b,44,23),I(1c,10,1d,11),I(1b,10,1f,04),I(11,1b,11,1b),I(24,00,00,00),B(mop_meth0 ,9),I(3c,01,1f,03),I(1c,0f,1f,06),I(1c,0f,22,07),I(36,02,86,45),I(02,00,00,00)};
+  /* Byte-vector with size: 14 is_init: 0 index: 35 binding: defmethod-keywords */
+  static const void *G00438[] = {I(aa,1b,10,7a),I(12,1b,34,00),I(00,00,00,2e),I(1c,10,1d,11),I(1b,10,1f,04),I(11,1b,11,1b),I(24,00,00,00),B(mop_meth0 ,9),I(3c,01,1f,03),I(1c,0f,1f,06),I(1c,0f,22,07),I(32,00,00,00),I(00,00,00,09),I(86,45,02,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 38 binding: named-method-function-lambda */
   static const void *G00440[] = {I(43,fd,1d,86),I(0f,23,00,00),B(mop_meth0 ,36),I(1c,0f,23,00),B(mop_meth0 ,30),I(1f,03,0f,1b),I(86,0f,1f,05),I(1c,0f,1f,03),I(1c,0f,23,00),B(mop_meth0 ,37),I(1c,0f,45,09)};

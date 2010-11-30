@@ -153,8 +153,8 @@ void initialize_module_sx_obj2()
   /* Byte-vector with size: 4 is_init: 0 index: 127 binding: local-static-var-lambda! */
   static const void *G001731[] = {I(ab,1c,83,1d),I(24,00,00,00),B(sx_obj2 ,9),I(09,45,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 128 binding: var-name? */
-  static const void *G001733[] = {I(aa,8a,03,24),B(sx_obj2 ,11),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 128 binding: var-name? */
+  static const void *G001733[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj2 ,11),I(08,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 129 binding: named-const-name? */
   static const void *G001735[] = {I(aa,83,24,00),B(sx_obj2 ,22),I(08,45,00,00)};
@@ -183,8 +183,8 @@ void initialize_module_sx_obj2()
   /* Byte-vector with size: 4 is_init: 0 index: 137 binding: const-value! */
   static const void *G001751[] = {I(ab,1c,82,1d),I(24,00,00,00),B(sx_obj2 ,29),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 138 binding: var-name! */
-  static const void *G001753[] = {I(ab,1c,8a,03),I(1d,24,00,00),B(sx_obj2 ,11),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 138 binding: var-name! */
+  static const void *G001753[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(sx_obj2 ,11),I(09,45,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 139 binding: var-value? */
   static const void *G001755[] = {I(aa,83,24,00),B(sx_obj2 ,11),I(08,45,00,00)};
