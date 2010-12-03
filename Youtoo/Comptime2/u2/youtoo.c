@@ -13,6 +13,7 @@ extern void initialize_module_level_0();
 extern void initialize_module_level_1();
 extern void initialize_module_math();
 extern void initialize_module_eval();
+extern void initialize_module_main();
 extern void initialize_module_i_aux0();
 extern void initialize_module_macros();
 extern void initialize_module_syntax_0();
@@ -20,6 +21,7 @@ extern LispRef boot1_bindings[];
 extern LispRef syntax_0_bindings[];
 extern LispRef macros_bindings[];
 extern LispRef i_aux0_bindings[];
+extern LispRef main_bindings[];
 extern LispRef eval_bindings[];
 extern LispRef math_bindings[];
 extern LispRef level_1_bindings[];
@@ -41,6 +43,7 @@ void initialize_module_youtoo()
   initialize_module_level_1();
   initialize_module_math();
   initialize_module_eval();
+  initialize_module_main();
   initialize_module_i_aux0();
   initialize_module_macros();
   initialize_module_syntax_0();
@@ -51,8 +54,8 @@ void initialize_module_youtoo()
   LispRef G002;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 42 is_init: 1 index: 0 binding: initialize-youtoo */
-  static const void *G001[] = {I(87,25,00,00),B(youtoo ,1),I(24,00,00,00),B(syntax_0 ,1),I(3e,0b,24,00),B(syntax_0 ,0),I(3c,00,21,01),I(24,00,00,00),B(macros ,1),I(3e,0b,24,00),B(macros ,0),I(3c,00,21,01),I(24,00,00,00),B(i_aux0 ,1),I(3e,0b,24,00),B(i_aux0 ,0),I(3c,00,21,01),I(24,00,00,00),B(eval ,1),I(3e,0b,24,00),B(eval ,0),I(3c,00,21,01),I(24,00,00,00),B(math ,1),I(3e,0b,24,00),B(math ,0),I(3c,00,21,01),I(24,00,00,00),B(level_1 ,1),I(3e,0b,24,00),B(level_1 ,0),I(3c,00,21,01),I(24,00,00,00),B(level_0 ,1),I(3e,0b,24,00),B(level_0 ,0),I(3c,00,21,01),I(24,00,00,00),B(boot1 ,27),I(24,00,00,00),B(eval ,3),I(3d,01,00,ac)};
+  /* Byte-vector with size: 47 is_init: 1 index: 0 binding: initialize-youtoo */
+  static const void *G001[] = {I(87,25,00,00),B(youtoo ,1),I(24,00,00,00),B(syntax_0 ,1),I(3e,0b,24,00),B(syntax_0 ,0),I(3c,00,21,01),I(24,00,00,00),B(macros ,1),I(3e,0b,24,00),B(macros ,0),I(3c,00,21,01),I(24,00,00,00),B(i_aux0 ,1),I(3e,0b,24,00),B(i_aux0 ,0),I(3c,00,21,01),I(24,00,00,00),B(main ,1),I(3e,0b,24,00),B(main ,0),I(3c,00,21,01),I(24,00,00,00),B(eval ,1),I(3e,0b,24,00),B(eval ,0),I(3c,00,21,01),I(24,00,00,00),B(math ,1),I(3e,0b,24,00),B(math ,0),I(3c,00,21,01),I(24,00,00,00),B(level_1 ,1),I(3e,0b,24,00),B(level_1 ,0),I(3c,00,21,01),I(24,00,00,00),B(level_0 ,1),I(3e,0b,24,00),B(level_0 ,0),I(3c,00,21,01),I(24,00,00,00),B(boot1 ,27),I(24,00,00,00),B(main ,3),I(3d,01,00,ac)};
 
 
   /* Initializations */

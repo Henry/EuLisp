@@ -8,14 +8,15 @@
 extern LispRef i_rep_bindings[];
 
 /* Module binding indices */
-#define show_help_fn_index 9 
+#define init_eval_fn_index 9 
+#define show_help_fn_index 10 
 #define dynamic_binding_set1_fn_index 12 
-#define show_module_bindings_fn_index 18 
-#define prompt_string_fn_index 11 
+#define show_module_bindings_fn_index 19 
+#define prompt_string_fn_index 12 
 #define module_loaded__X63_fn_index 6 
-#define __X63_fn_index 15 
+#define __X63_fn_index 16 
 #define macroexpand_fn_index 11 
-#define debug_eval_fn_index 20 
+#define debug_eval_fn_index 21 
 #define rep_fn_index 6 
 #define dynamic_load_module_fn_index 3 
 #define dynamic_binding_ref1_fn_index 11 

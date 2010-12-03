@@ -156,7 +156,7 @@ fi
 ###-----------------------------------------------------------------------------
 ### Set basic flags and libraries
 ###-----------------------------------------------------------------------------
-CLIBS="-leval -lmath -llevel-0 -llevel-1 -leval -ltelos -lboot -leulvm -lm"
+CLIBS="-lmain -leval -lmath -llevel-0 -llevel-1 -leval -ltelos -lboot -leulvm -lm"
 CFLAGS="$CFLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm"
 
 ###-----------------------------------------------------------------------------

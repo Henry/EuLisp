@@ -40,6 +40,7 @@
            cg-exec
            read)
    export (rep
+           init-eval
            eval
            debug-eval
            prompt-string
@@ -289,6 +290,21 @@
            (continue-k ())))
         (t
          (eval x))))
+
+(defun init-eval (module-name)
+  (setq *interpreter* t)
+  (setq *silent* t)
+  (let* ((new-module-name module-name)
+         (module (get-module new-module-name)))
+    (if (module? module)
+        (dynamic-setq *actual-module* module)
+      (progn
+        (setq module (dynamic-load-module new-module-name))
+        (module-binding-vector-size! module 2)
+        (module-max-binding-vector-size! module 1024)
+        ((setter *get-loaded-module*) new-module-name module)
+        (dynamic-setq *actual-module* module)
+        (check-module-envs module)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read/eval/print loop
