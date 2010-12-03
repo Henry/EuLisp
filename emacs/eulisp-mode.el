@@ -1332,7 +1332,7 @@ given symbol SYM."
     (unwind-protect . 1)
     (match . defun)
     (smatch . defun)
-    (ssmatch . defun)
+    (smatch0 . defun)
     (match-let . 1)
 
     (install-import-expander . defun)
