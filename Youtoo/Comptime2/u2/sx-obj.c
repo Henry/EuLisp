@@ -154,8 +154,8 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 951 is_init: 0 index: 143 binding: top-level */
   static const void *G002244[] = {I(a9,24,00,00),B(sx_obj1 ,3),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,84),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,82),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,83),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,88),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,81),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,89),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,90),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,80),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,91),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,92),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,79),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,93),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,94),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,78),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,95),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,96),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,77),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,97),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,98),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,76),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,99),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,100),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,75),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,101),I(24,00,00,00),B(boot1 ,26),I(3c,06,1f,07),I(1f,07,1f,07),I(1f,07,1f,07),I(1f,07,1f,07),I(1f,07,24,00),B(boot1 ,26),I(3c,08,24,00),B(mop_class ,81),I(23,00,00,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,102),I(23,00,00,00),B(sx_obj ,103),I(1f,0d,23,00),B(sx_obj ,104),I(1f,06,23,00),B(sx_obj ,105),I(23,00,00,00),B(sx_obj ,106),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(sx_obj ,17),I(2a,24,00,00),B(sx_obj ,17),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,107),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,74),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,108),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,109),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,73),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,110),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,111),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,72),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,112),I(24,00,00,00),B(boot1 ,26),I(3c,06,1d,1d),I(1d,24,00,00),B(boot1 ,26),I(3c,03,24,00),B(mop_class ,81),I(23,00,00,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,113),I(23,00,00,00),B(sx_obj ,103),I(1f,08,23,00),B(sx_obj ,104),I(1f,06,23,00),B(sx_obj ,105),I(23,00,00,00),B(sx_obj ,114),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(sx_obj ,13),I(2a,24,00,00),B(sx_obj ,17),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,115),I(23,00,00,00),B(sx_obj ,103),I(1f,05,23,00),B(sx_obj ,104),I(1f,06,23,00),B(sx_obj ,105),I(86,24,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(sx_obj ,8),I(2a,24,00,00),B(sx_obj ,17),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,116),I(23,00,00,00),B(sx_obj ,103),I(1f,05,23,00),B(sx_obj ,104),I(1f,06,23,00),B(sx_obj ,105),I(86,24,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(sx_obj ,2),I(2a,24,00,00),B(sx_obj1 ,3),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,102),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,71),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,117),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,90),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,70),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,91),I(24,00,00,00),B(boot1 ,26),I(3c,06,1c,1c),I(24,00,00,00),B(boot1 ,26),I(3c,02,24,00),B(mop_class ,81),I(23,00,00,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,118),I(23,00,00,00),B(sx_obj ,103),I(1f,07,23,00),B(sx_obj ,104),I(1f,06,23,00),B(sx_obj ,105),I(23,00,00,00),B(sx_obj ,119),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(sx_obj ,39),I(2a,24,00,00),B(sx_obj ,39),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,81),I(23,00,00,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,120),I(23,00,00,00),B(sx_obj ,103),I(1f,05,23,00),B(sx_obj ,104),I(1f,06,23,00),B(sx_obj ,105),I(86,24,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(sx_obj ,50),I(2a,24,00,00),B(sx_obj1 ,27),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,121),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,69),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,122),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,123),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,68),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,124),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,125),I(23,00,00,00),B(sx_obj ,85),I(23,00,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,67),I(3b,00,23,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,126),I(24,00,00,00),B(boot1 ,26),I(3c,06,1d,1d),I(1d,24,00,00),B(boot1 ,26),I(3c,03,24,00),B(mop_class ,81),I(23,00,00,00),B(sx_obj ,83),I(23,00,00,00),B(sx_obj ,127),I(23,00,00,00),B(sx_obj ,103),I(1f,08,23,00),B(sx_obj ,104),I(1f,06,23,00),B(sx_obj ,105),I(23,00,00,00),B(sx_obj ,128),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(sx_obj ,12),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_obj ,129),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_obj ,49),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_obj ,130),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_obj ,44),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_obj ,131),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_obj ,7),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_obj ,132),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_obj ,28),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_obj ,133),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_obj ,45),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_obj ,134),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_obj ,11),I(2a,83,24,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_obj ,135),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_obj ,21),I(2a,24,00,00),B(sx_obj ,49),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,49),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,136),I(23,00,00,00),B(sx_obj ,66),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,49),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,49),I(8a,03,02,83),I(24,00,00,00),B(sx_obj ,17),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,49),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,136),I(23,00,00,00),B(sx_obj ,65),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,49),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,49),I(2a,24,00,00),B(sx_obj ,17),I(2a,24,00,00),B(sx_obj ,44),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,44),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,137),I(23,00,00,00),B(sx_obj ,64),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,44),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,44),I(8a,03,02,83),I(24,00,00,00),B(sx_obj ,13),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,44),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,137),I(23,00,00,00),B(sx_obj ,63),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,44),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,44),I(2a,24,00,00),B(sx_obj ,13),I(2a,24,00,00),B(sx_obj ,7),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,7),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,138),I(23,00,00,00),B(sx_obj ,62),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,7),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,7),I(8a,03,02,83),I(24,00,00,00),B(sx_obj ,8),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,7),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,138),I(23,00,00,00),B(sx_obj ,61),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,7),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,7),I(2a,24,00,00),B(sx_obj ,8),I(2a,24,00,00),B(sx_obj ,28),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,28),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,139),I(23,00,00,00),B(sx_obj ,60),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,28),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,28),I(8a,03,02,83),I(24,00,00,00),B(sx_obj ,2),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,28),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,139),I(23,00,00,00),B(sx_obj ,59),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,28),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,28),I(2a,24,00,00),B(sx_obj ,2),I(2a,24,00,00),B(sx_obj ,45),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,45),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,140),I(23,00,00,00),B(sx_obj ,58),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,45),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,45),I(8a,03,02,83),I(24,00,00,00),B(sx_obj ,39),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,45),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,140),I(23,00,00,00),B(sx_obj ,57),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,45),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,45),I(2a,24,00,00),B(sx_obj ,39),I(2a,24,00,00),B(sx_obj ,11),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,11),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,141),I(23,00,00,00),B(sx_obj ,56),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,11),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,11),I(8a,03,02,83),I(24,00,00,00),B(sx_obj ,50),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,11),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,141),I(23,00,00,00),B(sx_obj ,55),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,11),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,11),I(2a,24,00,00),B(sx_obj ,50),I(2a,24,00,00),B(sx_obj ,21),I(8a,03,02,83),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,21),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,142),I(23,00,00,00),B(sx_obj ,54),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,21),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,21),I(8a,03,02,83),I(24,00,00,00),B(sx_obj ,12),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_obj ,21),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(sx_obj ,142),I(23,00,00,00),B(sx_obj ,53),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_obj ,21),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_obj ,21),I(2a,24,00,00),B(sx_obj ,12),I(45,95,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 144 binding: fun-binding? */
-  static const void *G002318[] = {I(aa,26,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj ,17),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 144 binding: fun-binding? */
+  static const void *G002318[] = {I(aa,8a,06,24),B(sx_obj ,17),I(08,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 145 binding: fun-body? */
   static const void *G002320[] = {I(aa,84,24,00),B(sx_obj ,17),I(08,45,00,00)};
@@ -163,23 +163,23 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 3 is_init: 0 index: 146 binding: lambda-delegated-vars? */
   static const void *G002322[] = {I(aa,83,24,00),B(sx_obj ,13),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 147 binding: fun-range-and-domain! */
-  static const void *G002324[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 147 binding: fun-range-and-domain! */
+  static const void *G002324[] = {I(ab,1c,8a,03),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 148 binding: fun-range-and-domain? */
-  static const void *G002326[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj ,17),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 148 binding: fun-range-and-domain? */
+  static const void *G002326[] = {I(aa,8a,03,24),B(sx_obj ,17),I(08,45,00,00)};
 
-  /* Byte-vector with size: 24 is_init: 0 index: 149 binding: local-name? */
-  static const void *G002328[] = {I(aa,1b,24,00),B(sx_obj1 ,14),I(3c,01,1b,34),I(00,00,00,1d),I(1c,26,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,32,00,00),I(00,00,00,3a),I(1c,23,00,00),B(sx_obj ,88),I(24,00,00,00),B(mop_defcl ,8),I(3c,02,1b,34),I(00,00,00,1d),I(1b,26,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,32,00,00),I(00,00,00,08),I(86,22,01,45),I(02,00,00,00)};
+  /* Byte-vector with size: 17 is_init: 0 index: 149 binding: local-name? */
+  static const void *G002328[] = {I(aa,1b,24,00),B(sx_obj1 ,14),I(3c,01,1b,44),I(0f,1c,8a,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,36,28,1c),I(23,00,00,00),B(sx_obj ,88),I(24,00,00,00),B(mop_defcl ,8),I(3c,02,1b,44),I(0f,1b,8a,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,36,02,86),I(22,01,45,02)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 150 binding: if-then? */
   static const void *G002330[] = {I(aa,83,24,00),B(sx_obj ,12),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 151 binding: fun-arity? */
-  static const void *G002332[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(sx_obj ,17),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 151 binding: fun-arity? */
+  static const void *G002332[] = {I(aa,8a,04,24),B(sx_obj ,17),I(08,45,00,00)};
 
-  /* Byte-vector with size: 35 is_init: 0 index: 153 binding: save-binding-module-name? */
-  static const void *G002334[] = {I(aa,1b,7a,1b),I(34,00,00,00),I(00,00,00,10),I(1c,73,32,00),I(00,00,00,79),I(1c,24,00,00),B(sx_obj1 ,14),I(3c,01,1b,34),I(00,00,00,45),I(1d,26,00,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj1 ,42),I(08,1b,24,00),B(sx_obj1 ,45),I(3c,01,1b,34),I(00,00,00,1d),I(1c,26,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,32,00,00),I(00,00,00,08),I(1c,22,02,32),I(00,00,00,26),I(23,00,00,00),B(sx_obj ,152),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,22,01,45),I(02,00,00,00)};
+  /* Byte-vector with size: 25 is_init: 0 index: 153 binding: save-binding-module-name? */
+  static const void *G002334[] = {I(aa,1b,7a,1b),I(44,05,1c,73),I(36,56,1c,24),B(sx_obj1 ,14),I(3c,01,1b,44),I(2c,1d,8a,05),I(24,00,00,00),B(sx_obj1 ,42),I(08,1b,24,00),B(sx_obj1 ,45),I(3c,01,1b,44),I(0f,1c,8a,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,36,02,1c),I(22,02,36,1e),I(23,00,00,00),B(sx_obj ,152),I(24,00,00,00),B(dynamic ,3),I(3c,01,8a,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,22,01,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 154 binding: appl-fun? */
   static const void *G002337[] = {I(aa,83,24,00),B(sx_obj ,39),I(08,45,00,00)};
@@ -199,11 +199,11 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 4 is_init: 0 index: 159 binding: lambda-delegated-vars! */
   static const void *G002347[] = {I(ab,1c,83,1d),I(24,00,00,00),B(sx_obj ,13),I(09,45,02,00)};
 
-  /* Byte-vector with size: 17 is_init: 0 index: 160 binding: save-binding-local-name? */
-  static const void *G002349[] = {I(aa,1b,7a,1b),I(34,00,00,00),I(00,00,00,10),I(1c,75,32,00),I(00,00,00,31),I(1c,24,00,00),B(sx_obj1 ,14),I(3c,01,1b,34),I(00,00,00,1d),I(1d,26,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,32,00,00),I(00,00,00,08),I(1d,22,01,45),I(02,00,00,00)};
+  /* Byte-vector with size: 10 is_init: 0 index: 160 binding: save-binding-local-name? */
+  static const void *G002349[] = {I(aa,1b,7a,1b),I(44,05,1c,75),I(36,1d,1c,24),B(sx_obj1 ,14),I(3c,01,1b,44),I(0f,1d,8a,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,36,02,1d),I(22,01,45,02)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 161 binding: fun-name? */
-  static const void *G002351[] = {I(aa,26,00,00),I(00,00,00,07),I(24,00,00,00),B(sx_obj ,17),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 161 binding: fun-name? */
+  static const void *G002351[] = {I(aa,8a,07,24),B(sx_obj ,17),I(08,45,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 162 binding: appl-fun! */
   static const void *G002353[] = {I(ab,1c,83,1d),I(24,00,00,00),B(sx_obj ,39),I(09,45,02,00)};
@@ -211,8 +211,8 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 4 is_init: 0 index: 163 binding: if-then! */
   static const void *G002355[] = {I(ab,1c,83,1d),I(24,00,00,00),B(sx_obj ,12),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 164 binding: fun-args? */
-  static const void *G002357[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,17),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 164 binding: fun-args? */
+  static const void *G002357[] = {I(aa,8a,05,24),B(sx_obj ,17),I(08,45,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 165 binding: fun-body! */
   static const void *G002359[] = {I(ab,1c,84,1d),I(24,00,00,00),B(sx_obj ,17),I(09,45,02,00)};
@@ -223,8 +223,8 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 2 is_init: 0 index: 167 binding: anonymous */
   static const void *G002363[] = {I(ab,84,02,50),I(45,00,00,00)};
 
-  /* Byte-vector with size: 17 is_init: 0 index: 168 binding: binding! */
-  static const void *G002365[] = {I(ab,1c,04,8a),I(04,02,23,00),B(sx_obj ,88),I(1c,23,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,167),I(3b,02,24,00),B(boot ,27),I(3c,03,1b,34),I(00,00,00,11),I(1b,10,83,02),I(32,00,00,00),I(00,00,00,09),I(86,1f,04,1f),I(04,1d,3d,02),I(05,00,00,00)};
+  /* Byte-vector with size: 15 is_init: 0 index: 168 binding: binding! */
+  static const void *G002365[] = {I(ab,1c,04,8a),I(04,02,23,00),B(sx_obj ,88),I(1c,23,00,00),B(sx_obj ,86),I(23,00,00,00),B(sx_obj ,167),I(3b,02,24,00),B(boot ,27),I(3c,03,1b,44),I(07,1b,10,83),I(02,36,02,86),I(1f,04,1f,04),I(1d,3d,02,05),I(45,05,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 169 binding: if-pred! */
   static const void *G002367[] = {I(ab,1c,84,1d),I(24,00,00,00),B(sx_obj ,12),I(09,45,02,00)};
@@ -235,8 +235,8 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 5 is_init: 0 index: 171 binding: origin-name? */
   static const void *G002371[] = {I(aa,23,00,00),B(sx_obj ,84),I(24,00,00,00),B(mop_defcl ,8),I(3d,02,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 172 binding: fun-arity! */
-  static const void *G002373[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 172 binding: fun-arity! */
+  static const void *G002373[] = {I(ab,1c,8a,04),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 173 binding: lambda-binding-refs! */
   static const void *G002375[] = {I(ab,1c,82,1d),I(24,00,00,00),B(sx_obj ,13),I(09,45,02,00)};
@@ -247,11 +247,11 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 3 is_init: 0 index: 175 binding: fun-has-unknown-appls? */
   static const void *G002379[] = {I(aa,82,24,00),B(sx_obj ,17),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 176 binding: fun-binding! */
-  static const void *G002381[] = {I(ab,1c,26,00),I(00,00,00,06),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 176 binding: fun-binding! */
+  static const void *G002381[] = {I(ab,1c,8a,06),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 177 binding: fun-name! */
-  static const void *G002383[] = {I(ab,1c,26,00),I(00,00,00,07),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 177 binding: fun-name! */
+  static const void *G002383[] = {I(ab,1c,8a,07),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 178 binding: appl-args! */
   static const void *G002385[] = {I(ab,1c,82,1d),I(24,00,00,00),B(sx_obj ,39),I(09,45,02,00)};
@@ -259,8 +259,8 @@ void initialize_module_sx_obj()
   /* Byte-vector with size: 3 is_init: 0 index: 179 binding: lambda-binding-refs? */
   static const void *G002387[] = {I(aa,82,24,00),B(sx_obj ,13),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 180 binding: fun-args! */
-  static const void *G002389[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 180 binding: fun-args! */
+  static const void *G002389[] = {I(ab,1c,8a,05),I(1d,24,00,00),B(sx_obj ,17),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 181 binding: fun-has-unknown-appls! */
   static const void *G002391[] = {I(ab,1c,82,1d),I(24,00,00,00),B(sx_obj ,17),I(09,45,02,00)};

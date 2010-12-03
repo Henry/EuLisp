@@ -51,14 +51,14 @@ void initialize_module_aux_table()
   /* Byte-vector with size: 4 is_init: 0 index: 11 binding: anonymous */
   static const void *G0028[] = {I(aa,47,00,00),I(10,27,0a,24),B(stream ,13),I(3d,03,00,00)};
 
-  /* Byte-vector with size: 26 is_init: 0 index: 13 binding: access-table-print */
-  static const void *G0030[] = {I(43,fe,46,01),I(1b,48,00,00),I(1c,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(34,00,00,00),I(00,00,00,2c),I(1c,8a,03,24),B(table1 ,3),I(08,24,00,00),B(stream ,13),I(1c,24,00,00),B(vector ,16),I(3d,02,06,22),I(01,32,00,00),I(00,00,00,22),I(23,00,00,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,16),I(3d,01,05,45),I(05,00,00,00)};
+  /* Byte-vector with size: 23 is_init: 0 index: 13 binding: access-table-print */
+  static const void *G0030[] = {I(a7,46,01,1b),I(48,00,00,1c),I(24,00,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(44,22,1c,8a),I(03,24,00,00),B(table1 ,3),I(08,24,00,00),B(stream ,13),I(1c,24,00,00),B(vector ,16),I(3d,02,06,22),I(01,36,19,23),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,16),I(3d,01,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 14 binding: access-table-keys */
   static const void *G0033[] = {I(aa,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,2),I(3d,01,01,00)};
 
-  /* Byte-vector with size: 14 is_init: 0 index: 15 binding: anonymous */
-  static const void *G0035[] = {I(ab,1c,34,00),I(00,00,00,2e),I(24,00,00,00),B(table ,7),I(24,00,00,00),B(boot1 ,42),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,32,00,00),I(00,00,00,0a),I(47,00,00,45),I(02,00,00,00)};
+  /* Byte-vector with size: 11 is_init: 0 index: 15 binding: anonymous */
+  static const void *G0035[] = {I(ab,1c,44,24),I(24,00,00,00),B(table ,7),I(24,00,00,00),B(boot1 ,42),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,36,04,47),I(00,00,45,02)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 16 binding: anonymous */
   static const void *G0037[] = {I(aa,47,00,00),I(1c,24,00,00),B(table ,7),I(3d,02,01,00)};
