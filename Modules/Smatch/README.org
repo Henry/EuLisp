@@ -1,0 +1,174 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:               Smatch module for Youtoo 0.991
+#+AUTHOR:
+#+DATE:                        November 2010
+#+LINK:                https://github.com/Henry/EuLisp
+#+EMAIL: no-reply
+#+OPTIONS: ^:{} email:nil
+
+* [[file:COPYING][Copyright]]
+  Youtoo is free software: you can redistribute it and/or modify it under the
+  terms of the GNU General Public License as published by the Free Software
+  Foundation, either version 2 of the License, or (at your option) any later
+  version.
+
+  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along with
+  Youtoo in the file [[file:../../COPYING][COPYING]].  If not, see <http://www.gnu.org/licenses/>.
+
+* [[file:../../index.org][EuLisp index]]
+
+* General Description
+  Programmable pattern matcher based on smatch.em -- portable hygienic pattern
+  matcher written by Alex Shinn, extended by Stefan Israelsson Tampe and
+  converted to EuLisp by Stefan Israelsson Tampe.  This is a full superset of
+  the popular MATCH package by Andrew Wright by written in itself and hence
+  requires bootstrapping.
+
+  This is a simple generative pattern matcher - each pattern is expanded into
+  the required tests, calling a failure continuation if the tests fail.  This
+  makes the logic easy to follow and extend, but produces sub-optimal code in
+  cases where you have many similar clauses due to repeating the same tests.
+  Nonetheless a smart compiler should be able to remove the redundant tests.
+  For MATCH-LET and DESTRUCTURING-BIND type uses there is no performance hit.
+
+* Original: Portable hygienic pattern matcher
+  The original version was written on 2006/11/29 and described in the following
+  Usenet post:
+  http://groups.google.com/group/comp.lang.scheme/msg/0941234de7112ffd and is
+  still available at http://synthcode.com/scheme/match-simple.scm. It's just
+  80 lines for the core MATCH, and an extra 40 lines for MATCH-LET,
+  MATCH-LAMBDA and other syntactic sugar.
+
+  A variant of this file which uses COND-EXPAND in a few places for performance
+  can be found at http://synthcode.com/scheme/match-cond-expand.scm.
+
+* Pattern Matching Syntactic Extensions for EuLisp
+  This macro package extends EuLisp with several new expression forms.
+  Following is a brief summary of the new forms.
+
+  #+BEGIN_SRC lisp
+  match expressions:
+  exp ::= ...
+        | (match exp clause ...)
+        | (match-lambda clause ...)
+        | (match-lambda* clause ...)
+        | (match-let ((pat exp) ...) body)
+        | (match-let* ((pat exp) ...) body)
+        | (match-letrec ((pat exp) ...) body)
+        | (defmatchun pat exp)
+
+  clause ::= (pat body) | (pat => exp)
+  #+END_SRC
+
+  #+BEGIN_SRC lisp
+  patterns:                               matches:
+
+  pat ::= identifier                      anything, and binds identifier
+        | _                               anything
+        | ()                              the empty list
+        | t                               t
+        | string                          a string
+        | number                          a number
+        | character                       a character
+        | 'sexp                           an s-expression
+        | 'symbol                         a symbol (special case of s-expr)
+        | (pat_1 ... pat_n)               list of n elements
+        | (pat_1 ... pat_n . pat_{n+1})   list of n or more
+        | (pat_1 ... pat_n pat_n+1 ooo)   list of n or more, each element
+                                          of remainder must match pat_n+1
+        | #(pat_1 ... pat_n)              vector of n elements
+        | #(pat_1 ... pat_n pat_n+1 ooo)  vector of n or more, each element
+                                          of remainder must match pat_n+1
+        | ($ struct-name pat_1 ... pat_n) a structure
+        | (= field pat)                   a field of a structure
+        | (and pat_1 ... pat_n)           if all of pat_1 thru pat_n match
+        | (or pat_1 ... pat_n)            if any of pat_1 thru pat_n match
+        | (not pat_1 ... pat_n)           if all pat_1 thru pat_n don't match
+        | (? predicate pat_1 ... pat_n)   if predicate true and all of
+                                          pat_1 thru pat_n match
+        | (set identifier)                anything, and binds setter
+        | (get identifier)                anything, and binds getter
+        | `qp                             a quasi-pattern
+
+  ooo ::= ...                             zero or more
+        | ___                             zero or more
+        | (.. k)                          k or more
+        | (__ k)                          k or more
+
+  quasi-patterns:                         matches:
+  qp  ::= ()                              the empty list
+        | t                               t
+        | ()                              ()
+        | string                          a string
+        | number                          a number
+        | character                       a character
+        | identifier                      a symbol
+        | (qp_1 ... qp_n)                 list of n elements
+        | (qp_1 ... qp_n . qp_{n+1})      list of n or more
+        | (qp_1 ... qp_n qp_n+1 ooo)      list of n or more, each element
+                                          of remainder must match qp_n+1
+        | #(qp_1 ... qp_n)                vector of n elements
+        | #(qp_1 ... qp_n qp_n+1 ooo)     vector of n or more, each element
+                                          of remainder must match qp_n+1
+        | ,pat                            a pattern
+        | ,@pat                           a pattern
+  #+END_SRC
+
+  The names =(quote, quasiquote, unquote, unquote-splicing, ?, _, $, and, or,
+  not, set, get, ..., ___)= cannot be used as pattern variables.
+
+  #+BEGIN_SRC lisp
+  structure expressions:
+  exp ::= ...
+        | (define-structure (id_0 id_1 ... id_n))
+        | (define-structure (id_0 id_1 ... id_n)
+                            ((id_{n+1} exp_1) ... (id_{n+m} exp_m)))
+        | (define-const-structure (id_0 arg_1 ... arg_n))
+        | (define-const-structure (id_0 arg_1 ... arg_n)
+                                  ((arg_{n+1} exp_1) ... (arg_{n+m} exp_m)))
+
+  arg ::= id | (! id) | (@ id)
+  #+END_SRC
+
+  =match:error-control= controls what code is generated for failed matches.\\
+  Possible values:
+  + '=unspecified= - do nothing, ie., evaluate =(cond [() ()])=
+  + '=fail= - call match:error, or die at =car= or =cdr=
+  + '=error= - call match:error with the unmatched value
+  + '=match= - call match:error with the unmatched value _and_
+             the quoted match expression
+
+  =match:error-control= is set by calling =match:set-error-control= with
+  the new value.
+
+  =match:error= is called for a failed match.
+  =match:error= is set by calling =match:set-error= with the new value.
+
+  =match:structure-control= controls the uniqueness of structures.\\
+  Possible values:
+  + '=vector= - (default) structures are vectors with a symbol in position 0
+  + '=disjoint= - structures are fully disjoint from all other values
+
+  =match:structure-control= is set by calling =match:set-structure-control=
+  with the new value.
+
+  =match:runtime-structures= controls whether local structure declarations
+  generate new structures each time they are reached.\\
+  Possible values:
+  + =t= - (default) each runtime occurrence generates a new structure
+  + =()= - each lexical occurrence generates a new structure
+
+  End of user visible/modifiable stuff.
+
+* Notes:
+  + Testing is incomplete
+  + Classes are not supported
+
+* Installation
+  + Run 'make' in directory /Modules/Smatch/.
+  + Run 'make test' in directory /Modules/Smatch/.
