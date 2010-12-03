@@ -148,6 +148,15 @@
   ;; to MATCH-TWO.
   ;(print `(match-one ,x) nl)
   (smatch0 x
+    ((abs v (p ('.. m) . r) g+s sk fk i)
+     `(match-extract-vars
+       ,abs ,p (abs-drop (match-gen-ellipses-n
+                          ,abs ,m ,v ,p ,r  ,g+s ,sk ,fk ,i)) ,i ()))
+    ((abs v (p ('__ m) . r) g+s sk fk i)
+     `(match-extract-vars
+       ,abs ,p (abs-drop (match-gen-ellipses-n
+                          ,abs ,m ,v ,p ,r  ,g+s ,sk ,fk ,i)) ,i ()))
+
     ((abs v (p q . r) g+s sk fk i)
      `(match-check-ellipse
        ,q
@@ -601,7 +610,7 @@
                 (,ls       ,v)
                 (,len      (size ,ls)))
            (if (< ,len ,tail-len)
-               ,fk
+               (insert-abs ,abs ,fk)
              (recur loop ((,ls ,ls) (,n ,len)
                           ,@(map (lambda (id-ls)
                                    `(,id-ls '())) id-ls))
@@ -617,10 +626,83 @@
                                      (loop (cdr ,ls) (- ,n 1)
                                            ,@(map (lambda (id id-ls)
                                                     `(cons ,id ,id-ls))
-                                                  id id-ls))
-                                     ,fk
-                                     ,i))))
-                      (else ,fk))))))))))
+                                                  id id-ls)))
+                                    ,fk
+                                    ,i)))
+                      (else (insert-abs ,abs ,fk)))))))))))
+
+(defmacro match-gen-ellipses-n x
+  (smatch0 x
+    ((abs n v p () g+s (sk ...) fk i ((id id-ls) ...))
+     (let ((ls (gensym "ls"))
+           (in (gensym "in"))
+           (w (gensym "w")))
+       `(match-check-identifier
+         ,p
+         ;; simplest case equivalent to (p ...), just bind the list
+         (let ((,p ,v))
+           (if (list? ,p)
+               (insert-abs ,abs (,@sk ,i))
+             (insert-abs ,abs ,fk)))
+         ;; simple case, match all elements of the list
+         (recur loop ((,ls ,v) (,in ,n) ,@(map (lambda (id-ls) `(,id-ls '())) id-ls))
+                (cond
+                  ((null? ,ls)
+                   (if (> ,in 0)
+                       (insert-abs ,abs ,fk)
+                     (let ,(map (lambda (id id-ls)
+                                  `(,id (reverse ,id-ls))) id id-ls)
+                       (insert-abs ,abs (,@sk ,i)))))
+                  ((cons? ,ls)
+                   (let ((,w (car ,ls)))
+                     (match-one ,abs ,w ,p ((car ,ls) ((setter car) ,ls))
+                                (match-drop-ids
+                                 (loop (cdr ,ls) (- ,in 1)
+                                       ,@(map (lambda (id id-ls)
+                                                `(cons ,id ,id-ls))
+                                              id id-ls)))
+                                ,fk ,i)))
+                  (else
+                   (insert-abs ,abs ,fk)))))))
+
+    ((abs m v p r g+s (sk ...) fk i ((id id-ls) ...))
+     ;; general case, trailing patterns to match, keep track of the
+     ;; remaining list size so we don't need any backtracking
+     (let ((tail-len (gensym "tail-len"))
+           (len      (gensym "len"     ))
+           (n        (gensym "n"       ))
+           (ls       (gensym "ls"      ))
+           (im       (gensym "im"      ))
+           (w        (gensym "w"       )))
+
+       `(match-verify-no-ellipses
+         ,r
+         (let* ((,tail-len (size (quote ,r)))
+                (,ls       ,v)
+                (,len      (size ,ls)))
+           (if (< ,len ,tail-len)
+               (insert-abs ,abs ,fk)
+             (recur loop ((,ls ,ls) (,n ,len) (,im ,m)
+                          ,@(map (lambda (id-ls)
+                                   `(,id-ls '())) id-ls))
+                    (cond
+                      ((= ,n ,tail-len)
+                       (if (> ,im 0)
+                           (insert-abs ,abs ,fk)
+                         (let ,(map (lambda (id id-ls)
+                                      `(,id (reverse ,id-ls))) id id-ls)
+                           (match-one ,abs ,ls ,r (() ()) ,sk  ,fk ,i))))
+                      ((cons? ,ls)
+                       (let ((,w (car ,ls)))
+                         (match-one ,abs ,w ,p ((car ,ls) ((setter car) ,ls))
+                                    (match-drop-ids
+                                     (loop (cdr ,ls) (- ,n 1) (- ,im 1)
+                                           ,@(map (lambda (id id-ls)
+                                                    `(cons ,id ,id-ls))
+                                                  id id-ls)))
+                                    ,fk
+                                    ,i)))
+                      (else (insert-abs ,abs ,fk)))))))))))
 
 
 (defmacro match-verify-no-ellipses x
@@ -652,14 +734,16 @@
            (next (gensym "next"))
            (ls   (gensym "ls"))
            (w    (gensym "w"))
+           (loop (gensym "loop"))
            (u    (gensym "u"))
            (fail (gensym "fail")))
 
-       `(letfuns ((,try (,w ,fail ,@id-ls)
-                        (match-one ,abs ,w ,q ,g+s
-                                   (match-drop-ids
+       (let ((ret `(letfuns ((,try (,w ,fail ,@id-ls)
+                                   (match-one ,abs ,w ,q ,g+s
+                                              (match-drop-ids
                                     (let ,(map (lambda (id id-ls)
-                                                 `(,id (reverse ,id-ls))))
+                                                 `(,id (reverse ,id-ls)))
+                                               id id-ls)
                                       ,sk))
                                    (match-drop-ids
                                     (,next ,w ,fail ,@id-ls)) ,i))
@@ -673,19 +757,21 @@
                                ;; accumulate the head variables from
                                ;; the p pattern, and loop over the tail
                                (let ,(map (lambda (id id-ls)
-                                            `(,id-ls (cons ,id ,id-ls))
-                                            id id-ls))
-                                 (recur ,ls ((,ls (cdr ,w)))
+                                            `(,id-ls (cons ,id ,id-ls)))
+                                            id id-ls)
+                                 (recur ,loop ((,ls (cdr ,w)))
                                         (if (cons? ,ls)
                                             (,try (car ,ls)
-                                                  (lambda () (,ls (cdr ,ls)))
+                                                  (lambda () (,loop
+                                                              (cdr ,ls)))
                                                   ,@id-ls)
                                           (,fail)))))
-                              (,fail) ,i)))))
+                              (match-drop-ids (,fail)) ,i)))))
           ;; the initial id-ls binding here is a dummy to get the right
           ;; number of '()s
           (let ,(map (lambda (id-ls) `(,id-ls '())) id-ls)
-            (,try ,v (lambda () (insert-abs ,abs ,fk)) ,@id-ls)))))))
+            (,try ,v (lambda () (insert-abs ,abs ,fk)) ,@id-ls)))))
+                  #;(print ret) ret)))))
 
 
 (defmacro match-quasiquote x
@@ -780,15 +866,18 @@
        (match-extract-vars
         ,abs ,p (match-extract-vars-step (,q ,@r) ,k ,i ,v) ,i ())))
     ((abs (p . q) k i v)
-     `(match-extract-vars ,abs ,p (match-extract-vars-step ,q ,k ,i ,v) ,i ()))
+     `(match-extract-vars
+       ,abs ,p (match-extract-vars-step ,q ,k ,i ,v) ,i ()))
     ((abs #(p ...) . x)
      `(match-extract-vars ,abs ,p ,@x))
     ((abs '_   (k kk ...) i v)  `(k ,abs ,@kk ,v))
     ((abs '___ (k kk ...) i v)  `(k ,abs ,@kk ,v))
+    ((abs ('.. m) (k kk ...) i v)  `(k ,abs ,@kk ,v))
+    ((abs ('__ m) (k kk ...) i v)  `(k ,abs ,@kk ,v))
     ((abs '*** (k kk ...) i v)  `(k ,abs ,@kk ,v))
 
-    ;; This is the main part, the only place where we might add a new
-    ;; var if it's an unbound symbol.
+    ;; This is the main part, the only place where we might add a new var if
+    ;; it's an unbound symbol.
     ((abs p (k kk ...) (i ...) v)
      (let ((p-ls (gensym "p-ls")))
        (if (or (member p i) (not (symbol? p)))
@@ -878,7 +967,7 @@
     ((#(a ...) success-k failure-k) failure-k)
     ;; matching an atom
     ((id success-k failure-k)
-     (if (binary= id '...) success-k failure-k))))
+     (if (or (binary= id '...)  (binary= id '___)) success-k failure-k))))
 
 
 (defmacro match-check-identifier x

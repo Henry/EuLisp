@@ -81,6 +81,8 @@ $(MODULE_EM) : $(EXPAND_EM) $(EXPAND_MAC_EM) $(MODULE_ALL_EM)
 		--load-path ../Match -l level-0 -l eval --recompile
 
 ###-----------------------------------------------------------------------------
+### Miscellaneous commands
+###-----------------------------------------------------------------------------
 .PHONY: README
 README: README.html
 

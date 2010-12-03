@@ -29,23 +29,38 @@
   (syntax (syntax-0
            smatch
            test-smatch-macros)
-   import (level-0))
+   import (level-0
+           eval))
 
 (defun f1 (l)
   (smatch l
-           (() 'nil)
-           (1  'one)
-           ("hello" 'hello)
-           ((1 2) 'const-1-2)
-           ((('z c d) a b) (list 'nested-z a b c d))
-           (('z . b) (list 'z-prefix b))
-           ((and a (1 (set s) 3)) (s 12) a)
-           ((a b) (list 'var-a-b a b))
-           ((a . b) (list 'var-a.b a b))
-           (#(a b) (list 'vect-a-b a b))
-           (#(#(c d) a b) (list 'vect-nested a b c d))
-           (#(a b c ...) (list 'vect-ellip a b c))
-           (_ 'anything-else)))
+    (() 'nil)
+    (1  'one)
+    ("hello" 'hello)
+    ((1 2) 'const-1-2)
+    ((('z c d) a b) (list 'nested-z a b c d))
+    (('z . b) (list 'z-prefix b))
+    ((and a (1 (set s) 3)) (s 12) a)
+    ((? (lambda (x) (binary= x '(a b))) a b) (list 'var-?a-b a b))
+    ((a b) (list 'var-a-b a b))
+    ((a . b) (list 'var-a.b a b))
+    (#(a b) (list 'vect-a-b a b))
+    (#(#(c d) a b) (list 'vect-nested a b c d))
+    (#(a b c ...) (list 'vect-ellip a b c))
+    (_ 'anything-else)))
+
+(deflocal a 1)
+(deflocal b 1)
+
+(defun f2 (l)
+  (smatch l
+    ((`,a b ... c d) (list 'var-ab...cd `,a b c d))
+    (_ 'anything-else)))
+
+(defun f3 (l)
+  (smatch l
+    ((a *** ((quote +) . l)) (list 'a***+l a))
+    (_ 'anything-else)))
 
 (defconstant fact
   (match-lambda
@@ -76,6 +91,8 @@
   (print-test (f1 '((z 3 4) 1 2)))
   (print-test (f1 '((z 3 4 5) 1 2)))
   (print-test (f1 '(1 2 3)))
+  (print-test (f2 '(1 2 3 4 5 6 7)))
+  (print-test (f3 '(* (+ 1 2))))
   (print-test (f1 #(1 2)))
   (print-test (f1 #(1 2 3 4 5)))
   (print-test (f1 #(#(3 4) 1 2)))
@@ -83,18 +100,18 @@
   (print-test (fact2 6))
   (print-test ((setter setit) m))
   (print-test (f1 (smatch '(let ((a 1)
-                                  (b 2)
-                                  (c 3))
-                              (m a)
-                              (m b)
-                              (m c)
-                              (list a b c))
-                           (('let ((a b) ...) body ...)
-                            (list vars: a  vals: b body: body))
-                           (_ 'no-match))))
+                                 (b 2)
+                                 (c 3))
+                             (m a)
+                             (m b)
+                             (m c)
+                             (list a b c))
+                    (('let ((a b) ...) body ...)
+                     (list vars: a  vals: b body: body))
+                    (_ 'no-match))))
   (print-test (smatch '(let3 ((a b c) (d e f)) body1 body2)
-                       (('let3 ((a b c) ...) body ...) (list (list a b c) body))
-                       (_ 'no-match))))
+                (('let3 ((a b c) ...) body ...) (list (list a b c) body))
+                (_ 'no-match))))
 (print "m = " m nl)
 (test)
 (print "m = " m nl)
@@ -102,7 +119,6 @@
 (print "Test match from outer context "
        (let ((A 1)) (smatch 1 ((unquote A) 'ok))) nl)
 
-;; (smatch '(1 2 3 4 5) ((a ... b c) (list 'var-a...bc a b c)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module test-smatch
