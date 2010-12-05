@@ -59,7 +59,17 @@
 
 (defun f3 (l)
   (smatch l
-    ((a *** ((quote +) . l)) (list 'a***+l a))
+    ((a *** ('+ . l)) (list 'a***+l a))
+    (_ 'anything-else)))
+
+(defclass <deer> ()
+  ((name reader: deer-name keyword: name:)
+   (gender reader: deer-gender keyword: gender:)
+   (age reader: deer-age keyword: age:)))
+
+(defun f4 (l)
+  (smatch l
+    (($ deer-name deer-gender) (list 'deer (deer-name l)))
     (_ 'anything-else)))
 
 (defconstant fact
@@ -93,6 +103,7 @@
   (print-test (f1 '(1 2 3)))
   (print-test (f2 '(1 2 3 4 5 6 7)))
   (print-test (f3 '(* (+ 1 2))))
+  (print-test (f4 (make <deer> name: 'rudolf gender: 'male age: 23)))
   (print-test (f1 #(1 2)))
   (print-test (f1 #(1 2 3 4 5)))
   (print-test (f1 #(#(3 4) 1 2)))

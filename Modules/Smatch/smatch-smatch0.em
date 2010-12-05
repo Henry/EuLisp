@@ -267,12 +267,12 @@
           (match-$ ,abs (and) 0 ,p ,v ,sk ,fk ,i)
         (insert-abs ,abs ,fk)))
 
-    ;; stis, added the possibility to use setq and get to records
+    ;; stis, added the possibility to use set and get on classes
     ((abs v ('= 0 m p) g+s sk fk i)
      (let ((w  (gensym "w")))
-       `(let ((,w  (struct-ref ,v ,m)))
+       `(let ((,w  (,m ,v)))
           (match-one
-           ,abs ,w ,p ((struct-ref ,v ,m) (struct-setq ,v ,m)) ,sk ,fk ,i))))
+           ,abs ,w ,p ((,m ,v) ((setter ,m) ,v)) ,sk ,fk ,i))))
 
     ((abs v ('= g s p) g+s sk fk i)
      (let ((w  (gensym "w")))
@@ -1010,9 +1010,9 @@
     ((loop . rest)
      `(match-named-let loop () ,@rest))))
 
-(defmacro match-letrec x
+(defmacro match-letfuns x
   (smatch0 x
-    ((vars . body) `(match-let/helper letrec () () ,vars ,@body))))
+    ((vars . body) `(match-let/helper letfuns () () ,vars ,@body))))
 
 (defmacro match-let/helper x
   (smatch0 x
