@@ -1,6 +1,6 @@
 #                            -*- mode: org; -*-
 #
-#+TITLE:               Smatch module for Youtoo 0.991
+#+TITLE:               EuLisp Smatch module
 #+AUTHOR:
 #+DATE:                        November 2010
 #+LINK:                https://github.com/Henry/EuLisp
@@ -23,10 +23,10 @@
 * [[file:../../index.org][EuLisp index]]
 
 * General Description
-  Programmable pattern matcher based on smatch.em -- portable hygienic pattern
+  Programmable pattern matcher based on =smatch.em= -- portable hygienic pattern
   matcher written by Alex Shinn, extended by Stefan Israelsson Tampe and
-  converted to EuLisp by Stefan Israelsson Tampe.  This is a full superset of
-  the popular MATCH package by Andrew Wright by written in itself and hence
+  converted to EuLisp by Stefan Israelsson Tampe.  This is a full super-set of
+  the popular =match= package by Andrew Wright by written in itself and hence
   requires bootstrapping.
 
   This is a simple generative pattern matcher - each pattern is expanded into
@@ -34,23 +34,23 @@
   makes the logic easy to follow and extend, but produces sub-optimal code in
   cases where you have many similar clauses due to repeating the same tests.
   Nonetheless a smart compiler should be able to remove the redundant tests.
-  For MATCH-LET and DESTRUCTURING-BIND type uses there is no performance hit.
+  For =match-let= and =destructuring-bind= type uses there is no performance
+  hit.
 
-* Original: Portable hygienic pattern matcher
-  The original version was written on 2006/11/29 and described in the following
-  Usenet post:
-  http://groups.google.com/group/comp.lang.scheme/msg/0941234de7112ffd and is
-  still available at http://synthcode.com/scheme/match-simple.scm. It's just
-  80 lines for the core MATCH, and an extra 40 lines for MATCH-LET,
-  MATCH-LAMBDA and other syntactic sugar.
+*** Original: Portable hygienic pattern matcher
+    The original version was written on 2006/11/29 and described in the
+    following Usenet post:
+    http://groups.google.com/group/comp.lang.scheme/msg/0941234de7112ffd and is
+    still available at http://synthcode.com/scheme/match-simple.scm. It's just
+    80 lines for the core MATCH, and an extra 40 lines for =match-let=,
+    =match-lambda= and other syntactic sugar.
 
-  A variant of this file which uses COND-EXPAND in a few places for performance
-  can be found at http://synthcode.com/scheme/match-cond-expand.scm.
+    A variant of this file which uses =cond-expand= in a few places for
+    performance can be found at
+    http://synthcode.com/scheme/match-cond-expand.scm.
 
-* Pattern Matching Syntactic Extensions for EuLisp
-  This macro package extends EuLisp with several new expression forms.
-  Following is a brief summary of the new forms.
-
+* Definition
+  The complete syntax of the pattern matching expressions follows:
   #+BEGIN_SRC lisp
   match expressions:
   exp ::= ...
@@ -59,13 +59,45 @@
         | (match-lambda* clause ...)
         | (match-let ((pat exp) ...) body)
         | (match-let* ((pat exp) ...) body)
-        | (match-letrec ((pat exp) ...) body)
-        | (defmatchun pat exp)
+        | (match-letfuns ((pat exp) ...) body)
+        | (defmatchfun pat exp)
 
   clause ::= (pat body) | (pat => exp)
   #+END_SRC
 
+  The =match-lambda= and =match-lambda*= forms are convenient combinations of
+  =match= and =lambda=, and can be explained as follows:
   #+BEGIN_SRC lisp
+  (match-lambda (pat body) ...)   =  (lambda (x) (match x (pat body) ...))
+
+  (match-lambda* (pat body) ...)  =  (lambda x (match x (pat body) ...))
+  #+END_SRC
+  where =x= is a unique variable. The =match-lambda= form is convenient when
+  defining a single argument function that immediately destructures its
+  argument. The =match-lambda*= form constructs a function that accepts any
+  number of arguments; the patterns of =match-lambda*= should be lists.  The
+  =match-let=, =match-let*=, =match-letfuns=, and =defmatchun= forms generalize
+  EuLisp's =let=, =let*=, =letfuns=, and =defun= expressions to allow patterns
+  in the binding position rather than just variables. For example, the
+  following expression:
+  #+BEGIN_SRC lisp
+  (match-let (((x y z) (list 1 2 3))) $body$)
+  #+END_SRC
+  binds =x= to 1, =y= to 2, and =z= to 3 in =body=. These forms are convenient
+  for destructuring the result of a function that returns multiple values. As
+  usual for =letfuns= and =defun=, pattern variables bound by =match-letfuns=
+  and =defmatchun= should not be used in computing the bound value.  The
+  =match=, =match-lambda=, and =match-lambda*= forms allow the optional
+  =syntax (=> identifier)= between the pattern and the body of a clause. When
+  the pattern match for such a clause succeeds, the identifier is bound to a
+  failure procedure of zero arguments within the body. If this procedure is
+  invoked, it jumps back to the pattern matching expression, and resumes the
+  matching process as if the pattern had failed to match. The body must not
+  mutate the object being matched, otherwise unpredictable behavior may
+  result.
+
+* Patterns
+  #+BEGIN_EXAMPLE
   patterns:                               matches:
 
   pat ::= identifier                      anything, and binds identifier
@@ -84,8 +116,8 @@
         | #(pat_1 ... pat_n)              vector of n elements
         | #(pat_1 ... pat_n pat_n+1 ooo)  vector of n or more, each element
                                           of remainder must match pat_n+1
-        | ($ struct-name pat_1 ... pat_n) a structure
-        | (= field pat)                   a field of a structure
+        | ($ class-name pat_1 ... pat_n)  a class
+        | (= field pat)                   a field of a class
         | (and pat_1 ... pat_n)           if all of pat_1 thru pat_n match
         | (or pat_1 ... pat_n)            if any of pat_1 thru pat_n match
         | (not pat_1 ... pat_n)           if all pat_1 thru pat_n don't match
@@ -117,57 +149,92 @@
                                           of remainder must match qp_n+1
         | ,pat                            a pattern
         | ,@pat                           a pattern
-  #+END_SRC
+  #+END_EXAMPLE
 
   The names =(quote, quasiquote, unquote, unquote-splicing, ?, _, $, and, or,
   not, set, get, ..., ___)= cannot be used as pattern variables.
 
-  #+BEGIN_SRC lisp
-  structure expressions:
-  exp ::= ...
-        | (define-structure (id_0 id_1 ... id_n))
-        | (define-structure (id_0 id_1 ... id_n)
-                            ((id_{n+1} exp_1) ... (id_{n+m} exp_m)))
-        | (define-const-structure (id_0 arg_1 ... arg_n))
-        | (define-const-structure (id_0 arg_1 ... arg_n)
-                                  ((arg_{n+1} exp_1) ... (arg_{n+m} exp_m)))
+*** /identifier/
+    (excluding the reserved names =?=, =$=, =_=, =and=, =or=,
+    =not=, =set=, =get=, =...=, and =(..= /k/ =)= for non-negative integers
+    /k/): matches anything, and binds a variable of this name to the matching
+    value in the body.
+*** =_=
+    matches anything, without binding any variables.
+*** =()=, =t=, /string/, /number/, /character/,  /​'s-expression/
+    These constant patterns match themselves, ie., the corresponding value
+    must be =equal?= to the pattern.
+*** =(= /pat_{1} ... pat_{n}/ =)=
+    matches a proper list of /n/ elements that match /pat_{1}/ through
+    /pat_{n}/.
+*** =(= /pat_{1} ... pat_{n} . pat_{n+1}/ =)=
+    matches a (possibly improper) list of at least /n/ elements that ends in
+    something matching /pat_{n+1}/.
+*** =(= /pat_{1} ... pat_{n} pat_{n+1} .../ =)=
+    matches a proper list of /n/ or more elements, where each element of the
+    tail matches /pat_{n+1}/.  Each pattern variable in /pat_{n+1}/ is bound
+    to a list of the matching values. For example, the expression:
+    #+BEGIN_SRC lisp
+    (match '(let ((x 1)(y 2)) z)
+      (('let ((binding values) ...)  exp) body))
+    #+END_SRC
+    binds binding to the list =​'(x y)=, values to the list =​'(1 2)=, and exp
+    to 'z in the body of the match- expression. For the special case where
+    /pat_{n+1}/ is a pattern variable, the list bound to that variable may
+    share with the matched value.\\
+*** =(= /pat_{1} ... pat_{n} pat_{n+1}/ =(..= /k/ =))=
+    This pattern is similar to the previous pattern, but the tail must be at
+    least /k/ elements long. The pattern keywords =(.. 0) and =...= are
+    equivalent.
+*** =#(= /pat_{1} ... pat_{n}/ =)=
+    matches a vector of length /n/, whose elements match /pat_{1}/ through
+    /pat_{n}/.
+*** =($= /class/ /pat_{1} ... pat_{n}/ =)=
+    matches a class declared with =defclass=.
+*** =(and= /pat_{1} ... pat_{n}/ =)=
+    matches if all of the sub-patterns match. This pattern is often used as
+    =(and= /x pat/ =)= to bind /x/ to the entire value that matches /pat/
+    (cf. "as-patterns" in ML or Haskell).
+*** =(or= /pat_{1} ... pat_{n}/ =)=
+    matches if any of the sub-patterns match. At least one subpattern must be
+    present.  All sub-patterns must bind the same set of pattern variables.
+*** =(not= /pat_{1} ... pat_{n}/ =)=
+    matches if none of the sub-patterns match. The sub-patterns may not bind
+    any pattern variables.
+*** =(?= /predicate pat_{1} ... pat_{n}/ =)=
+    In this pattern, predicate must be an expression evaluating to a single
+    argument function. This pattern matches if predicate applied to the
+    corresponding value is true, and the sub-patterns /pat_{1} ... pat_{n}/
+    all match. The predicate should not have side effects, as the code
+    generated by the pattern matcher may invoke predicates repeatedly in any
+    order. The predicate expression is bound in the same scope as the match
+    expression, /i.e./, free variables in predicate are not bound by pattern
+    variables.
+*** =(set= /identifier/ =)=
+    matches anything, and binds identifier to a procedure of one argument that
+    mutates the corresponding field of the matching value. This pattern must
+    be nested within a pair, vector or class pattern. For example,
+    the expression:
+    #+BEGIN_SRC lisp
+    (define x (list 1 (list 2 3)))
+    (match x ((_ (_ (set setit))) (setit 4)))
+    #+END_SRC
+    mutates the =cadadr= of =x= to 4, so that =x= is =​'(1 (2 4))=.
+*** =(get= /identifier/ =)=
+    matches anything, and binds identifier to a procedure of zero arguments
+    that accesses the corresponding field of the matching value. This pattern
+    is the complement to =set=.  As with =set=, this pattern must be nested
+    within a pair, vector, or class pattern.
+*** Quasipatterns
+    Quasiquote introduces a quasipattern, in which identifiers are considered
+    to be symbolic constants. Like Scheme's quasiquote for data, =unquote=
+    (=,=) and =unquote-splicing= (=,@=) escape back to normal patterns.
 
-  arg ::= id | (! id) | (@ id)
-  #+END_SRC
+* Match Failure
 
-  =match:error-control= controls what code is generated for failed matches.\\
-  Possible values:
-  + '=unspecified= - do nothing, ie., evaluate =(cond [() ()])=
-  + '=fail= - call match:error, or die at =car= or =cdr=
-  + '=error= - call match:error with the unmatched value
-  + '=match= - call match:error with the unmatched value _and_
-             the quoted match expression
-
-  =match:error-control= is set by calling =match:set-error-control= with
-  the new value.
-
-  =match:error= is called for a failed match.
-  =match:error= is set by calling =match:set-error= with the new value.
-
-  =match:structure-control= controls the uniqueness of structures.\\
-  Possible values:
-  + '=vector= - (default) structures are vectors with a symbol in position 0
-  + '=disjoint= - structures are fully disjoint from all other values
-
-  =match:structure-control= is set by calling =match:set-structure-control=
-  with the new value.
-
-  =match:runtime-structures= controls whether local structure declarations
-  generate new structures each time they are reached.\\
-  Possible values:
-  + =t= - (default) each runtime occurrence generates a new structure
-  + =()= - each lexical occurrence generates a new structure
-
-  End of user visible/modifiable stuff.
-
-* Notes:
-  + Testing is incomplete
-  + Classes are not supported
+* TODO
+  + Complete support of classes
+  + Complete set of tests
 
 * Installation
   + Run 'make' in directory /Modules/Smatch/.
