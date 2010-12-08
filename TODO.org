@@ -341,6 +341,22 @@
                                things))))
         ) ; end of module
     #+END_SRC
+
+*** TODO Complete support for eval
+    Following the analysis in the report "Modules, Macros and Lisp", Queinnec
+    and Padget, it is proposed to add for =eval= in EuLisp with the following
+    operators:
+    + Add additional module argument to =eval= to set the environment in which
+      the eval evaluates.
+    + Create =eval/cm= which calls =eval= with the current module as the second
+      argument to evaluate in the current environment.
+
+    However, unlike the proposal in the report an additional restriction is
+    added that it is exported environment in which =eval= operates rather than
+    the complete lexical environment within the module.  This restriction is
+    necessary because only the exported environment is guaranteed to exist at
+    "eval" time; the rest of the internal lexical environment may not be
+    complete due to, for example, compiler optimisations.
 * EuXLisp
 *** DONE Finish reformatting the C source files
     CLOSED: [2010-10-23 Sat 19:03]
