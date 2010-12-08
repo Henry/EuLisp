@@ -636,6 +636,11 @@
 ;; multiple-value-prog1 in der Zwischensprache.
 ;; Dieses Konstrukt ist sehr aehnlich zu dem Makro multiple-value-bind mit
 ;; der Ausnahme, dass eine beliebige Lambda-Liste angegeben werden kann.
+;;
+;; Construct for expressions of special forms of multiple-value-call and
+;; Multiple-value-prog1 in the intermediate language.
+;; This construct is very similar to the macro multiple-value-bind with
+;, Except that any lambda-list can be specified.
 ;;;-----------------------------------------------------------------------------
 (def-lzs-object mv-lambda ()
   params
