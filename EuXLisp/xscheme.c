@@ -284,7 +284,7 @@ void xlmain(int argc, char **argv)
     // trap errors
     if (SETJMP(top_level))
     {
-        code = xlenter_module("*TOPLEVEL*", root_module);
+        code = xlenter_module("*toplevel*", root_module);
         code = (boundp(code) ? getvalue(code) : NIL);
         xlfun = xlenv = xlval = NIL;
         xlsp = xlstktop;
@@ -592,7 +592,7 @@ static void trace_function(LVAL fun, LVAL env)
     xlterpri(errout);
 
     // Check to see if the trace has reached the top-level and return
-    if (getcname(fun) ==  xlenter_module("*TOPLEVEL*", root_module))
+    if (getcname(fun) ==  xlenter_module("*toplevel*", root_module))
     {
         return;
     }

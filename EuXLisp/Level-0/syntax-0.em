@@ -174,7 +174,7 @@
              value: mod)
     `(progn
        (setq curmod (find-module (current-module)))
-       (%IMPORT curmod ,mod))))
+       (%import curmod ,mod))))
 
 (defmacro syntax (mod)
   (if (not (or (string? mod)
@@ -184,7 +184,7 @@
              value: mod)
     `(progn
        (setq curmod (find-module (current-module)))
-       (%IMPORT curmod ,mod))))
+       (%import curmod ,mod))))
 
 (defmacro defmodule (name . body)
   (error <compilation-general-error>

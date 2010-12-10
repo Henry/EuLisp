@@ -795,7 +795,7 @@
         (if (not *debug-rl*) ;; If readline is not used print prompt
             (print "[error" *debug-depth* "] " (current-module) ">"))
         (let ((op (read)))
-          (if (eq op **EOF**)
+          (if (eq op **eof**)
               (if (null? cc)
                   (unwrap-and-reset)
                 (cc)))
@@ -857,8 +857,8 @@
 
 (define (locals frameptr cc cd . args)
         (letrec ((loop (lambda (e)
-                         (locals-loop (vector-ref (%CAR e) 0) (%CAR e) 1)
-                         (if (%CDR e) (loop (%CDR e))))))
+                         (locals-loop (vector-ref (%car e) 0) (%car e) 1)
+                         (if (%cdr e) (loop (%cdr e))))))
                 (loop (frame-env frameptr)))
         (print nl)
         frameptr)

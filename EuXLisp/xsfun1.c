@@ -79,7 +79,7 @@ LVAL xcar()
 // xicar - built-in function '%car'
 LVAL xicar()
 {
-    static char *cfn_name = "%CAR";
+    static char *cfn_name = "%car";
 
     LVAL arg = xlgetarg();
     xllastarg();
@@ -99,7 +99,7 @@ LVAL xcdr()
 // xicdr - built-in function '%cdr'
 LVAL xicdr()
 {
-    static char *cfn_name = "%CDR";
+    static char *cfn_name = "%cdr";
 
     LVAL arg = xlgetarg();
     xllastarg();
@@ -296,7 +296,7 @@ LVAL xsetcar()
 // xisetcar - built-in function '%set-car!'
 LVAL xisetcar()
 {
-    static char *cfn_name = "%SET-CAR!";
+    static char *cfn_name = "%set-car!";
 
     // get the cons and the new car
     LVAL arg = xlgetarg();
@@ -326,7 +326,7 @@ LVAL xsetcdr()
 // xisetcdr - built-in function '%set-cdr!'
 LVAL xisetcdr()
 {
-    static char *cfn_name = "%SET-CDR!";
+    static char *cfn_name = "%set-cdr!";
 
     // get the cons and the new cdr
     LVAL arg = xlgetarg();
@@ -945,7 +945,7 @@ LVAL xvsize()
 // xivsize - built-in function '%vector-size'
 LVAL xivsize()
 {
-    static char *cfn_name = "%VECTOR-SIZE";
+    static char *cfn_name = "%vector-size";
 
     LVAL arg = xlgetarg();
     xllastarg();
@@ -962,7 +962,7 @@ LVAL xvref()
 // xivref - built-in function '%vector-ref'
 LVAL xivref()
 {
-    static char *cfn_name = "%VECTOR-REF";
+    static char *cfn_name = "%vector-ref";
     return (vref(xlgetarg()));
 }
 
@@ -996,7 +996,7 @@ LVAL xvset()
 // xivset - built-in function '%vector-set!'
 LVAL xivset()
 {
-    static char *cfn_name = "%VECTOR-SET!";
+    static char *cfn_name = "%vector-set!";
     return (vset(xlgetarg()));
 }
 

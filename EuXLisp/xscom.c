@@ -219,7 +219,7 @@ FTDEF ftab[] =
     {"!>", do_enter_module},
     {"reenter-module", do_reenter_module},
     {"!>>", do_reenter_module},
-    {"%IMPORT", do_import},
+    {"%import", do_import},
     {"define-generic", do_define_generic},
     {"define-method", do_define_method},
     {"call-next-method", do_cnm},

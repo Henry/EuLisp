@@ -172,7 +172,7 @@
 ;; (put-syntax '!> '%syntax identity)
 ;; (put-syntax 'reenter-module '%syntax identity)
 ;; (put-syntax '!>> '%syntax identity)
-;; (put-syntax '%IMPORT '%syntax identity)
+;; (put-syntax '%import '%syntax identity)
 
 (put-syntax 'define-generic '%syntax
             (lambda (form)

@@ -26,35 +26,38 @@
 
 (defmodule system
   (import (root)
-   export (%MAP1
-           %FOR-EACH1
-           %WITH-FILE1
-           %LOAD1
-           %FORCE1
-           %INITLOOP1
-           %CAR
-           %CDR
-           %SET-CAR!
-           %SET-CDR!
-           %VECTOR-LENGTH
-           %VECTOR-REF
-           %VECTOR-SET!
-           %KEYWORDS
-           %MAKE-CONSTANT
-           %IMPORT
+   export (%map1
+           %for-each1
+           %with-file1
+           %load1
+           %force1
+           %initloop1
+           %car
+           %cdr
+           %set-car!
+           %set-cdr!
+           %vector-size
+           %vector-ref
+           %vector-set!
+           %keywords
+           %make-constant
+           %import
 
-           *INTIALIZE*
-           *TOPLEVEL*
-           **EOF**
-           **DEFAULT**
-           *UNBOUND*
+           *intialize*
+           *toplevel*
+           **eof**
+           **default**
+           *unbound*
+           *fixnum-format*
+           *flonum-format*
+           *print-case*
+
+           *gc-msgs*
+
+           ;; Standard streams
            stdin
            stdout
            stderr
-           *FIXNUM-FORMAT*
-           *FLONUM-FORMAT*
-           *PRINT-CASE*
-           *gc-msgs*
 
            ;; Setters
            set-car!
@@ -92,10 +95,10 @@
            check-ref))
 
 (define (getbcode closure)
-        (%VECTOR-REF (%CAR closure) 0))
+        (%vector-ref (%car closure) 0))
 
 (define (getliteral closure n)
-        (%VECTOR-REF (%CAR closure) n))
+        (%vector-ref (%car closure) n))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module system

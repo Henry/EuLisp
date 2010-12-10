@@ -102,11 +102,11 @@ void xlinitws(unsigned int ssize)
     s_unbound = NIL;    // to make cvsymbol work
 
     // enter the eof object
-    eof_object = cons(xlenter("**EOF**"), NIL);
+    eof_object = cons(xlenter("**eof**"), NIL);
     setvalue(car(eof_object), eof_object);
 
     // enter the default object
-    default_object = cons(xlenter("**DEFAULT**"), NIL);
+    default_object = cons(xlenter("**default**"), NIL);
 
     // install the built-in functions
     int i;
@@ -180,7 +180,7 @@ void xlinitws(unsigned int ssize)
     setelement(code, 1, xlenter("*INITIALIZE*"));
     setelement(code, 3, cvstring("xscheme.ini"));
     setelement(code, 4, xlenter("load"));
-    setelement(code, 5, xlenter("*TOPLEVEL*"));
+    setelement(code, 5, xlenter("*toplevel*"));
     drop(1);
 
     // store the byte codes
@@ -223,7 +223,7 @@ void xlinitws(unsigned int ssize)
     code = newcode(15);
     cpush(code);
     setelement(code, 0, newstring(0x70));
-    setelement(code, 1, xlenter("*TOPLEVEL*"));
+    setelement(code, 1, xlenter("*toplevel*"));
     #ifdef READLINE
     setelement(code, 2, xlenter("nil"));
     #else
@@ -236,11 +236,11 @@ void xlinitws(unsigned int ssize)
     setelement(code, 7, xlenter("*FILE-INPUT*"));
     setelement(code, 8, xlenter("read"));
     setelement(code, 9, xlenter("*last*"));
-    setelement(code, 10, xlenter("**EOF**"));
+    setelement(code, 10, xlenter("**eof**"));
     setelement(code, 11, xlenter("exit"));
     setelement(code, 12, xlenter("eval"));
     setelement(code, 13, xlenter("printnl"));
-    setelement(code, 14, xlenter("*TOPLEVEL*"));
+    setelement(code, 14, xlenter("*toplevel*"));
     drop(1);
 
     // store the byte codes
@@ -413,7 +413,7 @@ void xlsymbols()
     // enter the symbols used by the system
     true = xlenter("t");
 
-    s_unbound = xlenter("*UNBOUND*");
+    s_unbound = xlenter("*unbound*");
     s_unassigned = xlenter("#!UNASSIGNED");
 
     // enter the i/o symbols
@@ -423,8 +423,8 @@ void xlsymbols()
     s_filein = xlenter("*FILE-INPUT*");
 
     // enter the symbols used by the printer
-    s_fixfmt = xlenter("*FIXNUM-FORMAT*");
-    s_flofmt = xlenter("*FLONUM-FORMAT*");
+    s_fixfmt = xlenter("*fixnum-format*");
+    s_flofmt = xlenter("*flonum-format*");
 
     // enter symbols needed by the reader
     c_lpar = xlenter("(");
@@ -471,12 +471,12 @@ void xlsymbols()
     setvalue(s_filein, cvstream(filein, PF_INPUT));
 
     // get the built-in continuation subrs
-    cs_map1 = getvalue(xlenter("%MAP1"));
-    cs_foreach1 = getvalue(xlenter("%FOR-EACH1"));
-    cs_withfile1 = getvalue(xlenter("%WITH-FILE1"));
-    cs_load1 = getvalue(xlenter("%LOAD1"));
-    cs_force1 = getvalue(xlenter("%FORCE1"));
-    cs_initloop1 = getvalue(xlenter("%INITLOOP1"));
+    cs_map1 = getvalue(xlenter("%map1"));
+    cs_foreach1 = getvalue(xlenter("%for-each1"));
+    cs_withfile1 = getvalue(xlenter("%with-file1"));
+    cs_load1 = getvalue(xlenter("%load1"));
+    cs_force1 = getvalue(xlenter("%force1"));
+    cs_initloop1 = getvalue(xlenter("%initloop1"));
 
     s_direct_slots = xlenter_keyword("direct-slots:");
     s_direct_keywords = xlenter_keyword("direct-keywords:");

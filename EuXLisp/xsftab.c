@@ -54,12 +54,12 @@ FUNDEF funtab[] =
     {"initialize-object", (FP) xinitialize_object},
 
     // continuations for xsubrs (# must match csubrcnt)
-    {"%MAP1", (FP) xmap1},
-    {"%FOR-EACH1", (FP) xforeach1},
-    {"%WITH-FILE1", (FP) xwithfile1},
-    {"%LOAD1", (FP) xload1},
-    {"%FORCE1", (FP) xforce1},
-    {"%INITLOOP1", (FP) xinitloop1},
+    {"%map1", (FP) xmap1},
+    {"%for-each1", (FP) xforeach1},
+    {"%with-file1", (FP) xwithfile1},
+    {"%load1", (FP) xload1},
+    {"%force1", (FP) xforce1},
+    {"%initloop1", (FP) xinitloop1},
 
     // list functions
     {"cons", xcons},
@@ -314,14 +314,14 @@ FUNDEF funtab[] =
     {"trace-off", xtraceoff},
 
     // internal functions
-    {"%CAR", xicar},
-    {"%CDR", xicdr},
-    {"%SET-CAR!", xisetcar},
-    {"%SET-CDR!", xisetcdr},
-    {"%VECTOR-SIZE", xivsize},
-    {"%VECTOR-REF", xivref},
-    {"%VECTOR-SET!", xivset},
-    {"%KEYWORDS", xkeyword_array},
+    {"%car", xicar},
+    {"%cdr", xicdr},
+    {"%set-car!", xisetcar},
+    {"%set-cdr!", xisetcdr},
+    {"%vector-size", xivsize},
+    {"%vector-ref", xivref},
+    {"%vector-set!", xivset},
+    {"%keywords", xkeyword_array},
 
     // module functions
     {"module-symbols", module_symbols},
