@@ -65,11 +65,12 @@
 (defclass <deer> ()
   ((name reader: deer-name keyword: name:)
    (gender reader: deer-gender keyword: gender:)
-   (age reader: deer-age keyword: age:)))
+   (age reader: deer-age keyword: age:))
+  predicate: deer?)
 
 (defun f4 (l)
   (smatch l
-    (($ deer-name deer-gender) (list 'deer (deer-name l)))
+    (($ deer? deer-name) (list 'deer (deer-name l)))
     (_ 'anything-else)))
 
 (defconstant fact
