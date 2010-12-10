@@ -116,7 +116,7 @@ all:
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 version: xsbanner.h
-	awk '/define BANNER/ {print $$8}' < xsbanner.h | sed 's/[."]//g' > version
+	awk '/define BANNER/ {print $$10}' < xsbanner.h | sed 's/[."]//g' > version
 
 TAGS: $(EUXL_C) $(EUXL_H) $(LISP)
 	etags $(EUXL_C) $(EUXL_H) $(LISP)
