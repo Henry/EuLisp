@@ -28,7 +28,7 @@
 extern LVAL true, eof_object, default_object, s_unassigned;
 extern LVAL cs_map1, cs_foreach1, cs_withfile1, cs_load1, cs_force1;
 extern LVAL cs_initloop1, c_lpar, c_rpar, c_dot, c_quote, s_quote;
-extern LVAL s_eval, s_unbound, s_stdin, s_stdout, s_stderr, s_filein;
+extern LVAL s_eval_cm, s_unbound, s_stdin, s_stdout, s_stderr, s_filein;
 extern LVAL s_fixfmt, s_flofmt;
 extern LVAL s_direct_slots, s_direct_keywords, s_name, s_default, s_requiredp;
 extern LVAL s_keyword;

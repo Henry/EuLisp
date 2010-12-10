@@ -39,7 +39,7 @@
 LVAL true, eof_object, default_object, s_unassigned;
 LVAL cs_map1, cs_foreach1, cs_withfile1, cs_load1, cs_force1, cs_initloop1;
 LVAL c_lpar, c_rpar, c_dot, c_quote, s_quote;
-LVAL s_eval, s_unbound, s_stdin, s_stdout, s_stderr, s_filein;
+LVAL s_eval_cm, s_unbound, s_stdin, s_stdout, s_stderr, s_filein;
 LVAL s_fixfmt, s_flofmt;
 LVAL s_direct_slots, s_direct_keywords, s_name, s_default, s_requiredp;
 LVAL s_keyword;
@@ -144,7 +144,7 @@ void xlinitws(unsigned int ssize)
     LVAL code = newcode(4);
     cpush(code);
     setelement(code, 0, newstring(0x12));
-    setelement(code, 1, xlenter("eval"));
+    setelement(code, 1, xlenter("eval/cm"));
     setelement(code, 2, cons(xlenter("X"), NIL));
     setelement(code, 3, xlenter("compile"));
     drop(1);
@@ -238,7 +238,7 @@ void xlinitws(unsigned int ssize)
     setelement(code, 9, xlenter("*last*"));
     setelement(code, 10, xlenter("**eof**"));
     setelement(code, 11, xlenter("exit"));
-    setelement(code, 12, xlenter("eval"));
+    setelement(code, 12, xlenter("eval/cm"));
     setelement(code, 13, xlenter("printnl"));
     setelement(code, 14, xlenter("*toplevel*"));
     drop(1);
@@ -408,7 +408,7 @@ void xlinitws(unsigned int ssize)
 void xlsymbols()
 {
     // top-level procedure symbol
-    s_eval = xlenter("eval");
+    s_eval_cm = xlenter("eval/cm");
 
     // enter the symbols used by the system
     true = xlenter("t");

@@ -3621,7 +3621,7 @@ static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
     #endif
     fixup(nxt2);
     putcbyte(OP_PUSH);
-    cd_variable(OP_GREF, s_eval);
+    cd_variable(OP_GREF, s_eval_cm);
     putcbyte(OP_CALL);
     putcbyte(1);
     fixup(nxt1);
@@ -3725,7 +3725,7 @@ static void do_named_writer
     #endif
     fixup(nxt2);
     putcbyte(OP_PUSH);
-    cd_variable(OP_GREF, s_eval);
+    cd_variable(OP_GREF, s_eval_cm);
     putcbyte(OP_CALL);
     putcbyte(1);
     fixup(nxt1);

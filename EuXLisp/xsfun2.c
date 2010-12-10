@@ -376,7 +376,7 @@ static void do_load(LVAL print)
 // do_loadloop - read the next expression and setup to evaluate it
 static void do_loadloop(LVAL print)
 {
-    extern LVAL cs_load1, s_eval;
+    extern LVAL cs_load1, s_eval_cm;
 
     // try to read the next expression from the file
     LVAL expr;
@@ -390,7 +390,7 @@ static void do_loadloop(LVAL print)
         push(xlenv);
 
         // setup the argument list
-        xlval = getvalue(s_eval);
+        xlval = getvalue(s_eval_cm);
         cpush(expr);
         xlargc = 1;
 

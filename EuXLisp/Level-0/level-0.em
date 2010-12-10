@@ -265,7 +265,7 @@
            princ
            t
            else
-           eval                             ; no guarantees this one will work
+           eval/cm                           ; no guarantees this one will work
            system
            getenv
            putenv
