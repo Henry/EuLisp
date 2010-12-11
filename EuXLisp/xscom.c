@@ -2195,21 +2195,42 @@ static void process_export_directive(LVAL export_syms)
     setmexports(current_module, exports);
 }
 
-static void process_expose_directive(LVAL expose_mods)
+static void process_expose_directive(LVAL explist)
 {
-    for (LVAL mods=expose_mods; mods; mods = cdr(mods))
-    {
-        LVAL mod = car(mods);
+    LVAL syms = filter_imports(explist, NIL);
+    cpush(syms);
 
-        if (!symbolp(mod))
+    LVAL exports = getmexports(current_module);
+
+    for (; syms; syms = cdr(syms))
+    {
+        LVAL sym = car(syms);
+
+        if (!symbolp(sym))
         {
-            xlerror("non-symbol in expose", mod);
+            xlerror("non-symbol in expose", sym);
         }
         else
         {
-            do_expose(mod, C_NEXT);
+            // Intern the exported symbol into the current_module
+            LVAL mod_sym = xlenter(getstring(getpname(sym)));
+            exports = cons(mod_sym, exports);
+
+            #ifdef DEBUG
+            printf
+            (
+                "exposing symbol name %s in module %s as ",
+                getstring(getpname(sym)),
+                getstring(getmname(getmodule(mod_sym)))
+            );
+            errprint(mod_sym);
+            #endif
         }
     }
+
+    setmexports(current_module, exports);
+
+    drop(1);
 }
 
 static void process_module_directives(LVAL array, LVAL directives)
@@ -2248,7 +2269,7 @@ static void process_module_directives(LVAL array, LVAL directives)
         }
         else if (directive == s_expose)
         {
-            //process_expose_directive(value);
+            process_expose_directive(value);
         }
         else
         {

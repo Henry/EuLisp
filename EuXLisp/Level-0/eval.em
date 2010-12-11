@@ -28,7 +28,9 @@
 (defmodule eval
   (syntax (macros)
    import (root)
-   export (eval))
+   export (eval
+           macroexpand1
+           macroexpand))
 
 (defun eval (x . mod)
   (if mod

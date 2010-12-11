@@ -403,10 +403,6 @@
            quasiquote
            unquote
            unquote-splicing
-           macroexpand
-           macroexpand1
-           ;   syntax
-           ;   dprint
 
            ;; Collect
            <collection-condition>
@@ -453,9 +449,6 @@
            module-list
            unintern
 
-           ;; Eval
-           eval
-
            ; EuXLisp specific functions
            enter-module
            !>
@@ -481,24 +474,8 @@
 
            ;; EuXLisp/Youtoo compatible Extensions
            ticks-per-second
-           cpu-time
-           time-execution))
-
-(defmacro time-execution (expr stream)
-  (let ((x (gensym "time"))
-        (res (gensym "time")))
-    `(let* ((,x (cpu-time))
-            (,res ,expr))
-       (setq ,x (map (lambda (x y)
-                       (/ (binary- x y)
-                          (convert ticks-per-second <double-float>)))
-                     (cpu-time) ,x))
-       (sprint ,stream
-               "real: "     (vector-ref ,x 0)
-               "\nuser: "   (vector-ref ,x 1)
-               "\nsystem: " (vector-ref ,x 2)
-               nl)
-       ,res)))
+           cpu-time)
+   expose (eval))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module level-0

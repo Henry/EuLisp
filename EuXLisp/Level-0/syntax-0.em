@@ -40,7 +40,8 @@
            method-lambda
            import
            syntax
-           defmodule))
+           defmodule
+           time-execution))
 
 (defmacro block (tag . body)
   (if (symbol? tag)
@@ -190,6 +191,22 @@
   (error <compilation-general-error>
          "only use defmodule in root module"
          value: name))
+
+(defmacro time-execution (expr stream)
+  (let ((x (gensym "time"))
+        (res (gensym "time")))
+    `(let* ((,x (cpu-time))
+            (,res ,expr))
+       (setq ,x (map (lambda (x y)
+                       (/ (binary- x y)
+                          (convert ticks-per-second <double-float>)))
+                     (cpu-time) ,x))
+       (sprint ,stream
+               "real: "     (vector-ref ,x 0)
+               "\nuser: "   (vector-ref ,x 1)
+               "\nsystem: " (vector-ref ,x 2)
+               nl)
+       ,res)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module syntax-0
