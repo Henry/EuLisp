@@ -39,8 +39,8 @@
            collection
            copy
            formatted-io
-           math)
-
+           math
+           eval)
    export (;; Special operators
            deflocal
            defconstant
@@ -265,7 +265,6 @@
            princ
            t
            else
-           eval/cm                           ; no guarantees this one will work
            system
            getenv
            putenv
@@ -453,6 +452,9 @@
            current-module
            module-list
            unintern
+
+           ;; Eval
+           eval
 
            ; EuXLisp specific functions
            enter-module
