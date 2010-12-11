@@ -2195,6 +2195,23 @@ static void process_export_directive(LVAL export_syms)
     setmexports(current_module, exports);
 }
 
+static void process_expose_directive(LVAL expose_mods)
+{
+    for (LVAL mods=expose_mods; mods; mods = cdr(mods))
+    {
+        LVAL mod = car(mods);
+
+        if (!symbolp(mod))
+        {
+            xlerror("non-symbol in expose", mod);
+        }
+        else
+        {
+            do_expose(mod, C_NEXT);
+        }
+    }
+}
+
 static void process_module_directives(LVAL array, LVAL directives)
 {
     check(2);
@@ -2228,6 +2245,10 @@ static void process_module_directives(LVAL array, LVAL directives)
         else if (directive == s_export)
         {
             process_export_directive(value);
+        }
+        else if (directive == s_expose)
+        {
+            //process_expose_directive(value);
         }
         else
         {

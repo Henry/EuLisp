@@ -48,7 +48,7 @@ LVAL s_reader, s_writer, s_accessor, s_class, s_defclass, s_find_slot_index;
 LVAL s_getivar, s_setivar, s_list, s_lambda, s_lda, s_defun, s_object, s_value;
 LVAL s_backtracep, s_eq, s_eqv, s_equal, s_equals;
 LVAL s_import, s_only, s_except, s_rename, s_rename_flag;
-LVAL s_syntax, s_export;
+LVAL s_syntax, s_export, s_expose;
 LVAL s_callcc;
 LVAL s_make, s_apply, s_setter, s_signal, s_unwind_protect;
 LVAL s_general_error, s_no_applic_error, s_no_next_md_error;
@@ -519,6 +519,7 @@ void xlsymbols()
     s_rename_flag = xlenter("%rename");
     s_syntax = xlenter("syntax");
     s_export = xlenter("export");
+    s_expose = xlenter("expose");
 
     s_callcc = xlenter("call/cc");
 
