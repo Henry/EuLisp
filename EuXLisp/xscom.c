@@ -457,7 +457,6 @@ static void define1(LVAL list, LVAL body, int cont)
         define1(car(list), top(), cont);
         drop(1);
     }
-
     // compile procedure definitions
     else
     {
@@ -483,7 +482,8 @@ static void define1(LVAL list, LVAL body, int cont)
             body = cdr(cdr(car(body)));
             cd_fundefinition(list, fargs, body);
         }
-        else        // compile the value expression or procedure body
+        // compile the value expression or procedure body
+        else
         {
             do_progn(body, C_NEXT);
         }
@@ -2497,7 +2497,7 @@ static void load_dependent_modules(LVAL directives)
             xlerror("missing value for directive", directive);
         }
 
-        if (directive == s_import)
+        if (directive == s_import || directive == s_syntax)
         {
             load_dependent_modules2(car(directives));
         }
@@ -2757,7 +2757,7 @@ static void do_reenter_module(LVAL form, int cont)
     drop(1);
 }
 
-// an extra for those who can't wait
+// Import directive for interactive use
 static void do_import(LVAL form, int cont)
 {
     cpush(form);
