@@ -27,7 +27,8 @@
            telos
            telosint
            condition
-           macros)
+           macros
+           debugging)
    export (<thread>
            <simple-thread>
            make-thread
@@ -199,7 +200,7 @@
 (define (insert-thread-in-queue before after thread n)
         (if (= n 0)
             (set-cdr! before (cons thread after))
-          (insert-thread-in-queue (cdr before) (cdr after) thread (- n 1))))
+          (insert-thread-in-queue (cdr before) (cdr after) thread (%- n 1))))
 
 (define (remove-thread-from-queue thread)
         (setq r-t-r-q (delq thread r-t-r-q)))
@@ -563,7 +564,7 @@
                  (error <wait-error>
                         "waiting on non-running thread"
                         value: thread))
-                (t (timeout-loop (+ (vector-ref (cpu-time) 0) interval)
+                (t (timeout-loop (%+ (vector-ref (cpu-time) 0) interval)
                                  (lambda () (eq (thread-state thread) ready:)))
                    (if (eq (thread-state thread) ready:)
                        thread
@@ -579,7 +580,7 @@
 (define-method (wait (str <stream>) (time <object>))
                (cond ((null? time) (char-ready? str))
                      ((eq time t) (stream-suspend str))
-                     (t (timeout-loop (+ (vector-ref (cpu-time) 0) (round time))
+                     (t (timeout-loop (%+ (vector-ref (cpu-time) 0) (round time))
                                       (lambda () (char-ready? str)))
                         (char-ready? str))))
 
@@ -789,7 +790,7 @@
 (deflocal *debug-rl* ())
 
 (define (inc-depth inc)
-        (setq *debug-depth* (+ *debug-depth* inc)))
+        (setq *debug-depth* (%+ *debug-depth* inc)))
 
 (define (debug-loop frameptr cc condition)
         (if (not *debug-rl*) ;; If readline is not used print prompt
@@ -870,13 +871,13 @@
               (print ": ")
               (indent (string-size (symbol->string (car syms))))
               (print (vector-ref vals index) nl)
-              (locals-loop (cdr syms) vals (+ index 1)))))
+              (locals-loop (cdr syms) vals (%+ index 1)))))
 
 (define (indent n)
         (if (< n 15)
             (progn
               (print " ")
-              (indent (+ n 1)))))
+              (indent (%+ n 1)))))
 
 (table-set! op-table locals: locals)
 

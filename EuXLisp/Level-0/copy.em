@@ -55,7 +55,7 @@
         (if (<= index len)
             (progn
               (setivar new index (copy (getivar old index)))
-              (copy-loop new old (+ index 1) len copy))
+              (copy-loop new old (%+ index 1) len copy))
           new))
 
 ;; conses
@@ -108,7 +108,7 @@
         (if (< index len)
             (progn
               (vector-set! new index (copy (vector-ref old index)))
-              (vector-copy-loop new old (+ index 1) len copy))
+              (vector-copy-loop new old (%+ index 1) len copy))
           new))
 
 ;; tables
@@ -135,7 +135,7 @@
                (shallow-copy f))
 
 (define-method (shallow-copy (f <double-float>))
-               (+ f 0.0))
+               (%+ f 0.0))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module copy

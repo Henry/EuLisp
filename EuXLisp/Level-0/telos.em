@@ -24,7 +24,8 @@
 
 (defmodule telos
   (import (root
-           telosint)
+           telosint
+           macros)
    export (;; classes
            <object>
            <class>
@@ -163,13 +164,13 @@
         (print nl)
         (for-each
          (lambda (c)
-           (hierarchy c (+ depth 2)))
+           (hierarchy c (%+ depth 2)))
          (reverse-list (class-subclasses cl))))
 
 (define (indent n)
         (while (> n 0)
           (princ " ")
-          (setq n (- n 1))))
+          (setq n (%- n 1))))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -254,7 +255,7 @@
 ;; A feeble attempt at stopping infinite loops
 (deflocal current-print-depth 0)
 (define (inc-pr-depth n)
-        (setq current-print-depth (+ current-print-depth n)))
+        (setq current-print-depth (%+ current-print-depth n)))
 
 ;; Maintain tail recursion in write-list1
 (define (write-list obj s gfun)
@@ -284,7 +285,7 @@
               (else
                (%display " " s)
                (gfun (car obj) s)
-               (write-list1 (cdr obj) s gfun (+ current-print-breadth 1)))))
+               (write-list1 (cdr obj) s gfun (%+ current-print-breadth 1)))))
 
 (define (write-vector obj s gfun)
         (cond ((and (print-depth)
@@ -309,7 +310,7 @@
           (progn
             (%display " " s)
             (gfun (vector-ref obj index) s)
-            (write-vector1 obj s (+ index 1) size gfun))))
+            (write-vector1 obj s (%+ index 1) size gfun))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Wait functions

@@ -136,7 +136,7 @@
           (if (= len 0)
               :                             ; null keyword
             (string->symbol
-             (if (eql (string-ref name (- len 1)) #\:)
+             (if (eql (string-ref name (%- len 1)) #\:)
                  name
                (string-append name ":"))))))
 
@@ -268,8 +268,8 @@
                (len (string-size str)))
           (if (and (> len 1)
                    (eql (string-ref str 0) #\<)
-                   (eql (string-ref str (- len 1)) #\>))
-              (substring str 1 (- len 1))
+                   (eql (string-ref str (%- len 1)) #\>))
+              (substring str 1 (%- len 1))
             str)))
 
 (define (display-class-name obj stream)

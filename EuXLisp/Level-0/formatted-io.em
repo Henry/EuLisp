@@ -63,8 +63,8 @@
         (if (< n len)
             (let ((char (string-ref string n)))
               (if (eql char escape-char)
-                  (format-escape string args (+ n 1) len result)
-                (format-loop string args (+ n 1) len
+                  (format-escape string args (%+ n 1) len result)
+                (format-loop string args (%+ n 1) len
                              (cons char result))))
           (list->string (reverse-list result))))
 
@@ -75,7 +75,7 @@
               (if (null? op)
                   (format-error "unknown escape in format"
                                 (list->string (list #\~ char)))
-                (op char string args (+ n 1) len result)))
+                (op char string args (%+ n 1) len result)))
           (format-error "misplaced escape at end of format string" string)))
 
 (deflocal escape-table (make-table eql))
@@ -190,7 +190,7 @@
 
 (define (n-tabs count result)
         (if (> count 0)
-            (n-tabs (- count 1) (cons #\\t result))
+            (n-tabs (%- count 1) (cons #\\t result))
           result))
 
 ((setter table-ref) escape-arg-table #\t escape-int-tab)
@@ -228,13 +228,13 @@
 ((setter table-ref) escape-table escape-char escape-escape)
 
 (define (escape-arg char string args n len result)
-        (let* ((end (get-arg-end string (- n 1) len))
-               (arg (substring string (- n 1) end))
+        (let* ((end (get-arg-end string (%- n 1) len))
+               (arg (substring string (%- n 1) end))
                (char (string-ref string end))
                (op (table-ref escape-arg-table char)))
           (if (null? op)
               (format-error "unknown escape in format" char)
-            (op char arg string args (+ end 1) len result))))
+            (op char arg string args (%+ end 1) len result))))
 
 (define (check-string-ref string n len)
         (if (= n len)
@@ -246,15 +246,15 @@
                   (lambda (ind)
                     (let ((ch (check-string-ref string ind len)))
                       (cond ((eql ch #\.)
-                             (loop2 (+ ind 1)))
+                             (loop2 (%+ ind 1)))
                             ((memv ch '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9))
-                             (loop1 (+ ind 1)))
+                             (loop1 (%+ ind 1)))
                             (t ind)))))
                  (loop2
                   (lambda (ind)
                     (let ((ch (check-string-ref string ind len)))
                       (if (memv ch '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9))
-                          (loop2 (+ ind 1))
+                          (loop2 (%+ ind 1))
                         ind)))))
                 (loop1 n)))
 
@@ -280,7 +280,7 @@
                (format-error "bad base in format" base))
               ((integer? n)
                (cond ((= n 0) (list #\0))
-                     ((< n 0) (append (convert-radix (- n) base) (list #\-)))
+                     ((< n 0) (append (convert-radix (%- n) base) (list #\-)))
                      (t (convert-radix n base))))
               (format-error "expecting an integer in format" n)))
 

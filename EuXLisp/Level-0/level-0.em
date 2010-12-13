@@ -474,8 +474,25 @@
 
            ;; EuXLisp/Youtoo compatible Extensions
            ticks-per-second
-           cpu-time)
+           cpu-time
+           time-execution)
    expose (eval))
+
+(defmacro time-execution (expr stream)
+  (let ((x (gensym "time"))
+        (res (gensym "time")))
+    `(let* ((,x (cpu-time))
+            (,res ,expr))
+       (setq ,x (map (lambda (x y)
+                       (/ (binary- x y)
+                          (convert ticks-per-second <double-float>)))
+                     (cpu-time) ,x))
+       (sprint ,stream
+               "real: "     (vector-ref ,x 0)
+               "\nuser: "   (vector-ref ,x 1)
+               "\nsystem: " (vector-ref ,x 2)
+               nl)
+       ,res)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module level-0

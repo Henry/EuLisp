@@ -330,7 +330,7 @@
         (if (<= index end)
             (progn
               (set-car! l o)
-              (fill-index-list-aux (cdr l) o (+ index 1) end))))
+              (fill-index-list-aux (cdr l) o (%+ index 1) end))))
 
 (define-method (map (fn <function>) (c <list>) . more)
                (maplist fn c more))
@@ -430,7 +430,7 @@
         (if (< index end)
             (progn
               (string-set! s index o)
-              (fill-all-string s o (+ index 1) end))))
+              (fill-all-string s o (%+ index 1) end))))
 
 (define (fill-keyed-string s o k)
         (for-each
@@ -516,7 +516,7 @@
         (if (< index end)
             (progn
               (vector-set! v index o)
-              (fill-vector v o (+ index 1) end))))
+              (fill-vector v o (%+ index 1) end))))
 
 (define (fill-keyed-vector v o k)
         (for-each
@@ -647,7 +647,7 @@
 
 (define (slice-list list from to)
         (if (>= from to) ()
-          (cons (list-ref list from) (slice-list list (+ from 1) to))))
+          (cons (list-ref list from) (slice-list list (%+ from 1) to))))
 
 (define-method (slice (list <list>) (s <fpi>) (e <fpi>))
                (slice-list list s e))

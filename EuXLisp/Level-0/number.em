@@ -47,8 +47,6 @@
            quotient
            remainder))
 
-(deflocal %+ +)
-
 (defgeneric binary+ (a b))
 
 (defmethod binary+ ((a <number>) (b <number>))
@@ -59,8 +57,6 @@
         ((null? (cdr args)) (car args))
         ((null? (cddr args)) (binary+ (car args) (cadr args)))
         (t (apply + (binary+ (car args) (cadr args)) (cddr args)))))
-
-(deflocal %- -)
 
 (defgeneric binary- (a b))
 
@@ -76,8 +72,6 @@
 
 (defmethod unary- ((a <number>)) (%- a))
 
-(deflocal %* *)
-
 (defgeneric binary* (a b))
 
 (defmethod binary* ((a <number>) (b <number>))
@@ -88,8 +82,6 @@
         ((null? (cdr args)) (car args))
         ((null? (cddr args)) (binary* (car args) (cadr args)))
         (t (apply * (binary* (car args) (cadr args)) (cddr args)))))
-
-(deflocal %/ /)
 
 (defgeneric binary/ (a b))
 
@@ -125,8 +117,6 @@
         ((null? (cdr args)) (binary-mod arg (car args)))
         (t (apply mod (binary-mod arg (car args)) (cdr args)))))
 
-(deflocal %gcd gcd)
-
 (defun gcd ( n . args)
   (cond ((null? args) (abs n))
         ((null? (cdr args)) (binary-gcd n (car args)))
@@ -143,8 +133,6 @@
 
 (defmethod binary-gcd ((a <fpi>) (b <fpi>))
   (%gcd a b))
-
-(deflocal %abs abs)
 
 (defgeneric abs (a))
 
@@ -171,21 +159,15 @@
         ((= b 1) (* a sofar))
         (t sofar)))
 
-(deflocal %zero? zero?)
-
 (defgeneric zero? (a))
 
 (defmethod zero? ((a <number>))
   (%zero? a))
 
-(deflocal %quotient quotient)
-
 (defgeneric quotient (a b))
 
 (defmethod quotient ((a <integer>) (b <integer>))
   (%quotient a b))
-
-(deflocal %remainder remainder)
 
 (defgeneric remainder (a b))
 

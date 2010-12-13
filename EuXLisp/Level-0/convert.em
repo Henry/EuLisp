@@ -195,7 +195,7 @@
 
 (define-generic (converter->float obj))
 (define-method (converter->float (obj <integer>))
-               (+ obj 0.0))
+               (%+ obj 0.0))
 (define-method (converter->float (obj <string>))
                (converter->float (string->number obj)))
 (define-method (converter->float (obj <float>))
@@ -224,7 +224,7 @@
         (while (cons? list)
           (table-set! table index (car list))
           (setq list (cdr list))
-          (setq index (+ index 1)))
+          (setq index (%+ index 1)))
         table)
 
 ((setter converter) <table> converter->table)
