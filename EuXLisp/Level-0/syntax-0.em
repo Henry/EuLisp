@@ -29,7 +29,6 @@
            condition)
    export (block
            return-from
-           letfuns
            when
            unless
            while
@@ -38,10 +37,9 @@
            defmethod
            generic-lambda
            method-lambda
-           import
-           syntax
            defmodule
-           time-execution))
+           import
+           syntax))
 
 (defmacro block (tag . body)
   (if (symbol? tag)
@@ -58,16 +56,6 @@
     (error <compilation-general-error>
            "not a symbol in return-from"
            value: tag)))
-
-(define (letrec-binding binding)
-        (list
-         (car binding)
-         (cons 'lambda (cdr binding))))
-
-(defmacro letfuns (bindings . body)
-  `(letrec
-    ,(map-list letrec-binding bindings)
-    ,@body))
 
 (defmacro when (test . body)
   `(if ,test (progn ,@body) ()))
@@ -167,6 +155,13 @@
   `(lambda (next-methods arg-list ,@args)
      ,@body))
 
+;; Interactive defmodule (error)
+(defmacro defmodule (name . body)
+  (error <compilation-general-error>
+         "only use defmodule in root module"
+         value: name))
+
+;; Interactive import directive
 (defmacro import (mod)
   (if (not (or (string? mod)
                (symbol? mod)))
@@ -177,6 +172,7 @@
        (setq curmod (find-module (current-module)))
        (%import curmod ,mod))))
 
+;; Interactive syntax directive
 (defmacro syntax (mod)
   (if (not (or (string? mod)
                (symbol? mod)))
@@ -186,27 +182,6 @@
     `(progn
        (setq curmod (find-module (current-module)))
        (%import curmod ,mod))))
-
-(defmacro defmodule (name . body)
-  (error <compilation-general-error>
-         "only use defmodule in root module"
-         value: name))
-
-(defmacro time-execution (expr stream)
-  (let ((x (gensym "time"))
-        (res (gensym "time")))
-    `(let* ((,x (cpu-time))
-            (,res ,expr))
-       (setq ,x (map (lambda (x y)
-                       (/ (binary- x y)
-                          (convert ticks-per-second <double-float>)))
-                     (cpu-time) ,x))
-       (sprint ,stream
-               "real: "     (vector-ref ,x 0)
-               "\nuser: "   (vector-ref ,x 1)
-               "\nsystem: " (vector-ref ,x 2)
-               nl)
-       ,res)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module syntax-0

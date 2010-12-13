@@ -31,8 +31,7 @@
            symbol-macro
            macroexpand1
            macroexpand
-           debugging
-           dprint))
+           letfuns))
 
 (define (getprop s v)
         (if (symbol? s)
@@ -106,6 +105,7 @@
 ;;                 (%expand-arg-list (cadr form))
 ;;                 (%expand-list (cddr form))))))
 
+;; This is required otherwise macros are not expanded inside definitions
 (put-syntax 'define '%syntax
             (lambda (form)
               (cons
@@ -113,6 +113,9 @@
                (cons
                 (%expand-arg-list (cadr form))
                 (%expand-list (cddr form))))))
+
+;; This is not sufficient, see above
+;;(put-syntax 'define '%syntax identity)
 
 ;; (put-syntax 'setq '%syntax
 ;;             (lambda (form)
@@ -144,6 +147,20 @@
 ;; (put-syntax 'let* '%syntax %expand-let-form)
 ;; (put-syntax 'letrec '%syntax %expand-let-form)
 
+(define (letfun-binding binding)
+        (list
+         (car binding)
+         (cons 'lambda (cdr binding))))
+
+(put-syntax 'letfuns '%syntax
+            (lambda (form)
+              (cons
+               'letrec
+               (cons
+                (map-list letfun-binding (cadr form))
+                (%expand-list (cddr form))))))
+
+
 (define (%defmacro-binds arglist n)
         (cond ((null? arglist) ())
               ((atom? arglist) (list (list arglist
@@ -151,7 +168,7 @@
               (t (cons
                   (list (car arglist)
                         (list 'list-ref '(cdr form) n))
-                  (%defmacro-binds (cdr arglist) (+ n 1))))))
+                  (%defmacro-binds (cdr arglist) (%+ n 1))))))
 
 (put-syntax 'defmacro '%macro
             (lambda (form)
@@ -165,14 +182,15 @@
 
 ; delay if progn sequence and or while access
 
+;; Ensure defmodule is called only from the root module
 (put-syntax 'defmodule '%syntax identity)
+
 ;; (put-syntax 'export '%syntax identity)
 ;; (put-syntax 'expose '%syntax identity)
 ;; (put-syntax 'enter-module '%syntax identity)
 ;; (put-syntax '!> '%syntax identity)
 ;; (put-syntax 'reenter-module '%syntax identity)
 ;; (put-syntax '!>> '%syntax identity)
-;; (put-syntax '%import '%syntax identity)
 
 (put-syntax 'define-generic '%syntax
             (lambda (form)
@@ -312,13 +330,6 @@
 
 (deflocal macroexpand %expand-macros)
 
-(deflocal debugging ())
-(put-syntax 'dprint '%macro
-            (lambda (form)
-              (if debugging
-                  (cons 'print (cdr form))
-                ())))
-
 ;; just in case we get read twice somehow
 (if (not (symbol-exists? '%compile))
     (deflocal %compile compile))
@@ -340,6 +351,7 @@
 ;;          (if (null? env)
 ;;              (%compile (expand-macros expr))
 ;;            (%compile (expand-macros expr) (car env))))
+
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module macros
