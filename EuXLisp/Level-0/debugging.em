@@ -23,9 +23,9 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule debugging
-  (import (root
-           telos
-           macros)
+  (syntax (syntax)
+   import (root
+           telos)
    export (debugging
            dprint))
 

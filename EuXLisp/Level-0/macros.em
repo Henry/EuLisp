@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EuLisp Level-0 macro functionality
+;;; Title: EuLisp kernel macro functionality
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
@@ -28,10 +28,9 @@
            quasiquote
            unquote
            unquote-splicing
-           symbol-macro
            macroexpand1
            macroexpand
-           letfuns))
+           %defun))
 
 (define (getprop s v)
         (if (symbol? s)
@@ -117,6 +116,15 @@
 ;; This is not sufficient, see above
 ;;(put-syntax 'define '%syntax identity)
 
+(put-syntax '%defun '%syntax
+            (lambda (form)
+              (cons
+               'define
+               (cons
+                (cons (cadr form) (%expand-arg-list (caddr form)))
+                (%expand-list (cdddr form))))))
+
+
 ;; (put-syntax 'setq '%syntax
 ;;             (lambda (form)
 ;;               (cons
@@ -146,20 +154,6 @@
 ;; (put-syntax 'let '%syntax %expand-let-form)
 ;; (put-syntax 'let* '%syntax %expand-let-form)
 ;; (put-syntax 'letrec '%syntax %expand-let-form)
-
-(define (letfun-binding binding)
-        (list
-         (car binding)
-         (cons 'lambda (cdr binding))))
-
-(put-syntax 'letfuns '%syntax
-            (lambda (form)
-              (cons
-               'letrec
-               (cons
-                (map-list letfun-binding (cadr form))
-                (%expand-list (cddr form))))))
-
 
 (define (%defmacro-binds arglist n)
         (cond ((null? arglist) ())
@@ -308,9 +302,6 @@
 (put-syntax 'unquote '%syntax unq-expander)
 (put-syntax 'unquote-splicing '%syntax unq-spl-expander)
 
-(define (symbol-macro x)
-        (get-syntax x '%macro))
-
 (define (macroexpand1 expr)
         (cond ((cons? expr)
                (if (symbol? (car expr))
@@ -351,7 +342,6 @@
 ;;          (if (null? env)
 ;;              (%compile (expand-macros expr))
 ;;            (%compile (expand-macros expr) (car env))))
-
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module macros

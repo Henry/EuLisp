@@ -34,7 +34,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule convert
-  (syntax (macros)
+  (syntax (syntax)
    import (root
            setter
            condition

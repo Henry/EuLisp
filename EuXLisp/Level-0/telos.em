@@ -23,9 +23,9 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule telos
-  (import (root
-           telosint
-           macros)
+  (syntax (syntax)
+   import (root
+           telosint)
    export (;; classes
            <object>
            <class>

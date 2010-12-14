@@ -23,7 +23,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule setter
-  (syntax (macros)
+  (syntax (syntax)
    import (root)
    export (setter
            setter-setter))

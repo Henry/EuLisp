@@ -23,11 +23,15 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule syntax-0
-  (import (root
-           macros
-           thread
+  (syntax (syntax)
+   import (root
            condition)
-   export (block
+   export (defmacro
+           quasiquote
+           unquote
+           unquote-splicing
+           letfuns
+           block
            return-from
            when
            unless
@@ -72,7 +76,7 @@
                      (loop)))))
       (loop))))
 
-(define (definable-name? name)
+(%defun definable-name? (name)
         (and (cons? name)
              (or (eq (car name) 'setter)
                  (eq (car name) 'converter))))
@@ -121,7 +125,7 @@
                   "malformed name in defgeneric"
                   value: name))))
 
-(define (defgeneric-methods name body)
+(%defun defgeneric-methods (name body)
         (cond ((null? body) ())
               ((not (eq (car body) method:))
                (error <compilation-general-error>

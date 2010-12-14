@@ -23,11 +23,11 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule thread
-  (import (root
+  (syntax (syntax)
+   import (root
            telos
            telosint
            condition
-           macros
            debugging)
    export (<thread>
            <simple-thread>
@@ -290,8 +290,7 @@
               (started? ())
               (killed? ())
               (value ()))
-          (letrec ((self
-                    (lambda (op . args)
+          (letfuns ((self (op . args)
                       (cond ((eq op ready?:) ready?)
                             ((eq op value:)
                              (cond (ready? value)
@@ -347,8 +346,8 @@
                              (setq value ()))
                             (else (error <thread-general-error>
                                          "unknown thread operation"
-                                         value: op))))))
-                  self)))
+                                         value: op)))))
+            self)))
 
 (define (thread-kill thread)
         (if (thread? thread)
@@ -857,10 +856,10 @@
 (table-set! op-table bt: debug-backtrace)
 
 (define (locals frameptr cc cd . args)
-        (letrec ((loop (lambda (e)
-                         (locals-loop (vector-ref (%car e) 0) (%car e) 1)
-                         (if (%cdr e) (loop (%cdr e))))))
-                (loop (frame-env frameptr)))
+        (letfuns ((loop (e)
+                        (locals-loop (vector-ref (%car e) 0) (%car e) 1)
+                        (if (%cdr e) (loop (%cdr e)))))
+          (loop (frame-env frameptr)))
         (print nl)
         frameptr)
 

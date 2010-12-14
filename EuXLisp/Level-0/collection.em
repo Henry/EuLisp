@@ -33,7 +33,6 @@
            condition
            setter
            convert
-           macros
            copy
            list)
    export (<collection-condition>

@@ -23,10 +23,9 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule level-0
-  (import (;; all of the level-0 modules
+  (syntax (syntax-0)
+   import (;; all of the level-0 modules
            root
-           macros
-           syntax-0
            system
            thread
            telos

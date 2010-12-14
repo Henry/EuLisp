@@ -1,3 +1,4 @@
+;;; Copyright 1994 Russell Bradford
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
@@ -17,30 +18,37 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EuLisp Level-0 eval module
-;;;-----------------------------------------------------------------------------
-;;;  Description:
-;;    eval in the exported environment of the optionally specified module which
-;;    defaults to the current module.
+;;; Title: EuLisp kernel syntax
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-(defmodule eval
-  (syntax (syntax)
+(defmodule syntax
+  (syntax (macros)
    import (root)
-   export (eval
+   export (defmacro
+           quasiquote
+           unquote
+           unquote-splicing
            macroexpand1
-           macroexpand))
+           macroexpand
+           %defun
+           letfuns))
 
-(defun eval (x . mod)
-  (if mod
-      (let ((curmod (find-module (current-module))))
-        (set-module (find-module (car mod)))
-        (let ((res (eval/cm x)))
-          (set-module curmod)
-          res))
-    (eval/cm x)))
+;; (define (letfun-binding binding)
+;;         (list
+;;          (car binding)
+;;          (cons 'lambda (cdr binding))))
+
+(%defun letfun-binding (binding)
+        (list
+         (car binding)
+         (cons 'lambda (cdr binding))))
+
+(defmacro letfuns (funs . body)
+  `(letrec
+    ,(map-list letfun-binding funs)
+    ,@body))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module eval
+)  ;; End of module syntax
 ;;;-----------------------------------------------------------------------------

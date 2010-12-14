@@ -26,7 +26,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule list
-  (syntax (macros)
+  (syntax (syntax)
    import (root
            setter))
 
