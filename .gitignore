@@ -25,10 +25,12 @@ platforms
 core
 
 # Ignore intermediate build files from optional packages
-Test/*.[chi]
-Test/*[1-4]
-Examples/*/*.[hi]
-Tools/*.[chi]
+/Youtoo/Test/u2/*
+/Youtoo/Tools/u2/*
+
+/Examples/*/u2
+/Modules/*/u2
+
 
 # Ignore personal test area
 /Examples/Test
