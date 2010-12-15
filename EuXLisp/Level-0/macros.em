@@ -19,6 +19,17 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: EuLisp kernel macro functionality
+;;;  Description:
+;;    Fundamental macro expansion functionality built on top of the primitive
+;;    put-syntax/get-syntax XScheme primitives.
+;;
+;;    Provides the ubiquitous Lisp defmacro, quasiquote, unquote and
+;;    unquote-splicing operators as well as macro expansion operations.
+;;
+;;    An macro expanding form of define wrapped as %defun is also provided to
+;;    avoid problems with the sequence of macro expansion and compilation.
+;;    Other macro expanding forms are also provided but commented-out as it is
+;;    not currently clear which are actually needed.
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
