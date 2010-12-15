@@ -6,7 +6,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule eval-user
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-1)
    export (hmm))
 

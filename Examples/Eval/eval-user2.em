@@ -6,8 +6,9 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule eval-user2
-  (syntax (macros)
-   import (level-1 eval-user)
+  (syntax (syntax-0)
+   import (level-1
+           eval-user)
    export (locvar))
 
 (deflocal locvar "in eval-user2")
