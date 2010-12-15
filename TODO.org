@@ -123,6 +123,7 @@
     CLOSED: [2010-10-29 Fri 22:53]
     If only one super-class is specified allow single-inheritance syntax of
     specifying the class directly rather than as a list.
+
 * Youtoo and EuXLisp
 *** DONE Replace =equal= with =binary==
     CLOSED: [2010-05-12 Wed 22:57]
@@ -154,6 +155,7 @@
     CLOSED: [2010-10-26 Tue 22:30]
     =<double>= as in Youtoo?  If so then the name =<float>= as the abstract base
     class is odd.
+
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
@@ -344,12 +346,10 @@
 
 *** TODO Complete support for eval
     Following the analysis in the report "Modules, Macros and Lisp", Queinnec
-    and Padget, it is proposed to add for =eval= in EuLisp with the following
-    operators:
-    + Add additional module argument to =eval= to set the environment in which
-      the eval evaluates.
-    + Create =eval/cm= which calls =eval= with the current module as the second
-      argument to evaluate in the current environment.
+    and Padget, it is proposed to add =eval= to EuLisp with the following
+    operator:
+    + Add additional optional module argument to =eval= to set the environment
+      in which the eval evaluates which defaults to the current module.
 
     However, unlike the proposal in the report an additional restriction is
     added that it is exported environment in which =eval= operates rather than
@@ -357,6 +357,18 @@
     necessary because only the exported environment is guaranteed to exist at
     "eval" time; the rest of the internal lexical environment may not be
     complete due to, for example, compiler optimisations.
+
+    The basic functionality is now complete and a simple example provided in
+    Examples/Eval but currently there is no way to know what the current module
+    is so the additional "optional" argument is currently required /e.g./:
+    #+BEGIN_SRC lisp
+      (eval (read lispin () ()) 'eval-test)
+    #+END_SRC
+    It may be possible to remove this limitation by either keeping a local
+    variable in each module holding the module name or by converting =eval= into
+    a macro so that the module name can be expanded into the optional argument
+    slot during compilation.
+
 * EuXLisp
 *** DONE Finish reformatting the C source files
     CLOSED: [2010-10-23 Sat 19:03]
@@ -396,10 +408,10 @@
     CLOSED: [2010-07-05 Mon 22:03]
 *** TODO Complete =double-float= functionality in =arith.em=
     See =Youtoo/Runtime/double.em=
-*** TODO Consider replacing the built-in GC with =xalloc= in Eu2C
-
+*** TODO Consider replacing the built-in GC with =xalloc= from Eu2C
 *** DONE Rename =labels= -> =letfuns=
     CLOSED: [2010-11-08 Mon 22:43]
+
 * Eu2C
 *** DONE Hack CMUCL to write exponent "e"
     CLOSED: [2010-08-30 Mon 11:15]
@@ -504,6 +516,7 @@
 
 *** DONE Rename =labels= -> =letfuns=
     CLOSED: [2010-11-08 Mon 22:43]
+
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]
