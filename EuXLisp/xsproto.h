@@ -269,7 +269,7 @@ extern LVAL xpeek_char();
 extern LVAL xchar_readyp();
 extern LVAL xeofobjectp();
 extern LVAL xwrite();
-extern LVAL xprint();
+extern LVAL xprintnl();
 extern LVAL xwrchar();
 extern LVAL xwrbyte();
 extern LVAL xwrshort();
@@ -485,7 +485,7 @@ extern LVAL xcheck_ref();
 
 // xsprint.c
 extern void xlprin1(LVAL expr, LVAL file);
-extern void xlprinc(LVAL expr, LVAL file);
+extern void xlprint(LVAL expr, LVAL file);
 extern void xlterpri(LVAL fptr);
 extern void xlputstr(LVAL fptr, char *str);
 

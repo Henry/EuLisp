@@ -328,8 +328,8 @@
 ;; use this in compile below for debugging
 (define (expand-macros expr)
         (let ((result (%expand-macros expr)))
-          (prin1 expr)
-          (display " ==>> ")
+          (write expr)
+          (%display " ==>> ")
           (print result nl)
           result))
 

@@ -64,8 +64,8 @@ void xlprin1(LVAL expr, LVAL file)
     print(file, expr, TRUE, 0);
 }
 
-// xlprinc - print an expression without quoting
-void xlprinc(LVAL expr, LVAL file)
+// xlprint - print an expression without quoting
+void xlprint(LVAL expr, LVAL file)
 {
     print(file, expr, FALSE, 0);
 }

@@ -260,8 +260,6 @@
            binary
            text
            not
-           prin1
-           princ
            t
            else
            system

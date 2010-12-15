@@ -2582,7 +2582,7 @@ static void do_defmodule(LVAL form, int cont)
     {
         push(body);
         sprintf(buf, "<%s...", modname);
-        s_display = xlenter_module("display", root_module);
+        s_display = xlenter_module("%display", root_module);
         expr = cons(s_display, cons(cvstring(buf), NIL));
         do_expr(expr, C_NEXT);
         drop(1);

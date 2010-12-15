@@ -169,7 +169,7 @@
 
 (define (indent n)
         (while (> n 0)
-          (princ " ")
+          (%display " ")
           (setq n (%- n 1))))
 
 
@@ -208,8 +208,6 @@
 
 (define (sprint s . objs)
         (sprint-1 s objs))
-
-(deflocal %print print)
 
 (define (print . objs)
         (sprint-1 stdout objs))

@@ -648,10 +648,10 @@ LVAL xwrite()
     return (true);
 }
 
-// xprint - built-in function 'print'
-LVAL xprint()
+// xprintnl - built-in function 'printnl'
+LVAL xprintnl()
 {
-    static char *cfn_name = "print";
+    static char *cfn_name = "printnl";
 
     // get expression to print and file pointer
     LVAL val = xlgetarg();
@@ -740,7 +740,7 @@ LVAL xdisplay()
     xllastarg();
 
     // print the value
-    xlprinc(val, fptr);
+    xlprint(val, fptr);
 
     return (true);
 }

@@ -119,8 +119,6 @@ void xlinitws(unsigned int ssize)
 
     // setup some synonyms
     setvalue(xlenter("not"), getvalue(xlenter("null?")));
-    setvalue(xlenter("prin1"), getvalue(xlenter("write")));
-    setvalue(xlenter("princ"), getvalue(xlenter("display")));
 
     // enter all of the symbols used by the runtime system
     xlsymbols();
