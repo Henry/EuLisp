@@ -35,7 +35,6 @@
            i-rep
            eval)
    export (main
-           init-eval
            eval
            rep ?
            dynamic-binding-ref

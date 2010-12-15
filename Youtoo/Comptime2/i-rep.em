@@ -40,9 +40,9 @@
            cg-exec
            read)
    export (rep
-           init-eval
+           eval/cm
            eval
-           debug-eval
+           debug-eval/cm
            prompt-string
            show-module-bindings
            ?
@@ -141,10 +141,25 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Evaluation of sexprs
 ;;;-----------------------------------------------------------------------------
-;; Previous result of eval
+;; Previous result of eval/cm
 (deflocal ? ())
 
-(defun eval (x)
+(defun set-eval-module (module-name)
+  (setq *interpreter* t)
+  (setq *silent* t)
+  (let* ((module (get-module module-name)))
+    (if (module? module)
+        (dynamic-setq *actual-module* module)
+      (progn
+        (setq module (dynamic-load-module module-name))
+        (unless (module-binding-vector-size? module)
+                (module-binding-vector-size! module 2)
+                (module-max-binding-vector-size! module 1024))
+        ((setter *get-loaded-module*) module-name module)
+        (dynamic-setq *actual-module* module)
+        (check-module-envs module)))))
+
+(defun eval/cm (x)
   (setq
    ?
    (cond ((symbol? x)
@@ -156,8 +171,8 @@
                 (rest (cdr x)))
             (cond ((eq key 'quote)
                    (car rest))
-                  ((eq key 'eval)
-                   (eval `(@ eval ,@rest)))
+                  ((eq key 'eval/cm)
+                   (eval/cm `(@ eval/cm ,@rest)))
                   ((eq key '@)
                    (let ((op (car rest))
                          (args (cdr rest)))
@@ -165,7 +180,7 @@
                          (apply dynamic-binding-ref args)
                        (if (eq op 'dynamic-binding-ref1)
                            (apply dynamic-binding-ref1 args)
-                         (apply (eval op) (map eval args))))))
+                         (apply (eval/cm op) (map eval/cm args))))))
                   (t
                    (interactive-compile x)))))
          ((eq x :)
@@ -194,16 +209,16 @@
             (setq *current-module-name* new-module-name)))
          ((eq x load:)
           (let ((file-name (read lispin () (eos-default-value))))
-            (eval (load-file-exprs
+            (eval/cm (load-file-exprs
                    (convert (fmt "~a" file-name) <string>)))))
          ((eq x exit:)
           (exit 0))
          ((eq x trace:)
           (let ((function-name (read lispin () (eos-default-value))))
-            (eval `(trace ,function-name))))
+            (eval/cm `(trace ,function-name))))
          ((eq x untrace:)
           (let ((function-name (read lispin () (eos-default-value))))
-            (eval `(untrace ,function-name))))
+            (eval/cm `(untrace ,function-name))))
          ((eq x backtrace:)
           (backtrace))
          ((eq x values:)
@@ -246,6 +261,15 @@
   (thread-reschedule)
   ?)
 
+(defun eval (x . mod)
+  (let ((curmod (dynamic *actual-module*))
+        (evalmod (and mod (car mod))))
+    (set-eval-module evalmod)
+    (let ((res (eval/cm x)))
+      (dynamic-setq *actual-module* curmod)
+      res)))
+
+
 (defun show-help ()
   (print "load: <file-name>          evaluate file expressions" nl)
   (print "?                          previous value" nl)
@@ -276,7 +300,7 @@
       (do1-list import-module import)
       (do1-list import-syntax-module syntax))))
 
-(defun debug-eval (x)
+(defun debug-eval/cm (x)
   (cond ((eq x reset:)
          (*reset-k* ()))
         ((eq x resume:)
@@ -289,22 +313,7 @@
            (setq *resume-k* (cdr *resume-k*))
            (continue-k ())))
         (t
-         (eval x))))
-
-(defun init-eval (module-name)
-  (setq *interpreter* t)
-  (setq *silent* t)
-  (let* ((new-module-name module-name)
-         (module (get-module new-module-name)))
-    (if (module? module)
-        (dynamic-setq *actual-module* module)
-      (progn
-        (setq module (dynamic-load-module new-module-name))
-        (module-binding-vector-size! module 2)
-        (module-max-binding-vector-size! module 1024)
-        ((setter *get-loaded-module*) new-module-name module)
-        (dynamic-setq *actual-module* module)
-        (check-module-envs module)))))
+         (eval/cm x))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read/eval/print loop
@@ -332,8 +341,8 @@
                 (exit 0))
             ;; Ok, we're really going to eval something now!
             (if *script*
-                (eval x)
-              (format "-> ~s\n" (eval x))))
+                (eval/cm x)
+              (format "-> ~s\n" (eval/cm x))))
           (loop ())))
    (let/cc reset-k
      (setq *reset-k* reset-k)
@@ -357,8 +366,8 @@
           (if (eq x (eos-default-value))
               (progn
                 (print nl)
-                (debug-eval resume:))
-            (format "-> ~s\n" (debug-eval x)))
+                (debug-eval/cm resume:))
+            (format "-> ~s\n" (debug-eval/cm x)))
           (loop ())))
    (let/cc resume-k
      (setq *resume-k* (cons resume-k *resume-k*))

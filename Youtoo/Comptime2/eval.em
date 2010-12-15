@@ -27,8 +27,7 @@
 (defmodule eval
   (syntax (_macros)
    import (i-rep)
-   export (init-eval
-           eval
+   export (eval
            macroexpand-1
            macroexpand))
 
