@@ -396,7 +396,7 @@ void xlfail(char *msg, LVAL err)
 // xlerror - report an error
 void xlerror(char *msg, LVAL arg)
 {
-    // display the error message
+    // print the error message
     errputstr("Error: ");
     errputstr(msg);
     errputstr("\n");
@@ -516,7 +516,7 @@ void callerrorhandler()
 // xlabort - print an error message and abort
 void xlabort(char *msg)
 {
-    // display the error message
+    // print the error message
     errputstr("Abort: ");
     errputstr(msg);
     errputstr("\n");

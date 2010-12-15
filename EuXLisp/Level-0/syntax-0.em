@@ -25,17 +25,15 @@
 (defmodule syntax-0
   (syntax (syntax)
    import (root
+           thread
            condition)
-   export (defmacro
+   export (;; Imported from macros via syntax
+           defmacro
            quasiquote
            unquote
            unquote-splicing
-           letfuns
-           block
-           return-from
-           when
-           unless
-           while
+
+           ;; Imported from macros
            defun
            defgeneric
            defmethod
@@ -43,7 +41,15 @@
            method-lambda
            defmodule
            import
-           syntax))
+           syntax
+           letfuns
+
+           ;; Defined in this module
+           block
+           return-from
+           when
+           unless
+           while))
 
 (defmacro block (tag . body)
   (if (symbol? tag)
@@ -75,117 +81,6 @@
                      ,@body
                      (loop)))))
       (loop))))
-
-(%defun definable-name? (name)
-        (and (cons? name)
-             (or (eq (car name) 'setter)
-                 (eq (car name) 'converter))))
-
-; (defun foo (x) ...)
-; (defun (setter foo) (x) ...)
-; (defun (converter foo) (x) ...)
-(defmacro defun (name args . body)
-  (cond ((symbol? name)
-         (if (symbol-exists? name)
-             (progn
-               (%display "*** redefining ")
-               (%display name)
-               (%display " in module ")
-               (%display (current-module))
-               (%display "\n")))
-         `(define ,(cons name args)
-                  ,@body))
-        ((definable-name? name)
-         `(progn
-            ((setter ,(car name)) ,(cadr name)
-             (lambda ,args ,@body))
-            ',name))
-        (t (error <compilation-general-error>
-                  "malformed name in defun"
-                  value: name))))
-
-; (defgeneric foo (x)
-;    method: ((x <fpi>) ...)
-;    method: ((y <flt>) ...)
-;    ...)
-(defmacro defgeneric (name args . body)
-  (cond ((symbol? name)
-         `(progn (define-generic ,(cons name args))
-                 ,@(defgeneric-methods name body)
-                 ',name))
-        ((definable-name? name)
-         `(progn
-            (define-generic ,(cons 'setter/converter args))
-            ((setter ,(car name)) ,(cadr name) setter/converter)
-            ,@(defgeneric-methods
-               (list 'setter (cadr name))
-               body)
-            ',name))
-        (t (error <compilation-general-error>
-                  "malformed name in defgeneric"
-                  value: name))))
-
-(%defun defgeneric-methods (name body)
-        (cond ((null? body) ())
-              ((not (eq (car body) method:))
-               (error <compilation-general-error>
-                      "unknown keyword in defgeneric"
-                      value: (car body)))
-              ((null? (cdr body))
-               (error <compilation-general-error>
-                      "odd-size keyword list in defgeneric"
-                      value: name))
-              (t (cons
-                  `(defmethod ,name ,(caadr body) ,@(cdadr body))
-                  (defgeneric-methods name (cdr (cdr body)))))))
-
-(defmacro defmethod (name args . body)
-  (if (or (symbol? name)
-          (definable-name? name))
-      `(define-method ,(cons name args) ,@body)
-    (error <compilation-general-error>
-           "malformed name in defgeneric"
-           value: name)))
-
-(defmacro generic-lambda (args . body)
-  `(let (anonymous-generic)
-     (define-generic (anonymous-generic ,@args))
-     ,@(defgeneric-methods
-        'anonymous-generic
-        body)
-     anonymous-generic))
-
-(defmacro method-lambda (args . body)
-  `(lambda (next-methods arg-list ,@args)
-     ,@body))
-
-;; Interactive defmodule (error)
-(defmacro defmodule (name . body)
-  (error <compilation-general-error>
-         "only use defmodule in root module"
-         value: name))
-
-;; Interactive import directive
-(defmacro import (mod)
-  (if (not (or (string? mod)
-               (symbol? mod)))
-      (error <compilation-general-error>
-             "bad module name in import"
-             value: mod)
-    `(progn
-       (setq curmod (find-module (current-module)))
-       (%import curmod ,mod))))
-
-;; Interactive syntax directive
-(defmacro syntax (mod)
-  (if (not (or (string? mod)
-               (symbol? mod)))
-      (error <compilation-general-error>
-             "bad module name in syntax"
-             value: mod)
-    `(progn
-       (setq curmod (find-module (current-module)))
-       (%import curmod ,mod))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module syntax-0

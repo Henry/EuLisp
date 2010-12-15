@@ -63,7 +63,7 @@
            initialize-object
            initialize-class
            builtin-make-table
-           display-class-name))
+           print-class-name))
 
 ; install <class> slot defaults
 (deflocal slots (class-slots <class>))
@@ -93,7 +93,7 @@
 (deflocal builtin-make-table (make-table eq))
 
 ;; cons
-(define (mkcons inits)
+(defun mkcons (inits)
         (let ((car (find-key car: inits ()))
               (cdr (find-key cdr: inits ())))
           (cons car cdr)))
@@ -102,27 +102,27 @@
 (table-set! builtin-make-table <cons> mkcons)
 
 ;; null
-(define (mknull inits)
+(defun mknull (inits)
         ())
 
 (table-set! builtin-make-table <null> mknull)
 
 ;; int
-(define (mkint inits)
+(defun mkint (inits)
         (find-key value: inits 0))
 
 (set-class-keywords! <fpi> '(value:))
 (table-set! builtin-make-table <fpi> mkint)
 
 ;; double-float
-(define (mkdfloat inits)
+(defun mkdfloat (inits)
         (find-key value: inits 0.0))
 
 (set-class-keywords! <double-float> '(value:))
 (table-set! builtin-make-table <double-float> mkdfloat)
 
 ;; symbol
-(define (mksymbol inits)
+(defun mksymbol (inits)
         (let ((name (find-key string: inits "")))
           (string->symbol name)))
 
@@ -130,10 +130,10 @@
 (table-set! builtin-make-table <symbol> mksymbol)
 
 ;; keyword
-(define (mkkeyword inits)
+(defun mkkeyword (inits)
         (let* ((name (find-key string: inits ""))
                (len (string-size name)))
-          (if (= len 0)
+          (if (%= len 0)
               :                             ; null keyword
             (string->symbol
              (if (eql (string-ref name (%- len 1)) #\:)
@@ -144,7 +144,7 @@
 (table-set! builtin-make-table <keyword> mkkeyword)
 
 ;; string
-(define (mkstring inits)
+(defun mkstring (inits)
         (let ((size (find-key size: inits 0))
               (fill (find-key fill-value: inits #\space)))
           (make-string
@@ -158,7 +158,7 @@
 (table-set! builtin-make-table <string> mkstring)
 
 ;; input-stream
-(define (mkistream inits)
+(defun mkistream (inits)
         (let ((filename (find-key filename: inits ())))
           (open-input-file filename)))
 
@@ -166,7 +166,7 @@
 (table-set! builtin-make-table <input-stream> mkistream)
 
 ;; output-stream
-(define (mkostream inits)
+(defun mkostream (inits)
         (let ((filename (find-key filename: inits ())))
           (open-output-file filename)))
 
@@ -176,7 +176,7 @@
 ;; i/o stream ?
 
 ;; vector
-(define (mkvector inits)
+(defun mkvector (inits)
         (let ((size (find-key size: inits 0))
               (fill (find-key fill-value: inits ())))
           (make-vector size fill)))
@@ -186,7 +186,7 @@
 (table-set! builtin-make-table <vector> mkvector)
 
 ;; char
-(define (mkchar inits)
+(defun mkchar (inits)
         (let ((code (find-key code: inits 32)))
           (integer->char code)))
 
@@ -196,7 +196,7 @@
 
 ;; promise, env, code, module, simple-function, closure,
 ;; subr, xsubr, csubr, continuation, slot
-(define (cant-make cl)
+(defun cant-make (cl)
         (lambda (inits)
           (raise-telos-error "can't make instance of class" cl)))
 
@@ -218,7 +218,7 @@
 (table-set! builtin-make-table <local-slot> (cant-make <slot>))
 
 ;; table
-(define (mktable inits)
+(defun mktable (inits)
         (let ((comp (find-key comparator: inits eql))
               (fill (find-key fill-value: inits ())))
           (make-table comp fill)))
@@ -230,7 +230,7 @@
 ;; for thread see thread.em
 
 ;; generic
-(define (mkgeneric inits)
+(defun mkgeneric (inits)
         (let ((name (find-key name: inits 'anonymous-generic))
               (domain (find-key domain: inits ()))
               (optargs? (find-key optargs: inits ())))
@@ -244,7 +244,7 @@
 (table-set! builtin-make-table <simple-generic> mkgeneric)
 
 ;; method
-(define (mkmethod inits)
+(defun mkmethod (inits)
         (let ((fn (find-key method-lambda: inits ()))
               (domain (find-key domain: inits ()))
               (optargs? (find-key optargs: inits ())))
@@ -261,19 +261,19 @@
 (set-class-keywords! <simple-method> (class-keywords <method>))
 (table-set! builtin-make-table <simple-method> mkmethod)
 
-(define (strip<> name)
+(defun strip<> (name)
         (if (not (symbol? name))
             (raise-telos-error "class name not a symbol" name))
         (let* ((str (symbol->string name))
                (len (string-size str)))
-          (if (and (> len 1)
+          (if (and (%> len 1)
                    (eql (string-ref str 0) #\<)
                    (eql (string-ref str (%- len 1)) #\>))
               (substring str 1 (%- len 1))
             str)))
 
-(define (display-class-name obj stream)
-        (%display (strip<> (class-name (class-of obj))) stream))
+(defun print-class-name (obj stream)
+        (%print (strip<> (class-name (class-of obj))) stream))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module telosint

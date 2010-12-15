@@ -133,43 +133,43 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class make and initialisation functions
 ;;;-----------------------------------------------------------------------------
-(define (make cl . inits)
+(defun make (cl . inits)
         (let ((maker (table-ref builtin-make-table cl)))
           (if (null? maker)
               (initialize (allocate cl inits) inits)
             (maker inits))))
 
-(define-generic (initialize cl inits))
+(defgeneric initialize (cl inits))
 
-(define-method (initialize (obj <object>) inits)
+(defmethod initialize ((obj <object>) inits)
                (initialize-object obj inits))
 
-(define-method (initialize (cl <class>) inits)
+(defmethod initialize ((cl <class>) inits)
                (call-next-method)
                (initialize-class cl inits))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class introspection
 ;;;-----------------------------------------------------------------------------
-(define (class-hierarchy . top)
+(defun class-hierarchy top
         (hierarchy (if (null? top) <object> (car top)) 0)
         t)
 
-(define (hierarchy cl depth)
+(defun hierarchy (cl depth)
         (if (class-abstract? cl)
-            (%display "A  ")
-          (%display "   "))
+            (%print "A  ")
+          (%print "   "))
         (indent depth)
-        (%display cl)
+        (%print cl)
         (print nl)
         (for-each
          (lambda (c)
            (hierarchy c (%+ depth 2)))
          (reverse-list (class-subclasses cl))))
 
-(define (indent n)
-        (while (> n 0)
-          (%display " ")
+(defun indent (n)
+        (while (%> n 0)
+          (%print " ")
           (setq n (%- n 1))))
 
 
@@ -183,67 +183,65 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Generic print functions
 ;;;-----------------------------------------------------------------------------
-(define-generic (generic-print obj s))
+(defgeneric generic-print (obj s))
 
-(define-method (generic-print (obj <object>) s)
-               (%display obj s)
+(defmethod generic-print ((obj <object>) s)
+               (%print obj s)
                obj)
 
-(define-method (generic-print (obj <null>) s)
-               (%display "()" s)
+(defmethod generic-print ((obj <null>) s)
+               (%print "()" s)
                obj)
 
-(define-method (generic-print (obj <list>) s)
+(defmethod generic-print ((obj <list>) s)
                (write-list obj s generic-print))
 
-(define-method (generic-print (obj <vector>) s)
+(defmethod generic-print ((obj <vector>) s)
                (write-vector obj s generic-print))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  N-ary print functions
 ;;;-----------------------------------------------------------------------------
-(define (sprint-1 s objs)
+(defun sprint-1 (s objs)
         (for-each (lambda (x) (generic-print x s)) objs)
         s)
 
-(define (sprint s . objs)
+(defun sprint (s . objs)
         (sprint-1 s objs))
 
-(define (print . objs)
+(defun print objs
         (sprint-1 stdout objs))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  Generic write functions
 ;;;-----------------------------------------------------------------------------
-(define-generic (generic-write obj s))
+(defgeneric generic-write (obj s))
 
-(define-method (generic-write (obj <object>) s)
+(defmethod generic-write ((obj <object>) s)
                (%write obj s)
                obj)
 
-(define-method (generic-write (obj <null>) s)
-               (%display "()" s)
+(defmethod generic-write ((obj <null>) s)
+               (%print "()" s)
                obj)
 
-(define-method (generic-write (obj <list>) s)
+(defmethod generic-write ((obj <list>) s)
                (write-list obj s generic-write))
 
-(define-method (generic-write (obj <vector>) s)
+(defmethod generic-write ((obj <vector>) s)
                (write-vector obj s generic-write))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  N-ary write functions
 ;;;-----------------------------------------------------------------------------
-(define (swrite-1 s objs)
+(defun swrite-1 (s objs)
         (for-each (lambda (x) (generic-write x s)) objs)
         s)
 
-(define (swrite s . objs)
+(defun swrite (s . objs)
         (swrite-1 s objs))
 
-(deflocal %write write)
-
-(define (write . objs)
+(defun write objs
         (swrite-1 stdout objs))
 
 ;;;-----------------------------------------------------------------------------
@@ -252,16 +250,16 @@
 
 ;; A feeble attempt at stopping infinite loops
 (deflocal current-print-depth 0)
-(define (inc-pr-depth n)
+(defun inc-pr-depth (n)
         (setq current-print-depth (%+ current-print-depth n)))
 
 ;; Maintain tail recursion in write-list1
-(define (write-list obj s gfun)
+(defun write-list (obj s gfun)
         (cond ((and (print-depth)
-                    (>= current-print-depth (print-depth)))
-               (%display "(...)" s))
+                    (%>= current-print-depth (print-depth)))
+               (%print "(...)" s))
               ((list? obj)
-               (%display "(" s)
+               (%print "(" s)
                (inc-pr-depth 1)
                (gfun (car obj) s)
                (write-list1 (cdr obj) s gfun 1)
@@ -270,31 +268,31 @@
         obj)
 
 
-(define (write-list1 obj s gfun current-print-breadth)
+(defun write-list1 (obj s gfun current-print-breadth)
         (cond ((null? obj)
-               (%display ")" s))
+               (%print ")" s))
               ((atom? obj)
-               (%display " . " s)
+               (%print " . " s)
                (gfun obj s)
-               (%display ")" s))
+               (%print ")" s))
               ((and (print-breadth)
-                    (>= current-print-breadth (print-breadth)))
-               (%display " ...)" s))
+                    (%>= current-print-breadth (print-breadth)))
+               (%print " ...)" s))
               (else
-               (%display " " s)
+               (%print " " s)
                (gfun (car obj) s)
                (write-list1 (cdr obj) s gfun (%+ current-print-breadth 1)))))
 
-(define (write-vector obj s gfun)
+(defun write-vector (obj s gfun)
         (cond ((and (print-depth)
-                    (>= current-print-depth (print-depth)))
-               (%display "#(...)" s))
+                    (%>= current-print-depth (print-depth)))
+               (%print "#(...)" s))
               ((vector? obj)
                (let ((size (vector-size obj)))
-                 (if (= size 0)
-                     (%display "#()" s)
+                 (if (%= size 0)
+                     (%print "#()" s)
                    (progn
-                     (%display "#(" s)
+                     (%print "#(" s)
                      (inc-pr-depth 1)
                      (gfun (vector-ref obj 0) s)
                      (write-vector1 obj s 1 size gfun)
@@ -302,18 +300,18 @@
               (t (%write obj s)))        ; new subclass of <vector>
         obj)
 
-(define (write-vector1 obj s index size gfun)
-        (if (= index size)
-            (%display ")" s)
+(defun write-vector1 (obj s index size gfun)
+        (if (%= index size)
+            (%print ")" s)
           (progn
-            (%display " " s)
+            (%print " " s)
             (gfun (vector-ref obj index) s)
             (write-vector1 obj s (%+ index 1) size gfun))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Wait functions
 ;;;-----------------------------------------------------------------------------
-(define-generic (wait thread timeout))
+(defgeneric wait (thread timeout))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module telos

@@ -23,17 +23,18 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule copy
-  (import (root)
+  (syntax (syntax)
+   import (root)
    export (deep-copy
            shallow-copy))
 
-(define (identity x) x)
+(defun identity (x) x)
 
-(define-generic (deep-copy obj))
+(defgeneric deep-copy (obj))
 
-(define-generic (shallow-copy obj))
+(defgeneric shallow-copy (obj))
 
-(define-method (deep-copy (s <object>))
+(defmethod deep-copy ((s <object>))
                (let ((cl (class-of s)))
                  (copy-loop
                   (allocate cl ())
@@ -42,7 +43,7 @@
                   (class-instance-size cl)
                   deep-copy)))
 
-(define-method (shallow-copy (s <object>))
+(defmethod shallow-copy ((s <object>))
                (let ((cl (class-of s)))
                  (copy-loop
                   (allocate cl ())
@@ -51,42 +52,42 @@
                   (class-instance-size cl)
                   identity)))
 
-(define (copy-loop new old index len copy)
-        (if (<= index len)
+(defun copy-loop (new old index len copy)
+        (if (%<= index len)
             (progn
               (setivar new index (copy (getivar old index)))
               (copy-loop new old (%+ index 1) len copy))
           new))
 
 ;; conses
-(define-method (deep-copy (c <cons>))
+(defmethod deep-copy ((c <cons>))
                (cons-copy-loop c deep-copy))
 
-(define-method (shallow-copy (c <cons>))
+(defmethod shallow-copy ((c <cons>))
                (cons-copy-loop c identity))
 
-(define (cons-copy-loop c copy)
+(defun cons-copy-loop (c copy)
         (if (atom? c)
             (copy c)
           (cons (copy (car c))
                 (cons-copy-loop (cdr c) copy))))
 
 ;; strings
-(define-method (deep-copy (s <string>))
+(defmethod deep-copy ((s <string>))
                (shallow-copy s))
 
-(define-method (shallow-copy (s <string>))
+(defmethod shallow-copy ((s <string>))
                (list->string (string->list s)))
 
 ;; characters
-(define-method (deep-copy (c <simple-char>))
+(defmethod deep-copy ((c <simple-char>))
                (shallow-copy c))
 
-(define-method (shallow-copy (c <simple-char>))
+(defmethod shallow-copy ((c <simple-char>))
                (integer->char (char->integer c)))
 
 ;; vectors
-(define-method (deep-copy (v <vector>))
+(defmethod deep-copy ((v <vector>))
                (let ((len (vector-size v) ))
                  (vector-copy-loop
                   (make-vector len ())
@@ -95,7 +96,7 @@
                   len
                   deep-copy)))
 
-(define-method (shallow-copy (v <vector>))
+(defmethod shallow-copy ((v <vector>))
                (let ((len (vector-size v) ))
                  (vector-copy-loop
                   (make-vector len ())
@@ -104,15 +105,15 @@
                   len
                   identity)))
 
-(define (vector-copy-loop new old index len copy)
-        (if (< index len)
+(defun vector-copy-loop (new old index len copy)
+        (if (%< index len)
             (progn
               (vector-set! new index (copy (vector-ref old index)))
               (vector-copy-loop new old (%+ index 1) len copy))
           new))
 
 ;; tables
-(define-method (deep-copy (t <hash-table>))
+(defmethod deep-copy ((t <hash-table>))
                (let ((new (make-table (table-comparator t) (deep-copy (table-fill t)))))
                  (map-list
                   (lambda (k v)
@@ -121,7 +122,7 @@
                   (table-values t))
                  new))
 
-(define-method (shallow-copy (t <hash-table>))
+(defmethod shallow-copy ((t <hash-table>))
                (let ((new (make-table (table-comparator t) (table-fill t))))
                  (map-list
                   (lambda (k v)
@@ -131,10 +132,10 @@
                  new))
 
 ;; floats
-(define-method (deep-copy (f <double-float>))
+(defmethod deep-copy ((f <double-float>))
                (shallow-copy f))
 
-(define-method (shallow-copy (f <double-float>))
+(defmethod shallow-copy ((f <double-float>))
                (%+ f 0.0))
 
 ;;;-----------------------------------------------------------------------------

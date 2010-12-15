@@ -729,10 +729,10 @@ LVAL xwrlong()
     return (true);
 }
 
-// xdisplay - built-in function 'display'
-LVAL xdisplay()
+// xprint - built-in function 'print'
+LVAL xprint()
 {
-    static char *cfn_name = "display";
+    static char *cfn_name = "print";
 
     // get expression to print and file pointer
     LVAL val = xlgetarg();
@@ -743,17 +743,6 @@ LVAL xdisplay()
     xlprint(val, fptr);
 
     return (true);
-}
-
-// xnewline - terminate the current print line to stdout
-LVAL xnewline()
-{
-    LVAL fptr = xstdout();
-
-    // terminate the print line to stdout and return the stream
-    xlterpri(fptr);
-
-    return (fptr);
 }
 
 // xsflush - flush stream
@@ -1822,7 +1811,7 @@ LVAL xerror()
 {
     static char *cfn_name = "error";
 
-    // display the error message
+    // print the error message
     LVAL msg = xlgastring();
     errputstr("error: ");
     errputstr(getstring(msg));

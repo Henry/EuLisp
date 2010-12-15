@@ -207,9 +207,9 @@ void xlinitws(unsigned int ssize)
     // (define (*toplev*)
     // (if prompt?
     // (begin
-    // (newline)
-    // (display (current-module))
-    // (display "> ")))
+    // (printnl)
+    // (print (current-module))
+    // (print "> ")))
     // (setq *last* (read *FILE-INPUT*))
     // (if (eq *last* **eof**) (exit))
     // (if prompt?
@@ -228,8 +228,8 @@ void xlinitws(unsigned int ssize)
     setelement(code, 2, xlenter("prompt?"));
     #endif
     setelement(code, 3, xlenter("prompt?"));
-    setelement(code, 4, xlenter("newline"));
-    setelement(code, 5, xlenter("%display"));
+    setelement(code, 4, xlenter("printnl"));
+    setelement(code, 5, xlenter("%print"));
     setelement(code, 6, cvstring("> "));
     setelement(code, 7, xlenter("*FILE-INPUT*"));
     setelement(code, 8, xlenter("read"));
@@ -249,17 +249,17 @@ void xlinitws(unsigned int ssize)
     //  0003 05 03    GREF 15 ; prompt?@root
     //  0005 02 00 22 BRF 0022
     //  0008 0b 00 0f SAVE 000f
-    //  000b 05 04    GREF 04 ; newline@root
+    //  000b 05 04    GREF 04 ; printnl@root
     //  000d 0c 00    CALL 00
     //  000f 0b 00 18 SAVE 0018
     //  0012 50       current-module
     //  0013 10       PUSH
-    //  0014 05 05    GREF 05 ; display@root
+    //  0014 05 05    GREF 05 ; print@root
     //  0016 0c 01    CALL 01
     //  0018 0b 00 22 SAVE 0022
     //  001b 04 06    LIT 06 ; "> "
     //  001d 10       PUSH
-    //  001e 05 05    GREF 05 ; display@root
+    //  001e 05 05    GREF 05 ; print@root
     //  0020 0c 01    CALL 01
     //  0022 0b 00 2c SAVE 002c
     //  0025 05 07    GREF 07 ; *FILE-INPUT*@root
@@ -507,8 +507,8 @@ void xlsymbols()
 
     s_eq = xlenter("eq");
     s_eqv = xlenter("eql");
-    s_equal = xlenter("equal");
-    s_equals = xlenter("=");
+    s_equal = xlenter("%equal");
+    s_equals = xlenter("%=");
 
     s_import = xlenter("import");
     s_only = xlenter("only");

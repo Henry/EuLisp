@@ -92,7 +92,9 @@
            environment-bindings
            environment-parent
 
-           check-ref))
+           check-ref
+
+           %+))
 
 (define (getbcode closure)
         (%vector-ref (%car closure) 0))

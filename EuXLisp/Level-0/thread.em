@@ -64,7 +64,7 @@
            error
            cerror))
 
-(define (no-thread op . args)
+(defun no-thread (op . args)
         no-state:)
 
 ;; cf xsint.c, current_continuation and restore_continuation
@@ -95,11 +95,11 @@
 (defclass <simple-thread> <thread> ())
 
 ;; avoid calling make, which calls mkthread
-(define (%make-thread self cont)
+(defun %make-thread (self cont)
         (initialize (allocate <simple-thread> ()) (list self: self cont: cont)))
 
 ;; (make <thread> function: foo)
-(define (mkthread inits)
+(defun mkthread (inits)
         (let ((initfn (find-key function: inits ())))
           (if (null? initfn)
               (raise-telos-error
@@ -109,50 +109,50 @@
 
 (table-set! builtin-make-table <simple-thread> mkthread)
 
-(define (get-handlers thr)
+(defun get-handlers (thr)
         (car (get-state thr)))
 
-(define (set-handlers thr val)
+(defun set-handlers (thr val)
         (set-state thr (cons val (cdr (get-state thr))))) ; not rplaca
 
-(define (get-uwps thr)
+(defun get-uwps (thr)
         (cdr (get-state thr)))
 
-(define (set-uwps thr val)
+(defun set-uwps (thr val)
         (set-state thr (cons (car (get-state thr)) val))) ; not rplacd
 
-(define-method (generic-write (thr <thread>) stream)
+(defmethod generic-write ((thr <thread>) stream)
                (let ((self (get-self thr))
                      (locks (list-size (get-locks thr)))
                      (signals (get-signals thr)))
-                 (%display "#<" stream)
-                 (display-class-name thr stream)
-                 (%display " " stream)
+                 (%print "#<" stream)
+                 (print-class-name thr stream)
+                 (%print " " stream)
                  (generic-write self stream)
-                 (%display " " stream)
+                 (%print " " stream)
                  (generic-write (self state:) stream)
-                 (if (> locks 0)
+                 (if (%> locks 0)
                      (progn
-                       (%display " " stream)
+                       (%print " " stream)
                        (generic-print locks stream)
-                       (%display " lock" stream)
-                       (if (> locks 1) (%display "s" stream))))
+                       (%print " lock" stream)
+                       (if (%> locks 1) (%print "s" stream))))
                  (if (not (null? signals))
-                     (%display " signals pending" stream))
-                 (%display ">" stream)
+                     (%print " signals pending" stream))
+                 (%print ">" stream)
                  thr))
 
-(define-method (generic-print (thr <thread>) stream)
+(defmethod generic-print ((thr <thread>) stream)
                (generic-write thr stream))
 
-(define (make-uwp-frame cont)
+(defun make-uwp-frame (cont)
         (cons cont ()))
 
-(define (get-uwp-frame-cc uwpf) (car uwpf))
-(define (set-uwp-frame-cc uwpf val) (set-car! uwpf val))
+(defun get-uwp-frame-cc (uwpf) (car uwpf))
+(defun set-uwp-frame-cc (uwpf val) (set-car! uwpf val))
 
-(define (get-uwp-frame-uwps uwpf) (cdr uwpf))
-(define (set-uwp-frame-uwps uwpf val) (set-cdr! uwpf val))
+(defun get-uwp-frame-uwps (uwpf) (cdr uwpf))
+(defun set-uwp-frame-uwps (uwpf val) (set-cdr! uwpf val))
 
 (defcondition <thread-condition> () ()
   abstract?: t)
@@ -165,7 +165,7 @@
 (defcondition <thread-general-error> <thread-error> ())
 (defcondition <thread-already-started> <thread-error> ())
 
-(define (nconc a b)
+(defun nconc (a b)
         (if (null? a)
             b
           (progn
@@ -173,7 +173,7 @@
             a)))
 
 ;; delete first occurence
-(define (delq x l)
+(defun delq (x l)
         (cond ((null? l) ())
               ((eq x (car l)) (cdr l))
               (else (cons (car l) (delq x (cdr l))))))
@@ -182,30 +182,30 @@
 
 (deflocal r-t-r-q ())
 
-(define (queue-empty?) (null? r-t-r-q))
+(defun queue-empty? () (null? r-t-r-q))
 
-;;(define (add-thread-to-queue thread)
+;;(defun add-thread-to-queue (thread)
 ;;        (setq r-t-r-q (nconc r-t-r-q (list thread))))
 
 ;; generate a little non-determinism by random insertion into queue
-(define (add-thread-to-queue thread)
+(defun add-thread-to-queue (thread)
         (cond ((null? r-t-r-q)
                (setq r-t-r-q (list thread)))
-              ((= (random 2) 0)             ; often put at end
+              ((%= (random 2) 0)             ; often put at end
                (setq r-t-r-q (nconc r-t-r-q (list thread))))
               (else
                (insert-thread-in-queue      ; not at start of queue
                 r-t-r-q (cdr r-t-r-q) thread (random (list-size r-t-r-q))))))
 
-(define (insert-thread-in-queue before after thread n)
-        (if (= n 0)
+(defun insert-thread-in-queue (before after thread n)
+        (if (%= n 0)
             (set-cdr! before (cons thread after))
           (insert-thread-in-queue (cdr before) (cdr after) thread (%- n 1))))
 
-(define (remove-thread-from-queue thread)
+(defun remove-thread-from-queue (thread)
         (setq r-t-r-q (delq thread r-t-r-q)))
 
-(define (pop-thread-from-queue)
+(defun pop-thread-from-queue ()
         (if (queue-empty?)
             (no-more-threads)
           (let ((thread (car r-t-r-q)))
@@ -213,7 +213,7 @@
             (setq current-self thread)
             thread)))
 
-(define (pop-and-call-thread)
+(defun pop-and-call-thread ()
         (let* ((new (pop-thread-from-queue))
                (signals (get-signals new)))
           (if (null? signals)
@@ -236,7 +236,7 @@
 
 (deflocal die-when-no-more-threads ())
 
-(define (no-more-threads)
+(defun no-more-threads ()
         (print nl)
         (if die-when-no-more-threads
             (progn
@@ -244,7 +244,7 @@
               (print nl)
               (exit))
           (progn
-            (%display "No more runnable threads. Restarting...")
+            (%print "No more runnable threads. Restarting...")
             (print nl)
             (set-cont current-self ())     ; tidy up
             (set-locks current-self ())
@@ -253,14 +253,14 @@
             ((get-self current-self) reset-state:)
             (reset))))
 
-;;   (define (no-more-threads)
+;;   (defun no-more-threads ()
 ;;           (print nl)
 ;;           (print "No more runnable threads. Bye...\n")
 ;;           (exit))
 
-;;   (define (no-more-threads)
+;;   (defun no-more-threads ()
 ;;           (print nl)
-;;           (%display "No more runnable threads. Restarting...\n")
+;;           (%print "No more runnable threads. Restarting...\n")
 ;;           (set-cont current-self ())          ; tidy up
 ;;           (set-locks current-self ())
 ;;           (set-state current-self (list () (list ())))
@@ -271,7 +271,7 @@
 ;; capture and save current continuation, pass to a continuation in the
 ;; queue
 ;; this is expensive as call/cc uses a lot of memory
-(define (thread-reschedule)
+(defun thread-reschedule ()
         (if (queue-empty?)
             t
           (call/cc
@@ -280,12 +280,12 @@
              (add-thread-to-queue current-self)
              (pop-and-call-thread)))))
 
-(define (make-thread fun)
+(defun make-thread (fun)
         (let ((thread (%make-thread (%%make-thread fun) ())))
           (set-uwps thread (list (make-uwp-frame ())))
           thread))
 
-(define (%%make-thread fun)
+(defun %%make-thread (fun)
         (let ((ready? ())
               (started? ())
               (killed? ())
@@ -349,7 +349,7 @@
                                          value: op)))))
             self)))
 
-(define (thread-kill thread)
+(defun thread-kill (thread)
         (if (thread? thread)
             (progn
               ((get-self thread) kill: thread)
@@ -361,15 +361,15 @@
                  "not a thread in thread-kill"
                  value: thread)))
 
-(define (thread-queue) r-t-r-q)
+(defun thread-queue () r-t-r-q)
 
-(define (clear-queue) (setq r-t-r-q ()))
+(defun clear-queue () (setq r-t-r-q ()))
 
-(define (current-thread) current-self)
+(defun current-thread () current-self)
 
 (deflocal toplevel-thread
   (let ((killed? ()))
-    (define (interactive-thread op . args)
+    (defun interactive-thread (op . args)
             (cond ((eq op ready?:) ())
                   ((eq op kill:)
                    (setq killed? t)
@@ -403,7 +403,7 @@
 
 (setq current-self toplevel-thread)
 
-(define (thread-start thread . args)
+(defun thread-start (thread . args)
         (if (thread? thread)
             (progn
               ((get-self thread) start: thread args)
@@ -412,14 +412,14 @@
                  "not a thread in thread-start"
                  value: thread)))
 
-(define (thread-value thread)
+(defun thread-value (thread)
         (if (thread? thread)
             ((get-self thread) value:)
           (error <thread-general-error>
                  "not a thread in thread-value"
                  value: thread)))
 
-(define (thread-state thread)
+(defun thread-state (thread)
         (if (thread? thread)
             ((get-self thread) state:)
           (error <thread-general-error>
@@ -447,18 +447,18 @@
   ()
   constructor: (make-lock))
 
-(define-method (generic-write (l <lock>) stream)
-               (%display "#<" stream)
-               (display-class-name l stream)
-               (%display " " stream)
+(defmethod generic-write ((l <lock>) stream)
+               (%print "#<" stream)
+               (print-class-name l stream)
+               (%print " " stream)
                (generic-write (lock-queue l) stream)
-               (%display " value " stream)
+               (%print " value " stream)
                (generic-write (lock-value l) stream)
-               (if (= (lock-value l) 0)
+               (if (%= (lock-value l) 0)
                    (progn
-                     (%display " owner " stream)
+                     (%print " owner " stream)
                      (generic-write (lock-owner l) stream)))
-               (%display ">" stream)
+               (%print ">" stream)
                l)
 
 (defcondition <lock-condition> () ()
@@ -467,27 +467,27 @@
 (defcondition <lock-error> <lock-condition>
   ((value default: "no-value")))
 
-(define (add-thread-to-lock-queue lock thread)
+(defun add-thread-to-lock-queue (lock thread)
         (set-lock-queue!
          lock
          (nconc (lock-queue lock) (list thread))))
 
-(define (thread-reschedule-lock lock)
+(defun thread-reschedule-lock (lock)
         (call/cc
          (lambda (cc)
            (set-cont current-self cc)
            (add-thread-to-lock-queue lock current-self)
            (pop-and-call-thread))))
 
-(define (lockit l)
-        (if (= (lock-value l) 1)
+(defun lockit (l)
+        (if (%= (lock-value l) 1)
             (let ((current (current-thread)))
               (set-lock-value! l 0)
               (set-lock-owner! l current)
               (set-locks current (cons l (get-locks current))))
           (thread-reschedule-lock l)))
 
-(define (unlockit l)
+(defun unlockit (l)
         (let ((owner (lock-owner l)))
           (if owner (set-locks owner (delq l (get-locks owner))))
           (if (cons? (lock-queue l))
@@ -502,18 +502,18 @@
               (set-lock-owner! l ())
               (set-lock-value! l 1)))))
 
-(define (release-locks thread)
+(defun release-locks (thread)
         (let ((locks (get-locks thread)))
           (if locks
               (let ((len (list-size locks)))
                 (for-each unlockit (get-locks thread))
-                (%display ";; warning: thread finished holding ")
-                (%display len)
-                (%display " lock")
-                (if (> len 1) (%display "s"))
-                (%display " -- released\n")))))
+                (%print ";; warning: thread finished holding ")
+                (%print len)
+                (%print " lock")
+                (if (%> len 1) (%print "s"))
+                (%print " -- released\n")))))
 
-(define (lock l)
+(defun lock (l)
         (if (lock? l)
             (lockit l)
           (error <lock-error>
@@ -521,7 +521,7 @@
                  value: l))
         l)
 
-(define (unlock l)
+(defun unlock (l)
         (if (lock? l)
             (unlockit l)
           (error <lock-error>
@@ -540,7 +540,7 @@
 ;; ()       poll
 ;; t       suspend until ready
 ;; time     wait
-(define-method (wait (thread <thread>) (time <object>))
+(defmethod wait ((thread <thread>) (time <object>))
                (cond ((null? time)                 ; poll
                       (if (eq (thread-state thread) ready:)
                           thread
@@ -549,13 +549,13 @@
                       (thread-value thread)
                       thread)
                      ((and (number? time)
-                           (>= time 0))
+                           (%>= time 0))
                       (thread-timeout thread time))
                      (t (error <wait-error>
                                "not a valid timeout in wait"
                                value: time))))
 
-(define (thread-timeout thread time)
+(defun thread-timeout (thread time)
         (let ((state (thread-state thread))
               (interval (round time)))
           (cond ((eq state ready:) thread)
@@ -569,21 +569,21 @@
                        thread
                      ())))))
 
-(define (timeout-loop timeout test)
-        (if (and (< (vector-ref (cpu-time) 0) timeout)
+(defun timeout-loop (timeout test)
+        (if (and (%< (vector-ref (cpu-time) 0) timeout)
                  (not (test)))
             (progn
               (thread-reschedule)
               (timeout-loop timeout test))))
 
-(define-method (wait (str <stream>) (time <object>))
+(defmethod wait ((str <stream>) (time <object>))
                (cond ((null? time) (char-ready? str))
                      ((eq time t) (stream-suspend str))
                      (t (timeout-loop (%+ (vector-ref (cpu-time) 0) (round time))
                                       (lambda () (char-ready? str)))
                         (char-ready? str))))
 
-(define (stream-suspend str)
+(defun stream-suspend (str)
         (if (char-ready? str)
             t
           (progn
@@ -592,7 +592,7 @@
 
 ;; error handlers
 
-(define (establish-uwp cleanups)
+(defun establish-uwp (cleanups)
         (dprint (list "establish uwp" cleanups))
         (let* ((thread (current-thread))
                (frame (car (get-uwps thread))))
@@ -600,7 +600,7 @@
            frame
            (cons cleanups (get-uwp-frame-uwps frame)))))
 
-(define (disestablish-uwp value cleanups)
+(defun disestablish-uwp (value cleanups)
         (dprint (list "disestablish uwp" value cleanups))
         (let* ((thread (current-thread))
                (frame (car (get-uwps thread)))
@@ -613,12 +613,12 @@
           ((car uwps))                      ; run after forms
           value))
 
-(define (establish-handler fun)
+(defun establish-handler (fun)
         (dprint (list "establish handler" fun))
         (let ((thread (current-thread)))
           (set-handlers thread (cons fun (get-handlers thread)))))
 
-(define (disestablish-handler value handler)
+(defun disestablish-handler (value handler)
         (dprint (list "disestablish handler" value handler))
         (let* ((thread (current-thread))
                (handlers (get-handlers thread)))
@@ -629,7 +629,7 @@
 
 (defcondition <wrong-condition-class> <thread-error> ())
 
-(define (signal condition resume . thread)
+(defun signal (condition resume . thread)
         (let ((current (current-thread)))
           (if (or (null? thread) (eq (car thread) current))
               (current-thread-signal condition resume current)
@@ -639,7 +639,7 @@
                         value: condition)
               (other-thread-signal condition resume (car thread))))))
 
-(define (current-thread-signal condition resume current)
+(defun current-thread-signal (condition resume current)
         (if (null? (get-handlers current))
             (progn
               (default-handler condition resume)
@@ -657,7 +657,7 @@
 ;;   namely condition and resume---defhandler?
 ;;   or the use of dynamic variables
 
-(define (call-handler handler condition resume current)
+(defun call-handler (handler condition resume current)
         (dprint (list "handling" handler condition resume))
         (handler condition
                  (lambda val
@@ -669,7 +669,7 @@
                             "attempt to resume non-continuation"
                             value: resume)))))
 
-(define (other-thread-signal condition resume thread)
+(defun other-thread-signal (condition resume thread)
         (let ((signals (get-signals thread)))
           (if (null? signals)
               (set-signals thread (list (cons condition resume)))
@@ -677,7 +677,7 @@
                       (list (cons condition resume)))))
         t)
 
-(define (unwrap-cc cc)
+(defun unwrap-cc (cc)
         (lambda z
           (unwrap-uwps cc)
           (cond ((null? z) (cc))
@@ -693,19 +693,19 @@
                (let ((,name (unwrap-cc cc)))
                  ,@body)))))
 
-(define (push-uwp-frame cc)
+(defun push-uwp-frame (cc)
         (dprint (list "push uwp frame" cc))
         (let ((thread (current-thread)))
           (set-uwps thread (cons (make-uwp-frame cc)
                                  (get-uwps thread)))))
 
-(define (pop-uwp-frame result)
+(defun pop-uwp-frame (result)
         (dprint (list "pop uwp frame"))
         (let ((thread (current-thread)))
           (set-uwps thread (cdr (get-uwps thread))))
         result)
 
-(define (unwrap-uwps cc)
+(defun unwrap-uwps (cc)
         (dprint (list "unwrap uwps" cc))
         (let* ((thread (current-thread))
                (frames (get-uwps thread))
@@ -720,14 +720,14 @@
                   ()                       ; done
                 (unwrap-uwps cc))))))
 
-(define (unwrap-and-reset)
+(defun unwrap-and-reset ()
         (dprint (list "unwrap and reset"))
         (unwrap-uwps ())
         (if (eq (current-thread) toplevel-thread)
             (reset)
           (thread-kill (current-thread))))
 
-(define (exec-uwps frame)
+(defun exec-uwps (frame)
         (let ((uwps (get-uwp-frame-uwps frame)))
           (if (null? uwps)
               ()
@@ -747,14 +747,14 @@
      (establish-uwp cleanups)
      (disestablish-uwp ,protected cleanups)))
 
-(define (error condclass message . opts)
+(defun error (condclass message . opts)
         (signal (apply make condclass message: message opts) ()))
 
-;;   (define (cerror condclass message . opts)
+;;   (defun cerror (condclass message . opts)
 ;;           (let/cc resume
 ;;             (signal (apply make condclass message: message opts) resume)))
 
-(define (cerror condclass message . opts)
+(defun cerror (condclass message . opts)
         (call/cc (lambda (cc)
                    (push-uwp-frame cc)
                    (pop-uwp-frame
@@ -764,7 +764,7 @@
 
 ;; debugging support
 
-(define (debug cc condition)
+(defun debug (cc condition)
         (print "\nDebug loop.  Type help: for help\n")
         (frame-where *xlframe* cc condition)
         (setq current-print-depth 0)
@@ -788,10 +788,10 @@
 (deflocal *debug-depth* 0)
 (deflocal *debug-rl* ())
 
-(define (inc-depth inc)
+(defun inc-depth (inc)
         (setq *debug-depth* (%+ *debug-depth* inc)))
 
-(define (debug-loop frameptr cc condition)
+(defun debug-loop (frameptr cc condition)
         (if (not *debug-rl*) ;; If readline is not used print prompt
             (print "[error" *debug-depth* "] " (current-module) ">"))
         (let ((op (read)))
@@ -809,7 +809,7 @@
                     frameptr))
            cc condition)))
 
-(define (debug-op frameptr cc cd op args)
+(defun debug-op (frameptr cc cd op args)
         (let ((fn (table-ref op-table op)))
           (if (null? fn)
               (progn
@@ -819,7 +819,7 @@
 
 (deflocal op-table (make-table eq))
 
-(define (help frameptr cc cd . args)
+(defun help (frameptr cc cd . args)
         (print "Debug loop.\n")
         (print "top:                                return to top level\n")
         (print "resume:  or  (resume: val)          resume from error\n")
@@ -833,12 +833,12 @@
 
 (table-set! op-table help: help)
 
-(define (debug-return frameptr cc cd . args)
+(defun debug-return (frameptr cc cd . args)
         (unwrap-and-reset))
 
 (table-set! op-table top: debug-return)
 
-(define (resume frameptr cc cd . args)
+(defun resume (frameptr cc cd . args)
         (if (null? cc)
             (error <general-error>
                    "attempt to resume from a non-continuable error"
@@ -849,13 +849,13 @@
 
 (table-set! op-table resume: resume)
 
-(define (debug-backtrace frameptr cc cd . args)
+(defun debug-backtrace (frameptr cc cd . args)
         (backtrace frameptr)
         frameptr)
 
 (table-set! op-table bt: debug-backtrace)
 
-(define (locals frameptr cc cd . args)
+(defun locals (frameptr cc cd . args)
         (letfuns ((loop (e)
                         (locals-loop (vector-ref (%car e) 0) (%car e) 1)
                         (if (%cdr e) (loop (%cdr e)))))
@@ -863,7 +863,7 @@
         (print nl)
         frameptr)
 
-(define (locals-loop syms vals index)
+(defun locals-loop (syms vals index)
         (if (cons? syms)
             (progn
               (print (car syms))
@@ -872,8 +872,8 @@
               (print (vector-ref vals index) nl)
               (locals-loop (cdr syms) vals (%+ index 1)))))
 
-(define (indent n)
-        (if (< n 15)
+(defun indent (n)
+        (if (%< n 15)
             (progn
               (print " ")
               (indent (%+ n 1)))))
@@ -884,14 +884,14 @@
 
 (table-set! op-table down: frame-down)
 
-(define (frame-where frameptr cc cd . args)
+(defun frame-where (frameptr cc cd . args)
         (print "Broken at ")
         (print (frame-fun frameptr) nl nl)
         frameptr)
 
 (table-set! op-table where: frame-where)
 
-(define (frame-cond frameptr cc cd . args)
+(defun frame-cond (frameptr cc cd . args)
         (print cd nl nl)
         frameptr)
 

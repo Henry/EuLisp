@@ -151,14 +151,14 @@ static NTDEF *nptr, ntab[] =
     {"cdr", OP_CDR, 1},
     {"set-car!", OP_SETCAR, 2},
     {"set-cdr!", OP_SETCDR, 2},
-    {"+", OP_ADD, -2},
-    {"-", OP_SUB, -2},
-    {"*", OP_MUL, -2},
-    {"/", OP_DIV, -2},
-    {"quotient", OP_QUO, -2},
-    {"<", OP_LSS, -2},
-    {"=", OP_EQL, -2},
-    {">", OP_GTR, -2},
+    {"%+", OP_ADD, -2},
+    {"%-", OP_SUB, -2},
+    {"%*", OP_MUL, -2},
+    {"%/", OP_DIV, -2},
+    {"%quotient", OP_QUO, -2},
+    {"%<", OP_LSS, -2},
+    {"%=", OP_EQL, -2},
+    {"%>", OP_GTR, -2},
     {"class-of", OP_CLASSOF, 1},
     {"%GETIVAR", OP_GETIVAR, 2},
     {"%SETIVAR", OP_SETIVAR, 3},
@@ -2575,15 +2575,15 @@ static void do_defmodule(LVAL form, int cont)
 
     #ifdef NOISY_LOAD
     char buf[128];
-    LVAL s_display = NULL;
+    LVAL s_print = NULL;
     extern int quiet;
 
     if (!quiet)
     {
         push(body);
         sprintf(buf, "<%s...", modname);
-        s_display = xlenter_module("%display", root_module);
-        expr = cons(s_display, cons(cvstring(buf), NIL));
+        s_print = xlenter_module("%print", root_module);
+        expr = cons(s_print, cons(cvstring(buf), NIL));
         do_expr(expr, C_NEXT);
         drop(1);
     }
@@ -2602,7 +2602,7 @@ static void do_defmodule(LVAL form, int cont)
     if (!quiet)
     {
         sprintf(buf, "done>\n");
-        expr = cons(s_display, cons(cvstring(buf), NIL));
+        expr = cons(s_print, cons(cvstring(buf), NIL));
         do_expr(expr, C_NEXT);
     }
     #endif
@@ -4294,7 +4294,7 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
     xlputstr(fptr, buf);
     fflush(getfile(fptr));
 
-    // display the operands
+    // print the operands
     int i, n = 1;
     for (OTDEF *op = otab; op->ot_name; ++op)
     {

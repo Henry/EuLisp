@@ -102,7 +102,7 @@ FUNDEF funtab[] =
     {"member-list", xmember},
     {"memv", xmemv},
     {"memq", xmemq},
-    {"assoc", xassoc},
+    {"%assoc", xassoc},
     {"assv", xassv},
     {"assq", xassq},
     {"list-ref", xlistref},
@@ -176,7 +176,7 @@ FUNDEF funtab[] =
     {"default-object?", xdefaultobjectp},
     {"eq", xeq},
     {"eql", xeqv},
-    {"equal", xequal},
+    {"%equal", xequal},
 
     // arithmetic functions
     {"%zero?", xzerop},
@@ -201,8 +201,8 @@ FUNDEF funtab[] =
     {"%/", xdiv},
     {"%quotient", xquo},
     {"%remainder", xrem},
-    {"min", xmin},
-    {"max", xmax},
+    {"%min", xmin},
+    {"%max", xmax},
     {"sin", xsin},
     {"cos", xcos},
     {"tan", xtan},
@@ -221,11 +221,11 @@ FUNDEF funtab[] =
     {"lognot", xlognot},
 
     // numeric comparison functions
-    {"<", xlss},
-    {"<=", xleq},
-    {"=", xeql},
-    {">=", xgeq},
-    {">", xgtr},
+    {"%<", xlss},
+    {"%<=", xleq},
+    {"%=", xeql},
+    {"%>=", xgeq},
+    {"%>", xgtr},
 
     // string functions
     {"string-size", xstrlen},
@@ -266,14 +266,13 @@ FUNDEF funtab[] =
     {"read-long", xrdlong},
     {"peek-char", xpeek_char},
     {"char-ready?", xchar_readyp},
-    {"write", xwrite},
+    {"%write", xwrite},
     {"write-char", xwrchar},
     {"write-byte", xwrbyte},
     {"write-short", xwrshort},
     {"write-long", xwrlong},
-    {"%display", xdisplay},
+    {"%print", xprint},
     {"printnl", xprintnl},
-    {"newline", xnewline},
     {"sflush", xsflush},
     {"flush", xflush},
 

@@ -25,8 +25,8 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule number
-  (import (root
-           syntax-0)
+  (syntax (syntax-0)
+   import (root)
    export (binary+
            binary-
            binary*
@@ -145,18 +145,18 @@
   (expt a b))
 
 (defmethod pow ((a <integer>) (b <integer>))
-  (cond ((>= b 0)
-         (cond ((= b 0) 1)
-               ((= b 1) a)
+  (cond ((%>= b 0)
+         (cond ((%= b 0) 1)
+               ((%= b 1) a)
                (t (int-pow a b 1))))
-        ((= a 1) 1)
-        ((= a -1) (if (even? b) 1 -1))
+        ((%= a 1) 1)
+        ((%= a -1) (if (even? b) 1 -1))
         (t (expt a b))))
 
 (defun int-pow (a b sofar)
-  (cond ((> b 1)
+  (cond ((%> b 1)
          (int-pow (* a a) (quotient b 2) (if (odd? b) (* a sofar) sofar)))
-        ((= b 1) (* a sofar))
+        ((%= b 1) (* a sofar))
         (t sofar)))
 
 (defgeneric zero? (a))

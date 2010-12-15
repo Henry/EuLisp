@@ -23,13 +23,17 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule macros
-  (import (root)
+  (import (root
+           system)
    export (defmacro
            quasiquote
            unquote
            unquote-splicing
            macroexpand1
            macroexpand
+
+           ;; Macro-expanding version of the system define
+           ;; Used in syntax only
            %defun))
 
 (define (getprop s v)
@@ -96,26 +100,8 @@
 ;;                 (%expand-arg-list (cadr form))
 ;;                 (%expand-list (cddr form))))))
 
-;; (put-syntax '.l '%syntax
-;;             (lambda (form)
-;;               (cons
-;;                '.l
-;;                (cons
-;;                 (%expand-arg-list (cadr form))
-;;                 (%expand-list (cddr form))))))
-
-;; This is required otherwise macros are not expanded inside definitions
-(put-syntax 'define '%syntax
-            (lambda (form)
-              (cons
-               'define
-               (cons
-                (%expand-arg-list (cadr form))
-                (%expand-list (cddr form))))))
-
-;; This is not sufficient, see above
-;;(put-syntax 'define '%syntax identity)
-
+;; Explicit macro expansion is required here
+;; otherwise macros are not expanded inside definitions
 (put-syntax '%defun '%syntax
             (lambda (form)
               (cons
@@ -250,7 +236,7 @@
                ((eq (car exp) 'quasiquote)
                 (setq qq-lev (add1 qq-lev))
                 (let ((qq-val
-                       (if (= qq-lev 1) ; min val after inc
+                       (if (%= qq-lev 1) ; min val after inc
                            ; --> outermost level
                            (qq (cadr exp))
                          (qq-car-cdr exp))))
@@ -260,7 +246,7 @@
                     (eq (car exp) 'unquote-splicing))
                 (setq qq-lev (sub1 qq-lev))
                 (let ((qq-val
-                       (if (= qq-lev 0) ; min val
+                       (if (%= qq-lev 0) ; min val
                            ; --> outermost level
                            (if (eq (car exp) 'unquote-splicing)
                                (cons append-me-sym
@@ -328,9 +314,10 @@
 ;; use this in compile below for debugging
 (define (expand-macros expr)
         (let ((result (%expand-macros expr)))
-          (write expr)
-          (%display " ==>> ")
-          (print result nl)
+          (%write expr)
+          (%print " ==>> ")
+          (%print result)
+          (%print #\\n)
           result))
 
 (define (compile expr . env)
@@ -338,10 +325,10 @@
             (%compile (%expand-macros expr))
           (%compile (%expand-macros expr) (car env))))
 
-;;  (define (compile expr . env)
-;;          (if (null? env)
-;;              (%compile (expand-macros expr))
-;;            (%compile (expand-macros expr) (car env))))
+;; (define (compile expr . env)
+;;         (if (null? env)
+;;             (%compile (expand-macros expr))
+;;           (%compile (expand-macros expr) (car env))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module macros

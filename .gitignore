@@ -34,6 +34,7 @@ Tools/*.[chi]
 /Examples/Test
 /Youtoo/Scripts
 /Eu2C/Scripts
+/EuXLisp/Scripts
 /Modules/Case
 
 # Ignore Eu2c CL object files

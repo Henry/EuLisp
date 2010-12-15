@@ -384,6 +384,14 @@ void xlexecute(LVAL fun)
                 {
                     xlval = cvfixnum(getfixnum(xlval) + getfixnum(tmp));
                 }
+                else if (fixp(xlval) && floatp(tmp))
+                {
+                    xlval = cvflonum(getfixnum(xlval) + getflonum(tmp));
+                }
+                else if (floatp(xlval) && fixp(tmp))
+                {
+                    xlval = cvflonum(getflonum(xlval) + getfixnum(tmp));
+                }
                 else if (floatp(xlval) && floatp(tmp))
                 {
                     xlval = cvflonum(getflonum(xlval) + getflonum(tmp));
@@ -402,6 +410,14 @@ void xlexecute(LVAL fun)
                 {
                     xlval = cvfixnum(getfixnum(xlval) - getfixnum(tmp));
                 }
+                else if (fixp(xlval) && floatp(tmp))
+                {
+                    xlval = cvflonum(getfixnum(xlval) - getflonum(tmp));
+                }
+                else if (floatp(xlval) && fixp(tmp))
+                {
+                    xlval = cvflonum(getflonum(xlval) - getfixnum(tmp));
+                }
                 else if (floatp(xlval) && floatp(tmp))
                 {
                     xlval = cvflonum(getflonum(xlval) - getflonum(tmp));
@@ -419,6 +435,14 @@ void xlexecute(LVAL fun)
                 if (fixp(xlval) && fixp(tmp))
                 {
                     xlval = cvfixnum(getfixnum(xlval) * getfixnum(tmp));
+                }
+                else if (fixp(xlval) && floatp(tmp))
+                {
+                    xlval = cvflonum(getfixnum(xlval) * getflonum(tmp));
+                }
+                else if (floatp(xlval) && fixp(tmp))
+                {
+                    xlval = cvflonum(getflonum(xlval) * getfixnum(tmp));
                 }
                 else if (floatp(xlval) && floatp(tmp))
                 {
@@ -441,6 +465,22 @@ void xlexecute(LVAL fun)
                         xlinterror("division by zero", xlval, s_arith_error);
                     }
                     xlval = cvfixnum(getfixnum(xlval) / getfixnum(tmp));
+                }
+                else if (fixp(xlval) && floatp(tmp))
+                {
+                    if (getflonum(tmp) == (FLOTYPE) 0.0)
+                    {
+                        xlinterror("division by zero", xlval, s_arith_error);
+                    }
+                    xlval = cvflonum(getfixnum(xlval) / getflonum(tmp));
+                }
+                else if (floatp(xlval) && fixp(tmp))
+                {
+                    if (getfixnum(tmp) == (FIXTYPE) 0)
+                    {
+                        xlinterror("division by zero", xlval, s_arith_error);
+                    }
+                    xlval = cvflonum(getflonum(xlval) / getfixnum(tmp));
                 }
                 else if (floatp(xlval) && floatp(tmp))
                 {
@@ -483,6 +523,14 @@ void xlexecute(LVAL fun)
                 {
                     xlval = (getfixnum(xlval) < getfixnum(tmp) ? true : NIL);
                 }
+                else if (fixp(xlval) && floatp(tmp))
+                {
+                    xlval = (getfixnum(xlval) < getflonum(tmp) ? true : NIL);
+                }
+                else if (floatp(xlval) && fixp(tmp))
+                {
+                    xlval = (getflonum(xlval) < getfixnum(tmp) ? true : NIL);
+                }
                 else if (floatp(xlval) && floatp(tmp))
                 {
                     xlval = (getflonum(xlval) < getflonum(tmp) ? true : NIL);
@@ -501,6 +549,14 @@ void xlexecute(LVAL fun)
                 {
                     xlval = (getfixnum(xlval) == getfixnum(tmp) ? true : NIL);
                 }
+                else if (fixp(xlval) && floatp(tmp))
+                {
+                    xlval = (getfixnum(xlval) == getflonum(tmp) ? true : NIL);
+                }
+                else if (floatp(xlval) && fixp(tmp))
+                {
+                    xlval = (getflonum(xlval) == getfixnum(tmp) ? true : NIL);
+                }
                 else if (floatp(xlval) && floatp(tmp))
                 {
                     xlval = (getflonum(xlval) == getflonum(tmp) ? true : NIL);
@@ -518,6 +574,14 @@ void xlexecute(LVAL fun)
                 if (fixp(xlval) && fixp(tmp))
                 {
                     xlval = (getfixnum(xlval) > getfixnum(tmp) ? true : NIL);
+                }
+                else if (fixp(xlval) && floatp(tmp))
+                {
+                    xlval = (getfixnum(xlval) > getflonum(tmp) ? true : NIL);
+                }
+                else if (floatp(xlval) && fixp(tmp))
+                {
+                    xlval = (getflonum(xlval) > getfixnum(tmp) ? true : NIL);
                 }
                 else if (floatp(xlval) && floatp(tmp))
                 {
