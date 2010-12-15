@@ -24,12 +24,14 @@ platforms
 # Ignore corefiles
 core
 
-# Ignore intermediate build files from optional packages
+# Ignore intermediate build files from Youtoo components
 /Youtoo/Test/u2/*
 /Youtoo/Tools/u2/*
 
+# Ignore Youtoo intermediate build files from optional packages
 /Examples/*/u2
 /Modules/*/u2
+/Modules/*/*/u2
 
 
 # Ignore personal test area
