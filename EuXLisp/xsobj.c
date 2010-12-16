@@ -820,7 +820,7 @@ LVAL xclass_keywords()
 
 LVAL xset_class_keywords()
 {
-    static char *cfn_name = "set-class-keywords!";
+    static char *cfn_name = "set-class-keywords";
 
     LVAL cl = xlgetarg();
     LVAL val = xlgalist();
@@ -990,7 +990,7 @@ LVAL xgf_args()
 
 LVAL xgf_setargs()
 {
-    static char *cfn_name = "set-generic-args!";
+    static char *cfn_name = "set-generic-args";
 
     LVAL gf = xlgageneric();
     LVAL val = xlgalist();
@@ -1110,7 +1110,7 @@ LVAL xslot_default()
 
 LVAL xset_slot_default()
 {
-    static char *cfn_name = "set-slot-default!";
+    static char *cfn_name = "set-slot-default";
 
     LVAL slot = xlgaslot();
     LVAL val = xlgetarg();
@@ -1131,7 +1131,7 @@ LVAL xslot_requiredp()
 
 LVAL xset_slot_requiredp()
 {
-    static char *cfn_name = "set-slot-required-p!";
+    static char *cfn_name = "set-slot-required-p";
 
     LVAL slot = xlgaslot();
     LVAL val = xlgetarg();

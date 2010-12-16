@@ -102,7 +102,7 @@
            class-precedence-list
            class-slots
            class-keywords
-           ;   set-class-keywords!
+           ;   set-class-keywords
            class-subclasses
            class-instance-size
            class-abstract?
@@ -122,9 +122,9 @@
            slot-name
            slot-keyword
            slot-default
-           ;   set-slot-default!
+           ;   set-slot-default
            slot-required?
-           ;   set-slot-required?!
+           ;   set-slot-required?
            ;   find-slot-index
            ;   initialize-object
            ;   initialize-class

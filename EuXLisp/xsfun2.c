@@ -923,10 +923,10 @@ LVAL xgetfposition()
     return (cvfixnum(ostell(getfile(fptr))));
 }
 
-// xsetfposition - built-in function 'set-file-position!'
+// xsetfposition - built-in function 'set-file-position'
 LVAL xsetfposition()
 {
-    static char *cfn_name = "set-file-position!";
+    static char *cfn_name = "set-file-position";
 
     LVAL fptr = xlgastream();
     LVAL val = xlgafixnum();
@@ -1151,10 +1151,10 @@ LVAL xstrref()
     return (cvchar(getstring(str)[n]));
 }
 
-// xstrset - built-in function 'string-set!'
+// xstrset - built-in function 'string-set'
 LVAL xstrset()
 {
-    static char *cfn_name = "string-set!";
+    static char *cfn_name = "string-set";
 
     // get the string, the index and the value
     LVAL str = xlgastring();
@@ -1166,7 +1166,7 @@ LVAL xstrset()
     int n;
     if ((n = (int)getfixnum(num)) < 0 || n >= getslength(str) - 1)
     {
-        xlcerror("index out of range in string-set!", num, NIL);
+        xlcerror("index out of range in string-set", num, NIL);
     }
 
     // insert the character

@@ -37,17 +37,17 @@
 ;;     `(table-ref setter-table ,obj))
 
 (defun setter-setter (obj val)
-        (table-set! setter-table obj val))
+        (table-set setter-table obj val))
 
 (setter-setter setter setter-setter)
 
-(setter-setter string-ref string-set!)
-(setter-setter vector-ref vector-set!)
-(setter-setter get-file-position set-file-position!)
-(setter-setter symbol-value set-symbol-value!)
-(setter-setter symbol-plist set-symbol-plist!)
-(setter-setter table-ref table-set!)
-(setter-setter table-fill set-table-fill!)
+(setter-setter string-ref string-set)
+(setter-setter vector-ref vector-set)
+(setter-setter get-file-position set-file-position)
+(setter-setter symbol-value set-symbol-value)
+(setter-setter symbol-plist set-symbol-plist)
+(setter-setter table-ref table-set)
+(setter-setter table-fill set-table-fill)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module setter

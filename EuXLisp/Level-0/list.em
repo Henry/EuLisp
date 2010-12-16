@@ -31,9 +31,9 @@
            setter))
 
 (defun (setter car) (l x)
-  (set-car! l x))
+  (set-car l x))
 (defun (setter cdr) (l x)
-  (set-cdr! l x))
+  (set-cdr l x))
 
 (defun (setter caar) (l x)
   ((setter car) (car l) x))
@@ -93,7 +93,7 @@
   ((setter cdr) (cdddr l) x))
 
 (defun (setter list-ref) (l n x)
-  (set-car! (list-tail l n) x))
+  (set-car (list-tail l n) x))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module list

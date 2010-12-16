@@ -34,11 +34,11 @@
            %initloop1
            %car
            %cdr
-           %set-car!
-           %set-cdr!
+           %set-car
+           %set-cdr
            %vector-size
            %vector-ref
-           %vector-set!
+           %vector-set
            %keywords
            %make-constant
            %import
@@ -60,15 +60,15 @@
            stderr
 
            ;; Setters
-           set-car!
-           set-cdr!
-           vector-set!
-           set-file-position!
-           set-symbol-value!
-           set-symbol-plist!
-           table-set!
-           set-table-fill!
-           string-set!
+           set-car
+           set-cdr
+           vector-set
+           set-file-position
+           set-symbol-value
+           set-symbol-plist
+           table-set
+           set-table-fill
+           string-set
 
            set-module
            find-module

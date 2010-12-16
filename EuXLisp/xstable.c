@@ -130,7 +130,7 @@ LVAL xtable_ref()
 // xtable_set - put an elt into a table
 LVAL xtable_set()
 {
-    static char *cfn_name = "table-set!";
+    static char *cfn_name = "table-set";
 
     int (*equality) ();
 
@@ -375,7 +375,7 @@ LVAL xtable_fill()
 // xtable_setfill - set the table-fill value
 LVAL xtable_setfill()
 {
-    static char *cfn_name = "set-table-fill!";
+    static char *cfn_name = "set-table-fill";
 
     LVAL table = xlgatable();
     LVAL val = xlgetarg();

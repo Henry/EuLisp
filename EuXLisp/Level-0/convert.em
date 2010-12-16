@@ -222,7 +222,7 @@
 
 (defun make-index-table (table list index)
         (while (cons? list)
-          (table-set! table index (car list))
+          (table-set table index (car list))
           (setq list (cdr list))
           (setq index (%+ index 1)))
         table)

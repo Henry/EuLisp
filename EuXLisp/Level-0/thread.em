@@ -107,7 +107,7 @@
                inits))
           (make-thread initfn)))
 
-(table-set! builtin-make-table <simple-thread> mkthread)
+(table-set builtin-make-table <simple-thread> mkthread)
 
 (defun get-handlers (thr)
         (car (get-state thr)))
@@ -149,10 +149,10 @@
         (cons cont ()))
 
 (defun get-uwp-frame-cc (uwpf) (car uwpf))
-(defun set-uwp-frame-cc (uwpf val) (set-car! uwpf val))
+(defun set-uwp-frame-cc (uwpf val) (set-car uwpf val))
 
 (defun get-uwp-frame-uwps (uwpf) (cdr uwpf))
-(defun set-uwp-frame-uwps (uwpf val) (set-cdr! uwpf val))
+(defun set-uwp-frame-uwps (uwpf val) (set-cdr uwpf val))
 
 (defcondition <thread-condition> () ()
   abstract?: t)
@@ -169,7 +169,7 @@
         (if (null? a)
             b
           (progn
-            (set-cdr! (last-pair a) b)
+            (set-cdr (last-pair a) b)
             a)))
 
 ;; delete first occurence
@@ -199,7 +199,7 @@
 
 (defun insert-thread-in-queue (before after thread n)
         (if (%= n 0)
-            (set-cdr! before (cons thread after))
+            (set-cdr before (cons thread after))
           (insert-thread-in-queue (cdr before) (cdr after) thread (%- n 1))))
 
 (defun remove-thread-from-queue (thread)
@@ -431,13 +431,13 @@
 (defclass <lock> ()
 
   ((owner reader: lock-owner
-          writer: set-lock-owner!
+          writer: set-lock-owner
           default: ())
    (queue reader: lock-queue
-          writer: set-lock-queue!
+          writer: set-lock-queue
           default: ())
    (value reader: lock-value
-          writer: set-lock-value!
+          writer: set-lock-value
           default: 1))
 
   predicate: lock?
@@ -468,7 +468,7 @@
   ((value default: "no-value")))
 
 (defun add-thread-to-lock-queue (lock thread)
-        (set-lock-queue!
+        (set-lock-queue
          lock
          (nconc (lock-queue lock) (list thread))))
 
@@ -482,8 +482,8 @@
 (defun lockit (l)
         (if (%= (lock-value l) 1)
             (let ((current (current-thread)))
-              (set-lock-value! l 0)
-              (set-lock-owner! l current)
+              (set-lock-value l 0)
+              (set-lock-owner l current)
               (set-locks current (cons l (get-locks current))))
           (thread-reschedule-lock l)))
 
@@ -492,15 +492,15 @@
           (if owner (set-locks owner (delq l (get-locks owner))))
           (if (cons? (lock-queue l))
               (let ((thread (car (lock-queue l)))) ; someone waiting
-                (set-lock-queue! l (cdr (lock-queue l)))
-                (set-lock-owner! l thread)
+                (set-lock-queue l (cdr (lock-queue l)))
+                (set-lock-owner l thread)
                 (set-locks thread (cons l (get-locks thread)))
                 (if (eq (thread-state thread) dead:)       ; died wile waiting
                     (unlockit l)
                   (add-thread-to-queue thread)))
             (progn                          ; no-one waiting
-              (set-lock-owner! l ())
-              (set-lock-value! l 1)))))
+              (set-lock-owner l ())
+              (set-lock-value l 1)))))
 
 (defun release-locks (thread)
         (let ((locks (get-locks thread)))
@@ -673,7 +673,7 @@
         (let ((signals (get-signals thread)))
           (if (null? signals)
               (set-signals thread (list (cons condition resume)))
-            (set-cdr! (last-pair signals)
+            (set-cdr (last-pair signals)
                       (list (cons condition resume)))))
         t)
 
@@ -831,12 +831,12 @@
         (print "where:                              current function\n\n")
         frameptr)
 
-(table-set! op-table help: help)
+(table-set op-table help: help)
 
 (defun debug-return (frameptr cc cd . args)
         (unwrap-and-reset))
 
-(table-set! op-table top: debug-return)
+(table-set op-table top: debug-return)
 
 (defun resume (frameptr cc cd . args)
         (if (null? cc)
@@ -847,13 +847,13 @@
             (cc)
           (cc (car args))))
 
-(table-set! op-table resume: resume)
+(table-set op-table resume: resume)
 
 (defun debug-backtrace (frameptr cc cd . args)
         (backtrace frameptr)
         frameptr)
 
-(table-set! op-table bt: debug-backtrace)
+(table-set op-table bt: debug-backtrace)
 
 (defun locals (frameptr cc cd . args)
         (letfuns ((loop (e)
@@ -878,24 +878,24 @@
               (print " ")
               (indent (%+ n 1)))))
 
-(table-set! op-table locals: locals)
+(table-set op-table locals: locals)
 
-(table-set! op-table up: frame-up)
+(table-set op-table up: frame-up)
 
-(table-set! op-table down: frame-down)
+(table-set op-table down: frame-down)
 
 (defun frame-where (frameptr cc cd . args)
         (print "Broken at ")
         (print (frame-fun frameptr) nl nl)
         frameptr)
 
-(table-set! op-table where: frame-where)
+(table-set op-table where: frame-where)
 
 (defun frame-cond (frameptr cc cd . args)
         (print cd nl nl)
         frameptr)
 
-(table-set! op-table cond: frame-cond)
+(table-set op-table cond: frame-cond)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module thread

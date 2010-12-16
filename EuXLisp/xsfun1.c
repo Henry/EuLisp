@@ -278,10 +278,10 @@ static LVAL cxr(char *adstr)
     return (list);
 }
 
-// xsetcar - built-in function 'set-car!'
+// xsetcar - built-in function 'set-car'
 LVAL xsetcar()
 {
-    static char *cfn_name = "set-car!";
+    static char *cfn_name = "set-car";
 
     // get the cons and the new car
     LVAL arg = xlgacons();
@@ -293,10 +293,10 @@ LVAL xsetcar()
     return (newcar);
 }
 
-// xisetcar - built-in function '%set-car!'
+// xisetcar - built-in function '%set-car'
 LVAL xisetcar()
 {
-    static char *cfn_name = "%set-car!";
+    static char *cfn_name = "%set-car";
 
     // get the cons and the new car
     LVAL arg = xlgetarg();
@@ -308,10 +308,10 @@ LVAL xisetcar()
     return (arg);
 }
 
-// xsetcdr - built-in function 'set-cdr!'
+// xsetcdr - built-in function 'set-cdr'
 LVAL xsetcdr()
 {
-    static char *cfn_name = "set-cdr!";
+    static char *cfn_name = "set-cdr";
 
     // get the cons and the new cdr
     LVAL arg = xlgacons();
@@ -323,10 +323,10 @@ LVAL xsetcdr()
     return (newcdr);
 }
 
-// xisetcdr - built-in function '%set-cdr!'
+// xisetcdr - built-in function '%set-cdr'
 LVAL xisetcdr()
 {
-    static char *cfn_name = "%set-cdr!";
+    static char *cfn_name = "%set-cdr";
 
     // get the cons and the new cdr
     LVAL arg = xlgetarg();
@@ -692,7 +692,7 @@ LVAL xsymvalue()
 // xsetsymvalue - set the value of a symbol
 LVAL xsetsymvalue()
 {
-    static char *cfn_name = "set-symbol-value!";
+    static char *cfn_name = "set-symbol-value";
 
     // get the symbol
     LVAL sym = xlgasymbol();
@@ -722,7 +722,7 @@ LVAL xsymplist()
 // xsetsymplist - set the property list of a symbol
 LVAL xsetsymplist()
 {
-    static char *cfn_name = "set-symbol-plist!";
+    static char *cfn_name = "set-symbol-plist";
 
     // get the symbol
     LVAL sym = xlgasymbol();
@@ -986,24 +986,24 @@ static LVAL vref(LVAL vector)
     return (getelement(vector, i));
 }
 
-// xvset - built-in function 'vector-set!'
+// xvset - built-in function 'vector-set'
 LVAL xvset()
 {
-    static char *cfn_name = "vector-set!";
+    static char *cfn_name = "vector-set";
     return (vset(xlgavector()));
 }
 
-// xivset - built-in function '%vector-set!'
+// xivset - built-in function '%vector-set'
 LVAL xivset()
 {
-    static char *cfn_name = "%vector-set!";
+    static char *cfn_name = "%vector-set";
     return (vset(xlgetarg()));
 }
 
 // vset - common code for xvset and xivset
 static LVAL vset(LVAL vector)
 {
-    static char *cfn_name = "vector-set!";
+    static char *cfn_name = "vector-set";
 
     // get the index and the new value
     LVAL index = xlgafixnum();
@@ -1014,7 +1014,7 @@ static LVAL vset(LVAL vector)
     int i;
     if ((i = (int)getfixnum(index)) < 0 || i >= getsize(vector))
     {
-        xlcerror("index out of range in vector-set!", index, NIL);
+        xlcerror("index out of range in vector-set", index, NIL);
     }
 
     // set the vector element and return the value

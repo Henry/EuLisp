@@ -340,7 +340,7 @@ void xlexecute(LVAL fun)
             case OP_SETCAR:
                 if (!consp(xlval))
                 {
-                    badargtype(xlval, "<cons>", "set-car!");
+                    badargtype(xlval, "<cons>", "set-car");
                 }
                 tmp = pop();
                 rplaca(xlval, tmp);
@@ -349,7 +349,7 @@ void xlexecute(LVAL fun)
             case OP_SETCDR:
                 if (!consp(xlval))
                 {
-                    badargtype(xlval, "<cons>", "set-cdr!");
+                    badargtype(xlval, "<cons>", "set-cdr");
                 }
                 tmp = pop();
                 rplacd(xlval, tmp);

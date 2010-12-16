@@ -108,7 +108,7 @@
 (defun vector-copy-loop (new old index len copy)
         (if (%< index len)
             (progn
-              (vector-set! new index (copy (vector-ref old index)))
+              (vector-set new index (copy (vector-ref old index)))
               (vector-copy-loop new old (%+ index 1) len copy))
           new))
 

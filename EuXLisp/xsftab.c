@@ -109,15 +109,15 @@ FUNDEF funtab[] =
     {"list-tail", xlisttail},
 
     // destructive list functions
-    {"set-car!", xsetcar},
-    {"set-cdr!", xsetcdr},
+    {"set-car", xsetcar},
+    {"set-cdr", xsetcdr},
 
     // symbol functions
     {"symbol-exists?", xboundp},
     {"symbol-value", xsymvalue},
-    {"set-symbol-value!", xsetsymvalue},
+    {"set-symbol-value", xsetsymvalue},
     {"symbol-plist", xsymplist},
-    {"set-symbol-plist!", xsetsymplist},
+    {"set-symbol-plist", xsetsymplist},
     {"gensym", xgensym},
     {"get", xget},
     {"put", xput},
@@ -136,7 +136,7 @@ FUNDEF funtab[] =
     {"make-vector", xmakevector},
     {"vector-size", xvsize},
     {"vector-ref", xvref},
-    {"vector-set!", xvset},
+    {"vector-set", xvset},
 
     // conversion functions
     {"symbol->string", xsymstr},
@@ -232,7 +232,7 @@ FUNDEF funtab[] =
     {"string-null?", xstrnullp},
     {"string-append", xstrappend},
     {"string-ref", xstrref},
-    {"string-set!", xstrset},
+    {"string-set", xstrset},
     {"substring", xsubstring},
     {"string<?", xstrlss},
     {"string<=?", xstrleq},
@@ -289,7 +289,7 @@ FUNDEF funtab[] =
     {"close-input-stream", xclosei},
     {"close-output-stream", xcloseo},
     {"get-file-position", xgetfposition},
-    {"set-file-position!", xsetfposition},
+    {"set-file-position", xsetfposition},
     {"unlink", xunlink},
 
     // utility functions
@@ -313,11 +313,11 @@ FUNDEF funtab[] =
     // internal functions
     {"%car", xicar},
     {"%cdr", xicdr},
-    {"%set-car!", xisetcar},
-    {"%set-cdr!", xisetcdr},
+    {"%set-car", xisetcar},
+    {"%set-cdr", xisetcdr},
     {"%vector-size", xivsize},
     {"%vector-ref", xivref},
-    {"%vector-set!", xivset},
+    {"%vector-set", xivset},
     {"%keywords", xkeyword_array},
 
     // module functions
@@ -341,7 +341,7 @@ FUNDEF funtab[] =
     {"class-precedence-list", xclass_cpl},
     {"class-slots", xclass_slots},
     {"class-keywords", xclass_keywords},
-    {"set-class-keywords!", xset_class_keywords},
+    {"set-class-keywords", xset_class_keywords},
     {"class-subclasses", xclass_subclasses},
     {"class-instance-size", xclass_instsize},
     {"class-abstract?", xclass_abstractp},
@@ -349,7 +349,7 @@ FUNDEF funtab[] =
     {"subclass?", xsubclassp},
     {"generic-name", xgf_name},
     {"generic-args", xgf_args},
-    {"set-generic-args!", xgf_setargs},
+    {"set-generic-args", xgf_setargs},
     {"generic-optargs?", xgf_optargs},
     {"generic-methods", xgf_methods},
     {"generic-cache1", xgf_cache1},
@@ -364,14 +364,14 @@ FUNDEF funtab[] =
     {"slot-name", xslot_name},
     {"slot-keyword", xslot_keyword},
     {"slot-default", xslot_default},
-    {"set-slot-default!", xset_slot_default},
+    {"set-slot-default", xset_slot_default},
     {"slot-required?", xslot_requiredp},
-    {"set-slot-required?!", xset_slot_requiredp},
+    {"set-slot-required?", xset_slot_requiredp},
     {"find-slot-index", xfind_slot_index},
 
     {"make-table", xmake_table},
     {"table-ref", xtable_ref},
-    {"table-set!", xtable_set},
+    {"table-set", xtable_set},
     {"table-comparator", xtable_comparator},
     {"table-delete", xtable_delete},
     {"table-size", xtable_size},
@@ -386,7 +386,7 @@ FUNDEF funtab[] =
     {"module-directives", xmodule_directives},
 
     {"table-fill", xtable_fill},
-    {"set-table-fill!", xtable_setfill},
+    {"set-table-fill", xtable_setfill},
     {"table-clear", xtable_clear},
 
     {"raise-macro-error", xmacro_error},

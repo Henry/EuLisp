@@ -34,7 +34,7 @@
            class-precedence-list
            class-slots
            class-keywords
-           set-class-keywords!
+           set-class-keywords
            class-subclasses
            class-instance-size
            class-abstract?
@@ -42,7 +42,7 @@
            subclass?
            generic-name
            generic-args
-           set-generic-args!
+           set-generic-args
            generic-optargs?
            generic-methods
            generic-cache1
@@ -56,9 +56,9 @@
            slot-name
            slot-keyword
            slot-default
-           set-slot-default!
+           set-slot-default
            slot-required?
-           set-slot-required?!
+           set-slot-required?
            find-slot-index
            initialize-object
            initialize-class
@@ -68,25 +68,25 @@
 ; install <class> slot defaults
 (deflocal slots (class-slots <class>))
 
-(set-slot-default! (list-ref slots 0)
+(set-slot-default (list-ref slots 0)
                    (lambda () 'anon)) ; name
-(set-slot-default! (list-ref slots 1)
+(set-slot-default (list-ref slots 1)
                    (lambda () (list <object>))) ; superclasses
-(set-slot-default! (list-ref slots 5)
+(set-slot-default (list-ref slots 5)
                    (lambda () ()))    ; subclasses
-(set-slot-default! (list-ref slots 7)
+(set-slot-default (list-ref slots 7)
                    (lambda () ()))    ; abstract?
 
 ; install <simple-class> slot defaults
 (deflocal sslots (class-slots <simple-class>))
 
-(set-slot-default! (list-ref sslots 0)
+(set-slot-default (list-ref sslots 0)
                    (lambda () 'anon)) ; name
-(set-slot-default! (list-ref sslots 1)
+(set-slot-default (list-ref sslots 1)
                    (lambda () (list <object>))) ; superclasses
-(set-slot-default! (list-ref sslots 5)
+(set-slot-default (list-ref sslots 5)
                    (lambda () ()))    ; subclasses
-(set-slot-default! (list-ref sslots 7)
+(set-slot-default (list-ref sslots 7)
                    (lambda () ()))    ; abstract?
 
 ;; tweaks to allow make of a few built-in classes
@@ -98,36 +98,36 @@
               (cdr (find-key cdr: inits ())))
           (cons car cdr)))
 
-(set-class-keywords! <cons> '(car: cdr:))
-(table-set! builtin-make-table <cons> mkcons)
+(set-class-keywords <cons> '(car: cdr:))
+(table-set builtin-make-table <cons> mkcons)
 
 ;; null
 (defun mknull (inits)
         ())
 
-(table-set! builtin-make-table <null> mknull)
+(table-set builtin-make-table <null> mknull)
 
 ;; int
 (defun mkint (inits)
         (find-key value: inits 0))
 
-(set-class-keywords! <fpi> '(value:))
-(table-set! builtin-make-table <fpi> mkint)
+(set-class-keywords <fpi> '(value:))
+(table-set builtin-make-table <fpi> mkint)
 
 ;; double-float
 (defun mkdfloat (inits)
         (find-key value: inits 0.0))
 
-(set-class-keywords! <double-float> '(value:))
-(table-set! builtin-make-table <double-float> mkdfloat)
+(set-class-keywords <double-float> '(value:))
+(table-set builtin-make-table <double-float> mkdfloat)
 
 ;; symbol
 (defun mksymbol (inits)
         (let ((name (find-key string: inits "")))
           (string->symbol name)))
 
-(set-class-keywords! <symbol> '(string:))
-(table-set! builtin-make-table <symbol> mksymbol)
+(set-class-keywords <symbol> '(string:))
+(table-set builtin-make-table <symbol> mksymbol)
 
 ;; keyword
 (defun mkkeyword (inits)
@@ -140,8 +140,8 @@
                  name
                (string-append name ":"))))))
 
-(set-class-keywords! <keyword> '(string:))
-(table-set! builtin-make-table <keyword> mkkeyword)
+(set-class-keywords <keyword> '(string:))
+(table-set builtin-make-table <keyword> mkkeyword)
 
 ;; string
 (defun mkstring (inits)
@@ -153,25 +153,25 @@
                (integer->char fill)
              fill))))
 
-(set-class-keywords! <string> '(size: fill-value:))
-;;***HGW (set-class-keywords! <string> (class-keywords <string>))
-(table-set! builtin-make-table <string> mkstring)
+(set-class-keywords <string> '(size: fill-value:))
+;;***HGW (set-class-keywords <string> (class-keywords <string>))
+(table-set builtin-make-table <string> mkstring)
 
 ;; input-stream
 (defun mkistream (inits)
         (let ((filename (find-key filename: inits ())))
           (open-input-file filename)))
 
-(set-class-keywords! <input-stream> '(filename:))
-(table-set! builtin-make-table <input-stream> mkistream)
+(set-class-keywords <input-stream> '(filename:))
+(table-set builtin-make-table <input-stream> mkistream)
 
 ;; output-stream
 (defun mkostream (inits)
         (let ((filename (find-key filename: inits ())))
           (open-output-file filename)))
 
-(set-class-keywords! <output-stream> '(filename:))
-(table-set! builtin-make-table <output-stream> mkostream)
+(set-class-keywords <output-stream> '(filename:))
+(table-set builtin-make-table <output-stream> mkostream)
 
 ;; i/o stream ?
 
@@ -181,18 +181,18 @@
               (fill (find-key fill-value: inits ())))
           (make-vector size fill)))
 
-(set-class-keywords! <vector> '(size: fill-value:))
-;;***HGW (set-class-keywords! <vector> (class-keywords <vector>))
-(table-set! builtin-make-table <vector> mkvector)
+(set-class-keywords <vector> '(size: fill-value:))
+;;***HGW (set-class-keywords <vector> (class-keywords <vector>))
+(table-set builtin-make-table <vector> mkvector)
 
 ;; char
 (defun mkchar (inits)
         (let ((code (find-key code: inits 32)))
           (integer->char code)))
 
-(set-class-keywords! <char> '(code:))
-(set-class-keywords! <simple-char> (class-keywords <char>))
-(table-set! builtin-make-table <simple-char> mkchar)
+(set-class-keywords <char> '(code:))
+(set-class-keywords <simple-char> (class-keywords <char>))
+(table-set builtin-make-table <simple-char> mkchar)
 
 ;; promise, env, code, module, simple-function, closure,
 ;; subr, xsubr, csubr, continuation, slot
@@ -200,22 +200,22 @@
         (lambda (inits)
           (raise-telos-error "can't make instance of class" cl)))
 
-(table-set! builtin-make-table <promise> (cant-make <promise>))
-(table-set! builtin-make-table <env> (cant-make <env>))
-(table-set! builtin-make-table <code> (cant-make <code>))
-(table-set! builtin-make-table <module> (cant-make <module>))
-(table-set! builtin-make-table <simple-function>
+(table-set builtin-make-table <promise> (cant-make <promise>))
+(table-set builtin-make-table <env> (cant-make <env>))
+(table-set builtin-make-table <code> (cant-make <code>))
+(table-set builtin-make-table <module> (cant-make <module>))
+(table-set builtin-make-table <simple-function>
             (cant-make <simple-function>))
-(table-set! builtin-make-table <closure> (cant-make <closure>))
-(table-set! builtin-make-table <subr> (cant-make <subr>))
-(table-set! builtin-make-table <xsubr> (cant-make <xsubr>))
-(table-set! builtin-make-table <csubr> (cant-make <csubr>))
-(table-set! builtin-make-table <continuation> (cant-make <continuation>))
+(table-set builtin-make-table <closure> (cant-make <closure>))
+(table-set builtin-make-table <subr> (cant-make <subr>))
+(table-set builtin-make-table <xsubr> (cant-make <xsubr>))
+(table-set builtin-make-table <csubr> (cant-make <csubr>))
+(table-set builtin-make-table <continuation> (cant-make <continuation>))
 
 ;; slot
-(set-class-keywords! <slot> '(keyword: default: required?:))
-(set-class-keywords! <local-slot> (class-keywords <slot>))
-(table-set! builtin-make-table <local-slot> (cant-make <slot>))
+(set-class-keywords <slot> '(keyword: default: required?:))
+(set-class-keywords <local-slot> (class-keywords <slot>))
+(table-set builtin-make-table <local-slot> (cant-make <slot>))
 
 ;; table
 (defun mktable (inits)
@@ -223,9 +223,9 @@
               (fill (find-key fill-value: inits ())))
           (make-table comp fill)))
 
-(set-class-keywords! <table> '(comparator: fill-value:))
-(set-class-keywords! <hash-table> (class-keywords <table>))
-(table-set! builtin-make-table <hash-table> mktable)
+(set-class-keywords <table> '(comparator: fill-value:))
+(set-class-keywords <hash-table> (class-keywords <table>))
+(table-set builtin-make-table <hash-table> mktable)
 
 ;; for thread see thread.em
 
@@ -239,9 +239,9 @@
                                  inits))
           (make-generic name domain optargs?)))
 
-(set-class-keywords! <generic> '(name: domain: optargs:))
-(set-class-keywords! <simple-generic> (class-keywords <generic>))
-(table-set! builtin-make-table <simple-generic> mkgeneric)
+(set-class-keywords <generic> '(name: domain: optargs:))
+(set-class-keywords <simple-generic> (class-keywords <generic>))
+(table-set builtin-make-table <simple-generic> mkgeneric)
 
 ;; method
 (defun mkmethod (inits)
@@ -257,9 +257,9 @@
                                  inits))
           (make-method fn domain optargs?)))
 
-(set-class-keywords! <method> '(method-lambda: domain: optargs:))
-(set-class-keywords! <simple-method> (class-keywords <method>))
-(table-set! builtin-make-table <simple-method> mkmethod)
+(set-class-keywords <method> '(method-lambda: domain: optargs:))
+(set-class-keywords <simple-method> (class-keywords <method>))
+(table-set builtin-make-table <simple-method> mkmethod)
 
 (defun strip<> (name)
         (if (not (symbol? name))

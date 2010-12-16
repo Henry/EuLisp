@@ -301,7 +301,7 @@
 (defun output-to-string (fn obj)
         (let ((stream (tmpfile)))
           (fn obj stream)
-          (set-file-position! stream 0 0)     ; seek-set
+          (set-file-position stream 0 0)     ; seek-set
           (let ((s (read-string stream '())))
             (close-stream stream)
             s)))

@@ -560,7 +560,7 @@ void xlsymbols()
     s_thread_class = xlenter("<thread>");
     s_qualified_symbols = xlenter("qualified-symbols?");
 
-    s_set_generic_args = xlenter("set-generic-args!");
+    s_set_generic_args = xlenter("set-generic-args");
 
     s_macro_error = xlenter("macro-error");
     #ifdef SOCK

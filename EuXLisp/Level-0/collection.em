@@ -271,7 +271,7 @@
 (defun delete-list (obj l comp)
         (cond ((atom? l) (if (comp obj l) () l))
               ((comp obj (car l)) (delete-list obj (cdr l) comp))
-              (t (set-cdr! l (delete-list obj (cdr l) comp)))))
+              (t (set-cdr l (delete-list obj (cdr l) comp)))))
 
 (defmethod do ((fn <function>) (l <list>) . more)
                (do-list fn l more))
@@ -289,7 +289,7 @@
                (list-ref l n))
 
 (defmethod setter-element ((l <list>) (n <integer>) v)
-               (set-car! (list-tail l n) v)
+               (set-car (list-tail l n) v)
                v)
 
 (defmethod empty? ((l <list>))
@@ -312,14 +312,14 @@
 (defun fill-all-list (l o)
         (cond ((atom? l) ())
               ((atom? (cdr l))
-               (set-car! l o))
-              (t (set-car! l o)
+               (set-car l o))
+              (t (set-car l o)
                  (fill-all-list (cdr l) o))))
 
 (defun fill-keyed-list (l o k)
         (for-each
          (lambda (key)
-           (set-car! (list-tail l key) o))
+           (set-car (list-tail l key) o))
          (convert k <list>)))
 
 (defun fill-index-list (l o start end)
@@ -328,7 +328,7 @@
 (defun fill-index-list-aux (l o index end)
         (if (%<= index end)
             (progn
-              (set-car! l o)
+              (set-car l o)
               (fill-index-list-aux (cdr l) o (%+ index 1) end))))
 
 (defmethod map ((fn <function>) (c <list>) . more)
@@ -406,7 +406,7 @@
                (string-ref s n))
 
 (defmethod setter-element ((s <string>) (n <integer>) v)
-               (string-set! s n v))
+               (string-set s n v))
 
 (defmethod empty? ((s <string>))
                (string-null? s))
@@ -428,13 +428,13 @@
 (defun fill-string (s o index end)
         (if (%< index end)
             (progn
-              (string-set! s index o)
+              (string-set s index o)
               (fill-all-string s o (%+ index 1) end))))
 
 (defun fill-keyed-string (s o k)
         (for-each
          (lambda (key)
-           (string-set! s key o))
+           (string-set s key o))
          (convert k <list>)))
 
 (defmethod map ((fn <function>) (s <string>) . more)
@@ -492,7 +492,7 @@
                (vector-ref v n))
 
 (defmethod setter-element ((v <vector>) (n <integer>) e)
-               (vector-set! v n e))
+               (vector-set v n e))
 
 (defmethod empty? ((v <vector>))
                (%= (vector-size v) 0))
@@ -514,13 +514,13 @@
 (defun fill-vector (v o index end)
         (if (%< index end)
             (progn
-              (vector-set! v index o)
+              (vector-set v index o)
               (fill-vector v o (%+ index 1) end))))
 
 (defun fill-keyed-vector (v o k)
         (for-each
          (lambda (key)
-           (vector-set! v key o))
+           (vector-set v key o))
          (convert k <list>)))
 
 (defmethod map ((fn <function>) (v <vector>) . more)
@@ -564,7 +564,7 @@
                     (lambda (old)
                       (for-each
                        (lambda (key)
-                         (table-set! new key (table-ref old key)))
+                         (table-set new key (table-ref old key)))
                        (table-keys old)))
                     (cons t (map-list (converter <table>) more)))
                    new)))
@@ -585,7 +585,7 @@
                (table-ref t key))
 
 (defmethod setter-element ((t <table>) key v)
-               (table-set! t key v))
+               (table-set t key v))
 
 (defmethod empty? ((t <table>))
                (%= (table-size t) 0))
@@ -594,9 +594,9 @@
                (cond ((null? k)
                       (for-each
                        (lambda (key)
-                         (table-set! t key o))
+                         (table-set t key o))
                        (table-keys t))
-                      (set-table-fill! t o))
+                      (set-table-fill t o))
                      ((collection? (car k))
                       (fill-keyed-table t o (car k)))
                      (t (error <collection-error>
@@ -614,7 +614,7 @@
         (let ((new (make-table (table-comparator t) (fn (table-fill t)))))
           (for-each
            (lambda (k)
-             (table-set! new k (fn (table-ref t k))))
+             (table-set new k (fn (table-ref t k))))
            (table-keys t))
           new))
 
