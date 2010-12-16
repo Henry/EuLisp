@@ -45,9 +45,9 @@
            letfuns))
 
 (%defun definable-name? (name)
-  (and (cons? name)
-       (or (eq (car name) 'setter)
-           (eq (car name) 'converter))))
+        (and (cons? name)
+             (or (eq (car name) 'setter)
+                 (eq (car name) 'converter))))
 
 ; (defun foo (x) ...)
 ; (defun (setter foo) (x) ...)
@@ -62,7 +62,7 @@
                (%print (current-module))
                (%print "\n")))
          `(%defun ,name ,args
-            ,@body))
+                  ,@body))
         ((definable-name? name)
          `(progn
             ((setter ,(car name)) ,(cadr name)
@@ -94,18 +94,18 @@
                   value: name))))
 
 (%defun defgeneric-methods (name body)
-  (cond ((null? body) ())
-        ((not (eq (car body) method:))
-         (error <compilation-general-error>
-                "unknown keyword in defgeneric"
-                value: (car body)))
-        ((null? (cdr body))
-         (error <compilation-general-error>
-                "odd-size keyword list in defgeneric"
-                value: name))
-        (t (cons
-            `(defmethod ,name ,(caadr body) ,@(cdadr body))
-            (defgeneric-methods name (cdr (cdr body)))))))
+        (cond ((null? body) ())
+              ((not (eq (car body) method:))
+               (error <compilation-general-error>
+                      "unknown keyword in defgeneric"
+                      value: (car body)))
+              ((null? (cdr body))
+               (error <compilation-general-error>
+                      "odd-size keyword list in defgeneric"
+                      value: name))
+              (t (cons
+                  `(defmethod ,name ,(caadr body) ,@(cdadr body))
+                  (defgeneric-methods name (cdr (cdr body)))))))
 
 (defmacro defmethod (name args . body)
   (if (or (symbol? name)

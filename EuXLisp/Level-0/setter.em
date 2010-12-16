@@ -31,13 +31,10 @@
 (deflocal setter-table (make-table))
 
 (defun setter (obj)
-        (table-ref setter-table obj))
-
-;;   (defmacro setter (obj)
-;;     `(table-ref setter-table ,obj))
+  (table-ref setter-table obj))
 
 (defun setter-setter (obj val)
-        (table-set setter-table obj val))
+  (table-set setter-table obj val))
 
 (setter-setter setter setter-setter)
 

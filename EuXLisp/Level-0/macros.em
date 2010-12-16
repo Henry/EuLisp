@@ -37,15 +37,15 @@
   (import (root
            system)
    export (defmacro
-           quasiquote
-           unquote
-           unquote-splicing
-           macroexpand1
-           macroexpand
+            quasiquote
+            unquote
+            unquote-splicing
+            macroexpand1
+            macroexpand
 
-           ;; Macro-expanding version of the system define
-           ;; Used in syntax only
-           %defun))
+            ;; Macro-expanding version of the system define
+            ;; Used in syntax only
+            %defun))
 
 (define (getprop s v)
         (if (symbol? s)

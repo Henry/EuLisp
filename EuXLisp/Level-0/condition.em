@@ -26,29 +26,29 @@
   (import (root
            telos)
    export (defcondition
-           condition?
-           condition-message
-           condition-value
-           <condition>
-           <telos-condition>
-           <telos-error>
-           <telos-general-error>
-           <no-applicable-method>
-           <no-next-method>
-           <incompatible-method-domain>
-           <telos-bad-ref>
-           <arithmetic-condition>
-           <arithmetic-error>
-           <error>
-           <general-error>
-           <bad-type>
-           <unbound-error>
-           <compilation-error>
-           <compilation-general-error>
-           <macro-error>
-           <socket-error>
-           <syntax-error>
-           <user-interrupt>))
+            condition?
+            condition-message
+            condition-value
+            <condition>
+            <telos-condition>
+            <telos-error>
+            <telos-general-error>
+            <no-applicable-method>
+            <no-next-method>
+            <incompatible-method-domain>
+            <telos-bad-ref>
+            <arithmetic-condition>
+            <arithmetic-error>
+            <error>
+            <general-error>
+            <bad-type>
+            <unbound-error>
+            <compilation-error>
+            <compilation-general-error>
+            <macro-error>
+            <socket-error>
+            <syntax-error>
+            <user-interrupt>))
 
 (defclass <condition> ()
   ((message reader: condition-message
