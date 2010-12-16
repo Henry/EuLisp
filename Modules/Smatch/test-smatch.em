@@ -68,9 +68,20 @@
    (age reader: deer-age keyword: age:))
   predicate: deer?)
 
+(defconstant deer-acc '(deer-name deer-gender))
+
 (defun f4 (l)
   (smatch l
-    (($ deer? deer-name) (list 'deer (deer-name l)))
+    (($$ deer name) (list 'deer name))
+    (_ 'anything-else)))
+
+(defun f5 (l)
+  (smatch l
+    (($ deer-acc (and (set s) (get g) name))
+     (progn
+      (s 'olof)
+      (print (list (g) name))
+      (list 'deer name)))
     (_ 'anything-else)))
 
 (defconstant fact
@@ -105,6 +116,7 @@
   (print-test (f2 '(1 2 3 4 5 6 7)))
   (print-test (f3 '(* (+ 1 2))))
   (print-test (f4 (make <deer> name: 'rudolf gender: 'male age: 23)))
+  ;(print-test (f5 (make <deer> name: 'rudolf gender: 'male age: 23)))
   (print-test (f1 #(1 2)))
   (print-test (f1 #(1 2 3 4 5)))
   (print-test (f1 #(#(3 4) 1 2)))

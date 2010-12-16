@@ -257,15 +257,21 @@
                       ,abs ,v (and ,@p) ,g+s ,sk ,fk ,i) (insert-abs ,abs ,fk)))
 
     ;; stis, added $ support!
-    ((abs v ('$ n) g-s sk fk i)
-     `(if (,n ,v)
+    ((abs v ('$$ n) g-s sk fk i)
+     `(if (,(concatenate n '?) ,v)
           (insert-abs ,abs ,sk)
         (insert-abs ,abs ,fk)))
 
+    ((abs v ('$$ nn p ...) g+s sk fk i)
+     (if (symbol? nn)
+         (progn
+           `(if (,(concatenate nn '?) ,v)
+                (match-$$ ,abs (and) ,nn ,p ,v ,sk ,fk ,i)
+              (insert-abs ,abs ,fk)))
+       (error <condition> "only symbols in $")))
+
     ((abs v ('$ nn p ...) g+s sk fk i)
-     `(if (,nn ,v)
-          (match-$ ,abs (and) 0 ,p ,v ,sk ,fk ,i)
-        (insert-abs ,abs ,fk)))
+     `(match-$ ,abs (and) ,nn ,p ,v ,sk ,fk ,i))
 
     ;; stis, added the possibility to use set and get on classes
     ((abs v ('= 0 m p) g+s sk fk i)
@@ -554,11 +560,22 @@
     (((abs (c pp)) cc (fk fkk ...)  i ...)  `(,fk (,abs (,cc ,pp)) ,@fkk ,@i))))
 
 
+(defmacro match-$$ x
+  (smatch0 x
+    ((abs (a ...) n (p1 p2 ...) . v)
+     (if (symbol? p1)
+         (let ((acc (concatenate n '- p1)))
+           `(match-$$ ,abs (,@a (= ,acc (setter ,acc) ,p1)) ,n ,p2 ,@v))
+       (error <condition> "$$ matchers should be constituated of symbols")))
+    ((abs newpat  m ()            v kt ke i)
+     `(match-one ,abs ,v ,newpat () ,kt ,ke ,i))))
+
 (defmacro match-$ x
   (smatch0 x
-    ((abs (a ...) m (p1 p2 ...) . v)
-     `(match-$ ,abs (,@a (= 0 ,m ,p1)) ,(+ m 1) ,p2 ,@v))
-    ((_ abs newpat  m ()            v kt ke i)
+    ((abs (a ...) n (p1 p2 ...) . v)
+     `(match-$ ,abs (,@a (= ,(car n) ((setter ,(car n)) ,p1)))
+               ,(cdr n) ,p2 ,@v))
+    ((abs newpat  m ()            v kt ke i)
      `(match-one ,abs ,v ,newpat () ,kt ,ke ,i))))
 
 
