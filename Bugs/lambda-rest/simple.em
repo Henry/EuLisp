@@ -1,5 +1,5 @@
 (defmodule simple
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 (defconstant f (lambda fargs fargs))
 (print (f 61 62 63 64))

@@ -66,7 +66,7 @@
 ;;
 ;; 2010/11/10
 ;; Various improvements Implemented by Stefan Israelsson Tampe among others
-;; Translated the code using the EuLisp defmacro macrology.
+;; Translated the code using the EuLisp defsyntax.
 ;;
 ;; phd e.g. customable API for list processing
 ;; <z>  matcher system
@@ -82,7 +82,7 @@
    export (smatch))
 
 
-(defmacro smatch X
+(defsyntax smatch X
   (smatch0 X
     (()     (error <condition> "missing match expression"))
     ((atom) (error <condition> "no match clauses"))
@@ -98,7 +98,7 @@
      `(match* (() ((car cdr cons? null? binary=) ())) ,@l))))
 
 
-(defmacro match* X
+(defsyntax match* X
   (smatch0 X
     ((abs (app ...) (and a (pat . body)) ...)
      (let ((v (gensym "v")))
@@ -116,7 +116,7 @@
           (match-next ,abs ,v (,atom (setq ,atom)) ,@b))))))
 
 
-(defmacro match-next X
+(defsyntax match-next X
   (smatch0 X
     ;; no more clauses, the match failed
     ((abs v g+s)
@@ -136,13 +136,13 @@
        `(match-next ,abs ,v ,g+s (,pat (=> ,failure) ,@body) ,@rest)))))
 
 
-(defmacro abs-drop x
+(defsyntax abs-drop x
   (smatch0 x
     ((a k        ) k)
     ((a (k ...) v) (append k `(,v)))))
 
 
-(defmacro match-one x
+(defsyntax match-one x
   ;; If it's a list of two or more values, check to see if the
   ;; second one is an ellipse and handle accordingly, otherwise go
   ;; to MATCH-TWO.
@@ -169,20 +169,20 @@
       `(match-two ,@x))))
 
 
-(defmacro insert-abs x
+(defsyntax insert-abs x
   (smatch0 x
     ((abs ('progn . l)) `('progn ,@l))
     ((abs (x))          `(,x))
     ((abs (n nn ...))  (append `(,n ,abs) nn))))
 
 
-(defmacro recur x
+(defsyntax recur x
   (smatch0 x
     ((n ((a i) ...) code ...)
      `(letfuns ((,n ,a ,@code)) (,n ,@i)))))
 
 
-(defmacro match-two x
+(defsyntax match-two x
   (smatch0 x
     (((and a (qabs ((qcar qcdr qcons? qnull? qbinary=) pp)))
       v
@@ -306,7 +306,7 @@
      `(match-abstract () ,abs ,phd ,v ,p ,g+s ,sk ,fk ,i))))
 
 
-(defmacro match-gen-or x
+(defsyntax match-gen-or x
   (smatch0 x
     ((abs v p g+s (sk ...) fk (i ...) ((id id-ls) ...))
      (let ((sk2 (gensym "sk2")))
@@ -315,7 +315,7 @@
            ,abs ,v ,p ,g+s (match-drop-ids (,sk2 ,@id)) ,fk i))))))
 
 
-(defmacro match-gen-or-step x
+(defsyntax match-gen-or-step x
   (smatch0 x
     ((abs v () g+s sk fk . x)
      ;; no OR clauses, call the failure continuation
@@ -329,7 +329,7 @@
        ,abs ,v ,p ,g+s ,sk (match-gen-or-step ,v ,q ,g+s ,sk ,fk ,i) ,i))))
 
 
-(defmacro match-three x
+(defsyntax match-three x
   (smatch0 x
     (((and a (abs ((qcar qcdr qcons? qnull?) rr))) v (p) g+s sk fk i)
      (let ((w (gensym "w")))
@@ -386,7 +386,7 @@
 ;;    the current vector index being matched.
 ;;;-----------------------------------------------------------------------------
 
-(defmacro match-vector x
+(defsyntax match-vector x
   ;(print `(match-vector ,x) nl)
   (smatch0 x
     ((abs v n pats (p q) . x)
@@ -400,7 +400,7 @@
      `(match-vector-two ,@x))))
 
 
-(defmacro match-vector-two x
+(defsyntax match-vector-two x
   ;(print `(match-vector-tow ,x) nl)
   (smatch0 x
     ((abs v n (and a ((pat index) ...)) () sk fk i)
@@ -415,7 +415,7 @@
      `(match-vector ,abs ,v (+ ,n 1) (,@pats (,p ,n)) ,q ,@x))))
 
 
-(defmacro match-vector-step x
+(defsyntax match-vector-step x
   ;(print `(match-vector-step ,x) nl)
   (smatch0 x
     ((abs v () (sk ...) fk i) `(insert-abs ,abs (,@sk ,i)))
@@ -431,7 +431,7 @@
 ;; With a vector ellipse pattern we first check to see if the vector
 ;; size is at least the required size.
 
-(defmacro match-gen-vector-ellipses x
+(defsyntax match-gen-vector-ellipses x
   ;(print `(match-vector-ellipses ,x) nl)
   (smatch0 x
     ((abs v n (and a ((pat index) ...)) p sk fk i)
@@ -446,7 +446,7 @@
           (insert-abs ,abs ,fk))))))
 
 
-(defmacro match-vector-tail x
+(defsyntax match-vector-tail x
   ;(print `(match-vector-tail ,x) nl)
   (smatch0 x
     ((abs v p n len sk fk i)
@@ -454,7 +454,7 @@
        ,abs ,p (match-vector-tail-two ,v ,p ,n ,len ,sk ,fk ,i) ,i ()))))
 
 
-(defmacro match-vector-tail-two x
+(defsyntax match-vector-tail-two x
   ;(print `(match-vector-tail-two ,x) nl)
   (smatch0 x
     ((abs v p n len (sk ...) fk i ((id id-ls) ...))
@@ -477,7 +477,7 @@
                               ,fk ,i))))))))
 
 
-(defmacro match-abstract x
+(defsyntax match-abstract x
   (smatch0 x
     ((x () phd          y p               . l)
      `(match-phd () ,phd ,x ,y ,p ,@l))
@@ -533,7 +533,7 @@
      `(match-phd () ,phd ,abs ,y ,p ,g+s ,sk ,fk ,i))))
 
 
-(defmacro match-phd x
+(defsyntax match-phd x
   (smatch0 x
     ((phd (c (            )) abs . l) `(match-three (,abs (,c ,phd)) ,@l))
     (((phd ...) (c ((h a) hh ...)) abs v (h2 . l) g+s sk fk i)
@@ -546,21 +546,21 @@
      `(match-three (,abs ,phd) ,@l))))
 
 
-(defmacro set-phd-fk x
+(defsyntax set-phd-fk x
   (smatch0 x
     ((abs          cc ('progn . l))  `(progn ,@l))
     ((abs          cc (fk))          `(,fk))
     (((abs (c pp)) cc (fk fkk ...))  `(fk (,abs (,cc ,pp)) ,@fkk))))
 
 
-(defmacro set-phd-sk x
+(defsyntax set-phd-sk x
   (smatch0 x
     ((abs          cc ('progn . l)  i ...)  `(progn ,@l))
     ((abs          cc (fk)          i ...)  `(,fk))
     (((abs (c pp)) cc (fk fkk ...)  i ...)  `(,fk (,abs (,cc ,pp)) ,@fkk ,@i))))
 
 
-(defmacro match-$$ x
+(defsyntax match-$$ x
   (smatch0 x
     ((abs (a ...) n (p1 p2 ...) . v)
      (if (symbol? p1)
@@ -570,18 +570,33 @@
     ((abs newpat  m ()            v kt ke i)
      `(match-one ,abs ,v ,newpat () ,kt ,ke ,i))))
 
-(defmacro match-$ x
+;; (defsyntax match-$ x
+;;   (smatch0 x
+;;     ((abs (a ...) n (p1 p2 ...) . v)
+;;      `(match-$ ,abs (,@a (= ,(car n) ((setter ,(car n)) ,p1)))
+;;                ,(cdr n) ,p2 ,@v))
+;;     ((abs newpat  m ()            v kt ke i)
+;;      `(match-one ,abs ,v ,newpat () ,kt ,ke ,i))))
+
+(defsyntax match-$ x
   (smatch0 x
-    ((abs (a ...) n (p1 p2 ...) . v)
-     `(match-$ ,abs (,@a (= ,(car n) ((setter ,(car n)) ,p1)))
-               ,(cdr n) ,p2 ,@v))
+    ((abs (a ...) n (p1 p2 ...)  . v)
+     (let ((wcar (gensym "wcar"))
+           (wcdr (gensym "wcdr")))
+       `(if (cons? ,n)
+            (let ((,wcar (car ,n))
+                  (,wcdr (cdr ,n)))
+              (match-$ ,abs (,@a (= (car ,wcar) (cdr ,wcar) ,p1))
+                        ,wcdr ,p2 ,@v))
+          (error "$ matcher has too many patterns"))))
+
     ((abs newpat  m ()            v kt ke i)
      `(match-one ,abs ,v ,newpat () ,kt ,ke ,i))))
 
 
 ;; ... algorithms is implemented here, note this x ... y ... is not allowed and
 ;; phd is not implemented for this need to extend phd API with list? ...
-(defmacro match-gen-ellipses x
+(defsyntax match-gen-ellipses x
   (smatch0 x
     ((abs v p () g+s (sk ...) fk i ((id id-ls) ...))
      (let ((ls (gensym "ls"))
@@ -648,7 +663,7 @@
                                     ,i)))
                       (else (insert-abs ,abs ,fk)))))))))))
 
-(defmacro match-gen-ellipses-n x
+(defsyntax match-gen-ellipses-n x
   (smatch0 x
     ((abs n v p () g+s (sk ...) fk i ((id id-ls) ...))
      (let ((ls (gensym "ls"))
@@ -722,7 +737,7 @@
                       (else (insert-abs ,abs ,fk)))))))))))
 
 
-(defmacro match-verify-no-ellipses x
+(defsyntax match-verify-no-ellipses x
   (smatch0 x
     (((x . y) sk)
      `(match-check-ellipse
@@ -735,7 +750,7 @@
      `(error <condition> (fmt "dotted tail not allowed after ellipse ~a" ,x)))))
 
 
-(defmacro match-drop-ids x
+(defsyntax match-drop-ids x
   (smatch0 x
     ((expr            ) expr)
     ((abs expr ids ...) expr)))
@@ -744,7 +759,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Tree matching
 ;;;-----------------------------------------------------------------------------
-(defmacro match-gen-search x
+(defsyntax match-gen-search x
   (smatch0 x
     ((abs v p q g+s sk fk i ((id id-ls) ...))
      (let ((try  (gensym "try"))
@@ -791,7 +806,7 @@
                   #;(print ret) ret)))))
 
 
-(defmacro match-quasiquote x
+(defsyntax match-quasiquote x
   (smatch0 x
     ((abs v ('unquote p) g+s sk fk i)
      `(match-one ,abs ,v ,p ,g+s ,sk ,fk ,i))
@@ -835,13 +850,13 @@
      `(match-one ,abs ,v (quote ,x) ,g+s ,sk ,fk ,i))))
 
 
-(defmacro match-quasiquote-step x
+(defsyntax match-quasiquote-step x
   (smatch0 x
     ((abs x q g+s sk fk depth i)
      `(match-quasiquote ,abs ,x ,q ,g+s ,sk ,fk ,i ,@depth))))
 
 
-(defmacro match-extract-vars x
+(defsyntax match-extract-vars x
   (smatch0 x
     ((abs ('? pred . p) . x)
      `(match-extract-vars ,abs ,p ,@x))
@@ -874,7 +889,7 @@
      `(abs-extract-vars () ,abs ,phd ,p ,k ,i ,v))))
 
 
-(defmacro match-extract-vars2 x
+(defsyntax match-extract-vars2 x
   (smatch0 x
     ((abs (p q . r) k i v)
      `(match-check-ellipse
@@ -902,7 +917,7 @@
          `(,k ,abs ,@kk ((,p ,p-ls) ,@v)))))))
 
 
-(defmacro abs-extract-vars x
+(defsyntax abs-extract-vars x
   (smatch0 x
     ((abs () phd p . l) `(match-extract-phd () ,phd ,abs ,p ,@l))
     (((abs ...) ((a x . xs) us ...) phd ((b bs ...) w ...) k i v)
@@ -938,19 +953,19 @@
      `(match-extract-phd () ,phd ,a ,p ,k ,i ,v))))
 
 
-(defmacro match-extract-phd x
+(defsyntax match-extract-phd x
   (smatch0 x
     ((_ phd abs . l)
      `(match-extract-vars2 (,abs ,phd) ,@l))))
 
 
-(defmacro match-extract-vars-step x
+(defsyntax match-extract-vars-step x
   (smatch0 x
     ((abs p k i v (and a ((v2 v2-ls) ...)))
      `(match-extract-vars ,abs ,p ,k (,@v2 ,@i) (,@a ,@v)))))
 
 
-(defmacro match-extract-quasiquote-vars x
+(defsyntax match-extract-quasiquote-vars x
   (smatch0 x
     ((abs ('quasiquote x) k i v d)
      `(match-extract-quasiquote-vars ,abs ,x ,k ,i ,v (t ,@d)))
@@ -971,13 +986,13 @@
      `(,k ,abs ,@kk ,v))))
 
 
-(defmacro match-extract-quasiquote-vars-step x
+(defsyntax match-extract-quasiquote-vars-step x
   (smatch0 x
     ((_ abs x k i v d (and a ((v2 v2-ls) ...)))
      `(match-extract-quasiquote-vars ,abs ,x ,k (,@v2 ,@i) (,@a ,@v) ,d))))
 
 
-(defmacro match-check-ellipse x
+(defsyntax match-check-ellipse x
   (smatch0 x
     ;; these two aren't necessary but provide fast-case failures
     (((a . b)  success-k failure-k) failure-k)
@@ -987,7 +1002,7 @@
      (if (or (binary= id '...)  (binary= id '___)) success-k failure-k))))
 
 
-(defmacro match-check-identifier x
+(defsyntax match-check-identifier x
   (smatch0 x
     ;; fast-case failures, lists and vectors are not identifiers
     (((x . y) success-k failure-k) failure-k)
@@ -1000,7 +1015,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Utility functions
 ;;;-----------------------------------------------------------------------------
-(defmacro defmatchfun args
+(defsyntax defmatchfun args
   (let ((name (car args))
         (arg (gensym "arg"))
         (matchers (cdr args)))
@@ -1012,26 +1027,26 @@
             (named-lambda ,name (,arg) (smatch ,arg ,@matchers)))
         (error <condition> "bad defmatchfun syntax")))))
 
-(defmacro match-lambda matchers
+(defsyntax match-lambda matchers
   (let ((x (gensym "arg")))
     `(lambda (,x) (smatch ,x ,@matchers))))
 
-(defmacro match-lambda* matchers
+(defsyntax match-lambda* matchers
   (let ((x (gensym "arg")))
     `(lambda ,x (smatch ,x ,@matchers))))
 
-(defmacro match-let x
+(defsyntax match-let x
   (smatch0 x
     (((vars ...) . body)
      `(match-let/helper let () () ,vars ,@body))
     ((loop . rest)
      `(match-named-let loop () ,@rest))))
 
-(defmacro match-letfuns x
+(defsyntax match-letfuns x
   (smatch0 x
     ((vars . body) `(match-let/helper letfuns () () ,vars ,@body))))
 
-(defmacro match-let/helper x
+(defsyntax match-let/helper x
   (smatch0 x
     ((let (and a ((var expr) ...)) () () . body)
      `(,let ,a ,@body))
@@ -1049,7 +1064,7 @@
     ((let (v ...) (p ...) ((a expr) . rest) . body)
      `(match-let/helper ,let (,@v (,a ,expr)) ,p ,rest ,@body))))
 
-(defmacro match-named-let x
+(defsyntax match-named-let x
   (smatch0 x
     ((loop ((pat expr var) ...) () . body)
      `(recur loop ,(map (lambda (var expr) `(,var ,expr)) var expr)
@@ -1059,7 +1074,7 @@
      (let ((tmp (gensym "tmp")))
        `(match-named-let ,loop (,@v (,pat ,expr ,tmp)) ,rest ,@body)))))
 
-(defmacro match-let* x
+(defsyntax match-let* x
   (smatch0 x
     ((() . body)
      `(progn ,@body))

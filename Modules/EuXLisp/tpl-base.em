@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: A tiny paralation lisp, basic classes and macros.
+;;; Title: A tiny paralation lisp, basic classes and syntax operators.
 ;;;  Authors: Russell Bradford
 ;;;  Maintainer: Henry G. Weller
 ;;;  Description:
@@ -121,7 +121,7 @@
             ,(car nl))
           (do-side-effects (cdr nl) (+ i 1)))))
 
-(defmacro elwise (fields . body)
+(defsyntax elwise (fields . body)
   `(let ((*field-vec* (vector ,@fields)))
      (make-field
       paralation: (paralation ,(car fields))

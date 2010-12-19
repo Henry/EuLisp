@@ -30,13 +30,13 @@
     Have the extension /.em/.
 
 ***** EuLisp Language Level-1
-      Level-1 is provided by the library /liblevel-1.a/.
-      Standard macros are defined in the syntax module macros. Thus, the default
-      module body looks like this:
+      Level-1 is provided by the library /liblevel-1.a/.  Standard syntax
+      operators are defined in the module syntax-1. Thus, the default module
+      body looks like this:
       #+BEGIN_SRC lisp
         (defmodule foo
-          (syntax (macros)
-                  import (level-1))
+          (syntax (syntax-1)
+           import (level-1))
 
           ...
 

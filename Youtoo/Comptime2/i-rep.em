@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule i-rep
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (i-all
            i-args
            sx-obj
@@ -51,7 +51,9 @@
            show-help
            show-class-hierarchy
            macroexpand-1
-           macroexpand)
+           macroexpand
+           expand-syntax-1
+           expand-syntax)
    expose (cg-dld))
 
 ;;;-----------------------------------------------------------------------------

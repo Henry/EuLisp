@@ -26,7 +26,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule echo
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 
 (let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))

@@ -8,6 +8,8 @@
    export (
     ((name . macroexpand-1) (pos . 6) (origin ex-expr . macroexpand-1))
     ((name . set-eval-module) (pos . 4) (origin i-rep . set-eval-module))
+    ((name . expand-syntax-1) (pos . 23) (origin ex-expr . expand-syntax-1))
+    ((name . expand-syntax) (pos . 24) (origin ex-expr . expand-syntax))
     ((name . get-module) (pos . 14) (origin p-env . get-module))
     ((name . macroexpand) (pos . 11) (origin ex-expr . macroexpand))
     ((name . eval/cm) (pos . 3) (origin i-rep . eval/cm))

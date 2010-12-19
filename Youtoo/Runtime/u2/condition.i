@@ -3,7 +3,7 @@
 
 (definterface condition
   (import (telos thread dynamic let-cc)
-   syntax (_macros)
+   syntax (_syntax-1)
    full-import ()
    export (
     ((name . pop-error-handlers) (pos . 6) (origin dynamic . pop-error-handlers))

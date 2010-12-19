@@ -27,7 +27,7 @@
 ;;    url2
 ;;;-----------------------------------------------------------------------------
 (defmodule url2
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 
 (let ((c (make <connection> host: "www.cs.bath.ac.uk" port: 80))

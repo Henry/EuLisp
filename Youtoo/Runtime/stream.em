@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule stream
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (telos
            stream1
            stream2

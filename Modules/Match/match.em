@@ -36,7 +36,7 @@
 ;;    define-structure (see Dybvig, R.K., The Scheme Programming Language,
 ;;    Prentice-Hall, NJ, 1987).
 ;;
-;;    This macro package extends EuLisp with several new expression forms.
+;;    This package extends EuLisp with several new expression forms.
 ;;    Following is a brief summary of the new forms.  See the member-alistiated
 ;;    LaTeX documentation for a full description of their functionality.
 ;;
@@ -1373,8 +1373,8 @@
    (list genmatch genletrec gendefine pattern-var?)))
 
 ;; These are the actual syntax-0.  They are the user-visible interface to
-;; actual macro expanders.
-(defmacro match args
+;; actual syntax expanders.
+(defsyntax match args
   (cond
     ((and (list? args)
           (<= 1 (size args))
@@ -1395,7 +1395,7 @@
                                  `(match ,@args))))))
     (else (match:syntax-err `(match ,@args) "syntax error in"))))
 
-(defmacro match-lambda args
+(defsyntax match-lambda args
   (if (and (list? args)
            (match:andmap
             (lambda (g126)
@@ -1410,7 +1410,7 @@
         `(match-lambda ,@args)
         "syntax error in")))))
 
-(defmacro match-lambda* args
+(defsyntax match-lambda* args
   (if (and (list? args)
            (match:andmap
             (lambda (g134)
@@ -1425,7 +1425,7 @@
         `(match-lambda* ,@args)
         "syntax error in")))))
 
-(defmacro match-let args
+(defsyntax match-let args
   (let ((g158 (lambda (pat exp body)
                 `(match ,exp (,pat ,@body))))
         (g154 (lambda (pat exp body)
@@ -1649,7 +1649,7 @@
               (g146))))
       (g146))))
 
-(defmacro match-let* args
+(defsyntax match-let* args
   (let ((g176 (lambda ()
                 (match:syntax-err `(match-let* ,@args) "syntax error in"))))
     (if (cons? args)
@@ -1675,7 +1675,7 @@
             (g176)))
       (g176))))
 
-(defmacro match-letrec args
+(defsyntax match-letrec args
   (let ((g200 (cadddr match:expanders))
         (g199 (lambda (p1 e1 p2 e2 body)
                 `(match-letrec (((,p1 . ,p2) (cons ,e1 ,e2))) ,@body)))
@@ -1864,7 +1864,7 @@
             (g195)))
       (g195))))
 
-(defmacro match-define args
+(defsyntax match-define args
   (let ((g210 (cadddr match:expanders))
         (g209 (lambda ()
                 (match:syntax-err

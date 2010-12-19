@@ -27,13 +27,13 @@
    import (root
            thread
            condition)
-   export (;; Imported from macros via syntax
-           defmacro
+   export (;; Imported from defsyntax via syntax
+           defsyntax
            quasiquote
            unquote
            unquote-splicing
 
-           ;; Imported from macros
+           ;; Imported from defsyntax
            defun
            defgeneric
            defmethod
@@ -51,14 +51,14 @@
            unless
            while))
 
-(defmacro block (tag . body)
+(defsyntax block (tag . body)
   (if (symbol? tag)
       `(let/cc ,tag ,@body)
     (error <compilation-general-error>
            "not a symbol in block"
            value: tag)))
 
-(defmacro return-from (tag . val)
+(defsyntax return-from (tag . val)
   (if (symbol? tag)
       (if (null? val)
           `(,tag ())
@@ -67,13 +67,13 @@
            "not a symbol in return-from"
            value: tag)))
 
-(defmacro when (test . body)
+(defsyntax when (test . body)
   `(if ,test (progn ,@body) ()))
 
-(defmacro unless (test . body)
+(defsyntax unless (test . body)
   `(if ,test () (progn ,@body)))
 
-(defmacro while (test . body)
+(defsyntax while (test . body)
   `(let/cc {break}                    ; break can be captured in body
      (letrec
       ((loop (lambda ()

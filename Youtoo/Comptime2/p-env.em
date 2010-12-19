@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule p-env
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (i-all
            sx-obj)
    export (get-lexical-binding

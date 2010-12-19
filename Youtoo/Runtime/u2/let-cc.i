@@ -3,7 +3,7 @@
 
 (definterface let-cc
   (import (telos thread dynamic)
-   syntax (_macros)
+   syntax (_syntax-1)
    full-import ()
    export (
     ((name . call/ep) (pos . 2) (origin let-cc . call/ep))

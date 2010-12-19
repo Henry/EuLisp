@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule op-peep-r
-  (syntax (_macros
+  (syntax (_syntax-1
            _op-peep0)
    import (i-all
            op-peep))

@@ -26,7 +26,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule csem
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1)
    export (<csemaphore>
            cwait

@@ -5,7 +5,7 @@
 ;;;  Title: formatted output (a first attempt!)
 
 (defmodule format
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (telos
            collect
            fpi

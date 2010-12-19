@@ -27,12 +27,12 @@
 ;;      Header
 ;;      0. Legend
 ;;      1. Bindings in level-1 (Lib.${ARCH}/liblevel-1.i)
-;;      2. Bindings in macros (Runtime/macros.i)
+;;      2. Bindings in syntax-1 (Runtime/syntax-1.i)
 ;;      3. Bindings in eval (Lib.${ARCH}/libeval.i)
 ;;;-----------------------------------------------------------------------------
 
 (defmodule i2doc
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1)
    export (main))
 

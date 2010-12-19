@@ -1,5 +1,4 @@
-;;; Copyright 1997 A. Kind & University of Bath
-;;; Copyright 2010 Henry G. Weller
+;;; Copyright 2010 Henry G. Weller and Stefan Israelsson Tampe
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
 ;;; ---                         EuLisp System 'Youtoo'
@@ -18,21 +17,27 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Macros for test-match
-;;;  Library: match
-;;;  Authors: Andreas Kind
-;;;  Maintainer: Henry G. Weller
+;;; Title: Macros for test-smatch
+;;;  Library: smatch
+;;;  Authors: Henry G. Weller and Stefan Israelsson Tampe
+;;;  Maintainer: Henry G. Weller and Stefan Israelsson Tampe
 ;;;  Description:
-;;    See match.em
+;;    See test-smatch.em
 ;;;-----------------------------------------------------------------------------
 
-(defmodule test-match-macros
+(defmodule test-smatch-syntax
   (syntax (syntax-0)
-   import (level-0))
+   import (level-0
+           eval))
 
-(defmacro print-test (body)
-  `(format "~s~%    ;;=> ~s~%" ',body ,body))
+(defsyntax print-test (body)
+  `(print (fmt "~s" ',body) " => " (fmt "~s" ,body) nl))
+
+;; (print (expand-syntax '(smatch x ((set s) (s 4)))) nl)
+;; (print (expand-syntax '(smatch x ((get s) (s)))) nl)
+;; (print (expand-syntax '(defmatchfun (setter hmm) ((a (set s)) (s 4)))) nl)
+;; (print (expand-syntax '(smatch x ((a ... b c) (list 'var-a...bc a b c)))) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module test-match-macros
+)  ;; End of module test-smatch-syntax
 ;;;-----------------------------------------------------------------------------

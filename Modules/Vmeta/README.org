@@ -42,4 +42,4 @@
   The pipe library consists of single EuLisp module:
   - /vmeta.em/ -- root module
 
-  which uses the macros in /vmeta-aux.em/
+  which uses the syntax operators in /vmeta-aux.em/

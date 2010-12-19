@@ -27,7 +27,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule fcsem
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1)
    export (<csemaphore>
            csemaphorep

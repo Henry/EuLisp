@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-body
-  (syntax (_macros
+  (syntax (_syntax-1
            _sx-obj0)
    import (i-all
            p-env

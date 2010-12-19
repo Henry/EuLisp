@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule cg-bycode1
-  (syntax (_macros
+  (syntax (_syntax-1
            _cg-bycode0
            _sx-obj0)
    import (i-level-1

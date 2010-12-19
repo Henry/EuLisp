@@ -173,7 +173,7 @@ static LVAL reintern_symbol(LVAL sym)
     return xlenter(buf);
 }
 
-// xlgetsyntax - find a macro or syntax property
+// xlgetsyntax - find a syntax property
 LVAL xlgetsyntax(LVAL sym, LVAL prp)
 {
     // reintern into current module if necessary

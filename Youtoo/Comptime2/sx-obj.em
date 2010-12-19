@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule sx-obj
-  (syntax (_macros
+  (syntax (_syntax-1
            _sx-obj0)
    import (i-level-1
            sx-obj1)

@@ -26,7 +26,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule padd
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1)
    export (p-add))
 

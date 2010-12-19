@@ -3,7 +3,7 @@
 
 (definterface stream
   (import (telos stream1 stream2 socket dynamic condition lock convert collect list string fpi)
-   syntax (_macros)
+   syntax (_syntax-1)
    full-import ()
    export (
     ((name . <stream-control-block>) (pos . 23) (origin stream2 . <stream-control-block>) (class . constant))

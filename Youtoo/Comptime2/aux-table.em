@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule aux-table
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (level-1)
    export (make-access-table
            access-table-do

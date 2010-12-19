@@ -57,21 +57,21 @@
 (defun symbol-name (symbol)
   (convert symbol <string>))
 
-(defmacro for (init condition inc . body)
+(defsyntax for (init condition inc . body)
   `(progn
      ,init
      (while ,condition
        ,@body
        ,inc)))
 
-(defmacro ++ (sym . inc)
+(defsyntax ++ (sym . inc)
   `(setq ,sym (+ ,sym ,(if (null? inc) 1 (car inc)))))
 
-(defmacro -- (sym . inc)
+(defsyntax -- (sym . inc)
   `(setq ,sym (- ,sym ,(if (null? inc) 1 (car inc)))))
 
 
-(defmacro defstruct (name superclass slot-descriptions . class-options)
+(defsyntax defstruct (name superclass slot-descriptions . class-options)
   `(defclass ,name
      (,(if (null? superclass) '<object> superclass))
      ,(map (lambda (slot)

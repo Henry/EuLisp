@@ -24,7 +24,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule eval
-  (syntax (_macros
+  (syntax (_syntax-1
            syntax-eval)
    import ((except (eval)
                    i-rep)
@@ -33,7 +33,9 @@
            eval/cm
            get-module
            macroexpand-1
-           macroexpand))
+           macroexpand
+           expand-syntax-1
+           expand-syntax))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module eval

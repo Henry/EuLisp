@@ -3,7 +3,7 @@
 
 (definterface format
   (import (telos collect fpi list string character stream condition let-cc socket lock convert dynamic)
-   syntax (_macros)
+   syntax (_syntax-1)
    full-import ()
    export (
     ((name . sformat) (pos . 4) (origin format . sformat))

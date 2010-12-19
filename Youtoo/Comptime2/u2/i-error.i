@@ -3,7 +3,7 @@
 
 (definterface i-error
   (import (i-level-1 i-param i-notify)
-   syntax (_macros _i-aux0)
+   syntax (_syntax-1 _i-aux0)
    full-import (aux-table level-1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level-1 i-param i-notify)
    export (
     ((name . <ct-error>) (pos . 5) (origin i-error . <ct-error>) (class . constant))

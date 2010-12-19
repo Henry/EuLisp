@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tcltk
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tk_general)
    expose (tk_general

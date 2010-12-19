@@ -1,3 +1,4 @@
+;;; Copyright 1997 A. Kind & University of Bath
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
@@ -17,19 +18,21 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Simple macroexpand example
-;;;  Authors: Henry G. Weller
+;;; Title: Syntax for test-match
+;;;  Library: match
+;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
-;;;  Compilation
-;;    youtoo test-expand-macro -l level-0
+;;;  Description:
+;;    See match.em
 ;;;-----------------------------------------------------------------------------
 
-(defmodule test-expand-macro
-  (syntax (syntax-0
-           macro
-           expand-macro)
+(defmodule test-match-syntax
+  (syntax (syntax-0)
    import (level-0))
 
+(defsyntax print-test (body)
+  `(format "~s~%    ;;=> ~s~%" ',body ,body))
+
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module test-expand-macro
+)  ;; End of module test-match-syntax
 ;;;-----------------------------------------------------------------------------

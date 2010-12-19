@@ -30,7 +30,7 @@
   (syntax (syntax-0)
    import (level-0))
 
-(defmacro letrec (inits . body)
+(defsyntax letrec (inits . body)
   `(let (,@(map (lambda (init) `(,(car init) '())) inits))
      ,@(map (lambda (init) `(setq ,(car init) ,(cadr init))) inits)
      ,@body))

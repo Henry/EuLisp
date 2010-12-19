@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_graph_editor
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tcltk))
 

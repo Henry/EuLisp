@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule _ex-aux0
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 
 (defmacro get-name (form)

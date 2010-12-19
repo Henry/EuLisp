@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_class2
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tk_general)
    export (tk-add-arc-canvas

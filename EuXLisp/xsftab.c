@@ -389,7 +389,7 @@ FUNDEF funtab[] =
     {"set-table-fill", xtable_setfill},
     {"table-clear", xtable_clear},
 
-    {"raise-macro-error", xmacro_error},
+    {"raise-syntax-error", xsyntax_error},
 
     {"setivar", xsetivar},
     {"getivar", xgetivar},

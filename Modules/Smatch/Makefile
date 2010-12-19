@@ -45,13 +45,13 @@ MODULE_IHC = $(U2_C_DIR)/$(MODULE).i $(U2_C_DIR)/$(MODULE).c $(U2_C_DIR)/$(MODUL
 ### Test source files
 ###-----------------------------------------------------------------------------
 TEST_EM = test-smatch.em
-TEST_MAC_EM = test-smatch-macros.em
+TEST_MAC_EM = test-smatch-syntax.em
 
 ###-----------------------------------------------------------------------------
 ### Expand source files
 ###-----------------------------------------------------------------------------
 EXPAND_EM = expand-match.em
-EXPAND_MAC_EM = expand-match-macros.em
+EXPAND_MAC_EM = expand-match-syntax.em
 
 ###-----------------------------------------------------------------------------
 ### Build library

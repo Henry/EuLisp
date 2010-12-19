@@ -29,7 +29,7 @@
 (defmodule test-match
   (syntax (syntax-0
            match
-           test-match-macros)
+           test-match-syntax)
    import (level-0
            match-support))
 

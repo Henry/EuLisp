@@ -90,7 +90,7 @@ extern LVAL xreintern();
 extern LVAL xreintern_syntax();
 extern LVAL xmodule_directives();
 extern LVAL append(LVAL a, LVAL b);
-extern LVAL xmacro_error();
+extern LVAL xsyntax_error();
 extern void decode_procedure(LVAL fptr, LVAL fun);
 extern int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env);
 

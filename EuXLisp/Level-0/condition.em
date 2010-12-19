@@ -45,7 +45,7 @@
             <unbound-error>
             <compilation-error>
             <compilation-general-error>
-            <macro-error>
+            <syntax-expansion-error>
             <socket-error>
             <syntax-error>
             <user-interrupt>))
@@ -98,7 +98,7 @@
   abstract?: t)
 
 (defcondition <compilation-general-error> <compilation-error> ())
-(defcondition <macro-error> <compilation-error> ())
+(defcondition <syntax-expansion-error> <compilation-error> ())
 (defcondition <user-interrupt> <condition> ())
 (defcondition <socket-error> <error> ())
 (defcondition <syntax-error> <error> ())
@@ -115,7 +115,7 @@
 (deflocal arith-error (make <arithmetic-error>))
 (deflocal user-interrupt (make <user-interrupt>))
 (deflocal compilation-error (make <compilation-general-error>))
-(deflocal macro-error (make <macro-error>))
+(deflocal syntax-expansion-error (make <syntax-expansion-error>))
 (deflocal socket-error (make <socket-error>))
 (deflocal syntax-error (make <syntax-error>))
 

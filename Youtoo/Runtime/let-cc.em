@@ -25,14 +25,14 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule let-cc
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (telos
            thread
            dynamic)
    export (call/ep))
 
 ;;;-----------------------------------------------------------------------------
-;;; Downward call/cc (let/cc defined in _macros)
+;;; Downward call/cc (let/cc defined in syntax-1)
 ;;;-----------------------------------------------------------------------------
 (defun call/ep (fun)
   ;; Vm state not copied; continuations must not escape

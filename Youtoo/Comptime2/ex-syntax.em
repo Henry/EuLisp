@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-syntax
-  (syntax (_macros
+  (syntax (_syntax-1
            _i-aux0
            _sx-obj0)
    import (i-all

@@ -71,12 +71,12 @@ in the language.
     target.
 
     \definition{defining form}\index{general}{defining form} Any form or
-    \sc{macro expression} expanding into a form whose operator is a \sc{defining
-        operator}.
+    \sc{syntax expression} expanding into a form whose operator is a
+    \sc{defining operator}.
 
     \definition{defining operator}\index{general}{defining operator} One of
     \defopref{defclass}, \defopref{defcondition}, \defopref{defconstant},
-    \defopref{defgeneric}, \defopref{deflocal}, \defopref{defmacro},
+    \defopref{defgeneric}, \defopref{deflocal}, \defopref{defsyntax},
     \defopref{defun}, or \defopref{defglobal}.
 
     \definition{direct instance}\index{general}{direct
@@ -216,9 +216,9 @@ in the language.
     textual region of the form creating the entity.  See also \sc{lexically
         closer} and \sc{shadow}.
 
-    \definition{macro}\index{general}{macro} A macro is a function distinguished
-    by when it is used: macro functions are only used during the syntax
-    expansion of modules to transform expressions.
+    \definition{syntax operator}\index{general}{syntax operator} A syntax
+    operator is distinguished by when it is used: syntax operators are only used
+    during the syntax expansion of modules to transform expressions.
 
     \definition{metaclass} \index{general}{metaclass} A metaclass is a
     \sc{class} \scref{object} whose \sc{instances} are themselves \sc{classes}.
@@ -306,7 +306,7 @@ in the language.
     initialization.
 
     \definition{special form} \index{general}{special form} Any form or
-    \sc{macro expression} expanding into a form whose operator is a \sc{special
+    \sc{syntax expression} expanding into a form whose operator is a \sc{special
         operator}.  They are semantic primitives of the language and in
     consequence, any processor (for example, a compiler or a code-walker) need
     be able to process only the special forms of the language and compositions

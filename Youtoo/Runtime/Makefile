@@ -68,7 +68,7 @@ LEVEL_0_FF_C = Ff/eul-ext.c Ff/eul-ntok.c Ff/eul-read.c Ff/eul-sock.c
 LEVEL_0_C += $(LEVEL_0_FF_C)
 LEVEL_0_O += ${LEVEL_0_FF_C:%.c=$(ARCH_DIR)/%.o}
 
-LEVEL_0_MAC_EM = stream0.em macros.em syntax-0.em
+LEVEL_0_MAC_EM = stream0.em syntax-1.em syntax-0.em
 LEVEL_0_MAC_C = $(LEVEL_0_MAC_EM:%.em=$(U2_C_DIR)/%.c)
 LEVEL_0_MAC_O = ${LEVEL_0_MAC_C:%.c=$(ARCH_DIR)/%.o}
 
@@ -132,14 +132,14 @@ $(MATH_SHARED_LIB): $(MATH_O)
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
 .PHONY: boot
-boot:	$(U2_C_DIR)/libtelos.i $(U2_C_DIR)/_macros.i $(U2_C_DIR)/liblevel-0.i $(U2_C_DIR)/liblevel-1.i $(U2_C_DIR)/libmath.i
+boot:	$(U2_C_DIR)/libtelos.i $(U2_C_DIR)/_syntax-1.i $(U2_C_DIR)/liblevel-0.i $(U2_C_DIR)/liblevel-1.i $(U2_C_DIR)/libmath.i
 	@rm -f $(U2_C_DIR)/libtelos.i
 	$(MAKE) -C ../Telos boot-syntax
 	$(MAKE) boot-syntax
 
 .PHONY: boot-syntax
 boot-syntax:
-	$(U2) $(U2FLAGS) -c macros \
+	$(U2) $(U2FLAGS) -c syntax-1 \
 		--object-dir $(ARCH_DIR) \
 		--load-path $(U2_DIR)/Runtime \
 		--load-path $(U2_DIR)/Telos \

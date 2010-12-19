@@ -3,7 +3,7 @@
 
 (definterface thread
   (import (telos event)
-   syntax (_macros)
+   syntax (_syntax-1)
    full-import ()
    export (
     ((name . state-context-stack-size) (pos . 12) (origin thread . state-context-stack-size) (inline (G00206 (static-ref0) (binding-ref ? <state>) (primitive-relative-ref))) (setter (G00226 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <state>) (set-primitive-relative-ref) (nobble 2))))

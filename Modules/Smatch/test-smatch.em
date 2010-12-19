@@ -28,7 +28,7 @@
 (defmodule test-smatch
   (syntax (syntax-0
            smatch
-           test-smatch-macros)
+           test-smatch-syntax)
    import (level-0
            eval))
 
@@ -68,7 +68,9 @@
    (age reader: deer-age keyword: age:))
   predicate: deer?)
 
-(defconstant deer-acc '(deer-name deer-gender))
+;(defconstant deer-acc '(deer-name deer-gender))
+(defconstant deer-acc (list (cons deer-name (setter deer-name))
+                            (cons deer-age (setter deer-age))))
 
 (defun f4 (l)
   (smatch l
@@ -79,8 +81,8 @@
   (smatch l
     (($ deer-acc (and (set s) (get g) name))
      (progn
-      (s 'olof)
-      (print (list (g) name))
+      (s 'olof ())
+      ;(print (list (g) name))
       (list 'deer name)))
     (_ 'anything-else)))
 

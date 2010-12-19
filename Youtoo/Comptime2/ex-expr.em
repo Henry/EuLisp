@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-expr
-  (syntax (_macros
+  (syntax (_syntax-1
            _i-aux0
            _ex-aux0)
    import (i-all
@@ -39,6 +39,8 @@
            sx-write)
    export (macroexpand-1
            macroexpand
+           expand-syntax-1
+           expand-syntax
            complete-lambda-node
            filter-vars
            filter-init-forms
@@ -124,6 +126,23 @@
     (error <condition>
            (fmt "macroexpand-1: expression ~a is not a cons" expr))))
 
+(defun expand-syntax-1 (expr)
+  (if (cons? expr)
+      (let ((binding (get-syntax-binding (car expr))))
+        (if binding
+            (let ((macro-fun (as-dynamic-binding binding)))
+              (if macro-fun
+                  (progn (setq *pass* 'execute)
+                         (apply macro-fun (cdr expr)))
+                (error <condition>
+                       (fmt "expand-syntax-1 cannot find dynamic binding ~a for syntax binding ~a"
+                            binding (car expr)))))
+          (error <condition>
+                 (fmt "expand-syntax-1: cannot find syntax binding ~a"
+                      (car expr)))))
+    (error <condition>
+           (fmt "expand-syntax-1: expression ~a is not a cons" expr))))
+
 (defun macroexpanded? (expr)
   (if (cons? expr)
       (let ((binding (get-syntax-binding (car expr))))
@@ -145,6 +164,18 @@
                    (not (eq (car expr) 'quote))
                    (not (eq (car expr) 'quasiquote)))
               (cons (macroexpand (car expr)) (macroexpand (cdr expr)))
+            expr)))
+    expr))
+
+(defun expand-syntax (expr)
+  (if (cons? expr)
+      (let ((eexpr (macroexpanded? expr)))
+        (if eexpr
+            (expand-syntax eexpr)
+          (if (and (cons? expr)
+                   (not (eq (car expr) 'quote))
+                   (not (eq (car expr) 'quasiquote)))
+              (cons (expand-syntax (car expr)) (expand-syntax (cdr expr)))
             expr)))
     expr))
 

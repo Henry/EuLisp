@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-11-08 17:49:00" /> 
+<meta name="date" content="2010-12-19 18:27:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -1524,24 +1524,25 @@ class="cmti-9">form</span><sup><span
 class="cmsy-6">*</span></sup> : </dt><dd 
 class="arguments">
     <!--l. 274--><p class="noindent" >A sequence of forms.</p></dd></dl>
-<!--l. 277--><p class="noindent" >This macro creates and returns an anonymous method function
-with the given lambda list and body. This anonymous method
-function can later be added to a method using <a 
+<!--l. 277--><p class="noindent" >This syntax operator creates and returns an anonymous method
+function with the given lambda list and body. This anonymous
+method function can later be added to a method using
+<a 
 href="#x22-998001r5"><span 
-class="cmtt-9">method-function</span></a>,
-or as the <span 
-class="cmtt-9">function </span>initialization value in a call of <a 
+class="cmtt-9">method-function</span></a>, or as the <span 
+class="cmtt-9">function </span>initialization value in a call
+of <a 
 href="eulispcl11.html#x13-102003r1"><span 
-class="cmtt-9">make</span></a> on an
-instance of <a 
+class="cmtt-9">make</span></a> on an instance of <a 
 href="#x22-994007r1"><span 
-class="cmtt-9">&#x003C;method&#x003E;</span></a>. A function of this type is also returned by
-the method accessor <a 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>. A function of this type is also
+returned by the method accessor <a 
 href="#x22-996001r4"><span 
-class="cmtt-9">method-function</span></a>. Only functions created
-using this macro can be used as method functions. Note that the
-lambda list must not be specialized; a method&#8217;s domain is stored in
-the method itself.
+class="cmtt-9">method-function</span></a>. Only
+functions created using this syntax operator can be used
+as method functions. Note that the lambda list must not
+be specialized; a method&#8217;s domain is stored in the method
+itself.
 </p><!--l. 287--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x22-950001r4"></a><span 
 class="cmbx-9">17.4.4   </span><span 
@@ -1582,9 +1583,9 @@ applicable method list for <span
 class="cmti-9">args</span>; it is an error if this list is
 different from the methods which would be produced by the
 method lookup function of the generic function of <span 
-class="cmti-9">method</span>. If
-<span 
-class="cmti-9">method </span>is not attached to a generic function, its behavior is     unspecified. The <span 
+class="cmti-9">method</span>. If    <span 
+class="cmti-9">method </span>is not attached to a generic function, its behavior is
+  unspecified. The <span 
 class="cmti-9">next-methods </span>are used to determine the
   next method to call when <a 
 href="eulispcl11.html#x13-95002r1"><span 

@@ -70,7 +70,7 @@ LispRef eul_initialize_level_1_tables()
 
     // Allocate and register binding vector for user modules; see cg-dld.em
     eul_dyn_create_module("user", 1024);
-    // eul_dyn_create_module("macros", 1024);
+    // eul_dyn_create_module("syntax-1", 1024);
 
     // Initialize the fast lookup table for level_1/user bindings
     eul_allocate_table(level_1_tab, eul_nil);
@@ -111,7 +111,7 @@ LispRef make_entry(int pos, char *module_str, char *origin_str)
 ///-----------------------------------------------------------------------------
 void fill_level_1_table() {
   eul_level_1_lexical_module_name = "level_1";
-  eul_level_1_syntax_module_name = "macros";
+  eul_level_1_syntax_module_name = "syntax-1";
   eul_level_1_module_names = "level_1 string convert copy integer number fpi bit collect compare condition event thread dynamic let-cc callback telos boot1 boot mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc character float random stream3 vector stream stream1 lock stream2 socket list format convert1 table1 table handler symbol read math";
   eul_fast_table_set(level_1_tab,">=", make_entry(11, "compare", ">="));
   eul_fast_table_set(level_1_tab,"character-as-string", make_entry(11, "character", "character-as-string"));
@@ -809,6 +809,7 @@ void fill_level_1_table() {
   eul_fast_table_set(level_1_tab,"check-stop", make_entry(7, "i-compile", "check-stop"));
   eul_fast_table_set(level_1_tab,"link", make_entry(3, "i-compile", "link"));
   eul_fast_table_set(level_1_tab,"show-help", make_entry(11, "i-rep", "show-help"));
+  eul_fast_table_set(level_1_tab,"expand-syntax", make_entry(24, "ex-expr", "expand-syntax"));
   eul_fast_table_set(level_1_tab,"show-module-bindings", make_entry(21, "i-rep", "show-module-bindings"));
   eul_fast_table_set(level_1_tab,"prompt-string", make_entry(13, "i-rep", "prompt-string"));
   eul_fast_table_set(level_1_tab,"module-loaded?", make_entry(6, "cg-dld", "module-loaded?"));
@@ -819,6 +820,7 @@ void fill_level_1_table() {
   eul_fast_table_set(level_1_tab,"eval/cm", make_entry(3, "i-rep", "eval/cm"));
   eul_fast_table_set(level_1_tab,"macroexpand-1", make_entry(6, "ex-expr", "macroexpand-1"));
   eul_fast_table_set(level_1_tab,"set-eval-module", make_entry(4, "i-rep", "set-eval-module"));
+  eul_fast_table_set(level_1_tab,"expand-syntax-1", make_entry(23, "ex-expr", "expand-syntax-1"));
   eul_fast_table_set(level_1_tab,"as-dynamic-binding", make_entry(4, "cg-dld", "as-dynamic-binding"));
   eul_fast_table_set(level_1_tab,"show-class-hierarchy", make_entry(9, "i-rep", "show-class-hierarchy"));
   eul_fast_table_set(level_1_tab,"dynamic-binding-ref", make_entry(7, "cg-dld", "dynamic-binding-ref"));
@@ -1031,48 +1033,48 @@ void fill_level_1_table() {
 
 void fill_level_1_syntax_table() {
   eul_fast_table_set(level_1_syntax_tab,"defgeneric", make_entry(2, "mop-gf0", "defgeneric"));
-  eul_fast_table_set(level_1_syntax_tab,"dynamic-let", make_entry(11, "macros", "dynamic-let"));
+  eul_fast_table_set(level_1_syntax_tab,"dynamic-let", make_entry(11, "syntax-1", "dynamic-let"));
   eul_fast_table_set(level_1_syntax_tab,"defmethod-sig", make_entry(8, "mop-meth0", "defmethod-sig"));
-  eul_fast_table_set(level_1_syntax_tab,"dynamic-setq", make_entry(15, "macros", "dynamic-setq"));
+  eul_fast_table_set(level_1_syntax_tab,"dynamic-setq", make_entry(15, "syntax-1", "dynamic-setq"));
   eul_fast_table_set(level_1_syntax_tab,"defmethod-domain", make_entry(4, "mop-meth0", "defmethod-domain"));
   eul_fast_table_set(level_1_syntax_tab,"with-source", make_entry(4, "stream0", "with-source"));
-  eul_fast_table_set(level_1_syntax_tab,"butlast", make_entry(13, "macros", "butlast"));
-  eul_fast_table_set(level_1_syntax_tab,"dynamic", make_entry(18, "macros", "dynamic"));
-  eul_fast_table_set(level_1_syntax_tab,"time-execution", make_entry(12, "macros", "time-execution"));
+  eul_fast_table_set(level_1_syntax_tab,"butlast", make_entry(13, "syntax-1", "butlast"));
+  eul_fast_table_set(level_1_syntax_tab,"dynamic", make_entry(18, "syntax-1", "dynamic"));
+  eul_fast_table_set(level_1_syntax_tab,"time-execution", make_entry(12, "syntax-1", "time-execution"));
   eul_fast_table_set(level_1_syntax_tab,"method-function-lambda", make_entry(6, "mop-meth0", "method-function-lambda"));
-  eul_fast_table_set(level_1_syntax_tab,"last", make_entry(5, "macros", "last"));
-  eul_fast_table_set(level_1_syntax_tab,"return-from", make_entry(14, "macros", "return-from"));
-  eul_fast_table_set(level_1_syntax_tab,"not", make_entry(9, "macros", "not"));
+  eul_fast_table_set(level_1_syntax_tab,"last", make_entry(5, "syntax-1", "last"));
+  eul_fast_table_set(level_1_syntax_tab,"return-from", make_entry(14, "syntax-1", "return-from"));
+  eul_fast_table_set(level_1_syntax_tab,"not", make_entry(9, "syntax-1", "not"));
   eul_fast_table_set(level_1_syntax_tab,"defmethod-body", make_entry(7, "mop-meth0", "defmethod-body"));
   eul_fast_table_set(level_1_syntax_tab,"get-global-register", make_entry(5, "boot0", "get-global-register"));
   eul_fast_table_set(level_1_syntax_tab,"unless", make_entry(7, "boot0", "unless"));
   eul_fast_table_set(level_1_syntax_tab,"set-global-register", make_entry(6, "boot0", "set-global-register"));
   eul_fast_table_set(level_1_syntax_tab,"named-method-function-lambda", make_entry(10, "mop-meth0", "named-method-function-lambda"));
   eul_fast_table_set(level_1_syntax_tab,"with-output-file", make_entry(2, "stream0", "with-output-file"));
-  eul_fast_table_set(level_1_syntax_tab,"block", make_entry(6, "macros", "block"));
+  eul_fast_table_set(level_1_syntax_tab,"block", make_entry(6, "syntax-1", "block"));
   eul_fast_table_set(level_1_syntax_tab,"or", make_entry(8, "boot0", "or"));
-  eul_fast_table_set(level_1_syntax_tab,"case", make_entry(2, "macros", "case"));
-  eul_fast_table_set(level_1_syntax_tab,"catch", make_entry(19, "macros", "catch"));
-  eul_fast_table_set(level_1_syntax_tab,"throw", make_entry(17, "macros", "throw"));
+  eul_fast_table_set(level_1_syntax_tab,"case", make_entry(2, "syntax-1", "case"));
+  eul_fast_table_set(level_1_syntax_tab,"catch", make_entry(19, "syntax-1", "catch"));
+  eul_fast_table_set(level_1_syntax_tab,"throw", make_entry(17, "syntax-1", "throw"));
   eul_fast_table_set(level_1_syntax_tab,"with-input-file", make_entry(7, "stream0", "with-input-file"));
-  eul_fast_table_set(level_1_syntax_tab,"with-handler", make_entry(3, "macros", "with-handler"));
+  eul_fast_table_set(level_1_syntax_tab,"with-handler", make_entry(3, "syntax-1", "with-handler"));
   eul_fast_table_set(level_1_syntax_tab,"generic-lambda", make_entry(5, "mop-gf0", "generic-lambda"));
   eul_fast_table_set(level_1_syntax_tab,"defmethod", make_entry(5, "mop-meth0", "defmethod"));
   eul_fast_table_set(level_1_syntax_tab,"cond", make_entry(3, "boot0", "cond"));
   eul_fast_table_set(level_1_syntax_tab,"method-lambda", make_entry(3, "mop-meth0", "method-lambda"));
   eul_fast_table_set(level_1_syntax_tab,"defclass", make_entry(11, "mop-defcl0", "defclass"));
-  eul_fast_table_set(level_1_syntax_tab,"let/cc", make_entry(4, "macros", "let/cc"));
+  eul_fast_table_set(level_1_syntax_tab,"let/cc", make_entry(4, "syntax-1", "let/cc"));
   eul_fast_table_set(level_1_syntax_tab,"defprimclass", make_entry(5, "mop-defcl0", "defprimclass"));
   eul_fast_table_set(level_1_syntax_tab,"defmethod-args", make_entry(2, "mop-meth0", "defmethod-args"));
-  eul_fast_table_set(level_1_syntax_tab,"unwind-protect", make_entry(8, "macros", "unwind-protect"));
+  eul_fast_table_set(level_1_syntax_tab,"unwind-protect", make_entry(8, "syntax-1", "unwind-protect"));
   eul_fast_table_set(level_1_syntax_tab,"with-input-file-of-path", make_entry(3, "stream0", "with-input-file-of-path"));
   eul_fast_table_set(level_1_syntax_tab,"and", make_entry(4, "boot0", "and"));
   eul_fast_table_set(level_1_syntax_tab,"when", make_entry(2, "boot0", "when"));
   eul_fast_table_set(level_1_syntax_tab,"with-lock", make_entry(6, "stream0", "with-lock"));
   eul_fast_table_set(level_1_syntax_tab,"with-sink", make_entry(5, "stream0", "with-sink"));
-  eul_fast_table_set(level_1_syntax_tab,"defcondition", make_entry(16, "macros", "defcondition"));
-  eul_fast_table_set(level_1_syntax_tab,"defglobal", make_entry(7, "macros", "defglobal"));
-  eul_fast_table_set(level_1_syntax_tab,"while", make_entry(10, "macros", "while"));
+  eul_fast_table_set(level_1_syntax_tab,"defcondition", make_entry(16, "syntax-1", "defcondition"));
+  eul_fast_table_set(level_1_syntax_tab,"defglobal", make_entry(7, "syntax-1", "defglobal"));
+  eul_fast_table_set(level_1_syntax_tab,"while", make_entry(10, "syntax-1", "while"));
   eul_fast_table_set(level_1_syntax_tab,"defmethod-keywords", make_entry(9, "mop-meth0", "defmethod-keywords"));
   eul_fast_table_set(level_1_syntax_tab,"as-foreign-function-stub-name", make_entry(14, "i-aux0", "as-foreign-function-stub-name"));
   eul_fast_table_set(level_1_syntax_tab,"as-C-library-link-string", make_entry(19, "i-aux0", "as-C-library-link-string"));

@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule main
-  (syntax (_macros
+  (syntax (_syntax-1
            _i-aux0)
    import (i-all
            i-args
@@ -48,7 +48,9 @@
            dynamic-load-module1
            *redefine-imported-bindings*
            macroexpand-1
-           macroexpand))
+           macroexpand
+           expand-syntax-1
+           expand-syntax))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Main function to invoke the interpreter or compiler

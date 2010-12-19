@@ -3,7 +3,7 @@
 
 (definterface cg-gen
   (import (i-all cg-state cg-stack sx-obj sx-node p-env an-side)
-   syntax (_macros _i-aux0)
+   syntax (_syntax-1 _i-aux0)
    full-import (i-error i-notify i-param i-level-1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level-1 aux-table i-all cg-state sx-obj sx-obj1 sx-obj2 cg-stack p-env i-ffi sx-node an-side)
    export (
     ((name . encode) (pos . 9) (origin cg-gen . encode))
@@ -55,7 +55,7 @@
     (return . 164)
     ("  Code for ~a's top-level forms:" . 162)
     ("  Encoding module ~a ..." . 161)
-    (|(method G002840)| . 160)
+    (|(method G002935)| . 160)
     ("code generation error" . 158)
     ("compile time error condition: " . 157)
     (set-display-ref . 148)
@@ -82,7 +82,7 @@
     (encode . 108)
     ("  Encoding module ~a ..." . 107)
     (*actual-module* . 106)
-    (|(method G003069)| . 105)
+    (|(method G003164)| . 105)
     (ct-error-value: . 103)
     ("code generation error" . 102)
     ("compile time error condition: " . 101)

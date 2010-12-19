@@ -114,7 +114,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Implementation
 ;;;-----------------------------------------------------------------------------
-(defmacro iter (inits test . body)
+(defsyntax iter (inits test . body)
   (let ((loop (gensym)))
     `(let ,loop (,@(map (lambda (initform)
                           (let ((var (car initform))
@@ -136,11 +136,11 @@
                                inits)))
                 ))))
 
-(defmacro incf (n)
+(defsyntax incf (n)
   `(setq ,n (+ ,n 1)))
 
 ;; Baker's match, for strings.
-(defmacro match-literal (x)
+(defsyntax match-literal (x)
   (cond
     ((character? x)
      `(when (and (< index end) (binary= (element sequence index) ',x))
@@ -152,7 +152,7 @@
 
 ;; Doesn't work in EuLisp!!!  ???
 ;; Baker's match-type, for strings.
-(defmacro match-type (x v)
+(defsyntax match-type (x v)
   `(when (and (< index end) (,x (element sequence index)))
          ,(if v `(setq ,v (element sequence index)) ())
          (incf index)))
@@ -196,7 +196,7 @@
     (t
      (error <condition> (fmt "~s is not a valid star form." x)))))
 
-(defmacro push (item place)
+(defsyntax push (item place)
   `(setq ,place (cons ,item ,place)))
 
 ;; Baker's compileit.
@@ -277,11 +277,11 @@
 ;;; User syntax-0
 ;;;-----------------------------------------------------------------------------
 ;; Baker's matchit.
-(defmacro match (x) (compile-match x))
+(defsyntax match (x) (compile-match x))
 
 ;; This allows using match an expression without wrapping it in a
 ;; function.
-(defmacro match-expr (sequence expr)
+(defsyntax match-expr (sequence expr)
   `(let* ((sequence ,sequence)
           (index 0)
           (end   (size sequence)))
@@ -295,7 +295,7 @@
       ,(compile-match expr)))
   (print nl))
 
-(defmacro doit (sequence . forms)
+(defsyntax doit (sequence . forms)
   `(let* ((sequence ,sequence)
           (index 0)
           (end (size sequence)))
@@ -303,7 +303,7 @@
      (print nl nl)
      t))
 
-(defmacro testit (expr expected)
+(defsyntax testit (expr expected)
   (let ((res (gensym)))
     `(let ((,res ,expr))
        (format "expression: ~s\n    result: ~s\n  expected: ~s\n"

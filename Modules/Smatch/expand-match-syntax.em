@@ -1,5 +1,4 @@
-;;; Copyright 1997 A. Kind & University of Bath
-;;; Copyright 2010 Henry G. Weller
+;;; Copyright 2010 Henry G. Weller and Stefan Israelsson Tampe
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
 ;;; ---                         EuLisp System 'Youtoo'
@@ -18,19 +17,38 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Simple macroexpand example
-;;;  Authors: Henry G. Weller
-;;;  Maintainer: Henry G. Weller
-;;;  Compilation
-;;    youtoo test-expand-macro -l level-0
+;;; Title: Macros for expanding smatch
+;;;  Library: smatch
+;;;  Authors: Henry G. Weller and Stefan Israelsson Tampe
+;;;  Maintainers: Henry G. Weller and Stefan Israelsson Tampe
+;;;  Description:
+;;    See expand-smatch.em
 ;;;-----------------------------------------------------------------------------
 
-(defmodule macro
+(defmodule expand-match-syntax
   (syntax (syntax-0)
-   import (level-0))
+   import (level-0
+           eval))
 
-(defmacro mac (x) `(print 1 2 3 ,x))
+(defun expand-syntax-module-file (iname oname)
+  (let* ((module (with-input-file (f iname)
+                                  (read-s-expression f)))
+         (specs (caddr module))
+         (defs (cdddr module)))
+    (letfuns ((proc (def)
+                    (when (and (eq (car def) 'defsyntax)
+                               (eq (car (cadddr def)) 'smatch0))
+                          ((setter cadddr) def (expand-syntax (cadddr def)))))
+              (loop (defs)
+                    (when defs
+                          (proc (car defs))
+                          (loop (cdr defs)))))
+      (loop defs)
+      (with-output-file (f oname)
+                        (swrite f module)))))
+
+(expand-syntax-module-file "smatch-smatch0.em" "smatch.em")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module macro
+)  ;; End of module expand-match-syntax
 ;;;-----------------------------------------------------------------------------

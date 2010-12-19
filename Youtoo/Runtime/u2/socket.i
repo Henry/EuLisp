@@ -3,7 +3,7 @@
 
 (definterface socket
   (import (telos lock condition convert dynamic stream1 stream2 string)
-   syntax (_macros)
+   syntax (_syntax-1)
    full-import ()
    export (
     ((name . connection?) (pos . 4) (origin socket . connection?))

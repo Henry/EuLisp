@@ -25,7 +25,7 @@
 ;;; Title: executes compiled code
 ;;;-----------------------------------------------------------------------------
 (defmodule cg-exec-word-length
-  (syntax (_macros _i-aux0)
+  (syntax (_syntax-1 _i-aux0)
    import (i-all i-modify p-env sx-obj sx-node cg-state cg-asm cg-interf
                  i-ffi ex-expr cg-dld)
    export (bytevector open-bytevector write-next-bv-binding-ref

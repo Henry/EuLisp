@@ -766,7 +766,7 @@ LVAL xput()
     return (val);
 }
 
-// xgetsyntax - symbol macro
+// xgetsyntax - symbol syntax
 LVAL xgetsyntax()
 {
     static char *cfn_name = "get-syntax";
@@ -780,7 +780,7 @@ LVAL xgetsyntax()
     return (xlgetsyntax(sym, prp));
 }
 
-// xput - set symbol macro
+// xput - set symbol syntax
 LVAL xputsyntax()
 {
     static char *cfn_name = "put-syntax";

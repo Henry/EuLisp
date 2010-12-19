@@ -50,12 +50,12 @@ EuLispIntroRef.org: EuLispIntro.org
 bindings: bindings.txt
 
 bindings.txt: $(EUL_LIB_DIR)/u2/liblevel-1.i \
-            $(EUL_DIR)/Youtoo/Runtime/u2/macros.i \
+            $(EUL_DIR)/Youtoo/Runtime/u2/syntax-1.i \
             $(EUL_LIB_DIR)/u2/libeval.i
 	@$(MAKE) -C $(EUL_DIR)/Youtoo/Tools
 	$(EUL_BIN_DIR)/i2doc \
 		$(EUL_LIB_DIR)/u2/liblevel-1.i \
-		$(EUL_DIR)/Youtoo/Runtime/u2/macros.i \
+		$(EUL_DIR)/Youtoo/Runtime/u2/syntax-1.i \
 		$(EUL_LIB_DIR)/u2/libeval.i \
 	> bindings.txt
 

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: telos macros
+;;; Title: telos syntax
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
 ;;;  Maintainer: Henry G. Weller

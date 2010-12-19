@@ -3,7 +3,7 @@
 
 (definterface stream2
   (import (telos lock condition convert dynamic stream1 string)
-   syntax (_macros)
+   syntax (_syntax-1)
    full-import ()
    export (
     ((name . control-block-buffer-size) (pos . 8) (origin stream2 . control-block-buffer-size) (inline (G002800 (static-fpi-byte-ref 3) (binding-ref ? <stream-control-block>) (primitive-relative-ref))) (setter (G002832 (stack-ref 1) (static-fpi-byte-ref 3) (stack-ref 2) (binding-ref ? <stream-control-block>) (set-primitive-relative-ref) (nobble 2))))

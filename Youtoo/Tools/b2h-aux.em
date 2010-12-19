@@ -27,7 +27,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule b2h-aux
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 
 (defmacro with-input-file* (file-name . body)

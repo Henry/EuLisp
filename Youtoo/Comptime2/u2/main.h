@@ -9,6 +9,7 @@ extern LispRef main_bindings[];
 
 /* Module binding indices */
 #define dynamic_binding_set1_fn_index 12 
+#define expand_syntax_fn_index 24 
 #define module_loaded__X63_fn_index 6 
 #define __X63_fn_index 17 
 #define dynamic_binding_ref1_fn_index 11 
@@ -20,6 +21,7 @@ extern LispRef main_bindings[];
 #define main_fn_index 3 
 #define macroexpand_1_fn_index 6 
 #define dynamic_load_module1_fn_index 13 
+#define expand_syntax_1_fn_index 23 
 #define _redefine_imported_bindings__X42_X42_fn_index 31 
 #define dynamic_binding_ref_fn_index 7 
 #define eval_fn_index 10 

@@ -29,8 +29,8 @@
   (syntax (syntax)
    import (root)
    export (eval
-           macroexpand1
-           macroexpand))
+           expand-syntax1
+           expand-syntax))
 
 (defun eval (x . mod)
   (if mod

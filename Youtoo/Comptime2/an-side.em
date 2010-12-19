@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule an-side
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (i-all
            sx-obj)
    export (compute-captured-vars))

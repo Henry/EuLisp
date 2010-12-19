@@ -29,7 +29,7 @@
   (syntax (syntax-0)
    import (level-0))
 
-(defmacro ecase (exp . clauses)
+(defsyntax ecase (exp . clauses)
   (let ((val (gensym)))
     `(let ((,val ,exp))
        (cond

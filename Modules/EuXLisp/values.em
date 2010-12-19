@@ -31,7 +31,7 @@
 ;;      (lambda () ...)                 thunk returning values
 ;;      (lambda (a b c ...) ...))       that are passed to here
 ;;
-;;    CL-like macros:
+;;    CL-like syntax operators:
 ;;    multiple-value-setq multiple-value-list multiple-value-call
 ;;    values-list multiple-value-bind
 ;;;-----------------------------------------------------------------------------
@@ -89,7 +89,7 @@
   (consumer product))
 
 ;; sets vars to be values
-(defmacro multiple-value-setq (varlist values-form)
+(defsyntax multiple-value-setq (varlist values-form)
   `(let ((vals ,values-form))
      (if (values? vals)
          (let ((vallist (get-values vals)))
@@ -104,14 +104,14 @@
           (do-m-v-s (cdr varlist) (+ n 1)))))
 
 ;; returns a list of the values
-(defmacro multiple-value-list (values-form)
+(defsyntax multiple-value-list (values-form)
   `(let ((vals ,values-form))
      (if (values? vals)
          (get-values vals)
        (list vals))))
 
 ;; calls fn with all the values of forms as args
-(defmacro multiple-value-call (fn . forms)
+(defsyntax multiple-value-call (fn . forms)
   (if (null? (cdr forms))
       `(let ((args ,(car forms)))
          (apply ,fn
@@ -131,7 +131,7 @@
 (defun values-list (l)
   (apply values l))
 
-(defmacro multiple-value-bind (varlist values-form . body)
+(defsyntax multiple-value-bind (varlist values-form . body)
   `(call-with-values
     (lambda () ,values-form)
     (lambda ,varlist ,@body)))

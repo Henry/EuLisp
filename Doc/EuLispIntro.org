@@ -716,33 +716,34 @@
         (print "one = " 1 ", x = " (fmt "~e" 0.000002)) prints: one = 1, x = 2.000000e-06
     #+END_SRC
 
-* Macros
-  EuLisp employs the usual backquoted template style of macros.
+* Defining Syntax
+  EuLisp employs the usual backquoted template style for defining new syntax
+  (macros).
   #+BEGIN_SRC eulisp
-  (defmacro first (x)
+  (defsyntax first (x)
     `(car ,x))
   #+END_SRC
-  Note that a macro cannot be used in the module where it is defined: a module
-  must be fully macroexpanded before it can be compiled.  If you don't know what
-  is and what isn't a macro beforehand, it is very difficult to do this.  Thus a
-  module containing
+  Note that a new syntax operator cannot be used in the module where it is
+  defined: a module must be fully syntax-expanded before it can be compiled.  If
+  you don't know what is and what isn't a syntax operator beforehand, it is very
+  difficult to do this.  Thus a module containing
   #+BEGIN_SRC eulisp
-  (defmacro second (x)
+  (defsyntax second (x)
      `(cadr ,x))
 
   (defun foo (x) (+ 1 (second x)))
   #+END_SRC
   is doomed to failure by this restriction.
 
-  There is a wrinkle in the way that macros interact with modules: suppose a
-  macro expands into something that refers to bindings that are not imported
-  into the current module?
+  There is a wrinkle in the way that syntax operators interact with modules:
+  suppose a syntax form expands into something that refers to bindings that are
+  not imported into the current module?
   #+BEGIN_SRC eulisp
   (defmodule one
     (syntax (syntax-0)
      import (level-0))
 
-    (defmacro foo (x)
+    (defsyntax foo (x)
        `(car (bar ,x)))
 
     (defun bar (a) ...)
@@ -762,13 +763,13 @@
     ...
   )
   #+END_SRC
-  In the macroexpansion of module =two=, a reference to bar would appear, but
+  In the syntax expansion of module =two=, a reference to bar would appear, but
   bar is not defined in =two=.  Worse, maybe =bar= was defined in =two=: which
-  =bar= does the macroexpanded form refer to? The =bar= from =one= or the =bar=
-  from =two=?
+  =bar= does the syntax expanded form refer to? The =bar= from =one= or the
+  =bar= from =two=?
 
-  The answer is "the right =bar=", that is that =bar= in the module of macro
-  definition, not the =bar= in the module of macro use.  EuLisp takes care of
+  The answer is "the right =bar=", that is that =bar= in the module of syntax
+  definition, not the =bar= in the module of syntax use.  EuLisp takes care of
   all of this transparently for you: essentially every symbol remembers which
   module it was defined in, and always refers back to that module for its value.
 
@@ -778,7 +779,7 @@
   Sometimes you do want a symbol to be captured in the module of use: EuXLisp
   provides a facility to allow you to do this.
   #+BEGIN_SRC eulisp
-  (defmacro while (test .  body)
+  (defsyntax while (test .  body)
     `(let/cc {break}
        (letfuns
          ((loop ()
@@ -1165,7 +1166,7 @@
     + =defconstant=
     + =defclass=
     + =defcondition=
-    + =defmacro=
+    + =defsyntax=
     + =defgeneric=
     + =defmethod=
     + =quote=
@@ -1378,7 +1379,7 @@
     + =>==
     + =max=
     + =min=
-*** Macros
+*** Defining Syntax
     + =quasiquote=
     + =unquote=
     + =unquote-splicing=
@@ -1558,14 +1559,14 @@
     + =<bad-type>=
     + =<unbound-error>=
     + =<compilation-error>=
-    + =<macro-error>=
+    + =<defsyntax-error>=
     + =<syntax-error>=
     + =<user-interrupt>=
     + =<collection-condition>=
     + =<collection-error>=
-*** Macros
-    + =macroexpand=
-    + =macroexpand1=
+*** Syntax expansion
+    + =expand-syntax=
+    + =expand-syntax-1=
 
 * Command Line Arguments
 *** EuXLisp

@@ -28,7 +28,7 @@
 (defmodule expand-match
   (syntax (syntax-0
            smatch0
-           expand-match-macros)
+           expand-match-syntax)
    import (level-0))
 
 ;;;-----------------------------------------------------------------------------

@@ -204,7 +204,7 @@
     #+BEGIN_SRC lisp
       (defmodule youtoo
       ;; Final, proper executable!
-      (import (level1 math eval i-aux0 macros))
+      (import (level-1 math eval i-aux0 syntax-1))
 
       (main *argv*)
 
@@ -494,8 +494,8 @@
     CLOSED: [2010-10-23 Sat 19:09]
     including the =level-0=, =dynamic= and =exit-1= modules.
 *** TODO Create the =exit-1= module
-    containing the =throw= and =catch= functionality.  Perhaps the macros from
-    Youtoo can be re-used for this.
+    containing the =throw= and =catch= functionality.  Perhaps the syntax
+    operators from Youtoo can be re-used for this.
 *** TODO Add support for =generic-lambda=
     See Youtoo.
 *** TODO Investigate exposing MOP functionality from =lzs-mop.ecl=

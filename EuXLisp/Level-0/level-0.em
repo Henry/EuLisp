@@ -379,7 +379,7 @@
            <unbound-error>
            <compilation-error>
            <compilation-general-error>
-           <macro-error>
+           <syntax-expansion-error>
            <socket-error>
            <syntax-error>
            <user-interrupt>
@@ -396,7 +396,7 @@
            min
 
            ;; Macros
-           defmacro
+           defsyntax
            quasiquote
            unquote
            unquote-splicing
@@ -475,7 +475,7 @@
            time-execution)
    expose (eval))
 
-(defmacro time-execution (expr stream)
+(defsyntax time-execution (expr stream)
   (let ((x (gensym "time"))
         (res (gensym "time")))
     `(let* ((,x (cpu-time))

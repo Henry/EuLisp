@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule condition
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (telos
            thread
            dynamic

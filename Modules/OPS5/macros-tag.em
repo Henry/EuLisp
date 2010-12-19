@@ -32,7 +32,7 @@
 ; (syntax (syntax-0)
 ;        import (level-0))
 
-;  (defmacro while (condition . body)
+;  (defsyntax while (condition . body)
 ;    `(let/cc break                      ; (syntax break)
 ;       (letfuns ((| do it again | ()
 ;                 (when ,condition
@@ -40,7 +40,7 @@
 ;                      (| do it again |))))
 ;               (| do it again |))))
 
-;  (defmacro for (init condition inc . body)
+;  (defsyntax for (init condition inc . body)
 ;    `(progn
 ;       ,init
 ;       (while ,condition

@@ -6,10 +6,10 @@
 \begin{optDefinition}
 \noindent
 This section gives the syntax of well-formed expressions and describes the
-semantics of the special-forms, functions and macros of the level-0 language.
-In the case of level-0 macros, the description includes a set of expansion
-rules.  However, these descriptions are not prescriptive of any processor and a
-conforming program cannot rely on adherence to these expansions.
+semantics of the special-forms, functions and syntax forms of the level-0
+language.  In the case of level-0 syntax forms, the description includes a
+set of expansion rules.  However, these descriptions are not prescriptive of any
+processor and a conforming program cannot rely on adherence to these expansions.
 \end{optDefinition}
 
 \sclause{Simple Expressions}
@@ -152,7 +152,7 @@ See \specopref{quote}.
 \begin{optPrivate}
     Need more detail about \functionref{apply}.
 
-    The stuff about macroexpand is probably redundant now?  Although I
+    The stuff about expand-syntax is probably redundant now?  Although I
     suppose we need something at top-level??
 \end{optPrivate}
 %
@@ -205,23 +205,23 @@ remaining arguments.  These bindings have lexical scope and indefinite extent.
 It is a violation if the same identifier appears more than once in a
 \scref{lambda-list}.  It is an error to modify \scref{rest-list}.
 
-\defop{defmacro}
+\defop{defsyntax}
 %
 \Syntax
-\defSyntax{defmacro}{
+\defSyntax{defsyntax}{
 \begin{syntax}
-    \scdef{defmacro-form}: \ra{} \classref{function} \\
-    \>  ( \defopref{defmacro} \scref{macro-name} \scref{lambda-list}
+    \scdef{defsyntax-form}: \ra{} \classref{function} \\
+    \>  ( \defopref{defsyntax} \scref{syntax-operator-name} \scref{lambda-list}
     \scref{body} ) \\
-    \scdef{macro-name}: \\
+    \scdef{syntax-operator-name}: \\
     \> \scref{identifier}
 \end{syntax}}%
-\showSyntaxBox{defmacro}
+\showSyntaxBox{defsyntax}
 %
 \begin{arguments}
-    \item[macro-name] A symbol naming an immutable top-lexical binding to be
-    initialized with a function having the specified \scref{lambda-list} and
-    \scref{body}.
+    \item[syntax-operator-name] A symbol naming an immutable top-lexical binding
+    to be initialized with a function having the specified \scref{lambda-list}
+    and \scref{body}.
 
     \item[lambda-list] The parameter list of the function conforming to the
     syntax specified under \specopref{lambda}.
@@ -230,15 +230,16 @@ It is a violation if the same identifier appears more than once in a
 \end{arguments}
 %
 \remarks%
-The \defopref{defmacro} form defines a function \index{general}{macro} named by
-\scref{macro-name} and stores the definition as the top-lexical binding of
-\scref{macro-name} \index{general}{macro!definition by \defopref{defmacro}}
+The \defopref{defsyntax} form defines a syntax operator \index{general}{syntax
+    operator} named by \scref{syntax-operator-name} and stores the definition as
+the top-lexical binding of \scref{syntax-operator-name}
+\index{general}{syntax operator!definition by \defopref{defsyntax}}
 \index{general}{binding!module}.  The interpretation of the \scref{lambda-list}
 is as defined for \specopref{lambda} (see \ref{lambda-syntax-table}).
 %
 \begin{note}
-    A macro is automatically exported from the the module which defines it.  A
-    macro cannot be used in the module which defines it.
+    A syntax operator is automatically exported from the the module which
+    defines because it cannot be used in the module which defines it.
 \end{note}
 %
 \seealso%
@@ -571,8 +572,8 @@ of \specopref{if} is the result of the evaluation of whichever of
 \showSyntaxBox{cond}
 %
 \remarks%
-The \specopref{cond} macro provides a convenient syntax for collections of {\em
-    if-then-elseif...else} expressions.
+The \specopref{cond} syntax operator provides a convenient syntax for
+collections of {\em if-then-elseif...else} expressions.
 %
 \rewriterules
 %
@@ -1272,8 +1273,8 @@ called; {\tt loop} is called; etc..  This program loops indefinitely.
 Quasiquotation is also known as backquoting.  A \specopref{quasiquote}d
 expression is a convenient way of building a structure.  The \scref{skeleton}
 describes the shape and, generally, many of the entries in the structure but
-some holes remain to be filled.  The \specopref{quasiquote} macro can be
-abbreviated by using the glyph called {\em grave accent} (\syntaxref{`})
+some holes remain to be filled.  The \specopref{quasiquote} syntax operator can
+be abbreviated by using the glyph called {\em grave accent} (\syntaxref{`})
 \ttsubindex{quasiquote}{abbreviation with \syntaxref{`}}, so that {\tt
     (\specopref{quasiquote} \scref{skeleton})} can be written
 \syntaxref{`}\scref{skeleton}.
@@ -1376,7 +1377,7 @@ section~\ref{object-syntax-summary}.
 \showSyntax{defmethod}
 \showSyntax{defconstant}
 \showSyntax{deflocal}
-\showSyntax{defmacro}
+\showSyntax{defsyntax}
 \showSyntax{defun}
 \showSyntax{defcondition}
 

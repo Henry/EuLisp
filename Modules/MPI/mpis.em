@@ -27,7 +27,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule mpis
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            serial)
    export (<mpi-stream>

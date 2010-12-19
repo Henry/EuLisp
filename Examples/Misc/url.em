@@ -27,7 +27,7 @@
 ;;    url www.cs.bath.ac.uk /~jap/ak1/youtoo/home.html
 ;;;-----------------------------------------------------------------------------
 (defmodule url
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 
 (let* ((host (vector-ref *argv* 1))

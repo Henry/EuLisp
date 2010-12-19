@@ -362,14 +362,14 @@ In all other respects, the behaviour is as that defined in level-0.
     \item[form$^*$] A sequence of forms.
 \end{arguments}
 %
-This macro creates and returns an anonymous method function with the given
-lambda list and body. This anonymous method function can later be added to a
-method using \setterref{method-function}, or as the {\tt function}
+This syntax operator creates and returns an anonymous method function with the
+given lambda list and body. This anonymous method function can later be added to
+a method using \setterref{method-function}, or as the {\tt function}
 initialization value in a call of \functionref{make} on an instance of
 \classref{method}.  A function of this type is also returned by the method
-accessor \functionref{method-function}.  Only functions created using this macro
-can be used as method functions.  Note that the lambda list must not be
-specialized; a method's domain is stored in the method itself.
+accessor \functionref{method-function}.  Only functions created using this
+syntax operator can be used as method functions.  Note that the lambda list must
+not be specialized; a method's domain is stored in the method itself.
 
 % hb: there are no setters specified yet!
 \function{call-method}

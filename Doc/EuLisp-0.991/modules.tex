@@ -340,7 +340,7 @@ Definitions in a module only contain unqualified names---that is,
     \>  \scref{defconstant-form} \\
     \>  \scref{deflocal-form} \\
     \>  \scref{defgeneric-form} \\
-    \>  \scref{defmacro-form} \\
+    \>  \scref{defsyntax-form} \\
     \>  \scref{defun-form}
 \end{syntax}}
 \showSyntaxBox{defining-0-forms}
@@ -418,8 +418,8 @@ The following steps summarize the module definition process:
     \S~\ref{directives}--\ref{syntax-directive}.  This step creates and
     initializes the top-lexical, syntax and external environments.
 
-    \item[{\bf syntax expansion}] \index{general}{macros---see also syntax}
-    \index{general}{macro expansion---see also syntax} \index{general}{syntax}
+    \item[{\bf syntax expansion}] \index{general}{syntax operator}
+    \index{general}{syntax expansion} \index{general}{syntax}
     \index{general}{syntax expansion} The body of the module is expanded
     according to the operators defined in the syntax environment constructed
     from the syntax directive.
@@ -430,7 +430,7 @@ The following steps summarize the module definition process:
         hygenic expansion of forms in such a way that the programmer need have
         no knowledge of the expansion-time or run-time dependencies of the
         syntax defining module.  Currently syntax expansion is unhygienic to
-        allow a simple syntax for syntax macro definition.
+        allow a simple syntax for syntax operator definition.
     \end{note}
 
     \item[{\bf static analysis}] The expanded body of the module is analyzed.

@@ -60,7 +60,7 @@ LVAL s_module_directives;
 LVAL s_binary_plus, s_binary_minus, s_binary_times, s_binary_divide;
 LVAL s_quotient, s_binary_less, s_binary_equal, s_current_thread;
 LVAL s_thread_class, s_qualified_symbols, s_set_generic_args;
-LVAL s_macro_error, s_supplied_env, s_debug, s_xlframe, s_gcmsgs;
+LVAL s_syntax_error, s_supplied_env, s_debug, s_xlframe, s_gcmsgs;
 LVAL s_arg_list, s_next_methods;
 #ifndef NO_CHECK_REF
 LVAL s_check_ref;
@@ -562,7 +562,7 @@ void xlsymbols()
 
     s_set_generic_args = xlenter("set-generic-args");
 
-    s_macro_error = xlenter("macro-error");
+    s_syntax_error = xlenter("syntax-error");
     #ifdef SOCK
     s_socket_error = xlenter("socket-error");
     #endif

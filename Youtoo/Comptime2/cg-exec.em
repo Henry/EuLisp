@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule cg-exec
-  (syntax (_macros
+  (syntax (_syntax-1
            _i-aux0)
    import (cg-exec-word-length
            i-all

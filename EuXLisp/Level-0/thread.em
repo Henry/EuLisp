@@ -686,7 +686,7 @@
                     "too many args passed to continuation"
                     value: z)))))
 
-(defmacro let/cc (name . body)
+(defsyntax let/cc (name . body)
   `(call/cc (lambda (cc)
               (push-uwp-frame cc)
               (pop-uwp-frame
@@ -737,12 +737,12 @@
         (exec-uwps frame)))))
 
 ;; don't uwp disestablish, as any non-local exit will reset state itself
-(defmacro with-handler (fun . body)
+(defsyntax with-handler (fun . body)
   `(let ((handler ,fun))
      (establish-handler handler)
      (disestablish-handler (progn ,@body) handler)))
 
-(defmacro unwind-protect (protected . afterforms)
+(defsyntax unwind-protect (protected . afterforms)
   `(let ((cleanups (lambda () ,@afterforms)))
      (establish-uwp cleanups)
      (disestablish-uwp ,protected cleanups)))

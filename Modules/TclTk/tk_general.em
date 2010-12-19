@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_general
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1)
    export (<tk-button>
            <tk-label>

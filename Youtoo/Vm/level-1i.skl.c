@@ -70,7 +70,7 @@ LispRef eul_initialize_level_1_tables()
 
     // Allocate and register binding vector for user modules; see cg-dld.em
     eul_dyn_create_module("user", 1024);
-    // eul_dyn_create_module("macros", 1024);
+    // eul_dyn_create_module("syntax-1", 1024);
 
     // Initialize the fast lookup table for level_1/user bindings
     eul_allocate_table(level_1_tab, eul_nil);

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EuLisp debugging helper macros
+;;; Title: EuLisp debugging helper syntax
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@
 
 (deflocal debugging ())
 
-(defmacro dprint (x)
+(defsyntax dprint (x)
   `(if debugging
        (print ,x nl)
      ()))

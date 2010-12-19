@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_callback
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tcltk))
 

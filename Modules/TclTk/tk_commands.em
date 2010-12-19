@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_commands
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tk_general)
    export (tk-pack

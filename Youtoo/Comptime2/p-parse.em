@@ -24,13 +24,13 @@
 ;;;  Maintainer: Henry G. Weller
 ;;;  Description:
 ;;    ME: Module expander (import, top-lexical bindings)
-;;    SE: Syntax expander (macros)
+;;    SE: Syntax expander (syntax-1)
 ;;    EE: Export expander (export)
 ;;    XE: Expression expander (expressions)
 ;;;-----------------------------------------------------------------------------
 
 (defmodule p-parse
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (i-all
            p-env
            ex-module

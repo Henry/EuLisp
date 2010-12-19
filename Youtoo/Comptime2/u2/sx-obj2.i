@@ -3,7 +3,7 @@
 
 (definterface sx-obj2
   (import (i-level-1 sx-obj1)
-   syntax (_macros _sx-obj0)
+   syntax (_syntax-1 _sx-obj0)
    full-import (aux-table level-1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level-1 sx-obj1)
    export (
     ((name . var-binding?) (pos . 37) (origin sx-obj2 . var-binding?) (inline (G001461 (static-ref2) (binding-ref ? <var>) (primitive-relative-ref))))

@@ -30,7 +30,7 @@
 
 (defconstant trace-table (make-table eq))
 
-(defmacro trace (name)
+(defsyntax trace (name)
   `(progn
      (setq old ,name)
      (defun ,name args
@@ -41,7 +41,7 @@
      ((setter table-ref) trace-table ,name old)
      ',name))
 
-(defmacro untrace (name)
+(defsyntax untrace (name)
   `(let ((old (table-ref trace-table ,name)))
      (if old
          (progn

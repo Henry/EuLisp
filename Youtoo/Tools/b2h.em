@@ -40,7 +40,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule b2h
-  (syntax (macros
+  (syntax (syntax-1
            vmeta
            b2h-aux)
    import (level-1))

@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-module
-  (syntax (_macros
+  (syntax (_syntax-1
            _i-aux0
            _sx-obj0
            _ex-aux0)
@@ -211,6 +211,30 @@
  (lambda (x e)
    (with-ct-handler
     "bad defmacro syntax" x
+    (let ((name (get-name x))
+          (params (get-params x))
+          (body (get-body x)))
+      (if *interpreter*
+          ;; Extend lexical env and return function in interpreter
+          (let ((node (e `(deflocal ,name
+                            (named-lambda ,name ,params ,@body)) e))
+                (binding (get-lexical-binding name)))
+            (set-syntax-binding binding)
+            node)
+        ;; Extend lexical and external envs
+        (let ((node (make-defined-fun name params body)))
+          ;; Attention: lazy expansion of external bindings
+          ((setter (module-external-env? (dynamic *actual-module*)))
+           name name)))))))
+
+;;;-----------------------------------------------------------------------------
+;;; Install defsyntax expander
+;;;-----------------------------------------------------------------------------
+(install-module-expander
+ 'defsyntax
+ (lambda (x e)
+   (with-ct-handler
+    "bad defsyntax syntax" x
     (let ((name (get-name x))
           (params (get-params x))
           (body (get-body x)))

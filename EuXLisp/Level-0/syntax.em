@@ -23,15 +23,15 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule syntax
-  (syntax (macros)
+  (syntax (defsyntax)
    import (root)
-   export (;; Imported from macros
-           defmacro
+   export (;; Imported from defsyntax
+           defsyntax
            quasiquote
            unquote
            unquote-splicing
-           macroexpand1
-           macroexpand
+           expand-syntax1
+           expand-syntax
 
            ;; Defined in this module
            defun
@@ -52,7 +52,7 @@
 ; (defun foo (x) ...)
 ; (defun (setter foo) (x) ...)
 ; (defun (converter foo) (x) ...)
-(defmacro defun (name args . body)
+(defsyntax defun (name args . body)
   (cond ((symbol? name)
          (if (symbol-exists? name)
              (progn
@@ -76,7 +76,7 @@
 ;    method: ((x <fpi>) ...)
 ;    method: ((y <flt>) ...)
 ;    ...)
-(defmacro defgeneric (name args . body)
+(defsyntax defgeneric (name args . body)
   (cond ((symbol? name)
          `(progn (define-generic ,(cons name args))
                  ,@(defgeneric-methods name body)
@@ -107,7 +107,7 @@
                   `(defmethod ,name ,(caadr body) ,@(cdadr body))
                   (defgeneric-methods name (cdr (cdr body)))))))
 
-(defmacro defmethod (name args . body)
+(defsyntax defmethod (name args . body)
   (if (or (symbol? name)
           (definable-name? name))
       `(define-method ,(cons name args) ,@body)
@@ -115,7 +115,7 @@
            "malformed name in defgeneric"
            value: name)))
 
-(defmacro generic-lambda (args . body)
+(defsyntax generic-lambda (args . body)
   `(let (anonymous-generic)
      (define-generic (anonymous-generic ,@args))
      ,@(defgeneric-methods
@@ -123,18 +123,18 @@
         body)
      anonymous-generic))
 
-(defmacro method-lambda (args . body)
+(defsyntax method-lambda (args . body)
   `(lambda (next-methods arg-list ,@args)
      ,@body))
 
 ;; Interactive defmodule (error)
-(defmacro defmodule (name . body)
+(defsyntax defmodule (name . body)
   (error <compilation-general-error>
          "only use defmodule in root module"
          value: name))
 
 ;; Interactive import directive
-(defmacro import (mod)
+(defsyntax import (mod)
   (if (not (or (string? mod)
                (symbol? mod)))
       (error <compilation-general-error>
@@ -145,7 +145,7 @@
        (%import curmod ,mod))))
 
 ;; Interactive syntax directive
-(defmacro syntax (mod)
+(defsyntax syntax (mod)
   (if (not (or (string? mod)
                (symbol? mod)))
       (error <compilation-general-error>
@@ -160,7 +160,7 @@
          (car binding)
          (cons 'lambda (cdr binding))))
 
-(defmacro letfuns (funs . body)
+(defsyntax letfuns (funs . body)
   `(letrec
     ,(map-list letfun-binding funs)
     ,@body))

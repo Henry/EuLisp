@@ -45,12 +45,12 @@
   or bug fixes to wright@research.nj.nec.com so that they may be included
   in future releases.
 
-  This macro package extends Scheme with several new expression forms.
-  Following is a brief summary of the new forms.  See the associated
-  LaTeX documentation for a full description of their functionality.
+  This package extends Scheme with several new expression forms.  Following is a
+  brief summary of the new forms.  See the associated LaTeX documentation for a
+  full description of their functionality.
 
 * Pattern Matching Syntactic Extensions for EuLisp
-  This macro package extends EuLisp with several new expression forms.
+  This package extends EuLisp with several new expression forms.
   Following is a brief summary of the new forms.
 
   #+BEGIN_SRC lisp

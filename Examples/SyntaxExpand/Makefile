@@ -1,4 +1,3 @@
-### Copyright 1997 A. Kind & University of Bath
 ### Copyright 2010 Henry G. Weller
 ###-----------------------------------------------------------------------------
 ##  This file is part of
@@ -20,7 +19,7 @@
 ###-----------------------------------------------------------------------------
 
 ###-----------------------------------------------------------------------------
-### EuLisp test-expand-macro Makefile
+### EuLisp test-expand-syntax Makefile
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
@@ -28,18 +27,18 @@ include ../../Lib.$(ARCH)/Makefile
 ###-----------------------------------------------------------------------------
 ### Test source files
 ###-----------------------------------------------------------------------------
-TEST_EM = test-expand-macro.em
+TEST_EM = test-expand-syntax.em
 TEST_EXE = $(TEST_EM:%.em=$(ARCH_DIR)/%)
 
 ###-----------------------------------------------------------------------------
 ### Test
 ###-----------------------------------------------------------------------------
-$(ARCH_DIR)/% : %.em | $(ARCH_DIR)/.
+$(ARCH_DIR)/% : %.em test-syntax.em expand-test-syntax.em | $(ARCH_DIR)/.
 	${U2} ${U2FLAGS} $< --object-dir $(ARCH_DIR) -l level-0 -l eval
 
 .PHONY: test
-test: $(ARCH_DIR)/test-expand-macro
-	$(ARCH_DIR)/test-expand-macro
+test: $(ARCH_DIR)/test-expand-syntax
+	$(ARCH_DIR)/test-expand-syntax
 
 ###-----------------------------------------------------------------------------
 .PHONY: README

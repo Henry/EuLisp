@@ -99,7 +99,7 @@
 #define OP_CDAR         0x5E
 #define OP_CDDR         0x5F
 
-#define OP_GETSYNTAX    0x60    // symbol macro
+#define OP_GETSYNTAX    0x60    // symbol syntax
 #define OP_PUTSYNTAX    0x61
 
 #define OP_DIV          0x62    // division

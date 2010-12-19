@@ -4195,14 +4195,14 @@ static void do_defcondition(LVAL form, int cont)
     drop(1);
 }
 
-LVAL xmacro_error()
+LVAL xsyntax_error()
 {
-    static char *cfn_name = "raise-macro-error";
+    static char *cfn_name = "raise-syntax-error";
 
     LVAL msg = xlgastring();
     LVAL value = xlgetarg();
     xllastarg();
-    xlcerror(getstring(msg), value, s_macro_error);
+    xlcerror(getstring(msg), value, s_syntax_error);
 
     return NIL; // not reached
 }

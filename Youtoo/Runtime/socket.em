@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule socket
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (telos
            lock
            condition

@@ -1,5 +1,5 @@
 (defmodule lambda-rest
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 (defun f args1 (cons 'args1 args1))
 

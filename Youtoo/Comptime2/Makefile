@@ -109,6 +109,8 @@ boot-preliminary: $(U2_C_DIR)/_ex-aux0.i $(U2_C_DIR)/_op-peep0.i $(U2_C_DIR)/_cg
 		-c ex-aux0 op-peep0 cg-bycode0 i-aux0 sx-obj0 \
 		--load-path $(U2_DIR)/Comptime2 \
 		--load-path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
+		--load-path $(U2_DIR)/Runtime \
+		--load-path $(U2_DIR)/Telos \
 		-l level-1
 	$(U2) $(U2FLAGS) -c ex-expr --object-dir $(ARCH_DIR) \
 		--load-path $(U2_DIR)/Comptime2 \
@@ -156,7 +158,7 @@ $(U2_C_DIR)/lib%.i : $(EUL_LIB_DIR)/$(U2_C_DIR)/lib%.i
 .PHONY: boot-final
 boot-final:
 	@echo "---- CREATING youtoo.em module for final, proper youtoo executable"
-	@sed 	-e 's@#modules#@level-0 level-1 math eval main i-aux0 macros syntax-0@' \
+	@sed 	-e 's@#modules#@level-0 level-1 math eval main i-aux0 syntax-1 syntax-0@' \
 		-e 's@#which#@Final, proper executable!@' \
 		<youtoo.em.in >youtoo.em
 	@echo "---- CREATING final youtoo executable"

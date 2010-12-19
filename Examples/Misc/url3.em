@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule url3
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1))
 
 (defun open-url (url)

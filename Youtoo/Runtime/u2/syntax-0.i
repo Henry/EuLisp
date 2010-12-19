@@ -3,7 +3,7 @@
 
 (definterface syntax-0
   (import ()
-   syntax (macros)
+   syntax (syntax-1)
    full-import ()
    export (
    )

@@ -114,7 +114,7 @@
 (defun do-setqs (pattern)
   (do-setqs-aux pattern 0))
 
-(defmacro linda-in (pool tag . pattern)
+(defsyntax linda-in (pool tag . pattern)
   `(let ((*tuple* (convert (linda-tuple-value
                             (linda-in-tuple ,pool ,tag
                                             ,@(tidy-pattern pattern)))
@@ -129,7 +129,7 @@
           (format ";; in'd ~a~%" val))
     val))
 
-(defmacro linda-in? (pool tag . pattern)
+(defsyntax linda-in? (pool tag . pattern)
   `(let ((*result* (linda-in?-tuple ,pool ,tag
                                     ,@(tidy-pattern pattern))))
      (if (null? *result*)
@@ -145,7 +145,7 @@
           (format ";; in?'d ~a~%" val))
     val))
 
-(defmacro linda-read (pool tag . pattern)
+(defsyntax linda-read (pool tag . pattern)
   `(let ((*tuple* (convert (linda-tuple-value
                             (linda-read-tuple ,pool ,tag
                                               ,@(tidy-pattern pattern)))
@@ -160,7 +160,7 @@
           (format ";; read ~a~%" val))
     val))
 
-(defmacro linda-read? (pool tag . pattern)
+(defsyntax linda-read? (pool tag . pattern)
   `(let ((*result* (linda-read?-tuple ,pool ,tag
                                       ,@(tidy-pattern pattern))))
      (if (null? *result*)

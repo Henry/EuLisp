@@ -30,7 +30,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule thread
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (telos
            event)
    export (<current-thread>

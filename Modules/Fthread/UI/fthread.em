@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule fthread
-  (syntax (macros)
+  (syntax (syntax-1)
    import ((except (thread-return-value
                     thread-returned?)
                    level-1))

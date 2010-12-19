@@ -1,4 +1,3 @@
-;;; Copyright 1997 A. Kind & University of Bath
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
@@ -18,22 +17,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Simple macroexpand example
+;;; Title: Simple expand syntax example
 ;;;  Authors: Henry G. Weller
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
-;;     youtoo test-expand-macro -l level-0
+;;    youtoo test-expand-syntax -l level-0
 ;;;-----------------------------------------------------------------------------
 
-(defmodule expand-macro
+(defmodule test-expand-syntax
   (syntax (syntax-0
-           macro)
-   import (level-0
-           eval))
-
-(print "Expanding (when t 1): " (macroexpand '(when t 1)) nl)
-(print "Expanding (mac 1): " (macroexpand '(mac 1)) nl)
+           test-syntax
+           expand-test-syntax)
+   import (level-0))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module expand-macro
+)  ;; End of module test-expand-syntax
 ;;;-----------------------------------------------------------------------------

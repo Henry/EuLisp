@@ -43,7 +43,7 @@ SOURCE_EULYSSES_7=Comptime2/u2/aux-table.i
 SOURCE_EULYSSES_8=Comptime2/u2/sx-obj.i
 SOURCE_EULYSSES_9=Comptime2/u2/i-modify.i
 
-SOURCE_SYNTAX_1=Runtime/u2/macros.i
+SOURCE_SYNTAX_1=Runtime/u2/syntax-1.i
 SOURCE_SYNTAX_2=Comptime2/u2/i-aux0.i
 
 ## -----------------------------------------------------------------------
@@ -57,7 +57,7 @@ cat $FILE_SKL > $FILE
 echo "void fill_level_1_table() {" >> $FILE
 
 echo "  eul_level_1_lexical_module_name = \"level_1\";" >> $FILE
-echo "  eul_level_1_syntax_module_name = \"macros\";" >> $FILE
+echo "  eul_level_1_syntax_module_name = \"syntax-1\";" >> $FILE
 
 echo "  eul_level_1_module_names = \"level_1 string convert copy integer number fpi bit collect compare condition event thread dynamic let-cc callback telos boot1 boot mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc character float random stream3 vector stream stream1 lock stream2 socket list format convert1 table1 table handler symbol read math\";" >> $FILE
 

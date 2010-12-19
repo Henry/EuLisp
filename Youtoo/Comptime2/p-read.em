@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule p-read
-  (syntax (_macros
+  (syntax (_syntax-1
            _i-aux0)
    import (i-all
            sx-obj)

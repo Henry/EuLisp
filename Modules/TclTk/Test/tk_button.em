@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_button
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tcltk)
    export (test-buttons))

@@ -1,4 +1,4 @@
-;;; Copyright 2010 Henry G. Weller and Stefan Israelsson Tampe
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
 ;;; ---                         EuLisp System 'Youtoo'
@@ -17,27 +17,22 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Macros for test-smatch
-;;;  Library: smatch
-;;;  Authors: Henry G. Weller and Stefan Israelsson Tampe
-;;;  Maintainer: Henry G. Weller and Stefan Israelsson Tampe
-;;;  Description:
-;;    See test-smatch.em
+;;; Title: Simple syntax-expand example
+;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation
+;;     youtoo test-expand-syntax -l level-0
 ;;;-----------------------------------------------------------------------------
 
-(defmodule test-smatch-macros
-  (syntax (syntax-0)
+(defmodule expand-test-syntax
+  (syntax (syntax-0
+           test-syntax)
    import (level-0
            eval))
 
-(defmacro print-test (body)
-  `(print (fmt "~s" ',body) " => " (fmt "~s" ,body) nl))
-
-;; (print (macroexpand '(smatch x ((set s) (s 4)))) nl)
-;; (print (macroexpand '(smatch x ((get s) (s)))) nl)
-;; (print (macroexpand '(defmatchfun (setter hmm) ((a (set s)) (s 4)))) nl)
-;; (print (macroexpand '(smatch x ((a ... b c) (list 'var-a...bc a b c)))) nl)
+(print "Expanding (when t 1): " (expand-syntax '(when t 1)) nl)
+(print "Expanding (test 1): " (expand-syntax '(test 1)) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module test-smatch-macros
+)  ;; End of module expand-test-syntax
 ;;;-----------------------------------------------------------------------------

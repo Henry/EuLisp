@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_text
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tcltk))
 

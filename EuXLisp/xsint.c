@@ -661,7 +661,7 @@ void xlexecute(LVAL fun)
                         bad_slot_access("write", tmp, xlval);
                     }
                     #endif
-                    FIXTYPE fixtmp = getfixnum(tmp);        // macro
+                    FIXTYPE fixtmp = getfixnum(tmp);
                     tmp = pop();
                     setivar(xlval, fixtmp, tmp);
                     xlval = tmp;

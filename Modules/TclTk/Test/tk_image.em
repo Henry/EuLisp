@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_image
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            tcltk))
 

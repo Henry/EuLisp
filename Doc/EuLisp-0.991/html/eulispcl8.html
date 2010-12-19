@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-11-08 17:49:00" /> 
+<meta name="date" content="2010-12-19 18:27:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -219,7 +219,7 @@ class="cmbx-9">&#x00A0;defining</span>
 class="cmbx-9">form</span><br /><a 
  id="dx10-47023"></a>
  </p><!--l. 69--><p class="noindent" >Any form or <span 
-class="cmti-9">macro expression </span>expanding into a form whose
+class="cmti-9">syntax expression </span>expanding into a form whose
  operator is a <span 
 class="cmti-9">defining operator</span>.
  <a 
@@ -243,7 +243,7 @@ class="cmtt-9">defgeneric</span></a>,
 href="eulispcl12.html#x16-124006r5"><span 
 class="cmtt-9">deflocal</span></a>, <a 
 href="eulispcl12.html#x16-138002r2"><span 
-class="cmtt-9">defmacro</span></a>, <a 
+class="cmtt-9">defsyntax</span></a>, <a 
 href="eulispcl12.html#x16-142001r3"><span 
 class="cmtt-9">defun</span></a>, or <a 
 href="eulispcl17.html#x22-1212002r5"><span 
@@ -725,10 +725,12 @@ class="cmti-9">shadow</span>.
  id="x10-47083r45"></a>
 </p><!--l. 215--><p class="noindent" ><span 
 class="cmbx-9">8.39</span><span 
-class="cmbx-9">&#x00A0;macro</span><br /><a 
+class="cmbx-9">&#x00A0;syntax</span>
+<span 
+class="cmbx-9">operator</span><br /><a 
  id="dx10-47084"></a>
-</p><!--l. 215--><p class="noindent" >A macro is a function distinguished by when it is used: macro
-functions are only used during the syntax expansion of modules to
+</p><!--l. 215--><p class="noindent" >A syntax operator is distinguished by when it is used: syntax
+operators are only used during the syntax expansion of modules to
 transform expressions.
 <a 
  id="x10-47085r45"></a>
@@ -775,9 +777,9 @@ in its <span
 class="cmti-9">domain</span>. Methods are not <span 
 class="cmti-9">functions </span>but <a 
 href="eulispcl9.html#x11-560009.4.0.4"><span 
-class="cmti-9">object</span></a>s which contain,
-among other information, a <span 
-class="cmti-9">function </span>representing the method&#8217;s behaviour.
+class="cmti-9">object</span></a>s which contain,among other information, a <span 
+class="cmti-9">function </span>representing the method&#8217;s
+ behaviour.
  <a 
  id="x10-47089r45"></a>
  </p><!--l. 232--><p class="noindent" ><span 
@@ -917,9 +919,9 @@ class="cmbx-9">&#x00A0;simple</span>
 class="cmbx-9">function</span><br /><a 
  id="dx10-47108"></a>
  </p><!--l. 271--><p class="noindent" >A function comprises at least: an expression, a set of identifiers,
- which occur in the expression, called the parameters and the
                                                                                                   
                                                                                                   
+which occur in the expression, called the parameters and the
 closure of the expression with respect to the <span 
 class="cmti-9">lexical environment </span>in
 which it occurs, less the parameter identifiers. Note: this is not a
@@ -1014,7 +1016,7 @@ class="cmbx-9">&#x00A0;special</span>
 class="cmbx-9">form</span><br /><a 
  id="dx10-47118"></a>
 </p><!--l. 304--><p class="noindent" >Any form or <span 
-class="cmti-9">macro expression </span>expanding into a form whose
+class="cmti-9">syntax expression </span>expanding into a form whose
 operator is a <span 
 class="cmti-9">special operator</span>. They are semantic primitives of the
 language and in consequence, any processor (for example, a
@@ -1080,31 +1082,31 @@ class="cmbx-9">8.58</span><span
 class="cmbx-9">&#x00A0;specialize</span>
 <span 
 class="cmbx-9">on</span><br /><a 
- id="dx10-47124"></a>
-</p><!--l. 324--><p class="noindent" >A verbal form used to describe relationship of methods and the classes specified in their domains.
- <a 
+ id="dx10-47124"></a>                                                </p><!--l. 324--><p class="noindent" >A verbal form used to describe relationship of methods and the
+  classes specified in their domains.
+  <a 
  id="x10-47125r45"></a>
- </p><!--l. 328--><p class="noindent" ><span 
+  </p><!--l. 328--><p class="noindent" ><span 
 class="cmbx-9">8.59</span><span 
-class="cmbx-9">&#x00A0;subclass</span><br /><a 
+class="cmbx-9">&#x00A0;subclass</span><br /> <a 
  id="dx10-47126"></a>
  </p><!--l. 328--><p class="noindent" >The behaviour and structure defined by a class <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> are inherited
- by a set of <span 
+  by a set of <span 
 class="cmti-9">classes </span>which are termed <span 
 class="cmti-9">subclasses </span>of <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub>. A <span 
 class="cmti-9">subclass</span>
- can be either <span 
+  can be either <span 
 class="cmti-9">direct </span>or <span 
 class="cmti-9">indirect </span>or itself.
- <a 
+  <a 
  id="x10-47127r45"></a>
- </p><!--l. 333--><p class="noindent" ><span 
+  </p><!--l. 333--><p class="noindent" ><span 
 class="cmbx-9">8.60</span><span 
-class="cmbx-9">&#x00A0;superclass</span><br /><a 
+class="cmbx-9">&#x00A0;superclass</span><br /> <a 
  id="dx10-47128"></a>
  </p><!--l. 333--><p class="noindent" >A <span 
 class="cmti-9">class</span><sub><span 
@@ -1115,51 +1117,51 @@ class="cmti-9">class</span><sub><span
 class="cmr-6">2</span></sub> is a subclass of <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub>. A
- <span 
+  <span 
 class="cmti-9">superclass </span>can be either <span 
 class="cmti-9">direct </span>or <span 
 class="cmti-9">indirect </span>or itself.
- <a 
+  <a 
  id="x10-47129r45"></a>
- </p><!--l. 338--><p class="noindent" ><span 
+  </p><!--l. 338--><p class="noindent" ><span 
 class="cmbx-9">8.61</span><span 
 class="cmbx-9">&#x00A0;top</span>
  <span 
-class="cmbx-9">dynamic</span><br /><a 
+class="cmbx-9">dynamic</span><br /> <a 
  id="dx10-47130"></a>
  </p><!--l. 338--><p class="noindent" >Top dynamic bindings are created by <a 
 href="eulispcl17.html#x22-1212002r5"><span 
 class="cmtt-9">defglobal</span></a>, referenced by
- <a 
+  <a 
 href="eulispcl17.html#x22-1199004r1"><span 
 class="cmtt-9">dynamic</span></a> and modified by <a 
 href="eulispcl17.html#x22-1202002r2"><span 
 class="cmtt-9">dynamic-setq</span></a>. There is only one <span 
 class="cmti-9">top</span>
- <span 
+  <span 
 class="cmti-9">dynamic </span>environment.
- <a 
+  <a 
  id="x10-47131r45"></a>
- </p><!--l. 343--><p class="noindent" ><span 
+  </p><!--l. 343--><p class="noindent" ><span 
 class="cmbx-9">8.62</span><span 
 class="cmbx-9">&#x00A0;top</span>
  <span 
-class="cmbx-9">lexical</span><br /><a 
+class="cmbx-9">lexical</span><br /> <a 
  id="dx10-47132"></a>
  </p><!--l. 343--><p class="noindent" >Top lexical bindings are created in the <span 
 class="cmti-9">top lexical </span>environment of a
- module by a defining form. All these bindings are immutable
- except those created by <a 
+  module by a defining form. All these bindings are immutable
+  except those created by <a 
 href="eulispcl12.html#x16-124006r5"><span 
 class="cmtt-9">deflocal</span></a> which creates a mutable
- top-lexical binding. All such bindings are referenced by <span 
+  top-lexical binding. All such bindings are referenced by <span 
 class="cmti-9">variables</span>
- and those made by <a 
+  and those made by <a 
 href="eulispcl12.html#x16-124006r5"><span 
 class="cmtt-9">deflocal</span></a> are modified by <a 
 href="eulispcl12.html#x16-158002r1"><span 
 class="cmtt-9">setq</span></a>. Each module
- defines its own distinct <span 
+  defines its own distinct <span 
 class="cmti-9">top lexical </span>environment.
                                                                                                   
                                                                                                   

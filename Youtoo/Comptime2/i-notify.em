@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule i-notify
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (i-level-1
            i-param)
    export (notify0

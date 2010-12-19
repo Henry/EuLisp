@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*An Introduction to EuLisp, EuXLisp and Youtoo*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-11-08 09:04:27 GMT"/>
+<meta name="generated" content="2010-12-19 16:48:54 GMT"/>
 <meta name="author" content="of original Euscheme notes Russell Bradford"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -95,7 +95,7 @@ lang="en" xml:lang="en">
 <li><a href="#sec-14">14 Classes and Generic Functions </a></li>
 <li><a href="#sec-15">15 Threads </a></li>
 <li><a href="#sec-16">16 Input and Output </a></li>
-<li><a href="#sec-17">17 Macros </a></li>
+<li><a href="#sec-17">17 Defining Syntax </a></li>
 <li><a href="#sec-18">18 Miscellany </a></li>
 <li><a href="#sec-19">19 Example Modules </a></li>
 <li><a href="#sec-20">20 EuLisp functions </a></li>
@@ -1338,27 +1338,28 @@ formatted output statements in a more readable form that using <a href="EuLisp-0
 </div>
 
 <div id="outline-container-17" class="outline-2">
-<h2 id="sec-17"><span class="section-number-2">17</span> Macros </h2>
+<h2 id="sec-17"><span class="section-number-2">17</span> Defining Syntax </h2>
 <div class="outline-text-2" id="text-17">
 
-<p>EuLisp employs the usual backquoted template style of macros.
+<p>EuLisp employs the usual backquoted template style for defining new syntax
+(macros).
 </p>
 
 
-<pre class="src src-eulisp">(defmacro <span style="color: #0000ff; font-weight: bold;">first</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">defsyntax</span> first (<span style="color: #0000ff; font-weight: bold;">x</span>)
   `<span style="color: #0000ff; font-weight: bold;">(car</span> ,x))
 </pre>
 
 
 <p>
-Note that a macro cannot be used in the module where it is defined: a module
-must be fully macroexpanded before it can be compiled.  If you don't know what
-is and what isn't a macro beforehand, it is very difficult to do this.  Thus a
-module containing
+Note that a new syntax operator cannot be used in the module where it is
+defined: a module must be fully syntax-expanded before it can be compiled.  If
+you don't know what is and what isn't a syntax operator beforehand, it is very
+difficult to do this.  Thus a module containing
 </p>
 
 
-<pre class="src src-eulisp">(defmacro <span style="color: #0000ff; font-weight: bold;">second</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">defsyntax</span> second (<span style="color: #0000ff; font-weight: bold;">x</span>)
    `<span style="color: #0000ff; font-weight: bold;">(cadr</span> ,x))
 
 (defun <span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">x</span>) <span style="color: #0000ff; font-weight: bold;">(+</span> 1 (<span style="color: #0000ff; font-weight: bold;">second</span> x)))
@@ -1369,9 +1370,9 @@ module containing
 is doomed to failure by this restriction.
 </p>
 <p>
-There is a wrinkle in the way that macros interact with modules: suppose a
-macro expands into something that refers to bindings that are not imported
-into the current module?
+There is a wrinkle in the way that syntax operators interact with modules:
+suppose a syntax form expands into something that refers to bindings that are
+not imported into the current module?
 </p>
 
 
@@ -1379,7 +1380,7 @@ into the current module?
   (<span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">syntax-0</span>)
    <span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>))
 
-  (defmacro <span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+  (<span style="color: #0000ff; font-weight: bold;">defsyntax</span> foo (<span style="color: #0000ff; font-weight: bold;">x</span>)
      `<span style="color: #0000ff; font-weight: bold;">(car</span> (<span style="color: #0000ff; font-weight: bold;">bar</span> ,x)))
 
   (defun <span style="color: #0000ff; font-weight: bold;">bar</span> (<span style="color: #0000ff; font-weight: bold;">a</span>) ...)
@@ -1407,14 +1408,14 @@ Here the module <code>one</code> exports foo only, but <code>foo</code> expands 
 
 
 <p>
-In the macroexpansion of module <code>two</code>, a reference to bar would appear, but
+In the syntax expansion of module <code>two</code>, a reference to bar would appear, but
 bar is not defined in <code>two</code>.  Worse, maybe <code>bar</code> was defined in <code>two</code>: which
-<code>bar</code> does the macroexpanded form refer to? The <code>bar</code> from <code>one</code> or the <code>bar</code>
-from <code>two</code>?
+<code>bar</code> does the syntax expanded form refer to? The <code>bar</code> from <code>one</code> or the
+<code>bar</code> from <code>two</code>?
 </p>
 <p>
-The answer is "the right <code>bar</code>", that is that <code>bar</code> in the module of macro
-definition, not the <code>bar</code> in the module of macro use.  EuLisp takes care of
+The answer is "the right <code>bar</code>", that is that <code>bar</code> in the module of syntax
+definition, not the <code>bar</code> in the module of syntax use.  EuLisp takes care of
 all of this transparently for you: essentially every symbol remembers which
 module it was defined in, and always refers back to that module for its value.
 </p>
@@ -1428,9 +1429,9 @@ provides a facility to allow you to do this.
 </p>
 
 
-<pre class="src src-eulisp">(defmacro <span style="color: #0000ff; font-weight: bold;">while</span> (<span style="color: #0000ff; font-weight: bold;">test</span> .  body)
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">defsyntax</span> while (<span style="color: #0000ff; font-weight: bold;">test</span> .  body)
   `(let/cc {break}
-     (<span style="color: #0000ff; font-weight: bold;">letfuns</span>
+     (letfuns
        ((<span style="color: #0000ff; font-weight: bold;">loop</span> ()
           <span style="color: #0000ff; font-weight: bold;">(when</span> ,test
                 ,@body
@@ -1561,7 +1562,7 @@ local functions.
 
 
 
-<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">letfuns</span>
+<pre class="src src-eulisp">(letfuns
   ((<span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">a</span> b)
      ...  (<span style="color: #0000ff; font-weight: bold;">bar</span> a) ...  )
    (<span style="color: #0000ff; font-weight: bold;">bar</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
@@ -1583,7 +1584,7 @@ definitions can refer to local variables:
 
 
 <pre class="src src-eulisp">(let ((<span style="color: #0000ff; font-weight: bold;">a</span> 1))
-  (<span style="color: #0000ff; font-weight: bold;">letfuns</span>
+  (letfuns
     ((<span style="color: #0000ff; font-weight: bold;">addit</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
        (if (<span style="color: #0000ff; font-weight: bold;">null</span> x)
            ()
@@ -2112,7 +2113,7 @@ function.
 <a href="EuLisp-0.991/html/eulispcl14.html#dx18-162002"><code>defcondition</code></a>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-225003"><code>defmacro</code></a>
+<code>defsyntax</code>
 </li>
 <li>
 <a href="EuLisp-0.991/html/eulispcl18.html#dx23-948002"><code>defgeneric</code></a>
@@ -2827,7 +2828,7 @@ function.
 </li>
 </ul>
 <ul>
-<li id="sec-20_20">Macros <br/>
+<li id="sec-20_20">Defining Syntax <br/>
 <ul>
 <li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-305004"><code>quasiquote</code></a>
@@ -3442,7 +3443,7 @@ marked '*' are also in Youtoo.
 <code>&lt;compilation-error&gt;</code>
 </li>
 <li>
-<code>&lt;macro-error&gt;</code>
+<code>&lt;defsyntax-error&gt;</code>
 </li>
 <li>
 <code>&lt;syntax-error&gt;</code>
@@ -3461,13 +3462,13 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 <ul>
-<li id="sec-21_18">Macros <br/>
+<li id="sec-21_18">Syntax expansion <br/>
 <ul>
 <li>
-<code>macroexpand</code>
+<code>expand-syntax</code>
 </li>
 <li>
-<code>macroexpand1</code>
+<code>expand-syntax-1</code>
 </li>
 </ul>
 
@@ -3577,7 +3578,7 @@ See <i>Examples/Misc/script.em</i>.
 <div id="postamble">
 <p class="author"> Author: of original Euscheme notes Russell Bradford
 </p>
-<p class="date"> Date: 2010-11-08 09:04:27 GMT</p>
+<p class="date"> Date: 2010-12-19 16:48:54 GMT</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

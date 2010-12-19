@@ -405,7 +405,7 @@ void xinitloop1()
     LVAL inits = pop();
     LVAL slots = pop();
     LVAL ind = pop();
-    int index = (int)getfixnum(ind);        // getfixnum is a macro
+    int index = (int)getfixnum(ind);
     xlval = pop();
     setivar(xlval, index, val);
     do_initloop(index + 1, cdr(slots), inits);

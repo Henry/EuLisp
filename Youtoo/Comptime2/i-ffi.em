@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule i-ffi
-  (syntax (_macros)
+  (syntax (_syntax-1)
    import (i-all)
    export (arg-converter-index
            res-converter-index

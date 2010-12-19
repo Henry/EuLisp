@@ -1,4 +1,4 @@
-;;; Copyright 2010 Henry G. Weller and Stefan Israelsson Tampe
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
 ;;; ---                         EuLisp System 'Youtoo'
@@ -17,38 +17,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Macros for expanding smatch
-;;;  Library: smatch
-;;;  Authors: Henry G. Weller and Stefan Israelsson Tampe
-;;;  Maintainers: Henry G. Weller and Stefan Israelsson Tampe
-;;;  Description:
-;;    See expand-smatch.em
+;;; Title: Simple syntax-expand example
+;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation
+;;    youtoo test-expand-syntax -l level-0
 ;;;-----------------------------------------------------------------------------
 
-(defmodule expand-match-macros
+(defmodule test-syntax
   (syntax (syntax-0)
-   import (level-0
-           eval))
+   import (level-0))
 
-(defun macroexpand-module-file (iname oname)
-  (let* ((module (with-input-file (f iname)
-                                  (read-s-expression f)))
-         (specs (caddr module))
-         (defs (cdddr module)))
-    (letfuns ((proc (def)
-                    (when (and (eq (car def) 'defmacro)
-                               (eq (car (cadddr def)) 'smatch0))
-                          ((setter cadddr) def (macroexpand (cadddr def)))))
-              (loop (defs)
-                    (when defs
-                          (proc (car defs))
-                          (loop (cdr defs)))))
-      (loop defs)
-      (with-output-file (f oname)
-                        (swrite f module)))))
-
-(macroexpand-module-file "smatch-smatch0.em" "smatch.em")
+(defsyntax test (x) `(print 1 2 3 ,x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module expand-match-macros
+)  ;; End of module test-syntax
 ;;;-----------------------------------------------------------------------------

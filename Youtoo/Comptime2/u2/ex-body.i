@@ -3,7 +3,7 @@
 
 (definterface ex-body
   (import (i-all p-env ex-expr sx-obj sx-node)
-   syntax (_macros _sx-obj0)
+   syntax (_syntax-1 _sx-obj0)
    full-import (i-error i-notify i-param i-level-1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level-1 aux-table i-all sx-obj sx-obj1 sx-obj2 p-env sx-write cg-dld ex-direct ex-expose ex-syntax ex-import i-modify cg-interf sx-node i-ffi ex-expr)
    export (
     ((name . expand-bodies) (pos . 6) (origin ex-body . expand-bodies))

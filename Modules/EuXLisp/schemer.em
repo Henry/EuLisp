@@ -33,7 +33,7 @@
              (member-list member)
              (reverse-list reverse))
             root)
-           macros)
+           syntax-1)
    export (or
            and
            else
@@ -248,7 +248,7 @@
            transcript-on
            transcript-off))
 
-(defmacro do (vars test . body)
+(defsyntax do (vars test . body)
   `(let loop
      ,(map (lambda (v)
              (list (car v) (cadr v)))
@@ -265,7 +265,7 @@
                      vars))))))
 
 
-(defmacro case (expr . clauses)
+(defsyntax case (expr . clauses)
   `(let ((sym ,expr))
      (cond ,@(map (lambda (x)
                     (cond ((eq? (car x) 'else)

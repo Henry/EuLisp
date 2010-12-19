@@ -30,7 +30,7 @@
   (syntax (syntax-0)
    import (level-0))
 
-(defmacro and-let* (vars . body)
+(defsyntax and-let* (vars . body)
   (letfuns ((expand (vars body)
                    (cond
                      ((null? vars)

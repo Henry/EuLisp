@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule cg-dld
-  (syntax (_macros _i-aux0)
+  (syntax (_syntax-1 _i-aux0)
    import (i-all
            sx-obj
            sx-node
@@ -179,7 +179,7 @@
          (default-lexical-module-name
           (make <symbol> name: (vector-ref info 3))) ;; default level-1
          (default-syntax-module-name
-          (make <symbol> name: (vector-ref info 4)))  ;; default macros
+          (make <symbol> name: (vector-ref info 4)))  ;; default syntax-1
          (default-lexical-module
           (make-module default-lexical-module-name))
          (default-syntax-module (make-module default-syntax-module-name))

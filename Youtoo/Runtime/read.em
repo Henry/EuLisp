@@ -26,7 +26,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule read
-  (syntax (_macros
+  (syntax (_syntax-1
            read0)
    import (telos
            condition

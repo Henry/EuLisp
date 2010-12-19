@@ -10,6 +10,8 @@ extern LispRef eval_bindings[];
 /* Module binding indices */
 #define macroexpand_1_fn_index 6 
 #define set_eval_module_fn_index 4 
+#define expand_syntax_1_fn_index 23 
+#define expand_syntax_fn_index 24 
 #define get_module_fn_index 14 
 #define macroexpand_fn_index 11 
 #define eval_cm_X47_fn_index 3 

@@ -30,7 +30,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule test3
-  (syntax (macros)
+  (syntax (syntax-1)
    import (level-1
            mpis))
 

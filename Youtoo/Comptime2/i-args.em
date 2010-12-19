@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule i-args
-  (syntax (_macros
+  (syntax (_syntax-1
            _i-aux0)
    import (i-all)
    export (parse-args
