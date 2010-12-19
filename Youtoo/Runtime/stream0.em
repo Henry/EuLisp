@@ -31,7 +31,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; (with-lock (lock-valued-expression) form*)
 ;;;-----------------------------------------------------------------------------
-(defmacro with-lock (lock . body)
+(defsyntax with-lock (lock . body)
   (let ((the-lock (gensym)))
     `(let ((,the-lock ,lock))
        (unwind-protect
@@ -42,7 +42,7 @@
 ;;; (with-source (identifier expression) form*)
 ;;;  Temporarily reconnects source of identifier to expression
 ;;;-----------------------------------------------------------------------------
-(defmacro with-source (decl . body)
+(defsyntax with-source (decl . body)
   (let ((the-source (gensym)))
     `(let ((,the-source (source ,(car decl))))
        (reconnect ,(car (cdr decl)) ,(car decl))
@@ -54,7 +54,7 @@
 ;;; (with-source (identifier expression) form*)
 ;;;  Temporarily reconnects sink of identifier to expression
 ;;;-----------------------------------------------------------------------------
-(defmacro with-sink (decl . body)
+(defsyntax with-sink (decl . body)
   (let ((the-source (gensym)))
     `(let ((,the-source (source ,(car decl))))
        (reconnect ,(car (cdr decl)) ,(car decl))
@@ -66,7 +66,7 @@
 ;;;  (with-input-file (var-and-file-name)  form*)
 ;;;  Temporarily binds var with input stream
 ;;;-----------------------------------------------------------------------------
-(defmacro with-input-file (var-and-file-name . body)
+(defsyntax with-input-file (var-and-file-name . body)
   (let ((s (car var-and-file-name))
         (file-name (car (cdr var-and-file-name)))
         (res (gensym)))
@@ -80,7 +80,7 @@
 ;;;  (with-output-file (var-and-file-name)  form*)
 ;;;  Temporarily connects stdout to file-name
 ;;;-----------------------------------------------------------------------------
-(defmacro with-output-file (var-and-file-name . body)
+(defsyntax with-output-file (var-and-file-name . body)
   (let ((s (car var-and-file-name))
         (file-name (car (cdr var-and-file-name)))
         (res (gensym)))
@@ -94,7 +94,7 @@
 ;;; (with-input-file-of-path (decl) form*)
 ;;;  Open input file with path
 ;;;-----------------------------------------------------------------------------
-(defmacro with-input-file-of-path (decl . body)
+(defsyntax with-input-file-of-path (decl . body)
   (let ((s (car decl))
         (name (car (cdr decl)))
         (dir (car (cdr (cdr decl))))

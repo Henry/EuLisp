@@ -34,96 +34,96 @@ void initialize_module_callback()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_1044, sym_1043, sym_1042, G001041, G001039, G001037, G001035, sym_1033, G001006, key_1004, G001001;
+  LispRef sym_1081, sym_1080, sym_1079, G001078, G001076, G001074, G001072, sym_1070, G001043, key_1041, G001038;
 
   /* Code vector and literal definitions */
-  eul_allocate_static_string(str_1002, "integer underflow", 17);
-  eul_allocate_static_string(str_1003, "integer overerflow", 18);
+  eul_allocate_static_string(str_1039, "integer underflow", 17);
+  eul_allocate_static_string(str_1040, "integer overerflow", 18);
   /* Byte-vector with size: 15 is_init: 0 index: 25 binding: anonymous */
-  static const void *G001000[] = {I(ab,1b,44,0b),I(23,00,00,00),B(callback ,22),I(36,07,23,00),B(callback ,23),I(1d,24,00,00),B(boot1 ,26),I(3c,01,24,00),B(condition ,5),I(1d,23,00,00),B(callback ,24),I(1f,03,24,00),B(boot ,13),I(3d,04,04,45),I(04,00,00,00)};
+  static const void *G001037[] = {I(ab,1b,44,0b),I(23,00,00,00),B(callback ,22),I(36,07,23,00),B(callback ,23),I(1d,24,00,00),B(boot1 ,26),I(3c,01,24,00),B(condition ,5),I(1d,23,00,00),B(callback ,24),I(1f,03,24,00),B(boot ,13),I(3d,04,04,45),I(04,00,00,00)};
 
-  eul_allocate_static_string(str_1007, "unspecified system error", 24);
-  eul_allocate_static_string(str_1008, "bad car domain", 14);
-  eul_allocate_static_string(str_1009, "bad cdr domain", 14);
-  eul_allocate_static_string(str_1010, "bad assq domain", 15);
-  eul_allocate_static_string(str_1011, "bad iniq domain", 15);
-  eul_allocate_static_string(str_1012, "argument number mismatch", 24);
-  eul_allocate_static_string(str_1013, "bad stream primitive", 20);
-  eul_allocate_static_string(str_1014, "last argument of apply must be a list", 37);
-  eul_allocate_static_string(str_1015, "bad setter argument", 19);
-  eul_allocate_static_string(str_1016, "bad setter", 10);
-  eul_allocate_static_string(str_1017, "cannot set setter", 17);
-  eul_allocate_static_string(str_1018, "bad (setter car) domain", 23);
-  eul_allocate_static_string(str_1019, "bad (setter cdr) domain", 23);
-  eul_allocate_static_string(str_1020, "no next method available", 24);
-  eul_allocate_static_string(str_1021, "user interrupt", 14);
-  eul_allocate_static_string(str_1022, "segmentation fault", 18);
-  eul_allocate_static_string(str_1023, "bus error", 9);
-  eul_allocate_static_string(str_1024, "bad foreign function conversion", 31);
-  eul_allocate_static_string(str_1025, "bad operator", 12);
-  eul_allocate_static_string(str_1026, "bad slot access", 15);
-  eul_allocate_static_string(str_1027, "bad string access", 17);
-  eul_allocate_static_string(str_1028, "cannot set class", 16);
-  eul_allocate_static_string(str_1029, "integer overflow", 16);
-  eul_allocate_static_string(str_1030, "integer underflow", 17);
-  eul_allocate_static_string(str_1031, "integer overflow", 16);
-  eul_allocate_static_string(str_1032, "division by zero", 16);
+  eul_allocate_static_string(str_1044, "unspecified system error", 24);
+  eul_allocate_static_string(str_1045, "bad car domain", 14);
+  eul_allocate_static_string(str_1046, "bad cdr domain", 14);
+  eul_allocate_static_string(str_1047, "bad assq domain", 15);
+  eul_allocate_static_string(str_1048, "bad iniq domain", 15);
+  eul_allocate_static_string(str_1049, "argument number mismatch", 24);
+  eul_allocate_static_string(str_1050, "bad stream primitive", 20);
+  eul_allocate_static_string(str_1051, "last argument of apply must be a list", 37);
+  eul_allocate_static_string(str_1052, "bad setter argument", 19);
+  eul_allocate_static_string(str_1053, "bad setter", 10);
+  eul_allocate_static_string(str_1054, "cannot set setter", 17);
+  eul_allocate_static_string(str_1055, "bad (setter car) domain", 23);
+  eul_allocate_static_string(str_1056, "bad (setter cdr) domain", 23);
+  eul_allocate_static_string(str_1057, "no next method available", 24);
+  eul_allocate_static_string(str_1058, "user interrupt", 14);
+  eul_allocate_static_string(str_1059, "segmentation fault", 18);
+  eul_allocate_static_string(str_1060, "bus error", 9);
+  eul_allocate_static_string(str_1061, "bad foreign function conversion", 31);
+  eul_allocate_static_string(str_1062, "bad operator", 12);
+  eul_allocate_static_string(str_1063, "bad slot access", 15);
+  eul_allocate_static_string(str_1064, "bad string access", 17);
+  eul_allocate_static_string(str_1065, "cannot set class", 16);
+  eul_allocate_static_string(str_1066, "integer overflow", 16);
+  eul_allocate_static_string(str_1067, "integer underflow", 17);
+  eul_allocate_static_string(str_1068, "integer overflow", 16);
+  eul_allocate_static_string(str_1069, "division by zero", 16);
   /* Byte-vector with size: 232 is_init: 0 index: 53 binding: top-level */
-  static const void *G001005[] = {I(a9,28,0e,1b),I(89,00,00,00),B(callback ,6),I(2a,83,89,00),B(callback ,16),I(2a,8a,0a,89),B(callback ,10),I(2a,8a,0f,89),B(callback ,19),I(2a,8a,14,89),B(callback ,14),I(2a,8a,2d,89),B(callback ,21),I(2a,82,89,00),B(callback ,12),I(2a,8a,0f,89),B(callback ,17),I(2a,8a,10,89),B(callback ,15),I(2a,8a,19,89),B(callback ,8),I(2a,8a,1a,89),B(callback ,20),I(2a,8a,1e,89),B(callback ,11),I(2a,8a,1f,89),B(callback ,3),I(2a,8a,20,89),B(callback ,18),I(2a,8a,21,89),B(callback ,4),I(2a,8a,22,89),B(callback ,9),I(2a,8a,23,89),B(callback ,13),I(2a,8a,24,89),B(callback ,5),I(2a,23,00,00),B(callback ,26),I(24,00,00,00),B(callback ,2),I(3c,01,82,1c),I(24,00,00,00),B(callback ,7),I(3c,02,2a,8a),I(0a,82,14,23),B(callback ,27),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0a,2b,23,00),B(callback ,28),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0a,84,14,23),B(callback ,29),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0a,8a,03,14),I(23,00,00,00),B(callback ,30),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0f,82,14,23),B(callback ,31),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0f,2b,23,00),B(callback ,32),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0f,84,14,23),B(callback ,33),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,82,14,23),B(callback ,34),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,2b,23,00),B(callback ,35),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,84,14,23),B(callback ,36),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,8a,03,14),I(23,00,00,00),B(callback ,37),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,8a,04,14),I(23,00,00,00),B(callback ,38),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,23),B(callback ,39),I(24,00,00,00),B(callback ,2),I(3c,01,8a,10),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,8a),I(14,82,14,23),B(callback ,40),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(14,2b,23,00),B(callback ,41),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(14,84,14,23),B(callback ,42),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(14,8a,03,14),I(23,00,00,00),B(callback ,43),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,23),B(callback ,44),I(24,00,00,00),B(callback ,2),I(3c,01,8a,23),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,45),I(24,00,00,00),B(callback ,2),I(3c,01,8a,24),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,46),I(24,00,00,00),B(callback ,2),I(3c,01,8a,19),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,47),I(24,00,00,00),B(callback ,2),I(3c,01,8a,1a),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,48),I(24,00,00,00),B(callback ,2),I(3c,01,8a,1e),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,49),I(24,00,00,00),B(callback ,2),I(3c,01,8a,1f),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,50),I(24,00,00,00),B(callback ,2),I(3c,01,8a,20),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,51),I(24,00,00,00),B(callback ,2),I(3c,01,8a,21),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,8a),I(22,23,00,00),B(callback ,52),I(23,00,00,00),B(callback ,25),I(3b,02,24,00),B(callback ,7),I(3d,02,0b,45),I(0b,00,00,00)};
+  static const void *G001042[] = {I(a9,28,0e,1b),I(89,00,00,00),B(callback ,6),I(2a,83,89,00),B(callback ,16),I(2a,8a,0a,89),B(callback ,10),I(2a,8a,0f,89),B(callback ,19),I(2a,8a,14,89),B(callback ,14),I(2a,8a,2d,89),B(callback ,21),I(2a,82,89,00),B(callback ,12),I(2a,8a,0f,89),B(callback ,17),I(2a,8a,10,89),B(callback ,15),I(2a,8a,19,89),B(callback ,8),I(2a,8a,1a,89),B(callback ,20),I(2a,8a,1e,89),B(callback ,11),I(2a,8a,1f,89),B(callback ,3),I(2a,8a,20,89),B(callback ,18),I(2a,8a,21,89),B(callback ,4),I(2a,8a,22,89),B(callback ,9),I(2a,8a,23,89),B(callback ,13),I(2a,8a,24,89),B(callback ,5),I(2a,23,00,00),B(callback ,26),I(24,00,00,00),B(callback ,2),I(3c,01,82,1c),I(24,00,00,00),B(callback ,7),I(3c,02,2a,8a),I(0a,82,14,23),B(callback ,27),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0a,2b,23,00),B(callback ,28),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0a,84,14,23),B(callback ,29),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0a,8a,03,14),I(23,00,00,00),B(callback ,30),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0f,82,14,23),B(callback ,31),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0f,2b,23,00),B(callback ,32),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(0f,84,14,23),B(callback ,33),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,82,14,23),B(callback ,34),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,2b,23,00),B(callback ,35),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,84,14,23),B(callback ,36),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,8a,03,14),I(23,00,00,00),B(callback ,37),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(2d,8a,04,14),I(23,00,00,00),B(callback ,38),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,23),B(callback ,39),I(24,00,00,00),B(callback ,2),I(3c,01,8a,10),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,8a),I(14,82,14,23),B(callback ,40),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(14,2b,23,00),B(callback ,41),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(14,84,14,23),B(callback ,42),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,8a),I(14,8a,03,14),I(23,00,00,00),B(callback ,43),I(24,00,00,00),B(callback ,2),I(3c,01,24,00),B(callback ,7),I(3c,02,2a,23),B(callback ,44),I(24,00,00,00),B(callback ,2),I(3c,01,8a,23),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,45),I(24,00,00,00),B(callback ,2),I(3c,01,8a,24),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,46),I(24,00,00,00),B(callback ,2),I(3c,01,8a,19),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,47),I(24,00,00,00),B(callback ,2),I(3c,01,8a,1a),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,48),I(24,00,00,00),B(callback ,2),I(3c,01,8a,1e),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,49),I(24,00,00,00),B(callback ,2),I(3c,01,8a,1f),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,50),I(24,00,00,00),B(callback ,2),I(3c,01,8a,20),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,23),B(callback ,51),I(24,00,00,00),B(callback ,2),I(3c,01,8a,21),I(1c,24,00,00),B(callback ,7),I(3c,02,2a,8a),I(22,23,00,00),B(callback ,52),I(23,00,00,00),B(callback ,25),I(3b,02,24,00),B(callback ,7),I(3d,02,0b,45),I(0b,00,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 54 binding: anonymous */
-  static const void *G001034[] = {I(a8,24,00,00),B(condition ,5),I(47,00,00,23),B(callback ,24),I(1f,03,24,00),B(boot ,13),I(3d,04,01,00)};
+  static const void *G001071[] = {I(a8,24,00,00),B(condition ,5),I(47,00,00,23),B(callback ,24),I(1f,03,24,00),B(boot ,13),I(3d,04,01,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 55 binding: callback-thunk */
-  static const void *G001036[] = {I(aa,46,01,1b),I(48,00,00,23),B(callback ,52),I(23,00,00,00),B(callback ,54),I(3b,ff,45,01)};
+  static const void *G001073[] = {I(aa,46,01,1b),I(48,00,00,23),B(callback ,52),I(23,00,00,00),B(callback ,54),I(3b,ff,45,01)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 56 binding: install-callback */
-  static const void *G001038[] = {I(ab,24,00,00),B(callback ,6),I(1d,1d,03,45),I(02,00,00,00)};
+  static const void *G001075[] = {I(ab,24,00,00),B(callback ,6),I(1d,1d,03,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 32 is_init: 1 index: 0 binding: initialize-callback */
-  static const void *G001040[] = {I(87,25,00,00),B(callback ,1),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(callback ,57),I(23,00,00,00),B(callback ,56),I(3b,02,25,00),B(callback ,7),I(86,25,00,00),B(callback ,6),I(23,00,00,00),B(callback ,58),I(23,00,00,00),B(callback ,55),I(3b,01,25,00),B(callback ,2),I(23,00,00,00),B(callback ,59),I(23,00,00,00),B(callback ,53),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G001077[] = {I(87,25,00,00),B(callback ,1),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(callback ,57),I(23,00,00,00),B(callback ,56),I(3b,02,25,00),B(callback ,7),I(86,25,00,00),B(callback ,6),I(23,00,00,00),B(callback ,58),I(23,00,00,00),B(callback ,55),I(3b,01,25,00),B(callback ,2),I(23,00,00,00),B(callback ,59),I(23,00,00,00),B(callback ,53),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  object_class(str_1002) = eul_static_string_class;
-  object_class(str_1003) = eul_static_string_class;
-  eul_intern_keyword(key_1004,"arguments");
-  eul_allocate_bytevector( G001001,G001000);
-  object_class(str_1007) = eul_static_string_class;
-  object_class(str_1008) = eul_static_string_class;
-  object_class(str_1009) = eul_static_string_class;
-  object_class(str_1010) = eul_static_string_class;
-  object_class(str_1011) = eul_static_string_class;
-  object_class(str_1012) = eul_static_string_class;
-  object_class(str_1013) = eul_static_string_class;
-  object_class(str_1014) = eul_static_string_class;
-  object_class(str_1015) = eul_static_string_class;
-  object_class(str_1016) = eul_static_string_class;
-  object_class(str_1017) = eul_static_string_class;
-  object_class(str_1018) = eul_static_string_class;
-  object_class(str_1019) = eul_static_string_class;
-  object_class(str_1020) = eul_static_string_class;
-  object_class(str_1021) = eul_static_string_class;
-  object_class(str_1022) = eul_static_string_class;
-  object_class(str_1023) = eul_static_string_class;
-  object_class(str_1024) = eul_static_string_class;
-  object_class(str_1025) = eul_static_string_class;
-  object_class(str_1026) = eul_static_string_class;
-  object_class(str_1027) = eul_static_string_class;
-  object_class(str_1028) = eul_static_string_class;
-  object_class(str_1029) = eul_static_string_class;
-  object_class(str_1030) = eul_static_string_class;
-  object_class(str_1031) = eul_static_string_class;
-  object_class(str_1032) = eul_static_string_class;
-  eul_intern_symbol(sym_1033,"anonymous");
-  eul_allocate_bytevector( G001006,G001005);
-  eul_allocate_bytevector( G001035,G001034);
-  eul_allocate_bytevector( G001037,G001036);
-  eul_allocate_bytevector( G001039,G001038);
-  eul_intern_symbol(sym_1042,"install-callback");
-  eul_intern_symbol(sym_1043,"callback-thunk");
-  eul_intern_symbol(sym_1044,"top-level");
-  eul_allocate_bytevector( G001041,G001040);
+  object_class(str_1039) = eul_static_string_class;
+  object_class(str_1040) = eul_static_string_class;
+  eul_intern_keyword(key_1041,"arguments");
+  eul_allocate_bytevector( G001038,G001037);
+  object_class(str_1044) = eul_static_string_class;
+  object_class(str_1045) = eul_static_string_class;
+  object_class(str_1046) = eul_static_string_class;
+  object_class(str_1047) = eul_static_string_class;
+  object_class(str_1048) = eul_static_string_class;
+  object_class(str_1049) = eul_static_string_class;
+  object_class(str_1050) = eul_static_string_class;
+  object_class(str_1051) = eul_static_string_class;
+  object_class(str_1052) = eul_static_string_class;
+  object_class(str_1053) = eul_static_string_class;
+  object_class(str_1054) = eul_static_string_class;
+  object_class(str_1055) = eul_static_string_class;
+  object_class(str_1056) = eul_static_string_class;
+  object_class(str_1057) = eul_static_string_class;
+  object_class(str_1058) = eul_static_string_class;
+  object_class(str_1059) = eul_static_string_class;
+  object_class(str_1060) = eul_static_string_class;
+  object_class(str_1061) = eul_static_string_class;
+  object_class(str_1062) = eul_static_string_class;
+  object_class(str_1063) = eul_static_string_class;
+  object_class(str_1064) = eul_static_string_class;
+  object_class(str_1065) = eul_static_string_class;
+  object_class(str_1066) = eul_static_string_class;
+  object_class(str_1067) = eul_static_string_class;
+  object_class(str_1068) = eul_static_string_class;
+  object_class(str_1069) = eul_static_string_class;
+  eul_intern_symbol(sym_1070,"anonymous");
+  eul_allocate_bytevector( G001043,G001042);
+  eul_allocate_bytevector( G001072,G001071);
+  eul_allocate_bytevector( G001074,G001073);
+  eul_allocate_bytevector( G001076,G001075);
+  eul_intern_symbol(sym_1079,"install-callback");
+  eul_intern_symbol(sym_1080,"callback-thunk");
+  eul_intern_symbol(sym_1081,"top-level");
+  eul_allocate_bytevector( G001078,G001077);
 
   /* Set local bindings */
   {
@@ -132,46 +132,46 @@ void initialize_module_callback()
       callback_bindings[i] = eul_nil;
   }
 
-  callback_bindings[ 22] = str_1002;
-  callback_bindings[ 23] = str_1003;
-  callback_bindings[ 24] = key_1004;
-  callback_bindings[ 25] = G001001;
-  callback_bindings[ 26] = str_1007;
-  callback_bindings[ 27] = str_1008;
-  callback_bindings[ 28] = str_1009;
-  callback_bindings[ 29] = str_1010;
-  callback_bindings[ 30] = str_1011;
-  callback_bindings[ 31] = str_1012;
-  callback_bindings[ 32] = str_1013;
-  callback_bindings[ 33] = str_1014;
-  callback_bindings[ 34] = str_1015;
-  callback_bindings[ 35] = str_1016;
-  callback_bindings[ 36] = str_1017;
-  callback_bindings[ 37] = str_1018;
-  callback_bindings[ 38] = str_1019;
-  callback_bindings[ 39] = str_1020;
-  callback_bindings[ 40] = str_1021;
-  callback_bindings[ 41] = str_1022;
-  callback_bindings[ 42] = str_1023;
-  callback_bindings[ 43] = str_1024;
-  callback_bindings[ 44] = str_1025;
-  callback_bindings[ 45] = str_1026;
-  callback_bindings[ 46] = str_1027;
-  callback_bindings[ 47] = str_1028;
-  callback_bindings[ 48] = str_1029;
-  callback_bindings[ 49] = str_1030;
-  callback_bindings[ 50] = str_1031;
-  callback_bindings[ 51] = str_1032;
-  callback_bindings[ 52] = sym_1033;
-  callback_bindings[ 53] = G001006;
-  callback_bindings[ 54] = G001035;
-  callback_bindings[ 55] = G001037;
-  callback_bindings[ 56] = G001039;
+  callback_bindings[ 22] = str_1039;
+  callback_bindings[ 23] = str_1040;
+  callback_bindings[ 24] = key_1041;
+  callback_bindings[ 25] = G001038;
+  callback_bindings[ 26] = str_1044;
+  callback_bindings[ 27] = str_1045;
+  callback_bindings[ 28] = str_1046;
+  callback_bindings[ 29] = str_1047;
+  callback_bindings[ 30] = str_1048;
+  callback_bindings[ 31] = str_1049;
+  callback_bindings[ 32] = str_1050;
+  callback_bindings[ 33] = str_1051;
+  callback_bindings[ 34] = str_1052;
+  callback_bindings[ 35] = str_1053;
+  callback_bindings[ 36] = str_1054;
+  callback_bindings[ 37] = str_1055;
+  callback_bindings[ 38] = str_1056;
+  callback_bindings[ 39] = str_1057;
+  callback_bindings[ 40] = str_1058;
+  callback_bindings[ 41] = str_1059;
+  callback_bindings[ 42] = str_1060;
+  callback_bindings[ 43] = str_1061;
+  callback_bindings[ 44] = str_1062;
+  callback_bindings[ 45] = str_1063;
+  callback_bindings[ 46] = str_1064;
+  callback_bindings[ 47] = str_1065;
+  callback_bindings[ 48] = str_1066;
+  callback_bindings[ 49] = str_1067;
+  callback_bindings[ 50] = str_1068;
+  callback_bindings[ 51] = str_1069;
+  callback_bindings[ 52] = sym_1070;
+  callback_bindings[ 53] = G001043;
+  callback_bindings[ 54] = G001072;
+  callback_bindings[ 55] = G001074;
+  callback_bindings[ 56] = G001076;
   callback_bindings[ 1] = eul_nil;
-  callback_bindings[ 57] = sym_1042;
-  callback_bindings[ 58] = sym_1043;
-  callback_bindings[ 59] = sym_1044;
-  eul_allocate_lambda( callback_bindings[0], "initialize-callback", 0, G001041);
+  callback_bindings[ 57] = sym_1079;
+  callback_bindings[ 58] = sym_1080;
+  callback_bindings[ 59] = sym_1081;
+  eul_allocate_lambda( callback_bindings[0], "initialize-callback", 0, G001078);
 
   }
 }

@@ -37,8 +37,8 @@ extern LispRef telos_bindings[];
 #define slotp_fn_index 13 
 #define class_slotz_fn_index 75 
 #define _list__X60_X62_fn_index 74 
-#define class_direct_subclasses_fn_index 73 
 #define method_size_fn_index 72 
+#define class_direct_subclasses_fn_index 73 
 #define member1_string_fn_index 55 
 #define character_as_fpi_fn_index () 
 #define _metaclass__X60_X62_fn_index 71 

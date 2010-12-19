@@ -4,7 +4,7 @@
 (definterface fpi
   (import (telos compare number integer)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos callback let-cc dynamic thread event condition compare copy number integer)
    export (
     ((name . fpi-binary-) (pos . 16) (origin boot1 . -) (inline (G0062 (fpi-difference))))
     ((name . most-positive-fpi) (pos . 3) (origin fpi . most-positive-fpi) (class . constant) (value 53687091))
@@ -13,7 +13,7 @@
     ((name . fpi-binary*) (pos . 35) (origin boot1 . *) (inline (G0064 (fpi-product))))
     ((name . fpi-binary-mod) (pos . 41) (origin boot1 . mod) (inline (G0070 (fpi-remainder))))
     ((name . most-negative-fpi) (pos . 2) (origin fpi . most-negative-fpi) (class . constant) (value -53687091))
-    ((name . fpi-as-string) (pos . 7) (origin fpi . fpi-as-string) (class . ff) (arity . 1) (ff (0) 3 ("eul_fpi_as_str" . "ff_stub_eul_fpi_as_str1255")))
+    ((name . fpi-as-string) (pos . 7) (origin fpi . fpi-as-string) (class . ff) (arity . 1) (ff (0) 3 ("eul_fpi_as_str" . "ff_stub_eul_fpi_as_str2337")))
     ((name . fpi-binary%) (pos . 32) (origin boot1 . %) (inline (G0068 (fpi-remainder))))
     ((name . fpi?) (pos . 34) (origin boot1 . fpi?) (inline (G0049 (fpip))))
    )

@@ -4,7 +4,7 @@
 (definterface condition
   (import (telos thread dynamic let-cc)
    syntax (_syntax-1)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos event thread dynamic let-cc)
    export (
     ((name . pop-error-handlers) (pos . 6) (origin dynamic . pop-error-handlers))
     ((name . <general-condition>) (pos . 5) (origin condition . <general-condition>) (class . constant))
@@ -12,7 +12,7 @@
     ((name . <condition>) (pos . 8) (origin condition . <condition>) (class . constant))
     ((name . signal) (pos . 2) (origin condition . signal))
     ((name . *default-error-handler*) (pos . 3) (origin condition . *default-error-handler*))
-    ((name . condition-message) (pos . 6) (origin condition . condition-message) (inline (G00823 (static-ref0) (binding-ref ? <condition>) (primitive-relative-ref))) (setter (G00825 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <condition>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . condition-message) (pos . 6) (origin condition . condition-message) (inline (G00860 (static-ref0) (binding-ref ? <condition>) (primitive-relative-ref))) (setter (G00862 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <condition>) (set-primitive-relative-ref) (nobble 2))))
     ((name . output-condition-contents) (pos . 4) (origin condition . output-condition-contents))
     ((name . push-error-handler) (pos . 5) (origin dynamic . push-error-handler))
     ((name . condition?) (pos . 7) (origin condition . condition?))

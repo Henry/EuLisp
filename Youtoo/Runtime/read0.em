@@ -52,7 +52,7 @@
 ;;                   (progn (setq b (car G00055)) (setq G00055 (cdr G00055)))))
 ;;        bar)
 ;;;-----------------------------------------------------------------------------
-(defmacro match-let (expression default-initializers . body)
+(defsyntax match-let (expression default-initializers . body)
   (if (eql 1 (size default-initializers))
       `(let ((,(caar default-initializers)
               (if (null? ,expression)

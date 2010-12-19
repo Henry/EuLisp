@@ -30,7 +30,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Macros to define peep-hole optimization rules
 ;;;-----------------------------------------------------------------------------
-(defmacro guarded-rule (lhs guard rhs)
+(defsyntax guarded-rule (lhs guard rhs)
   (labels
    ((rule-parameters (lhs)
                      (if (null? lhs) ()
@@ -54,7 +54,7 @@
                          rhs)))
               ,(size lhs))))
 
-(defmacro simple-rule (lhs rhs)
+(defsyntax simple-rule (lhs rhs)
   `(guarded-rule ,lhs () ,rhs))
 
 ;;;-----------------------------------------------------------------------------

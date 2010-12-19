@@ -30,7 +30,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Control syntax
 ;;;-----------------------------------------------------------------------------
-(defmacro cond body
+(defsyntax cond body
   (if body
       (if (cdr (car body))
           `(if ,(car (car body))
@@ -39,7 +39,7 @@
         `(or ,(car (car body)) (cond ,@(cdr body))))
     ()))
 
-(defmacro and body
+(defsyntax and body
   (if body
       (if (cdr body)
           `(if ,(car body)
@@ -48,7 +48,7 @@
         (car body))
     t))
 
-(defmacro or body
+(defsyntax or body
   (if body
       (if (cdr body)
           (let ((x (gensym)))
@@ -59,19 +59,19 @@
         (car body))
     ()))
 
-(defmacro when (pred . body) `(if ,pred (progn ,@body) ()))
+(defsyntax when (pred . body) `(if ,pred (progn ,@body) ()))
 
-(defmacro unless (pred . body) `(if ,pred () (progn ,@body)))
+(defsyntax unless (pred . body) `(if ,pred () (progn ,@body)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Global register access
 ;;;-----------------------------------------------------------------------------
-(defmacro set-global-register (name value)
+(defsyntax set-global-register (name value)
   `((opencoded-lambda (x)
                       (set-register-ref ,name)
                       (register-ref ,name)) ,value))
 
-(defmacro get-global-register (name)
+(defsyntax get-global-register (name)
   `((opencoded-lambda ()
                       (register-ref ,name))))
 

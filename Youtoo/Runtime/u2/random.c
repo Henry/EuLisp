@@ -16,7 +16,7 @@ extern LispRef telos_bindings[];
 LispRef random_bindings[17];
 
 /* Foreign functions */
-static LispRef ff_stub_eul_rand_max16 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_rand_max10207 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
   LispRef res;
 
@@ -24,7 +24,7 @@ static LispRef ff_stub_eul_rand_max16 (Stack *reg_value_stack, LispRef *sreg_val
   return res;
 }
 
-static LispRef ff_stub_rand17 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_rand10208 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
   LispRef res;
 
@@ -32,12 +32,12 @@ static LispRef ff_stub_rand17 (Stack *reg_value_stack, LispRef *sreg_value_sp, L
   return res;
 }
 
-static LispRef ff_stub_eul_srand18 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_srand10209 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G0033, res;
+  LispRef G0010224, res;
 
-  POPVAL1(G0033);
-  FF_RES_CONVERT0(res,eul_srand(FF_ARG_CONVERT0(G0033)));
+  POPVAL1(G0010224);
+  FF_RES_CONVERT0(res,eul_srand(FF_ARG_CONVERT0(G0010224)));
   return res;
 }
 
@@ -54,35 +54,35 @@ void initialize_module_random()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_32, sym_31, sym_30, sym_29, G0028, G0026, G0024, G0022, G0020;
+  LispRef sym_10223, sym_10222, sym_10221, sym_10220, G0010219, G0010217, G0010215, G0010213, G0010211;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 5 is_init: 0 index: 9 binding: top-level */
-  static const void *G0019[] = {I(a9,41,00,00),B(random ,6),I(1b,89,00,00),B(random ,3),I(45,01,00,00)};
+  static const void *G0010210[] = {I(a9,41,00,00),B(random ,6),I(1b,89,00,00),B(random ,3),I(45,01,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 10 binding: random-true-nil */
-  static const void *G0021[] = {I(a9,84,24,00),B(random ,4),I(3c,01,2d,45),I(00,00,00,00)};
+  static const void *G0010212[] = {I(a9,84,24,00),B(random ,4),I(3c,01,2d,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 11 binding: random */
-  static const void *G0023[] = {I(a8,1b,44,1a),I(41,00,00,00),B(random ,7),I(1c,10,24,00),B(random ,3),I(1c,17,1d,1c),I(17,22,03,36),I(08,41,00,00),B(random ,7),I(45,01,00,00)};
+  static const void *G0010214[] = {I(a8,1b,44,1a),I(41,00,00,00),B(random ,7),I(1c,10,24,00),B(random ,3),I(1c,17,1d,1c),I(17,22,03,36),I(08,41,00,00),B(random ,7),I(45,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 12 binding: random-seed */
-  static const void *G0025[] = {I(aa,41,00,00),B(random ,8),I(45,01,00,00)};
+  static const void *G0010216[] = {I(aa,41,00,00),B(random ,8),I(45,01,00,00)};
 
   /* Byte-vector with size: 33 is_init: 1 index: 0 binding: initialize-random */
-  static const void *G0027[] = {I(87,25,00,00),B(random ,1),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(random ,13),I(23,00,00,00),B(random ,12),I(3b,01,25,00),B(random ,5),I(23,00,00,00),B(random ,14),I(23,00,00,00),B(random ,11),I(3b,ff,25,00),B(random ,4),I(86,25,00,00),B(random ,3),I(23,00,00,00),B(random ,15),I(23,00,00,00),B(random ,10),I(3b,00,25,00),B(random ,2),I(23,00,00,00),B(random ,16),I(23,00,00,00),B(random ,9),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G0010218[] = {I(87,25,00,00),B(random ,1),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(random ,13),I(23,00,00,00),B(random ,12),I(3b,01,25,00),B(random ,5),I(23,00,00,00),B(random ,14),I(23,00,00,00),B(random ,11),I(3b,ff,25,00),B(random ,4),I(86,25,00,00),B(random ,3),I(23,00,00,00),B(random ,15),I(23,00,00,00),B(random ,10),I(3b,00,25,00),B(random ,2),I(23,00,00,00),B(random ,16),I(23,00,00,00),B(random ,9),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G0020,G0019);
-  eul_allocate_bytevector( G0022,G0021);
-  eul_allocate_bytevector( G0024,G0023);
-  eul_allocate_bytevector( G0026,G0025);
-  eul_intern_symbol(sym_29,"random-seed");
-  eul_intern_symbol(sym_30,"random");
-  eul_intern_symbol(sym_31,"random-true-nil");
-  eul_intern_symbol(sym_32,"top-level");
-  eul_allocate_bytevector( G0028,G0027);
+  eul_allocate_bytevector( G0010211,G0010210);
+  eul_allocate_bytevector( G0010213,G0010212);
+  eul_allocate_bytevector( G0010215,G0010214);
+  eul_allocate_bytevector( G0010217,G0010216);
+  eul_intern_symbol(sym_10220,"random-seed");
+  eul_intern_symbol(sym_10221,"random");
+  eul_intern_symbol(sym_10222,"random-true-nil");
+  eul_intern_symbol(sym_10223,"top-level");
+  eul_allocate_bytevector( G0010219,G0010218);
 
   /* Set local bindings */
   {
@@ -91,19 +91,19 @@ void initialize_module_random()
       random_bindings[i] = eul_nil;
   }
 
-  random_bindings[ 6] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_rand_max16;
-  random_bindings[ 7] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_rand17;
-  random_bindings[ 8] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_srand18;
-  random_bindings[ 9] = G0020;
-  random_bindings[ 10] = G0022;
-  random_bindings[ 11] = G0024;
-  random_bindings[ 12] = G0026;
+  random_bindings[ 6] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_rand_max10207;
+  random_bindings[ 7] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_rand10208;
+  random_bindings[ 8] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_srand10209;
+  random_bindings[ 9] = G0010211;
+  random_bindings[ 10] = G0010213;
+  random_bindings[ 11] = G0010215;
+  random_bindings[ 12] = G0010217;
   random_bindings[ 1] = eul_nil;
-  random_bindings[ 13] = sym_29;
-  random_bindings[ 14] = sym_30;
-  random_bindings[ 15] = sym_31;
-  random_bindings[ 16] = sym_32;
-  eul_allocate_lambda( random_bindings[0], "initialize-random", 0, G0028);
+  random_bindings[ 13] = sym_10220;
+  random_bindings[ 14] = sym_10221;
+  random_bindings[ 15] = sym_10222;
+  random_bindings[ 16] = sym_10223;
+  eul_allocate_lambda( random_bindings[0], "initialize-random", 0, G0010219);
 
   }
 }

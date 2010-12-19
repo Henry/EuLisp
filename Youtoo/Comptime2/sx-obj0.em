@@ -31,7 +31,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  All syntax objects are defined with this macro
 ;;;-----------------------------------------------------------------------------
-(defmacro def-syntax-obj (cl-name super slots . options)
+(defsyntax def-syntax-obj (cl-name super slots . options)
   (let* ((str (symbol-name cl-name))
          (pred-str (concatenate
                     (substring str 1 (- (string-size str) 1))
@@ -75,7 +75,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Register a new node to the actual module
 ;;;-----------------------------------------------------------------------------
-(defmacro new-node (node kind . first?)
+(defsyntax new-node (node kind . first?)
   (let ((reader-name (make <symbol>
                            name: (fmt "module-~as?" (cadr kind))))
         (writer-name (make <symbol>

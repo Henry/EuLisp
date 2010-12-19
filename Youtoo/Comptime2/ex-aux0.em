@@ -28,7 +28,7 @@
   (syntax (syntax-1)
    import (level-1))
 
-(defmacro get-name (form)
+(defsyntax get-name (form)
   `(let ((x (cadr ,form)))
      (if (symbol? x)
          x
@@ -37,29 +37,29 @@
          (error <condition>
                 (fmt "bad value ~a" x))))))
 
-(defmacro get-params (form) `(caddr ,form))
+(defsyntax get-params (form) `(caddr ,form))
 
-(defmacro get-lambda-params (form) `(cadr ,form))
+(defsyntax get-lambda-params (form) `(cadr ,form))
 
-(defmacro get-body (form)
+(defsyntax get-body (form)
   `(let ((x (cdr (cddr ,form))))
      (if (or (null? x) (cons? x))
          x
        (error <condition>
               (fmt "body ~a not a list" x)))))
 
-(defmacro get-lambda-body (form)
+(defsyntax get-lambda-body (form)
   `(let ((x (cddr ,form)))
      (if (or (null? x) (cons? x))
          x
        (error <condition>
               (fmt "body ~a not a list" x)))))
 
-(defmacro get-value (form) `(caddr ,form))
+(defsyntax get-value (form) `(caddr ,form))
 
-(defmacro get-directives (form) `(caddr ,form))
+(defsyntax get-directives (form) `(caddr ,form))
 
-(defmacro get-top-level-forms (form) `(cdr (cddr ,form)))
+(defsyntax get-top-level-forms (form) `(cdr (cddr ,form)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module ex-aux0

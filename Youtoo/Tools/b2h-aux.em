@@ -30,7 +30,7 @@
   (syntax (syntax-1)
    import (level-1))
 
-(defmacro with-input-file* (file-name . body)
+(defsyntax with-input-file* (file-name . body)
   (let ((res (gensym))
         (s (gensym))
         (orig-source (gensym))

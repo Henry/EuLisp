@@ -40,7 +40,7 @@
 ;; method:                  a method to be attached to the generic function
 ;; The method: keyword can be repeated.
 ;;;-----------------------------------------------------------------------------
-(defmacro defgeneric (gfname args . keywords)
+(defsyntax defgeneric (gfname args . keywords)
   (let* ((gf-class (find-key class: keywords '<simple-generic-function>))
          (method-class (find-key method-class: keywords '<simple-method>))
          (method-inits (find-key method-keywords: keywords ()))
@@ -78,7 +78,7 @@
 ;;; Syntax: (generic-lambda (args) {keyword}*).
 ;; See defgeneric for details.
 ;;;-----------------------------------------------------------------------------
-(defmacro generic-lambda (args . keywords)
+(defsyntax generic-lambda (args . keywords)
   (let* ((gf-class (find-key class: keywords '<simple-generic-function>))
          (method-class (find-key method-class: keywords '<simple-method>))
          (method-inits (find-key method-keywords: keywords ()))

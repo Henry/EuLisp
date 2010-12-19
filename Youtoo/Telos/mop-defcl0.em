@@ -51,7 +51,7 @@
 ;; default:             an initial value for the slot
 ;; The reader:, writer:, and accessor: keywords can be repeated.
 ;;;-----------------------------------------------------------------------------
-(defmacro defclass (cl-name supers slots . keywords)
+(defsyntax defclass (cl-name supers slots . keywords)
   (let ((real-name (strip-<> cl-name)))
     `(progn
        (defconstant ,cl-name
@@ -77,7 +77,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Define primitive class
 ;;;-----------------------------------------------------------------------------
-(defmacro defprimclass (cl-name internal-name supers slots . keywords)
+(defsyntax defprimclass (cl-name internal-name supers slots . keywords)
   (let ((real-name (strip-<> cl-name)))
     `(progn
        (defconstant ,cl-name (get-global-register ,internal-name))

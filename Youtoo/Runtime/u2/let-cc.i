@@ -4,7 +4,7 @@
 (definterface let-cc
   (import (telos thread dynamic)
    syntax (_syntax-1)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos event thread dynamic)
    export (
     ((name . call/ep) (pos . 2) (origin let-cc . call/ep))
    )

@@ -350,8 +350,8 @@ extern LispRef level_1_bindings[];
 #define O_WRONLY_fn_index 11 
 #define fill_fn_index 19 
 #define generic_read_fn_index 44 
-#define class_direct_subclasses_fn_index 73 
 #define method_size_fn_index 72 
+#define class_direct_subclasses_fn_index 73 
 #define string_data_fn_index 12 
 #define control_block_descriptor_fn_index 43 
 #define symbol_name_fn_index 70 

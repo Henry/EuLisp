@@ -4,7 +4,7 @@
 (definterface bit
   (import (telos)
    syntax ()
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos)
    export (
     ((name . bit-and) (pos . 2) (origin bit . bit-and))
     ((name . bit-xor) (pos . 6) (origin bit . bit-xor))

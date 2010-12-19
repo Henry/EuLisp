@@ -4,7 +4,7 @@
 (definterface mop-access
   (import (boot mop-prim mop-key mop-class mop-inspect mop-gf mop-meth mop-defcl)
    syntax (_boot0 _mop-gf0 _mop-meth0)
-   full-import ()
+   full-import (boot1 boot mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl)
    export (
     ((name . find-slot-names) (pos . 5) (origin mop-access . find-slot-names))
     ((name . pprint) (pos . 3) (origin mop-access . pprint))

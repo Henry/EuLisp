@@ -4,7 +4,7 @@
 (definterface dynamic
   (import (telos thread)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos event thread)
    export (
     ((name . pop-error-handlers) (pos . 6) (origin dynamic . pop-error-handlers))
     ((name . push-error-handler) (pos . 5) (origin dynamic . push-error-handler))

@@ -4,13 +4,13 @@
 (definterface mop-inspect
   (import (boot mop-prim mop-class mop-init)
    syntax (_boot0)
-   full-import ()
+   full-import (boot1 boot mop-prim mop-class mop-init)
    export (
     ((name . class?) (pos . 4) (origin mop-inspect . class?))
     ((name . methodp) (pos . 12) (origin mop-inspect . methodp))
     ((name . generic-function?) (pos . 3) (origin mop-inspect . generic-function?))
     ((name . cpl-subclass?) (pos . 11) (origin mop-inspect . cpl-subclass?))
-    ((name . class-of) (pos . 5) (origin mop-inspect . class-of) (inline (G00943 (primitive-class-of))))
+    ((name . class-of) (pos . 5) (origin mop-inspect . class-of) (inline (G001495 (primitive-class-of))))
     ((name . slotp) (pos . 13) (origin mop-inspect . slotp))
     ((name . primitive-metaclass?) (pos . 6) (origin mop-inspect . primitive-metaclass?))
     ((name . primitive-slot-value) (pos . 10) (origin mop-inspect . primitive-slot-value))

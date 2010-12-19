@@ -31,7 +31,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; General instructions
 ;;;-----------------------------------------------------------------------------
-(defmacro def-bytecode (name args code . properties)
+(defsyntax def-bytecode (name args code . properties)
   `((setter get-bytecode) ',name
     (make <bytecode>
           name: ',name
@@ -42,7 +42,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Registers
 ;;;-----------------------------------------------------------------------------
-(defmacro def-register (name code)
+(defsyntax def-register (name code)
   `((setter get-register) ',name ,code))
 
 ;;;-----------------------------------------------------------------------------

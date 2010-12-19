@@ -33,7 +33,7 @@
 ;;  gfname is {symbol | (setter symbol)}, and arglist is
 ;;  {{symbol | (symbol class)}+ [ . symbol ]}
 ;;;-----------------------------------------------------------------------------
-(defmacro defmethod (gfname . form)
+(defsyntax defmethod (gfname . form)
   (let* ((*absent* '(absent))
          (keywords (defmethod-keywords form))
          (sig (defmethod-sig form))
@@ -56,24 +56,24 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Defmethod auxilary functions
 ;;;-----------------------------------------------------------------------------
-(defmacro defmethod-keywords (form)
+(defsyntax defmethod-keywords (form)
   (if (atom? (car form))
       (cons (car form)
             (cons (car (cdr form))
                   (defmethod-keywords (cdr (cdr form)))))
     ()))
 
-(defmacro defmethod-sig (form)
+(defsyntax defmethod-sig (form)
   (if (atom? (car form))
       (defmethod-sig (cdr (cdr form)))
     (car form)))
 
-(defmacro defmethod-body (form)
+(defsyntax defmethod-body (form)
   (if (atom? (car form))
       (defmethod-body (cdr (cdr form)))
     (cdr form)))
 
-(defmacro defmethod-args (sig)
+(defsyntax defmethod-args (sig)
   ;; allows { symbol | (symbol+ [ . symbol ]) }
   (cond ((null? sig) ())
         ((atom? sig) sig)
@@ -82,7 +82,7 @@
         (t (cons (caar sig)
                  (defmethod-args (cdr sig))))))
 
-(defmacro defmethod-domain (sig)
+(defsyntax defmethod-domain (sig)
   (cond ((atom? sig) ())
         ((atom? (car sig))
          (cons () (defmethod-domain (cdr sig))))
@@ -93,7 +93,7 @@
 ;;  Syntax: (method-lambda {key val}* (arglist) {form}*), where arglist is
 ;;  {{symbol | (symbol class)}+ [ . symbol]}
 ;;;-----------------------------------------------------------------------------
-(defmacro method-lambda form
+(defsyntax method-lambda form
   (let* ((keywords (defmethod-keywords form))
          (sig (defmethod-sig form))
          (body (defmethod-body form))
@@ -111,10 +111,10 @@
 ;;;  Syntax: (method-function-lambda (arglist) {form}*), where arglist is
 ;;;  { (symbol+ [ . symbol ]) }
 ;;;-----------------------------------------------------------------------------
-(defmacro method-function-lambda (args . body)
+(defsyntax method-function-lambda (args . body)
   `(lambda ,args (progn ,@body)))
 
-(defmacro named-method-function-lambda (name args . body)
+(defsyntax named-method-function-lambda (name args . body)
   `(named-lambda (method ,name) ,args (progn ,@body)))
 
 ;;;-----------------------------------------------------------------------------

@@ -4,12 +4,12 @@
 (definterface lock
   (import (telos thread)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos event thread)
    export (
     ((name . <lock>) (pos . 2) (origin lock . <lock>))
     ((name . <semaphore>) (pos . 8) (origin lock . <semaphore>) (class . constant))
     ((name . semaphore?) (pos . 7) (origin lock . semaphore?))
-    ((name . semaphore-counter) (pos . 6) (origin lock . semaphore-counter) (inline (G002449 (static-ref0) (binding-ref ? <semaphore>) (primitive-relative-ref))) (setter (G002451 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <semaphore>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . semaphore-counter) (pos . 6) (origin lock . semaphore-counter) (inline (G004870 (static-ref0) (binding-ref ? <semaphore>) (primitive-relative-ref))) (setter (G004872 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <semaphore>) (set-primitive-relative-ref) (nobble 2))))
     ((name . lock) (pos . 3) (origin lock . lock))
     ((name . unlock) (pos . 4) (origin lock . unlock))
     ((name . lock?) (pos . 5) (origin lock . lock?))

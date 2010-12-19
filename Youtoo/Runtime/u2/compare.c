@@ -37,90 +37,90 @@ void initialize_module_compare()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_165, sym_164, sym_163, sym_162, sym_161, sym_160, sym_159, sym_158, sym_157, G00156, G00154, G00152, G00150, G00148, G00146, G00144, G00142, G00140, G00138, G00136, G00134, sym_132, G00130, G00128, sym_126, sym_125, sym_124, G00123, G00121;
+  LispRef sym_1247, sym_1246, sym_1245, sym_1244, sym_1243, sym_1242, sym_1241, sym_1240, sym_1239, G001238, G001236, G001234, G001232, G001230, G001228, G001226, G001224, G001222, G001220, G001218, G001216, sym_1214, G001212, G001210, sym_1208, sym_1207, sym_1206, G001205, G001203;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 1 is_init: 0 index: 12 binding: (method-binary=) */
-  static const void *G00120[] = {I(ab,51,45,00)};
+  static const void *G001202[] = {I(ab,51,45,00)};
 
   /* Byte-vector with size: 82 is_init: 0 index: 16 binding: top-level */
-  static const void *G00122[] = {I(a9,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(compare ,13),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(compare ,9),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(compare ,14),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(compare ,6),I(2a,24,00,00),B(compare ,9),I(2a,24,00,00),B(compare ,9),I(8a,03,02,84),I(86,86,24,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(compare ,9),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(compare ,15),I(23,00,00,00),B(compare ,12),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(compare ,9),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(compare ,6),I(2a,83,8a,05),I(14,24,00,00),B(compare ,9),I(24,00,00,00),B(callback ,7),I(3c,02,2a,83),I(8a,06,14,24),B(compare ,6),I(24,00,00,00),B(callback ,7),I(3d,02,0e,45),I(0e,00,00,00)};
+  static const void *G001204[] = {I(a9,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(compare ,13),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(compare ,9),I(2a,84,24,00),B(mop_class ,22),I(24,00,00,00),B(mop_class ,22),I(24,00,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(compare ,14),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,63),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(compare ,6),I(2a,24,00,00),B(compare ,9),I(2a,24,00,00),B(compare ,9),I(8a,03,02,84),I(86,86,24,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(compare ,9),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(compare ,15),I(23,00,00,00),B(compare ,12),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(compare ,9),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(compare ,6),I(2a,83,8a,05),I(14,24,00,00),B(compare ,9),I(24,00,00,00),B(callback ,7),I(3c,02,2a,83),I(8a,06,14,24),B(compare ,6),I(24,00,00,00),B(callback ,7),I(3d,02,0e,45),I(0e,00,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 17 binding: anonymous */
-  static const void *G00127[] = {I(aa,1b,12,1b),I(44,04,87,36),I(20,1c,10,47),I(00,00,1c,24),B(compare ,9),I(3c,02,12,1b),I(44,04,86,36),I(0a,1f,03,11),I(47,00,01,3d),I(01,04,22,02),I(45,02,00,00)};
+  static const void *G001209[] = {I(aa,1b,12,1b),I(44,04,87,36),I(20,1c,10,47),I(00,00,1c,24),B(compare ,9),I(3c,02,12,1b),I(44,04,86,36),I(0a,1f,03,11),I(47,00,01,3d),I(01,04,22,02),I(45,02,00,00)};
 
-  eul_allocate_static_string(str_131, "=", 1);
+  eul_allocate_static_string(str_1213, "=", 1);
   /* Byte-vector with size: 15 is_init: 0 index: 20 binding: = */
-  static const void *G00129[] = {I(a7,46,03,1c),I(48,00,00,23),B(compare ,18),I(24,00,00,00),B(boot1 ,3),I(3c,01,2a,86),I(1b,48,00,01),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,17),I(3b,01,48,00),I(01,1c,47,00),I(01,3d,01,03),I(45,03,00,00)};
+  static const void *G001211[] = {I(a7,46,03,1c),I(48,00,00,23),B(compare ,18),I(24,00,00,00),B(boot1 ,3),I(3c,01,2a,86),I(1b,48,00,01),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,17),I(3b,01,48,00),I(01,1c,47,00),I(01,3d,01,03),I(45,03,00,00)};
 
   /* Byte-vector with size: 12 is_init: 0 index: 21 binding: anonymous */
-  static const void *G00133[] = {I(aa,1b,11,1b),I(12,1b,44,04),I(87,36,21,1d),I(10,1d,10,1c),I(1c,24,00,00),B(compare ,6),I(3c,02,12,1b),I(44,04,86,36),I(09,1f,04,47),I(00,00,3d,01),I(06,22,03,45),I(03,00,00,00)};
+  static const void *G001215[] = {I(aa,1b,11,1b),I(12,1b,44,04),I(87,36,21,1d),I(10,1d,10,1c),I(1c,24,00,00),B(compare ,6),I(3c,02,12,1b),I(44,04,86,36),I(09,1f,04,47),I(00,00,3d,01),I(06,22,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 22 binding: < */
-  static const void *G00135[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,21),I(3b,01,48,00),I(00,1d,1d,0f),I(47,00,00,3d),I(01,03,45,03)};
+  static const void *G001217[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,21),I(3b,01,48,00),I(00,1d,1d,0f),I(47,00,00,3d),I(01,03,45,03)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 23 binding: > */
-  static const void *G00137[] = {I(a8,24,00,00),B(boot ,28),I(3c,01,24,00),B(compare ,3),I(1c,24,00,00),B(boot ,5),I(3d,02,01,00)};
+  static const void *G001219[] = {I(a8,24,00,00),B(boot ,28),I(3c,01,24,00),B(compare ,3),I(1c,24,00,00),B(boot ,5),I(3d,02,01,00)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 24 binding: anonymous */
-  static const void *G00139[] = {I(ab,1c,12,1b),I(44,04,1c,36),I(2b,1d,10,1f),I(03,11,1f,03),I(1d,24,00,00),B(compare ,6),I(3c,02,1b,44),I(0c,1c,1f,03),I(47,00,00,3d),I(02,06,36,0a),I(1c,1f,05,47),I(00,00,3d,02),I(06,22,03,45),I(03,00,00,00)};
+  static const void *G001221[] = {I(ab,1c,12,1b),I(44,04,1c,36),I(2b,1d,10,1f),I(03,11,1f,03),I(1d,24,00,00),B(compare ,6),I(3c,02,1b,44),I(0c,1c,1f,03),I(47,00,00,3d),I(02,06,36,0a),I(1c,1f,05,47),I(00,00,3d,02),I(06,22,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 25 binding: max */
-  static const void *G00141[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,24),I(3b,02,48,00),I(00,1c,1f,03),I(47,00,00,3d),I(02,03,45,03)};
+  static const void *G001223[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,24),I(3b,02,48,00),I(00,1c,1f,03),I(47,00,00,3d),I(02,03,45,03)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 26 binding: != */
-  static const void *G00143[] = {I(a7,24,00,00),B(compare ,2),I(1d,1d,24,00),B(boot ,5),I(3c,03,12,45),I(02,00,00,00)};
+  static const void *G001225[] = {I(a7,24,00,00),B(compare ,2),I(1d,1d,24,00),B(boot ,5),I(3c,03,12,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 17 is_init: 0 index: 27 binding: anonymous */
-  static const void *G00145[] = {I(aa,1b,11,1b),I(12,1b,44,04),I(87,36,35,1d),I(10,1d,10,1c),I(1c,24,00,00),B(compare ,6),I(3c,02,12,1b),I(44,10,1d,1d),I(24,00,00,00),B(compare ,9),I(3c,02,12,36),I(02,86,22,03),I(1b,44,04,86),I(36,08,1d,47),I(00,00,3d,01),I(04,22,01,45),I(03,00,00,00)};
+  static const void *G001227[] = {I(aa,1b,11,1b),I(12,1b,44,04),I(87,36,35,1d),I(10,1d,10,1c),I(1c,24,00,00),B(compare ,6),I(3c,02,12,1b),I(44,10,1d,1d),I(24,00,00,00),B(compare ,9),I(3c,02,12,36),I(02,86,22,03),I(1b,44,04,86),I(36,08,1d,47),I(00,00,3d,01),I(04,22,01,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 28 binding: <= */
-  static const void *G00147[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,27),I(3b,01,48,00),I(00,1d,1d,0f),I(47,00,00,3d),I(01,03,45,03)};
+  static const void *G001229[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,27),I(3b,01,48,00),I(00,1d,1d,0f),I(47,00,00,3d),I(01,03,45,03)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 29 binding: anonymous */
-  static const void *G00149[] = {I(ab,1c,12,1b),I(44,04,1c,36),I(2b,1d,10,1f),I(03,11,1f,03),I(1d,24,00,00),B(compare ,6),I(3c,02,1b,44),I(0c,1c,1f,05),I(47,00,00,3d),I(02,06,36,0a),I(1c,1f,03,47),I(00,00,3d,02),I(06,22,03,45),I(03,00,00,00)};
+  static const void *G001231[] = {I(ab,1c,12,1b),I(44,04,1c,36),I(2b,1d,10,1f),I(03,11,1f,03),I(1d,24,00,00),B(compare ,6),I(3c,02,1b,44),I(0c,1c,1f,05),I(47,00,00,3d),I(02,06,36,0a),I(1c,1f,03,47),I(00,00,3d,02),I(06,22,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 30 binding: min */
-  static const void *G00151[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,29),I(3b,02,48,00),I(00,1c,1f,03),I(47,00,00,3d),I(02,03,45,03)};
+  static const void *G001233[] = {I(a7,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(compare ,19),I(23,00,00,00),B(compare ,29),I(3b,02,48,00),I(00,1c,1f,03),I(47,00,00,3d),I(02,03,45,03)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 31 binding: >= */
-  static const void *G00153[] = {I(a8,24,00,00),B(boot ,28),I(3c,01,24,00),B(compare ,8),I(1c,24,00,00),B(boot ,5),I(3d,02,01,00)};
+  static const void *G001235[] = {I(a8,24,00,00),B(boot ,28),I(3c,01,24,00),B(compare ,8),I(1c,24,00,00),B(boot ,5),I(3d,02,01,00)};
 
   /* Byte-vector with size: 70 is_init: 1 index: 0 binding: initialize-compare */
-  static const void *G00155[] = {I(87,25,00,00),B(compare ,1),I(24,00,00,00),B(callback ,1),I(3e,0b,24,00),B(callback ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(compare ,32),I(23,00,00,00),B(compare ,31),I(3b,ff,25,00),B(compare ,11),I(23,00,00,00),B(compare ,33),I(23,00,00,00),B(compare ,30),I(3b,fe,25,00),B(compare ,10),I(86,25,00,00),B(compare ,9),I(23,00,00,00),B(compare ,34),I(23,00,00,00),B(compare ,28),I(3b,fe,25,00),B(compare ,8),I(23,00,00,00),B(compare ,35),I(23,00,00,00),B(compare ,26),I(3b,fe,25,00),B(compare ,7),I(86,25,00,00),B(compare ,6),I(23,00,00,00),B(compare ,36),I(23,00,00,00),B(compare ,25),I(3b,fe,25,00),B(compare ,5),I(23,00,00,00),B(compare ,37),I(23,00,00,00),B(compare ,23),I(3b,ff,25,00),B(compare ,4),I(23,00,00,00),B(compare ,38),I(23,00,00,00),B(compare ,22),I(3b,fe,25,00),B(compare ,3),I(23,00,00,00),B(compare ,39),I(23,00,00,00),B(compare ,20),I(3b,fe,25,00),B(compare ,2),I(23,00,00,00),B(compare ,40),I(23,00,00,00),B(compare ,16),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G001237[] = {I(87,25,00,00),B(compare ,1),I(24,00,00,00),B(callback ,1),I(3e,0b,24,00),B(callback ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(compare ,32),I(23,00,00,00),B(compare ,31),I(3b,ff,25,00),B(compare ,11),I(23,00,00,00),B(compare ,33),I(23,00,00,00),B(compare ,30),I(3b,fe,25,00),B(compare ,10),I(86,25,00,00),B(compare ,9),I(23,00,00,00),B(compare ,34),I(23,00,00,00),B(compare ,28),I(3b,fe,25,00),B(compare ,8),I(23,00,00,00),B(compare ,35),I(23,00,00,00),B(compare ,26),I(3b,fe,25,00),B(compare ,7),I(86,25,00,00),B(compare ,6),I(23,00,00,00),B(compare ,36),I(23,00,00,00),B(compare ,25),I(3b,fe,25,00),B(compare ,5),I(23,00,00,00),B(compare ,37),I(23,00,00,00),B(compare ,23),I(3b,ff,25,00),B(compare ,4),I(23,00,00,00),B(compare ,38),I(23,00,00,00),B(compare ,22),I(3b,fe,25,00),B(compare ,3),I(23,00,00,00),B(compare ,39),I(23,00,00,00),B(compare ,20),I(3b,fe,25,00),B(compare ,2),I(23,00,00,00),B(compare ,40),I(23,00,00,00),B(compare ,16),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G00121,G00120);
-  eul_intern_symbol(sym_124,"binary=");
-  eul_intern_symbol(sym_125,"binary<");
-  eul_intern_symbol(sym_126,"(method binary=)");
-  eul_allocate_bytevector( G00123,G00122);
-  eul_allocate_bytevector( G00128,G00127);
-  object_class(str_131) = eul_static_string_class;
-  eul_intern_symbol(sym_132,"anonymous");
-  eul_allocate_bytevector( G00130,G00129);
-  eul_allocate_bytevector( G00134,G00133);
-  eul_allocate_bytevector( G00136,G00135);
-  eul_allocate_bytevector( G00138,G00137);
-  eul_allocate_bytevector( G00140,G00139);
-  eul_allocate_bytevector( G00142,G00141);
-  eul_allocate_bytevector( G00144,G00143);
-  eul_allocate_bytevector( G00146,G00145);
-  eul_allocate_bytevector( G00148,G00147);
-  eul_allocate_bytevector( G00150,G00149);
-  eul_allocate_bytevector( G00152,G00151);
-  eul_allocate_bytevector( G00154,G00153);
-  eul_intern_symbol(sym_157,">=");
-  eul_intern_symbol(sym_158,"min");
-  eul_intern_symbol(sym_159,"<=");
-  eul_intern_symbol(sym_160,"!=");
-  eul_intern_symbol(sym_161,"max");
-  eul_intern_symbol(sym_162,">");
-  eul_intern_symbol(sym_163,"<");
-  eul_intern_symbol(sym_164,"=");
-  eul_intern_symbol(sym_165,"top-level");
-  eul_allocate_bytevector( G00156,G00155);
+  eul_allocate_bytevector( G001203,G001202);
+  eul_intern_symbol(sym_1206,"binary=");
+  eul_intern_symbol(sym_1207,"binary<");
+  eul_intern_symbol(sym_1208,"(method binary=)");
+  eul_allocate_bytevector( G001205,G001204);
+  eul_allocate_bytevector( G001210,G001209);
+  object_class(str_1213) = eul_static_string_class;
+  eul_intern_symbol(sym_1214,"anonymous");
+  eul_allocate_bytevector( G001212,G001211);
+  eul_allocate_bytevector( G001216,G001215);
+  eul_allocate_bytevector( G001218,G001217);
+  eul_allocate_bytevector( G001220,G001219);
+  eul_allocate_bytevector( G001222,G001221);
+  eul_allocate_bytevector( G001224,G001223);
+  eul_allocate_bytevector( G001226,G001225);
+  eul_allocate_bytevector( G001228,G001227);
+  eul_allocate_bytevector( G001230,G001229);
+  eul_allocate_bytevector( G001232,G001231);
+  eul_allocate_bytevector( G001234,G001233);
+  eul_allocate_bytevector( G001236,G001235);
+  eul_intern_symbol(sym_1239,">=");
+  eul_intern_symbol(sym_1240,"min");
+  eul_intern_symbol(sym_1241,"<=");
+  eul_intern_symbol(sym_1242,"!=");
+  eul_intern_symbol(sym_1243,"max");
+  eul_intern_symbol(sym_1244,">");
+  eul_intern_symbol(sym_1245,"<");
+  eul_intern_symbol(sym_1246,"=");
+  eul_intern_symbol(sym_1247,"top-level");
+  eul_allocate_bytevector( G001238,G001237);
 
   /* Set local bindings */
   {
@@ -129,37 +129,37 @@ void initialize_module_compare()
       compare_bindings[i] = eul_nil;
   }
 
-  compare_bindings[ 12] = G00121;
-  compare_bindings[ 13] = sym_124;
-  compare_bindings[ 14] = sym_125;
-  compare_bindings[ 15] = sym_126;
-  compare_bindings[ 16] = G00123;
-  compare_bindings[ 17] = G00128;
-  compare_bindings[ 18] = str_131;
-  compare_bindings[ 19] = sym_132;
-  compare_bindings[ 20] = G00130;
-  compare_bindings[ 21] = G00134;
-  compare_bindings[ 22] = G00136;
-  compare_bindings[ 23] = G00138;
-  compare_bindings[ 24] = G00140;
-  compare_bindings[ 25] = G00142;
-  compare_bindings[ 26] = G00144;
-  compare_bindings[ 27] = G00146;
-  compare_bindings[ 28] = G00148;
-  compare_bindings[ 29] = G00150;
-  compare_bindings[ 30] = G00152;
-  compare_bindings[ 31] = G00154;
+  compare_bindings[ 12] = G001203;
+  compare_bindings[ 13] = sym_1206;
+  compare_bindings[ 14] = sym_1207;
+  compare_bindings[ 15] = sym_1208;
+  compare_bindings[ 16] = G001205;
+  compare_bindings[ 17] = G001210;
+  compare_bindings[ 18] = str_1213;
+  compare_bindings[ 19] = sym_1214;
+  compare_bindings[ 20] = G001212;
+  compare_bindings[ 21] = G001216;
+  compare_bindings[ 22] = G001218;
+  compare_bindings[ 23] = G001220;
+  compare_bindings[ 24] = G001222;
+  compare_bindings[ 25] = G001224;
+  compare_bindings[ 26] = G001226;
+  compare_bindings[ 27] = G001228;
+  compare_bindings[ 28] = G001230;
+  compare_bindings[ 29] = G001232;
+  compare_bindings[ 30] = G001234;
+  compare_bindings[ 31] = G001236;
   compare_bindings[ 1] = eul_nil;
-  compare_bindings[ 32] = sym_157;
-  compare_bindings[ 33] = sym_158;
-  compare_bindings[ 34] = sym_159;
-  compare_bindings[ 35] = sym_160;
-  compare_bindings[ 36] = sym_161;
-  compare_bindings[ 37] = sym_162;
-  compare_bindings[ 38] = sym_163;
-  compare_bindings[ 39] = sym_164;
-  compare_bindings[ 40] = sym_165;
-  eul_allocate_lambda( compare_bindings[0], "initialize-compare", 0, G00156);
+  compare_bindings[ 32] = sym_1239;
+  compare_bindings[ 33] = sym_1240;
+  compare_bindings[ 34] = sym_1241;
+  compare_bindings[ 35] = sym_1242;
+  compare_bindings[ 36] = sym_1243;
+  compare_bindings[ 37] = sym_1244;
+  compare_bindings[ 38] = sym_1245;
+  compare_bindings[ 39] = sym_1246;
+  compare_bindings[ 40] = sym_1247;
+  eul_allocate_lambda( compare_bindings[0], "initialize-compare", 0, G001238);
 
   }
 }

@@ -4,7 +4,7 @@
 (definterface collect
   (import (telos compare)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos callback let-cc dynamic thread event condition compare)
    export (
     ((name . concatenate) (pos . 17) (origin collect . concatenate))
     ((name . sequence?) (pos . 10) (origin collect . sequence?))

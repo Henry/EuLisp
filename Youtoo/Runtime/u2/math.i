@@ -4,7 +4,7 @@
 (definterface math
   (import (telos double)
    syntax (_telos0)
-   full-import (double1 double)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos double1 convert collect fpi integer number compare copy condition event thread dynamic let-cc callback double)
    export (
     ((name . exp) (pos . 7) (origin math . exp))
     ((name . double-log10) (pos . 30) (origin math . double-log10) (class . ff) (arity . 1) (ff (2) 2 ("log10" . "ff_stub_log10210")))

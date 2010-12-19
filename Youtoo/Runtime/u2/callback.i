@@ -4,7 +4,7 @@
 (definterface callback
   (import (telos condition)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos let-cc dynamic thread event condition)
    export (
     ((name . CB-sum-overflow) (pos . 11) (origin callback . CB-sum-overflow) (class . constant) (value 30))
     ((name . CB-read-overflow) (pos . 9) (origin callback . CB-read-overflow) (class . constant) (value 34))

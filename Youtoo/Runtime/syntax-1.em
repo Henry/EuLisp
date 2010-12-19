@@ -33,13 +33,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Let/cc and unwind-protect
 ;;;-----------------------------------------------------------------------------
-(defmacro let/cc (k . body)
+(defsyntax let/cc (k . body)
   ;; call/ep must not occur in tail position
   (let ((res (gensym)))
     `(let ((,res (call/ep (named-lambda call/ep-lambda (,k) ,@body))))
        ,res)))
 
-(defmacro unwind-protect (form . clean-up-forms)
+(defsyntax unwind-protect (form . clean-up-forms)
   (let ((res-var (gensym)))
     `(progn
        (push-dynamic-variable
@@ -56,27 +56,27 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Block and return-from
 ;;;-----------------------------------------------------------------------------
-(defmacro block forms
+(defsyntax block forms
   (cons 'let/cc forms))
 
-(defmacro return-from (name . forms)
+(defsyntax return-from (name . forms)
   (list name (cons 'progn forms)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Catch and throw
 ;;;-----------------------------------------------------------------------------
-(defmacro catch (tag . body)
+(defsyntax catch (tag . body)
   (let ((k (gensym)))
     `(let/cc ,k
        (dynamic-let ((,tag ,k)) ,@body))))
 
-(defmacro throw (tag . forms)
+(defsyntax throw (tag . forms)
   `((dynamic ,tag) (progn ,@forms)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; While loop
 ;;;-----------------------------------------------------------------------------
-(defmacro while (condition . body)
+(defsyntax while (condition . body)
   (let ((loop (gensym)))
     `(let/cc break
        (labels
@@ -86,13 +86,13 @@
                       (,loop))))
         (,loop)))))
 
-;;  (defmacro for (init condition inc . body)
+;;  (defsyntax for (init condition inc . body)
 ;;    `(progn ,init (while ,condition ,@body ,inc)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Case
 ;;;-----------------------------------------------------------------------------
-(defmacro case (keyform . clauses)
+(defsyntax case (keyform . clauses)
   (let ((key (gensym))
         (last-clause (list-ref clauses (- (list-size clauses) 1))))
     (if (null? (eq (car last-clause) 'else))
@@ -121,21 +121,21 @@
 ;;;-----------------------------------------------------------------------------
 ;;; defcondition
 ;;;-----------------------------------------------------------------------------
-(defmacro defcondition (name super slots . keywords)
+(defsyntax defcondition (name super slots . keywords)
   `(defclass ,name ,(or super '<condition>) ,slots ,@keywords))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Dynamic variables
 ;;    defglobal is top-level form only; must not be used within dynamic-let
 ;;;-----------------------------------------------------------------------------
-(defmacro defglobal (name val) `(push-dynamic-variable ',name ,val))
+(defsyntax defglobal (name val) `(push-dynamic-variable ',name ,val))
 
-(defmacro dynamic (name) `(dynamic-variable-ref ',name))
+(defsyntax dynamic (name) `(dynamic-variable-ref ',name))
 
-(defmacro dynamic-setq (name val)
+(defsyntax dynamic-setq (name val)
   `((setter dynamic-variable-ref) ',name ,val))
 
-(defmacro dynamic-let (name-vals . body)
+(defsyntax dynamic-let (name-vals . body)
   (let ((res (gensym)))
     `(progn
        ,@(map
@@ -148,7 +148,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Error handlers
 ;;;-----------------------------------------------------------------------------
-(defmacro with-handler (fun . body)
+(defsyntax with-handler (fun . body)
   (let ((res (gensym)))
     `(progn
        (push-error-handler ,fun)
@@ -159,7 +159,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Last (will become a generic function)
 ;;;-----------------------------------------------------------------------------
-(defmacro last (l . number)
+(defsyntax last (l . number)
   (if (null? number)
       `(list-drop ,l (- (list-size ,l) 1))
     `(list-drop ,l (- (list-size ,l) ,@number))))
@@ -167,14 +167,14 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Auxiliary functions (not EuLisp)
 ;;;-----------------------------------------------------------------------------
-(defmacro not (x) `(null? ,x))
+(defsyntax not (x) `(null? ,x))
 
-(defmacro butlast (list . number)
+(defsyntax butlast (list . number)
   (if (null? number)
       `(reverse-list (list-drop (reverse-list ,list) 1))
     `(reverse-list (list-drop (reverse-list ,list) ,@number))))
 
-(defmacro time-execution (expr stream)
+(defsyntax time-execution (expr stream)
   (let ((x (gensym "time"))
         (res (gensym "time")))
     `(let* ((,x (cpu-time))

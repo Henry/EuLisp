@@ -4,13 +4,13 @@
 (definterface vector
   (import (telos convert copy collect compare fpi list callback)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc convert copy compare callback collect integer number fpi list)
    export (
     ((name . map1-vector) (pos . 15) (origin vector . map1-vector))
     ((name . maximum-vector-size) (pos . 14) (origin vector . maximum-vector-size) (class . constant) (value 536870911))
     ((name . do1-vector) (pos . 16) (origin vector . do1-vector))
     ((name . vector-append) (pos . 8) (origin vector . vector-append))
-    ((name . vector-empty?) (pos . 19) (origin vector . vector-empty?) (inline (G001804 (primitive-size) (fpi-zerop))))
+    ((name . vector-empty?) (pos . 19) (origin vector . vector-empty?) (inline (G007321 (primitive-size) (fpi-zerop))))
     ((name . accumulate1-vector) (pos . 7) (origin vector . accumulate1-vector))
     ((name . anyp1-vector) (pos . 4) (origin vector . anyp1-vector))
     ((name . reverse-vector!) (pos . 11) (origin vector . reverse-vector!))

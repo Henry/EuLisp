@@ -4,7 +4,7 @@
 (definterface character
   (import (telos compare collect string)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos callback let-cc dynamic thread event condition compare collect fpi number integer copy convert string)
    export (
     ((name . alnump) (pos . 8) (origin character . alnump))
     ((name . uppercase?) (pos . 2) (origin character . uppercase?))

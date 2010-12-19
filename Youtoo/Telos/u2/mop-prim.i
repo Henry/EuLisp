@@ -4,11 +4,11 @@
 (definterface mop-prim
   (import (boot)
    syntax ()
-   full-import ()
+   full-import (boot1 boot)
    export (
-    ((name . primitive-ref) (pos . 4) (origin mop-prim . primitive-ref) (inline (G008 (primitive-ref))) (setter (G0012 (set-primitive-ref))))
-    ((name . primitive-allocate) (pos . 3) (origin mop-prim . primitive-allocate) (inline (G004 (primitive-allocate))))
-    ((name . primitive-class-of) (pos . 2) (origin mop-prim . primitive-class-of) (inline (G006 (primitive-class-of))) (setter (G0010 (set-primitive-class-of))))
+    ((name . primitive-ref) (pos . 4) (origin mop-prim . primitive-ref) (inline (G00560 (primitive-ref))) (setter (G00564 (set-primitive-ref))))
+    ((name . primitive-allocate) (pos . 3) (origin mop-prim . primitive-allocate) (inline (G00556 (primitive-allocate))))
+    ((name . primitive-class-of) (pos . 2) (origin mop-prim . primitive-class-of) (inline (G00558 (primitive-class-of))) (setter (G00562 (set-primitive-class-of))))
    )
    local-literals (
     (top-level . 16)

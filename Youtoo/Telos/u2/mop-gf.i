@@ -4,7 +4,7 @@
 (definterface mop-gf
   (import (boot mop-prim mop-class mop-inspect)
    syntax (_boot0 _mop-gf0)
-   full-import ()
+   full-import (boot1 boot mop-prim mop-class mop-init mop-inspect)
    export (
     ((name . error-no-applicable-methods) (pos . 15) (origin mop-gf . error-no-applicable-methods))
     ((name . initialize) (pos . 12) (origin mop-gf . initialize))

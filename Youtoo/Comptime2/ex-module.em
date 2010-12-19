@@ -42,7 +42,7 @@
            expand-export))
 
 ;;;-----------------------------------------------------------------------------
-;;; Top-level MODULE expander
+;;; Top-level module expander
 ;;;-----------------------------------------------------------------------------
 (defconstant get-module-expander (make-access-table))
 
@@ -66,7 +66,7 @@
     (expander x e)))
 
 ;;;-----------------------------------------------------------------------------
-;;; MACRO expander
+;;; syntax operator expander
 ;;;-----------------------------------------------------------------------------
 (defun get-top-level-macro-expander (key)
   (let ((binding (get-syntax-binding key)))
@@ -84,14 +84,14 @@
                            (e macro-expanded-form e)))))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Collect TOP-LEVEL FORMS
+;;; Collect top-level FORMS
 ;;;-----------------------------------------------------------------------------
 (defun get-top-level-form-collector (key)
   (lambda (x e)
     (new-node x 'top-level-form)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DEFMODULE expander
+;;; Install defmodule expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'defmodule
@@ -116,7 +116,7 @@
            m))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install EXPORT expander
+;;; Install export expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'export
@@ -139,14 +139,14 @@
        (cdr x))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install PROGN Expander
+;;; Install progn Expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'progn
  (lambda (x e) (map1-list (lambda (x) (e x e)) (cdr x))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DEFCONSTANT expander
+;;; Install defconstant expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'defconstant
@@ -161,7 +161,7 @@
         (make-named-const (get-name x) v))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DEFLOCAL expander
+;;; Install deflocal expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'deflocal
@@ -175,7 +175,7 @@
        (ct-warning () "variable ~a not initialized" (get-name x)))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DEFUN expander
+;;; Install defun expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'defun
@@ -204,30 +204,6 @@
           (error <condition> "bad defun syntax")))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DEFMACRO expander
-;;;-----------------------------------------------------------------------------
-(install-module-expander
- 'defmacro
- (lambda (x e)
-   (with-ct-handler
-    "bad defmacro syntax" x
-    (let ((name (get-name x))
-          (params (get-params x))
-          (body (get-body x)))
-      (if *interpreter*
-          ;; Extend lexical env and return function in interpreter
-          (let ((node (e `(deflocal ,name
-                            (named-lambda ,name ,params ,@body)) e))
-                (binding (get-lexical-binding name)))
-            (set-syntax-binding binding)
-            node)
-        ;; Extend lexical and external envs
-        (let ((node (make-defined-fun name params body)))
-          ;; Attention: lazy expansion of external bindings
-          ((setter (module-external-env? (dynamic *actual-module*)))
-           name name)))))))
-
-;;;-----------------------------------------------------------------------------
 ;;; Install defsyntax expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
@@ -252,7 +228,7 @@
            name name)))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DEFOPENCODED expander
+;;; Install defopencoded expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'defopencoded
@@ -262,7 +238,7 @@
                      (get-name x) (get-params x) (get-body x)))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DECLARE-INLINE expander
+;;; Install declare-inline expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'declare-inline
@@ -286,7 +262,7 @@
                              (cadr x)))))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Install DEFEXTERN expander
+;;; Install defextern expander
 ;;;-----------------------------------------------------------------------------
 (install-module-expander
  'defextern

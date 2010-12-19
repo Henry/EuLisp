@@ -4,7 +4,7 @@
 (definterface mop-alloc
   (import (boot mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl mop-access)
    syntax (_boot0 _mop-gf0 _mop-meth0)
-   full-import ()
+   full-import (boot1 boot mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl mop-access)
    export (
     ((name . compute-slots) (pos . 9) (origin mop-alloc . compute-slots))
     ((name . compatible-superclasses?) (pos . 14) (origin mop-alloc . compatible-superclasses?))

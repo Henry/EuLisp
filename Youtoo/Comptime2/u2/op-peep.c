@@ -38,64 +38,64 @@ void initialize_module_op_peep()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_5676, sym_5675, sym_5674, sym_5673, sym_5672, sym_5671, G005670, G005668, G005666, G005664, G005662, G005660, G005658, G005656, sym_5654, G005653, G005650, G005648;
+  LispRef sym_5581, sym_5580, sym_5579, sym_5578, sym_5577, sym_5576, G005575, G005573, G005571, G005569, G005567, G005565, G005563, G005561, sym_5559, G005558, G005555, G005553;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 7 is_init: 0 index: 8 binding: top-level */
-  static const void *G005647[] = {I(a9,24,00,00),B(table1 ,3),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,89),B(op_peep ,6),I(45,01,00,00)};
+  static const void *G005552[] = {I(a9,24,00,00),B(table1 ,3),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,89),B(op_peep ,6),I(45,01,00,00)};
 
-  eul_allocate_static_string(str_5651, "[~a => ~a]", 10);
+  eul_allocate_static_string(str_5556, "[~a => ~a]", 10);
   /* Byte-vector with size: 40 is_init: 0 index: 10 binding: anonymous */
-  static const void *G005649[] = {I(aa,1b,12,1b),I(44,04,86,36),I(94,1c,10,1b),I(10,1c,73,1d),I(11,1b,73,1f),I(03,47,00,00),I(24,00,00,00),B(op_peep ,7),I(3c,02,1b,44),I(19,1f,03,44),I(12,1b,10,1f),I(04,1c,24,00),B(boot ,5),I(3c,02,22,01),I(36,02,87,36),I(02,86,1b,44),I(51,1c,10,1f),I(03,1c,24,00),B(boot ,5),I(3c,02,1f,08),I(11,1b,11,1b),I(11,1b,10,1f),I(04,1c,23,00),B(op_peep ,9),I(1f,0e,1f,03),I(24,00,00,00),B(i_notify ,4),I(3c,03,2a,47),I(00,00,1c,24),B(list ,3),I(3c,02,1d,1c),I(24,00,00,00),B(boot ,8),I(3c,02,47,00),I(01,1c,90,2a),I(87,22,0a,36),I(0a,1f,08,11),I(47,00,02,3d),I(01,09,22,07),I(45,02,00,00)};
+  static const void *G005554[] = {I(aa,1b,12,1b),I(44,04,86,36),I(94,1c,10,1b),I(10,1c,73,1d),I(11,1b,73,1f),I(03,47,00,00),I(24,00,00,00),B(op_peep ,7),I(3c,02,1b,44),I(19,1f,03,44),I(12,1b,10,1f),I(04,1c,24,00),B(boot ,5),I(3c,02,22,01),I(36,02,87,36),I(02,86,1b,44),I(51,1c,10,1f),I(03,1c,24,00),B(boot ,5),I(3c,02,1f,08),I(11,1b,11,1b),I(11,1b,10,1f),I(04,1c,23,00),B(op_peep ,9),I(1f,0e,1f,03),I(24,00,00,00),B(i_notify ,4),I(3c,03,2a,47),I(00,00,1c,24),B(list ,3),I(3c,02,1d,1c),I(24,00,00,00),B(boot ,8),I(3c,02,47,00),I(01,1c,90,2a),I(87,22,0a,36),I(0a,1f,08,11),I(47,00,02,3d),I(01,09,22,07),I(45,02,00,00)};
 
   /* Byte-vector with size: 17 is_init: 0 index: 12 binding: apply-rule */
-  static const void *G005652[] = {I(ab,46,03,1c),I(48,00,00,1b),I(48,00,01,86),I(1b,48,00,02),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,10),I(3b,01,48,00),I(02,47,00,00),I(10,1b,10,24),B(op_peep ,6),I(1c,24,00,00),B(table ,7),I(3c,02,47,00),I(02,3d,01,05),I(45,05,00,00)};
+  static const void *G005557[] = {I(ab,46,03,1c),I(48,00,00,1b),I(48,00,01,86),I(1b,48,00,02),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,10),I(3b,01,48,00),I(02,47,00,00),I(10,1b,10,24),B(op_peep ,6),I(1c,24,00,00),B(table ,7),I(3c,02,47,00),I(02,3d,01,05),I(45,05,00,00)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 13 binding: anonymous */
-  static const void *G005655[] = {I(aa,1b,11,12),I(1b,44,06,47),I(00,00,36,27),I(1c,11,1b,1f),I(03,24,00,00),B(op_peep ,2),I(3c,02,1b,44),I(0b,1f,03,47),I(00,01,3d,01),I(04,36,0a,1f),I(03,11,47,00),I(01,3d,01,04),I(22,02,45,02)};
+  static const void *G005560[] = {I(aa,1b,11,12),I(1b,44,06,47),I(00,00,36,27),I(1c,11,1b,1f),I(03,24,00,00),B(op_peep ,2),I(3c,02,1b,44),I(0b,1f,03,47),I(00,01,3d,01),I(04,36,0a,1f),I(03,11,47,00),I(01,3d,01,04),I(22,02,45,02)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 14 binding: peep-hole-optimize */
-  static const void *G005657[] = {I(aa,46,02,1b),I(48,00,00,86),I(1b,48,00,01),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,13),I(3b,01,48,00),I(01,24,00,00),B(i_param ,51),I(12,1b,44,06),I(47,00,00,36),I(0c,86,47,00),I(00,0f,47,00),I(01,3d,01,03),I(45,03,00,00)};
+  static const void *G005562[] = {I(aa,46,02,1b),I(48,00,00,86),I(1b,48,00,01),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,13),I(3b,01,48,00),I(01,24,00,00),B(i_param ,51),I(12,1b,44,06),I(47,00,00,36),I(0c,86,47,00),I(00,0f,47,00),I(01,3d,01,03),I(45,03,00,00)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 15 binding: anonymous */
-  static const void *G005659[] = {I(ab,1c,12,1b),I(44,10,47,00),I(00,11,24,00),B(boot1 ,26),I(3d,01,03,36),I(38,1d,10,1d),I(10,1c,7c,1b),I(44,0f,1f,05),I(11,1f,05,11),I(47,00,01,3d),I(02,06,36,1f),I(1d,1d,24,00),B(compare ,9),I(3c,02,1b,44),I(0f,1f,06,11),I(1f,06,11,47),I(00,01,3d,02),I(07,36,02,86),I(22,01,22,03),I(45,03,00,00)};
+  static const void *G005564[] = {I(ab,1c,12,1b),I(44,10,47,00),I(00,11,24,00),B(boot1 ,26),I(3d,01,03,36),I(38,1d,10,1d),I(10,1c,7c,1b),I(44,0f,1f,05),I(11,1f,05,11),I(47,00,01,3d),I(02,06,36,1f),I(1d,1d,24,00),B(compare ,9),I(3c,02,1b,44),I(0f,1f,06,11),I(1f,06,11,47),I(00,01,3d,02),I(07,36,02,86),I(22,01,22,03),I(45,03,00,00)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 16 binding: match-pattern */
-  static const void *G005661[] = {I(ab,46,02,1b),I(48,00,00,86),I(1b,48,00,01),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,15),I(3b,02,48,00),I(01,1d,10,47),I(00,00,10,50),I(1b,44,10,1f),I(03,11,47,00),I(00,11,47,00),I(01,3d,02,04),I(36,02,86,45),I(04,00,00,00)};
+  static const void *G005566[] = {I(ab,46,02,1b),I(48,00,00,86),I(1b,48,00,01),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,15),I(3b,02,48,00),I(01,1d,10,47),I(00,00,10,50),I(1b,44,10,1f),I(03,11,47,00),I(00,11,47,00),I(01,3d,02,04),I(36,02,86,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 19 is_init: 0 index: 17 binding: add-rule */
-  static const void *G005663[] = {I(43,04,1f,03),I(72,24,00,00),B(op_peep ,6),I(1c,24,00,00),B(table ,7),I(3c,02,24,00),B(table ,7),I(24,00,00,00),B(boot1 ,42),I(3c,01,1f,06),I(1f,06,1f,06),I(1f,06,24,00),B(boot1 ,26),I(3c,04,1b,1f),I(03,0f,24,00),B(op_peep ,6),I(1f,05,1d,1f),I(05,3c,03,2a),I(1f,08,45,09)};
+  static const void *G005568[] = {I(43,04,1f,03),I(72,24,00,00),B(op_peep ,6),I(1c,24,00,00),B(table ,7),I(3c,02,24,00),B(table ,7),I(24,00,00,00),B(boot1 ,42),I(3c,01,1f,06),I(1f,06,1f,06),I(1f,06,24,00),B(boot1 ,26),I(3c,04,1b,1f),I(03,0f,24,00),B(op_peep ,6),I(1f,05,1d,1f),I(05,3c,03,2a),I(1f,08,45,09)};
 
   /* Byte-vector with size: 22 is_init: 0 index: 18 binding: anonymous */
-  static const void *G005665[] = {I(43,03,1d,12),I(1b,44,0f,1c),I(24,00,00,00),B(boot1 ,26),I(3d,01,04,36),I(42,1d,12,1b),I(44,04,86,36),I(38,1f,04,10),I(1f,04,10,24),B(op_peep ,4),I(3c,02,1b,44),I(25,1f,05,11),I(1f,05,11,1d),I(10,1f,06,1c),I(24,00,00,00),B(boot ,8),I(3c,02,1f,03),I(1f,03,1d,47),I(00,00,3d,03),I(0a,22,04,36),I(02,86,22,01),I(22,01,45,04)};
+  static const void *G005570[] = {I(43,03,1d,12),I(1b,44,0f,1c),I(24,00,00,00),B(boot1 ,26),I(3d,01,04,36),I(42,1d,12,1b),I(44,04,86,36),I(38,1f,04,10),I(1f,04,10,24),B(op_peep ,4),I(3c,02,1b,44),I(25,1f,05,11),I(1f,05,11,1d),I(10,1f,06,1c),I(24,00,00,00),B(boot ,8),I(3c,02,1f,03),I(1f,03,1d,47),I(00,00,3d,03),I(0a,22,04,36),I(02,86,22,01),I(22,01,45,04)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 19 binding: match-rule */
-  static const void *G005667[] = {I(ab,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,18),I(3b,03,48,00),I(00,1d,1d,86),I(47,00,00,3d),I(03,03,45,03)};
+  static const void *G005572[] = {I(ab,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(op_peep ,11),I(23,00,00,00),B(op_peep ,18),I(3b,03,48,00),I(00,1d,1d,86),I(47,00,00,3d),I(03,03,45,03)};
 
   /* Byte-vector with size: 45 is_init: 1 index: 0 binding: initialize-op-peep */
-  static const void *G005669[] = {I(87,25,00,00),B(op_peep ,1),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(op_peep ,20),I(23,00,00,00),B(op_peep ,19),I(3b,02,25,00),B(op_peep ,7),I(86,25,00,00),B(op_peep ,6),I(23,00,00,00),B(op_peep ,21),I(23,00,00,00),B(op_peep ,17),I(3b,04,25,00),B(op_peep ,5),I(23,00,00,00),B(op_peep ,22),I(23,00,00,00),B(op_peep ,16),I(3b,02,25,00),B(op_peep ,4),I(23,00,00,00),B(op_peep ,23),I(23,00,00,00),B(op_peep ,14),I(3b,01,25,00),B(op_peep ,3),I(23,00,00,00),B(op_peep ,24),I(23,00,00,00),B(op_peep ,12),I(3b,02,25,00),B(op_peep ,2),I(23,00,00,00),B(op_peep ,25),I(23,00,00,00),B(op_peep ,8),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G005574[] = {I(87,25,00,00),B(op_peep ,1),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(op_peep ,20),I(23,00,00,00),B(op_peep ,19),I(3b,02,25,00),B(op_peep ,7),I(86,25,00,00),B(op_peep ,6),I(23,00,00,00),B(op_peep ,21),I(23,00,00,00),B(op_peep ,17),I(3b,04,25,00),B(op_peep ,5),I(23,00,00,00),B(op_peep ,22),I(23,00,00,00),B(op_peep ,16),I(3b,02,25,00),B(op_peep ,4),I(23,00,00,00),B(op_peep ,23),I(23,00,00,00),B(op_peep ,14),I(3b,01,25,00),B(op_peep ,3),I(23,00,00,00),B(op_peep ,24),I(23,00,00,00),B(op_peep ,12),I(3b,02,25,00),B(op_peep ,2),I(23,00,00,00),B(op_peep ,25),I(23,00,00,00),B(op_peep ,8),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G005648,G005647);
-  object_class(str_5651) = eul_static_string_class;
-  eul_allocate_bytevector( G005650,G005649);
-  eul_intern_symbol(sym_5654,"anonymous");
-  eul_allocate_bytevector( G005653,G005652);
-  eul_allocate_bytevector( G005656,G005655);
-  eul_allocate_bytevector( G005658,G005657);
-  eul_allocate_bytevector( G005660,G005659);
-  eul_allocate_bytevector( G005662,G005661);
-  eul_allocate_bytevector( G005664,G005663);
-  eul_allocate_bytevector( G005666,G005665);
-  eul_allocate_bytevector( G005668,G005667);
-  eul_intern_symbol(sym_5671,"match-rule");
-  eul_intern_symbol(sym_5672,"add-rule");
-  eul_intern_symbol(sym_5673,"match-pattern");
-  eul_intern_symbol(sym_5674,"peep-hole-optimize");
-  eul_intern_symbol(sym_5675,"apply-rule");
-  eul_intern_symbol(sym_5676,"top-level");
-  eul_allocate_bytevector( G005670,G005669);
+  eul_allocate_bytevector( G005553,G005552);
+  object_class(str_5556) = eul_static_string_class;
+  eul_allocate_bytevector( G005555,G005554);
+  eul_intern_symbol(sym_5559,"anonymous");
+  eul_allocate_bytevector( G005558,G005557);
+  eul_allocate_bytevector( G005561,G005560);
+  eul_allocate_bytevector( G005563,G005562);
+  eul_allocate_bytevector( G005565,G005564);
+  eul_allocate_bytevector( G005567,G005566);
+  eul_allocate_bytevector( G005569,G005568);
+  eul_allocate_bytevector( G005571,G005570);
+  eul_allocate_bytevector( G005573,G005572);
+  eul_intern_symbol(sym_5576,"match-rule");
+  eul_intern_symbol(sym_5577,"add-rule");
+  eul_intern_symbol(sym_5578,"match-pattern");
+  eul_intern_symbol(sym_5579,"peep-hole-optimize");
+  eul_intern_symbol(sym_5580,"apply-rule");
+  eul_intern_symbol(sym_5581,"top-level");
+  eul_allocate_bytevector( G005575,G005574);
 
   /* Set local bindings */
   {
@@ -104,26 +104,26 @@ void initialize_module_op_peep()
       op_peep_bindings[i] = eul_nil;
   }
 
-  op_peep_bindings[ 8] = G005648;
-  op_peep_bindings[ 9] = str_5651;
-  op_peep_bindings[ 10] = G005650;
-  op_peep_bindings[ 11] = sym_5654;
-  op_peep_bindings[ 12] = G005653;
-  op_peep_bindings[ 13] = G005656;
-  op_peep_bindings[ 14] = G005658;
-  op_peep_bindings[ 15] = G005660;
-  op_peep_bindings[ 16] = G005662;
-  op_peep_bindings[ 17] = G005664;
-  op_peep_bindings[ 18] = G005666;
-  op_peep_bindings[ 19] = G005668;
+  op_peep_bindings[ 8] = G005553;
+  op_peep_bindings[ 9] = str_5556;
+  op_peep_bindings[ 10] = G005555;
+  op_peep_bindings[ 11] = sym_5559;
+  op_peep_bindings[ 12] = G005558;
+  op_peep_bindings[ 13] = G005561;
+  op_peep_bindings[ 14] = G005563;
+  op_peep_bindings[ 15] = G005565;
+  op_peep_bindings[ 16] = G005567;
+  op_peep_bindings[ 17] = G005569;
+  op_peep_bindings[ 18] = G005571;
+  op_peep_bindings[ 19] = G005573;
   op_peep_bindings[ 1] = eul_nil;
-  op_peep_bindings[ 20] = sym_5671;
-  op_peep_bindings[ 21] = sym_5672;
-  op_peep_bindings[ 22] = sym_5673;
-  op_peep_bindings[ 23] = sym_5674;
-  op_peep_bindings[ 24] = sym_5675;
-  op_peep_bindings[ 25] = sym_5676;
-  eul_allocate_lambda( op_peep_bindings[0], "initialize-op-peep", 0, G005670);
+  op_peep_bindings[ 20] = sym_5576;
+  op_peep_bindings[ 21] = sym_5577;
+  op_peep_bindings[ 22] = sym_5578;
+  op_peep_bindings[ 23] = sym_5579;
+  op_peep_bindings[ 24] = sym_5580;
+  op_peep_bindings[ 25] = sym_5581;
+  eul_allocate_lambda( op_peep_bindings[0], "initialize-op-peep", 0, G005575);
 
   }
 }

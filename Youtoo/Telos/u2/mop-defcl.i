@@ -4,7 +4,7 @@
 (definterface mop-defcl
   (import (boot mop-prim mop-inspect mop-key mop-class mop-init mop-gf mop-meth)
    syntax (_boot0 _mop-gf0 _mop-meth0)
-   full-import ()
+   full-import (boot1 boot mop-prim mop-init mop-class mop-inspect mop-key mop-gf mop-meth)
    export (
     ((name . remove-class) (pos . 4) (origin mop-defcl . remove-class))
     ((name . find-slot) (pos . 9) (origin mop-defcl . find-slot))

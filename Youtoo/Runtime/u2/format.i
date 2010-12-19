@@ -4,7 +4,7 @@
 (definterface format
   (import (telos collect fpi list string character stream condition let-cc socket lock convert dynamic)
    syntax (_syntax-1)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos compare condition event thread dynamic let-cc callback collect integer number copy fpi convert list string character socket stream2 lock stream1 stream)
    export (
     ((name . sformat) (pos . 4) (origin format . sformat))
     ((name . cerror) (pos . 3) (origin format . cerror))

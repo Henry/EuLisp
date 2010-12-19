@@ -4,7 +4,7 @@
 (definterface float
   (import (telos number)
    syntax (_telos0)
-   full-import ()
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos copy compare callback let-cc dynamic thread event condition number)
    export (
     ((name . floor) (pos . 7) (origin float . floor))
     ((name . float?) (pos . 3) (origin float . float?))

@@ -270,8 +270,8 @@ extern LispRef level_0_bindings[];
 #define subvector_fn_index 3 
 #define slice_fn_index 4 
 #define stderr_fn_index 9 
-#define thread_reschedule_fn_index 7 
 #define _thread__X60_X62_fn_index 8 
+#define thread_reschedule_fn_index 7 
 #define control_block_buffer_size_fn_index 8 
 #define backtrace_fn_index 9 
 #define uppercase__X63_fn_index 2 
@@ -350,8 +350,8 @@ extern LispRef level_0_bindings[];
 #define O_WRONLY_fn_index 11 
 #define fill_fn_index 19 
 #define generic_read_fn_index 44 
-#define class_direct_subclasses_fn_index 73 
 #define method_size_fn_index 72 
+#define class_direct_subclasses_fn_index 73 
 #define string_data_fn_index 12 
 #define control_block_descriptor_fn_index 43 
 #define symbol_name_fn_index 70 

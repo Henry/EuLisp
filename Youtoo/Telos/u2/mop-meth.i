@@ -4,7 +4,7 @@
 (definterface mop-meth
   (import (boot mop-prim mop-key mop-class mop-inspect mop-gf)
    syntax (_boot0 _mop-gf0 _mop-meth0)
-   full-import ()
+   full-import (boot1 boot mop-prim mop-key mop-class mop-init mop-inspect mop-gf)
    export (
     ((name . add-method) (pos . 8) (origin mop-meth . add-method))
     ((name . compute-discriminating-function) (pos . 12) (origin mop-meth . compute-discriminating-function))

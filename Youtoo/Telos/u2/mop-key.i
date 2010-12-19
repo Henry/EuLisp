@@ -4,7 +4,7 @@
 (definterface mop-key
   (import (boot)
    syntax (_boot0)
-   full-import ()
+   full-import (boot1 boot)
    export (
     ((name . find-key) (pos . 2) (origin mop-key . find-key))
     ((name . filter-keywords) (pos . 3) (origin mop-key . filter-keywords))

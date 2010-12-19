@@ -29,7 +29,7 @@
            sx-obj1)
    export (eval))
 
-(defmacro eval (x . mod)
+(defsyntax eval (x . mod)
   (let* ((current-module-name (module-name? (dynamic *actual-module*))))
     `(let ((eval-module-name (or ,@mod `,current-module-name)))
        (set-eval-module eval-module-name)

@@ -9,7 +9,7 @@ extern LispRef boot_bindings[];
 
 /* Module binding indices */
 #define stdout_fn_index 52 
-#define cons_fn_index 2 
+#define print_fn_index 3 
 #define equal_fn_index 50 
 #define _backtrace_nframes__X42_X42_fn_index 34 
 #define list_remove_duplicates_fn_index 15 
@@ -50,9 +50,9 @@ extern LispRef boot_bindings[];
 #define map1_list_fn_index 11 
 #define stderr_fn_index 31 
 #define _stack_nvalues__X42_X42_fn_index 10 
+#define member1_string_fn_index 55 
 #define character_as_fpi_fn_index () 
 #define make_symbol_fn_index 56 
-#define member1_string_fn_index 55 
 #define tailstring_fn_index 54 
 #define backtrace_fn_index 9 
 #define car_fn_index 30 
@@ -94,7 +94,7 @@ extern LispRef boot_bindings[];
 #define list__X63_fn_index 5 
 #define system_fn_index 51 
 #define simple_function__X63_fn_index 4 
-#define print_fn_index 3 
+#define cons_fn_index 2 
 
 
 
