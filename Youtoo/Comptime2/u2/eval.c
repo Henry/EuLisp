@@ -10,6 +10,9 @@
 
 /* Imported modules */
 extern void initialize_module_i_rep();
+extern void initialize_module_i_rep();
+extern void initialize_module_p_env();
+extern LispRef p_env_bindings[];
 extern LispRef i_rep_bindings[];
 
 /* Module bindings with size 2 */
@@ -25,6 +28,8 @@ void initialize_module_eval()
 {
   if (is_initialized) return;
   initialize_module_i_rep();
+  initialize_module_i_rep();
+  initialize_module_p_env();
   eul_fast_table_set(eul_modules,"eval",(LispRef) eval_bindings);
   is_initialized = 1;
   {
@@ -32,8 +37,8 @@ void initialize_module_eval()
   LispRef G002;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 8 is_init: 1 index: 0 binding: initialize-eval */
-  static const void *G001[] = {I(87,25,00,00),B(eval ,1),I(24,00,00,00),B(i_rep ,1),I(3e,0b,24,00),B(i_rep ,0),I(3c,00,21,01),I(86,ac,00,00)};
+  /* Byte-vector with size: 18 is_init: 1 index: 0 binding: initialize-eval */
+  static const void *G001[] = {I(87,25,00,00),B(eval ,1),I(24,00,00,00),B(p_env ,1),I(3e,0b,24,00),B(p_env ,0),I(3c,00,21,01),I(24,00,00,00),B(i_rep ,1),I(3e,0b,24,00),B(i_rep ,0),I(3c,00,21,01),I(24,00,00,00),B(i_rep ,1),I(3e,0b,24,00),B(i_rep ,0),I(3c,00,21,01),I(86,ac,00,00)};
 
 
   /* Initializations */

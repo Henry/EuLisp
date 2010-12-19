@@ -19,6 +19,7 @@
     ((name . dynamic-binding-ref1) (pos . 11) (origin cg-dld . dynamic-binding-ref1) (class . ff) (arity . 2) (ff (3 0) 6 ("eul_dyn_binding_ref" . "ff_stub_eul_dyn_binding_ref5832")))
     ((name . as-C-module-name) (pos . 14) (origin cg-dld . as-C-module-name) (class . ff) (arity . 1) (ff (8) 3 ("eul_module_name_as_C_module_name_string" . "ff_stub_eul_module_name_as_C_module_name_string5835")))
     ((name . macroexpand-1) (pos . 6) (origin ex-expr . macroexpand-1))
+    ((name . set-eval-module) (pos . 4) (origin i-rep . set-eval-module))
     ((name . as-dynamic-binding) (pos . 4) (origin cg-dld . as-dynamic-binding))
     ((name . dynamic-load-module1) (pos . 13) (origin cg-dld . dynamic-load-module1) (class . ff) (arity . 2) (ff (3 3) 0 ("eul_dyn_load_module" . "ff_stub_eul_dyn_load_module5834")))
     ((name . show-class-hierarchy) (pos . 9) (origin i-rep . show-class-hierarchy))

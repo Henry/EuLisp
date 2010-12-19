@@ -818,6 +818,7 @@ void fill_level_1_table() {
   eul_fast_table_set(level_1_tab,"rep", make_entry(8, "i-rep", "rep"));
   eul_fast_table_set(level_1_tab,"eval/cm", make_entry(3, "i-rep", "eval/cm"));
   eul_fast_table_set(level_1_tab,"macroexpand-1", make_entry(6, "ex-expr", "macroexpand-1"));
+  eul_fast_table_set(level_1_tab,"set-eval-module", make_entry(4, "i-rep", "set-eval-module"));
   eul_fast_table_set(level_1_tab,"as-dynamic-binding", make_entry(4, "cg-dld", "as-dynamic-binding"));
   eul_fast_table_set(level_1_tab,"show-class-hierarchy", make_entry(9, "i-rep", "show-class-hierarchy"));
   eul_fast_table_set(level_1_tab,"dynamic-binding-ref", make_entry(7, "cg-dld", "dynamic-binding-ref"));

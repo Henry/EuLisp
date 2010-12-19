@@ -115,7 +115,7 @@
     ("-V" . 73)
     ("--help" . 72)
     ("-h" . 71)
-    (|(method G003)| . 70)
+    (|(method G0080)| . 70)
     (anonymous . 69)
     (ct-error-value: . 67)
     ("bad parameter ~a" . 66)

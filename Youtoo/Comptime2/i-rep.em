@@ -32,7 +32,8 @@
            sx-node
            i-compile
            cg-interf
-           cg-dld ex-expr
+           cg-dld
+           ex-expr
            ex-import
            ex-syntax
            p-env
@@ -41,6 +42,7 @@
            read)
    export (rep
            eval/cm
+           set-eval-module
            eval
            debug-eval/cm
            prompt-string

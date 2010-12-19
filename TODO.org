@@ -344,7 +344,8 @@
         ) ; end of module
     #+END_SRC
 
-*** TODO Complete support for eval
+*** DONE Complete support for eval
+    CLOSED: [2010-12-19 Sun 09:59]
     Following the analysis in the report "Modules, Macros and Lisp", Queinnec
     and Padget, it is proposed to add =eval= to EuLisp with the following
     operator:
@@ -367,7 +368,7 @@
     It may be possible to remove this limitation by either keeping a local
     variable in each module holding the module name or by converting =eval= into
     a macro so that the module name can be expanded into the optional argument
-    slot during compilation.
+    slot during compilation.  *This is now implemented*.
 
 * EuXLisp
 *** DONE Finish reformatting the C source files

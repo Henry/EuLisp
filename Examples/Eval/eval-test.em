@@ -6,7 +6,8 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule eval-test
-  (syntax (syntax-0)
+  (syntax (syntax-0
+           syntax-eval)
    import (level-1
            eval
            eval-user
@@ -17,7 +18,7 @@
 
 (deflocal end "not end")
 
-(eval (read lispin () ()) 'eval-test)
+(eval (read lispin () ()))
 (eval (read lispin () ()) 'eval-test)
 (eval (read lispin () ()) 'eval-test)
 

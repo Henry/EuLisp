@@ -17,24 +17,26 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Eval
+;;; Title: Syntax for eval
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Henry G. Weller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-(defmodule eval
-  (syntax (_macros
-           syntax-eval)
-   import ((except (eval)
-                   i-rep)
-           p-env)
-   export (set-eval-module
-           eval/cm
-           get-module
-           macroexpand-1
-           macroexpand))
+(defmodule syntax-eval
+  (syntax (syntax-0)
+   import (level-1
+           sx-obj1)
+   export (eval))
+
+(defmacro eval (x . mod)
+  (let* ((current-module-name (module-name? (dynamic *actual-module*))))
+    `(let ((eval-module-name (or ,@mod `,current-module-name)))
+       (set-eval-module eval-module-name)
+       (let ((res (eval/cm ,x)))
+         (dynamic-setq *actual-module* (get-module `,current-module-name))
+         res))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module eval
+)  ;; End of module syntax-eval
 ;;;-----------------------------------------------------------------------------
