@@ -63,28 +63,32 @@
     (_ 'anything-else)))
 
 (defclass <deer> ()
-  ((name reader: deer-name keyword: name:)
-   (gender reader: deer-gender keyword: gender:)
-   (age reader: deer-age keyword: age:))
+  ((name reader: deer-name
+         writer: set-deer-name
+         keyword: name:)
+   (gender reader: deer-gender
+           writer: set-deer-gender
+           keyword: gender:)
+   (age reader: deer-age
+        writer: set-deer-age
+        keyword: age:))
   predicate: deer?)
-
-;(defconstant deer-acc '(deer-name deer-gender))
-(defconstant deer-acc (list (cons deer-name (setter deer-name))
-                            (cons deer-age (setter deer-age))))
 
 (defun f4 (l)
   (smatch l
     (($$ deer name) (list 'deer name))
     (_ 'anything-else)))
 
+(defconstant deer-acc (list (cons deer-name set-deer-name)
+                        (cons deer-age  set-deer-age)))
+
 (defun f5 (l)
   (smatch l
-    (($ deer-acc (and (set s) (get g) name))
-     (progn
-      (s 'olof ())
-      ;(print (list (g) name))
-      (list 'deer name)))
-    (_ 'anything-else)))
+   (($ deer-acc (and (set f) (get g) name))
+    (progn
+      (f 'olof)
+      (list 'deer (g))))
+   (_ 'anything-else)))
 
 (defconstant fact
   (match-lambda
@@ -118,7 +122,7 @@
   (print-test (f2 '(1 2 3 4 5 6 7)))
   (print-test (f3 '(* (+ 1 2))))
   (print-test (f4 (make <deer> name: 'rudolf gender: 'male age: 23)))
-  ;(print-test (f5 (make <deer> name: 'rudolf gender: 'male age: 23)))
+  (print-test (f5 (make <deer> name: 'rudolf gender: 'male age: 23)))
   (print-test (f1 #(1 2)))
   (print-test (f1 #(1 2 3 4 5)))
   (print-test (f1 #(#(3 4) 1 2)))
