@@ -60,7 +60,7 @@
          (expander
           (cond
             ((symbol? key) (or (get-module-expander key)
-                               (get-top-level-macro-expander key)
+                               (get-top-level-syntax-expander key)
                                (get-top-level-form-collector key)))
             (t (get-top-level-form-collector key)))))
     (expander x e)))
@@ -68,20 +68,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;; syntax operator expander
 ;;;-----------------------------------------------------------------------------
-(defun get-top-level-macro-expander (key)
+(defun get-top-level-syntax-expander (key)
   (let ((binding (get-syntax-binding key)))
     (and binding
-         (let ((macro-fun (as-dynamic-binding binding)))
-           (and macro-fun
+         (let ((syntax-op (as-dynamic-binding binding)))
+           (and syntax-op
                 (lambda (x e)
                   (with-ct-handler
                    (protect-tilde
-                    (fmt "bad macro expansion of ~a"
-                         (cons key (cdr x)))) macro-fun
-                         (notify0 "APPLY MACRO: ~a" (cons key (cdr x)))
-                         (let ((macro-expanded-form (apply macro-fun (cdr x))))
-                           (notify0 "RESULT: ~a" macro-expanded-form)
-                           (e macro-expanded-form e)))))))))
+                    (fmt "bad syntax expansion of ~a"
+                         (cons key (cdr x)))) syntax-op
+                         (notify0 "APPLY syntax operator: ~a" (cons key (cdr x)))
+                         (let ((syntax-expanded-form (apply syntax-op (cdr x))))
+                           (notify0 "RESULT: ~a" syntax-expanded-form)
+                           (e syntax-expanded-form e)))))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Collect top-level FORMS

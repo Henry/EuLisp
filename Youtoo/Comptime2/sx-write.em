@@ -69,7 +69,7 @@
 (defun binding-print-string (binding)
   (let ((obj (binding-obj? binding)))
     (if (function? obj)
-        "#<macro-function>"
+        "#<syntax-operator>"
       (fmt "~a" obj))))
 
 (defmethod generic-print ((x <module>) (s <stream>))
@@ -99,7 +99,7 @@
 (defgeneric new-generic-print (x s))
 
 (defmethod new-generic-print ((x <function>) s)
-  (sformat s "#<macro-function>"))
+  (sformat s "#<syntax-operator>"))
 
 (defmethod new-generic-print ((x <syntax-obj>) s)
   (if (member1-list 'binding (find-slot-names x))

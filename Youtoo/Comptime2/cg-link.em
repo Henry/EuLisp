@@ -245,7 +245,7 @@
 
 (defun as-hex (x)
   (or (as-hex-aux x)
-      (ct-error "00" "too many top-level forms after macro expansion")))
+      (ct-error "00" "too many top-level forms after syntax expansion")))
 
 (defun open-bytevector ()
   (reset-code-vector-str)

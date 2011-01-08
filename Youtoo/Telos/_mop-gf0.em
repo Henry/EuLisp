@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: defgeneric macro
+;;; Title: defgeneric syntax operator
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
 ;;;  Maintainer: Henry G. Weller

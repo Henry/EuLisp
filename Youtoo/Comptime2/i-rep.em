@@ -50,8 +50,6 @@
            ?
            show-help
            show-class-hierarchy
-           macroexpand-1
-           macroexpand
            expand-syntax-1
            expand-syntax)
    expose (cg-dld))

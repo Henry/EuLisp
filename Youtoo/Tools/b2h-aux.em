@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Macros for b2h
+;;; Title: Syntax operators for b2h
 ;;;  Library: Tools
 ;;;  Authors: T. Kurt Bond
 ;;;  Maintainer: Henry G. Weller

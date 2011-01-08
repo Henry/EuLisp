@@ -34,7 +34,7 @@
            set-external-binding
            get-syntax-binding
            set-syntax-binding
-           ;set-interactive-macro-binding
+           ;set-interactive-syntax-binding
            get-local-static-binding
            add-local-static-bindings
            get-module

@@ -37,9 +37,7 @@
            ex-direct
            cg-dld
            sx-write)
-   export (macroexpand-1
-           macroexpand
-           expand-syntax-1
+   export (expand-syntax-1
            expand-syntax
            complete-lambda-node
            filter-vars
@@ -82,58 +80,41 @@
             (lambda (x expr-context env e) ; literal constant
               (make <literal-const> value: x)))
            ((symbol? (car x))
-            (or (get-macro-expander (car x))
+            (or (get-syntax-expander (car x))
                 (get-expr-expander (car x))
                 (get-appl-expander (car x))))
            (t (get-appl-expander (car x))))))
     (expander x expr-context env e)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Macro expander
+;;; Syntax expander
 ;;;-----------------------------------------------------------------------------
-(defun get-macro-expander (key)
+(defun get-syntax-expander (key)
   (let ((binding (get-syntax-binding key)))
     (and binding
-         (let ((macro-fun (as-dynamic-binding binding)))
-           (and macro-fun
+         (let ((syntax-op (as-dynamic-binding binding)))
+           (and syntax-op
                 (lambda (x expr-context env e)
                   (with-ct-handler
                    (protect-tilde
-                    (fmt "bad macro expansion of ~a in ~s"
+                    (fmt "bad syntax expansion of ~a in ~s"
                          (cons key (cdr x)) expr-context))
-                   macro-fun
-                   (notify0 "APPLY MACRO: ~a" (cons key (cdr x)))
-                   (let ((macro-expanded-form
+                   syntax-op
+                   (notify0 "APPLY syntax operator: ~a" (cons key (cdr x)))
+                   (let ((syntax-expanded-form
                           (progn (setq *pass* 'execute)
-                                 (apply macro-fun (cdr x)))))
-                     (notify0 "RESULT: ~a" macro-expanded-form)
-                     (e macro-expanded-form expr-context env e)))))))))
-
-(defun macroexpand-1 (expr)
-  (if (cons? expr)
-      (let ((binding (get-syntax-binding (car expr))))
-        (if binding
-            (let ((macro-fun (as-dynamic-binding binding)))
-              (if macro-fun
-                  (progn (setq *pass* 'execute)
-                         (apply macro-fun (cdr expr)))
-                (error <condition>
-                       (fmt "macroexpand-1 cannot find dynamic binding ~a for syntax binding ~a"
-                            binding (car expr)))))
-          (error <condition>
-                 (fmt "macroexpand-1: cannot find syntax binding ~a"
-                      (car expr)))))
-    (error <condition>
-           (fmt "macroexpand-1: expression ~a is not a cons" expr))))
+                                 (apply syntax-op (cdr x)))))
+                     (notify0 "RESULT: ~a" syntax-expanded-form)
+                     (e syntax-expanded-form expr-context env e)))))))))
 
 (defun expand-syntax-1 (expr)
   (if (cons? expr)
       (let ((binding (get-syntax-binding (car expr))))
         (if binding
-            (let ((macro-fun (as-dynamic-binding binding)))
-              (if macro-fun
+            (let ((syntax-op (as-dynamic-binding binding)))
+              (if syntax-op
                   (progn (setq *pass* 'execute)
-                         (apply macro-fun (cdr expr)))
+                         (apply syntax-op (cdr expr)))
                 (error <condition>
                        (fmt "expand-syntax-1 cannot find dynamic binding ~a for syntax binding ~a"
                             binding (car expr)))))
@@ -143,33 +124,21 @@
     (error <condition>
            (fmt "expand-syntax-1: expression ~a is not a cons" expr))))
 
-(defun macroexpanded? (expr)
+(defun syntax-expanded? (expr)
   (if (cons? expr)
       (let ((binding (get-syntax-binding (car expr))))
         (if binding
-            (let ((macro-fun (as-dynamic-binding binding)))
-              (if macro-fun
+            (let ((syntax-op (as-dynamic-binding binding)))
+              (if syntax-op
                   (progn (setq *pass* 'execute)
-                         (apply macro-fun (cdr expr)))
+                         (apply syntax-op (cdr expr)))
                 ()))
           ()))
     ()))
 
-(defun macroexpand (expr)
-  (if (cons? expr)
-      (let ((eexpr (macroexpanded? expr)))
-        (if eexpr
-            (macroexpand eexpr)
-          (if (and (cons? expr)
-                   (not (eq (car expr) 'quote))
-                   (not (eq (car expr) 'quasiquote)))
-              (cons (macroexpand (car expr)) (macroexpand (cdr expr)))
-            expr)))
-    expr))
-
 (defun expand-syntax (expr)
   (if (cons? expr)
-      (let ((eexpr (macroexpanded? expr)))
+      (let ((eexpr (syntax-expanded? expr)))
         (if eexpr
             (expand-syntax eexpr)
           (if (and (cons? expr)
@@ -540,7 +509,7 @@
 
 (defmethod check-appl ((appl <appl>) (op <object>) expr-context)
   (if (function? op)
-      (ct-serious-warning () "macro binding ~a should be in syntax import in ~s"
+      (ct-serious-warning () "syntax operator binding ~a should be in syntax import in ~s"
                           (binding-local-name? (appl-fun? appl)) expr-context)
     (ct-serious-warning () "no applicable object ~a in ~s" op expr-context)))
 

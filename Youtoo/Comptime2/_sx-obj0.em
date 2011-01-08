@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: macro to define abstract syntax tree
+;;; Title: syntax operator to define abstract syntax tree
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;;  Maintainer: Henry G. Weller
@@ -29,7 +29,7 @@
    import (level-1))
 
 ;;;-----------------------------------------------------------------------------
-;;;  All syntax objects are defined with this macro
+;;;  All syntax objects are defined with this syntax operator
 ;;;-----------------------------------------------------------------------------
 (defsyntax def-syntax-obj (cl-name super slots . options)
   (let* ((str (symbol-name cl-name))

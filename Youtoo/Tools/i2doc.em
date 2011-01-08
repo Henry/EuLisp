@@ -147,7 +147,7 @@
   (print "  Global variables begin with * and end with * (e.g. *foo*)." nl)
   (print "  Classes begin with < and end with > (e.g. <foo>)." nl)
   (print "" nl)
-  (print "  Not all of the level-1 and macro functions are mentioned in the" nl)
+  (print "  Not all of the level-1 and syntax-1 functions are mentioned in the" nl)
   (print "  EuLisp Definition. Please, consult the EuLisp Definition for further" nl)
   (print "  details." nl)
   (setq header-index 1))

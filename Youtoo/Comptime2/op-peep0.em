@@ -28,7 +28,7 @@
    import (level-1))
 
 ;;;-----------------------------------------------------------------------------
-;;; Macros to define peep-hole optimization rules
+;;; Syntax operators to define peep-hole optimization rules
 ;;;-----------------------------------------------------------------------------
 (defsyntax guarded-rule (lhs guard rhs)
   (labels

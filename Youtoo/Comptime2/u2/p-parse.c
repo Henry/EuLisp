@@ -51,53 +51,53 @@ void initialize_module_p_parse()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_2036, sym_2035, G002034, G002030, sym_2028, G002027, sym_2022, sym_2021, sym_2020, sym_2019, sym_2017, G002015, G002013;
+  LispRef sym_1128, sym_1127, G001126, G001122, sym_1120, G001119, sym_1114, sym_1113, sym_1112, sym_1111, sym_1109, G001107, G001105;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 6 is_init: 0 index: 3 binding: anonymous */
-  static const void *G002012[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G001104[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_2016, "  Parsing module ~a ...", 23);
-  eul_allocate_static_string(str_2018, " .ME/SE", 7);
-  eul_allocate_static_string(str_2023, " .EE", 4);
-  eul_allocate_static_string(str_2024, " .XE/SE", 7);
-  eul_allocate_static_string(str_2025, "bad defmodule syntax in module ~a ...", 37);
-  /* Byte-vector with size: 69 is_init: 0 index: 14 binding: (method-parse-module) */
-  static const void *G002014[] = {I(aa,23,00,00),B(p_parse ,4),I(24,00,00,00),B(i_param ,63),I(24,00,00,00),B(i_notify ,3),I(3c,02,2a,23),B(p_parse ,5),I(89,00,00,00),B(i_param ,60),I(2a,23,00,00),B(p_parse ,6),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1b),I(7a,1b,44,0c),I(1c,10,23,00),B(p_parse ,7),I(50,36,02,86),I(1b,44,a6,1d),I(24,00,00,00),B(ex_module ,3),I(3c,01,23,00),B(p_parse ,8),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(p_parse ,9),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(p_parse ,10),I(23,00,00,00),B(p_parse ,3),I(3b,00,1c,0f),I(23,00,00,00),B(p_parse ,9),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(p_parse ,11),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1d),I(24,00,00,00),B(ex_direct ,4),I(3c,01,2a,23),B(p_parse ,12),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1d),I(24,00,00,00),B(ex_body ,6),I(3c,01,2a,1d),I(83,24,00,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(22,04,36,1c),I(86,23,00,00),B(p_parse ,13),I(24,00,00,00),B(i_param ,63),I(24,00,00,00),B(i_notify ,6),I(3d,03,03,45),I(03,00,00,00)};
+  eul_allocate_static_string(str_1108, "  Parsing module ~a ...", 23);
+  eul_allocate_static_string(str_1110, " .ME/SE", 7);
+  eul_allocate_static_string(str_1115, " .EE", 4);
+  eul_allocate_static_string(str_1116, " .XE/SE", 7);
+  eul_allocate_static_string(str_1117, "bad defmodule syntax in module ~a ...", 37);
+  /* Byte-vector with size: 73 is_init: 0 index: 14 binding: (method-parse-module) */
+  static const void *G001106[] = {I(aa,23,00,00),B(p_parse ,4),I(24,00,00,00),B(i_param ,63),I(24,00,00,00),B(i_notify ,3),I(3c,02,2a,23),B(p_parse ,5),I(89,00,00,00),B(i_param ,60),I(2a,23,00,00),B(p_parse ,6),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1b),I(7a,1b,34,00),I(00,00,00,16),I(1c,10,23,00),B(p_parse ,7),I(50,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,ae),I(1d,24,00,00),B(ex_module ,3),I(3c,01,23,00),B(p_parse ,8),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(p_parse ,9),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(p_parse ,10),I(23,00,00,00),B(p_parse ,3),I(3b,00,1c,0f),I(23,00,00,00),B(p_parse ,9),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(p_parse ,11),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1d),I(24,00,00,00),B(ex_direct ,4),I(3c,01,2a,23),B(p_parse ,12),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1d),I(24,00,00,00),B(ex_body ,6),I(3c,01,2a,1d),I(83,24,00,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(22,04,32,00),I(00,00,00,21),I(86,23,00,00),B(p_parse ,13),I(24,00,00,00),B(i_param ,63),I(24,00,00,00),B(i_notify ,6),I(3d,03,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 26 is_init: 0 index: 16 binding: top-level */
-  static const void *G002026[] = {I(a9,24,00,00),B(i_param ,17),I(8a,03,02,83),I(86,24,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(i_param ,17),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(p_parse ,15),I(23,00,00,00),B(p_parse ,14),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(i_param ,17),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,06,45),I(06,00,00,00)};
+  static const void *G001118[] = {I(a9,24,00,00),B(i_param ,17),I(8a,03,02,83),I(86,24,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(i_param ,17),I(8a,04,02,1c),I(1c,24,00,00),B(boot ,8),I(3c,02,1f,04),I(1f,04,23,00),B(p_parse ,15),I(23,00,00,00),B(p_parse ,14),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(i_param ,17),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,06,45),I(06,00,00,00)};
 
-  eul_allocate_static_string(str_2031, " .ME/SE", 7);
-  eul_allocate_static_string(str_2032, " .XE/SE", 7);
+  eul_allocate_static_string(str_1123, " .ME/SE", 7);
+  eul_allocate_static_string(str_1124, " .XE/SE", 7);
   /* Byte-vector with size: 24 is_init: 0 index: 19 binding: interactive-parse */
-  static const void *G002029[] = {I(aa,23,00,00),B(p_parse ,8),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(p_parse ,5),I(89,00,00,00),B(i_param ,60),I(2a,23,00,00),B(p_parse ,17),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1c),I(24,00,00,00),B(ex_module ,3),I(3c,01,2a,23),B(p_parse ,18),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1b),I(24,00,00,00),B(ex_body ,6),I(3c,01,2a,1b),I(45,02,00,00)};
+  static const void *G001121[] = {I(aa,23,00,00),B(p_parse ,8),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(p_parse ,5),I(89,00,00,00),B(i_param ,60),I(2a,23,00,00),B(p_parse ,17),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1c),I(24,00,00,00),B(ex_module ,3),I(3c,01,2a,23),B(p_parse ,18),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,1b),I(24,00,00,00),B(ex_body ,6),I(3c,01,2a,1b),I(45,02,00,00)};
 
   /* Byte-vector with size: 44 is_init: 1 index: 0 binding: initialize-p-parse */
-  static const void *G002033[] = {I(87,25,00,00),B(p_parse ,1),I(24,00,00,00),B(sx_node ,1),I(3e,0b,24,00),B(sx_node ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_write ,1),I(3e,0b,24,00),B(sx_write ,0),I(3c,00,21,01),I(24,00,00,00),B(ex_body ,1),I(3e,0b,24,00),B(ex_body ,0),I(3c,00,21,01),I(24,00,00,00),B(ex_module ,1),I(3e,0b,24,00),B(ex_module ,0),I(3c,00,21,01),I(24,00,00,00),B(p_env ,1),I(3e,0b,24,00),B(p_env ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(p_parse ,20),I(23,00,00,00),B(p_parse ,19),I(3b,01,25,00),B(p_parse ,2),I(23,00,00,00),B(p_parse ,21),I(23,00,00,00),B(p_parse ,16),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G001125[] = {I(87,25,00,00),B(p_parse ,1),I(24,00,00,00),B(sx_node ,1),I(3e,0b,24,00),B(sx_node ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_write ,1),I(3e,0b,24,00),B(sx_write ,0),I(3c,00,21,01),I(24,00,00,00),B(ex_body ,1),I(3e,0b,24,00),B(ex_body ,0),I(3c,00,21,01),I(24,00,00,00),B(ex_module ,1),I(3e,0b,24,00),B(ex_module ,0),I(3c,00,21,01),I(24,00,00,00),B(p_env ,1),I(3e,0b,24,00),B(p_env ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(p_parse ,20),I(23,00,00,00),B(p_parse ,19),I(3b,01,25,00),B(p_parse ,2),I(23,00,00,00),B(p_parse ,21),I(23,00,00,00),B(p_parse ,16),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G002013,G002012);
-  object_class(str_2016) = eul_static_string_class;
-  eul_intern_symbol(sym_2017,"parse");
-  object_class(str_2018) = eul_static_string_class;
-  eul_intern_symbol(sym_2019,"defmodule");
-  eul_intern_symbol(sym_2020,"*actual-module*");
-  eul_intern_symbol(sym_2021,"*clean-ups*");
-  eul_intern_symbol(sym_2022,"anonymous");
-  object_class(str_2023) = eul_static_string_class;
-  object_class(str_2024) = eul_static_string_class;
-  object_class(str_2025) = eul_static_string_class;
-  eul_allocate_bytevector( G002015,G002014);
-  eul_intern_symbol(sym_2028,"(method parse-module)");
-  eul_allocate_bytevector( G002027,G002026);
-  object_class(str_2031) = eul_static_string_class;
-  object_class(str_2032) = eul_static_string_class;
-  eul_allocate_bytevector( G002030,G002029);
-  eul_intern_symbol(sym_2035,"interactive-parse");
-  eul_intern_symbol(sym_2036,"top-level");
-  eul_allocate_bytevector( G002034,G002033);
+  eul_allocate_bytevector( G001105,G001104);
+  object_class(str_1108) = eul_static_string_class;
+  eul_intern_symbol(sym_1109,"parse");
+  object_class(str_1110) = eul_static_string_class;
+  eul_intern_symbol(sym_1111,"defmodule");
+  eul_intern_symbol(sym_1112,"*actual-module*");
+  eul_intern_symbol(sym_1113,"*clean-ups*");
+  eul_intern_symbol(sym_1114,"anonymous");
+  object_class(str_1115) = eul_static_string_class;
+  object_class(str_1116) = eul_static_string_class;
+  object_class(str_1117) = eul_static_string_class;
+  eul_allocate_bytevector( G001107,G001106);
+  eul_intern_symbol(sym_1120,"(method parse-module)");
+  eul_allocate_bytevector( G001119,G001118);
+  object_class(str_1123) = eul_static_string_class;
+  object_class(str_1124) = eul_static_string_class;
+  eul_allocate_bytevector( G001122,G001121);
+  eul_intern_symbol(sym_1127,"interactive-parse");
+  eul_intern_symbol(sym_1128,"top-level");
+  eul_allocate_bytevector( G001126,G001125);
 
   /* Set local bindings */
   {
@@ -106,27 +106,27 @@ void initialize_module_p_parse()
       p_parse_bindings[i] = eul_nil;
   }
 
-  p_parse_bindings[ 3] = G002013;
-  p_parse_bindings[ 4] = str_2016;
-  p_parse_bindings[ 5] = sym_2017;
-  p_parse_bindings[ 6] = str_2018;
-  p_parse_bindings[ 7] = sym_2019;
-  p_parse_bindings[ 8] = sym_2020;
-  p_parse_bindings[ 9] = sym_2021;
-  p_parse_bindings[ 10] = sym_2022;
-  p_parse_bindings[ 11] = str_2023;
-  p_parse_bindings[ 12] = str_2024;
-  p_parse_bindings[ 13] = str_2025;
-  p_parse_bindings[ 14] = G002015;
-  p_parse_bindings[ 15] = sym_2028;
-  p_parse_bindings[ 16] = G002027;
-  p_parse_bindings[ 17] = str_2031;
-  p_parse_bindings[ 18] = str_2032;
-  p_parse_bindings[ 19] = G002030;
+  p_parse_bindings[ 3] = G001105;
+  p_parse_bindings[ 4] = str_1108;
+  p_parse_bindings[ 5] = sym_1109;
+  p_parse_bindings[ 6] = str_1110;
+  p_parse_bindings[ 7] = sym_1111;
+  p_parse_bindings[ 8] = sym_1112;
+  p_parse_bindings[ 9] = sym_1113;
+  p_parse_bindings[ 10] = sym_1114;
+  p_parse_bindings[ 11] = str_1115;
+  p_parse_bindings[ 12] = str_1116;
+  p_parse_bindings[ 13] = str_1117;
+  p_parse_bindings[ 14] = G001107;
+  p_parse_bindings[ 15] = sym_1120;
+  p_parse_bindings[ 16] = G001119;
+  p_parse_bindings[ 17] = str_1123;
+  p_parse_bindings[ 18] = str_1124;
+  p_parse_bindings[ 19] = G001122;
   p_parse_bindings[ 1] = eul_nil;
-  p_parse_bindings[ 20] = sym_2035;
-  p_parse_bindings[ 21] = sym_2036;
-  eul_allocate_lambda( p_parse_bindings[0], "initialize-p-parse", 0, G002034);
+  p_parse_bindings[ 20] = sym_1127;
+  p_parse_bindings[ 21] = sym_1128;
+  eul_allocate_lambda( p_parse_bindings[0], "initialize-p-parse", 0, G001126);
 
   }
 }

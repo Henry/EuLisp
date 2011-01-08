@@ -169,7 +169,7 @@
 ***** =defextern=
       =defextern= definitions can not be linked dynamically.
 ***** =DEFINTERN=
-      Foreign in-calls have to use the DEFINTERN() macro. Examples for
+      Foreign in-calls have to use the DEFINTERN() syntax operator. Examples for
       in/out-calls to/from Lisp can be found in the directories /Examples/Misc/,
       /Examples/Fortran/, and /Examples/C++/.
 

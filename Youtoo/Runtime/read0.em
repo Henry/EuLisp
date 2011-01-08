@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: match-let macro used in read
+;;; Title: match-let syntax operator used in read
 ;;;  Library: level-1
 ;;;  Authors: Julian Padget, Andreas Kind
 ;;;  Maintainer: Henry G. Weller

@@ -47,8 +47,6 @@
            dynamic-binding-set1
            dynamic-load-module1
            *redefine-imported-bindings*
-           macroexpand-1
-           macroexpand
            expand-syntax-1
            expand-syntax))
 

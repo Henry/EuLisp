@@ -32,8 +32,6 @@
    export (set-eval-module
            eval/cm
            get-module
-           macroexpand-1
-           macroexpand
            expand-syntax-1
            expand-syntax))
 

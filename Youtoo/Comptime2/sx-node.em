@@ -261,13 +261,6 @@
         local-name: (or (and names (car names)) '| unbound |)
         module: (dynamic *actual-module*)))
 
-;; Hack: later to be removed
-;  (defun make-macro-binding (node name)
-;    (make <binding>
-;         local-name: name
-;         module: (dynamic *actual-module*)
-;         obj: node))
-
 (defun true-local-binding? (binding)
   (if (binding? binding)
       (let ((obj (binding-obj? binding)))
@@ -278,7 +271,7 @@
                    (get-binding-info binding 'ff)
                    (and (eq (get-binding-info binding 'class) 'constant)
                         (get-binding-info binding 'value))  ; no const folding
-                   (function? obj))))                       ; no macro function
+                   (function? obj))))                       ; no syntax operator
     ()))
 
 (defun non-folded-local-binding? (binding)
@@ -289,7 +282,7 @@
                    (opencoding? obj)
                    (get-binding-info binding 'opencoding)
                    (get-binding-info binding 'ff)
-                   (function? obj))))                       ; no macro function
+                   (function? obj))))                       ; no syntax operator
     ()))
 
 (defun get-binding-info (binding key)
