@@ -403,7 +403,7 @@ static void findmemory()
     if (nfree < (long)NSSIZE)
     {
         nexpand(NSSIZE);
-        nexpand(NSSIZE);        // rjb
+        //nexpand(NSSIZE);        // rjb
     }
 }
 
@@ -713,6 +713,11 @@ void gc(int reason)
 // mark - mark all accessible nodes
 static void mark(LVAL ptr)
 {
+    if (!ispointer(ptr))
+    {
+        return;
+    }
+
     // initialize
     register LVAL prev = NIL;
     register LVAL this = ptr;
