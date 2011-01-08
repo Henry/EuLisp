@@ -195,7 +195,6 @@ FTDEF ftab[] =
 {
     {"quote", do_quote},
     {"lambda", do_lambda},
-    {".l", do_lambda},
     {"delay", do_delay},
     {"let", do_let},
     {"let*", do_letstar},
@@ -472,10 +471,7 @@ static void define1(LVAL list, LVAL body, int cont)
         (
             consp(body)
          && consp(car(body))
-         && (
-             car(car(body)) == s_lambda
-          || car(car(body)) == s_lda
-            )
+         && (car(car(body)) == s_lambda)
         )
         {
             LVAL fargs = car(cdr(car(body)));
@@ -885,60 +881,6 @@ static void cd_let(LVAL name, LVAL form, int cont)
     }
 }
 
-// do_letrec - compile the (LETREC ... ) expression
-static void do_letrec(LVAL form, int cont)
-{
-    // make sure there is a binding list
-    if (atom(form) || !listp(car(form)))
-    {
-        xlerror("expecting binding list", form);
-    }
-
-    int nxt = 0;
-
-    // save a continuation
-    if (cont != C_RETURN)
-    {
-        putcbyte(OP_SAVE);
-        nxt = putcword(0);
-    }
-
-    // push the initialization expressions
-    int n = push_dummy_values(car(form));
-
-    // establish a new environment frame
-    int oldcbase = add_level();
-
-    // compile the binding list
-    parse_let_variables(car(form), cdr(form));
-
-    // compile instructions to set the bound variables
-    set_bound_variables(car(form));
-
-    // compile the body of the let/letrec
-    do_progn(cdr(form), C_RETURN);
-
-    // build the code object
-    cpush(make_code_object(s_letname));
-
-    // restore the previous environment
-    remove_level(oldcbase);
-
-    // compile code to create a closure
-    do_literal(pop(), C_NEXT);
-    putcbyte(OP_CLOSE);
-
-    // apply the function
-    putcbyte(OP_CALL);
-    putcbyte(n);
-
-    // target for the continuation
-    if (cont != C_RETURN)
-    {
-        fixup(nxt);
-    }
-}
-
 // do_letstar - compile the (LET* ... ) expression
 static void do_letstar(LVAL form, int cont)
 {
@@ -1012,6 +954,60 @@ static void letstar1(LVAL blist, LVAL body)
     putcbyte(n);
 }
 
+// do_letrec - compile the (LETREC ... ) expression
+static void do_letrec(LVAL form, int cont)
+{
+    // make sure there is a binding list
+    if (atom(form) || !listp(car(form)))
+    {
+        xlerror("expecting binding list", form);
+    }
+
+    int nxt = 0;
+
+    // save a continuation
+    if (cont != C_RETURN)
+    {
+        putcbyte(OP_SAVE);
+        nxt = putcword(0);
+    }
+
+    // push the initialization expressions
+    int n = push_dummy_values(car(form));
+
+    // establish a new environment frame
+    int oldcbase = add_level();
+
+    // compile the binding list
+    parse_let_variables(car(form), cdr(form));
+
+    // compile instructions to set the bound variables
+    set_bound_variables(car(form));
+
+    // compile the body of the let/letrec
+    do_progn(cdr(form), C_RETURN);
+
+    // build the code object
+    cpush(make_code_object(s_letname));
+
+    // restore the previous environment
+    remove_level(oldcbase);
+
+    // compile code to create a closure
+    do_literal(pop(), C_NEXT);
+    putcbyte(OP_CLOSE);
+
+    // apply the function
+    putcbyte(OP_CALL);
+    putcbyte(n);
+
+    // target for the continuation
+    if (cont != C_RETURN)
+    {
+        fixup(nxt);
+    }
+}
+
 // push_dummy_values - push dummy values for a 'letrec' expression
 static int push_dummy_values(LVAL blist)
 {
@@ -1036,7 +1032,17 @@ static int push_init_expressions(LVAL blist)
         n = push_init_expressions(cdr(blist));
         if (consp(car(blist)) && consp(cdr(car(blist))))
         {
-            do_expr(car(cdr(car(blist))), C_NEXT);
+            if (cdr(cdr(car(blist))) != NIL)
+            {
+                //***HGW do_expr(car(cdr(cdr(cdr(car(blist))))), C_NEXT);
+                //putcbyte(OP_PUSH);
+                n++;
+                do_expr(car(cdr(cdr(car(blist)))), C_NEXT);
+            }
+            else
+            {
+                do_expr(car(cdr(car(blist))), C_NEXT);
+            }
         }
         else
         {
@@ -1077,7 +1083,31 @@ static void parse_let_variables(LVAL blist, LVAL body)
         }
         else if (consp(arg) && symbolp(car(arg)))
         {
-            new = cons(car(arg), NIL);
+            if (cdr(cdr(arg)) != NIL)
+            {
+                //xlerror("Multi-binding in let not supported", arg);
+                new = cons(car(arg), NIL);
+                // add the argument name to the name list
+                if (last)
+                {
+                    rplacd(last, new);
+                }
+                else
+                {
+                    setelement(car(car(info)), 0, new);
+                }
+                last = new;
+
+                // generate an instruction to move the argument into the frame
+                putcbyte(OP_MVARG);
+                putcbyte(slotn++);
+
+                new = cons(car(cdr(arg)), NIL);
+            }
+            else
+            {
+                new = cons(car(arg), NIL);
+            }
         }
         else
         {
@@ -1315,7 +1345,7 @@ static void do_if(LVAL form, int cont)
     }
 }
 
-// do_progn - compile the (BEGIN ... ) expression
+// do_progn - compile the (PROGN ... ) expression
 static void do_progn(LVAL form, int cont)
 {
     if (consp(form))
