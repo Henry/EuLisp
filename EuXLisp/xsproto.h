@@ -245,6 +245,7 @@ extern LVAL xsprintf();
 
 // xsfun2.c
 extern void xapply();
+extern void xvalues();
 extern void xcallcc();
 extern void xmap();
 extern void xmap1();

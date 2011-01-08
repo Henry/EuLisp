@@ -111,6 +111,70 @@ void xapply()
     xlapply();
 }
 
+// values -
+void xvalues()
+{
+    static char *cfn_name = "values";
+
+    // get the function
+    xlval = xlgetarg();
+
+    LVAL arglist = xlsp[xlargc - 1];
+    if (!listp(arglist))
+    {
+        xlbadtype(arglist, "<list>", cfn_name);
+    }
+
+    int nargs = list_size(arglist);
+
+    // check for room for extra args
+    check(nargs - 1);
+    xlargc--;   // number of explicit args
+
+    // shift up (or down) explicit args
+    if (nargs == 0)
+    {
+        LVAL *from, *to;
+        int i;
+        for
+        (
+            from = xlsp + xlargc - 1, to = xlsp + xlargc, i = 0;
+            i < xlargc;
+            i++
+        )
+        {
+            *to-- = *from--;
+        }
+        xlsp++;
+    }
+    else
+    {
+        xlsp -= nargs - 1;
+        LVAL *from, *to;
+        int i;
+        for (from = xlsp + nargs - 1, to = xlsp, i = 0; i < xlargc; i++)
+        {
+            *to++ = *from++;
+        }
+    }
+
+    // copy the list arguments onto the stack
+    for (LVAL *to = xlsp + xlargc; consp(arglist); arglist = cdr(arglist))
+    {
+        *to++ = car(arglist);
+    }
+
+    xlargc += nargs;
+
+    //restore_continuation();
+    //xlreturn();
+    pop();
+    pop();
+    pop();
+    //xlreturn();
+    //xlapply();
+}
+
 // xcallcc - built-in function 'call-with-current-continuation'
 void xcallcc()
 {

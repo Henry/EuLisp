@@ -30,8 +30,8 @@
 // include machine specific declarations
 #include "osdefs.h"
 
-int xsubrcnt = 11;              // number of XSUBR functions
-int csubrcnt = 17;              // number of CSUBR functions + xsubrcnt
+int xsubrcnt = 12;              // number of XSUBR functions
+int csubrcnt = 18;              // number of CSUBR functions + xsubrcnt
 
 typedef LVAL(*FP) ();
 
@@ -52,6 +52,7 @@ FUNDEF funtab[] =
     {"load-noisily", (FP) xloadnoisily},
     {"force", (FP) xforce},
     {"initialize-object", (FP) xinitialize_object},
+    {"values", (FP) xvalues},
 
     // continuations for xsubrs (# must match csubrcnt)
     {"%map1", (FP) xmap1},
