@@ -19,12 +19,12 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: xscheme dynamic memory management functions
+/// Title: euxlisp dynamic memory management functions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xsobj.h"
+#include "euxlisp.h"
+#include "euxlobj.h"
 
 ///-----------------------------------------------------------------------------
 /// Virtual machine registers
@@ -68,7 +68,7 @@ LVAL *vtop = NULL;              // top of vector space
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-#include "xssymbols.h"
+#include "euxlsymbols.h"
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations

@@ -23,9 +23,9 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xsbcode.h"
-#include "xssymbols.h"
+#include "euxlisp.h"
+#include "euxlbcode.h"
+#include "euxlsymbols.h"
 
 ///-----------------------------------------------------------------------------
 /// Macros
@@ -176,7 +176,7 @@ void xlinitws(unsigned int ssize)
     cpush(code);
     setelement(code, 0, newstring(0x11));
     setelement(code, 1, xlenter("*INITIALIZE*"));
-    setelement(code, 3, cvstring("xscheme.ini"));
+    setelement(code, 3, cvstring("euxlisp.ini"));
     setelement(code, 4, xlenter("load"));
     setelement(code, 5, xlenter("*toplevel*"));
     drop(1);
@@ -191,7 +191,7 @@ void xlinitws(unsigned int ssize)
     pb(0x00);
     pb(0x0d);           // 0003 0b 00 0d SAVE 000d
     pb(OP_LIT);
-    pb(0x03);           // 0006 04 03 LIT 03 ; "xscheme.ini"
+    pb(0x03);           // 0006 04 03 LIT 03 ; "euxlisp.ini"
     pb(OP_PUSH);        // 0008 10 PUSH
     pb(OP_GREF);
     pb(0x04);           // 0009 05 04 GREF 04 ; load

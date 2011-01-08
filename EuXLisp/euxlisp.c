@@ -19,13 +19,13 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: xscheme main function
+/// Title: EuXLisp main function
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xsobj.h"
-#include "xsbanner.h"
+#include "euxlisp.h"
+#include "euxlobj.h"
+#include "euxlbanner.h"
 #include <getopt.h>
 
 ///-----------------------------------------------------------------------------
@@ -52,8 +52,8 @@ FILE *tfp = NULL;
 ///-----------------------------------------------------------------------------
 extern LVAL xlfun, xlenv, xlval;
 
-#include "xssymbols.h"
-#include "xsproto.h"
+#include "euxlsymbols.h"
+#include "euxlproto.h"
 
 extern int trace;
 extern int reading;

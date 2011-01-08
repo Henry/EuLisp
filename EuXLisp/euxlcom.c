@@ -25,10 +25,10 @@
 
 #define NOISY_LOAD
 
-#include "xscheme.h"
-#include "xsbcode.h"
-#include "xssymbols.h"
-#include "xsproto.h"
+#include "euxlisp.h"
+#include "euxlbcode.h"
+#include "euxlsymbols.h"
+#include "euxlproto.h"
 
 ///-----------------------------------------------------------------------------
 /// Macros

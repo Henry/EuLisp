@@ -23,12 +23,12 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xssymbols.h"
-#include "xsproto.h"
+#include "euxlisp.h"
+#include "euxlsymbols.h"
+#include "euxlproto.h"
 
 // include machine specific declarations
-#include "osdefs.h"
+#include "euxlosdefs.h"
 
 int xsubrcnt = 12;              // number of XSUBR functions
 int csubrcnt = 18;              // number of CSUBR functions + xsubrcnt
@@ -451,7 +451,7 @@ FUNDEF funtab[] =
     #endif
 
     // include machine specific table entries
-    #include "osptrs.h"
+    #include "euxlosptrs.h"
 
     {0, 0}      // end of table marker
 };

@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: xscheme compiler byte code definitions
+/// Title: EuXLisp compiler byte code definitions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef XSBCODE_H

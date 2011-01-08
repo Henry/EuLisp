@@ -22,9 +22,9 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xssymbols.h"
-#include "xsproto.h"
+#include "euxlisp.h"
+#include "euxlsymbols.h"
+#include "euxlproto.h"
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations

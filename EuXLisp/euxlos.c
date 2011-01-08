@@ -23,11 +23,11 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
+#include "euxlisp.h"
 #include <errno.h>
 #include <unistd.h>
 #include <sys/times.h>
-#include "xscheme.h"
+#include "euxlisp.h"
 
 #ifdef READLINE
 #include <readline/readline.h>
@@ -41,11 +41,11 @@
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-#include "xssymbols.h"
+#include "euxlsymbols.h"
 extern FILE *tfp;
 extern int errno;
 
-// Used in xscheme.c
+// Used in euxlisp.c
 int reading;
 
 // Line buffer size when not using readline

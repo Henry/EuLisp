@@ -23,9 +23,9 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xsobj.h"
-#include "xsbanner.h"
+#include "euxlisp.h"
+#include "euxlobj.h"
+#include "euxlbanner.h"
 
 #define _path_open_path_sep ":"
 #define _path_open_string_format "%s/%s"

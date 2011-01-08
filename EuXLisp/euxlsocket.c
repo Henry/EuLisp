@@ -44,14 +44,14 @@
 #include <sys/select.h>
 #endif
 
-#include "xscheme.h"
+#include "euxlisp.h"
 
 #ifndef SEEK_CUR
 #define SEEK_CUR 1
 #endif
 
-#include "xssymbols.h"
-#include "xsproto.h"
+#include "euxlsymbols.h"
+#include "euxlproto.h"
 
 ///-----------------------------------------------------------------------------
 /// Functions

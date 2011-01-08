@@ -69,13 +69,13 @@ CPPFLAGS = -DIMAGE='"$(IMAGE)"' -DIMAGE_MOD='"$(IMAGE_MOD)"' \
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
-EUXL_C = osspecific.c xsdmem.c xsfun2.c xsint.c xsobj.c xssym.c \
-         xscheme.c xsftab.c xsimage.c xsio.c xsprint.c \
-         xscom.c xsfun1.c xsinit.c xsmath.c xsread.c \
-         xsmodule.c xstable.c xsocket.c
+EUXL_C = euxldmem.c euxlfun2.c euxlint.c euxlobj.c euxlsym.c \
+         euxlisp.c euxlftab.c euxlimage.c euxlio.c euxlprint.c \
+         euxlcom.c euxlfun1.c euxlinit.c euxlmath.c euxlread.c \
+         euxlmodule.c euxltable.c euxlos.c euxlsocket.c
 
-EUXL_H = osdefs.h osptrs.h xsbcode.h xscheme.h xsproto.h xssymbols.h \
-         xsbanner.h xsobj.h
+EUXL_H = euxlosdefs.h euxlosptrs.h euxlbcode.h euxlisp.h euxlproto.h \
+         euxlsymbols.h euxlbanner.h euxlobj.h
 
 EULX_O = $(EUXL_C:%.c=$(ARCH_DIR)/%.o)
 
@@ -89,6 +89,7 @@ DISTFILES = $(EUXL_C) $(EUXL_H) $(LISP) $(OTHERS)
 ###-----------------------------------------------------------------------------
 ### Commands to build EuXLisp
 ###-----------------------------------------------------------------------------
+.PHONY: euxlisp
 euxlisp: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
 
 $(EULX_O) : $(EUXL_H)
@@ -115,8 +116,8 @@ all:
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-version: xsbanner.h
-	awk '/define BANNER/ {print $$10}' < xsbanner.h | sed 's/[."]//g' > version
+version: euxlbanner.h
+	awk '/define BANNER/ {print $$10}' < euxlbanner.h | sed 's/[."]//g' > version
 
 TAGS: $(EUXL_C) $(EUXL_H) $(LISP)
 	etags $(EUXL_C) $(EUXL_H) $(LISP)

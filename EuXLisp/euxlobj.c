@@ -22,8 +22,8 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xsobj.h"
+#include "euxlisp.h"
+#include "euxlobj.h"
 
 LVAL object, class, simple_class, class_vector;
 static void merge_slots(LVAL obj, LVAL super, LVAL inits);

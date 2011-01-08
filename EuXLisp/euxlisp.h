@@ -19,11 +19,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: xscheme definitions
+/// Title: EuXLisp definitions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-#ifndef XSCHEME_H
-#define XSCHEME_H
+#ifndef EUXLISP_H
+#define EUXLISP_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -508,8 +508,8 @@ extern LVAL obarray;            // prototype symbols
 #define xlenter(name)           xlenter_module(name,current_module)
 
 // external function declarations
-#include "xsproto.h"
+#include "euxlproto.h"
 
 ///-----------------------------------------------------------------------------
-#endif // XSCHEME_H
+#endif // EUXLISP_H
 ///-----------------------------------------------------------------------------

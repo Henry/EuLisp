@@ -23,7 +23,7 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
+#include "euxlisp.h"
 
 LVAL module_list = NIL;
 LVAL current_module = NIL;

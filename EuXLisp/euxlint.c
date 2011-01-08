@@ -19,16 +19,16 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: xscheme bytecode interpreter
+/// Title: euxlisp bytecode interpreter
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #define CHECK_REF
 
-#include "xscheme.h"
-#include "xsbcode.h"
+#include "euxlisp.h"
+#include "euxlbcode.h"
 #ifdef CHECK_REF
-#include "xsobj.h"
+#include "euxlobj.h"
 #endif
 
 // sample rate (instructions per sample)
@@ -44,8 +44,8 @@ int trace = FALSE;              // trace enable
 int xlargc;                     // argument count
 JMP_BUF bc_dispatch;            // bytecode dispatcher
 
-#include "xssymbols.h"
-#include "xsproto.h"
+#include "euxlsymbols.h"
+#include "euxlproto.h"
 
 ///-----------------------------------------------------------------------------
 /// External variables

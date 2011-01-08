@@ -19,13 +19,13 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: xscheme built-in functions - part 1
+/// Title: euxlisp built-in functions - part 1
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xssymbols.h"
-#include "xsproto.h"
+#include "euxlisp.h"
+#include "euxlsymbols.h"
+#include "euxlproto.h"
 
 ///-----------------------------------------------------------------------------
 /// Gensym variables

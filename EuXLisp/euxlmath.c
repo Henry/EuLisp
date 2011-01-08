@@ -19,11 +19,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: xscheme built-in arithmetic functions
+/// Title: euxlisp built-in arithmetic functions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
+#include "euxlisp.h"
 #include <math.h>
 
 ///-----------------------------------------------------------------------------

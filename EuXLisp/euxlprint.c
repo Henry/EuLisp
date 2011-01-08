@@ -23,9 +23,9 @@
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
-#include "xscheme.h"
-#include "xsobj.h"
-#include "xssymbols.h"
+#include "euxlisp.h"
+#include "euxlobj.h"
+#include "euxlsymbols.h"
 
 ///-----------------------------------------------------------------------------
 /// Global variables

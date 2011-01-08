@@ -56,7 +56,7 @@ extern LVAL xtmpfile();
 extern LVAL xgetenv();
 extern LVAL xputenv();
 
-// xscheme.c
+// euxlisp.c
 extern void xlmain(int argc, char **argv);
 extern void xlload();
 extern void xlcontinue();
