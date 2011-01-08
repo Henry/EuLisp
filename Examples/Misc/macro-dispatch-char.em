@@ -27,8 +27,10 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule macro-dispatch-char
-  (syntax (syntax-0)
-   import (level-0))
+  (syntax (syntax-0
+           hmm)
+   import (level-0
+           hmm2))
 
 (set-dispatch-macro-character
  #\# #\M

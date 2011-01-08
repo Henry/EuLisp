@@ -22,15 +22,15 @@
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;  Compilation:
-;;    youtoo rec -l level-0
+;;    youtoo rec -l level-0 -l math
 ;;;  Interpretation:
 ;;    (!> rec)
 ;;;-----------------------------------------------------------------------------
 
 (defmodule rec
   (syntax (syntax-0)
-   import (level-0)
-   export (run))
+   import (level-0
+           math))
 
 (defun test (f g n)
   (if (= n 0)

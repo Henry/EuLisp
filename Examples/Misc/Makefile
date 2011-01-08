@@ -25,8 +25,7 @@ include ../../Lib.$(ARCH)/Makefile
 
 ###  EuLisp Level-0 examples
 EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl triang \
-	random2
-#	macro-dispatch-char
+	random2 rec
 
 ###  EuLisp Level-1 examples
 EXAMPLES_1 = dphil echo echod padd url url2 url3
@@ -34,7 +33,7 @@ EXAMPLES_1 = dphil echo echod padd url url2 url3
 OTHERS_EM = csem
 
 ###  All examples
-EXAMPLES = $(EXAMPLES_0) $(EXAMPLES_1)
+EXAMPLES = $(EXAMPLES_0) macro-dispatch-char $(EXAMPLES_1)
 EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
 ###  Youtoo default compile rules for Level-0 and Level-1
@@ -71,7 +70,7 @@ $(ARCH_DIR)/fact: fact.em
 $(ARCH_DIR)/hanoi: hanoi.em
 	$(call makeExe0,hanoi)
 
-$(ARCH_DIR)/macro-dispatch-char: macro-dispatch-char.em macro-dispatch-char.dat
+$(ARCH_DIR)/macro-dispatch-char: macro-dispatch-char.em
 	$(call makeExe0,macro-dispatch-char)
 
 $(ARCH_DIR)/nfib: nfib.em
@@ -85,6 +84,9 @@ $(ARCH_DIR)/padd: padd.em
 
 $(ARCH_DIR)/random2: random2.em
 	$(call makeExe0,random2)
+
+$(ARCH_DIR)/rec: rec.em
+	$(call makeExe0,rec)
 
 $(ARCH_DIR)/sieve: sieve.em
 	$(call makeExe0,sieve)
@@ -120,9 +122,8 @@ runeuxlisp:
 		$(EUL_BIN_DIR)/euxlisp -m $(example);)
 
 # Currently echo, echod and padd are not run because they are interactive
-RUN = fact append div dphil empty hanoi nfib null \
+RUN = fact append div dphil empty hanoi macro-dispatch-char nfib null \
 	sieve sumTo tak takl triang url2
-#	macro-dispatch-char
 
 .PHONY: runyoutoo
 runyoutoo: $(EXAMPLES_EXE)
