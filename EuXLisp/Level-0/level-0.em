@@ -49,8 +49,8 @@
            defmethod
            quote
            lambda
-           .l
            progn
+           values
            let
            let*
            setq
