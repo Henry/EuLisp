@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -22,8 +22,8 @@
 /// Title: EuXLisp compiler byte code definitions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-#ifndef XSBCODE_H
-#define XSBCODE_H
+#ifndef EUXLBCODE_H
+#define EUXLBCODE_H
 
 #define OP_BRT          0x01    // branch on true
 #define OP_BRF          0x02    // branch on false
@@ -109,5 +109,5 @@
 #endif
 
 ///-----------------------------------------------------------------------------
-#endif // XSBCODE_H
+#endif // EUXLBCODE_H
 ///-----------------------------------------------------------------------------

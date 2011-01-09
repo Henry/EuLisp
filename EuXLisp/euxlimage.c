@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -33,15 +33,15 @@
 ///-----------------------------------------------------------------------------
 /// Virtual machine registers
 ///-----------------------------------------------------------------------------
-extern LVAL xlfun;              // current function
-extern LVAL xlenv;              // current environment
-extern LVAL xlval;              // value of most recent instruction
+extern euxlValue xlfun;              // current function
+extern euxlValue xlenv;              // current environment
+extern euxlValue xlval;              // value of most recent instruction
 
 ///-----------------------------------------------------------------------------
 /// Stack limits
 ///-----------------------------------------------------------------------------
-extern LVAL *xlstkbase;         // base of value stack
-extern LVAL *xlstktop;          // top of value stack
+extern euxlValue *xlstkbase;         // base of value stack
+extern euxlValue *xlstktop;          // top of value stack
 
 ///-----------------------------------------------------------------------------
 /// Node space
@@ -52,13 +52,13 @@ extern NSEGMENT *nsegments;     // list of node segments
 /// Vector (and string) space
 ///-----------------------------------------------------------------------------
 extern VSEGMENT *vsegments;     // list of vector segments
-extern LVAL *vfree;             // next free location in vector space
-extern LVAL *vtop;              // top of vector space
+extern euxlValue *vfree;             // next free location in vector space
+extern euxlValue *vtop;              // top of vector space
 
 ///-----------------------------------------------------------------------------
 /// Global variables
 ///-----------------------------------------------------------------------------
-extern LVAL eof_object, default_object;
+extern euxlValue eof_object, default_object;
 extern JMP_BUF top_level;
 extern FUNDEF funtab[];
 
@@ -80,13 +80,13 @@ static char *image_search_path[] = { IMAGE_SEARCH_PATH, 0 };
 ///-----------------------------------------------------------------------------
 static void freeimage();
 static void setoffset();
-static void writenode(LVAL node);
+static void writenode(euxlValue node);
 static void writeptr(OFFTYPE off);
-static void readnode(int type, LVAL node);
+static void readnode(int type, euxlValue node);
 static OFFTYPE readptr();
-static LVAL cviptr(OFFTYPE o);
-OFFTYPE cvoptr(LVAL p);
-static LVAL *getvspace(LVAL node, unsigned int size);
+static euxlValue cviptr(OFFTYPE o);
+OFFTYPE cvoptr(euxlValue p);
+static euxlValue *getvspace(euxlValue node, unsigned int size);
 
 ///-----------------------------------------------------------------------------
 /// Functions
@@ -133,7 +133,7 @@ int xlisave(char *fname)
     // write out all nodes that are still in use
     for (NSEGMENT *nseg = nsegments; nseg != NULL; nseg = nseg->ns_next)
     {
-        LVAL p = &nseg->ns_data[0];
+        euxlValue p = &nseg->ns_data[0];
         int n = nseg->ns_size;
         for (; --n >= 0; ++p, off += sizeof(NODE))
         {
@@ -165,7 +165,7 @@ int xlisave(char *fname)
                     osbputc(p->n_type, fp);
                     size = getsize(p);
                     writeptr((OFFTYPE) size);
-                    for (LVAL *vp = p->n_vdata; --size >= 0;)
+                    for (euxlValue *vp = p->n_vdata; --size >= 0;)
                         writeptr(cvoptr(*vp++));
                     foff += sizeof(NODE);
                     break;
@@ -343,7 +343,7 @@ int xlirestore(char *fname)
 
     // read each node
     int type;
-    LVAL p;
+    euxlValue p;
     for (off = (OFFTYPE) 2; (type = osbgetc(fp)) >= 0;)
     {
         switch (type)
@@ -378,7 +378,7 @@ int xlirestore(char *fname)
                 p->n_type = type;
                 p->n_vsize = size = (int)readptr();
                 p->n_vdata = getvspace(p, size);
-                for (LVAL *vp = p->n_vdata; --size >= 0;)
+                for (euxlValue *vp = p->n_vdata; --size >= 0;)
                 {
                     *vp++ = cviptr(readptr());
                 }
@@ -427,7 +427,7 @@ done:
 
     // lookup all of the symbols the interpreter uses
     {
-        LVAL curmod = current_module;
+        euxlValue curmod = current_module;
         current_module = root_module;
         xlsymbols();
         current_module = curmod;
@@ -444,7 +444,7 @@ static void freeimage()
     while (nsegments != NULL)
     {
         NSEGMENT *nextnseg = nsegments->ns_next;
-        LVAL p = &nsegments->ns_data[0];
+        euxlValue p = &nsegments->ns_data[0];
         int n = nsegments->ns_size;
         for (; --n >= 0; ++p)
         {
@@ -496,7 +496,7 @@ static void setoffset()
 }
 
 // writenode - write a node to a file
-static void writenode(LVAL node)
+static void writenode(euxlValue node)
 {
     char *p = (char *)&node->n_info;
     int n = sizeof(union ninfo);
@@ -519,7 +519,7 @@ static void writeptr(OFFTYPE off)
 }
 
 // readnode - read a node
-static void readnode(int type, LVAL node)
+static void readnode(int type, euxlValue node)
 {
     char *p = (char *)&node->n_info;
     int n = sizeof(union ninfo);
@@ -544,7 +544,7 @@ static OFFTYPE readptr()
 }
 
 // cviptr - convert a pointer on input
-static LVAL cviptr(OFFTYPE o)
+static euxlValue cviptr(OFFTYPE o)
 {
     NSEGMENT *newnsegment(), *nseg;
     OFFTYPE off = (OFFTYPE) 2;
@@ -553,7 +553,7 @@ static LVAL cviptr(OFFTYPE o)
     // check for nil and small fixnums
     if (o == (OFFTYPE) 0 || (o & 1) == 1)
     {
-        return ((LVAL) o);
+        return ((euxlValue) o);
     }
 
     // compute a pointer for this offset
@@ -562,7 +562,7 @@ static LVAL cviptr(OFFTYPE o)
         nextoff = off + (OFFTYPE) (nseg->ns_size * sizeof(NODE));
         if (o >= off && o < nextoff)
         {
-            return ((LVAL) ((OFFTYPE) & nseg->ns_data[0] + o - off));
+            return ((euxlValue) ((OFFTYPE) & nseg->ns_data[0] + o - off));
         }
         off = nextoff;
     }
@@ -585,11 +585,11 @@ static LVAL cviptr(OFFTYPE o)
         off = nextoff;
     }
 
-    return ((LVAL) ((OFFTYPE) & nseg->ns_data[0] + o - off));
+    return ((euxlValue) ((OFFTYPE) & nseg->ns_data[0] + o - off));
 }
 
 // cvoptr - convert a pointer on output
-OFFTYPE cvoptr(LVAL p)
+OFFTYPE cvoptr(euxlValue p)
 {
     OFFTYPE off = (OFFTYPE) 2;
     NSEGMENT *nseg;
@@ -616,7 +616,7 @@ OFFTYPE cvoptr(LVAL p)
 }
 
 // getvspace - allocate vector space
-static LVAL *getvspace(LVAL node, unsigned int size)
+static euxlValue *getvspace(euxlValue node, unsigned int size)
 {
     ++size;     // space for the back pointer
     if
@@ -628,7 +628,7 @@ static LVAL *getvspace(LVAL node, unsigned int size)
     {
         xlfatal("insufficient vector space");
     }
-    LVAL *p = vfree;
+    euxlValue *p = vfree;
     vfree += size;
     *p++ = node;
     return (p);

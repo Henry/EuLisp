@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -31,22 +31,22 @@
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-extern LVAL xlfun, xlenv, xlval;
+extern euxlValue xlfun, xlenv, xlval;
 extern int prbreadth, prdepth;
 extern FILE *tfp;
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static void do_maploop(LVAL last);
+static void do_maploop(euxlValue last);
 static void do_forloop();
 static void do_withfile(int flags, char *mode);
-static void do_load(LVAL print);
-static void do_loadloop(LVAL print);
-static LVAL setit(int *pvar);
-static LVAL openfile(int flags, char *mode);
-static LVAL strcompare(int fcn, int icase);
-static LVAL chrcompare(int fcn, int icase);
+static void do_load(euxlValue print);
+static void do_loadloop(euxlValue print);
+static euxlValue setit(int *pvar);
+static euxlValue openfile(int flags, char *mode);
+static euxlValue strcompare(int fcn, int icase);
+static euxlValue chrcompare(int fcn, int icase);
 
 ///-----------------------------------------------------------------------------
 /// Functions
@@ -60,7 +60,7 @@ void xapply()
     // get the function
     xlval = xlgetarg();
 
-    LVAL arglist = xlsp[xlargc - 1];
+    euxlValue arglist = xlsp[xlargc - 1];
     if (!listp(arglist))
     {
         xlbadtype(arglist, "<list>", cfn_name);
@@ -75,7 +75,7 @@ void xapply()
     // shift up (or down) explicit args
     if (nargs == 0)
     {
-        LVAL *from, *to;
+        euxlValue *from, *to;
         int i;
         for
         (
@@ -91,7 +91,7 @@ void xapply()
     else
     {
         xlsp -= nargs - 1;
-        LVAL *from, *to;
+        euxlValue *from, *to;
         int i;
         for (from = xlsp + nargs - 1, to = xlsp, i = 0; i < xlargc; i++)
         {
@@ -100,7 +100,7 @@ void xapply()
     }
 
     // copy the list arguments onto the stack
-    for (LVAL *to = xlsp + xlargc; consp(arglist); arglist = cdr(arglist))
+    for (euxlValue *to = xlsp + xlargc; consp(arglist); arglist = cdr(arglist))
     {
         *to++ = car(arglist);
     }
@@ -119,7 +119,7 @@ void xvalues()
     // get the function
     xlval = xlgetarg();
 
-    LVAL arglist = xlsp[xlargc - 1];
+    euxlValue arglist = xlsp[xlargc - 1];
     if (!listp(arglist))
     {
         xlbadtype(arglist, "<list>", cfn_name);
@@ -134,7 +134,7 @@ void xvalues()
     // shift up (or down) explicit args
     if (nargs == 0)
     {
-        LVAL *from, *to;
+        euxlValue *from, *to;
         int i;
         for
         (
@@ -150,7 +150,7 @@ void xvalues()
     else
     {
         xlsp -= nargs - 1;
-        LVAL *from, *to;
+        euxlValue *from, *to;
         int i;
         for (from = xlsp + nargs - 1, to = xlsp, i = 0; i < xlargc; i++)
         {
@@ -159,7 +159,7 @@ void xvalues()
     }
 
     // copy the list arguments onto the stack
-    for (LVAL *to = xlsp + xlargc; consp(arglist); arglist = cdr(arglist))
+    for (euxlValue *to = xlsp + xlargc; consp(arglist); arglist = cdr(arglist))
     {
         *to++ = car(arglist);
     }
@@ -179,14 +179,14 @@ void xvalues()
 void xcallcc()
 {
     static char *cfn_name = "call/cc";
-    extern LVAL current_continuation();
+    extern euxlValue current_continuation();
 
     // get the function to call
     xlval = xlgetarg();
     xllastarg();
 
     // create a continuation object
-    LVAL cont = current_continuation(FALSE);
+    euxlValue cont = current_continuation(FALSE);
 
     // setup the argument list
     cpush(cont);
@@ -211,13 +211,13 @@ void xmap()
 }
 
 // do_maploop - setup for the next application
-static void do_maploop(LVAL last)
+static void do_maploop(euxlValue last)
 {
-    extern LVAL cs_map1;
+    extern euxlValue cs_map1;
 
     // get a pointer to the end of the argument list
-    LVAL *p = &xlsp[xlargc];
-    LVAL *oldsp = xlsp;
+    euxlValue *p = &xlsp[xlargc];
+    euxlValue *oldsp = xlsp;
 
     // save a continuation
     if (xlval)
@@ -238,7 +238,7 @@ static void do_maploop(LVAL last)
     // build the argument list for the next application
     for (int cnt = xlargc; --cnt >= 1;)
     {
-        LVAL x = *--p;
+        euxlValue x = *--p;
         if (consp(x))
         {
             cpush(car(x));
@@ -261,10 +261,10 @@ static void do_maploop(LVAL last)
 void xmap1()
 {
     // get the argument count
-    LVAL tmp = pop();
+    euxlValue tmp = pop();
 
     // get the tail of the value list
-    LVAL last;
+    euxlValue last;
     if ((last = pop()) != NIL)
     {
         rplacd(last, cons(xlval, NIL)); // add the new value to the tail
@@ -297,11 +297,11 @@ void xforeach()
 // do_forloop - setup for the next application
 static void do_forloop()
 {
-    extern LVAL cs_foreach1;
+    extern euxlValue cs_foreach1;
 
     // get a pointer to the end of the argument list
-    LVAL *p = &xlsp[xlargc];
-    LVAL *oldsp = xlsp;
+    euxlValue *p = &xlsp[xlargc];
+    euxlValue *oldsp = xlsp;
 
     // save a continuation
     check(3);
@@ -312,7 +312,7 @@ static void do_forloop()
     // build the argument list for the next application
     for (int cnt = xlargc; --cnt >= 1;)
     {
-        LVAL x = *--p;
+        euxlValue x = *--p;
         if (consp(x))
         {
             cpush(car(x));
@@ -337,7 +337,7 @@ static void do_forloop()
 void xforeach1()
 {
     // get the argument count
-    LVAL tmp = pop();
+    euxlValue tmp = pop();
 
     // convert the argument count and loop
     xlargc = (int)getfixnum(tmp);
@@ -360,16 +360,16 @@ void xcallwo()
 static void do_withfile(int flags, char *mode)
 {
     static char *cfn_name = "call-with-input/output-file";
-    extern LVAL cs_withfile1;
+    extern euxlValue cs_withfile1;
     extern FILE *osaopen();
 
     // get the function to call
-    LVAL name = xlgastring();
+    euxlValue name = xlgastring();
     xlval = xlgetarg();
     xllastarg();
 
     // create a file object
-    LVAL file = cvstream(NULL, flags);
+    euxlValue file = cvstream(NULL, flags);
     FILE *fp;
     if ((fp = osaopen(getstring(name), mode)) == NULL)
     {
@@ -412,7 +412,7 @@ void xloadnoisily()
 }
 
 // do_load - open the file and setup the load loop
-static void do_load(LVAL print)
+static void do_load(euxlValue print)
 {
     static char *cfn_name = "load";
     extern FILE *osaopen();
@@ -422,7 +422,7 @@ static void do_load(LVAL print)
     xllastarg();
 
     // create a file object
-    LVAL file = cvstream(NULL, PF_INPUT);
+    euxlValue file = cvstream(NULL, PF_INPUT);
     FILE *fp;
     if ((fp = osaopen(getstring(xlval), "r")) == NULL)
     {
@@ -438,12 +438,12 @@ static void do_load(LVAL print)
 }
 
 // do_loadloop - read the next expression and setup to evaluate it
-static void do_loadloop(LVAL print)
+static void do_loadloop(euxlValue print)
 {
-    extern LVAL cs_load1, s_eval_cm;
+    extern euxlValue cs_load1, s_eval_cm;
 
     // try to read the next expression from the file
-    LVAL expr;
+    euxlValue expr;
     if (xlread(xlval, &expr))
     {
         // save a continuation
@@ -474,7 +474,7 @@ static void do_loadloop(LVAL print)
 void xload1()
 {
     // print the value if the print variable is set
-    LVAL print;
+    euxlValue print;
     if ((print = pop()) != NIL)
     {
         xlprin1(xlval, xstdout());
@@ -490,7 +490,7 @@ void xload1()
 void xforce()
 {
     static char *cfn_name = "force";
-    extern LVAL cs_force1;
+    extern euxlValue cs_force1;
 
     // get the promise
     xlval = xlgetarg();
@@ -530,14 +530,14 @@ void xforce()
 // xforce1 - continuation for xforce
 void xforce1()
 {
-    LVAL promise = pop();
+    euxlValue promise = pop();
     setpvalue(promise, xlval);
     setpproc(promise, NIL);
     xlreturn();
 }
 
 // xsymstr - built-in function 'symbol->string'
-LVAL xsymstr()
+euxlValue xsymstr()
 {
     static char *cfn_name = "symbol->string";
 
@@ -547,7 +547,7 @@ LVAL xsymstr()
 }
 
 // xstrsym - built-in function 'string->symbol'
-LVAL xstrsym()
+euxlValue xstrsym()
 {
     static char *cfn_name = "string->symbol";
 
@@ -557,16 +557,16 @@ LVAL xstrsym()
 }
 
 // xread - built-in function 'read'
-LVAL xread()
+euxlValue xread()
 {
     static char *cfn_name = "read";
 
     // get file pointer and eof value
-    LVAL fptr = (moreargs()? xlgaistream() : xstdin());
+    euxlValue fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
 
     // read an expression
-    LVAL val;
+    euxlValue val;
     if (!xlread(fptr, &val))
     {
         val = eof_object;
@@ -577,22 +577,22 @@ LVAL xread()
 }
 
 // xrdchar - built-in function 'read-char'
-LVAL xrdchar()
+euxlValue xrdchar()
 {
     static char *cfn_name = "read-char";
 
-    LVAL fptr = (moreargs()? xlgaistream() : xstdin());
+    euxlValue fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
     int ch;
     return ((ch = xlgetc(fptr)) == EOF ? eof_object : cvchar(ch));
 }
 
 // xrdbyte - built-in function 'read-byte'
-LVAL xrdbyte()
+euxlValue xrdbyte()
 {
     static char *cfn_name = "read-byte";
 
-    LVAL fptr = (moreargs()? xlgaistream() : xstdin());
+    euxlValue fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
 
     int ch;
@@ -600,14 +600,14 @@ LVAL xrdbyte()
 }
 
 // xrdshort - built-in function 'read-short'
-LVAL xrdshort()
+euxlValue xrdshort()
 {
     static char *cfn_name = "read-short";
 
     unsigned char *p;
     short int val = 0;
     int n;
-    LVAL fptr = (moreargs()? xlgaistream() : xstdin());
+    euxlValue fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
     for (n = sizeof(short int), p = (unsigned char *)&val; --n >= 0;)
     {
@@ -623,14 +623,14 @@ LVAL xrdshort()
 }
 
 // xrdlong - built-in function 'read-long'
-LVAL xrdlong()
+euxlValue xrdlong()
 {
     static char *cfn_name = "read-long";
 
     unsigned char *p;
     long int val = 0;
     int n;
-    LVAL fptr = (moreargs()? xlgaistream() : xstdin());
+    euxlValue fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
     for (n = sizeof(long int), p = (unsigned char *)&val; --n >= 0;)
     {
@@ -646,11 +646,11 @@ LVAL xrdlong()
 }
 
 // peek-char
-LVAL xpeek_char()
+euxlValue xpeek_char()
 {
     static char *cfn_name = "peek-char";
 
-    LVAL fptr = (moreargs()? xlgaistream() : xstdin());
+    euxlValue fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
 
     int ch = xlpeekchar(fptr);
@@ -669,11 +669,11 @@ LVAL xpeek_char()
 }
 
 // char-ready?
-LVAL xchar_readyp()
+euxlValue xchar_readyp()
 {
     static char *cfn_name = "char-ready?";
 
-    LVAL fptr = (moreargs()? xlgaistream() : xstdin());
+    euxlValue fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
 
     if (xlpeekchar(fptr) == NOCHAR)
@@ -687,23 +687,23 @@ LVAL xchar_readyp()
 }
 
 // xeofobjectp - built-in function 'eof-object?'
-LVAL xeofobjectp()
+euxlValue xeofobjectp()
 {
     static char *cfn_name = "eof-object?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (arg == eof_object ? true : NIL);
 }
 
 // xwrite - built-in function 'write'
-LVAL xwrite()
+euxlValue xwrite()
 {
     static char *cfn_name = "write";
 
     // get expression to print and file pointer
-    LVAL val = xlgetarg();
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue val = xlgetarg();
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // print the value
@@ -713,13 +713,13 @@ LVAL xwrite()
 }
 
 // xprintnl - built-in function 'printnl'
-LVAL xprintnl()
+euxlValue xprintnl()
 {
     static char *cfn_name = "printnl";
 
     // get expression to print and file pointer
-    LVAL val = xlgetarg();
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue val = xlgetarg();
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // print the value
@@ -730,12 +730,12 @@ LVAL xprintnl()
 }
 
 // xwrchar - built-in function 'write-char'
-LVAL xwrchar()
+euxlValue xwrchar()
 {
     static char *cfn_name = "write-char";
 
-    LVAL ch = xlgachar();
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue ch = xlgachar();
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     xlputc(fptr, (int)getchcode(ch));
 
@@ -743,12 +743,12 @@ LVAL xwrchar()
 }
 
 // xwrbyte - built-in function 'write-byte'
-LVAL xwrbyte()
+euxlValue xwrbyte()
 {
     static char *cfn_name = "write-byte";
 
-    LVAL ch = xlgafixnum();
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue ch = xlgafixnum();
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     xlputc(fptr, (int)getfixnum(ch));
 
@@ -756,13 +756,13 @@ LVAL xwrbyte()
 }
 
 // xwrshort - built-in function 'write-short'
-LVAL xwrshort()
+euxlValue xwrshort()
 {
     static char *cfn_name = "write-short";
 
-    LVAL v = xlgafixnum();
+    euxlValue v = xlgafixnum();
     short int val = (short int)getfixnum(v);
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     unsigned char *p;
     int n;
@@ -775,13 +775,13 @@ LVAL xwrshort()
 }
 
 // xwrlong - built-in function 'write-long'
-LVAL xwrlong()
+euxlValue xwrlong()
 {
     static char *cfn_name = "write-long";
 
-    LVAL v = xlgafixnum();
+    euxlValue v = xlgafixnum();
     long int val = (long int)getfixnum(v);
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     unsigned char *p;
     int n;
@@ -794,13 +794,13 @@ LVAL xwrlong()
 }
 
 // xprint - built-in function 'print'
-LVAL xprint()
+euxlValue xprint()
 {
     static char *cfn_name = "print";
 
     // get expression to print and file pointer
-    LVAL val = xlgetarg();
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue val = xlgetarg();
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // print the value
@@ -810,12 +810,12 @@ LVAL xprint()
 }
 
 // xsflush - flush stream
-LVAL xsflush()
+euxlValue xsflush()
 {
     static char *cfn_name = "sflush";
 
     // get file pointer
-    LVAL fptr = xlgaostream();
+    euxlValue fptr = xlgaostream();
     xllastarg();
 
     // flush and return the stream
@@ -825,10 +825,10 @@ LVAL xsflush()
 }
 
 // xflush - flush stdout
-LVAL xflush()
+euxlValue xflush()
 {
     // get file pointer
-    LVAL fptr = xstdout();
+    euxlValue fptr = xstdout();
 
     // flush and return the stream
     fflush(getfile(fptr));
@@ -837,26 +837,26 @@ LVAL xflush()
 }
 
 // xprbreadth - set the maximum number of elements to be printed
-LVAL xprbreadth()
+euxlValue xprbreadth()
 {
     return (setit(&prbreadth));
 }
 
 // xprdepth - set the maximum depth of nested lists to be printed
-LVAL xprdepth()
+euxlValue xprdepth()
 {
     return (setit(&prdepth));
 }
 
 // setit - common function for prbreadth/prdepth
-static LVAL setit(int *pvar)
+static euxlValue setit(int *pvar)
 {
     static char *cfn_name = "prbreadth/prdepth";
 
     // get the optional argument
     if (moreargs())
     {
-        LVAL arg = xlgetarg();
+        euxlValue arg = xlgetarg();
         xllastarg();
         *pvar = (fixp(arg) ? (int)getfixnum(arg) : -1);
     }
@@ -866,39 +866,39 @@ static LVAL setit(int *pvar)
 }
 
 // xopeni - built-in function 'open-input-file'
-LVAL xopeni()
+euxlValue xopeni()
 {
     return (openfile(PF_INPUT, "r"));
 }
 
 // xopeno - built-in function 'open-output-file'
-LVAL xopeno()
+euxlValue xopeno()
 {
     return (openfile(PF_OUTPUT, "w"));
 }
 
 // xopena - built-in function 'open-append-file'
-LVAL xopena()
+euxlValue xopena()
 {
     return (openfile(PF_OUTPUT, "a"));
 }
 
 // xopenu - built-in function 'open-update-file'
-LVAL xopenu()
+euxlValue xopenu()
 {
     return (openfile(PF_INPUT | PF_OUTPUT, "r+"));
 }
 
 // openfile - open an ascii or binary file
-static LVAL openfile(int flags, char *mode)
+static euxlValue openfile(int flags, char *mode)
 {
     static char *cfn_name = "open";
     extern FILE *osaopen(), *osbopen();
-    LVAL xlenter_keyword();
+    euxlValue xlenter_keyword();
 
     // get the file name and direction
     char * name = getstring(xlgastring());
-    LVAL modekey = (moreargs()? xlgasymbol() : NIL);
+    euxlValue modekey = (moreargs()? xlgasymbol() : NIL);
     xllastarg();
 
     // check for binary mode
@@ -915,7 +915,7 @@ static LVAL openfile(int flags, char *mode)
     }
 
     // try to open the file
-    LVAL file = cvstream(NULL, flags);
+    euxlValue file = cvstream(NULL, flags);
     FILE *fp =
         ((flags & PF_BINARY) == 0 ? osaopen(name, mode) : osbopen(name, mode));
     if (fp == NULL)
@@ -928,11 +928,11 @@ static LVAL openfile(int flags, char *mode)
 }
 
 // xclose - built-in function 'close-stream'
-LVAL xclose()
+euxlValue xclose()
 {
     static char *cfn_name = "close-stream";
 
-    LVAL fptr = xlgastream();
+    euxlValue fptr = xlgastream();
     xllastarg();
     if (getfile(fptr))
     {
@@ -944,11 +944,11 @@ LVAL xclose()
 }
 
 // xclosei - built-in function 'close-input-stream'
-LVAL xclosei()
+euxlValue xclosei()
 {
     static char *cfn_name = "close-input-stream";
 
-    LVAL fptr = xlgaistream();
+    euxlValue fptr = xlgaistream();
     xllastarg();
     if (getfile(fptr))
     {
@@ -960,11 +960,11 @@ LVAL xclosei()
 }
 
 // xcloseo - built-in function 'close-output-stream'
-LVAL xcloseo()
+euxlValue xcloseo()
 {
     static char *cfn_name = "close-output-stream";
 
-    LVAL fptr = xlgaostream();
+    euxlValue fptr = xlgaostream();
     xllastarg();
     if (getfile(fptr))
     {
@@ -976,24 +976,24 @@ LVAL xcloseo()
 }
 
 // xgetfposition - built-in function 'get-file-position'
-LVAL xgetfposition()
+euxlValue xgetfposition()
 {
     static char *cfn_name = "get-file-position";
     extern long ostell();
 
-    LVAL fptr = xlgastream();
+    euxlValue fptr = xlgastream();
     xllastarg();
 
     return (cvfixnum(ostell(getfile(fptr))));
 }
 
 // xsetfposition - built-in function 'set-file-position'
-LVAL xsetfposition()
+euxlValue xsetfposition()
 {
     static char *cfn_name = "set-file-position";
 
-    LVAL fptr = xlgastream();
-    LVAL val = xlgafixnum();
+    euxlValue fptr = xlgastream();
+    euxlValue val = xlgafixnum();
     long position = getfixnum(val);
     val = xlgafixnum();
     int whence = (int)getfixnum(val);
@@ -1003,7 +1003,7 @@ LVAL xsetfposition()
 }
 
 // xunlink -  built-in function 'unlink'
-LVAL xunlink()
+euxlValue xunlink()
 {
     static char *cfn_name = "unlink";
 
@@ -1012,47 +1012,47 @@ LVAL xunlink()
 
     check_if_disabled(cfn_name);
 
-    LVAL path = xlgastring();
+    euxlValue path = xlgastring();
     xllastarg();
 
     return (osunlink(getstring(path)) == 0 ? true : NIL);
 }
 
 // xstreamp - built-in function 'stream?'
-LVAL xstreamp()
+euxlValue xstreamp()
 {
     static char *cfn_name = "stream?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     return (streamp(arg) ? true : NIL);
 }
 
 // xinputstreamp - built-in function 'input-stream?'
-LVAL xinputstreamp()
+euxlValue xinputstreamp()
 {
     static char *cfn_name = "input-stream?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     return (istreamp(arg) ? true : NIL);
 }
 
 // xoutputstreamp - built-in function 'output-stream?'
-LVAL xoutputstreamp()
+euxlValue xoutputstreamp()
 {
     static char *cfn_name = "output-stream?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     return (ostreamp(arg) ? true : NIL);
 }
 
 // xtranson - built-in function 'transcript-on'
-LVAL xtranson()
+euxlValue xtranson()
 {
     static char *cfn_name = "transcript-on";
     extern FILE *osaopen();
@@ -1075,7 +1075,7 @@ LVAL xtranson()
 }
 
 // xtransoff - built-in function 'transcript-off'
-LVAL xtransoff()
+euxlValue xtransoff()
 {
     static char *cfn_name = "transcript-off";
 
@@ -1098,12 +1098,12 @@ LVAL xtransoff()
 }
 
 // xmakestring - built-in function 'make-string'
-LVAL xmakestring()
+euxlValue xmakestring()
 {
     static char *cfn_name = "make-string";
 
     // get the string size
-    LVAL arg = xlgafixnum();
+    euxlValue arg = xlgafixnum();
     int len = (int)getfixnum(arg);
 
     if (len < 0)
@@ -1124,7 +1124,7 @@ LVAL xmakestring()
         ch = ' ';       // no initialization value, default to space
     }
 
-    LVAL val = newstring(len + 1);
+    euxlValue val = newstring(len + 1);
     char *p = getstring(val); // initialize the string
     p[len] = 0;
     for (; --len >= 0;)
@@ -1137,41 +1137,41 @@ LVAL xmakestring()
 }
 
 // xstrlen - built-in function 'string-size'
-LVAL xstrlen()
+euxlValue xstrlen()
 {
     static char *cfn_name = "string-size";
 
-    LVAL str = xlgastring();
+    euxlValue str = xlgastring();
     xllastarg();
 
     return (cvfixnum((FIXTYPE) (getslength(str) - 1)));
 }
 
 // xstrnullp - built-in function 'string-null?'
-LVAL xstrnullp()
+euxlValue xstrnullp()
 {
     static char *cfn_name = "string-null?";
 
-    LVAL str = xlgastring();
+    euxlValue str = xlgastring();
     xllastarg();
 
     return (getslength(str) == 1 ? true : NIL);
 }
 
 // xstrappend - built-in function 'string-append'
-LVAL xstrappend()
+euxlValue xstrappend()
 {
     static char *cfn_name = "string-append?";
 
     // save the argument list
     int saveargc = xlargc;
-    LVAL *savesp = xlsp;
+    euxlValue *savesp = xlsp;
 
     // find the size of the new string
     int len;
     for (len = 0; moreargs();)
     {
-        LVAL tmp = xlgastring();
+        euxlValue tmp = xlgastring();
         len += (int)getslength(tmp) - 1;
     }
 
@@ -1180,13 +1180,13 @@ LVAL xstrappend()
     xlsp = savesp;
 
     // create the result string
-    LVAL val = newstring(len + 1);
+    euxlValue val = newstring(len + 1);
     char *str = getstring(val);
 
     // combine the strings
     for (*str = '\0'; moreargs();)
     {
-        LVAL tmp = nextarg();
+        euxlValue tmp = nextarg();
         strcat(str, getstring(tmp));
     }
 
@@ -1195,13 +1195,13 @@ LVAL xstrappend()
 }
 
 // xstrref - built-in function 'string-ref'
-LVAL xstrref()
+euxlValue xstrref()
 {
     static char *cfn_name = "string-ref";
 
     // get the string and the index
-    LVAL str = xlgastring();
-    LVAL num = xlgafixnum();
+    euxlValue str = xlgastring();
+    euxlValue num = xlgafixnum();
     xllastarg();
 
     // range check the index
@@ -1216,14 +1216,14 @@ LVAL xstrref()
 }
 
 // xstrset - built-in function 'string-set'
-LVAL xstrset()
+euxlValue xstrset()
 {
     static char *cfn_name = "string-set";
 
     // get the string, the index and the value
-    LVAL str = xlgastring();
-    LVAL num = xlgafixnum();
-    LVAL val = xlgachar();
+    euxlValue str = xlgastring();
+    euxlValue num = xlgafixnum();
+    euxlValue val = xlgachar();
     xllastarg();
 
     // range check the index
@@ -1240,15 +1240,15 @@ LVAL xstrset()
 }
 
 // xsubstring - built-in function 'substring'
-LVAL xsubstring()
+euxlValue xsubstring()
 {
     static char *cfn_name = "substring";
 
     // get string and starting and ending positions
-    LVAL src = xlgastring();
+    euxlValue src = xlgastring();
 
     // get the starting position
-    LVAL dst = xlgafixnum();
+    euxlValue dst = xlgafixnum();
     int start = (int)getfixnum(dst);
     if (start < 0 || start > getslength(src) - 1)
     {
@@ -1293,12 +1293,12 @@ LVAL xsubstring()
 }
 
 // xstrlist - built-in function 'string->list'
-LVAL xstrlist()
+euxlValue xstrlist()
 {
     static char *cfn_name = "string->list";
 
     // get the vector
-    LVAL str = xlgastring();
+    euxlValue str = xlgastring();
     xllastarg();
 
     // make a list from the vector
@@ -1315,7 +1315,7 @@ LVAL xstrlist()
 }
 
 // xliststring - built-in function 'list->string'
-LVAL xliststring()
+euxlValue xliststring()
 {
     static char *cfn_name = "list->string";
 
@@ -1325,7 +1325,7 @@ LVAL xliststring()
 
     // make a vector from the list
     int size = list_size(xlval);
-    LVAL str = newstring(size + 1);
+    euxlValue str = newstring(size + 1);
     char *p;
     for (p = getstring(str); --size >= 0; xlval = cdr(xlval))
     {
@@ -1348,74 +1348,74 @@ LVAL xliststring()
 /// String comparision functions
 ///-----------------------------------------------------------------------------
 // string<?
-LVAL xstrlss()
+euxlValue xstrlss()
 {
     return (strcompare('<', FALSE));
 }
 
 // string<=?
-LVAL xstrleq()
+euxlValue xstrleq()
 {
     return (strcompare('L', FALSE));
 }
 
 // string=?
-LVAL xstreql()
+euxlValue xstreql()
 {
     return (strcompare('=', FALSE));
 }
 
 // string>=?
-LVAL xstrgeq()
+euxlValue xstrgeq()
 {
     return (strcompare('G', FALSE));
 }
 
 // string>?
-LVAL xstrgtr()
+euxlValue xstrgtr()
 {
     return (strcompare('>', FALSE));
 }
 
 // string comparison functions (case insensitive)
 // string-ci<?
-LVAL xstrilss()
+euxlValue xstrilss()
 {
     return (strcompare('<', TRUE));
 }
 
 // string-ci<=?
-LVAL xstrileq()
+euxlValue xstrileq()
 {
     return (strcompare('L', TRUE));
 }
 
 // string-ci=?
-LVAL xstrieql()
+euxlValue xstrieql()
 {
     return (strcompare('=', TRUE));
 }
 
 // string-ci>=?
-LVAL xstrigeq()
+euxlValue xstrigeq()
 {
     return (strcompare('G', TRUE));
 }
 
 // string-ci>?
-LVAL xstrigtr()
+euxlValue xstrigtr()
 {
     return (strcompare('>', TRUE));
 }
 
 // strcompare - compare strings
-static LVAL strcompare(int fcn, int icase)
+static euxlValue strcompare(int fcn, int icase)
 {
     static char *cfn_name = "string compare";
 
     // get the strings
-    LVAL str1 = xlgastring();
-    LVAL str2 = xlgastring();
+    euxlValue str1 = xlgastring();
+    euxlValue str2 = xlgastring();
     xllastarg();
 
     // setup the string pointers
@@ -1479,28 +1479,28 @@ static LVAL strcompare(int fcn, int icase)
 }
 
 // xcharint - built-in function 'char->integer'
-LVAL xcharint()
+euxlValue xcharint()
 {
     static char *cfn_name = "char->integer";
 
-    LVAL arg = xlgachar();
+    euxlValue arg = xlgachar();
     xllastarg();
 
     return (cvfixnum((FIXTYPE) getchcode(arg)));
 }
 
 // xintchar - built-in function 'integer->char'
-LVAL xintchar()
+euxlValue xintchar()
 {
     static char *cfn_name = "integer->char";
 
-    LVAL arg = xlgafixnum();
+    euxlValue arg = xlgafixnum();
     xllastarg();
 
     return (cvchar((int)getfixnum(arg)));
 }
 
-static int radix_int(char *str, LVAL arg)
+static int radix_int(char *str, euxlValue arg)
 {
     int ch = (int)*str;
 
@@ -1570,11 +1570,11 @@ static int radix_int(char *str, LVAL arg)
 }
 
 // built-in function 'string->number'
-LVAL xstringnum()
+euxlValue xstringnum()
 {
     static char *cfn_name = "string->number";
 
-    LVAL arg = xlgastring();
+    euxlValue arg = xlgastring();
     xllastarg();
 
     char *str = getstring(arg);
@@ -1618,11 +1618,11 @@ LVAL xstringnum()
 }
 
 // built-in function 'number->string'
-LVAL xnumstring()
+euxlValue xnumstring()
 {
     static char *cfn_name = "number->string";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     if (!numberp(arg))
@@ -1647,31 +1647,31 @@ LVAL xnumstring()
 /// Character comparision functions
 ///-----------------------------------------------------------------------------
 // char<?
-LVAL xchrlss()
+euxlValue xchrlss()
 {
     return (chrcompare('<', FALSE));
 }
 
 // char<=?
-LVAL xchrleq()
+euxlValue xchrleq()
 {
     return (chrcompare('L', FALSE));
 }
 
 // char=?
-LVAL xchreql()
+euxlValue xchreql()
 {
     return (chrcompare('=', FALSE));
 }
 
 // char>=?
-LVAL xchrgeq()
+euxlValue xchrgeq()
 {
     return (chrcompare('G', FALSE));
 }
 
 // char>?
-LVAL xchrgtr()
+euxlValue xchrgtr()
 {
     return (chrcompare('>', FALSE));
 }
@@ -1680,42 +1680,42 @@ LVAL xchrgtr()
 /// Character comparision functions (case insensitive)
 ///-----------------------------------------------------------------------------
 // char-ci<?
-LVAL xchrilss()
+euxlValue xchrilss()
 {
     return (chrcompare('<', TRUE));
 }
 
 // char-ci<=?
-LVAL xchrileq()
+euxlValue xchrileq()
 {
     return (chrcompare('L', TRUE));
 }
 
 // char-ci=?
-LVAL xchrieql()
+euxlValue xchrieql()
 {
     return (chrcompare('=', TRUE));
 }
 
 // char-ci>=?
-LVAL xchrigeq()
+euxlValue xchrigeq()
 {
     return (chrcompare('G', TRUE));
 }
 
 // char-ci>?
-LVAL xchrigtr()
+euxlValue xchrigtr()
 {
     return (chrcompare('>', TRUE));
 }
 
 // chrcompare - compare characters
-static LVAL chrcompare(int fcn, int icase)
+static euxlValue chrcompare(int fcn, int icase)
 {
     static char *cfn_name = "char compare";
 
     // get the characters
-    LVAL arg = xlgachar();
+    euxlValue arg = xlgachar();
     int ch1 = getchcode(arg);
     arg = xlgachar();
     int ch2 = getchcode(arg);
@@ -1753,14 +1753,14 @@ static LVAL chrcompare(int fcn, int icase)
 }
 
 // xcompile - built-in function 'compile'
-LVAL xcompile()
+euxlValue xcompile()
 {
     static char *cfn_name = "compile";
-    extern LVAL xlcompile();
+    extern euxlValue xlcompile();
 
     // get the expression to compile and the environment
     xlval = xlgetarg();
-    LVAL env = (moreargs()? xlgaenv() : NIL);
+    euxlValue env = (moreargs()? xlgaenv() : NIL);
     xllastarg();
 
     // build the closure
@@ -1773,13 +1773,13 @@ LVAL xcompile()
 }
 
 // xdecompile - built-in function 'decompile'
-LVAL xdecompile()
+euxlValue xdecompile()
 {
     static char *cfn_name = "decompile";
 
     // get the closure (or code) and file pointer
-    LVAL fun = xlgetarg();
-    LVAL fptr = (moreargs()? xlgaostream() : xstdout());
+    euxlValue fun = xlgetarg();
+    euxlValue fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // make sure we got either a closure or a code object
@@ -1795,7 +1795,7 @@ LVAL xdecompile()
 }
 
 // xsave - save the memory image
-LVAL xsave()
+euxlValue xsave()
 {
     static char *cfn_name = "save";
 
@@ -1808,7 +1808,7 @@ LVAL xsave()
 }
 
 // xrestore - restore a saved memory image
-LVAL xrestore()
+euxlValue xrestore()
 {
     static char *cfn_name = "restore";
     extern JMP_BUF top_level;
@@ -1831,7 +1831,7 @@ LVAL xrestore()
 }
 
 // xgc - function to force garbage collection
-LVAL xgc()
+euxlValue xgc()
 {
     static char *cfn_name = "gc";
     extern FIXTYPE nnodes, nfree, gccalls, total;
@@ -1840,7 +1840,7 @@ LVAL xgc()
     // check the argument list and call the garbage collector
     if (moreargs())
     {
-        LVAL arg = xlgafixnum();
+        euxlValue arg = xlgafixnum();
         int arg1 = (int)getfixnum(arg);
         arg = xlgafixnum();
         int arg2 = (int)getfixnum(arg);
@@ -1871,12 +1871,12 @@ LVAL xgc()
 }
 
 // xerror - built-in function 'error'
-LVAL xerror()
+euxlValue xerror()
 {
     static char *cfn_name = "error";
 
     // print the error message
-    LVAL msg = xlgastring();
+    euxlValue msg = xlgastring();
     errputstr("error: ");
     errputstr(getstring(msg));
     errputstr("\n");
@@ -1899,21 +1899,21 @@ LVAL xerror()
 }
 
 // default-handler
-LVAL default_handler()
+euxlValue default_handler()
 {
     static char *cfn_name = "default error handler";
 
     extern JMP_BUF top_level, bc_dispatch;
-    extern LVAL s_stderr, s_unbound, xlreverse(), get_module();
-    // extern LVAL s_backtracep;
+    extern euxlValue s_stderr, s_unbound, xlreverse(), get_module();
+    // extern euxlValue s_backtracep;
     extern void do_backtrace(), set_xlframe();
 
-    LVAL condition = xlgaobject();
-    LVAL cc = xlgetarg();
+    euxlValue condition = xlgaobject();
+    euxlValue cc = xlgetarg();
     xllastarg();
-    LVAL fptr = getvalue(s_stderr);
-    LVAL cls = class_of(condition);
-    LVAL sds = getivar(cls, SLOTS);
+    euxlValue fptr = getvalue(s_stderr);
+    euxlValue cls = class_of(condition);
+    euxlValue sds = getivar(cls, SLOTS);
 
     if (cc == NULL)
     {
@@ -1947,7 +1947,7 @@ LVAL default_handler()
 
     oscheck();
     set_xlframe(1);
-    LVAL thread_module = get_module("thread");
+    euxlValue thread_module = get_module("thread");
     xlval = getvalue(xlenter_module("debug", thread_module));
     cpush(condition);
     cpush(cc);
@@ -1962,7 +1962,7 @@ LVAL default_handler()
 }
 
 // xreset - built-in function 'reset'
-LVAL xreset()
+euxlValue xreset()
 {
     static char *cfn_name = "reset";
     extern JMP_BUF top_level;
@@ -1974,13 +1974,13 @@ LVAL xreset()
 }
 
 // xgetarg - return a command line argument
-LVAL xgetarg()
+euxlValue xgetarg()
 {
     static char *cfn_name = "getarg";
     extern char **clargv;
     extern int clargc;
 
-    LVAL arg = xlgafixnum();
+    euxlValue arg = xlgafixnum();
     int n = (int)getfixnum(arg);
     xllastarg();
 
@@ -1988,7 +1988,7 @@ LVAL xgetarg()
 }
 
 // xexit - exit to the operating system
-LVAL xexit()
+euxlValue xexit()
 {
     static char *cfn_name = "exit";
 
@@ -1996,7 +1996,7 @@ LVAL xexit()
 
     if (moreargs())
     {
-        LVAL val = xlgafixnum();
+        euxlValue val = xlgafixnum();
         retval = getfixnum(val);
         xllastarg();
     }

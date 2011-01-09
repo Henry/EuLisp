@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -28,45 +28,45 @@
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-extern LVAL true;
+extern euxlValue true;
 
 // external functions
 extern double atof();
 extern ITYPE;
-extern LVAL cvstring2(), s_syntax_error, s_unbound;
-extern LVAL xlenter_keyword();
+extern euxlValue cvstring2(), s_syntax_error, s_unbound;
+extern euxlValue xlenter_keyword();
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static void read_cdr(LVAL fptr, LVAL last);
-static void read_comment(LVAL fptr);
-static LVAL read_list(LVAL fptr);
-static LVAL read_vector(LVAL fptr);
-static LVAL read_comma(LVAL fptr);
-static LVAL read_quote(LVAL fptr, char *sym);
-static LVAL read_string(LVAL fptr);
-static LVAL read_special(LVAL fptr);
-static LVAL read_radix(LVAL fptr, int radix);
-static LVAL read_with_radix(LVAL fptr, FIXTYPE radix);
+static void read_cdr(euxlValue fptr, euxlValue last);
+static void read_comment(euxlValue fptr);
+static euxlValue read_list(euxlValue fptr);
+static euxlValue read_vector(euxlValue fptr);
+static euxlValue read_comma(euxlValue fptr);
+static euxlValue read_quote(euxlValue fptr, char *sym);
+static euxlValue read_string(euxlValue fptr);
+static euxlValue read_special(euxlValue fptr);
+static euxlValue read_radix(euxlValue fptr, int radix);
+static euxlValue read_with_radix(euxlValue fptr, FIXTYPE radix);
 static int isradixdigit(int ch, int radix);
 static int getdigit(int ch);
-static int scan(LVAL fptr);
-static int checkeof(LVAL fptr);
+static int scan(euxlValue fptr);
+static int checkeof(euxlValue fptr);
 static int issym(int ch);
-static int getsymbol(LVAL fptr, char *buf);
-static LVAL read_symbol_or_number(LVAL fptr), read_symbol(LVAL fptr, int ch);
-static void read_unescaped(LVAL fptr, int ch, char *buf, int index,
+static int getsymbol(euxlValue fptr, char *buf);
+static euxlValue read_symbol_or_number(euxlValue fptr), read_symbol(euxlValue fptr, int ch);
+static void read_unescaped(euxlValue fptr, int ch, char *buf, int index,
 int *keyword);
-static void read_escaped(LVAL fptr, char *buf, int index, int *keyword);
-static LVAL read_number(LVAL fptr, int ch, char *buf, int index);
-static LVAL read_peculiar(LVAL fptr, int ch);
+static void read_escaped(euxlValue fptr, char *buf, int index, int *keyword);
+static euxlValue read_number(euxlValue fptr, int ch, char *buf, int index);
+static euxlValue read_peculiar(euxlValue fptr, int ch);
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
 // xlread - read an expression
-int xlread(LVAL fptr, LVAL * pval)
+int xlread(euxlValue fptr, euxlValue * pval)
 {
     // check the next non-blank character
     int ch;
@@ -109,10 +109,10 @@ int xlread(LVAL fptr, LVAL * pval)
 }
 
 // read_list - read a list
-static LVAL read_list(LVAL fptr)
+static euxlValue read_list(euxlValue fptr)
 {
     cpush(NIL);
-    LVAL last = NIL;
+    euxlValue last = NIL;
     int ch;
     while ((ch = scan(fptr)) != EOF)
     {
@@ -125,7 +125,7 @@ static LVAL read_list(LVAL fptr)
                 {
                     ch = checkeof(fptr);
                     xlungetc(fptr, ch);
-                    LVAL val = read_special(fptr);
+                    euxlValue val = read_special(fptr);
                     val = cons(val, NIL);
                     if (last)
                     {
@@ -143,7 +143,7 @@ static LVAL read_list(LVAL fptr)
             default:
                 {
                     xlungetc(fptr, ch);
-                    LVAL val;
+                    euxlValue val;
                     if (!xlread(fptr, &val))
                     {
                         xlfail("unexpected EOF", s_syntax_error);
@@ -180,10 +180,10 @@ static LVAL read_list(LVAL fptr)
 }
 
 // read_cdr - read the cdr of a dotted pair
-static void read_cdr(LVAL fptr, LVAL last)
+static void read_cdr(euxlValue fptr, euxlValue last)
 {
     // read the cdr expression
-    LVAL val;
+    euxlValue val;
     if (!xlread(fptr, &val))
     {
         xlfail("unexpected EOF", s_syntax_error);
@@ -219,7 +219,7 @@ static void read_cdr(LVAL fptr, LVAL last)
 }
 
 // read_comment - read a comment (to end of line)
-static void read_comment(LVAL fptr)
+static void read_comment(euxlValue fptr)
 {
     int ch;
     while ((ch = xlgetc(fptr)) != EOF && ch != '\n');
@@ -230,12 +230,12 @@ static void read_comment(LVAL fptr)
 }
 
 // read_vector - read a vector
-static LVAL read_vector(LVAL fptr)
+static euxlValue read_vector(euxlValue fptr)
 {
     int len = 0, i;
 
     cpush(NIL);
-    LVAL last = NIL;
+    euxlValue last = NIL;
     int ch;
     while ((ch = scan(fptr)) != EOF)
     {
@@ -248,7 +248,7 @@ static LVAL read_vector(LVAL fptr)
                 {
                     ch = checkeof(fptr);
                     xlungetc(fptr, ch);
-                    LVAL val = read_special(fptr);
+                    euxlValue val = read_special(fptr);
                     val = cons(val, NIL);
                     if (last)
                     {
@@ -264,7 +264,7 @@ static LVAL read_vector(LVAL fptr)
                 break;
             case ')':
                 {
-                    LVAL val = newvector(len);
+                    euxlValue val = newvector(len);
                     for (last = pop(), i = 0; i < len; ++i, last = cdr(last))
                     {
                         setelement(val, i, car(last));
@@ -274,7 +274,7 @@ static LVAL read_vector(LVAL fptr)
             default:
                 {
                     xlungetc(fptr, ch);
-                    LVAL val;
+                    euxlValue val;
                     if (!xlread(fptr, &val))
                     {
                         xlfail("unexpected EOF", s_syntax_error);
@@ -301,7 +301,7 @@ static LVAL read_vector(LVAL fptr)
 }
 
 // read_comma - read a unquote or unquote-splicing expression
-static LVAL read_comma(LVAL fptr)
+static euxlValue read_comma(euxlValue fptr)
 {
     int ch;
     if ((ch = xlgetc(fptr)) == '@')
@@ -316,9 +316,9 @@ static LVAL read_comma(LVAL fptr)
 }
 
 // read_quote - parse the tail of a quoted expression
-static LVAL read_quote(LVAL fptr, char *sym)
+static euxlValue read_quote(euxlValue fptr, char *sym)
 {
-    LVAL val;
+    euxlValue val;
     if (!xlread(fptr, &val))
     {
         xlfail("unexpected EOF", s_syntax_error);
@@ -329,7 +329,7 @@ static LVAL read_quote(LVAL fptr, char *sym)
 }
 
 // read_string - parse a string
-static LVAL read_string(LVAL fptr)
+static euxlValue read_string(euxlValue fptr)
 {
     char buf[VSSIZE + 1];
     int ch, i;
@@ -422,7 +422,7 @@ static LVAL read_string(LVAL fptr)
 }
 
 // read_hex_char: #\x1234
-static LVAL read_hex_char(LVAL fptr, int x)
+static euxlValue read_hex_char(euxlValue fptr, int x)
 {
     int count = 0;
     int value = 0;
@@ -450,7 +450,7 @@ static LVAL read_hex_char(LVAL fptr, int x)
 }
 
 // read_control_char: #\^r
-static LVAL read_control_char(LVAL fptr)
+static euxlValue read_control_char(euxlValue fptr)
 {
     int ch = checkeof(fptr);
     if (isascii(ch))
@@ -487,7 +487,7 @@ static LVAL read_control_char(LVAL fptr)
 }
 
 // read_special - parse an atom starting with '#'
-static LVAL read_special(LVAL fptr)
+static euxlValue read_special(euxlValue fptr)
 {
     char buf[STRMAX + 1];
     int ch;
@@ -626,7 +626,7 @@ static LVAL read_special(LVAL fptr)
 }
 
 // read_radix - read a number in a specified radix
-static LVAL read_radix(LVAL fptr, int radix)
+static euxlValue read_radix(euxlValue fptr, int radix)
 {
     if (radix < 2 || radix > 36)
     {
@@ -662,7 +662,7 @@ static LVAL read_radix(LVAL fptr, int radix)
 }
 
 // integers of the form #23r42
-static LVAL read_with_radix(LVAL fptr, FIXTYPE radix)
+static euxlValue read_with_radix(euxlValue fptr, FIXTYPE radix)
 {
     int ch;
 
@@ -697,7 +697,7 @@ static int getdigit(int ch)
 }
 
 // scan - scan for the first non-blank character
-static int scan(LVAL fptr)
+static int scan(euxlValue fptr)
 {
     // look for a non-blank character
     int ch;
@@ -706,7 +706,7 @@ static int scan(LVAL fptr)
 }
 
 // checkeof - get a character and check for end of file
-static int checkeof(LVAL fptr)
+static int checkeof(euxlValue fptr)
 {
     int ch;
     if ((ch = xlgetc(fptr)) == EOF)
@@ -735,7 +735,7 @@ static int issym(int ch)
 }
 
 // getsymbol - get a symbol name
-static int getsymbol(LVAL fptr, char *buf)
+static int getsymbol(euxlValue fptr, char *buf)
 {
     // get symbol name
     int ch, i;
@@ -755,7 +755,7 @@ static int getsymbol(LVAL fptr, char *buf)
     return (buf[0] != 0);
 }
 
-static LVAL read_symbol_or_number(LVAL fptr)
+static euxlValue read_symbol_or_number(euxlValue fptr)
 {
     char buf[STRMAX + 1];
 
@@ -784,7 +784,7 @@ static LVAL read_symbol_or_number(LVAL fptr)
     return NIL; // not reached
 }
 
-static LVAL read_symbol(LVAL fptr, int ch)
+static euxlValue read_symbol(euxlValue fptr, int ch)
 {
     if (!isprint(ch))
     {
@@ -829,7 +829,7 @@ static LVAL read_symbol(LVAL fptr, int ch)
     )
 
 static void
-read_unescaped(LVAL fptr, int ch, char *buf, int index, int *keyword)
+read_unescaped(euxlValue fptr, int ch, char *buf, int index, int *keyword)
 {
     while (isconstituent(ch))
     {
@@ -863,7 +863,7 @@ read_unescaped(LVAL fptr, int ch, char *buf, int index, int *keyword)
     buf[index] = 0;
 }
 
-static void read_escaped(LVAL fptr, char *buf, int index, int *keyword)
+static void read_escaped(euxlValue fptr, char *buf, int index, int *keyword)
 {
     *keyword = FALSE;
 
@@ -882,7 +882,7 @@ static void read_escaped(LVAL fptr, char *buf, int index, int *keyword)
     read_unescaped(fptr, ch, buf, index, keyword);
 }
 
-static int read_integer(LVAL fptr, int ch, char *buf, int index)
+static int read_integer(euxlValue fptr, int ch, char *buf, int index)
 {
     while (ch != EOF && isascii(ch) && isdigit(ch))
     {
@@ -894,7 +894,7 @@ static int read_integer(LVAL fptr, int ch, char *buf, int index)
     return index;
 }
 
-static LVAL read_exponent(LVAL fptr, char *buf, int index)
+static euxlValue read_exponent(euxlValue fptr, char *buf, int index)
 {
     buf[index++] = 'E';
     int ch = checkeof(fptr);
@@ -919,7 +919,7 @@ static LVAL read_exponent(LVAL fptr, char *buf, int index)
 }
 
 // point and at least one digit has been read
-static LVAL read_point_float(LVAL fptr, int ch, char *buf, int index)
+static euxlValue read_point_float(euxlValue fptr, int ch, char *buf, int index)
 {
     index = read_integer(fptr, ch, buf, index);
 
@@ -941,7 +941,7 @@ static LVAL read_point_float(LVAL fptr, int ch, char *buf, int index)
 
 }
 
-static LVAL read_number(LVAL fptr, int ch, char *buf, int index)
+static euxlValue read_number(euxlValue fptr, int ch, char *buf, int index)
 {
     index = read_integer(fptr, ch, buf, index);
 
@@ -977,7 +977,7 @@ static LVAL read_number(LVAL fptr, int ch, char *buf, int index)
 
 // symbols that nearly look like numbers
 // ch is . or + or -
-static LVAL read_peculiar(LVAL fptr, int ch)
+static euxlValue read_peculiar(euxlValue fptr, int ch)
 {
     char buf[STRMAX + 1];
     buf[0] = ch;
@@ -1021,7 +1021,7 @@ static LVAL read_peculiar(LVAL fptr, int ch)
         )
         {
             xlungetc(fptr, ch2);
-            LVAL val = read_special(fptr);
+            euxlValue val = read_special(fptr);
 
             if (ch == '+')
             {

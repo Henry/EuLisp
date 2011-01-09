@@ -1,5 +1,5 @@
 /// Copyright 1994 Russell Bradford0
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -25,33 +25,33 @@
 #include "euxlisp.h"
 #include "euxlobj.h"
 
-LVAL object, class, simple_class, class_vector;
-static void merge_slots(LVAL obj, LVAL super, LVAL inits);
-static void merge_keywords(LVAL obj, LVAL super, LVAL inits);
-static void do_initloop(int index, LVAL slots, LVAL inits);
+euxlValue object, class, simple_class, class_vector;
+static void merge_slots(euxlValue obj, euxlValue super, euxlValue inits);
+static void merge_keywords(euxlValue obj, euxlValue super, euxlValue inits);
+static void do_initloop(int index, euxlValue slots, euxlValue inits);
 
-static LVAL redefine_slot
+static euxlValue redefine_slot
 (
-    LVAL slotname,
-    LVAL defn,
-    LVAL slotkey,
-    LVAL reqd,
-    LVAL slots,
-    LVAL slotdesc
+    euxlValue slotname,
+    euxlValue defn,
+    euxlValue slotkey,
+    euxlValue reqd,
+    euxlValue slots,
+    euxlValue slotdesc
 );
 
 static int slotequal();
 int xlsubclassp();
-extern LVAL true, s_unbound, cs_initloop1, xlenv, xlval;
-extern LVAL s_direct_slots, s_direct_keywords, s_name, s_default, s_requiredp;
-extern LVAL s_keyword, s_telos_error, s_incompatible_md;
+extern euxlValue true, s_unbound, cs_initloop1, xlenv, xlval;
+extern euxlValue s_direct_slots, s_direct_keywords, s_name, s_default, s_requiredp;
+extern euxlValue s_keyword, s_telos_error, s_incompatible_md;
 
 static char *expect_class = "<simple-class>";
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
-LVAL class_of(LVAL obj)
+euxlValue class_of(euxlValue obj)
 {
     // small integers
     if (!ispointer(obj))
@@ -102,19 +102,19 @@ LVAL class_of(LVAL obj)
     return NIL;
 }
 
-LVAL xclassof()
+euxlValue xclassof()
 {
     static char *cfn_name = "class-of";
 
-    LVAL obj = xlgetarg();
+    euxlValue obj = xlgetarg();
     xllastarg();
     return class_of(obj);
 }
 
-void xldescribe(LVAL obj)
+void xldescribe(euxlValue obj)
 {
-    LVAL fptr = xstdout();
-    LVAL cls = class_of(obj);
+    euxlValue fptr = xstdout();
+    euxlValue cls = class_of(obj);
 
     #if 0
     xlputstr(fptr, "object: ");
@@ -141,7 +141,7 @@ void xldescribe(LVAL obj)
             xlputstr(fptr, "with rest argument\n");
         }
 
-        LVAL mds = getgmethods(obj);
+        euxlValue mds = getgmethods(obj);
         if (mds == NIL)
         {
             xlputstr(fptr, "there are no attached methods\n");
@@ -176,7 +176,7 @@ void xldescribe(LVAL obj)
 
     if (objectp(obj))
     {
-        LVAL sds = getivar(cls, SLOTS);
+        euxlValue sds = getivar(cls, SLOTS);
 
         if (sds == NIL)
         {
@@ -261,23 +261,23 @@ void xldescribe(LVAL obj)
     }
 }
 
-LVAL xdescribe()
+euxlValue xdescribe()
 {
     static char *cfn_name = "describe";
 
-    LVAL obj = xlgetarg();
+    euxlValue obj = xlgetarg();
     xllastarg();
     xldescribe(obj);
 
     return true;
 }
 
-LVAL xallocate()
+euxlValue xallocate()
 {
     static char *cfn_name = "allocate";
 
-    LVAL cls = xlgetarg();
-    LVAL inits = xlgetarg();
+    euxlValue cls = xlgetarg();
+    euxlValue inits = xlgetarg();
     xllastarg();
 
     if (!classp(cls))
@@ -299,9 +299,9 @@ LVAL xallocate()
 }
 
 // 'default' is a C reserved word
-LVAL find_key(LVAL key, LVAL inits, LVAL deefault)
+euxlValue find_key(euxlValue key, euxlValue inits, euxlValue deefault)
 {
-    LVAL intl = inits;
+    euxlValue intl = inits;
 
     for (; inits; inits = cdr(cdr(inits)))
     {
@@ -320,37 +320,37 @@ LVAL find_key(LVAL key, LVAL inits, LVAL deefault)
 
 }
 
-LVAL xfind_key()
+euxlValue xfind_key()
 {
     static char *cfn_name = "find-key";
 
-    LVAL key = xlgasymbol();
+    euxlValue key = xlgasymbol();
 
     if (!keywordp(key))
     {
         xlcerror("not a keyword in init list", key, s_telos_error);
     }
 
-    LVAL inits = xlgalist();
-    LVAL deefault = xlgetarg();
+    euxlValue inits = xlgalist();
+    euxlValue deefault = xlgetarg();
     xllastarg();
 
     return find_key(key, inits, deefault);
 }
 
-LVAL xtelos_error()
+euxlValue xtelos_error()
 {
     static char *cfn_name = "raise-telos-error";
 
-    LVAL msg = xlgastring();
-    LVAL value = xlgetarg();
+    euxlValue msg = xlgastring();
+    euxlValue value = xlgetarg();
     xllastarg();
     xlcerror(getstring(msg), value, s_telos_error);
 
     return NIL; // not reached
 }
 
-static void check_legal_keywords(LVAL inits, LVAL keys)
+static void check_legal_keywords(euxlValue inits, euxlValue keys)
 {
     for (; inits; inits = cdr(cdr(inits)))
     {
@@ -366,7 +366,7 @@ static void check_legal_keywords(LVAL inits, LVAL keys)
     }
 }
 
-static void check_required_keywords(LVAL inits, LVAL slots)
+static void check_required_keywords(euxlValue inits, euxlValue slots)
 {
     for (; slots; slots = cdr(slots))
     {
@@ -375,8 +375,8 @@ static void check_required_keywords(LVAL inits, LVAL slots)
             continue;
         }
 
-        LVAL key = getslotkey(car(slots));
-        LVAL ints;
+        euxlValue key = getslotkey(car(slots));
+        euxlValue ints;
 
         for (ints = inits; ints; ints = cdr(cdr(ints)))
         {
@@ -401,17 +401,17 @@ static void check_required_keywords(LVAL inits, LVAL slots)
 // continuation for do_initloop
 void xinitloop1()
 {
-    LVAL val = xlval;
-    LVAL inits = pop();
-    LVAL slots = pop();
-    LVAL ind = pop();
+    euxlValue val = xlval;
+    euxlValue inits = pop();
+    euxlValue slots = pop();
+    euxlValue ind = pop();
     int index = (int)getfixnum(ind);
     xlval = pop();
     setivar(xlval, index, val);
     do_initloop(index + 1, cdr(slots), inits);
 }
 
-static void do_initloop(int index, LVAL slots, LVAL inits)
+static void do_initloop(int index, euxlValue slots, euxlValue inits)
 {
     if (slots == NIL)
     {
@@ -419,11 +419,11 @@ static void do_initloop(int index, LVAL slots, LVAL inits)
         return;
     }
 
-    LVAL slot = car(slots);
-    LVAL slot_key = getslotkey(slot);
-    LVAL defaultfn = getslotdefault(slot);
+    euxlValue slot = car(slots);
+    euxlValue slot_key = getslotkey(slot);
+    euxlValue defaultfn = getslotdefault(slot);
 
-    LVAL init = xlmember(slot_key, inits, eq);
+    euxlValue init = xlmember(slot_key, inits, eq);
     if (init == NIL)
     {
         if (closurep(defaultfn))
@@ -457,7 +457,7 @@ void xinitialize_object()
     static char *cfn_name = "initialize <object>";
 
     xlval = xlgetarg();
-    LVAL inits = xlgalist();
+    euxlValue inits = xlgalist();
     xllastarg();
 
     if (!objectp(xlval))
@@ -476,7 +476,7 @@ void xinitialize_object()
             );
         }
 
-        LVAL cls = class_of(xlval);
+        euxlValue cls = class_of(xlval);
 
         check_legal_keywords(inits, getivar(cls, KEYWORDS));
         check_required_keywords(inits, getivar(cls, SLOTS));
@@ -486,12 +486,12 @@ void xinitialize_object()
 }
 
 // when we get here, initialize-object has already been done
-LVAL xinitialize_class()
+euxlValue xinitialize_class()
 {
     static char *cfn_name = "initialize <class>";
 
-    LVAL obj = xlgetarg();
-    LVAL inits = xlgalist();
+    euxlValue obj = xlgetarg();
+    euxlValue inits = xlgalist();
     xllastarg();
 
     if (!classp(obj))
@@ -503,7 +503,7 @@ LVAL xinitialize_class()
     push(obj);
     push(inits);
 
-    LVAL super = getivar(obj, SUPERCLASS);
+    euxlValue super = getivar(obj, SUPERCLASS);
     if (!consp(super) || cdr(super) != NIL)
     {
         xlcerror
@@ -532,7 +532,7 @@ LVAL xinitialize_class()
     }
     #endif
 
-    LVAL val = cons(obj, getivar(super, CPL));
+    euxlValue val = cons(obj, getivar(super, CPL));
     setivar(obj, CPL, val);
 
     merge_slots(obj, super, inits);
@@ -550,12 +550,12 @@ LVAL xinitialize_class()
     return obj;
 }
 
-static void merge_slots(LVAL obj, LVAL super, LVAL inits)
+static void merge_slots(euxlValue obj, euxlValue super, euxlValue inits)
 {
-    extern LVAL xlreverse();
+    extern euxlValue xlreverse();
 
-    LVAL slots = getivar(super, SLOTS);
-    LVAL dirslots = find_key(s_direct_slots, inits, NIL);
+    euxlValue slots = getivar(super, SLOTS);
+    euxlValue dirslots = find_key(s_direct_slots, inits, NIL);
 
     if (dirslots == NIL)
     {
@@ -570,7 +570,7 @@ static void merge_slots(LVAL obj, LVAL super, LVAL inits)
 
     for (; dirslots; dirslots = cdr(dirslots))
     {
-        LVAL slotdesc = car(dirslots);
+        euxlValue slotdesc = car(dirslots);
         if (!consp(slotdesc))
         {
             xlcerror
@@ -581,7 +581,7 @@ static void merge_slots(LVAL obj, LVAL super, LVAL inits)
             );
         }
 
-        LVAL slotname = find_key(s_name, slotdesc, s_unbound);
+        euxlValue slotname = find_key(s_name, slotdesc, s_unbound);
 
         if (slotname == s_unbound)
         {
@@ -593,9 +593,9 @@ static void merge_slots(LVAL obj, LVAL super, LVAL inits)
             );
         }
 
-        LVAL defn = find_key(s_default, slotdesc, s_unbound);
-        LVAL slotkey = find_key(s_keyword, slotdesc, s_unbound);
-        LVAL reqd = find_key(s_requiredp, slotdesc, s_unbound);
+        euxlValue defn = find_key(s_default, slotdesc, s_unbound);
+        euxlValue slotkey = find_key(s_keyword, slotdesc, s_unbound);
+        euxlValue reqd = find_key(s_requiredp, slotdesc, s_unbound);
 
         push(slots);
 
@@ -611,7 +611,7 @@ static void merge_slots(LVAL obj, LVAL super, LVAL inits)
                 );
             }
 
-            LVAL new = newslot(slotname);
+            euxlValue new = newslot(slotname);
             setslotkey(new, slotkey);
             setslotdefault(new, defn);
             setslotrequiredp(new, reqd == s_unbound ? NIL : reqd);
@@ -633,7 +633,7 @@ static void merge_slots(LVAL obj, LVAL super, LVAL inits)
     return;
 }
 
-static int slotequal(LVAL name, LVAL slot)
+static int slotequal(euxlValue name, euxlValue slot)
 {
     if (symbolp(name) && symbolp(getslotname(slot)))
     {
@@ -648,14 +648,14 @@ static int slotequal(LVAL name, LVAL slot)
 // illegal to shadow a keyword from a super that has one defined
 // OK to shadow a default from a super
 // if super is required, then new is required
-static LVAL redefine_slot
+static euxlValue redefine_slot
 (
-    LVAL slotname,
-    LVAL defn,
-    LVAL slotkey,
-    LVAL reqd,
-    LVAL slots,
-    LVAL slotdesc
+    euxlValue slotname,
+    euxlValue defn,
+    euxlValue slotkey,
+    euxlValue reqd,
+    euxlValue slots,
+    euxlValue slotdesc
 )
 {
     if (slots == NIL)
@@ -663,8 +663,8 @@ static LVAL redefine_slot
         return NIL;
     }
 
-    LVAL old = car(slots);
-    LVAL new;
+    euxlValue old = car(slots);
+    euxlValue new;
     if (slotequal(slotname, old))
     {
         if
@@ -727,10 +727,10 @@ static LVAL redefine_slot
     );
 }
 
-static void merge_keywords(LVAL obj, LVAL super, LVAL inits)
+static void merge_keywords(euxlValue obj, euxlValue super, euxlValue inits)
 {
-    LVAL dirkeys = find_key(s_direct_keywords, inits, NIL);
-    LVAL keys = getivar(super, KEYWORDS);
+    euxlValue dirkeys = find_key(s_direct_keywords, inits, NIL);
+    euxlValue keys = getivar(super, KEYWORDS);
 
     for (; dirkeys; dirkeys = cdr(dirkeys))
     {
@@ -743,11 +743,11 @@ static void merge_keywords(LVAL obj, LVAL super, LVAL inits)
     setivar(obj, KEYWORDS, keys);
 }
 
-LVAL xclass_name()
+euxlValue xclass_name()
 {
     static char *cfn_name = "class-name";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -758,11 +758,11 @@ LVAL xclass_name()
     return getivar(val, CNAME);
 }
 
-LVAL xclass_superclasses()
+euxlValue xclass_superclasses()
 {
     static char *cfn_name = "class-superclasses";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -773,11 +773,11 @@ LVAL xclass_superclasses()
     return getivar(val, SUPERCLASS);
 }
 
-LVAL xclass_subclasses()
+euxlValue xclass_subclasses()
 {
     static char *cfn_name = "class-subclasses";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -788,11 +788,11 @@ LVAL xclass_subclasses()
     return getivar(val, SUBCLASSES);
 }
 
-LVAL xclass_slots()
+euxlValue xclass_slots()
 {
     static char *cfn_name = "class-slots";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -803,11 +803,11 @@ LVAL xclass_slots()
     return getivar(val, SLOTS);
 }
 
-LVAL xclass_keywords()
+euxlValue xclass_keywords()
 {
     static char *cfn_name = "class-keywords";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -818,12 +818,12 @@ LVAL xclass_keywords()
     return getivar(val, KEYWORDS);
 }
 
-LVAL xset_class_keywords()
+euxlValue xset_class_keywords()
 {
     static char *cfn_name = "set-class-keywords";
 
-    LVAL cl = xlgetarg();
-    LVAL val = xlgalist();
+    euxlValue cl = xlgetarg();
+    euxlValue val = xlgalist();
     xllastarg();
 
     if (!classp(cl))
@@ -836,11 +836,11 @@ LVAL xset_class_keywords()
     return val;
 }
 
-LVAL xclass_instsize()
+euxlValue xclass_instsize()
 {
     static char *cfn_name = "class-instance-size";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -851,11 +851,11 @@ LVAL xclass_instsize()
     return getivar(val, INSTSIZE);
 }
 
-LVAL xclass_abstractp()
+euxlValue xclass_abstractp()
 {
     static char *cfn_name = "class-abstract?";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -866,11 +866,11 @@ LVAL xclass_abstractp()
     return getivar(val, ABSTRACTP);
 }
 
-LVAL xclass_cpl()
+euxlValue xclass_cpl()
 {
     static char *cfn_name = "class-precedence-list";
 
-    LVAL val = xlgetarg();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     if (!classp(val))
@@ -881,20 +881,20 @@ LVAL xclass_cpl()
     return getivar(val, CPL);
 }
 
-LVAL xclassp()
+euxlValue xclassp()
 {
     static char *cfn_name = "class?";
 
-    LVAL obj = xlgetarg();
+    euxlValue obj = xlgetarg();
     xllastarg();
 
     return classp(obj) ? true : NIL;
 }
 
 // cl1 and cl2 are classes
-int xlsubclassp(LVAL cl1, LVAL cl2)
+int xlsubclassp(euxlValue cl1, euxlValue cl2)
 {
-    LVAL cpl = getivar(cl1, CPL);
+    euxlValue cpl = getivar(cl1, CPL);
 
     for (; cpl; cpl = cdr(cpl))
     {
@@ -907,12 +907,12 @@ int xlsubclassp(LVAL cl1, LVAL cl2)
     return FALSE;
 }
 
-LVAL xsubclassp()
+euxlValue xsubclassp()
 {
     static char *cfn_name = "subclass?";
 
-    LVAL cl1 = xlgetarg();
-    LVAL cl2 = xlgetarg();
+    euxlValue cl1 = xlgetarg();
+    euxlValue cl2 = xlgetarg();
 
     if (!classp(cl1))
     {
@@ -927,13 +927,13 @@ LVAL xsubclassp()
     return xlsubclassp(cl1, cl2) ? true : NIL;
 }
 
-LVAL xsetivar()
+euxlValue xsetivar()
 {
     static char *cfn_name = "setivar";
 
-    LVAL obj = xlgaobject();
-    LVAL index = xlgafixnum();
-    LVAL val = xlgetarg();
+    euxlValue obj = xlgaobject();
+    euxlValue index = xlgafixnum();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     int len = getfixnum(getivar(class_of(obj), INSTSIZE));
@@ -949,12 +949,12 @@ LVAL xsetivar()
     return val;
 }
 
-LVAL xgetivar()
+euxlValue xgetivar()
 {
     static char *cfn_name = "getivar";
 
-    LVAL obj = xlgaobject();
-    LVAL index = xlgafixnum();
+    euxlValue obj = xlgaobject();
+    euxlValue index = xlgafixnum();
     xllastarg();
 
     int len = getfixnum(getivar(class_of(obj), INSTSIZE));
@@ -968,35 +968,35 @@ LVAL xgetivar()
     return getivar(obj, i);
 }
 
-LVAL xgf_name()
+euxlValue xgf_name()
 {
     static char *cfn_name = "generic-name";
 
-    LVAL gf = xlgageneric();
+    euxlValue gf = xlgageneric();
     xllastarg();
 
     return getgname(gf);
 }
 
-LVAL xgf_args()
+euxlValue xgf_args()
 {
     static char *cfn_name = "generic-args";
 
-    LVAL gf = xlgageneric();
+    euxlValue gf = xlgageneric();
     xllastarg();
 
     return getgargs(gf);
 }
 
-LVAL xgf_setargs()
+euxlValue xgf_setargs()
 {
     static char *cfn_name = "set-generic-args";
 
-    LVAL gf = xlgageneric();
-    LVAL val = xlgalist();
+    euxlValue gf = xlgageneric();
+    euxlValue val = xlgalist();
     xllastarg();
 
-    for (LVAL cls = val; cls; cls = cdr(cls))
+    for (euxlValue cls = val; cls; cls = cdr(cls))
     {
         if (!classp(car(cls)))
         {
@@ -1009,144 +1009,144 @@ LVAL xgf_setargs()
     return val;
 }
 
-LVAL xgf_optargs()
+euxlValue xgf_optargs()
 {
     static char *cfn_name = "generic-optargs?";
 
-    LVAL gf = xlgageneric();
+    euxlValue gf = xlgageneric();
     xllastarg();
 
     return getgopt(gf);
 }
 
-LVAL xgf_methods()
+euxlValue xgf_methods()
 {
     static char *cfn_name = "generic-methods";
 
-    LVAL gf = xlgageneric();
+    euxlValue gf = xlgageneric();
     xllastarg();
 
     return getgmethods(gf);
 }
 
-LVAL xgf_cache1()
+euxlValue xgf_cache1()
 {
     static char *cfn_name = "generic-cache1";
 
-    LVAL gf = xlgageneric();
+    euxlValue gf = xlgageneric();
     xllastarg();
 
     return getgcache1(gf);
 }
 
-LVAL xgf_cache2()
+euxlValue xgf_cache2()
 {
     static char *cfn_name = "generic-cache2";
 
-    LVAL gf = xlgageneric();
+    euxlValue gf = xlgageneric();
     xllastarg();
 
     return getgcache2(gf);
 }
 
-LVAL xmethod_gf()
+euxlValue xmethod_gf()
 {
     static char *cfn_name = "method-generic";
 
-    LVAL md = xlgamethod();
+    euxlValue md = xlgamethod();
     xllastarg();
 
     return getmdgf(md);
 }
 
-LVAL xmethod_fun()
+euxlValue xmethod_fun()
 {
     static char *cfn_name = "method-function";
 
-    LVAL md = xlgamethod();
+    euxlValue md = xlgamethod();
     xllastarg();
 
     return getmdfun(md);
 }
 
-LVAL xmethod_domain()
+euxlValue xmethod_domain()
 {
     static char *cfn_name = "method-domain";
 
-    LVAL md = xlgamethod();
+    euxlValue md = xlgamethod();
     xllastarg();
 
     return getmddomain(md);
 }
 
-LVAL xslot_name()
+euxlValue xslot_name()
 {
     static char *cfn_name = "slot-name";
 
-    LVAL slot = xlgaslot();
+    euxlValue slot = xlgaslot();
     xllastarg();
 
     return getslotname(slot);
 }
 
-LVAL xslot_keyword()
+euxlValue xslot_keyword()
 {
     static char *cfn_name = "slot-keyword";
 
-    LVAL slot = xlgaslot();
+    euxlValue slot = xlgaslot();
     xllastarg();
 
     return getslotkey(slot);
 }
 
-LVAL xslot_default()
+euxlValue xslot_default()
 {
     static char *cfn_name = "slot-default";
 
-    LVAL slot = xlgaslot();
+    euxlValue slot = xlgaslot();
     xllastarg();
     return getslotdefault(slot);
 }
 
-LVAL xset_slot_default()
+euxlValue xset_slot_default()
 {
     static char *cfn_name = "set-slot-default";
 
-    LVAL slot = xlgaslot();
-    LVAL val = xlgetarg();
+    euxlValue slot = xlgaslot();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     setslotdefault(slot, val);
     return slot;
 }
 
-LVAL xslot_requiredp()
+euxlValue xslot_requiredp()
 {
     static char *cfn_name = "slot-required-p";
 
-    LVAL slot = xlgaslot();
+    euxlValue slot = xlgaslot();
     xllastarg();
     return getslotrequiredp(slot);
 }
 
-LVAL xset_slot_requiredp()
+euxlValue xset_slot_requiredp()
 {
     static char *cfn_name = "set-slot-required-p";
 
-    LVAL slot = xlgaslot();
-    LVAL val = xlgetarg();
+    euxlValue slot = xlgaslot();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     setslotrequiredp(slot, val);
     return slot;
 }
 
-LVAL xfind_slot_index()
+euxlValue xfind_slot_index()
 {
     static char *cfn_name = "find-slot-index";
 
-    LVAL name = xlgasymbol();
-    LVAL cls = xlgaobject();
+    euxlValue name = xlgasymbol();
+    euxlValue cls = xlgaobject();
     xllastarg();
 
     if (!classp(cls))
@@ -1154,7 +1154,7 @@ LVAL xfind_slot_index()
         xlcerror("not a class in find-slot", cls, s_telos_error);
     }
 
-    LVAL slots = getivar(cls, SLOTS);
+    euxlValue slots = getivar(cls, SLOTS);
 
     for (int index = 1; slots; slots = cdr(slots), index++)
     {
@@ -1167,10 +1167,10 @@ LVAL xfind_slot_index()
     return NIL;
 }
 
-static LVAL init_class(int type, char *name, LVAL super, LVAL absp)
+static euxlValue init_class(int type, char *name, euxlValue super, euxlValue absp)
 {
-    LVAL cl = newobject(simple_class, CLASSSIZE);
-    LVAL sym = xlenter(name);
+    euxlValue cl = newobject(simple_class, CLASSSIZE);
+    euxlValue sym = xlenter(name);
     setvalue(sym, cl);
     setivar(cl, CNAME, sym);
     setivar(cl, SUPERCLASS, cons(super, NIL));
@@ -1196,70 +1196,70 @@ static void init_builtin_classes()
     // incl. NULLTYPE, KEYWORD, ISTREAM, OSTREAM, IOSTREAM
     class_vector = newvector(NTYPES + EXTRA_TYPES);
 
-    LVAL collection_cl = init_class(-1, "<collection>", object, true);
-    LVAL sequence_cl = init_class(-1, "<sequence>", collection_cl, true);
-    LVAL character_sequence_cl =
+    euxlValue collection_cl = init_class(-1, "<collection>", object, true);
+    euxlValue sequence_cl = init_class(-1, "<sequence>", collection_cl, true);
+    euxlValue character_sequence_cl =
         init_class(-1, "<character-sequence>", sequence_cl, true);
     init_class(STRING, "<string>", character_sequence_cl, NIL);
     init_class(VECTOR, "<vector>", sequence_cl, NIL);
-    LVAL list_cl = init_class(-1, "<list>", sequence_cl, true);
+    euxlValue list_cl = init_class(-1, "<list>", sequence_cl, true);
     init_class(CONS, "<cons>", list_cl, NIL);
     init_class(NTYPES, "<null>", list_cl, NIL);
 
-    LVAL number_cl = init_class(-1, "<number>", object, true);
-    LVAL integer_cl = init_class(-1, "<integer>", number_cl, true);
+    euxlValue number_cl = init_class(-1, "<number>", object, true);
+    euxlValue integer_cl = init_class(-1, "<integer>", number_cl, true);
     init_class(FIXNUM, "<fpi>", integer_cl, NIL);
-    LVAL float_cl = init_class(-1, "<float>", number_cl, true);
+    euxlValue float_cl = init_class(-1, "<float>", number_cl, true);
     init_class(FLONUM, "<double-float>", float_cl, NIL);
 
-    LVAL symbol_cl = init_class(SYMBOL, "<symbol>", object, NIL);
+    euxlValue symbol_cl = init_class(SYMBOL, "<symbol>", object, NIL);
     init_class(KEYWORD, "<keyword>", symbol_cl, NIL);
 
-    LVAL stream_cl = init_class(STREAM, "<stream>", object, true);
+    euxlValue stream_cl = init_class(STREAM, "<stream>", object, true);
     init_class(ISTREAM, "<input-stream>", stream_cl, NIL);
     init_class(OSTREAM, "<output-stream>", stream_cl, NIL);
     init_class(IOSTREAM, "<i/o-stream>", stream_cl, NIL);
 
-    LVAL char_cl = init_class(-1, "<char>", object, true);
+    euxlValue char_cl = init_class(-1, "<char>", object, true);
     init_class(CHAR, "<simple-char>", char_cl, NIL);
 
     init_class(PROMISE, "<promise>", object, NIL);
     init_class(ENV, "<env>", object, NIL);
     init_class(CODE, "<code>", object, NIL);
     init_class(MODULE, "<module>", object, NIL);
-    LVAL table_cl = init_class(-1, "<table>", object, true);
+    euxlValue table_cl = init_class(-1, "<table>", object, true);
     init_class(TABLE, "<hash-table>", table_cl, NIL);
 
-    LVAL function_cl = init_class(-1, "<function>", object, true);
-    LVAL simplefun_cl = init_class(-1, "<simple-function>", function_cl, NIL);
+    euxlValue function_cl = init_class(-1, "<function>", object, true);
+    euxlValue simplefun_cl = init_class(-1, "<simple-function>", function_cl, NIL);
     init_class(CLOSURE, "<closure>", simplefun_cl, NIL);
     init_class(SUBR, "<subr>", simplefun_cl, NIL);
     init_class(XSUBR, "<xsubr>", object, NIL);
     init_class(CSUBR, "<csubr>", object, NIL);
     init_class(CONTINUATION, "<continuation>", function_cl, NIL);
 
-    LVAL generic_cl = init_class(-1, "<generic>", function_cl, true);
+    euxlValue generic_cl = init_class(-1, "<generic>", function_cl, true);
     init_class(GENERIC, "<simple-generic>", generic_cl, NIL);
 
-    LVAL method_cl = init_class(-1, "<method>", object, true);
+    euxlValue method_cl = init_class(-1, "<method>", object, true);
     init_class(METHOD, "<simple-method>", method_cl, NIL);
 
-    LVAL slot_cl = init_class(-1, "<slot>", object, true);
+    euxlValue slot_cl = init_class(-1, "<slot>", object, true);
     init_class(SLOT, "<local-slot>", slot_cl, NIL);
 }
 
 void xloinit()
 {
-    LVAL scls = xlenter("<simple-class>");
+    euxlValue scls = xlenter("<simple-class>");
     simple_class = newobject(NIL, CLASSSIZE);
     setclass(simple_class, simple_class);
     setvalue(scls, simple_class);
 
-    LVAL cls = xlenter("<class>");
+    euxlValue cls = xlenter("<class>");
     class = newobject(simple_class, CLASSSIZE);
     setvalue(cls, class);
 
-    LVAL obj = xlenter("<object>");
+    euxlValue obj = xlenter("<object>");
     object = newobject(simple_class, CLASSSIZE);
     setvalue(obj, object);
 
@@ -1286,7 +1286,7 @@ void xloinit()
     setivar(simple_class, INSTSIZE, cvfixnum((FIXTYPE) CLASSSIZE));
     setivar(simple_class, ABSTRACTP, NIL);
 
-    LVAL sds = cons(newslot(xlenter("abstract?")), NIL);
+    euxlValue sds = cons(newslot(xlenter("abstract?")), NIL);
     setslotkey(car(sds), xlenter_keyword("abstract?:"));
     sds = cons(newslot(xlenter("instance-size")), sds);
     sds = cons(newslot(xlenter("subclasses")), sds);
@@ -1312,9 +1312,9 @@ void xloinit()
 }
 
 // is this method applicable to this domain?
-static int applicablep(LVAL md, LVAL domain)
+static int applicablep(euxlValue md, euxlValue domain)
 {
-    LVAL md_domain = getmddomain(md);
+    euxlValue md_domain = getmddomain(md);
 
     for (; md_domain; md_domain = cdr(md_domain), domain = cdr(domain))
     {
@@ -1328,10 +1328,10 @@ static int applicablep(LVAL md, LVAL domain)
 }
 
 // order by domains as more or less specific
-static int specific(LVAL * md1, LVAL * md2)
+static int specific(euxlValue * md1, euxlValue * md2)
 {
-    LVAL dom1 = getmddomain(*md1);
-    LVAL dom2 = getmddomain(*md2);
+    euxlValue dom1 = getmddomain(*md1);
+    euxlValue dom2 = getmddomain(*md2);
 
     for (; dom1; dom1 = cdr(dom1), dom2 = cdr(dom2))
     {
@@ -1353,16 +1353,16 @@ static int specific(LVAL * md1, LVAL * md2)
 }
 
 // find and sort applicable methods
-static LVAL applicable_methods(LVAL gf, LVAL classes)
+static euxlValue applicable_methods(euxlValue gf, euxlValue classes)
 {
-    LVAL methods = getgmethods(gf);
+    euxlValue methods = getgmethods(gf);
     if (methods == NIL)
     {
         return NIL;
     }
 
     int app = 0;
-    LVAL buf[128];
+    euxlValue buf[128];
 
     for (app = 0; methods; methods = cdr(methods))
     {
@@ -1392,7 +1392,7 @@ static LVAL applicable_methods(LVAL gf, LVAL classes)
         }
         xlputstr(xstdout(), ">\n");
     }
-    qsort((char *)buf, app, sizeof(LVAL), specific);
+    qsort((char *)buf, app, sizeof(euxlValue), specific);
     {
         xlputstr(xstdout(), "<sorted");
         for (int i = 0; i < app; i++)
@@ -1407,12 +1407,12 @@ static LVAL applicable_methods(LVAL gf, LVAL classes)
     (
         buf,
         app,
-        sizeof(LVAL),
+        sizeof(euxlValue),
         (int (*)(const void *, const void *))specific
     );
     #endif
 
-    LVAL applicable = NIL;
+    euxlValue applicable = NIL;
     for (int i = app - 1; i >= 0; i--)
     {
         applicable = cons(buf[i], applicable);
@@ -1422,9 +1422,9 @@ static LVAL applicable_methods(LVAL gf, LVAL classes)
 }
 
 // get clases of required args
-static LVAL classlist(LVAL l, LVAL gf)
+static euxlValue classlist(euxlValue l, euxlValue gf)
 {
-    LVAL reqd = getgargs(gf);
+    euxlValue reqd = getgargs(gf);
 
     if (l == NIL)
     {
@@ -1436,11 +1436,11 @@ static LVAL classlist(LVAL l, LVAL gf)
         return NIL;
     }
 
-    LVAL start = cons(class_of(car(l)), NIL);
+    euxlValue start = cons(class_of(car(l)), NIL);
     reqd = cdr(reqd);
 
     cpush(start);
-    LVAL end;
+    euxlValue end;
     for (end = start, l = cdr(l); l && reqd; l = cdr(l), end = cdr(end))
     {
         rplacd(end, cons(class_of(car(l)), NIL));
@@ -1464,18 +1464,18 @@ static LVAL classlist(LVAL l, LVAL gf)
 }
 
 // find, sort and cache applicable methods
-LVAL find_and_cache_methods(LVAL gf, LVAL arglist)
+euxlValue find_and_cache_methods(euxlValue gf, euxlValue arglist)
 {
-    LVAL classes = classlist(arglist, gf);
+    euxlValue classes = classlist(arglist, gf);
 
-    LVAL cache1 = getgcache1(gf);
+    euxlValue cache1 = getgcache1(gf);
     if (cache1 != NIL && equal(classes, car(cache1)))
     {
         // fprintf(stderr, "<cache1 hit>");
         return cdr(cache1);
     }
 
-    LVAL cache2 = getgcache2(gf);
+    euxlValue cache2 = getgcache2(gf);
     if (cache2 != NIL)
     {
         for (; cache2; cache2 = cdr(cache2))
@@ -1493,7 +1493,7 @@ LVAL find_and_cache_methods(LVAL gf, LVAL arglist)
     push(classes);
     push(gf);
 
-    LVAL applicable = applicable_methods(gf, classes);
+    euxlValue applicable = applicable_methods(gf, classes);
     if (applicable == NIL)
     {
         drop(2);
@@ -1501,7 +1501,7 @@ LVAL find_and_cache_methods(LVAL gf, LVAL arglist)
     }
     push(applicable);
 
-    LVAL methodfns;
+    euxlValue methodfns;
     for (methodfns = applicable; applicable; applicable = cdr(applicable))
     {
         rplaca(applicable, getmdfun(car(applicable)));
@@ -1517,10 +1517,10 @@ LVAL find_and_cache_methods(LVAL gf, LVAL arglist)
 }
 
 // replace old method of same domain, if there
-static LVAL add_or_replace_method(LVAL md, LVAL mdlist)
+static euxlValue add_or_replace_method(euxlValue md, euxlValue mdlist)
 {
-    LVAL domain = getmddomain(md);
-    LVAL list;
+    euxlValue domain = getmddomain(md);
+    euxlValue list;
     for (list = mdlist; list; list = cdr(list))
     {
         if (equal(domain, getmddomain(car(list))))
@@ -1538,9 +1538,9 @@ static LVAL add_or_replace_method(LVAL md, LVAL mdlist)
     return mdlist;
 }
 
-static void check_domain_compatibility(LVAL domain, LVAL gf, LVAL optargs)
+static void check_domain_compatibility(euxlValue domain, euxlValue gf, euxlValue optargs)
 {
-    LVAL gfdomain = getgargs(gf);
+    euxlValue gfdomain = getgargs(gf);
 
     for (; domain && gfdomain; domain = cdr(domain), gfdomain = cdr(gfdomain))
     {
@@ -1582,14 +1582,14 @@ static void check_domain_compatibility(LVAL domain, LVAL gf, LVAL optargs)
 }
 
 // (make-and-add-method gf closure domain optargs?)
-LVAL xmake_and_add_method()
+euxlValue xmake_and_add_method()
 {
     static char *cfn_name = "make-and-add-method";
 
-    LVAL gf = xlgageneric();
-    LVAL mdfn = xlgaclosure();
-    LVAL domain = xlgalist();
-    LVAL optargs = xlgetarg();
+    euxlValue gf = xlgageneric();
+    euxlValue mdfn = xlgaclosure();
+    euxlValue domain = xlgalist();
+    euxlValue optargs = xlgetarg();
     xllastarg();
 
     check(4);
@@ -1600,12 +1600,12 @@ LVAL xmake_and_add_method()
 
     check_domain_compatibility(domain, gf, optargs);
 
-    LVAL md = newmethod();
+    euxlValue md = newmethod();
     setmdgf(md, gf);
     setmdfun(md, mdfn);
     setmddomain(md, domain);
     setmdopt(md, optargs);
-    LVAL meths = add_or_replace_method(md, getgmethods(gf));
+    euxlValue meths = add_or_replace_method(md, getgmethods(gf));
     setgmethods(gf, meths);
     setgcache1(gf, NIL);
     setgcache2(gf, NIL);
@@ -1616,13 +1616,13 @@ LVAL xmake_and_add_method()
 }
 
 // (make-method closure domain optargs?)
-LVAL xmake_method()
+euxlValue xmake_method()
 {
     static char *cfn_name = "make-method";
 
-    LVAL mdfn = xlgaclosure();
-    LVAL domain = xlgalist();
-    LVAL optargs = xlgetarg();
+    euxlValue mdfn = xlgaclosure();
+    euxlValue domain = xlgalist();
+    euxlValue optargs = xlgetarg();
     xllastarg();
 
     check(3);
@@ -1630,7 +1630,7 @@ LVAL xmake_method()
     push(domain);
     push(optargs);
 
-    LVAL md = newmethod();
+    euxlValue md = newmethod();
 
     setmdgf(md, NIL);
     setmdfun(md, mdfn);
@@ -1643,12 +1643,12 @@ LVAL xmake_method()
 }
 
 // (add-method gf md)
-LVAL xadd_method()
+euxlValue xadd_method()
 {
     static char *cfn_name = "add-method";
 
-    LVAL gf = xlgageneric();
-    LVAL md = xlgamethod();
+    euxlValue gf = xlgageneric();
+    euxlValue md = xlgamethod();
     xllastarg();
 
     check(2);
@@ -1656,7 +1656,7 @@ LVAL xadd_method()
     push(md);
 
     check_domain_compatibility(getmddomain(md), gf, getmdopt(md));
-    LVAL meths = add_or_replace_method(md, getgmethods(gf));
+    euxlValue meths = add_or_replace_method(md, getgmethods(gf));
     setgmethods(gf, meths);
     setgcache1(gf, NIL);
     setgcache2(gf, NIL);
@@ -1668,13 +1668,13 @@ LVAL xadd_method()
 }
 
 // (make-generic name domain optargs?)
-LVAL xmake_generic()
+euxlValue xmake_generic()
 {
     static char *cfn_name = "make-generic";
 
-    LVAL name = xlgasymbol();
-    LVAL domain = xlgalist();
-    LVAL optargs = xlgetarg();
+    euxlValue name = xlgasymbol();
+    euxlValue domain = xlgalist();
+    euxlValue optargs = xlgetarg();
     xllastarg();
 
     check(3);
@@ -1682,7 +1682,7 @@ LVAL xmake_generic()
     push(domain);
     push(optargs);
 
-    LVAL gf = newgeneric();
+    euxlValue gf = newgeneric();
     setgname(gf, name);
     setgargs(gf, domain);
     setgopt(gf, optargs);
@@ -1696,11 +1696,11 @@ LVAL xmake_generic()
 }
 
 #ifndef NO_CHECK_REF
-void telos_bad_ref_error(LVAL object, LVAL wanted, int interp)
+void telos_bad_ref_error(euxlValue object, euxlValue wanted, int interp)
 {
-    extern LVAL s_telos_bad_ref;
+    extern euxlValue s_telos_bad_ref;
 
-    LVAL cond = getvalue(s_telos_bad_ref);
+    euxlValue cond = getvalue(s_telos_bad_ref);
     if (cond != s_unbound)
     {
         setivar(cond, 3, wanted);
@@ -1717,12 +1717,12 @@ void telos_bad_ref_error(LVAL object, LVAL wanted, int interp)
 }
 
 // (check-ref class obj)
-LVAL xcheck_ref()
+euxlValue xcheck_ref()
 {
     static char *cfn_name = "check-ref";
 
-    LVAL class = xlgaobject();
-    LVAL object = xlgetarg();
+    euxlValue class = xlgaobject();
+    euxlValue object = xlgetarg();
     xllastarg();
 
     if (!classp(class))

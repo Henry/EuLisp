@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -285,7 +285,7 @@ void rlgets()
     static char prompt[255];
     int debug_depth = 0;
 
-    LVAL thread_module = get_module("thread");
+    euxlValue thread_module = get_module("thread");
 
     if (thread_module)
     {
@@ -571,11 +571,11 @@ void set_ticks_per_second()
 #define TIMES_USER(x) x->n_vdata[1]
 #define TIMES_SYS(x) x->n_vdata[2]
 
-LVAL x_cpu_time()
+euxlValue x_cpu_time()
 {
     static struct tms buffer;
 
-    LVAL res = newvector(TIMES_SIZE);
+    euxlValue res = newvector(TIMES_SIZE);
 
     FIXTYPE r = (FIXTYPE)times(&buffer);
     if (r == -1)
@@ -604,7 +604,7 @@ void check_if_disabled(char *name)
 }
 
 // xsystem - execute a system command
-LVAL xsystem()
+euxlValue xsystem()
 {
     static char *cfn_name = "system";
     char *cmd;
@@ -619,7 +619,7 @@ LVAL xsystem()
 
 #if 0
 // tmpfile - open a temporary file
-LVAL xtmpfile()
+euxlValue xtmpfile()
 {
     static char *cfn_name = "tmpfile";
 
@@ -636,7 +636,7 @@ LVAL xtmpfile()
 
 #else
 
-LVAL xtmpfile()
+euxlValue xtmpfile()
 {
     static char *cfn_name = "tmpfile";
 
@@ -649,19 +649,19 @@ LVAL xtmpfile()
         xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
     }
 
-    LVAL stream = cvstream(fp, PF_INPUT | PF_OUTPUT);
+    euxlValue stream = cvstream(fp, PF_INPUT | PF_OUTPUT);
 
     return stream;
 }
 #endif
 
 // xgetenv - getenv
-LVAL xgetenv()
+euxlValue xgetenv()
 {
     static char *cfn_name = "getenv";
     extern char *getenv();
 
-    LVAL arg = xlgastring();
+    euxlValue arg = xlgastring();
     xllastarg();
 
     char *str = getenv(getstring(arg));
@@ -675,19 +675,19 @@ LVAL xgetenv()
 
 // xputenv - (putenv name val)
 // some contortions to keep a chunk of string memory
-LVAL xputenv()
+euxlValue xputenv()
 {
     static char *cfn_name = "putenv";
     extern int putenv();
-    extern LVAL s_supplied_env, xassoc();
+    extern euxlValue s_supplied_env, xassoc();
 
-    LVAL name = xlgastring();
-    LVAL val = xlgastring();
+    euxlValue name = xlgastring();
+    euxlValue val = xlgastring();
     xllastarg();
 
     char buf[1024];
     sprintf(buf, "%s=%s", getstring(name), getstring(val));
-    LVAL new = cvstring(buf);
+    euxlValue new = cvstring(buf);
 
     int retval = putenv(getstring(new));
     if (retval > 0)
@@ -698,11 +698,11 @@ LVAL xputenv()
     check(3);
     push(new);
 
-    LVAL env = getvalue(s_supplied_env);
+    euxlValue env = getvalue(s_supplied_env);
     push(env);
     push(name);
     xlargc = 2;
-    LVAL old = xassoc();
+    euxlValue old = xassoc();
 
     if (old)
     {

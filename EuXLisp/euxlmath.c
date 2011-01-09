@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -29,16 +29,16 @@
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-extern LVAL true, s_arith_error;
+extern euxlValue true, s_arith_error;
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static LVAL binary(int fcn);
-static LVAL unary(int fcn);
-static LVAL predicate(int fcn);
-static LVAL compare(int fcn);
-static FLOTYPE toflotype(LVAL val);
+static euxlValue binary(int fcn);
+static euxlValue unary(int fcn);
+static euxlValue predicate(int fcn);
+static euxlValue compare(int fcn);
+static FLOTYPE toflotype(euxlValue val);
 static void checkizero(FIXTYPE iarg, FIXTYPE num);
 static void checkineg(FIXTYPE iarg);
 static void checkfzero(FLOTYPE farg, FLOTYPE num);
@@ -51,7 +51,7 @@ static void badfop();
 ///-----------------------------------------------------------------------------
 // xexactp - built-in function 'exact?'
 // *** THIS IS REALLY JUST A STUB FOR NOW ***
-LVAL xexactp()
+euxlValue xexactp()
 {
     static char *cfn_name = "exact?";
     (void)xlganumber();
@@ -61,7 +61,7 @@ LVAL xexactp()
 
 // xinexactp - built-in function 'inexact?'
 // *** THIS IS REALLY JUST A STUB FOR NOW ***
-LVAL xinexactp()
+euxlValue xinexactp()
 {
     static char *cfn_name = "inexact?";
     (void)xlganumber();
@@ -70,17 +70,17 @@ LVAL xinexactp()
 }
 
 // xatan - built-in function 'atan'
-LVAL xatan()
+euxlValue xatan()
 {
     static char *cfn_name = "atan";
 
     // get the first argument
-    LVAL arg = xlganumber();
+    euxlValue arg = xlganumber();
 
     FLOTYPE val;
     if (moreargs())    // handle two argument (atan y x)
     {
-        LVAL arg2 = xlganumber();
+        euxlValue arg2 = xlganumber();
         xllastarg();
         val = atan2(toflotype(arg), toflotype(arg2));
     }
@@ -94,12 +94,12 @@ LVAL xatan()
 }
 
 // xfloor - built-in function 'floor'
-LVAL xfloor()
+euxlValue xfloor()
 {
     static char *cfn_name = "floor";
 
     // get the argument
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     // check its type
@@ -118,12 +118,12 @@ LVAL xfloor()
 }
 
 // xceiling - built-in function 'ceiling'
-LVAL xceiling()
+euxlValue xceiling()
 {
     static char *cfn_name = "ceiling";
 
     // get the argument
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     // check its type
@@ -142,12 +142,12 @@ LVAL xceiling()
 }
 
 // xround - built-in function 'round'
-LVAL xround()
+euxlValue xround()
 {
     static char *cfn_name = "round";
 
     // get the argument
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     // check its type
@@ -185,12 +185,12 @@ LVAL xround()
 }
 
 // xtruncate - built-in function 'truncate'
-LVAL xtruncate()
+euxlValue xtruncate()
 {
     static char *cfn_name = "truncate";
 
     // get the argument
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     // check its type
@@ -212,7 +212,7 @@ LVAL xtruncate()
 /// binary functions
 ///-----------------------------------------------------------------------------
 
-LVAL xadd() // +
+euxlValue xadd() // +
 {
     if (!moreargs())
     {
@@ -221,7 +221,7 @@ LVAL xadd() // +
     return (binary('+'));
 }
 
-LVAL xmul() // *
+euxlValue xmul() // *
 {
     if (!moreargs())
     {
@@ -230,64 +230,64 @@ LVAL xmul() // *
     return (binary('*'));
 }
 
-LVAL xsub()  // -
+euxlValue xsub()  // -
 {
     return (binary('-'));
 }
 
-LVAL xdiv()  // /
+euxlValue xdiv()  // /
 {
     return (binary('/'));
 }
 
-LVAL xquo()  // quotient
+euxlValue xquo()  // quotient
 {
     return (binary('Q'));
 }
 
-LVAL xrem()  // remainder
+euxlValue xrem()  // remainder
 {
     return (binary('R'));
 }
 
-LVAL xmin()
+euxlValue xmin()
 {
     return (binary('m'));
 }
 
-LVAL xmax()
+euxlValue xmax()
 {
     return (binary('M'));
 }
 
-LVAL xexpt()
+euxlValue xexpt()
 {
     return (binary('E'));
 }
 
-LVAL xlogand()
+euxlValue xlogand()
 {
     return (binary('&'));
 }
 
-LVAL xlogior()
+euxlValue xlogior()
 {
     return (binary('|'));
 }
 
-LVAL xlogxor()
+euxlValue xlogxor()
 {
     return (binary('^'));
 }
 
 // binary - handle binary operations
-static LVAL binary(int fcn)
+static euxlValue binary(int fcn)
 {
 
     static char *cfn_name = "binary arith op";
 
     // get the first argument
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
 
     // set the type of the first argument
     int mode = 0;
@@ -483,67 +483,67 @@ static LVAL binary(int fcn)
 ///-----------------------------------------------------------------------------
 /// Unary functions
 ///-----------------------------------------------------------------------------
-LVAL xlognot()
+euxlValue xlognot()
 {
     return (unary('~'));
 }
 
-LVAL xabs()
+euxlValue xabs()
 {
     return (unary('A'));
 }
 
-LVAL xadd1()
+euxlValue xadd1()
 {
     return (unary('+'));
 }
 
-LVAL xsub1()
+euxlValue xsub1()
 {
     return (unary('-'));
 }
 
-LVAL xsin()
+euxlValue xsin()
 {
     return (unary('S'));
 }
 
-LVAL xcos()
+euxlValue xcos()
 {
     return (unary('C'));
 }
 
-LVAL xtan()
+euxlValue xtan()
 {
     return (unary('T'));
 }
 
-LVAL xasin()
+euxlValue xasin()
 {
     return (unary('s'));
 }
 
-LVAL xacos()
+euxlValue xacos()
 {
     return (unary('c'));
 }
 
-LVAL xxexp()
+euxlValue xxexp()
 {
     return (unary('E'));
 }
 
-LVAL xsqrt()
+euxlValue xsqrt()
 {
     return (unary('R'));
 }
 
-LVAL xxlog()
+euxlValue xxlog()
 {
     return (unary('L'));
 }
 
-LVAL xrandom()
+euxlValue xrandom()
 {
     return (unary('?'));
 }
@@ -584,9 +584,9 @@ static char *unary_to_name(int fcn)
 }
 
 // unary - handle unary operations
-static LVAL unary(int fcn)
+static euxlValue unary(int fcn)
 {
-    LVAL arg = NULL;
+    euxlValue arg = NULL;
 
     // get the argument
     if (moreargs())
@@ -702,7 +702,7 @@ static LVAL unary(int fcn)
 }
 
 // xgcd - greatest common divisor
-LVAL xgcd()
+euxlValue xgcd()
 {
     static char *cfn_name = "gcd";
 
@@ -711,7 +711,7 @@ LVAL xgcd()
         return (cvfixnum((FIXTYPE) 0));
     }
 
-    LVAL arg = xlgafixnum();
+    euxlValue arg = xlgafixnum();
     FIXTYPE n = getfixnum(arg);
 
     if (n < (FIXTYPE) 0)
@@ -754,38 +754,38 @@ LVAL xgcd()
 ///-----------------------------------------------------------------------------
 /// unary predicates
 ///-----------------------------------------------------------------------------
-LVAL xnegativep()  // negative?
+euxlValue xnegativep()  // negative?
 {
     return (predicate('-'));
 }
 
-LVAL xzerop()  // zero?
+euxlValue xzerop()  // zero?
 {
     return (predicate('Z'));
 }
 
-LVAL xpositivep()  // positive?
+euxlValue xpositivep()  // positive?
 {
     return (predicate('+'));
 }
 
-LVAL xevenp()  // even?
+euxlValue xevenp()  // even?
 {
     return (predicate('E'));
 }
 
-LVAL xoddp()  // odd?
+euxlValue xoddp()  // odd?
 {
     return (predicate('O'));
 }
 
 // predicate - handle a predicate function
-static LVAL predicate(int fcn)
+static euxlValue predicate(int fcn)
 {
     static char *cfn_name = "arith predicate";
 
     // get the argument
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
 
     FIXTYPE ival = 0;
@@ -845,38 +845,38 @@ static LVAL predicate(int fcn)
 ///-----------------------------------------------------------------------------
 /// comparison functions
 ///-----------------------------------------------------------------------------
-LVAL xlss()  // <
+euxlValue xlss()  // <
 {
     return (compare('<'));
 }
 
-LVAL xleq()  // <=
+euxlValue xleq()  // <=
 {
     return (compare('L'));
 }
 
-LVAL xeql()  // =
+euxlValue xeql()  // =
 {
     return (compare('='));
 }
 
-LVAL xgeq()  // >=
+euxlValue xgeq()  // >=
 {
     return (compare('G'));
 }
 
-LVAL xgtr()  // >
+euxlValue xgtr()  // >
 {
     return (compare('>'));
 }
 
 // compare - common compare function
-static LVAL compare(int fcn)
+static euxlValue compare(int fcn)
 {
     static char *cfn_name = "arith compare op";
 
     // get the first argument
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
 
     // set the type of the first argument
     int mode = 0;
@@ -1000,7 +1000,7 @@ static LVAL compare(int fcn)
 }
 
 // toflotype - convert a lisp value to a floating point number
-static FLOTYPE toflotype(LVAL val)
+static FLOTYPE toflotype(euxlValue val)
 {
     // must be a number for this to work
     switch (ntype(val))

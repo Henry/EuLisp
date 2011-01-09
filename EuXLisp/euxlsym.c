@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -28,22 +28,22 @@
 ///-----------------------------------------------------------------------------
 /// Local variables
 ///-----------------------------------------------------------------------------
-LVAL obarray;
+euxlValue obarray;
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static LVAL findprop(LVAL sym, LVAL prp), findsyntax(LVAL sym, LVAL prp);
+static euxlValue findprop(euxlValue sym, euxlValue prp), findsyntax(euxlValue sym, euxlValue prp);
 
-extern LVAL c_dot, s_rename_flag;
+extern euxlValue c_dot, s_rename_flag;
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
 // xlsubr - define a builtin function
-void xlsubr(char *sname, int type, LVAL(*fcn) (void), int offset)
+void xlsubr(char *sname, int type, euxlValue(*fcn) (void), int offset)
 {
-    LVAL sym = xlenter(sname);
+    euxlValue sym = xlenter(sname);
     setvalue(sym, cvsubr(type, fcn, offset));
 }
 
@@ -53,12 +53,12 @@ void xlsubr(char *sname, int type, LVAL(*fcn) (void), int offset)
 #define trace_symbol(a,s,m)
 #endif
 
-LVAL xlenter_keyword(char *name)
+euxlValue xlenter_keyword(char *name)
 {
     int i = hash(name, HSIZE);
 
     // check if symbol is already in table
-    for (LVAL sym = getelement(keyword_array, i); sym; sym = cdr(sym))
+    for (euxlValue sym = getelement(keyword_array, i); sym; sym = cdr(sym))
     {
         if (strcmp(name, getstring(getpname(car(sym)))) == 0)
         {
@@ -68,11 +68,11 @@ LVAL xlenter_keyword(char *name)
     }
 
     // make a new symbol node and link it into the list
-    LVAL symbol = cvsymbol(name);
+    euxlValue symbol = cvsymbol(name);
     setmodule(symbol, NIL);
     setvalue(symbol, symbol);   // self-evaluating
 
-    LVAL sym = cons(symbol, getelement(keyword_array, i));
+    euxlValue sym = cons(symbol, getelement(keyword_array, i));
     setelement(keyword_array, i, sym);
 
     trace_symbol("N", name, "keyword");
@@ -82,7 +82,7 @@ LVAL xlenter_keyword(char *name)
 }
 
 // xlenter - enter a symbol into the obarray of the given module
-LVAL xlenter_module(char *name, LVAL module)
+euxlValue xlenter_module(char *name, euxlValue module)
 {
     // see if symbol is marked for reinternment
     int len = strlen(name);
@@ -95,11 +95,11 @@ LVAL xlenter_module(char *name, LVAL module)
     }
 
     // get the current obarray and the hash index for this symbol
-    LVAL array = getmsymbols(module);
+    euxlValue array = getmsymbols(module);
     int i = hash(name, HSIZE);
 
     // check if symbol is already in table
-    for (LVAL sym = getelement(array, i); sym; sym = cdr(sym))
+    for (euxlValue sym = getelement(array, i); sym; sym = cdr(sym))
     {
         if (strcmp(name, getstring(getpname(car(sym)))) == 0)
         {
@@ -109,13 +109,13 @@ LVAL xlenter_module(char *name, LVAL module)
     }
 
     // make a new symbol node
-    LVAL symbol = cvsymbol(name);
+    euxlValue symbol = cvsymbol(name);
 
     // ensure correct home module
     setmodule(symbol, module);
 
     // link it into the list
-    LVAL sym = cons(symbol, getelement(array, i));
+    euxlValue sym = cons(symbol, getelement(array, i));
     setelement(array, i, sym);
 
     trace_symbol("N", name, getstring(getmname(module)));
@@ -125,16 +125,16 @@ LVAL xlenter_module(char *name, LVAL module)
 }
 
 // xlgetprop - get the value of a property
-LVAL xlgetprop(LVAL sym, LVAL prp)
+euxlValue xlgetprop(euxlValue sym, euxlValue prp)
 {
-    LVAL p;
+    euxlValue p;
     return ((p = findprop(sym, prp)) == NIL ? NIL : car(p));
 }
 
 // xlputprop - put a property value onto the property list
-void xlputprop(LVAL sym, LVAL val, LVAL prp)
+void xlputprop(euxlValue sym, euxlValue val, euxlValue prp)
 {
-    LVAL pair;
+    euxlValue pair;
     if ((pair = findprop(sym, prp)) != NIL)
     {
         rplaca(pair, val);
@@ -146,9 +146,9 @@ void xlputprop(LVAL sym, LVAL val, LVAL prp)
 }
 
 // findprop - find a property pair
-static LVAL findprop(LVAL sym, LVAL prp)
+static euxlValue findprop(euxlValue sym, euxlValue prp)
 {
-    for (LVAL p = getplist(sym); consp(p) && consp(cdr(p)); p = cdr(cdr(p)))
+    for (euxlValue p = getplist(sym); consp(p) && consp(cdr(p)); p = cdr(cdr(p)))
     {
         if (symboleq(car(p), prp))
         {
@@ -161,7 +161,7 @@ static LVAL findprop(LVAL sym, LVAL prp)
 
 // intern symbol in current module
 // can't use symbol name directly as it might move during a GC in xlenter
-static LVAL reintern_symbol(LVAL sym)
+static euxlValue reintern_symbol(euxlValue sym)
 {
     if (keywordp(sym))
     {
@@ -174,7 +174,7 @@ static LVAL reintern_symbol(LVAL sym)
 }
 
 // xlgetsyntax - find a syntax property
-LVAL xlgetsyntax(LVAL sym, LVAL prp)
+euxlValue xlgetsyntax(euxlValue sym, euxlValue prp)
 {
     // reintern into current module if necessary
     if (getmodule(sym) == reintern_module)
@@ -183,17 +183,17 @@ LVAL xlgetsyntax(LVAL sym, LVAL prp)
         // fprintf(stderr, "<re %s %s %s>", getstring(getpname(sym)),
         //         getstring(getmname(current_module)),
         //         getstring(getpname(prp)));
-        LVAL p = findsyntax(sym, prp);
+        euxlValue p = findsyntax(sym, prp);
         return (p == NIL ? (prp == s_rename_flag ? sym : NIL) : car(p));
     }
 
-    LVAL p = findsyntax(sym, prp);
+    euxlValue p = findsyntax(sym, prp);
     return (p == NIL ? NIL : car(p));
 }
 
-void xlputsyntax(LVAL sym, LVAL val, LVAL prp)
+void xlputsyntax(euxlValue sym, euxlValue val, euxlValue prp)
 {
-    LVAL pair;
+    euxlValue pair;
     if ((pair = findsyntax(sym, prp)) != NIL)
     {
         rplaca(pair, val);
@@ -204,9 +204,9 @@ void xlputsyntax(LVAL sym, LVAL val, LVAL prp)
     }
 }
 
-static LVAL findsyntax(LVAL sym, LVAL prp)
+static euxlValue findsyntax(euxlValue sym, euxlValue prp)
 {
-    for (LVAL p = getsyntax(sym); consp(p) && consp(cdr(p)); p = cdr(cdr(p)))
+    for (euxlValue p = getsyntax(sym); consp(p) && consp(cdr(p)); p = cdr(cdr(p)))
     {
         if (car(p) == prp)      // only ever %macro, %rename or %syntax
         {

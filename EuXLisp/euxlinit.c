@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -36,37 +36,37 @@
 ///-----------------------------------------------------------------------------
 /// Global variables
 ///-----------------------------------------------------------------------------
-LVAL true, eof_object, default_object, s_unassigned;
-LVAL cs_map1, cs_foreach1, cs_withfile1, cs_load1, cs_force1, cs_initloop1;
-LVAL c_lpar, c_rpar, c_dot, c_quote, s_quote;
-LVAL s_eval_cm, s_unbound, s_stdin, s_stdout, s_stderr, s_filein;
-LVAL s_fixfmt, s_flofmt;
-LVAL s_direct_slots, s_direct_keywords, s_name, s_default, s_requiredp;
-LVAL s_keyword;
-LVAL s_abstractp, s_predicate, s_constructor, s_keywords, s_superclasses;
-LVAL s_reader, s_writer, s_accessor, s_class, s_defclass, s_find_slot_index;
-LVAL s_getivar, s_setivar, s_list, s_lambda, s_defun, s_object, s_value;
-LVAL s_backtracep, s_eq, s_eqv, s_equal, s_equals;
-LVAL s_import, s_only, s_except, s_rename, s_rename_flag;
-LVAL s_syntax, s_export, s_expose;
-LVAL s_callcc;
-LVAL s_make, s_apply, s_setter, s_signal, s_unwind_protect;
-LVAL s_general_error, s_no_applic_error, s_no_next_md_error;
-LVAL s_bad_type_error, s_telos_error, s_telos_bad_ref, s_incompatible_md;
-LVAL s_unbound_error, s_arith_error, s_user_intr, s_syntax_error;
-LVAL s_compile_error;
-LVAL s_letname, s_progn, s_compile, s_setmodule, s_getmodule, s_reintern;
-LVAL s_module_directives;
-LVAL s_binary_plus, s_binary_minus, s_binary_times, s_binary_divide;
-LVAL s_quotient, s_binary_less, s_binary_equal, s_current_thread;
-LVAL s_thread_class, s_qualified_symbols, s_set_generic_args;
-LVAL s_syntax_error, s_supplied_env, s_debug, s_xlframe, s_gcmsgs;
-LVAL s_arg_list, s_next_methods;
+euxlValue true, eof_object, default_object, s_unassigned;
+euxlValue cs_map1, cs_foreach1, cs_withfile1, cs_load1, cs_force1, cs_initloop1;
+euxlValue c_lpar, c_rpar, c_dot, c_quote, s_quote;
+euxlValue s_eval_cm, s_unbound, s_stdin, s_stdout, s_stderr, s_filein;
+euxlValue s_fixfmt, s_flofmt;
+euxlValue s_direct_slots, s_direct_keywords, s_name, s_default, s_requiredp;
+euxlValue s_keyword;
+euxlValue s_abstractp, s_predicate, s_constructor, s_keywords, s_superclasses;
+euxlValue s_reader, s_writer, s_accessor, s_class, s_defclass, s_find_slot_index;
+euxlValue s_getivar, s_setivar, s_list, s_lambda, s_defun, s_object, s_value;
+euxlValue s_backtracep, s_eq, s_eqv, s_equal, s_equals;
+euxlValue s_import, s_only, s_except, s_rename, s_rename_flag;
+euxlValue s_syntax, s_export, s_expose;
+euxlValue s_callcc;
+euxlValue s_make, s_apply, s_setter, s_signal, s_unwind_protect;
+euxlValue s_general_error, s_no_applic_error, s_no_next_md_error;
+euxlValue s_bad_type_error, s_telos_error, s_telos_bad_ref, s_incompatible_md;
+euxlValue s_unbound_error, s_arith_error, s_user_intr, s_syntax_error;
+euxlValue s_compile_error;
+euxlValue s_letname, s_progn, s_compile, s_setmodule, s_getmodule, s_reintern;
+euxlValue s_module_directives;
+euxlValue s_binary_plus, s_binary_minus, s_binary_times, s_binary_divide;
+euxlValue s_quotient, s_binary_less, s_binary_equal, s_current_thread;
+euxlValue s_thread_class, s_qualified_symbols, s_set_generic_args;
+euxlValue s_syntax_error, s_supplied_env, s_debug, s_xlframe, s_gcmsgs;
+euxlValue s_arg_list, s_next_methods;
 #ifndef NO_CHECK_REF
-LVAL s_check_ref;
+euxlValue s_check_ref;
 #endif
 #ifdef SOCK
-LVAL s_socket_error;
+euxlValue s_socket_error;
 #endif
 
 ///-----------------------------------------------------------------------------
@@ -76,7 +76,7 @@ extern JMP_BUF top_level;
 extern FUNDEF funtab[];
 extern int xsubrcnt;
 extern int csubrcnt;
-extern LVAL xlenter_keyword();
+extern euxlValue xlenter_keyword();
 
 extern void init_root_module();
 extern void init_root_exports();
@@ -92,7 +92,7 @@ void xlinitws(unsigned int ssize)
     // allocate memory for the workspace
     xlminit(ssize);
 
-    extern LVAL s_gcmsgs;
+    extern euxlValue s_gcmsgs;
     s_gcmsgs = NIL;
 
     obarray = newvector(HSIZE);
@@ -139,7 +139,7 @@ void xlinitws(unsigned int ssize)
     setvalue(s_flofmt, cvstring(FFMT));
 
     // build the 'eval' function
-    LVAL code = newcode(4);
+    euxlValue code = newcode(4);
     cpush(code);
     setelement(code, 0, newstring(0x12));
     setelement(code, 1, xlenter("eval/cm"));
@@ -432,7 +432,7 @@ void xlsymbols()
     s_quote = xlenter("quote");
 
     // 'else' is a useful synonym for `t' in cond clauses
-    LVAL sym = xlenter("else");
+    euxlValue sym = xlenter("else");
     setvalue(sym, true);
 
     // do we want a prompt?
@@ -453,7 +453,7 @@ void xlsymbols()
 
     // restore OS environment
     s_supplied_env = xlenter("supplied-env");
-    LVAL env = getvalue(s_supplied_env);
+    euxlValue env = getvalue(s_supplied_env);
     for (; consp(env); env = cdr(env))
     {
         putenv(getstring(cdr(car(env))));

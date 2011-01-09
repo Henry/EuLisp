@@ -1,5 +1,5 @@
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -75,7 +75,7 @@ extern int reading, ctrl_c;
 #define FALSEVALUE NIL
 #define TRUEVALUE  true
 
-void xlsockerror(char *msg, LVAL val)
+void xlsockerror(char *msg, euxlValue val)
 {
     char buf[128];
 
@@ -94,7 +94,7 @@ void xlsockerror(char *msg, LVAL val)
 }
 
 // (socket-socket)
-LVAL socket_socket()
+euxlValue socket_socket()
 {
     static char *cfn_name = "socket-socket";
     int s;
@@ -110,17 +110,17 @@ LVAL socket_socket()
 }
 
 // (socket-connect fd name stream)
-LVAL socket_connect()
+euxlValue socket_connect()
 {
     static char *cfn_name = "socket-connect";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
-    LVAL arg_name = xlgastring();
+    euxlValue arg_name = xlgastring();
     char *name = (char *)getstring(arg_name);
 
-    LVAL arg_stream = xlgafixnum();
+    euxlValue arg_stream = xlgafixnum();
     int stream = (int)getfixnum(arg_stream);
 
     xllastarg();
@@ -160,14 +160,14 @@ LVAL socket_connect()
 }
 
 // (socket-bind fd stream)
-LVAL socket_bind()
+euxlValue socket_bind()
 {
     static char *cfn_name = "socket-bind";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
-    LVAL arg_stream = xlgafixnum();
+    euxlValue arg_stream = xlgafixnum();
     int stream = (int)getfixnum(arg_stream);
 
     xllastarg();
@@ -196,14 +196,14 @@ LVAL socket_bind()
 }
 
 // (socket-listen fd backlog)
-LVAL socket_listen()
+euxlValue socket_listen()
 {
     static char *cfn_name = "socket-listen";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
-    LVAL arg_backlog = xlgafixnum();
+    euxlValue arg_backlog = xlgafixnum();
     int backlog = (int)getfixnum(arg_backlog);
 
     xllastarg();
@@ -217,14 +217,14 @@ LVAL socket_listen()
 }
 
 // (socket-accept fd)
-LVAL socket_accept()
+euxlValue socket_accept()
 {
     static char *cfn_name = "socket-accept";
 
     struct sockaddr_in sin;
     socklen_t len = sizeof sin;
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -239,11 +239,11 @@ LVAL socket_accept()
 }
 
 // (socket-block fd)
-LVAL socket_block()
+euxlValue socket_block()
 {
     static char *cfn_name = "socket-block";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -263,11 +263,11 @@ LVAL socket_block()
 }
 
 // (socket-nonblock fd)
-LVAL socket_nonblock()
+euxlValue socket_nonblock()
 {
     static char *cfn_name = "socket-nonblock";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -287,11 +287,11 @@ LVAL socket_nonblock()
 }
 
 // (socket-reuse fd)
-LVAL socket_reuse()
+euxlValue socket_reuse()
 {
     static char *cfn_name = "socket-reuse";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -303,11 +303,11 @@ LVAL socket_reuse()
 }
 
 // (socket-noreuse fd)
-LVAL socket_noreuse()
+euxlValue socket_noreuse()
 {
     static char *cfn_name = "socket-noreuse";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -319,11 +319,11 @@ LVAL socket_noreuse()
 }
 
 // (socket-close fd)
-LVAL socket_close()
+euxlValue socket_close()
 {
     static char *cfn_name = "socket-close";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -334,14 +334,14 @@ LVAL socket_close()
 }
 
 // (socket-shutdown fd how)
-LVAL socket_shutdown()
+euxlValue socket_shutdown()
 {
     static char *cfn_name = "socket-shutdown";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
-    LVAL arg_how = xlgafixnum();
+    euxlValue arg_how = xlgafixnum();
     int how = (int)getfixnum(arg_how);
 
     xllastarg();
@@ -355,7 +355,7 @@ LVAL socket_shutdown()
 }
 
 // (socket-peeraddr fd)
-LVAL socket_peeraddr()
+euxlValue socket_peeraddr()
 {
     static char *cfn_name = "socket-peeraddr";
 
@@ -363,7 +363,7 @@ LVAL socket_peeraddr()
     socklen_t peer_namelen = sizeof peer_name;
     struct hostent *hp;
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -397,11 +397,11 @@ LVAL socket_peeraddr()
 }
 
 // (socket-peerstream fd)
-LVAL socket_peerstream()
+euxlValue socket_peerstream()
 {
     static char *cfn_name = "socket-peerstream";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -417,11 +417,11 @@ LVAL socket_peerstream()
 }
 
 // (socket-sockaddr fd)
-LVAL socket_sockaddr()
+euxlValue socket_sockaddr()
 {
     static char *cfn_name = "socket-sockaddr";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -457,11 +457,11 @@ LVAL socket_sockaddr()
 }
 
 // (socket-sockstream fd)
-LVAL socket_sockstream()
+euxlValue socket_sockstream()
 {
     static char *cfn_name = "socket-sockstream";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -477,11 +477,11 @@ LVAL socket_sockstream()
 }
 
 // (socket-host-to-ip name)
-LVAL socket_host_to_ip()
+euxlValue socket_host_to_ip()
 {
     static char *cfn_name = "socket-host-to-ip";
 
-    LVAL arg_name = xlgastring();
+    euxlValue arg_name = xlgastring();
     char *name = (char *)getstring(arg_name);
 
     xllastarg();
@@ -499,11 +499,11 @@ LVAL socket_host_to_ip()
 }
 
 // (socket-ip-to-host ip)
-LVAL socket_ip_to_host()
+euxlValue socket_ip_to_host()
 {
     static char *cfn_name = "socket-ip-to-host";
 
-    LVAL arg_ip = xlgastring();
+    euxlValue arg_ip = xlgastring();
     char *ip = (char *)getstring(arg_ip);
 
     xllastarg();
@@ -526,11 +526,11 @@ LVAL socket_ip_to_host()
 // convert to stream to get I/O functions for free
 
 // (socket-convert-to-stream fd)
-LVAL socket_convert_to_stream()
+euxlValue socket_convert_to_stream()
 {
     static char *cfn_name = "socket-convert-to-stream";
 
-    LVAL arg_s = xlgafixnum();
+    euxlValue arg_s = xlgafixnum();
     int s = (int)getfixnum(arg_s);
 
     xllastarg();
@@ -548,11 +548,11 @@ LVAL socket_convert_to_stream()
 }
 
 // (stream-fd stream)
-LVAL stream_fd()
+euxlValue stream_fd()
 {
     static char *cfn_name = "stream-fd";
 
-    LVAL arg_handle = xlgastream();
+    euxlValue arg_handle = xlgastream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -563,11 +563,11 @@ LVAL stream_fd()
 // buffering stuff loses data on most OSes
 #ifdef __linux
 // (stream-unbuffered stream)
-LVAL stream_unbuffered()
+euxlValue stream_unbuffered()
 {
     static char *cfn_name = "stream-unbuffered";
 
-    LVAL arg_handle = xlgastream();
+    euxlValue arg_handle = xlgastream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -582,17 +582,17 @@ LVAL stream_unbuffered()
 }
 
 // (stream-block-buffered stream . bufsize)
-LVAL stream_block_buffered()
+euxlValue stream_block_buffered()
 {
     static char *cfn_name = "stream-block-buffered";
 
-    LVAL arg_handle = xlgastream();
+    euxlValue arg_handle = xlgastream();
     FILE *handle = getfile(arg_handle);
 
     int size;
     if (moreargs())
     {
-        LVAL arg_size = xlgafixnum();
+        euxlValue arg_size = xlgafixnum();
         size = getfixnum(arg_size);
         xllastarg();
     }
@@ -611,11 +611,11 @@ LVAL stream_block_buffered()
 }
 
 // (stream-line-buffered stream)
-LVAL stream_line_buffered()
+euxlValue stream_line_buffered()
 {
     static char *cfn_name = "stream-line-buffered";
 
-    LVAL arg_handle = xlgastream();
+    euxlValue arg_handle = xlgastream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -630,11 +630,11 @@ LVAL stream_line_buffered()
 }
 #else
 // (stream-unbuffered stream)
-LVAL stream_unbuffered()
+euxlValue stream_unbuffered()
 {
     static char *cfn_name = "stream-unbuffered";
 
-    LVAL arg_handle = xlgastream();
+    euxlValue arg_handle = xlgastream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -645,17 +645,17 @@ LVAL stream_unbuffered()
 }
 
 // (stream-block-buffered stream . bufsize)
-LVAL stream_block_buffered()
+euxlValue stream_block_buffered()
 {
     static char *cfn_name = "stream-block-buffered";
 
-    LVAL arg_handle = xlgastream();
+    euxlValue arg_handle = xlgastream();
     FILE *handle = getfile(arg_handle);
 
     int size;
     if (moreargs())
     {
-        LVAL arg_size = xlgafixnum();
+        euxlValue arg_size = xlgafixnum();
         size = getfixnum(arg_size);
         xllastarg();
     }
@@ -670,11 +670,11 @@ LVAL stream_block_buffered()
 }
 
 // (stream-line-buffered stream)
-LVAL stream_line_buffered()
+euxlValue stream_line_buffered()
 {
     static char *cfn_name = "stream-line-buffered";
 
-    LVAL arg_handle = xlgastream();
+    euxlValue arg_handle = xlgastream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -690,7 +690,7 @@ LVAL stream_line_buffered()
 static fd_set readfds, writefds;
 
 // (socket-fd-zero-read)
-LVAL socket_fd_zero_read()
+euxlValue socket_fd_zero_read()
 {
     static char *cfn_name = "socket-fd-zero-read";
 
@@ -700,11 +700,11 @@ LVAL socket_fd_zero_read()
 }
 
 // (socket-fd-set-read fd)
-LVAL socket_fd_set_read()
+euxlValue socket_fd_set_read()
 {
     static char *cfn_name = "socket-fd-set-read";
 
-    LVAL arg_fd = xlgafixnum();
+    euxlValue arg_fd = xlgafixnum();
     int fd = (int)getfixnum(arg_fd);
 
     xllastarg();
@@ -715,11 +715,11 @@ LVAL socket_fd_set_read()
 }
 
 // (socket-fd-isset-read fd)
-LVAL socket_fd_isset_read()
+euxlValue socket_fd_isset_read()
 {
     static char *cfn_name = "socket-fd-isset-read";
 
-    LVAL arg_fd = xlgafixnum();
+    euxlValue arg_fd = xlgafixnum();
     int fd = (int)getfixnum(arg_fd);
 
     xllastarg();
@@ -728,11 +728,11 @@ LVAL socket_fd_isset_read()
 }
 
 // (socket-select-read timeout)
-LVAL socket_select_read()
+euxlValue socket_select_read()
 {
     static char *cfn_name = "socket-select-read";
 
-    LVAL arg_time = xlgafixnum();
+    euxlValue arg_time = xlgafixnum();
     int time = (int)getfixnum(arg_time);
 
     xllastarg();
@@ -769,7 +769,7 @@ LVAL socket_select_read()
 }
 
 // (socket-fd-zero-write)
-LVAL socket_fd_zero_write()
+euxlValue socket_fd_zero_write()
 {
     static char *cfn_name = "socket-fd-zero-write";
 
@@ -779,11 +779,11 @@ LVAL socket_fd_zero_write()
 }
 
 // (socket-fd-set-write fd)
-LVAL socket_fd_set_write()
+euxlValue socket_fd_set_write()
 {
     static char *cfn_name = "socket-fd-set-write";
 
-    LVAL arg_fd = xlgafixnum();
+    euxlValue arg_fd = xlgafixnum();
     int fd = (int)getfixnum(arg_fd);
 
     xllastarg();
@@ -793,11 +793,11 @@ LVAL socket_fd_set_write()
 }
 
 // (socket-fd-isset-write fd)
-LVAL socket_fd_isset_write()
+euxlValue socket_fd_isset_write()
 {
     static char *cfn_name = "socket-fd-isset-write";
 
-    LVAL arg_fd = xlgafixnum();
+    euxlValue arg_fd = xlgafixnum();
     int fd = (int)getfixnum(arg_fd);
 
     xllastarg();
@@ -806,11 +806,11 @@ LVAL socket_fd_isset_write()
 }
 
 // (socket-select-write timeout)
-LVAL socket_select_write()
+euxlValue socket_select_write()
 {
     static char *cfn_name = "socket-select-write";
 
-    LVAL arg_time = xlgafixnum();
+    euxlValue arg_time = xlgafixnum();
     int time = (int)getfixnum(arg_time);
 
     xllastarg();
@@ -928,14 +928,14 @@ bool_t xdr_recv_string(FILE *handle, char **ip, int len)
 // entry functions for XDR I/O to and from streams
 
 // (stream-xdr-send-int stream val)
-LVAL stream_xdr_send_int()
+euxlValue stream_xdr_send_int()
 {
     static char *cfn_name = "stream-xdr-send-int";
 
-    LVAL arg_handle = xlgaostream();
+    euxlValue arg_handle = xlgaostream();
     FILE *handle = getfile(arg_handle);
 
-    LVAL arg_i = xlgafixnum();
+    euxlValue arg_i = xlgafixnum();
     int i = (int)getfixnum(arg_i);
 
     xllastarg();
@@ -949,11 +949,11 @@ LVAL stream_xdr_send_int()
 }
 
 // (stream-xdr-recv-int stream)
-LVAL stream_xdr_recv_int()
+euxlValue stream_xdr_recv_int()
 {
     static char *cfn_name = "stream-xdr-recv-int";
 
-    LVAL arg_handle = xlgaistream();
+    euxlValue arg_handle = xlgaistream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -968,14 +968,14 @@ LVAL stream_xdr_recv_int()
 }
 
 // (stream-xdr-send-float stream val)
-LVAL stream_xdr_send_float()
+euxlValue stream_xdr_send_float()
 {
     static char *cfn_name = "stream-xdr-send-float";
 
-    LVAL arg_handle = xlgaostream();
+    euxlValue arg_handle = xlgaostream();
     FILE *handle = getfile(arg_handle);
 
-    LVAL arg_i = xlganumber();
+    euxlValue arg_i = xlganumber();
 
     double i;
     if (fixp(arg_i))
@@ -998,11 +998,11 @@ LVAL stream_xdr_send_float()
 }
 
 // (stream-xdr-recv-float stream)
-LVAL stream_xdr_recv_float()
+euxlValue stream_xdr_recv_float()
 {
     static char *cfn_name = "stream-xdr-recv-float";
 
-    LVAL arg_handle = xlgaistream();
+    euxlValue arg_handle = xlgaistream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -1017,14 +1017,14 @@ LVAL stream_xdr_recv_float()
 }
 
 // (stream-xdr-send-string stream val)
-LVAL stream_xdr_send_string()
+euxlValue stream_xdr_send_string()
 {
     static char *cfn_name = "stream-xdr-send-string";
 
-    LVAL arg_handle = xlgaostream();
+    euxlValue arg_handle = xlgaostream();
     FILE *handle = getfile(arg_handle);
 
-    LVAL arg_string = xlgastring();
+    euxlValue arg_string = xlgastring();
     char *string = (char *)getstring(arg_string);
 
     xllastarg();
@@ -1045,11 +1045,11 @@ LVAL stream_xdr_send_string()
 }
 
 // (stream-xdr-recv-string stream)
-LVAL stream_xdr_recv_string()
+euxlValue stream_xdr_recv_string()
 {
     static char *cfn_name = "stream-xdr-recv-string";
 
-    LVAL arg_handle = xlgaistream();
+    euxlValue arg_handle = xlgaistream();
     FILE *handle = getfile(arg_handle);
 
     xllastarg();
@@ -1078,7 +1078,7 @@ LVAL stream_xdr_recv_string()
 
     buffer[i - 1] = '\0';
 
-    LVAL temp = cvstring2(buffer, i - 1);
+    euxlValue temp = cvstring2(buffer, i - 1);
     free(buffer);
 
     return temp;

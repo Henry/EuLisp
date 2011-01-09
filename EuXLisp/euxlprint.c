@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -38,46 +38,46 @@ int prdepth = 30;
 ///-----------------------------------------------------------------------------
 static char buf[200];
 
-static void print(LVAL fptr, LVAL vptr, int escflag, int depth);
-static void putatm(LVAL fptr, char *tag, LVAL val);
-static void putstring(LVAL fptr, char *str, int len);
-static void putobject(LVAL fptr, LVAL val, int escflag, int depth);
-static void putsym(LVAL fptr, char *str, int escflag, int keyword);
-static void putsubr(LVAL fptr, char *tag, LVAL val);
-static void putclosure(LVAL fptr, char *tag, LVAL val);
-static void putcode(LVAL fptr, char *tag, LVAL val);
-static void putnumber(LVAL fptr, FIXTYPE n);
-static void putflonum(LVAL fptr, FLOTYPE n);
-static void putcharacter(LVAL fptr, int ch);
-static void putgeneric(LVAL fptr, LVAL vptr);
-static void putmethod(LVAL fptr, LVAL vptr);
-static void putslot(LVAL fptr, LVAL vptr);
-static void puttable(LVAL fptr, LVAL vptr);
-static void putclassname(LVAL fptr, LVAL vptr);
+static void print(euxlValue fptr, euxlValue vptr, int escflag, int depth);
+static void putatm(euxlValue fptr, char *tag, euxlValue val);
+static void putstring(euxlValue fptr, char *str, int len);
+static void putobject(euxlValue fptr, euxlValue val, int escflag, int depth);
+static void putsym(euxlValue fptr, char *str, int escflag, int keyword);
+static void putsubr(euxlValue fptr, char *tag, euxlValue val);
+static void putclosure(euxlValue fptr, char *tag, euxlValue val);
+static void putcode(euxlValue fptr, char *tag, euxlValue val);
+static void putnumber(euxlValue fptr, FIXTYPE n);
+static void putflonum(euxlValue fptr, FLOTYPE n);
+static void putcharacter(euxlValue fptr, int ch);
+static void putgeneric(euxlValue fptr, euxlValue vptr);
+static void putmethod(euxlValue fptr, euxlValue vptr);
+static void putslot(euxlValue fptr, euxlValue vptr);
+static void puttable(euxlValue fptr, euxlValue vptr);
+static void putclassname(euxlValue fptr, euxlValue vptr);
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
 // xlprin1 - print an expression with quoting
-void xlprin1(LVAL expr, LVAL file)
+void xlprin1(euxlValue expr, euxlValue file)
 {
     print(file, expr, TRUE, 0);
 }
 
 // xlprint - print an expression without quoting
-void xlprint(LVAL expr, LVAL file)
+void xlprint(euxlValue expr, euxlValue file)
 {
     print(file, expr, FALSE, 0);
 }
 
 // xlterpri - terminate the current print line
-void xlterpri(LVAL fptr)
+void xlterpri(euxlValue fptr)
 {
     xlputc(fptr, '\n');
 }
 
 // xlputstr - output a string
-void xlputstr(LVAL fptr, char *str)
+void xlputstr(euxlValue fptr, char *str)
 {
     while (*str)
     {
@@ -86,7 +86,7 @@ void xlputstr(LVAL fptr, char *str)
 }
 
 // print - internal print function
-static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
+static void print(euxlValue fptr, euxlValue vptr, int escflag, int depth)
 {
     // print nil
     if (vptr == NIL)
@@ -114,7 +114,7 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
                 }
                 xlputc(fptr, '(');
                 int breadth = 0;
-                for (LVAL nptr = vptr; nptr != NIL;)
+                for (euxlValue nptr = vptr; nptr != NIL;)
                 {
                     if (prbreadth >= 0 && breadth++ >= prbreadth)
                     {
@@ -122,7 +122,7 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
                         break;
                     }
                     print(fptr, car(nptr), escflag, depth + 1);
-                    LVAL next;
+                    euxlValue next;
                     if ((next = cdr(nptr)) != NIL)
                     {
                         if (consp(next))
@@ -253,7 +253,7 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
 }
 
 // putatm - output an atom
-static void putatm(LVAL fptr, char *tag, LVAL val)
+static void putatm(euxlValue fptr, char *tag, euxlValue val)
 {
     sprintf(buf, "#<%s #", tag);
     xlputstr(fptr, buf);
@@ -263,7 +263,7 @@ static void putatm(LVAL fptr, char *tag, LVAL val)
 }
 
 // putstring - output a string
-static void putstring(LVAL fptr, char *str, int len)
+static void putstring(euxlValue fptr, char *str, int len)
 {
     // output the initial quote
     xlputc(fptr, '"');
@@ -361,7 +361,7 @@ static int escaped_id(char *id, int keyword)
 }
 
 // putsym - output a symbol
-static void putsym(LVAL fptr, char *str, int escflag, int keyword)
+static void putsym(euxlValue fptr, char *str, int escflag, int keyword)
 {
     // check for printing without escapes
     if (!escflag)
@@ -401,7 +401,7 @@ static void putsym(LVAL fptr, char *str, int escflag, int keyword)
     }
 }
 
-static void strip_angles(char *name, LVAL fptr)
+static void strip_angles(char *name, euxlValue fptr)
 {
     int len = strlen(name);
     if (name[0] == '<' && name[len - 1] == '>')
@@ -417,12 +417,12 @@ static void strip_angles(char *name, LVAL fptr)
 }
 
 // take care on thread <-> lock references
-static void putthread(LVAL fptr, LVAL val, LVAL cls)
+static void putthread(euxlValue fptr, euxlValue val, euxlValue cls)
 {
     xlputstr(fptr, "#<");
     putclassname(fptr, cls);
 
-    LVAL slots;
+    euxlValue slots;
     int i;
     for (slots = getivar(cls, SLOTS), i = 1; slots; slots = cdr(slots), i++)
     {
@@ -445,11 +445,11 @@ static void putthread(LVAL fptr, LVAL val, LVAL cls)
 }
 
 // putobject - output a telos object
-static void putobject(LVAL fptr, LVAL val, int escflag, int depth)
+static void putobject(euxlValue fptr, euxlValue val, int escflag, int depth)
 {
-    extern LVAL s_thread_class;
+    extern euxlValue s_thread_class;
 
-    LVAL cls = getclass(val);
+    euxlValue cls = getclass(val);
     if (cls == getvalue(s_thread_class))
     {
         putthread(fptr, val, cls);
@@ -495,7 +495,7 @@ static void putobject(LVAL fptr, LVAL val, int escflag, int depth)
         else
         {
             int i;
-            LVAL slots;
+            euxlValue slots;
             for
             (
                 slots = getivar(cls, SLOTS), i = 1;
@@ -515,7 +515,7 @@ static void putobject(LVAL fptr, LVAL val, int escflag, int depth)
 }
 
 // putsubr - output a subr/fsubr
-static void putsubr(LVAL fptr, char *tag, LVAL val)
+static void putsubr(euxlValue fptr, char *tag, euxlValue val)
 {
     extern FUNDEF funtab[];
     sprintf(buf, "#<%s %s>", tag, funtab[getoffset(val)].fd_name);
@@ -523,15 +523,15 @@ static void putsubr(LVAL fptr, char *tag, LVAL val)
 }
 
 // putclosure - output a closure
-static void putclosure(LVAL fptr, char *tag, LVAL val)
+static void putclosure(euxlValue fptr, char *tag, euxlValue val)
 {
     putcode(fptr, tag, getcode(val));
 }
 
 // putcode - output a code object
-static void putcode(LVAL fptr, char *tag, LVAL val)
+static void putcode(euxlValue fptr, char *tag, euxlValue val)
 {
-    LVAL name;
+    euxlValue name;
     if ((name = getelement(val, 1)) == NIL)
     {
         putatm(fptr, tag, val);
@@ -544,23 +544,23 @@ static void putcode(LVAL fptr, char *tag, LVAL val)
 }
 
 // putnumber - output a number
-static void putnumber(LVAL fptr, FIXTYPE n)
+static void putnumber(euxlValue fptr, FIXTYPE n)
 {
-    LVAL fmt = getvalue(s_fixfmt);
+    euxlValue fmt = getvalue(s_fixfmt);
     sprintf(buf, (stringp(fmt) ? (char *)getstring(fmt) : IFMT), n);
     xlputstr(fptr, buf);
 }
 
 // putflonum - output a flonum
-static void putflonum(LVAL fptr, FLOTYPE n)
+static void putflonum(euxlValue fptr, FLOTYPE n)
 {
-    LVAL fmt = getvalue(s_flofmt);
+    euxlValue fmt = getvalue(s_flofmt);
     sprintf(buf, (stringp(fmt) ? (char *)getstring(fmt) : FFMT), n);
     xlputstr(fptr, buf);
 }
 
 // putcharacter - output a character value
-static void putcharacter(LVAL fptr, int ch)
+static void putcharacter(euxlValue fptr, int ch)
 {
     switch (ch)
     {
@@ -621,7 +621,7 @@ static void putcharacter(LVAL fptr, int ch)
     }
 }
 
-static void putgeneric(LVAL fptr, LVAL vptr)
+static void putgeneric(euxlValue fptr, euxlValue vptr)
 {
     xlputstr(fptr, "#<");
     putclassname(fptr, class_of(vptr));
@@ -632,14 +632,14 @@ static void putgeneric(LVAL fptr, LVAL vptr)
     xlputstr(fptr, buf);
 }
 
-static void putmethod(LVAL fptr, LVAL vptr)
+static void putmethod(euxlValue fptr, euxlValue vptr)
 {
     xlputstr(fptr, "#<");
     putclassname(fptr, class_of(vptr));
 
     if (genericp(getmdgf(vptr)))
     {
-        LVAL gf = getmdgf(vptr);
+        euxlValue gf = getmdgf(vptr);
         sprintf(buf, " %s",
         symbolp(getgname(gf)) ?
         getstring(getpname(getgname(gf))) : "(anon gf)");
@@ -650,7 +650,7 @@ static void putmethod(LVAL fptr, LVAL vptr)
         xlputstr(fptr, " (unattached)");
     }
 
-    LVAL domain = getmddomain(vptr);
+    euxlValue domain = getmddomain(vptr);
     for (; domain; domain = cdr(domain))
     {
         xlputstr(fptr, " ");
@@ -666,7 +666,7 @@ static void putmethod(LVAL fptr, LVAL vptr)
     xlputstr(fptr, ">");
 }
 
-static void putslot(LVAL fptr, LVAL vptr)
+static void putslot(euxlValue fptr, euxlValue vptr)
 {
     xlputstr(fptr, "#<");
     putclassname(fptr, class_of(vptr));
@@ -675,19 +675,19 @@ static void putslot(LVAL fptr, LVAL vptr)
     xlputstr(fptr, buf);
 }
 
-static void puttable(LVAL fptr, LVAL vptr)
+static void puttable(euxlValue fptr, euxlValue vptr)
 {
-    extern LVAL s_eq, s_eqv, s_equal, s_equals;
+    extern euxlValue s_eq, s_eqv, s_equal, s_equals;
 
-    LVAL eqp = getvalue(s_eq);
-    LVAL eqvp = getvalue(s_eqv);
-    LVAL equalp = getvalue(s_equal);
-    LVAL equals = getvalue(s_equals);
+    euxlValue eqp = getvalue(s_eq);
+    euxlValue eqvp = getvalue(s_eqv);
+    euxlValue equalp = getvalue(s_equal);
+    euxlValue equals = getvalue(s_equals);
 
     xlputstr(fptr, "#<");
     putclassname(fptr, class_of(vptr));
 
-    LVAL comp = gettablecomp(vptr);
+    euxlValue comp = gettablecomp(vptr);
     if (comp == eqp)
     {
         xlputstr(fptr, " eq>");
@@ -710,7 +710,7 @@ static void puttable(LVAL fptr, LVAL vptr)
     }
 }
 
-static void putclassname(LVAL fptr, LVAL cls)
+static void putclassname(euxlValue fptr, euxlValue cls)
 {
     char *name;
     if (symbolp(getivar(cls, CNAME)))

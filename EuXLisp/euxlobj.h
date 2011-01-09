@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -22,8 +22,8 @@
 /// Title: Definitions for classes and objects
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-#ifndef XSOBJ_H
-#define XSOBJ_H
+#ifndef EUXLOBJ_H
+#define EUXLOBJ_H
 
 // c.f. xloinit in csobj.c
 #define CNAME      1
@@ -37,8 +37,8 @@
 
 #define CLASSSIZE  8
 
-extern LVAL object, class, simple_class, class_vector;
+extern euxlValue object, class, simple_class, class_vector;
 
 ///-----------------------------------------------------------------------------
-#endif // XSOBJ_H
+#endif // EUXLOBJ_H
 ///-----------------------------------------------------------------------------

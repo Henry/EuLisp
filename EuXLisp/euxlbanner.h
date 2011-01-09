@@ -1,5 +1,5 @@
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -21,11 +21,11 @@
 /// Title: EuXLisp identification
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-#ifndef XSBANNER_H
-#define XSBANNER_H
+#ifndef EUXLBANNER_H
+#define EUXLBANNER_H
 
 #define BANNER "EuLisp System EuXLisp (formally Euscheme) - Version 0.991"
 
 ///-----------------------------------------------------------------------------
-#endif // XSBANNER_H
+#endif // EUXLBANNER_H
 ///-----------------------------------------------------------------------------

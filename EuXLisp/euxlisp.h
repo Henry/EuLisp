@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -53,7 +53,7 @@
 #define NSSIZE  4000    // number of nodes per node segment
 #endif
 #ifndef VSSIZE
-#define VSSIZE  10000   // number of LVAL's per vector segment
+#define VSSIZE  10000   // number of euxlValue's per vector segment
 #endif
 
 // reasons for GC
@@ -108,7 +108,7 @@
 #define FALSE   0
 #endif
 #ifndef NIL
-#define NIL     (LVAL)0
+#define NIL     (euxlValue)0
 #endif
 
 extern FILE *filein;
@@ -249,7 +249,7 @@ extern FILE *filein;
 // This is necessary because the memory pointed to by the n_vdata field
 // of a vector object can move during a garbage collection.  This macro
 // guarantees that evaluation happens in the right order.
-#define vupdate(x,i,v)  { LVAL vutmp=(v); (x)->n_vdata[i] = vutmp; }
+#define vupdate(x,i,v)  { euxlValue vutmp=(v); (x)->n_vdata[i] = vutmp; }
 
 // cons access macros
 #define car(x)          ((x)->n_car)
@@ -314,7 +314,7 @@ extern FILE *filein;
 #define getchcode(x)    ((x)->n_chcode)
 
 // small fixnum access macros
-#define cvsfixnum(x)    ((LVAL)(((OFFTYPE)x << 1) | 1))
+#define cvsfixnum(x)    ((euxlValue)(((OFFTYPE)x << 1) | 1))
 #define getsfixnum(x)   ((FIXTYPE)((OFFTYPE)(x) >> 1))
 
 // string access macros
@@ -458,16 +458,16 @@ typedef struct node
             int xs_offset;      // offset into funtab
         } n_xsubr;
     } n_info;
-} NODE, *LVAL;
+} NODE, *euxlValue;
 
 // memory allocator definitions
 
 // macros to compute the size of a segment
 #define nsegsize(n) (sizeof(NSEGMENT)+((n)-1)*sizeof(struct node))
-#define vsegsize(n) (sizeof(VSEGMENT)+((n)-1)*sizeof(LVAL))
+#define vsegsize(n) (sizeof(VSEGMENT)+((n)-1)*sizeof(euxlValue))
 
 // macro to convert a byte size to a word size
-#define btow_size(n)    (((n) + sizeof(LVAL) - 1) / sizeof(LVAL))
+#define btow_size(n)    (((n) + sizeof(euxlValue) - 1) / sizeof(euxlValue))
 
 // node segment structure
 typedef struct nsegment
@@ -481,29 +481,29 @@ typedef struct nsegment
 typedef struct vsegment
 {
     struct vsegment *vs_next;   // next vector segment
-    LVAL *vs_free;              // next free location in this segment
-    LVAL *vs_top;               // top of segment (plus one)
-    LVAL vs_data[1];            // segment data
+    euxlValue *vs_free;              // next free location in this segment
+    euxlValue *vs_top;               // top of segment (plus one)
+    euxlValue vs_data[1];            // segment data
 } VSEGMENT;
 
 // function definition structure
 typedef struct
 {
     char *fd_name;              // function name
-        LVAL(*fd_subr) ();      // function entry point
+        euxlValue(*fd_subr) ();      // function entry point
 } FUNDEF;
 
 // external variables
-extern LVAL *xlstkbase;         // base of value stack
-extern LVAL *xlstktop;          // top of value stack
-extern LVAL *xlsp;              // value stack pointer
+extern euxlValue *xlstkbase;         // base of value stack
+extern euxlValue *xlstktop;          // top of value stack
+extern euxlValue *xlsp;              // value stack pointer
 extern int xlargc;              // argument count for current call
-extern LVAL current_module;     // current module
-extern LVAL root_module;        // the root module
-extern LVAL reintern_module;    // module for reinterning symbols
-extern LVAL module_list;        // all the modules
-extern LVAL keyword_array;      // all the keywords
-extern LVAL obarray;            // prototype symbols
+extern euxlValue current_module;     // current module
+extern euxlValue root_module;        // the root module
+extern euxlValue reintern_module;    // module for reinterning symbols
+extern euxlValue module_list;        // all the modules
+extern euxlValue keyword_array;      // all the keywords
+extern euxlValue obarray;            // prototype symbols
 
 #define xlenter(name)           xlenter_module(name,current_module)
 

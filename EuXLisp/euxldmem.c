@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -29,16 +29,16 @@
 ///-----------------------------------------------------------------------------
 /// Virtual machine registers
 ///-----------------------------------------------------------------------------
-LVAL xlfun = NIL;               // current function
-LVAL xlenv = NIL;               // current environment
-LVAL xlval = NIL;               // value of most recent instruction
-LVAL *xlsp = NULL;              // value stack pointer
+euxlValue xlfun = NIL;               // current function
+euxlValue xlenv = NIL;               // current environment
+euxlValue xlval = NIL;               // value of most recent instruction
+euxlValue *xlsp = NULL;              // value stack pointer
 
 ///-----------------------------------------------------------------------------
 /// Stack limits
 ///-----------------------------------------------------------------------------
-LVAL *xlstkbase = NULL;         // base of value stack
-LVAL *xlstktop = NULL;          // top of value stack (actually, one beyond)
+euxlValue *xlstkbase = NULL;         // base of value stack
+euxlValue *xlstktop = NULL;          // top of value stack (actually, one beyond)
 
 ///-----------------------------------------------------------------------------
 /// variables shared with xsimage.c
@@ -54,7 +54,7 @@ NSEGMENT *nslast = NULL;        // last node segment
 int nscount = 0;                // number of node segments
 FIXTYPE nnodes = 0;             // total number of nodes
 FIXTYPE nfree = 0;              // number of nodes in free list
-LVAL fnodes = NIL;              // list of free nodes
+euxlValue fnodes = NIL;              // list of free nodes
 
 ///-----------------------------------------------------------------------------
 /// Vector (and string) space
@@ -62,8 +62,8 @@ LVAL fnodes = NIL;              // list of free nodes
 VSEGMENT *vsegments = NULL;     // list of vector segments
 VSEGMENT *vscurrent = NULL;     // current vector segment
 int vscount = 0;                // number of vector segments
-LVAL *vfree = NULL;             // next free location in vector space
-LVAL *vtop = NULL;              // top of vector space
+euxlValue *vfree = NULL;             // next free location in vector space
+euxlValue *vtop = NULL;              // top of vector space
 
 ///-----------------------------------------------------------------------------
 /// External variables
@@ -73,13 +73,13 @@ LVAL *vtop = NULL;              // top of vector space
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static LVAL allocnode(int type);
+static euxlValue allocnode(int type);
 static void findmemory();
-static LVAL allocvector(int type, int size);
+static euxlValue allocvector(int type, int size);
 static int findvmemory(int size);
 void gc(int reason);
-static void mark(LVAL ptr);
-static void markvector(LVAL vect);
+static void mark(euxlValue ptr);
+static void markvector(euxlValue vect);
 static void compact();
 static void compact_vector(VSEGMENT * vseg);
 static void sweep();
@@ -90,9 +90,9 @@ static void badobjtype(int type);
 /// Functions
 ///-----------------------------------------------------------------------------
 // cons - construct a new cons node
-LVAL cons(LVAL x, LVAL y)
+euxlValue cons(euxlValue x, euxlValue y)
 {
-    LVAL nnode;
+    euxlValue nnode;
 
     // get a free node
     if ((nnode = fnodes) == NIL)
@@ -120,25 +120,25 @@ LVAL cons(LVAL x, LVAL y)
 }
 
 // newframe - create a new environment frame
-LVAL newframe(LVAL parent, int size)
+euxlValue newframe(euxlValue parent, int size)
 {
-    LVAL frame = cons(newvector(size), parent);
+    euxlValue frame = cons(newvector(size), parent);
     frame->n_type = ENV;
     return (frame);
 }
 
 // cvstring - convert a string to a string node
-LVAL cvstring(char *str)
+euxlValue cvstring(char *str)
 {
-    LVAL val = newstring(strlen(str) + 1);
+    euxlValue val = newstring(strlen(str) + 1);
     strcpy(getstring(val), str);
     return (val);
 }
 
 // cvstring2 - convert a string (possibly containing NULLs) to a string node
-LVAL cvstring2(char *str, int len)
+euxlValue cvstring2(char *str, int len)
 {
-    LVAL val = newstring(len + 1);
+    euxlValue val = newstring(len + 1);
 
     for (int i = 0; i < len; i++)
     {
@@ -151,11 +151,11 @@ LVAL cvstring2(char *str, int len)
 }
 
 // ensure unique names for symbols
-static void set_symbol_name(LVAL new, char *pname)
+static void set_symbol_name(euxlValue new, char *pname)
 {
     int i = hash(pname, HSIZE);
 
-    LVAL sym, name;
+    euxlValue sym, name;
     for (sym = getelement(obarray, i); sym; sym = cdr(sym))
     {
         if (strcmp(pname, getstring(getpname(car(sym)))) == 0)
@@ -176,9 +176,9 @@ static void set_symbol_name(LVAL new, char *pname)
 }
 
 // cvsymbol - convert a string to a symbol
-LVAL cvsymbol(char *pname)
+euxlValue cvsymbol(char *pname)
 {
-    LVAL val = allocvector(SYMBOL, SYMSIZE);
+    euxlValue val = allocvector(SYMBOL, SYMSIZE);
     cpush(val);
     setvalue(val, s_unbound);
     set_symbol_name(val, pname);
@@ -188,9 +188,9 @@ LVAL cvsymbol(char *pname)
 }
 
 // cvmodule - convert a string to a module
-LVAL cvmodule(char *name)
+euxlValue cvmodule(char *name)
 {
-    extern LVAL xlenter_keyword();
+    extern euxlValue xlenter_keyword();
 
     // delete old module of same name if there
     if (module_list != NIL)
@@ -201,7 +201,7 @@ LVAL cvmodule(char *name)
         }
         else
         {
-            LVAL mods1, mods2;
+            euxlValue mods1, mods2;
             for
             (
                 mods1 = module_list, mods2 = cdr(module_list);
@@ -219,10 +219,10 @@ LVAL cvmodule(char *name)
     }
 
     // make new module
-    LVAL val = allocvector(MODULE, MODSIZE);
+    euxlValue val = allocvector(MODULE, MODSIZE);
     cpush(val);
     setmname(val, cvstring(name));      // module name
-    LVAL obarray = newvector(HSIZE);
+    euxlValue obarray = newvector(HSIZE);
     setmsymbols(val, obarray);  // module obarray
     // next line to ensure that oblists of different modules differ, and are
     // not compiled into equal literals
@@ -232,62 +232,62 @@ LVAL cvmodule(char *name)
 }
 
 // cvfixnum - convert an integer to a fixnum node
-LVAL cvfixnum(FIXTYPE n)
+euxlValue cvfixnum(FIXTYPE n)
 {
     if (n >= SFIXMIN && n <= SFIXMAX)
     {
         return (cvsfixnum(n));
     }
-    LVAL val = allocnode(FIXNUM);
+    euxlValue val = allocnode(FIXNUM);
     val->n_int = n;
     return (val);
 }
 
 // cvflonum - convert a floating point number to a flonum node
-LVAL cvflonum(FLOTYPE n)
+euxlValue cvflonum(FLOTYPE n)
 {
-    LVAL val = allocnode(FLONUM);
+    euxlValue val = allocnode(FLONUM);
     val->n_flonum = n;
     return (val);
 }
 
 // cvchar - convert an integer to a character node
-LVAL cvchar(int ch)
+euxlValue cvchar(int ch)
 {
-    LVAL val = allocnode(CHAR);
+    euxlValue val = allocnode(CHAR);
     val->n_chcode = ch;
     return (val);
 }
 
 // cvclosure - convert code and an environment to a closure
-LVAL cvclosure(LVAL code, LVAL env)
+euxlValue cvclosure(euxlValue code, euxlValue env)
 {
-    LVAL val = cons(code, env);
+    euxlValue val = cons(code, env);
     val->n_type = CLOSURE;
     return (val);
 }
 
 // cvpromise - convert a procedure to a promise
-LVAL cvpromise(LVAL code, LVAL env)
+euxlValue cvpromise(euxlValue code, euxlValue env)
 {
-    LVAL val = cons(cvclosure(code, env), NIL);
+    euxlValue val = cons(cvclosure(code, env), NIL);
     val->n_type = PROMISE;
     return (val);
 }
 
 // cvsubr - convert a function to a subr/xsubr
-LVAL cvsubr(int type, LVAL(*fcn) (), int offset)
+euxlValue cvsubr(int type, euxlValue(*fcn) (), int offset)
 {
-    LVAL val = allocnode(type);
+    euxlValue val = allocnode(type);
     val->n_subr = fcn;
     val->n_offset = offset;
     return (val);
 }
 
 // cvstream - convert a file pointer to an stream
-LVAL cvstream(FILE *fp, int flags)
+euxlValue cvstream(FILE *fp, int flags)
 {
-    LVAL val = allocnode(STREAM);
+    euxlValue val = allocnode(STREAM);
     setfile(val, fp);
     setsavech(val, '\0');
     setpflags(val, flags);
@@ -295,12 +295,12 @@ LVAL cvstream(FILE *fp, int flags)
 }
 
 // cvtable - convert a comparator function to a table
-LVAL cvtable(LVAL comp, LVAL fill)
+euxlValue cvtable(euxlValue comp, euxlValue fill)
 {
     check(3);
     push(comp);
     push(fill);
-    LVAL val = allocvector(TABLE, TABLESIZE);
+    euxlValue val = allocvector(TABLE, TABLESIZE);
     push(val);
     settablecomp(val, comp);
     settabletable(val, newvector(HTABLESIZE));
@@ -310,35 +310,35 @@ LVAL cvtable(LVAL comp, LVAL fill)
 }
 
 // newvector - allocate and initialize a new vector
-LVAL newvector(int size)
+euxlValue newvector(int size)
 {
     return (allocvector(VECTOR, size));
 }
 
 // newstring - allocate and initialize a new string
-LVAL newstring(int size)
+euxlValue newstring(int size)
 {
-    LVAL val = allocvector(STRING, btow_size(size));
+    euxlValue val = allocvector(STRING, btow_size(size));
     val->n_vsize = size;
     return (val);
 }
 
 // newcode - create a new code object
-LVAL newcode(int nlits)
+euxlValue newcode(int nlits)
 {
     return (allocvector(CODE, nlits));
 }
 
 // newcontinuation - create a new continuation object
-LVAL newcontinuation(int size)
+euxlValue newcontinuation(int size)
 {
     return (allocvector(CONTINUATION, size));
 }
 
 // newobject - allocate and initialize a new object
-LVAL newobject(LVAL cls, int size)
+euxlValue newobject(euxlValue cls, int size)
 {
-    LVAL val = allocvector(OBJECT, size + 1);        // class, ivars
+    euxlValue val = allocvector(OBJECT, size + 1);        // class, ivars
     setclass(val, cls);
     for (int i = 1; i <= size; i++)
     {
@@ -348,19 +348,19 @@ LVAL newobject(LVAL cls, int size)
     return (val);
 }
 
-LVAL newgeneric()
+euxlValue newgeneric()
 {
     return allocvector(GENERIC, GENSIZE);
 }
 
-LVAL newmethod()
+euxlValue newmethod()
 {
     return allocvector(METHOD, MDSIZE);
 }
 
-LVAL newslot(LVAL name)
+euxlValue newslot(euxlValue name)
 {
-    LVAL val = allocvector(SLOT, SLOTSIZE);
+    euxlValue val = allocvector(SLOT, SLOTSIZE);
     setslotname(val, name);
     setslotkey(val, s_unbound);
     setslotdefault(val, s_unbound);
@@ -369,9 +369,9 @@ LVAL newslot(LVAL name)
 }
 
 // allocnode - allocate a new node
-static LVAL allocnode(int type)
+static euxlValue allocnode(int type)
 {
-    LVAL nnode;
+    euxlValue nnode;
 
     // get a free node
     if ((nnode = fnodes) == NIL)
@@ -416,7 +416,7 @@ int nexpand(int size)
     if ((newseg = newnsegment(size)) != NULL)
     {
         // add each new node to the free list
-        LVAL p = &newseg->ns_data[0];
+        euxlValue p = &newseg->ns_data[0];
         for (int i = NSSIZE; --i >= 0; ++p)
         {
             p->n_type = FREE;
@@ -429,9 +429,9 @@ int nexpand(int size)
 }
 
 // allocvector - allocate and initialize a new vector node
-static LVAL allocvector(int type, int size)
+static euxlValue allocvector(int type, int size)
 {
-    register LVAL val;
+    register euxlValue val;
 
     // get a free node
     if ((val = fnodes) == NIL)
@@ -468,7 +468,7 @@ static LVAL allocvector(int type, int size)
     }
 
     // allocate the next available block
-    register LVAL *p = vfree;
+    register euxlValue *p = vfree;
     vfree += size;
 
     // store the backpointer
@@ -610,14 +610,14 @@ VSEGMENT *newvsegment(unsigned int n)
 
 void pstack()
 {
-    extern LVAL s_stdout;
+    extern euxlValue s_stdout;
 
     if (s_stdout && getvalue(s_stdout))
     {
         xlterpri(xstdout());
-        for (LVAL *p = xlsp; p < xlstktop; ++p)
+        for (euxlValue *p = xlsp; p < xlstktop; ++p)
         {
-            LVAL tmp = *p;
+            euxlValue tmp = *p;
             xlprin1(tmp, xstdout());
             xlterpri(xstdout());
         }
@@ -628,7 +628,7 @@ void pstack()
 void gc(int reason)
 {
     extern int quiet;
-    extern LVAL s_gcmsgs;
+    extern euxlValue s_gcmsgs;
 
     if (!quiet && s_gcmsgs && getvalue(s_gcmsgs))
     {
@@ -684,9 +684,9 @@ void gc(int reason)
     }
 
     // mark the stack
-    for (register LVAL *p = xlsp; p < xlstktop; ++p)
+    for (register euxlValue *p = xlsp; p < xlstktop; ++p)
     {
-        register LVAL tmp;
+        register euxlValue tmp;
         if ((tmp = *p) != NIL && ispointer(tmp))
         {
             mark(tmp);
@@ -711,7 +711,7 @@ void gc(int reason)
 }
 
 // mark - mark all accessible nodes
-static void mark(LVAL ptr)
+static void mark(euxlValue ptr)
 {
     if (!ispointer(ptr))
     {
@@ -719,8 +719,8 @@ static void mark(LVAL ptr)
     }
 
     // initialize
-    register LVAL prev = NIL;
-    register LVAL this = ptr;
+    register euxlValue prev = NIL;
+    register euxlValue this = ptr;
 
     // mark this node
     for (;;)
@@ -737,7 +737,7 @@ static void mark(LVAL ptr)
                 case ENV:
                     {
                         this->n_flags |= MARK;
-                        register LVAL tmp;
+                        register euxlValue tmp;
                         if ((tmp = car(this)) != NIL && ispointer(tmp))
                         {
                             this->n_flags |= LEFT;
@@ -788,7 +788,7 @@ static void mark(LVAL ptr)
             // make sure there is a previous node
             if (prev)
             {
-                register LVAL tmp;
+                register euxlValue tmp;
                 if (prev->n_flags & LEFT)
                 {
                     // came from left side
@@ -820,15 +820,15 @@ static void mark(LVAL ptr)
 }
 
 // markvector - mark a vector-like node
-static void markvector(LVAL vect)
+static void markvector(euxlValue vect)
 {
-    register LVAL *p;
+    register euxlValue *p;
     if ((p = vect->n_vdata) != NULL)
     {
         register int n = getsize(vect);
         while (--n >= 0)
         {
-            register LVAL tmp;
+            register euxlValue tmp;
             if ((tmp = *p++) != NIL && ispointer(tmp))
             {
                 mark(tmp);
@@ -865,13 +865,13 @@ static void compact()
 // compact_vector - compact a vector segment
 static void compact_vector(VSEGMENT * vseg)
 {
-    register LVAL *vdata = &vseg->vs_data[0];
-    register LVAL *vnext = vdata;
-    register LVAL *vfree = vseg->vs_free;
+    register euxlValue *vdata = &vseg->vs_data[0];
+    register euxlValue *vnext = vdata;
+    register euxlValue *vfree = vseg->vs_free;
 
     while (vdata < vfree)
     {
-        register LVAL vector = *vdata;
+        register euxlValue vector = *vdata;
         register int vsize =
         (
             vector->n_type == STRING
@@ -921,7 +921,7 @@ static void sweep()
 static void sweep_segment(NSEGMENT * nseg)
 {
     register FIXTYPE n;
-    register LVAL p;
+    register euxlValue p;
 
     // add all unmarked nodes
     for (p = &nseg->ns_data[0], n = nseg->ns_size; --n >= 0L; ++p)
@@ -966,8 +966,8 @@ void xlminit(unsigned int ssize)
     vfree = vtop = NULL;
 
     // allocate the value stack
-    unsigned int n = ssize * sizeof(LVAL);
-    if ((xlstkbase = (LVAL *) calloc(1, n)) == NULL)
+    unsigned int n = ssize * sizeof(euxlValue);
+    if ((xlstkbase = (euxlValue *) calloc(1, n)) == NULL)
     {
         xlfatal("insufficient memory");
     }

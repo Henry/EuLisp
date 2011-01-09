@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -25,12 +25,12 @@
 
 #include "euxlisp.h"
 
-LVAL module_list = NIL;
-LVAL current_module = NIL;
-LVAL root_module = NIL;
-LVAL reintern_module = NIL;
-LVAL keyword_array;
-extern LVAL true, s_syntax_error, s_general_error;
+euxlValue module_list = NIL;
+euxlValue current_module = NIL;
+euxlValue root_module = NIL;
+euxlValue reintern_module = NIL;
+euxlValue keyword_array;
+extern euxlValue true, s_syntax_error, s_general_error;
 
 typedef struct
 {
@@ -57,7 +57,7 @@ void init_root_module()
 // export everthing from root module
 void init_root_exports()
 {
-    extern LVAL append();
+    extern euxlValue append();
 
     // ensure all specials are entered
     for (FTDEF *fptr = ftab; fptr->ft_name; fptr++)
@@ -65,8 +65,8 @@ void init_root_exports()
         xlenter(fptr->ft_name);
     }
 
-    LVAL array = getmsymbols(root_module);
-    LVAL exports = getmexports(root_module);
+    euxlValue array = getmsymbols(root_module);
+    euxlValue exports = getmexports(root_module);
 
     for (int i = 0; i < HSIZE; i++)
     {
@@ -76,15 +76,15 @@ void init_root_exports()
     setmexports(current_module, exports);
 }
 
-static LVAL get_a_module()
+static euxlValue get_a_module()
 {
     static char *cfn_name = "get_a_module";
 
-    LVAL mod;
+    euxlValue mod;
 
     if (moreargs())
     {
-        LVAL name = xlgetarg();
+        euxlValue name = xlgetarg();
         if (!symbolp(name) && !stringp(name))
         {
             xlcerror
@@ -117,30 +117,30 @@ static LVAL get_a_module()
 }
 
 // (module-symbols [mod])
-LVAL module_symbols()
+euxlValue module_symbols()
 {
     return getmsymbols(get_a_module());
 }
 
 // (module-exports [mod])
-LVAL module_exports()
+euxlValue module_exports()
 {
     return getmexports(get_a_module());
 }
 
 // (symbol-module sym)
-LVAL symbol_module()
+euxlValue symbol_module()
 {
     static char *cfn_name = "symbol-module";
 
-    LVAL sym = xlgasymbol();
+    euxlValue sym = xlgasymbol();
     xllastarg();
-    LVAL mod = getmodule(sym);
+    euxlValue mod = getmodule(sym);
     return mod == NIL ? NIL : getmname(mod);
 }
 
 // (current-module)
-LVAL current_mod()
+euxlValue current_mod()
 {
     static char *cfn_name = "current-module";
     xllastarg();
@@ -148,7 +148,7 @@ LVAL current_mod()
 }
 
 // (module-list)
-LVAL mod_list()
+euxlValue mod_list()
 {
     static char *cfn_name = "module-list";
     xllastarg();
@@ -156,19 +156,19 @@ LVAL mod_list()
 }
 
 // (unintern sym ...)
-LVAL unintern()
+euxlValue unintern()
 {
     static char *cfn_name = "unintern";
 
     while (moreargs())
     {
-        LVAL sym = xlgasymbol();
+        euxlValue sym = xlgasymbol();
 
         char *name = getstring(getpname(sym));
-        LVAL array = getmsymbols(current_module);
+        euxlValue array = getmsymbols(current_module);
         int i = hash(name, HSIZE);
 
-        LVAL syms1 = getelement(array, i);
+        euxlValue syms1 = getelement(array, i);
         if (syms1 == NIL)
         {
             continue;
@@ -182,7 +182,7 @@ LVAL unintern()
 
         for
         (
-            LVAL syms2 = cdr(syms1);
+            euxlValue syms2 = cdr(syms1);
             syms2;
             syms1 = cdr(syms1), syms2 = cdr(syms2)
         )
@@ -199,7 +199,7 @@ LVAL unintern()
 }
 
 // (keyword-array)
-LVAL xkeyword_array()
+euxlValue xkeyword_array()
 {
     static char *cfn_name = "keyword-array";
     xllastarg();
@@ -207,11 +207,11 @@ LVAL xkeyword_array()
 }
 
 // (set-module mod)
-LVAL xset_module()
+euxlValue xset_module()
 {
     static char *cfn_name = "set-module";
 
-    LVAL mod = xlgamodule();
+    euxlValue mod = xlgamodule();
     xllastarg();
 
     current_module = mod;
@@ -224,7 +224,7 @@ LVAL xset_module()
 }
 
 // sym a symbol or a string that might name a module
-LVAL find_module(LVAL sym)
+euxlValue find_module(euxlValue sym)
 {
     char *name;
 
@@ -237,7 +237,7 @@ LVAL find_module(LVAL sym)
         name = getstring(sym);
     }
 
-    for (LVAL mods = module_list; mods; mods = cdr(mods))
+    for (euxlValue mods = module_list; mods; mods = cdr(mods))
     {
         if (strcmp(name, getstring(getmname(car(mods)))) == 0)
         {
@@ -248,11 +248,11 @@ LVAL find_module(LVAL sym)
     return NIL;
 }
 
-LVAL xfind_module()
+euxlValue xfind_module()
 {
     static char *cfn_name = "find-module";
 
-    LVAL mod = xlgetarg();
+    euxlValue mod = xlgetarg();
     xllastarg();
 
     if (stringp(mod) || symbolp(mod))
@@ -265,7 +265,7 @@ LVAL xfind_module()
     return NIL; // not reached
 }
 
-LVAL get_module(char *name)
+euxlValue get_module(char *name)
 {
     return find_module(xlenter_module(name, root_module));
 }

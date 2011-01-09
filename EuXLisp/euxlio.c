@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -32,13 +32,13 @@ FIXTYPE xlfsize;
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-extern LVAL s_stdin, s_stdout, s_stderr, s_unbound;
+extern euxlValue s_stdin, s_stdout, s_stderr, s_unbound;
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
 // xlgetc - get a character from a file or stream
-int xlgetc(LVAL fptr)
+int xlgetc(euxlValue fptr)
 {
     int ch;
 
@@ -81,7 +81,7 @@ int xlgetc(LVAL fptr)
 }
 
 // xlungetc - unget a character
-void xlungetc(LVAL fptr, int ch)
+void xlungetc(euxlValue fptr, int ch)
 {
     // check for ungetc from nil
     if (fptr == NIL)
@@ -94,7 +94,7 @@ void xlungetc(LVAL fptr, int ch)
 }
 
 // xlpeekchar
-int xlpeekchar(LVAL fptr)
+int xlpeekchar(euxlValue fptr)
 {
     int ch;
     if (fptr == NIL)
@@ -115,7 +115,7 @@ int xlpeekchar(LVAL fptr)
 }
 
 // xlputc - put a character to a file or stream
-void xlputc(LVAL fptr, int ch)
+void xlputc(euxlValue fptr, int ch)
 {
     // count the character
     ++xlfsize;
@@ -160,14 +160,14 @@ void stdputstr(char *str)
 }
 
 // errprint - print to *error-output*
-void errprint(LVAL expr)
+void errprint(euxlValue expr)
 {
     xlprin1(expr, getvalue(s_stderr));
     xlterpri(getvalue(s_stderr));
 }
 
 // errprin - prin to *error-output*
-void errprin(LVAL expr)
+void errprin(euxlValue expr)
 {
     xlprin1(expr, getvalue(s_stderr));
 }

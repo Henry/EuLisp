@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -36,30 +36,30 @@ static int gsnumber = 1;                        // gensym number
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-extern LVAL xlenv, xlval;
+extern euxlValue xlenv, xlval;
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static LVAL cxr(char *adstr);
-LVAL member(int (*fcn) (LVAL a, LVAL b));
-LVAL assoc(int (*fcn) (LVAL a, LVAL b));
-static LVAL nth(int carflag);
-static LVAL vref(LVAL vector);
-static LVAL vset(LVAL vector);
-static LVAL eqtest(int (*fcn) (LVAL a, LVAL b));
+static euxlValue cxr(char *adstr);
+euxlValue member(int (*fcn) (euxlValue a, euxlValue b));
+euxlValue assoc(int (*fcn) (euxlValue a, euxlValue b));
+static euxlValue nth(int carflag);
+static euxlValue vref(euxlValue vector);
+static euxlValue vset(euxlValue vector);
+static euxlValue eqtest(int (*fcn) (euxlValue a, euxlValue b));
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
 // xcons - construct a new list cell
-LVAL xcons()
+euxlValue xcons()
 {
     static char *cfn_name = "cons";
 
     // get the two arguments
-    LVAL carval = xlgetarg();
-    LVAL cdrval = xlgetarg();
+    euxlValue carval = xlgetarg();
+    euxlValue cdrval = xlgetarg();
     xllastarg();
 
     // construct a new cons node
@@ -67,197 +67,197 @@ LVAL xcons()
 }
 
 // xcar - built-in function 'car'
-LVAL xcar()
+euxlValue xcar()
 {
     static char *cfn_name = "car";
 
-    LVAL list = xlgacons();
+    euxlValue list = xlgacons();
     xllastarg();
     return car(list);
 }
 
 // xicar - built-in function '%car'
-LVAL xicar()
+euxlValue xicar()
 {
     static char *cfn_name = "%car";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (car(arg));
 }
 
 // xcdr - built-in function 'cdr'
-LVAL xcdr()
+euxlValue xcdr()
 {
     static char *cfn_name = "cdr";
 
-    LVAL arg = xlgacons();
+    euxlValue arg = xlgacons();
     xllastarg();
     return cdr(arg);
 }
 
 // xicdr - built-in function '%cdr'
-LVAL xicdr()
+euxlValue xicdr()
 {
     static char *cfn_name = "%cdr";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (cdr(arg));
 }
 
 // cxxr functions
-LVAL xcaar()
+euxlValue xcaar()
 {
     return (cxr("aa"));
 }
 
-LVAL xcadr()
+euxlValue xcadr()
 {
     return (cxr("da"));
 }
 
-LVAL xcdar()
+euxlValue xcdar()
 {
     return (cxr("ad"));
 }
 
-LVAL xcddr()
+euxlValue xcddr()
 {
     return (cxr("dd"));
 }
 
 // cxxxr functions
-LVAL xcaaar()
+euxlValue xcaaar()
 {
     return (cxr("aaa"));
 }
 
-LVAL xcaadr()
+euxlValue xcaadr()
 {
     return (cxr("daa"));
 }
 
-LVAL xcadar()
+euxlValue xcadar()
 {
     return (cxr("ada"));
 }
 
-LVAL xcaddr()
+euxlValue xcaddr()
 {
     return (cxr("dda"));
 }
 
-LVAL xcdaar()
+euxlValue xcdaar()
 {
     return (cxr("aad"));
 }
 
-LVAL xcdadr()
+euxlValue xcdadr()
 {
     return (cxr("dad"));
 }
 
-LVAL xcddar()
+euxlValue xcddar()
 {
     return (cxr("add"));
 }
 
-LVAL xcdddr()
+euxlValue xcdddr()
 {
     return (cxr("ddd"));
 }
 
 // cxxxxr functions
-LVAL xcaaaar()
+euxlValue xcaaaar()
 {
     return (cxr("aaaa"));
 }
 
-LVAL xcaaadr()
+euxlValue xcaaadr()
 {
     return (cxr("daaa"));
 }
 
-LVAL xcaadar()
+euxlValue xcaadar()
 {
     return (cxr("adaa"));
 }
 
-LVAL xcaaddr()
+euxlValue xcaaddr()
 {
     return (cxr("ddaa"));
 }
 
-LVAL xcadaar()
+euxlValue xcadaar()
 {
     return (cxr("aada"));
 }
 
-LVAL xcadadr()
+euxlValue xcadadr()
 {
     return (cxr("dada"));
 }
 
-LVAL xcaddar()
+euxlValue xcaddar()
 {
     return (cxr("adda"));
 }
 
-LVAL xcadddr()
+euxlValue xcadddr()
 {
     return (cxr("ddda"));
 }
 
-LVAL xcdaaar()
+euxlValue xcdaaar()
 {
     return (cxr("aaad"));
 }
 
-LVAL xcdaadr()
+euxlValue xcdaadr()
 {
     return (cxr("daad"));
 }
 
-LVAL xcdadar()
+euxlValue xcdadar()
 {
     return (cxr("adad"));
 }
 
-LVAL xcdaddr()
+euxlValue xcdaddr()
 {
     return (cxr("ddad"));
 }
 
-LVAL xcddaar()
+euxlValue xcddaar()
 {
     return (cxr("aadd"));
 }
 
-LVAL xcddadr()
+euxlValue xcddadr()
 {
     return (cxr("dadd"));
 }
 
-LVAL xcdddar()
+euxlValue xcdddar()
 {
     return (cxr("addd"));
 }
 
-LVAL xcddddr()
+euxlValue xcddddr()
 {
     return (cxr("dddd"));
 }
 
 // cxr - common car/cdr function
-static LVAL cxr(char *adstr)
+static euxlValue cxr(char *adstr)
 {
     static char *cfn_name = "c[ad]r";
 
     // get the list
-    LVAL list = xlgalist();
+    euxlValue list = xlgalist();
     xllastarg();
-    LVAL lst = list;
+    euxlValue lst = list;
     char *ad = adstr;
 
     // perform the car/cdr operations
@@ -279,13 +279,13 @@ static LVAL cxr(char *adstr)
 }
 
 // xsetcar - built-in function 'set-car'
-LVAL xsetcar()
+euxlValue xsetcar()
 {
     static char *cfn_name = "set-car";
 
     // get the cons and the new car
-    LVAL arg = xlgacons();
-    LVAL newcar = xlgetarg();
+    euxlValue arg = xlgacons();
+    euxlValue newcar = xlgetarg();
     xllastarg();
 
     // replace the car
@@ -294,13 +294,13 @@ LVAL xsetcar()
 }
 
 // xisetcar - built-in function '%set-car'
-LVAL xisetcar()
+euxlValue xisetcar()
 {
     static char *cfn_name = "%set-car";
 
     // get the cons and the new car
-    LVAL arg = xlgetarg();
-    LVAL newcar = xlgetarg();
+    euxlValue arg = xlgetarg();
+    euxlValue newcar = xlgetarg();
     xllastarg();
 
     // replace the car
@@ -309,13 +309,13 @@ LVAL xisetcar()
 }
 
 // xsetcdr - built-in function 'set-cdr'
-LVAL xsetcdr()
+euxlValue xsetcdr()
 {
     static char *cfn_name = "set-cdr";
 
     // get the cons and the new cdr
-    LVAL arg = xlgacons();
-    LVAL newcdr = xlgetarg();
+    euxlValue arg = xlgacons();
+    euxlValue newcdr = xlgetarg();
     xllastarg();
 
     // replace the cdr
@@ -324,13 +324,13 @@ LVAL xsetcdr()
 }
 
 // xisetcdr - built-in function '%set-cdr'
-LVAL xisetcdr()
+euxlValue xisetcdr()
 {
     static char *cfn_name = "%set-cdr";
 
     // get the cons and the new cdr
-    LVAL arg = xlgetarg();
-    LVAL newcdr = xlgetarg();
+    euxlValue arg = xlgetarg();
+    euxlValue newcdr = xlgetarg();
     xllastarg();
 
     // replace the cdr
@@ -339,19 +339,19 @@ LVAL xisetcdr()
 }
 
 // xlist - built-in function 'list'
-LVAL xlist()
+euxlValue xlist()
 {
     // initialize the list
-    LVAL val = NIL;
+    euxlValue val = NIL;
 
     // add each argument to the list
     if (moreargs())
     {
-        LVAL last = cons(nextarg(), NIL);
+        euxlValue last = cons(nextarg(), NIL);
         val = last;
         while (moreargs())
         {
-            LVAL next = nextarg();
+            euxlValue next = nextarg();
             push(val);
             next = cons(next, NIL);
             rplacd(last, next);
@@ -365,18 +365,18 @@ LVAL xlist()
 }
 
 // xliststar - built-in function 'list*'
-LVAL xliststar()
+euxlValue xliststar()
 {
     // initialize the list
-    LVAL val = NIL;
-    LVAL last = NIL;
+    euxlValue val = NIL;
+    euxlValue last = NIL;
 
     // add each argument to the list
     if (moreargs())
     {
         for (;;)
         {
-            LVAL next = nextarg();
+            euxlValue next = nextarg();
             if (moreargs())
             {
                 push(val);
@@ -412,19 +412,19 @@ LVAL xliststar()
 }
 
 // xappend - built-in function 'append'
-LVAL xappend()
+euxlValue xappend()
 {
     static char *cfn_name = "append";
 
     // append each argument
-    LVAL last, val;
+    euxlValue last, val;
     for (val = last = NIL; xlargc > 1;)
     {
         // append each element of this list to the result list
-        for (LVAL next = xlgalist(); consp(next); next = cdr(next))
+        for (euxlValue next = xlgalist(); consp(next); next = cdr(next))
         {
             push(val);
-            LVAL this = cons(car(next), NIL);
+            euxlValue this = cons(car(next), NIL);
             val = pop();
             if (last == NIL)
             {
@@ -455,12 +455,12 @@ LVAL xappend()
     return (val);
 }
 
-LVAL xlreverse(LVAL next)
+euxlValue xlreverse(euxlValue next)
 {
     cpush(next);
 
     // append each element of this list to the result list
-    LVAL val;
+    euxlValue val;
     for (val = NIL; consp(next); next = cdr(next))
     {
         push(val);
@@ -475,24 +475,24 @@ LVAL xlreverse(LVAL next)
 }
 
 // xreverse - built-in function 'reverse'
-LVAL xreverse()
+euxlValue xreverse()
 {
     static char *cfn_name = "reverse-list";
 
     // get the list to reverse
-    LVAL next = xlgalist();
+    euxlValue next = xlgalist();
     xllastarg();
 
     return xlreverse(next);
 }
 
 // xlastpair - built-in function 'last-pair'
-LVAL xlastpair()
+euxlValue xlastpair()
 {
     static char *cfn_name = "last-pair";
 
     // get the list
-    LVAL list = xlgalist();
+    euxlValue list = xlgalist();
     xllastarg();
 
     // find the last cons
@@ -509,12 +509,12 @@ LVAL xlastpair()
 }
 
 // xsize - built-in function 'list_size'
-LVAL xsize()
+euxlValue xsize()
 {
     static char *cfn_name = "list-size";
 
     // get the argument
-    LVAL arg = xlgalist();
+    euxlValue arg = xlgalist();
     xllastarg();
 
     // find the list_size
@@ -529,27 +529,27 @@ LVAL xsize()
 }
 
 // xmember - built-in function 'member'
-LVAL xmember()
+euxlValue xmember()
 {
     return (member(equal));
 }
 
 // xmemv - built-in function 'memv'
-LVAL xmemv()
+euxlValue xmemv()
 {
     return (member(eqv));
 }
 
 // xmemq - built-in function 'memq'
-LVAL xmemq()
+euxlValue xmemq()
 {
     return (member(eq));
 }
 
 // member - common function for member/memv/memq
-LVAL xlmember(LVAL x, LVAL list, int (*fcn) (LVAL a, LVAL b))
+euxlValue xlmember(euxlValue x, euxlValue list, int (*fcn) (euxlValue a, euxlValue b))
 {
-    LVAL val;
+    euxlValue val;
 
     // look for the expression
     for (val = NIL; consp(list); list = cdr(list))
@@ -565,51 +565,51 @@ LVAL xlmember(LVAL x, LVAL list, int (*fcn) (LVAL a, LVAL b))
     return (val);
 }
 
-LVAL member(int (*fcn) ())
+euxlValue member(int (*fcn) ())
 {
     static char *cfn_name = "member/memq/memv";
 
     // get the expression to look for and the list
-    LVAL x = xlgetarg();
-    LVAL list = xlgalist();
+    euxlValue x = xlgetarg();
+    euxlValue list = xlgalist();
     xllastarg();
 
     return xlmember(x, list, fcn);
 }
 
 // xassoc - built-in function 'assoc'
-LVAL xassoc()
+euxlValue xassoc()
 {
     return (assoc(equal));
 }
 
 // xassv - built-in function 'assv'
-LVAL xassv()
+euxlValue xassv()
 {
     return (assoc(eqv));
 }
 
 // xassq - built-in function 'assq'
-LVAL xassq()
+euxlValue xassq()
 {
     return (assoc(eq));
 }
 
 // assoc - common function for assoc/assv/assq
-LVAL assoc(int (*fcn) ())
+euxlValue assoc(int (*fcn) ())
 {
     static char *cfn_name = "assoc/assv/assq";
 
     // get the expression to look for and the association list
-    LVAL x = xlgetarg();
-    LVAL alist = xlgalist();
+    euxlValue x = xlgetarg();
+    euxlValue alist = xlgalist();
     xllastarg();
 
     // look for the expression
-    LVAL val;
+    euxlValue val;
     for (val = NIL; consp(alist); alist = cdr(alist))
     {
-        LVAL pair;
+        euxlValue pair;
         if ((pair = car(alist)) != NIL && consp(pair))
         {
             if ((*fcn) (x, car(pair), fcn))
@@ -625,25 +625,25 @@ LVAL assoc(int (*fcn) ())
 }
 
 // xlistref - built-in function 'list-ref'
-LVAL xlistref()
+euxlValue xlistref()
 {
     return (nth(TRUE));
 }
 
 // xlisttail - built-in function 'list-tail'
-LVAL xlisttail()
+euxlValue xlisttail()
 {
     return (nth(FALSE));
 }
 
 // nth - internal nth function
-static LVAL nth(int carflag)
+static euxlValue nth(int carflag)
 {
     static char *cfn_name = "list-ref/list-tail";
 
     // get n and the list
-    LVAL list = xlgalist();
-    LVAL arg = xlgafixnum();
+    euxlValue list = xlgalist();
+    euxlValue arg = xlgafixnum();
     xllastarg();
 
     // range check the index
@@ -670,33 +670,33 @@ static LVAL nth(int carflag)
 }
 
 // xboundp - is this a value bound to this symbol?
-LVAL xboundp()
+euxlValue xboundp()
 {
     static char *cfn_name = "symbol-exists?";
 
-    LVAL sym = xlgasymbol();
+    euxlValue sym = xlgasymbol();
     xllastarg();
     return (boundp(sym) ? true : NIL);
 }
 
 // xsymvalue - get the value of a symbol
-LVAL xsymvalue()
+euxlValue xsymvalue()
 {
     static char *cfn_name = "symbol-value";
 
-    LVAL sym = xlgasymbol();
+    euxlValue sym = xlgasymbol();
     xllastarg();
     return (getvalue(sym));
 }
 
 // xsetsymvalue - set the value of a symbol
-LVAL xsetsymvalue()
+euxlValue xsetsymvalue()
 {
     static char *cfn_name = "set-symbol-value";
 
     // get the symbol
-    LVAL sym = xlgasymbol();
-    LVAL val = xlgetarg();
+    euxlValue sym = xlgasymbol();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     // set the global value
@@ -707,12 +707,12 @@ LVAL xsetsymvalue()
 }
 
 // xsymplist - get the property list of a symbol
-LVAL xsymplist()
+euxlValue xsymplist()
 {
     static char *cfn_name = "symbol-plist";
 
     // get the symbol
-    LVAL sym = xlgasymbol();
+    euxlValue sym = xlgasymbol();
     xllastarg();
 
     // return the property list
@@ -720,13 +720,13 @@ LVAL xsymplist()
 }
 
 // xsetsymplist - set the property list of a symbol
-LVAL xsetsymplist()
+euxlValue xsetsymplist()
 {
     static char *cfn_name = "set-symbol-plist";
 
     // get the symbol
-    LVAL sym = xlgasymbol();
-    LVAL val = xlgetarg();
+    euxlValue sym = xlgasymbol();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     // set the property list
@@ -735,13 +735,13 @@ LVAL xsetsymplist()
 }
 
 // xget - get the value of a property
-LVAL xget()
+euxlValue xget()
 {
     static char *cfn_name = "get";
 
     // get the symbol and property
-    LVAL sym = xlgasymbol();
-    LVAL prp = xlgasymbol();
+    euxlValue sym = xlgasymbol();
+    euxlValue prp = xlgasymbol();
     xllastarg();
 
     // retrieve the property value
@@ -749,14 +749,14 @@ LVAL xget()
 }
 
 // xput - set the value of a property
-LVAL xput()
+euxlValue xput()
 {
     static char *cfn_name = "put";
 
     // get the symbol and property
-    LVAL sym = xlgasymbol();
-    LVAL prp = xlgasymbol();
-    LVAL val = xlgetarg();
+    euxlValue sym = xlgasymbol();
+    euxlValue prp = xlgasymbol();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     // set the property value
@@ -767,13 +767,13 @@ LVAL xput()
 }
 
 // xgetsyntax - symbol syntax
-LVAL xgetsyntax()
+euxlValue xgetsyntax()
 {
     static char *cfn_name = "get-syntax";
 
     // get the symbol and property
-    LVAL sym = xlgasymbol();
-    LVAL prp = xlgasymbol();
+    euxlValue sym = xlgasymbol();
+    euxlValue prp = xlgasymbol();
     xllastarg();
 
     // retrieve the syntax value
@@ -781,14 +781,14 @@ LVAL xgetsyntax()
 }
 
 // xput - set symbol syntax
-LVAL xputsyntax()
+euxlValue xputsyntax()
 {
     static char *cfn_name = "put-syntax";
 
     // get the symbol and property
-    LVAL sym = xlgasymbol();
-    LVAL prp = xlgasymbol();
-    LVAL val = xlgetarg();
+    euxlValue sym = xlgasymbol();
+    euxlValue prp = xlgasymbol();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     // set the syntax value
@@ -799,7 +799,7 @@ LVAL xputsyntax()
 }
 
 // xtheenvironment - built-in function 'the-environment'
-LVAL xtheenvironment()
+euxlValue xtheenvironment()
 {
     static char *cfn_name = "the-environment";
     xllastarg();
@@ -807,32 +807,32 @@ LVAL xtheenvironment()
 }
 
 // xprocenvironment - built-in function 'procedure-environment'
-LVAL xprocenvironment()
+euxlValue xprocenvironment()
 {
     static char *cfn_name = "procedure-environment";
 
-    LVAL arg = xlgaclosure();
+    euxlValue arg = xlgaclosure();
     xllastarg();
     return (getcenv(arg));
 }
 
 // xenvp - built-in function 'environment?'
-LVAL xenvp()
+euxlValue xenvp()
 {
     static char *cfn_name = "environment?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (envp(arg) ? true : NIL);
 }
 
 // xenvbindings - built-in function 'environment-bindings'
-LVAL xenvbindings()
+euxlValue xenvbindings()
 {
     static char *cfn_name = "environment-bindings";
 
     // get the environment
-    LVAL env = xlgetarg();
+    euxlValue env = xlgetarg();
     xllastarg();
 
     // check the argument type
@@ -846,18 +846,18 @@ LVAL xenvbindings()
     }
 
     // initialize
-    LVAL frame = car(env);
-    LVAL names = getelement(frame, 0);
+    euxlValue frame = car(env);
+    euxlValue names = getelement(frame, 0);
     int len = getsize(frame);
     check(1);
 
     // build a list of dotted pairs
-    LVAL val, last;
+    euxlValue val, last;
     int i;
     for (val = last = NIL, i = 1; i < len; ++i, names = cdr(names))
     {
         push(val);
-        LVAL this = cons(cons(car(names), getelement(frame, i)), NIL);
+        euxlValue this = cons(cons(car(names), getelement(frame, i)), NIL);
         val = pop();
         if (last)
         {
@@ -873,22 +873,22 @@ LVAL xenvbindings()
 }
 
 // xenvparent - built-in function 'environment-parent'
-LVAL xenvparent()
+euxlValue xenvparent()
 {
     static char *cfn_name = "environment-parent";
 
-    LVAL env = xlgaenv();
+    euxlValue env = xlgaenv();
     xllastarg();
     return (cdr(env));
 }
 
 // xvector - built-in function 'vector'
-LVAL xvector()
+euxlValue xvector()
 {
     static char *cfn_name = "vector";
 
-    LVAL vect = newvector(xlargc);
-    for (LVAL *p = &vect->n_vdata[0]; moreargs();)
+    euxlValue vect = newvector(xlargc);
+    for (euxlValue *p = &vect->n_vdata[0]; moreargs();)
     {
         *p++ = xlgetarg();
     }
@@ -896,12 +896,12 @@ LVAL xvector()
 }
 
 // xmakevector - built-in function 'make-vector'
-LVAL xmakevector()
+euxlValue xmakevector()
 {
     static char *cfn_name = "make-vector";
 
     // get the vector size
-    LVAL arg = xlgafixnum();
+    euxlValue arg = xlgafixnum();
     int len = (int)getfixnum(arg);
 
     if (len < 0)
@@ -910,14 +910,14 @@ LVAL xmakevector()
     }
 
     // check for an initialization value
-    LVAL val;
+    euxlValue val;
     if (moreargs())
     {
         arg = xlgetarg();       // get the initializer
         xllastarg();            // make sure that's the last argument
         cpush(arg);             // save the initializer
         val = newvector(len);   // create the vector
-        LVAL *p = &val->n_vdata[0];   // initialize the vector
+        euxlValue *p = &val->n_vdata[0];   // initialize the vector
         for (arg = pop(); --len >= 0;)
         {
             *p++ = arg;
@@ -933,46 +933,46 @@ LVAL xmakevector()
 }
 
 // xvsize - built-in function 'vector-size'
-LVAL xvsize()
+euxlValue xvsize()
 {
     static char *cfn_name = "vector-size";
 
-    LVAL arg = xlgavector();
+    euxlValue arg = xlgavector();
     xllastarg();
     return (cvfixnum((FIXTYPE) getsize(arg)));
 }
 
 // xivsize - built-in function '%vector-size'
-LVAL xivsize()
+euxlValue xivsize()
 {
     static char *cfn_name = "%vector-size";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (cvfixnum((FIXTYPE) getsize(arg)));
 }
 
 // xvref - built-in function 'vector-ref'
-LVAL xvref()
+euxlValue xvref()
 {
     static char *cfn_name = "vector-ref";
     return (vref(xlgavector()));
 }
 
 // xivref - built-in function '%vector-ref'
-LVAL xivref()
+euxlValue xivref()
 {
     static char *cfn_name = "%vector-ref";
     return (vref(xlgetarg()));
 }
 
 // vref - common code for xvref and xivref
-static LVAL vref(LVAL vector)
+static euxlValue vref(euxlValue vector)
 {
     static char *cfn_name = "vector-ref";
 
     // get the index
-    LVAL index = xlgafixnum();
+    euxlValue index = xlgafixnum();
     xllastarg();
 
     // range check the index
@@ -987,27 +987,27 @@ static LVAL vref(LVAL vector)
 }
 
 // xvset - built-in function 'vector-set'
-LVAL xvset()
+euxlValue xvset()
 {
     static char *cfn_name = "vector-set";
     return (vset(xlgavector()));
 }
 
 // xivset - built-in function '%vector-set'
-LVAL xivset()
+euxlValue xivset()
 {
     static char *cfn_name = "%vector-set";
     return (vset(xlgetarg()));
 }
 
 // vset - common code for xvset and xivset
-static LVAL vset(LVAL vector)
+static euxlValue vset(euxlValue vector)
 {
     static char *cfn_name = "vector-set";
 
     // get the index and the new value
-    LVAL index = xlgafixnum();
-    LVAL val = xlgetarg();
+    euxlValue index = xlgafixnum();
+    euxlValue val = xlgetarg();
     xllastarg();
 
     // range check the index
@@ -1023,12 +1023,12 @@ static LVAL vset(LVAL vector)
 }
 
 // xvectlist - built-in function 'vector->list'
-LVAL xvectlist()
+euxlValue xvectlist()
 {
     static char *cfn_name = "vector->list";
 
     // get the vector
-    LVAL vect = xlgavector();
+    euxlValue vect = xlgavector();
     xllastarg();
 
     // make a list from the vector
@@ -1043,7 +1043,7 @@ LVAL xvectlist()
 }
 
 // xlistvect - built-in function 'list->vector'
-LVAL xlistvect()
+euxlValue xlistvect()
 {
     static char *cfn_name = "list->vector";
 
@@ -1053,8 +1053,8 @@ LVAL xlistvect()
 
     // make a vector from the list
     int size = list_size(xlval);
-    LVAL vect = newvector(size);
-    for (LVAL *p = &vect->n_vdata[0]; --size >= 0; xlval = cdr(xlval))
+    euxlValue vect = newvector(size);
+    for (euxlValue *p = &vect->n_vdata[0]; --size >= 0; xlval = cdr(xlval))
     {
         *p++ = car(xlval);
     }
@@ -1063,131 +1063,131 @@ LVAL xlistvect()
 }
 
 // xnullp - built-in function 'null?'
-LVAL xnullp()
+euxlValue xnullp()
 {
     static char *cfn_name = "null?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (null(arg) ? true : NIL);
 }
 
 // xatomp - built-in function 'atom?'
-LVAL xatomp()
+euxlValue xatomp()
 {
     static char *cfn_name = "atom?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (atom(arg) ? true : NIL);
 }
 
 // xlistp - built-in function 'list?'
-LVAL xlistp()
+euxlValue xlistp()
 {
     static char *cfn_name = "list?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (listp(arg) ? true : NIL);
 }
 
 // xnumberp - built-in function 'number?'
-LVAL xnumberp()
+euxlValue xnumberp()
 {
     static char *cfn_name = "number?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (numberp(arg) ? true : NIL);
 }
 
 // xbooleanp - built-in function 'boolean?'
-LVAL xbooleanp()
+euxlValue xbooleanp()
 {
     static char *cfn_name = "boolean?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (arg == true || arg == NIL ? true : NIL);
 }
 
 // xconsp - built-in function 'cons?'
-LVAL xconsp()
+euxlValue xconsp()
 {
     static char *cfn_name = "cons?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (consp(arg) ? true : NIL);
 }
 
 // xsymbolp - built-in function 'symbol?'
-LVAL xsymbolp()
+euxlValue xsymbolp()
 {
     static char *cfn_name = "symbol?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (symbolp(arg) ? true : NIL);
 }
 
 // xkeywordp - built-in function 'keyword?'
-LVAL xkeywordp()
+euxlValue xkeywordp()
 {
     static char *cfn_name = "keyword?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (keywordp(arg) ? true : NIL);
 }
 
 // xintegerp - built-in function 'integer?'
-LVAL xintegerp()
+euxlValue xintegerp()
 {
     static char *cfn_name = "integer?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (fixp(arg) ? true : NIL);
 }
 
 // xfloatp - built-in function 'float?'
-LVAL xfloatp()
+euxlValue xfloatp()
 {
     static char *cfn_name = "float?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (floatp(arg) ? true : NIL);
 }
 
 // xcharp - built-in function 'char?'
-LVAL xcharp()
+euxlValue xcharp()
 {
     static char *cfn_name = "char?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (charp(arg) ? true : NIL);
 }
 
 // xstringp - built-in function 'string?'
-LVAL xstringp()
+euxlValue xstringp()
 {
     static char *cfn_name = "string?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (stringp(arg) ? true : NIL);
 }
 
 // xvectorp - built-in function 'vector?'
-LVAL xvectorp()
+euxlValue xvectorp()
 {
     static char *cfn_name = "vector?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (vectorp(arg) ? true : NIL);
 }
@@ -1196,73 +1196,73 @@ LVAL xvectorp()
     (closurep(x) || continuationp(x) || subrp(x) || xsubrp(x) || genericp(x))
 
 // xfunctionp - built-in function 'function?'
-LVAL xfunctionp()
+euxlValue xfunctionp()
 {
     static char *cfn_name = "function?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (isprocedure(arg) ? true : NIL);
 }
 
 // xobjectp - built-in function 'object?'
-LVAL xobjectp()
+euxlValue xobjectp()
 {
     static char *cfn_name = "object?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (objectp(arg) ? true : NIL);
 }
 
 // xdefaultobjectp - built-in function 'default-object?'
-LVAL xdefaultobjectp()
+euxlValue xdefaultobjectp()
 {
     static char *cfn_name = "default-object?";
 
-    LVAL arg = xlgetarg();
+    euxlValue arg = xlgetarg();
     xllastarg();
     return (arg == default_object ? true : NIL);
 }
 
 // xeq - built-in function 'eq'
-LVAL xeq()
+euxlValue xeq()
 {
     return (eqtest(eq));
 }
 
 // xeqv - built-in function 'eql'
-LVAL xeqv()
+euxlValue xeqv()
 {
     return (eqtest(eqv));
 }
 
 // xequal - built-in function 'equal'
-LVAL xequal()
+euxlValue xequal()
 {
     return (eqtest(equal));
 }
 
 // eqtest - common code for eq/eql/equal
-static LVAL eqtest(int (*fcn) ())
+static euxlValue eqtest(int (*fcn) ())
 {
     static char *cfn_name = "eq/eql/equal";
 
-    LVAL arg1 = xlgetarg();
-    LVAL arg2 = xlgetarg();
+    euxlValue arg1 = xlgetarg();
+    euxlValue arg2 = xlgetarg();
     xllastarg();
     return ((*fcn) (arg1, arg2) ? true : NIL);
 }
 
 // xgensym - generate a symbol
-LVAL xgensym()
+euxlValue xgensym()
 {
     static char *cfn_name = "gensym";
 
     // get the prefix or number
     if (moreargs())
     {
-        LVAL x;
+        euxlValue x;
         if ((x = xlgetarg()) == NIL)
         {
             xlbadtype(x, "symbol, string, or integer", cfn_name);
@@ -1296,13 +1296,13 @@ LVAL xgensym()
 }
 
 // xsprintf -- used by format
-LVAL xsprintf()
+euxlValue xsprintf()
 {
     static char *cfn_name = "xsprintf";
 
-    LVAL arg = xlgastring();
-    LVAL ch = xlgachar();
-    LVAL val = xlgafloat();
+    euxlValue arg = xlgastring();
+    euxlValue ch = xlgachar();
+    euxlValue val = xlgafloat();
     xllastarg();
 
     char buf[128], fmt[128];

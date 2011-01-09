@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -50,7 +50,7 @@ JMP_BUF bc_dispatch;            // bytecode dispatcher
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-extern LVAL xlfun, xlenv, xlval;
+extern euxlValue xlfun, xlenv, xlval;
 
 ///-----------------------------------------------------------------------------
 /// Local variables
@@ -58,21 +58,21 @@ extern LVAL xlfun, xlenv, xlval;
 static unsigned char *base, *pc;
 static int sample = SRATE;
 
-static LVAL findvar(LVAL env, LVAL var, int *poff);
+static euxlValue findvar(euxlValue env, euxlValue var, int *poff);
 void xlapply();
 void xlreturn();
 static void restore_continuation();
-static void badfuntype(LVAL arg);
-static void badargtype(LVAL arg, char *name, char *fn);
-static int generic_call(LVAL, LVAL, LVAL);
+static void badfuntype(euxlValue arg);
+static void badargtype(euxlValue arg, char *name, char *fn);
+static int generic_call(euxlValue, euxlValue, euxlValue);
 void xlstkover();
-static void bad_slot_access(char *msg, LVAL index, LVAL object);
+static void bad_slot_access(char *msg, euxlValue index, euxlValue object);
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
 // xtraceon - built-in function 'trace-on'
-LVAL xtraceon()
+euxlValue xtraceon()
 {
     static char *cfn_name = "trace-on";
     xllastarg()trace = TRUE;
@@ -80,7 +80,7 @@ LVAL xtraceon()
 }
 
 // xtraceoff - built-in function 'trace-off'
-LVAL xtraceoff()
+euxlValue xtraceoff()
 {
     static char *cfn_name = "trace-off";
     xllastarg()trace = FALSE;
@@ -88,9 +88,9 @@ LVAL xtraceoff()
 }
 
 // xlexecute - execute byte codes
-void xlexecute(LVAL fun)
+void xlexecute(euxlValue fun)
 {
-    extern LVAL s_unbound_error, s_arith_error, s_no_next_md_error;
+    extern euxlValue s_unbound_error, s_arith_error, s_no_next_md_error;
 
     // initialize the registers
     xlfun = getcode(fun);
@@ -106,7 +106,7 @@ void xlexecute(LVAL fun)
     // setup a target for the error handler
     SETJMP(bc_dispatch);
 
-    register LVAL tmp, tmp2;
+    register euxlValue tmp, tmp2;
     register unsigned int i;
     register int k;
 
@@ -607,8 +607,8 @@ void xlexecute(LVAL fun)
                     s_no_next_md_error);
                 }
                 {
-                    LVAL *p;
-                    LVAL mfl, al, args;
+                    euxlValue *p;
+                    euxlValue mfl, al, args;
                     al = pop();
                     mfl = xlval;
                     xlargc = list_size(al);
@@ -719,7 +719,7 @@ void xlexecute(LVAL fun)
                 }
                 else
                 {
-                    LVAL end;
+                    euxlValue end;
                     push(tmp);
                     end = cons(car(xlval), NIL);
                     cpush(end);
@@ -855,11 +855,11 @@ void xlexecute(LVAL fun)
 }
 
 // findvar - find a variable in an environment
-static LVAL findvar(LVAL env, LVAL var, int *poff)
+static euxlValue findvar(euxlValue env, euxlValue var, int *poff)
 {
     for (; env != NIL; env = cdr(env))
     {
-        LVAL names = getelement(car(env), 0);
+        euxlValue names = getelement(car(env), 0);
         for (int off = 1; names != NIL; ++off, names = cdr(names))
             if (var == car(names))
             {
@@ -877,7 +877,7 @@ void xlapply()
 {
     static char *cfn_name = "function apply";
 
-    extern LVAL s_no_applic_error;
+    extern euxlValue s_no_applic_error;
 
     // check for null function
     if (null(xlval))
@@ -902,7 +902,7 @@ void xlapply()
             break;
         case GENERIC:
             {
-                LVAL al, applicable;
+                euxlValue al, applicable;
                 int i;
                 al = NIL;       // consing on function call :-(
                 for (i = xlargc - 1; i >= 0; i--)
@@ -925,7 +925,7 @@ void xlapply()
             break;
         case CONTINUATION:
             {
-                LVAL tmp = moreargs()? xlgetarg() : NIL; // zero or one arg allowed
+                euxlValue tmp = moreargs()? xlgetarg() : NIL; // zero or one arg allowed
                 xllastarg();
                 restore_continuation();
                 xlval = tmp;
@@ -942,7 +942,7 @@ void xlreturn()
 {
     // restore the environment and the continuation function
     xlenv = pop();
-    LVAL tmp = pop();
+    euxlValue tmp = pop();
 
     // dispatch on the function type
     switch (ntype(tmp))
@@ -963,9 +963,9 @@ void xlreturn()
 
 // save a stack snapshot
 // cc is TRUE if return address is needed, e.g., in the interpreter
-LVAL current_continuation(int cc)
+euxlValue current_continuation(int cc)
 {
-    extern LVAL s_current_thread;
+    extern euxlValue s_current_thread;
 
     if (cc)
     {
@@ -990,8 +990,8 @@ LVAL current_continuation(int cc)
 
     // create and initialize a continuation object
     int size = (int)(xlstktop - xlsp);
-    LVAL cont = newcontinuation(size);
-    LVAL *src, *dst;
+    euxlValue cont = newcontinuation(size);
+    euxlValue *src, *dst;
     for (src = xlsp, dst = &cont->n_vdata[0]; --size >= 0;)
     {
         *dst++ = *src++;
@@ -1008,7 +1008,7 @@ LVAL current_continuation(int cc)
 static void restore_continuation()
 {
     int size = getsize(xlval);
-    LVAL *src;
+    euxlValue *src;
     for (src = &xlval->n_vdata[size], xlsp = xlstktop; --size >= 0;)
     {
         *--xlsp = *--src;
@@ -1026,9 +1026,9 @@ static void restore_continuation()
 }
 
 // call gf associated with an inlined operator
-static int generic_call(LVAL sym, LVAL val1, LVAL val2)
+static int generic_call(euxlValue sym, euxlValue val1, euxlValue val2)
 {
-    LVAL op = getvalue(sym);
+    euxlValue op = getvalue(sym);
     if (!genericp(op))
     {
         return FALSE;   // generic not defined yet
@@ -1064,23 +1064,23 @@ void gc_protect(void (*protected_fcn) ())
 }
 
 // badfuntype - bad function error
-static void badfuntype(LVAL arg)
+static void badfuntype(euxlValue arg)
 {
     xlbadtype(arg, "<function>", "function application");
 }
 
 // badargtype - bad argument type error
 // cf xlbadtype in xsftab.c
-static void badargtype(LVAL arg, char *name, char *fn)
+static void badargtype(euxlValue arg, char *name, char *fn)
 {
-    extern LVAL s_bad_type_error;
+    extern euxlValue s_bad_type_error;
 
     char buf[256];
     sprintf(buf, "incorrect type in %s", fn);
-    LVAL cond = getvalue(s_bad_type_error);
+    euxlValue cond = getvalue(s_bad_type_error);
     if (cond != s_unbound)
     {
-        LVAL class = name[0] == '<' ?
+        euxlValue class = name[0] == '<' ?
         getvalue(xlenter_module(name, root_module)) : cvstring(name);
         setivar(cond, 3, class);        // cf condcl.em
     }
@@ -1094,7 +1094,7 @@ void xlstkover()
     xlabort("value stack overflow");
 }
 
-static void bad_slot_access(char *msg, LVAL index, LVAL object)
+static void bad_slot_access(char *msg, euxlValue index, euxlValue object)
 {
     cpush(index);
     char buf[20];

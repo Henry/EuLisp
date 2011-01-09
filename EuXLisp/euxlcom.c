@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: A simple scheme bytecode compiler
+/// Title: A simple EuLisp bytecode compiler
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ static char *module_search_path[] = { MODULE_SEARCH_PATH, 0 };
 ///-----------------------------------------------------------------------------
 /// Local variables
 ///-----------------------------------------------------------------------------
-static LVAL info;               // compiler info
+static euxlValue info;               // compiler info
 
 // code buffer
 static unsigned char cbuff[CMAX];       // base of code buffer
@@ -59,79 +59,79 @@ static int cptr;                // code buffer pointer
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static void do_expr(LVAL expr, int cont);
-static int in_ntab(LVAL expr, int cont);
-static int in_ftab(LVAL expr, int cont);
-static void do_define(LVAL form, int cont);
-static void do_defconstant(LVAL form, int cont);
-static void do_deflocal(LVAL form, int cont);
-static void define1(LVAL list, LVAL body, int cont);
-static void do_set(LVAL form, int cont);
-static void do_setvar(LVAL form, int cont);
-static void do_quote(LVAL form, int cont);
-static void do_lambda(LVAL form, int cont);
-static void cd_fundefinition(LVAL fun, LVAL fargs, LVAL body);
-static void parse_lambda_list(LVAL fargs, LVAL body);
-static int find_internal_definitions(LVAL body, LVAL last);
-static void do_delay(LVAL form, int cont);
-static void do_let(LVAL form, int cont);
-static void do_named_let(LVAL form, int cont);
-static void cd_let(LVAL name, LVAL form, int cont);
-static void do_letrec(LVAL form, int cont);
-static void do_letstar(LVAL form, int cont);
-static void letstar1(LVAL blist, LVAL body);
-static int push_dummy_values(LVAL blist);
-static int push_init_expressions(LVAL blist);
-static void parse_let_variables(LVAL blist, LVAL body);
-static void set_bound_variables(LVAL blist);
-static LVAL make_code_object(LVAL fun);
-static void do_cond(LVAL form, int cont);
-static void do_and(LVAL form, int cont);
-static void do_or(LVAL form, int cont);
-static void do_if(LVAL form, int cont);
-static void do_progn(LVAL form, int cont);
-static void do_while(LVAL form, int cont);
-static void do_access(LVAL form, int cont);
-static void do_setaccess(LVAL form, int cont);
-static void do_call(LVAL form, int cont);
-static int push_args(LVAL form);
-static void do_nary(int op, int n, LVAL form, int cont);
-static int push_nargs(LVAL form, LVAL body, int n);
-static void do_literal(LVAL lit, int cont);
-static void do_identifier(LVAL sym, int cont);
+static void do_expr(euxlValue expr, int cont);
+static int in_ntab(euxlValue expr, int cont);
+static int in_ftab(euxlValue expr, int cont);
+static void do_define(euxlValue form, int cont);
+static void do_defconstant(euxlValue form, int cont);
+static void do_deflocal(euxlValue form, int cont);
+static void define1(euxlValue list, euxlValue body, int cont);
+static void do_set(euxlValue form, int cont);
+static void do_setvar(euxlValue form, int cont);
+static void do_quote(euxlValue form, int cont);
+static void do_lambda(euxlValue form, int cont);
+static void cd_fundefinition(euxlValue fun, euxlValue fargs, euxlValue body);
+static void parse_lambda_list(euxlValue fargs, euxlValue body);
+static int find_internal_definitions(euxlValue body, euxlValue last);
+static void do_delay(euxlValue form, int cont);
+static void do_let(euxlValue form, int cont);
+static void do_named_let(euxlValue form, int cont);
+static void cd_let(euxlValue name, euxlValue form, int cont);
+static void do_letrec(euxlValue form, int cont);
+static void do_letstar(euxlValue form, int cont);
+static void letstar1(euxlValue blist, euxlValue body);
+static int push_dummy_values(euxlValue blist);
+static int push_init_expressions(euxlValue blist);
+static void parse_let_variables(euxlValue blist, euxlValue body);
+static void set_bound_variables(euxlValue blist);
+static euxlValue make_code_object(euxlValue fun);
+static void do_cond(euxlValue form, int cont);
+static void do_and(euxlValue form, int cont);
+static void do_or(euxlValue form, int cont);
+static void do_if(euxlValue form, int cont);
+static void do_progn(euxlValue form, int cont);
+static void do_while(euxlValue form, int cont);
+static void do_access(euxlValue form, int cont);
+static void do_setaccess(euxlValue form, int cont);
+static void do_call(euxlValue form, int cont);
+static int push_args(euxlValue form);
+static void do_nary(int op, int n, euxlValue form, int cont);
+static int push_nargs(euxlValue form, euxlValue body, int n);
+static void do_literal(euxlValue lit, int cont);
+static void do_identifier(euxlValue sym, int cont);
 static void do_continuation(int cont);
 static int add_level();
 
 static void remove_level(int oldcbase);
-static int findvariable(LVAL sym, int *plev, int *poff);
-static int findcvariable(LVAL sym, int *poff);
-static int findliteral(LVAL lit);
-static void cd_variable(int op, LVAL sym);
+static int findvariable(euxlValue sym, int *plev, int *poff);
+static int findcvariable(euxlValue sym, int *poff);
+static int findliteral(euxlValue lit);
+static void cd_variable(int op, euxlValue sym);
 static void cd_evariable(int op, int lev, int off);
-static void cd_literal(LVAL lit);
+static void cd_literal(euxlValue lit);
 static int putcbyte(int b);
 static int putcword(int w);
 static void fixup(int chn);
 
-static void do_defmodule(LVAL form, int cont);
-static void do_export(LVAL form, int cont);
-static void do_expose(LVAL form, int cont);
-static void do_enter_module(LVAL form, int cont);
-static void do_reenter_module(LVAL form, int cont);
-static void do_import(LVAL form, int cont);
-static void reintern_module_symbols(LVAL body);
+static void do_defmodule(euxlValue form, int cont);
+static void do_export(euxlValue form, int cont);
+static void do_expose(euxlValue form, int cont);
+static void do_enter_module(euxlValue form, int cont);
+static void do_reenter_module(euxlValue form, int cont);
+static void do_import(euxlValue form, int cont);
+static void reintern_module_symbols(euxlValue body);
 
-static void do_define_generic(LVAL form, int cont);
-static void do_define_method(LVAL form, int cont);
-static void do_cnm(LVAL form, int cont);
-static void do_next_method_p(LVAL form, int cont);
-static void do_defclass(LVAL form, int cont);
+static void do_define_generic(euxlValue form, int cont);
+static void do_define_method(euxlValue form, int cont);
+static void do_cnm(euxlValue form, int cont);
+static void do_next_method_p(euxlValue form, int cont);
+static void do_defclass(euxlValue form, int cont);
 
-static void do_defcondition(LVAL form, int cont);
-static LVAL reintern_symbol(LVAL a);
+static void do_defcondition(euxlValue form, int cont);
+static euxlValue reintern_symbol(euxlValue a);
 
-LVAL append(LVAL a, LVAL b);
-static LVAL filter_imports(LVAL implist, LVAL sofar);
+euxlValue append(euxlValue a, euxlValue b);
+static euxlValue filter_imports(euxlValue implist, euxlValue sofar);
 
 // integrable function table
 typedef struct
@@ -232,7 +232,7 @@ FTDEF ftab[] =
 /// Functions
 ///-----------------------------------------------------------------------------
 // xlcompile - compile an expression
-LVAL xlcompile(LVAL expr, LVAL ctenv)
+euxlValue xlcompile(euxlValue expr, euxlValue ctenv)
 {
     // initialize the compile time environment
     info = cons(NIL, NIL);
@@ -256,7 +256,7 @@ LVAL xlcompile(LVAL expr, LVAL ctenv)
 }
 
 // xlfunction - compile a function
-LVAL xlfunction(LVAL fun, LVAL fargs, LVAL body, LVAL ctenv)
+euxlValue xlfunction(euxlValue fun, euxlValue fargs, euxlValue body, euxlValue ctenv)
 {
     // initialize the compile time environment
     info = cons(NIL, NIL);
@@ -278,13 +278,13 @@ LVAL xlfunction(LVAL fun, LVAL fargs, LVAL body, LVAL ctenv)
 
 // do_expr - compile an expression
 // (deflocal a (let ((lambda (lambda (lambda) lambda))) (lambda lambda)))
-static void do_expr(LVAL expr, int cont)
+static void do_expr(euxlValue expr, int cont)
 {
     cpush(expr);
 
     if (consp(expr))
     {
-        LVAL sym = car(expr);
+        euxlValue sym = car(expr);
         int lev, off;
 
         if
@@ -311,9 +311,9 @@ static void do_expr(LVAL expr, int cont)
 }
 
 // in_ntab - check for a function in ntab
-static int in_ntab(LVAL expr, int cont)
+static int in_ntab(euxlValue expr, int cont)
 {
-    LVAL sym = car(expr);
+    euxlValue sym = car(expr);
 
     char *pname = getstring(getpname(sym));
 
@@ -330,9 +330,9 @@ static int in_ntab(LVAL expr, int cont)
 }
 
 // in_ftab - check for a function in ftab
-static int in_ftab(LVAL expr, int cont)
+static int in_ftab(euxlValue expr, int cont)
 {
-    LVAL sym = car(expr);
+    euxlValue sym = car(expr);
     char *pname = getstring(getpname(sym));
 
     for (FTDEF *fptr = ftab; fptr->ft_name; ++fptr)
@@ -348,7 +348,7 @@ static int in_ftab(LVAL expr, int cont)
 }
 
 // do_define - handle the (DEFINE ... ) expression
-static void do_define(LVAL form, int cont)
+static void do_define(euxlValue form, int cont)
 {
     if (atom(form))
     {
@@ -359,14 +359,14 @@ static void do_define(LVAL form, int cont)
 }
 
 // do_defconstant - handle the (defconstant ... ) expression
-static void do_defconstant(LVAL form, int cont)
+static void do_defconstant(euxlValue form, int cont)
 {
     if (atom(form))
     {
         xlerror("expecting symbol in defconstant", form);
     }
 
-    LVAL sym = car(form);
+    euxlValue sym = car(form);
     if (!symbolp(sym))
     {
         xlerror("expecting a symbol in defconstant", sym);
@@ -402,14 +402,14 @@ static void do_defconstant(LVAL form, int cont)
 
 
 // do_deflocal - handle the (deflocal ... ) expression
-static void do_deflocal(LVAL form, int cont)
+static void do_deflocal(euxlValue form, int cont)
 {
     if (atom(form))
     {
         xlerror("expecting symbol in deflocal", form);
     }
 
-    LVAL sym = car(form);
+    euxlValue sym = car(form);
     if (!symbolp(sym))
     {
         xlerror("expecting a symbol in deflocal", sym);
@@ -444,7 +444,7 @@ static void do_deflocal(LVAL form, int cont)
 
 
 // define1 - helper function for do_define
-static void define1(LVAL list, LVAL body, int cont)
+static void define1(euxlValue list, euxlValue body, int cont)
 {
     // handle nested definitions
     if (consp(list))
@@ -474,7 +474,7 @@ static void define1(LVAL list, LVAL body, int cont)
          && (car(car(body)) == s_lambda)
         )
         {
-            LVAL fargs = car(cdr(car(body)));
+            euxlValue fargs = car(cdr(car(body)));
             body = cdr(cdr(car(body)));
             cd_fundefinition(list, fargs, body);
         }
@@ -500,7 +500,7 @@ static void define1(LVAL list, LVAL body, int cont)
 }
 
 // do_set - compile the (SET! ... ) expression
-static void do_set(LVAL form, int cont)
+static void do_set(euxlValue form, int cont)
 {
     if (atom(form))
     {
@@ -521,10 +521,10 @@ static void do_set(LVAL form, int cont)
 }
 
 // do_setvar - compile the (SET! var value) expression
-static void do_setvar(LVAL form, int cont)
+static void do_setvar(euxlValue form, int cont)
 {
     // get the variable name
-    LVAL sym = car(form);
+    euxlValue sym = car(form);
 
     if (keywordp(sym))
     {
@@ -558,7 +558,7 @@ static void do_setvar(LVAL form, int cont)
 }
 
 // do_quote - compile the (QUOTE ... ) expression
-static void do_quote(LVAL form, int cont)
+static void do_quote(euxlValue form, int cont)
 {
     if (atom(form))
     {
@@ -568,7 +568,7 @@ static void do_quote(LVAL form, int cont)
 }
 
 // do_lambda - compile the (LAMBDA ... ) expression
-static void do_lambda(LVAL form, int cont)
+static void do_lambda(euxlValue form, int cont)
 {
     if (atom(form))
     {
@@ -579,7 +579,7 @@ static void do_lambda(LVAL form, int cont)
 }
 
 // cd_fundefinition - compile the function
-static void cd_fundefinition(LVAL fun, LVAL fargs, LVAL body)
+static void cd_fundefinition(euxlValue fun, euxlValue fargs, euxlValue body)
 {
     // establish a new environment frame
     int oldcbase = add_level();
@@ -600,19 +600,19 @@ static void cd_fundefinition(LVAL fun, LVAL fargs, LVAL body)
 }
 
 // parse_lambda_list - parse the formal argument list
-static void parse_lambda_list(LVAL fargs, LVAL body)
+static void parse_lambda_list(euxlValue fargs, euxlValue body)
 {
     // setup the entry code
     putcbyte(OP_FRAME);
     int frame = putcbyte(0);
 
     // initialize the argument name list and slot number
-    LVAL restarg = NIL;
-    LVAL last = NIL;
+    euxlValue restarg = NIL;
+    euxlValue last = NIL;
     int slotn = 1;
 
     // handle each required argument
-    LVAL arg;
+    euxlValue arg;
     while (consp(fargs) && (arg = car(fargs)) != NIL)
     {
         // make sure the argument is a symbol
@@ -628,7 +628,7 @@ static void parse_lambda_list(LVAL fargs, LVAL body)
         }
 
         // add the argument name to the name list
-        LVAL new = cons(arg, NIL);
+        euxlValue new = cons(arg, NIL);
         if (last)
         {
             rplacd(last, new);
@@ -658,7 +658,7 @@ static void parse_lambda_list(LVAL fargs, LVAL body)
         }
 
         // add the argument name to the name list
-        LVAL new = cons(restarg, NIL);
+        euxlValue new = cons(restarg, NIL);
         if (last)
         {
             rplacd(last, new);
@@ -695,16 +695,16 @@ static void parse_lambda_list(LVAL fargs, LVAL body)
 }
 
 // find_internal_definitions - find internal definitions
-static int find_internal_definitions(LVAL body, LVAL last)
+static int find_internal_definitions(euxlValue body, euxlValue last)
 {
     int n = 0;
 
     // look for all (define...) forms
-    for (LVAL define = xlenter("define"); consp(body); body = cdr(body))
+    for (euxlValue define = xlenter("define"); consp(body); body = cdr(body))
     {
         if (consp(car(body)) && car(car(body)) == define)
         {
-            LVAL sym = cdr(car(body));       // the rest of the (define...) form
+            euxlValue sym = cdr(car(body));       // the rest of the (define...) form
             if (consp(sym))
             {   // make sure there is a second subform
                 sym = car(sym); // get the second subform
@@ -715,7 +715,7 @@ static int find_internal_definitions(LVAL body, LVAL last)
 
                 if (symbolp(sym))
                 {
-                    LVAL new = cons(sym, NIL);
+                    euxlValue new = cons(sym, NIL);
                     if (last)
                     {
                         rplacd(last, new);
@@ -735,7 +735,7 @@ static int find_internal_definitions(LVAL body, LVAL last)
 }
 
 // do_delay - compile the (DELAY ... ) expression
-static void do_delay(LVAL form, int cont)
+static void do_delay(euxlValue form, int cont)
 {
     // check argument list
     if (atom(form))
@@ -766,7 +766,7 @@ static void do_delay(LVAL form, int cont)
 }
 
 // do_let - compile the (LET ... ) expression
-static void do_let(LVAL form, int cont)
+static void do_let(euxlValue form, int cont)
 {
     // handle named let
     if (consp(form) && symbolp(car(form)))
@@ -780,7 +780,7 @@ static void do_let(LVAL form, int cont)
 }
 
 // do_named_let - compile the (LET name ... ) expression
-static void do_named_let(LVAL form, int cont)
+static void do_named_let(euxlValue form, int cont)
 {
     int nxt;
 
@@ -824,7 +824,7 @@ static void do_named_let(LVAL form, int cont)
 }
 
 // cd_let - code a let expression
-static void cd_let(LVAL name, LVAL form, int cont)
+static void cd_let(euxlValue name, euxlValue form, int cont)
 {
     // make sure there is a binding list
     if (atom(form) || !listp(car(form)))
@@ -882,7 +882,7 @@ static void cd_let(LVAL name, LVAL form, int cont)
 }
 
 // do_letstar - compile the (LET* ... ) expression
-static void do_letstar(LVAL form, int cont)
+static void do_letstar(euxlValue form, int cont)
 {
     // make sure there is a binding list
     if (atom(form) || !listp(car(form)))
@@ -918,7 +918,7 @@ static void do_letstar(LVAL form, int cont)
 }
 
 // letstar1 - helper function for let*
-static void letstar1(LVAL blist, LVAL body)
+static void letstar1(euxlValue blist, euxlValue body)
 {
     // push the next initialization expressions
     cpush(cons(car(blist), NIL));
@@ -955,7 +955,7 @@ static void letstar1(LVAL blist, LVAL body)
 }
 
 // do_letrec - compile the (LETREC ... ) expression
-static void do_letrec(LVAL form, int cont)
+static void do_letrec(euxlValue form, int cont)
 {
     // make sure there is a binding list
     if (atom(form) || !listp(car(form)))
@@ -1009,7 +1009,7 @@ static void do_letrec(LVAL form, int cont)
 }
 
 // push_dummy_values - push dummy values for a 'letrec' expression
-static int push_dummy_values(LVAL blist)
+static int push_dummy_values(euxlValue blist)
 {
     int n = 0;
     if (consp(blist))
@@ -1024,7 +1024,7 @@ static int push_dummy_values(LVAL blist)
 }
 
 // push_init_expressions - push init expressions for a 'let' expression
-static int push_init_expressions(LVAL blist)
+static int push_init_expressions(euxlValue blist)
 {
     int n;
     if (consp(blist))
@@ -1055,18 +1055,18 @@ static int push_init_expressions(LVAL blist)
 }
 
 // parse_let_variables - parse the binding list
-static void parse_let_variables(LVAL blist, LVAL body)
+static void parse_let_variables(euxlValue blist, euxlValue body)
 {
     // setup the entry code
     putcbyte(OP_FRAME);
     int frame = putcbyte(0);
 
     // initialize the argument name list and slot number
-    LVAL last = NIL;
+    euxlValue last = NIL;
     int slotn = 1;
 
     // handle each required argument
-    LVAL arg;
+    euxlValue arg;
     while (consp(blist) && (arg = car(blist)) != NIL)
     {
         if (keywordp(arg) || (consp(arg) && keywordp(car(arg))))
@@ -1074,7 +1074,7 @@ static void parse_let_variables(LVAL blist, LVAL body)
             xlerror("trying to bind a keyword in let", arg);
         }
 
-        LVAL new = NULL;
+        euxlValue new = NULL;
 
         // make sure the argument is a symbol
         if (symbolp(arg))
@@ -1142,7 +1142,7 @@ static void parse_let_variables(LVAL blist, LVAL body)
 }
 
 // set_bound_variables - set bound variables in a 'letrec' expression
-static void set_bound_variables(LVAL blist)
+static void set_bound_variables(euxlValue blist)
 {
     for (; consp(blist); blist = cdr(blist))
     {
@@ -1163,17 +1163,17 @@ static void set_bound_variables(LVAL blist)
 }
 
 // make_code_object - build a code object
-static LVAL make_code_object(LVAL fun)
+static euxlValue make_code_object(euxlValue fun)
 {
     // create a code object
-    LVAL code = newcode(FIRSTLIT + list_size(car(cdr(info))));
+    euxlValue code = newcode(FIRSTLIT + list_size(car(cdr(info))));
     cpush(code);
     setbcode(code, newstring(cptr - cbase));
     setcname(code, fun);        // function name
     setvnames(code, getelement(car(car(info)), 0));  // lambda list variables
 
     // copy the literals into the code object
-    LVAL p;
+    euxlValue p;
     int i;
     for (i = FIRSTLIT, p = car(cdr(info)); consp(p); p = cdr(p), ++i)
     {
@@ -1192,7 +1192,7 @@ static LVAL make_code_object(LVAL fun)
 }
 
 // do_cond - compile the (COND ... ) expression
-static void do_cond(LVAL form, int cont)
+static void do_cond(euxlValue form, int cont)
 {
     if (consp(form))
     {
@@ -1235,7 +1235,7 @@ static void do_cond(LVAL form, int cont)
 }
 
 // do_and - compile the (AND ... ) expression
-static void do_and(LVAL form, int cont)
+static void do_and(euxlValue form, int cont)
 {
     if (consp(form))
     {
@@ -1264,7 +1264,7 @@ static void do_and(LVAL form, int cont)
 }
 
 // do_or - compile the (OR ... ) expression
-static void do_or(LVAL form, int cont)
+static void do_or(euxlValue form, int cont)
 {
     if (consp(form))
     {
@@ -1293,7 +1293,7 @@ static void do_or(LVAL form, int cont)
 }
 
 // do_if - compile the (IF ... ) expression
-static void do_if(LVAL form, int cont)
+static void do_if(euxlValue form, int cont)
 {
     // compile the test expression
     if (atom(form))
@@ -1346,7 +1346,7 @@ static void do_if(LVAL form, int cont)
 }
 
 // do_progn - compile the (PROGN ... ) expression
-static void do_progn(LVAL form, int cont)
+static void do_progn(euxlValue form, int cont)
 {
     if (consp(form))
     {
@@ -1370,7 +1370,7 @@ static void do_progn(LVAL form, int cont)
 }
 
 // do_while - compile the (WHILE ... ) expression
-static void do_while(LVAL form, int cont)
+static void do_while(euxlValue form, int cont)
 {
     // make sure there is a test expression
     if (atom(form))
@@ -1402,7 +1402,7 @@ static void do_while(LVAL form, int cont)
 }
 
 // do_access - compile the (ACCESS var env) expression
-static void do_access(LVAL form, int cont)
+static void do_access(euxlValue form, int cont)
 {
     // get the variable name
     if (atom(form) || !symbolp(car(form)))
@@ -1410,7 +1410,7 @@ static void do_access(LVAL form, int cont)
         xlerror("expecting symbol", form);
     }
 
-    LVAL sym = car(form);
+    euxlValue sym = car(form);
 
     // compile the environment expression
     form = cdr(form);
@@ -1427,10 +1427,10 @@ static void do_access(LVAL form, int cont)
 }
 
 // do_setaccess - compile the (SET! (ACCESS var env) value) expression
-static void do_setaccess(LVAL form, int cont)
+static void do_setaccess(euxlValue form, int cont)
 {
     // make sure this is an access form
-    LVAL aform = car(form);
+    euxlValue aform = car(form);
     if (atom(aform) || car(aform) != xlenter_module("access", root_module))
     {
         xlerror("expecting an ACCESS form", aform);
@@ -1442,7 +1442,7 @@ static void do_setaccess(LVAL form, int cont)
     {
         xlerror("expecting symbol", aform);
     }
-    LVAL sym = car(aform);
+    euxlValue sym = car(aform);
 
     // compile the environment expression
     aform = cdr(aform);
@@ -1467,7 +1467,7 @@ static void do_setaccess(LVAL form, int cont)
 }
 
 // do_call - compile a function call
-static void do_call(LVAL form, int cont)
+static void do_call(euxlValue form, int cont)
 {
     int nxt = 0;
 
@@ -1496,7 +1496,7 @@ static void do_call(LVAL form, int cont)
 }
 
 // push_args - compile the arguments for a function call
-static int push_args(LVAL form)
+static int push_args(euxlValue form)
 {
     if (consp(form))
     {
@@ -1509,7 +1509,7 @@ static int push_args(LVAL form)
 }
 
 // do_nary - compile nary operator expressions
-static void do_nary(int op, int n, LVAL form, int cont)
+static void do_nary(int op, int n, euxlValue form, int cont)
 {
     if (n < 0 && (n = (-n)) != list_size(cdr(form)))
     {
@@ -1524,7 +1524,7 @@ static void do_nary(int op, int n, LVAL form, int cont)
 }
 
 // push_nargs - compile the arguments for an inline function call
-static int push_nargs(LVAL fun, LVAL body, int n)
+static int push_nargs(euxlValue fun, euxlValue body, int n)
 {
     if (consp(body))
     {
@@ -1547,14 +1547,14 @@ static int push_nargs(LVAL fun, LVAL body, int n)
 }
 
 // do_literal - compile a literal
-static void do_literal(LVAL lit, int cont)
+static void do_literal(euxlValue lit, int cont)
 {
     cd_literal(lit);
     do_continuation(cont);
 }
 
 // do_identifier - compile an identifier
-static void do_identifier(LVAL sym, int cont)
+static void do_identifier(euxlValue sym, int cont)
 {
     int lev, off;
     if (sym == true)
@@ -1614,10 +1614,10 @@ static void remove_level(int oldcbase)
 }
 
 // findvariable - find an environment variable
-static int findvariable(LVAL sym, int *plev, int *poff)
+static int findvariable(euxlValue sym, int *plev, int *poff)
 {
     int lev, off;
-    LVAL e, a;
+    euxlValue e, a;
     for (e = car(info), lev = 0; envp(e); e = cdr(e), ++lev)
     {
         for (a = getelement(car(e), 0), off = 1; consp(a); a = cdr(a), ++off)
@@ -1635,9 +1635,9 @@ static int findvariable(LVAL sym, int *plev, int *poff)
 }
 
 // findcvariable - find an environment variable in the current frame
-static int findcvariable(LVAL sym, int *poff)
+static int findcvariable(euxlValue sym, int *poff)
 {
-    LVAL a = getelement(car(car(info)), 0);
+    euxlValue a = getelement(car(car(info)), 0);
 
     for (int off = 1; consp(a); a = cdr(a), ++off)
     {
@@ -1652,7 +1652,7 @@ static int findcvariable(LVAL sym, int *poff)
 
 // litequal - test for equality that distinguishes symbols from
 // different modules
-static int litequal(LVAL a, LVAL b)
+static int litequal(euxlValue a, euxlValue b)
 {
     if (a == b)
     {
@@ -1667,10 +1667,10 @@ static int litequal(LVAL a, LVAL b)
 }
 
 // findliteral - find a literal in the literal frame
-static int findliteral(LVAL lit)
+static int findliteral(euxlValue lit)
 {
     int o = FIRSTLIT;
-    LVAL t, p;
+    euxlValue t, p;
 
     if ((t = car(cdr(info))) != NIL)
     {
@@ -1692,7 +1692,7 @@ static int findliteral(LVAL lit)
 }
 
 // cd_variable - compile a variable reference
-static void cd_variable(int op, LVAL sym)
+static void cd_variable(int op, euxlValue sym)
 {
     int index = findliteral(sym);
 
@@ -1717,7 +1717,7 @@ static void cd_evariable(int op, int lev, int off)
 }
 
 // cd_literal - compile a literal reference
-static void cd_literal(LVAL lit)
+static void cd_literal(euxlValue lit)
 {
     if (lit == NIL)
     {
@@ -1781,7 +1781,7 @@ static void fixup(int chn)
 }
 
 // list_size - find the size of a list
-int list_size(LVAL list)
+int list_size(euxlValue list)
 {
     int len;
 
@@ -1794,12 +1794,12 @@ int list_size(LVAL list)
 }
 
 // check if symbol is in list -- error if from different module
-LVAL findsym(LVAL symbol, LVAL list)
+euxlValue findsym(euxlValue symbol, euxlValue list)
 {
     char *name = getstring(getpname(symbol));
-    LVAL module = getmodule(symbol);
+    euxlValue module = getmodule(symbol);
 
-    for (LVAL sym = list; sym; sym = cdr(sym))
+    for (euxlValue sym = list; sym; sym = cdr(sym))
     {
         if (strcmp(name, getstring(getpname(car(sym)))) == 0)
         {
@@ -1818,7 +1818,7 @@ LVAL findsym(LVAL symbol, LVAL list)
 }
 
 // try to load a module
-static int load_module(LVAL sym)
+static int load_module(euxlValue sym)
 {
     char name[256];
 
@@ -1849,7 +1849,7 @@ static int load_module(LVAL sym)
         return FALSE;   // fail
     }
 
-    LVAL file = cvstream(fp, PF_INPUT);
+    euxlValue file = cvstream(fp, PF_INPUT);
     cpush(file);
 
     if (!quiet)
@@ -1866,13 +1866,13 @@ static int load_module(LVAL sym)
     }
     indent += 2;
 
-    LVAL curmod = current_module;
+    euxlValue curmod = current_module;
     current_module = root_module;       // read the form in root module
     #ifdef TRACE_SETMODULE
     xlputstr(xstdout(), "<2curmod=root>");
     #endif
 
-    LVAL expr;
+    euxlValue expr;
     int readit = xlread(file, &expr);
     setfile(file, NULL);
     osclose(fp);
@@ -1919,10 +1919,10 @@ static int load_module(LVAL sym)
 }
 
 // sym a string or symbol
-LVAL find_or_load_module(LVAL sym)
+euxlValue find_or_load_module(euxlValue sym)
 {
     cpush(sym);
-    LVAL mod = find_module(sym);
+    euxlValue mod = find_module(sym);
 
     if (mod == NIL)
     {
@@ -1935,22 +1935,22 @@ LVAL find_or_load_module(LVAL sym)
     return mod;
 }
 
-static void add_imported_symbols(LVAL array, LVAL syms)
+static void add_imported_symbols(euxlValue array, euxlValue syms)
 {
     for (; syms; syms = cdr(syms))
     {
-        LVAL sym = car(syms);
+        euxlValue sym = car(syms);
         char *name = getstring(getpname(sym));
         int hval = hash(name, HSIZE);
         if (findsym(sym, getelement(array, hval)) == NIL)
         {
-            LVAL symlist = cons(sym, getelement(array, hval));
+            euxlValue symlist = cons(sym, getelement(array, hval));
             setelement(array, hval, symlist);
         }
     }
 }
 
-static void check_symlist(LVAL symlist)
+static void check_symlist(euxlValue symlist)
 {
     for (; symlist; symlist = cdr(symlist))
     {
@@ -1961,15 +1961,15 @@ static void check_symlist(LVAL symlist)
     }
 }
 
-static int same_name(LVAL a, LVAL b)
+static int same_name(euxlValue a, euxlValue b)
 {
     return (strcmp(getstring(getpname(a)), getstring(getpname(b))) == 0);
 }
 
-static LVAL filter_all(LVAL modname, LVAL sofar)
+static euxlValue filter_all(euxlValue modname, euxlValue sofar)
 {
     cpush(sofar);
-    LVAL module = find_or_load_module(modname);
+    euxlValue module = find_or_load_module(modname);
     drop(1);
 
     if (module == NIL)
@@ -1977,7 +1977,7 @@ static LVAL filter_all(LVAL modname, LVAL sofar)
         xlerror("no such module in defmodule", modname);
     }
 
-    for (LVAL syms = getmexports(module); syms; syms = cdr(syms))
+    for (euxlValue syms = getmexports(module); syms; syms = cdr(syms))
     {
         sofar = cons(car(syms), sofar);
     }
@@ -1985,19 +1985,19 @@ static LVAL filter_all(LVAL modname, LVAL sofar)
     return sofar;
 }
 
-static LVAL filter_only(LVAL symlist, LVAL implist, LVAL sofar)
+static euxlValue filter_only(euxlValue symlist, euxlValue implist, euxlValue sofar)
 {
     check_symlist(symlist);
 
     cpush(sofar);
-    LVAL syms = filter_imports(implist, NIL);
+    euxlValue syms = filter_imports(implist, NIL);
     drop(1);
 
     push(syms);
 
     for (; symlist; symlist = cdr(symlist))
     {
-        LVAL sym = xlmember(car(symlist), syms, same_name);
+        euxlValue sym = xlmember(car(symlist), syms, same_name);
         if (sym != NIL)
         {
             sofar = cons(car(sym), sofar);
@@ -2009,12 +2009,12 @@ static LVAL filter_only(LVAL symlist, LVAL implist, LVAL sofar)
     return sofar;
 }
 
-static LVAL filter_except(LVAL symlist, LVAL implist, LVAL sofar)
+static euxlValue filter_except(euxlValue symlist, euxlValue implist, euxlValue sofar)
 {
     check_symlist(symlist);
 
     cpush(sofar);
-    LVAL syms = filter_imports(implist, NIL);
+    euxlValue syms = filter_imports(implist, NIL);
     drop(1);
 
     push(syms);
@@ -2032,16 +2032,16 @@ static LVAL filter_except(LVAL symlist, LVAL implist, LVAL sofar)
     return sofar;
 }
 
-static void check_rename_list(LVAL renamelist)
+static void check_rename_list(euxlValue renamelist)
 {
     if (!listp(renamelist))
     {
         xlerror("malformed rename directive in defmodule", renamelist);
     }
 
-    for (LVAL list = renamelist; list; list = cdr(list))
+    for (euxlValue list = renamelist; list; list = cdr(list))
     {
-        LVAL rename = car(list);
+        euxlValue rename = car(list);
 
         if (!consp(rename) || !consp(cdr(rename)))
         {
@@ -2063,10 +2063,10 @@ static void check_rename_list(LVAL renamelist)
     // (+ add)) ...) seems OK
     for (; renamelist; renamelist = cdr(renamelist))
     {
-        LVAL rename = car(renamelist);
-        LVAL old = car(rename);
-        LVAL new = car(cdr(rename));
-        for (LVAL list = cdr(renamelist); list; list = cdr(list))
+        euxlValue rename = car(renamelist);
+        euxlValue old = car(rename);
+        euxlValue new = car(cdr(rename));
+        for (euxlValue list = cdr(renamelist); list; list = cdr(list))
         {
             rename = car(list);
             if ((new == car(cdr(rename))) && (old != car(rename)))
@@ -2078,25 +2078,25 @@ static void check_rename_list(LVAL renamelist)
 }
 
 // import all symbols, flag some as renamed
-static LVAL filter_rename(LVAL renamelist, LVAL implist, LVAL sofar)
+static euxlValue filter_rename(euxlValue renamelist, euxlValue implist, euxlValue sofar)
 {
-    extern LVAL s_rename_flag;
+    extern euxlValue s_rename_flag;
 
     check(3);
     push(sofar);
-    LVAL syms = filter_imports(implist, NIL);
+    euxlValue syms = filter_imports(implist, NIL);
     push(syms);
 
     check_rename_list(renamelist);
 
-    LVAL except = NIL;
+    euxlValue except = NIL;
 
     for (; renamelist; renamelist = cdr(renamelist))
     {
-        LVAL rename = car(renamelist);
+        euxlValue rename = car(renamelist);
 
-        LVAL oldname = car(rename);
-        LVAL newname = car(cdr(rename));
+        euxlValue oldname = car(rename);
+        euxlValue newname = car(cdr(rename));
 
         // renaming to self?
         if (oldname == newname)
@@ -2104,7 +2104,7 @@ static LVAL filter_rename(LVAL renamelist, LVAL implist, LVAL sofar)
             continue;
         }
 
-        LVAL found = xlmember(oldname, syms, same_name);
+        euxlValue found = xlmember(oldname, syms, same_name);
         if (found == NIL)
         {
             xlerror("no such imported symbol to rename in defmodule", oldname);
@@ -2141,11 +2141,11 @@ static LVAL filter_rename(LVAL renamelist, LVAL implist, LVAL sofar)
     return sofar;
 }
 
-static LVAL filter_imports(LVAL implist, LVAL sofar)
+static euxlValue filter_imports(euxlValue implist, euxlValue sofar)
 {
     for (; implist; implist = cdr(implist))
     {
-        LVAL imp = car(implist);
+        euxlValue imp = car(implist);
 
         if (symbolp(imp))
         {
@@ -2182,9 +2182,9 @@ static LVAL filter_imports(LVAL implist, LVAL sofar)
     return sofar;
 }
 
-static void process_import_directive(LVAL array, LVAL implist)
+static void process_import_directive(euxlValue array, euxlValue implist)
 {
-    LVAL symlist = filter_imports(implist, NIL);
+    euxlValue symlist = filter_imports(implist, NIL);
     cpush(symlist);
 
     add_imported_symbols(array, symlist);
@@ -2192,13 +2192,13 @@ static void process_import_directive(LVAL array, LVAL implist)
     drop(1);
 }
 
-static void process_export_directive(LVAL export_syms)
+static void process_export_directive(euxlValue export_syms)
 {
-    LVAL exports = getmexports(current_module);
+    euxlValue exports = getmexports(current_module);
 
-    for (LVAL syms=export_syms; syms; syms = cdr(syms))
+    for (euxlValue syms=export_syms; syms; syms = cdr(syms))
     {
-        LVAL sym = car(syms);
+        euxlValue sym = car(syms);
 
         if (!symbolp(sym))
         {
@@ -2207,7 +2207,7 @@ static void process_export_directive(LVAL export_syms)
         else
         {
             // Intern the exported symbol into the current_module
-            LVAL mod_sym = xlenter(getstring(getpname(sym)));
+            euxlValue mod_sym = xlenter(getstring(getpname(sym)));
             exports = cons(mod_sym, exports);
 
             #ifdef DEBUG
@@ -2225,16 +2225,16 @@ static void process_export_directive(LVAL export_syms)
     setmexports(current_module, exports);
 }
 
-static void process_expose_directive(LVAL explist)
+static void process_expose_directive(euxlValue explist)
 {
-    LVAL syms = filter_imports(explist, NIL);
+    euxlValue syms = filter_imports(explist, NIL);
     cpush(syms);
 
-    LVAL exports = getmexports(current_module);
+    euxlValue exports = getmexports(current_module);
 
     for (; syms; syms = cdr(syms))
     {
-        LVAL sym = car(syms);
+        euxlValue sym = car(syms);
 
         if (!symbolp(sym))
         {
@@ -2243,7 +2243,7 @@ static void process_expose_directive(LVAL explist)
         else
         {
             // Intern the exported symbol into the current_module
-            LVAL mod_sym = xlenter(getstring(getpname(sym)));
+            euxlValue mod_sym = xlenter(getstring(getpname(sym)));
             exports = cons(mod_sym, exports);
 
             #ifdef DEBUG
@@ -2263,7 +2263,7 @@ static void process_expose_directive(LVAL explist)
     drop(1);
 }
 
-static void process_module_directives(LVAL array, LVAL directives)
+static void process_module_directives(euxlValue array, euxlValue directives)
 {
     check(2);
     push(array);
@@ -2271,7 +2271,7 @@ static void process_module_directives(LVAL array, LVAL directives)
 
     while (directives)
     {
-        LVAL directive = car(directives);
+        euxlValue directive = car(directives);
         if (!symbolp(directive))
         {
             xlerror("malformed directive in defmodule", directive);
@@ -2284,7 +2284,7 @@ static void process_module_directives(LVAL array, LVAL directives)
             xlerror("missing value for directive", directive);
         }
 
-        LVAL value = car(directives);
+        euxlValue value = car(directives);
 
         // For the moment treat "import" and "syntax" equivalently
         // This supports but does not require the code to correspond to the
@@ -2303,7 +2303,7 @@ static void process_module_directives(LVAL array, LVAL directives)
         }
         else
         {
-            LVAL out;
+            euxlValue out;
             out = getvalue(s_stderr);
             xlputstr(out, "*** ignoring directive \"");
             xlprin1(directive, out);
@@ -2318,7 +2318,7 @@ static void process_module_directives(LVAL array, LVAL directives)
 
 // intern symbol in current module
 // can't use symbol name directly as it might move during a GC in xlenter
-static LVAL reintern_symbol(LVAL sym)
+static euxlValue reintern_symbol(euxlValue sym)
 {
     char buf[STRMAX + 1];
 
@@ -2332,12 +2332,12 @@ static LVAL reintern_symbol(LVAL sym)
 }
 
 // make all symbols in a vector be in current module
-static void reintern_vector_symbols(LVAL form)
+static void reintern_vector_symbols(euxlValue form)
 {
     int len = getsize(form);
     for (int i = 0; i < len; i++)
     {
-        LVAL elt = getelement(form, i);
+        euxlValue elt = getelement(form, i);
         if (symbolp(elt))
         {
             setelement(form, i, reintern_symbol(elt));
@@ -2351,11 +2351,11 @@ static void reintern_vector_symbols(LVAL form)
 
 // make all symbols in a defmodule body be in current module
 // classes: lists & vectors only
-static void reintern_module_symbols(LVAL body)
+static void reintern_module_symbols(euxlValue body)
 {
     for (; consp(body); body = cdr(body))
     {
-        LVAL form = car(body);
+        euxlValue form = car(body);
         if (symbolp(form))
         {
             rplaca(body, reintern_symbol(form));
@@ -2380,11 +2380,11 @@ static void reintern_module_symbols(LVAL body)
     }
 }
 
-LVAL xreintern()
+euxlValue xreintern()
 {
     static char *cfn_name = "reintern";
 
-    LVAL body = xlgalist();
+    euxlValue body = xlgalist();
     xllastarg();
 
     reintern_module_symbols(cdr(body)); // (begin@ROOT .... )
@@ -2393,19 +2393,19 @@ LVAL xreintern()
 }
 
 #if 1
-LVAL xreintern_syntax()
+euxlValue xreintern_syntax()
 {
     static char *cfn_name = "reintern-syntax";
 
-    LVAL sym = xlgasymbol();
+    euxlValue sym = xlgasymbol();
     xllastarg();
 
     return reintern_symbol(sym);
 }
 #else
-LVAL reintern_syntax_form(), reintern_syntax_vector();
+euxlValue reintern_syntax_form(), reintern_syntax_vector();
 
-LVAL reintern_syntax_form(LVAL form)
+euxlValue reintern_syntax_form(euxlValue form)
 {
     if (symbolp(form))
     {
@@ -2425,10 +2425,10 @@ LVAL reintern_syntax_form(LVAL form)
     }
 }
 
-LVAL reintern_syntax_vector(LVAL form)
+euxlValue reintern_syntax_vector(euxlValue form)
 {
     int len = getsize(form);
-    LVAL new = newvector(len);
+    euxlValue new = newvector(len);
     cpush(new);
     for (int i = 0; i < len; i++)
     {
@@ -2438,11 +2438,11 @@ LVAL reintern_syntax_vector(LVAL form)
     return new;
 }
 
-LVAL xreintern_syntax()
+euxlValue xreintern_syntax()
 {
     static char *cfn_name = "reintern-syntax";
 
-    LVAL form = xlgetarg();
+    euxlValue form = xlgetarg();
     xllastarg();
 
     cpush(form);
@@ -2457,12 +2457,12 @@ LVAL xreintern_syntax()
 }
 #endif
 
-LVAL xmodule_directives()
+euxlValue xmodule_directives()
 {
     static char *cfn_name = "module-directives";
 
-    LVAL array = xlgavector();
-    LVAL form = xlgalist();
+    euxlValue array = xlgavector();
+    euxlValue form = xlgalist();
     xllastarg();
 
     process_module_directives(array, form);
@@ -2472,14 +2472,14 @@ LVAL xmodule_directives()
 
 // load those modules that this one depends on
 // implist is a list of module descriptors (i.e., names or filters)
-static void load_dependent_modules2(LVAL implist)
+static void load_dependent_modules2(euxlValue implist)
 {
     for (; implist; implist = cdr(implist))
     {
-        LVAL imp = car(implist);
+        euxlValue imp = car(implist);
         if (symbolp(imp))
         {
-            LVAL module = find_or_load_module(imp);
+            euxlValue module = find_or_load_module(imp);
             if (module == NIL)
             {
                 xlerror("no such module in defmodule", imp);
@@ -2511,11 +2511,11 @@ static void load_dependent_modules2(LVAL implist)
     }
 }
 
-static void load_dependent_modules(LVAL directives)
+static void load_dependent_modules(euxlValue directives)
 {
     while (directives)
     {
-        LVAL directive = car(directives);
+        euxlValue directive = car(directives);
         if (!symbolp(directive))
         {
             xlerror("malformed directive in defmodule", directive);
@@ -2544,7 +2544,7 @@ static void load_dependent_modules(LVAL directives)
 //    (reintern (begin body ...))
 //    ((compile (begin body ...)))     ; compile and run
 //    (set-module root)
-static void do_defmodule(LVAL form, int cont)
+static void do_defmodule(euxlValue form, int cont)
 {
     if (current_module != root_module)
     {
@@ -2579,14 +2579,14 @@ static void do_defmodule(LVAL form, int cont)
 
     check(3);
     push(form);
-    LVAL newmod = cvmodule(modname);
+    euxlValue newmod = cvmodule(modname);
     push(newmod);
 
-    LVAL array = getmsymbols(newmod);
+    euxlValue array = getmsymbols(newmod);
 
     load_dependent_modules(car(cdr(form)));
 
-    LVAL expr = cons(s_setmodule, cons(newmod, NIL));
+    euxlValue expr = cons(s_setmodule, cons(newmod, NIL));
     do_expr(expr, C_NEXT);
 
     array = getmsymbols(newmod);
@@ -2594,7 +2594,7 @@ static void do_defmodule(LVAL form, int cont)
     cons(array, cons(cons(s_quote, cons(car(cdr(form)), NIL)), NIL)));
     do_expr(expr, C_NEXT);
 
-    LVAL body = cdr(cdr(form));
+    euxlValue body = cdr(cdr(form));
     body = cons(s_progn, body);
     body = cons(s_quote, cons(body, NIL));
     body = cons(body, NIL);
@@ -2605,7 +2605,7 @@ static void do_defmodule(LVAL form, int cont)
 
     #ifdef NOISY_LOAD
     char buf[128];
-    LVAL s_print = NULL;
+    euxlValue s_print = NULL;
     extern int quiet;
 
     if (!quiet)
@@ -2652,14 +2652,14 @@ static void do_defmodule(LVAL form, int cont)
     drop(2);
 }
 
-static void do_export(LVAL form, int cont)
+static void do_export(euxlValue form, int cont)
 {
-    LVAL exports = getmexports(current_module);
+    euxlValue exports = getmexports(current_module);
     cpush(form);
 
-    for (LVAL syms = form; syms; syms = cdr(syms))
+    for (euxlValue syms = form; syms; syms = cdr(syms))
     {
-        LVAL sym = car(syms);
+        euxlValue sym = car(syms);
         if (!symbolp(sym))
         {
             xlerror("non-symbol in export", sym);
@@ -2678,7 +2678,7 @@ static void do_export(LVAL form, int cont)
     do_continuation(cont);
 }
 
-LVAL append(LVAL a, LVAL b)
+euxlValue append(euxlValue a, euxlValue b)
 {
     if (a == NIL)
     {
@@ -2688,14 +2688,14 @@ LVAL append(LVAL a, LVAL b)
     return cons(car(a), append(cdr(a), b));
 }
 
-static void do_expose(LVAL form, int cont)
+static void do_expose(euxlValue form, int cont)
 {
-    LVAL exports = getmexports(current_module);
+    euxlValue exports = getmexports(current_module);
     cpush(form);
 
-    for (LVAL syms = form; syms; syms = cdr(syms))
+    for (euxlValue syms = form; syms; syms = cdr(syms))
     {
-        LVAL sym = car(syms);
+        euxlValue sym = car(syms);
 
         if (!symbolp(sym) && !stringp(sym))
         {
@@ -2703,7 +2703,7 @@ static void do_expose(LVAL form, int cont)
         }
         else
         {
-            LVAL mod = find_or_load_module(sym);
+            euxlValue mod = find_or_load_module(sym);
             if (mod == NIL)
             {
                 xlerror("no such module in expose", sym);
@@ -2722,14 +2722,14 @@ static void do_expose(LVAL form, int cont)
     drop(1);
 }
 
-static void do_enter_module(LVAL form, int cont)
+static void do_enter_module(euxlValue form, int cont)
 {
     if (atom(form))
     {
         xlfail("module name expected in enter-module", s_syntax_error);
     }
 
-    LVAL sym = car(form);
+    euxlValue sym = car(form);
     if (!symbolp(sym) && !stringp(sym))
     {
         xlerror("bad module name in enter-module", sym);
@@ -2737,7 +2737,7 @@ static void do_enter_module(LVAL form, int cont)
 
     cpush(form);
 
-    LVAL mod = find_or_load_module(sym);
+    euxlValue mod = find_or_load_module(sym);
     if (mod == NIL)
     {
         xlerror("unknown module in enter-module", sym);
@@ -2752,14 +2752,14 @@ static void do_enter_module(LVAL form, int cont)
     drop(1);
 }
 
-static void do_reenter_module(LVAL form, int cont)
+static void do_reenter_module(euxlValue form, int cont)
 {
     if (atom(form))
     {
         xlfail("module name expected in reenter-module", s_syntax_error);
     }
 
-    LVAL sym = car(form);
+    euxlValue sym = car(form);
     if (!symbolp(sym) && !stringp(sym))
         xlerror("bad module name in reenter-module", sym);
 
@@ -2767,7 +2767,7 @@ static void do_reenter_module(LVAL form, int cont)
 
     int loaded = load_module(sym);
 
-    LVAL mod = find_module(sym);
+    euxlValue mod = find_module(sym);
     if (mod == NIL)
     {
         xlerror("unknown module in reenter-module", sym);
@@ -2788,17 +2788,17 @@ static void do_reenter_module(LVAL form, int cont)
 }
 
 // Import directive for interactive use
-static void do_import(LVAL form, int cont)
+static void do_import(euxlValue form, int cont)
 {
     cpush(form);
 
-    LVAL mod = find_or_load_module(car(cdr(form)));
+    euxlValue mod = find_or_load_module(car(cdr(form)));
     if (mod == NIL)
     {
         xlerror("unknown module in import", car(cdr(form)));
     }
 
-    LVAL array = getmsymbols(current_module);
+    euxlValue array = getmsymbols(current_module);
 
     putcbyte(OP_SAVE);
     int nxt = putcword(0);
@@ -2835,9 +2835,9 @@ static void do_import(LVAL form, int cont)
     drop(1);
 }
 
-static void genargs(LVAL gf, LVAL args)
+static void genargs(euxlValue gf, euxlValue args)
 {
-    extern LVAL object;
+    extern euxlValue object;
 
     if (!consp(args))
     {
@@ -2862,7 +2862,7 @@ static void genargs(LVAL gf, LVAL args)
      && symbolp(car(cdr(car(args))))
     )
     {
-        LVAL sym = car(cdr(car(args)));
+        euxlValue sym = car(cdr(car(args)));
         int lev, off;
         if (findvariable(sym, &lev, &off))
         {
@@ -2882,9 +2882,9 @@ static void genargs(LVAL gf, LVAL args)
 }
 
 // get classes of required args for gf
-static void do_set_genargs(LVAL gf, LVAL args)
+static void do_set_genargs(euxlValue gf, euxlValue args)
 {
-    extern LVAL s_set_generic_args;
+    extern euxlValue s_set_generic_args;
     putcbyte(OP_SAVE);
     int nxt = putcword(0);
     putcbyte(OP_NIL);
@@ -2898,7 +2898,7 @@ static void do_set_genargs(LVAL gf, LVAL args)
     fixup(nxt);
 }
 
-static void do_define_generic(LVAL form, int cont)
+static void do_define_generic(euxlValue form, int cont)
 {
     if (atom(form))
     {
@@ -2910,13 +2910,13 @@ static void do_define_generic(LVAL form, int cont)
         xlerror("bad name/args in defgeneric", car(form));
     }
 
-    LVAL name = car(car(form));
+    euxlValue name = car(car(form));
     if (!symbolp(name))
     {
         xlerror("bad name in defgeneric", name);
     }
 
-    LVAL args = cdr(car(form));
+    euxlValue args = cdr(car(form));
     if (!listp(args))
     {
         xlerror("bad arglist in defgeneric", car(form));
@@ -2926,7 +2926,7 @@ static void do_define_generic(LVAL form, int cont)
         xlerror("must have at least one required arg in defgeneric", car(form));
     }
 
-    LVAL gf = newgeneric();
+    euxlValue gf = newgeneric();
     cpush(gf);
 
     setgname(gf, name);
@@ -2953,21 +2953,21 @@ static void do_define_generic(LVAL form, int cont)
     do_literal(name, cont);
 }
 
-static LVAL define_method_args(LVAL arglist)
+static euxlValue define_method_args(euxlValue arglist)
 {
     if (!consp(arglist))
     {
         return arglist;
     }
 
-    LVAL args = NIL;
-    LVAL tail = NIL;
+    euxlValue args = NIL;
+    euxlValue tail = NIL;
 
     check(1);
 
     for (; consp(arglist); arglist = cdr(arglist))
     {
-        LVAL arg = car(arglist);
+        euxlValue arg = car(arglist);
         if (consp(arg))
         {
             arg = car(arg);
@@ -3003,22 +3003,22 @@ static LVAL define_method_args(LVAL arglist)
 }
 
 // the required args classes
-static LVAL define_method_classes(LVAL arglist)
+static euxlValue define_method_classes(euxlValue arglist)
 {
     if (!consp(arglist))
     {
         return NIL;
     }
 
-    LVAL s_object_class = xlenter_module("<object>", root_module);
-    LVAL classes = NIL;
-    LVAL tail = NIL;
+    euxlValue s_object_class = xlenter_module("<object>", root_module);
+    euxlValue classes = NIL;
+    euxlValue tail = NIL;
 
     check(1);
 
     for (; consp(arglist); arglist = cdr(arglist))
     {
-        LVAL arg = car(arglist);
+        euxlValue arg = car(arglist);
         if (consp(arg))
         {
             arg = cdr(arg);
@@ -3059,7 +3059,7 @@ static LVAL define_method_classes(LVAL arglist)
 }
 
 // cons up the method domain
-static int push_method_domain(LVAL classes)
+static int push_method_domain(euxlValue classes)
 {
     if (classes == NIL)
     {
@@ -3082,9 +3082,9 @@ static int push_method_domain(LVAL classes)
     return len + 1;
 }
 
-static void do_define_method(LVAL form, int cont)
+static void do_define_method(euxlValue form, int cont)
 {
-    extern LVAL s_arg_list, s_next_methods;
+    extern euxlValue s_arg_list, s_next_methods;
 
     if (atom(form))
     {
@@ -3096,13 +3096,13 @@ static void do_define_method(LVAL form, int cont)
         xlerror("bad name/args in defmethod", car(form));
     }
 
-    LVAL name = car(car(form));
+    euxlValue name = car(car(form));
     if (!(symbolp(name) || (consp(name) && symbolp(car(name)))))
     {
         xlerror("bad name in defmethod", name);
     }
 
-    LVAL arglist = cdr(car(form));
+    euxlValue arglist = cdr(car(form));
     if (!listp(arglist))
     {
         xlerror("bad arglist in defmethod", car(form));
@@ -3113,9 +3113,9 @@ static void do_define_method(LVAL form, int cont)
     }
 
     cpush(form);
-    LVAL classes = define_method_classes(arglist);
+    euxlValue classes = define_method_classes(arglist);
     cpush(classes);
-    LVAL args = define_method_args(arglist);
+    euxlValue args = define_method_args(arglist);
     cpush(args);
 
     drop(1);
@@ -3127,7 +3127,7 @@ static void do_define_method(LVAL form, int cont)
     int nxt1 = putcword(0);
 
     // optional args?
-    LVAL opts;
+    euxlValue opts;
     for (opts = args; consp(opts); opts = cdr(opts));
     if (opts == NIL)
     {
@@ -3150,7 +3150,7 @@ static void do_define_method(LVAL form, int cont)
     fixup(nxt2);
     putcbyte(OP_PUSH);
 
-    LVAL body = cdr(form);
+    euxlValue body = cdr(form);
     cd_fundefinition(name, args, body); // the method function
     putcbyte(OP_PUSH);
 
@@ -3158,7 +3158,7 @@ static void do_define_method(LVAL form, int cont)
 
     putcbyte(OP_PUSH);
 
-    LVAL sym = xlenter_module("make-and-add-method", root_module);
+    euxlValue sym = xlenter_module("make-and-add-method", root_module);
     cd_variable(OP_GREF, sym);
 
     putcbyte(OP_CALL);
@@ -3172,9 +3172,9 @@ static void do_define_method(LVAL form, int cont)
 
 }
 
-static void do_cnm(LVAL form, int cont)
+static void do_cnm(euxlValue form, int cont)
 {
-    extern LVAL s_next_methods, s_arg_list;
+    extern euxlValue s_next_methods, s_arg_list;
 
     if (form != NIL)
     {
@@ -3220,14 +3220,14 @@ static void do_cnm(LVAL form, int cont)
 
 }
 
-static void do_next_method_p(LVAL form, int cont)
+static void do_next_method_p(euxlValue form, int cont)
 {
     if (form != NIL)
     {
         xlerror("extra forms in next-method?", form);
     }
 
-    extern LVAL s_next_methods;
+    extern euxlValue s_next_methods;
     int lev, off;
     if (findvariable(s_next_methods, &lev, &off))       // arg list
     {
@@ -3245,7 +3245,7 @@ static void do_next_method_p(LVAL form, int cont)
 
 }
 
-static int do_superclass(LVAL super)
+static int do_superclass(euxlValue super)
 {
     if (super == NIL)
     {
@@ -3275,7 +3275,7 @@ static int do_superclass(LVAL super)
 
 }
 
-static int do_abstractp(LVAL classopts)
+static int do_abstractp(euxlValue classopts)
 {
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
@@ -3292,7 +3292,7 @@ static int do_abstractp(LVAL classopts)
     return 0;
 }
 
-static int do_slots(LVAL slots)
+static int do_slots(euxlValue slots)
 {
     if (slots == NIL)
     {
@@ -3308,7 +3308,7 @@ static int do_slots(LVAL slots)
     int nargs1;
     for (nargs1 = 0; slots; slots = cdr(slots), nargs1++)
     {
-        LVAL slot = car(slots);
+        euxlValue slot = car(slots);
 
         if (slot == NIL)
         {
@@ -3331,7 +3331,7 @@ static int do_slots(LVAL slots)
         else
         {
             // slot name
-            LVAL slotname = car(slot);
+            euxlValue slotname = car(slot);
             do_literal(slotname, C_NEXT);
             putcbyte(OP_PUSH);
             nargs2++;
@@ -3342,7 +3342,7 @@ static int do_slots(LVAL slots)
             slot = cdr(slot);
 
             // slot keyword
-            LVAL key = find_key(s_keyword, slot, s_unbound);
+            euxlValue key = find_key(s_keyword, slot, s_unbound);
             if (key != s_unbound)
             {
                 do_literal(key, C_NEXT);
@@ -3354,7 +3354,7 @@ static int do_slots(LVAL slots)
             }
 
             // slot default
-            LVAL defn = find_key(s_default, slot, s_unbound);
+            euxlValue defn = find_key(s_default, slot, s_unbound);
             if (defn != s_unbound)
             {
                 defn = cons(defn, NIL);
@@ -3367,7 +3367,7 @@ static int do_slots(LVAL slots)
             }
 
             // slot requiredp
-            LVAL reqd = find_key(s_requiredp, slot, s_unbound);
+            euxlValue reqd = find_key(s_requiredp, slot, s_unbound);
             if (reqd != s_unbound)
             {
                 do_literal(reqd, C_NEXT);
@@ -3399,21 +3399,21 @@ static int do_slots(LVAL slots)
     return 2;
 }
 
-static int do_keywords(LVAL slots, LVAL classopts)
+static int do_keywords(euxlValue slots, euxlValue classopts)
 {
     int nargs = 0;
 
     check(1);
 
-    LVAL keys = NIL;
+    euxlValue keys = NIL;
 
     // slot keywords
     for (; slots; slots = cdr(slots))
     {
-        LVAL slot = car(slots);
+        euxlValue slot = car(slots);
         if (consp(slot))
         {
-            LVAL val = find_key(s_keyword, cdr(slot), s_unbound);
+            euxlValue val = find_key(s_keyword, cdr(slot), s_unbound);
             if (val != s_unbound)
             {
                 keys = cons(val, keys);
@@ -3424,7 +3424,7 @@ static int do_keywords(LVAL slots, LVAL classopts)
     // class keywords
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
-        LVAL kwd = car(classopts);
+        euxlValue kwd = car(classopts);
         if (kwd == s_keywords)
         {
             if (!listp(car(cdr(classopts))))
@@ -3463,7 +3463,7 @@ static int do_keywords(LVAL slots, LVAL classopts)
     return nargs;
 }
 
-static LVAL mkarg(int n)
+static euxlValue mkarg(int n)
 {
     char buf[128];
 
@@ -3471,15 +3471,15 @@ static LVAL mkarg(int n)
     return xlenter(buf);
 }
 
-static void do_general_constructor(LVAL classname, LVAL name)
+static void do_general_constructor(euxlValue classname, euxlValue name)
 {
     if (!symbolp(name))
     {
         xlerror("bad name for constructor in defclass", name);
     }
 
-    LVAL args = mkarg(0);
-    LVAL body = cons(args, NIL);
+    euxlValue args = mkarg(0);
+    euxlValue body = cons(args, NIL);
     body = cons(classname, body);
     body = cons(s_make, body);
     body = cons(s_apply, body); // (apply make foo args)
@@ -3499,14 +3499,14 @@ static void do_general_constructor(LVAL classname, LVAL name)
     }
 }
 
-static void do_constructor(LVAL classname, LVAL classopts)
+static void do_constructor(euxlValue classname, euxlValue classopts)
 {
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
         if (car(classopts) == s_constructor)
         {
-            LVAL name = car(cdr(classopts));
-            LVAL keys;
+            euxlValue name = car(cdr(classopts));
+            euxlValue keys;
             if (consp(name))
             {
                 keys = cdr(name);
@@ -3521,8 +3521,8 @@ static void do_constructor(LVAL classname, LVAL classopts)
             if (!symbolp(name))
                 xlerror("bad name for constructor in defclass", name);
 
-            LVAL args = NIL;
-            LVAL body = NIL;
+            euxlValue args = NIL;
+            euxlValue body = NIL;
             check(3);
             keys = xlreverse(keys);
             push(keys);
@@ -3531,7 +3531,7 @@ static void do_constructor(LVAL classname, LVAL classopts)
             {
                 push(args);
                 push(body);
-                LVAL arg = mkarg(count);
+                euxlValue arg = mkarg(count);
                 drop(2);
                 args = cons(arg, args);
                 push(args);
@@ -3562,10 +3562,10 @@ static void do_constructor(LVAL classname, LVAL classopts)
     }
 }
 
-static void do_predicate(LVAL classname, LVAL classopts)
+static void do_predicate(euxlValue classname, euxlValue classopts)
 {
-    LVAL s_class_of = xlenter_module("class-of", root_module);
-    LVAL s_subclassp = xlenter_module("subclass?", root_module);
+    euxlValue s_class_of = xlenter_module("class-of", root_module);
+    euxlValue s_subclassp = xlenter_module("subclass?", root_module);
 
     check(2);
 
@@ -3577,16 +3577,16 @@ static void do_predicate(LVAL classname, LVAL classopts)
         if (car(classopts) == s_predicate)
         {
 
-            LVAL name = car(cdr(classopts));
+            euxlValue name = car(cdr(classopts));
             if (!symbolp(name))
                 xlerror("bad name for predicate in defclass", name);
 
             if (!previous)
             {   // make predicate function
-                LVAL args = cons(s_object, NIL);
+                euxlValue args = cons(s_object, NIL);
                 push(args);
 
-                LVAL body = cons(classname, NIL);
+                euxlValue body = cons(classname, NIL);
                 push(body);
                 body = cons(s_object, NIL);
                 body = cons(s_class_of, body);
@@ -3617,7 +3617,7 @@ static void do_predicate(LVAL classname, LVAL classopts)
     }
 }
 
-static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
+static void do_named_reader(euxlValue readername, euxlValue slotname, euxlValue classname)
 {
     putcbyte(OP_SAVE);
     int nxt1 = putcword(0);
@@ -3709,9 +3709,9 @@ static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
 
 static void do_named_writer
 (
-    LVAL writername,
-    LVAL slotname,
-    LVAL classname,
+    euxlValue writername,
+    euxlValue slotname,
+    euxlValue classname,
     int setterp
 )
 {
@@ -3844,14 +3844,14 @@ static void do_named_writer
 
 }
 
-static void do_readers(LVAL classname, LVAL slots)
+static void do_readers(euxlValue classname, euxlValue slots)
 {
     for (; slots; slots = cdr(slots))
     {
-        LVAL slot = car(slots);
+        euxlValue slot = car(slots);
         if (consp(slot))
         {
-            for (LVAL slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
+            for (euxlValue slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
             {
                 if (cdr(slotl) == NIL)
                 {
@@ -3866,14 +3866,14 @@ static void do_readers(LVAL classname, LVAL slots)
     }
 }
 
-static void do_writers(LVAL classname, LVAL slots)
+static void do_writers(euxlValue classname, euxlValue slots)
 {
     for (; slots; slots = cdr(slots))
     {
-        LVAL slot = car(slots);
+        euxlValue slot = car(slots);
         if (consp(slot))
         {
-            for (LVAL slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
+            for (euxlValue slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
             {
                 if (cdr(slotl) == NIL)
                 {
@@ -3894,9 +3894,9 @@ static void do_writers(LVAL classname, LVAL slots)
     }
 }
 
-static void do_class_class(LVAL classopts)
+static void do_class_class(euxlValue classopts)
 {
-    LVAL cls = NIL;
+    euxlValue cls = NIL;
 
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
@@ -3920,14 +3920,14 @@ static void do_class_class(LVAL classopts)
     drop(1);
 }
 
-static void do_accessors(LVAL classname, LVAL slots)
+static void do_accessors(euxlValue classname, euxlValue slots)
 {
     for (; slots; slots = cdr(slots))
     {
-        LVAL slot = car(slots);
+        euxlValue slot = car(slots);
         if (consp(slot))
         {
-            for (LVAL slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
+            for (euxlValue slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
             {
                 if (cdr(slotl) == NIL)
                 {
@@ -3944,11 +3944,11 @@ static void do_accessors(LVAL classname, LVAL slots)
     }
 }
 
-static void check_slot_options(LVAL slots)
+static void check_slot_options(euxlValue slots)
 {
     for (; slots; slots = cdr(slots))
     {
-        LVAL slot = car(slots);
+        euxlValue slot = car(slots);
 
         if (symbolp(slot))
         {
@@ -3972,7 +3972,7 @@ static void check_slot_options(LVAL slots)
                 xlerror("excess form in slot description", slot);
             }
 
-            LVAL kwd = car(slot);
+            euxlValue kwd = car(slot);
             if
             (
                 kwd != s_keyword
@@ -3989,7 +3989,7 @@ static void check_slot_options(LVAL slots)
     }
 }
 
-static void check_class_options(LVAL classopts)
+static void check_class_options(euxlValue classopts)
 {
     if ((list_size(classopts) & 1) == 1)
     {
@@ -4013,7 +4013,7 @@ static void check_class_options(LVAL classopts)
     }
 }
 
-static void do_defclass(LVAL form, int cont)
+static void do_defclass(euxlValue form, int cont)
 {
     cpush(form);
 
@@ -4022,7 +4022,7 @@ static void do_defclass(LVAL form, int cont)
         xlfail("missing body in defclass", s_syntax_error);
     }
 
-    LVAL name = car(form);
+    euxlValue name = car(form);
     if (!symbolp(name))
     {
         xlerror("bad class name in defclass", form);
@@ -4033,7 +4033,7 @@ static void do_defclass(LVAL form, int cont)
         xlerror("missing superclass in defclass", form);
     }
 
-    LVAL super = car(cdr(form));
+    euxlValue super = car(cdr(form));
     if (super != NIL && !symbolp(super))
     {
         xlerror("bad superclass in defclass", form);
@@ -4044,13 +4044,13 @@ static void do_defclass(LVAL form, int cont)
         xlerror("missing slot descriptions in defclass", form);
     }
 
-    LVAL slots = car(cdr(cdr(form)));
+    euxlValue slots = car(cdr(cdr(form)));
     if (!listp(slots))
     {
         xlerror("bad slot descriptions in defclass", form);
     }
 
-    LVAL classopts = cdr(cdr(cdr(form)));
+    euxlValue classopts = cdr(cdr(cdr(form)));
 
     check_slot_options(slots);
     check_class_options(classopts);
@@ -4101,11 +4101,11 @@ static void do_defclass(LVAL form, int cont)
     drop(1);
 }
 
-static int do_supercondition(LVAL super)
+static int do_supercondition(euxlValue super)
 {
-    LVAL s_condition = xlenter_module("<condition>", get_module("condition"));
+    euxlValue s_condition = xlenter_module("<condition>", get_module("condition"));
 
-    LVAL supercond = super;
+    euxlValue supercond = super;
     if (super == NIL)
     {
         supercond = s_condition;
@@ -4141,7 +4141,7 @@ static int do_supercondition(LVAL super)
     return 2;
 }
 
-static void do_defcondition(LVAL form, int cont)
+static void do_defcondition(euxlValue form, int cont)
 {
     cpush(form);
 
@@ -4150,13 +4150,13 @@ static void do_defcondition(LVAL form, int cont)
         xlfail("missing body in defcondition", s_syntax_error);
     }
 
-    LVAL name = car(form);
+    euxlValue name = car(form);
     if (atom(cdr(form)))
     {
         xlerror("missing supercondition in defcondition", name);
     }
 
-    LVAL super = car(cdr(form));
+    euxlValue super = car(cdr(form));
     if (!symbolp(super) && (super != NIL))
     {
         xlerror("bad supercondition in defcondition", super);
@@ -4168,13 +4168,13 @@ static void do_defcondition(LVAL form, int cont)
         xlerror("missing slot descriptions in defclass", form);
     }
 
-    LVAL slots = car(cdr(cdr(form)));
+    euxlValue slots = car(cdr(cdr(form)));
     if (!listp(slots))
     {
         xlerror("bad slot descriptions in defclass", form);
     }
 
-    LVAL classopts = cdr(cdr(cdr(form)));
+    euxlValue classopts = cdr(cdr(cdr(form)));
 
     check_slot_options(slots);
     check_class_options(classopts);
@@ -4225,12 +4225,12 @@ static void do_defcondition(LVAL form, int cont)
     drop(1);
 }
 
-LVAL xsyntax_error()
+euxlValue xsyntax_error()
 {
     static char *cfn_name = "raise-syntax-error";
 
-    LVAL msg = xlgastring();
-    LVAL value = xlgetarg();
+    euxlValue msg = xlgastring();
+    euxlValue value = xlgetarg();
     xllastarg();
     xlcerror(getstring(msg), value, s_syntax_error);
 
@@ -4290,10 +4290,10 @@ OTDEF otab[] =
 };
 
 // decode_procedure - decode the instructions in a code object
-void decode_procedure(LVAL fptr, LVAL fun)
+void decode_procedure(euxlValue fptr, euxlValue fun)
 {
-    LVAL code = getcode(fun);
-    LVAL env = getcenv(fun);
+    euxlValue code = getcode(fun);
+    euxlValue env = getcenv(fun);
     int len = getslength(getbcode(code));
     for (int lc = 0; lc < len;)
     {
@@ -4302,14 +4302,14 @@ void decode_procedure(LVAL fptr, LVAL fun)
 }
 
 // decode_instruction - decode a single bytecode instruction
-int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
+int decode_instruction(euxlValue fptr, euxlValue code, int lc, euxlValue env)
 {
     // get a pointer to the bytecodes for this instruction
     unsigned char *cp = (unsigned char *)getstring(getbcode(code)) + lc;
 
     // show the address and opcode
     char buf[100];
-    LVAL tmp;
+    euxlValue tmp;
     if ((tmp = getcname(code)) != NIL)
     {
         sprintf(buf, "%s:%04x %02x ", getstring(getpname(tmp)), lc, *cp);
@@ -4350,7 +4350,7 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
                     xlputstr(fptr, buf);
                     fflush(getfile(fptr));
                     {
-                        LVAL elt, mod;
+                        euxlValue elt, mod;
                         elt = getelement(code, cp[1]);
                         xlprin1(elt, fptr);
                         fflush(getfile(fptr));
@@ -4415,7 +4415,7 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
                     xlputstr(fptr, buf);
                     fflush(getfile(fptr));
                     {
-                        LVAL elt, mod;
+                        euxlValue elt, mod;
                         elt = getelement(code, (cp[1] << 8) | cp[2]);
                         xlprin1(elt, fptr);
                         fflush(getfile(fptr));

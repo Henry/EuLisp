@@ -1,6 +1,6 @@
 /// Copyright 1990 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -50,7 +50,7 @@ FILE *tfp = NULL;
 ///-----------------------------------------------------------------------------
 /// External variables
 ///-----------------------------------------------------------------------------
-extern LVAL xlfun, xlenv, xlval;
+extern euxlValue xlfun, xlenv, xlval;
 
 #include "euxlsymbols.h"
 #include "euxlproto.h"
@@ -63,10 +63,10 @@ FILE *filein;
 static void print_usage(FILE* stream, int exit_code);
 
 void xltoplevel();
-void xlerror(char *msg, LVAL arg);
+void xlerror(char *msg, euxlValue arg);
 void callerrorhandler();
 void xlwrapup(int);
-void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc);
+void do_xlerror(char *msg, euxlValue arg, euxlValue errname, int cc);
 
 ///-----------------------------------------------------------------------------
 /// Signal handling
@@ -278,7 +278,7 @@ void xlmain(int argc, char **argv)
     }
 
     // do the initialization code first
-    LVAL code = xlenter_module("*INITIALIZE*", root_module);
+    euxlValue code = xlenter_module("*INITIALIZE*", root_module);
     code = (boundp(code) ? getvalue(code) : NIL);
 
     // trap errors
@@ -388,13 +388,13 @@ void xltoplevel_int()
 }
 
 // xlfail - report an error
-void xlfail(char *msg, LVAL err)
+void xlfail(char *msg, euxlValue err)
 {
     xlcerror(msg, s_unbound, err);
 }
 
 // xlerror - report an error
-void xlerror(char *msg, LVAL arg)
+void xlerror(char *msg, euxlValue arg)
 {
     // print the error message
     errputstr("Error: ");
@@ -418,9 +418,9 @@ void xlerror(char *msg, LVAL arg)
 
 void set_xlframe(int n)
 {
-    extern LVAL s_xlframe;
+    extern euxlValue s_xlframe;
 
-    LVAL *ptr = xlsp + n;
+    euxlValue *ptr = xlsp + n;
     while(!is_cont(ptr) && ptr < xlstktop)
     {
         ptr++;
@@ -435,16 +435,16 @@ void set_xlframe(int n)
 }
 
 // cc is TRUE if return address is needed, e.g., in interpreter
-void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc)
+void do_xlerror(char *msg, euxlValue arg, euxlValue errname, int cc)
 {
-    extern LVAL current_continuation();
+    extern euxlValue current_continuation();
     extern JMP_BUF bc_dispatch;
 
     #ifdef NOERROR
     xlerror(msg, arg);
     #endif
 
-    LVAL cond;
+    euxlValue cond;
     if (errname == NIL)
     {
         cond = getvalue(s_general_error);
@@ -466,13 +466,13 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc)
     {
         set_xlframe(1);
         setivar(cond, 1, cvstring(msg));
-        LVAL condcl = getclass(cond);
+        euxlValue condcl = getclass(cond);
         if (getsfixnum(getivar(condcl, INSTSIZE)) > 1)
         {
             setivar(cond, 2, arg);
         }
         oscheck();
-        LVAL cont = current_continuation(cc);
+        euxlValue cont = current_continuation(cc);
         check(2);
         push(cont);     // resume continuation
         push(cond);     // condition
@@ -483,13 +483,13 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc)
 }
 
 // xlinterror - report run-time error in the interpreter
-void xlinterror(char *msg, LVAL arg, LVAL errname)
+void xlinterror(char *msg, euxlValue arg, euxlValue errname)
 {
     do_xlerror(msg, arg, errname, TRUE);
 }
 
 // xlcerror - report run-time error in C code
-void xlcerror(char *msg, LVAL arg, LVAL errname)
+void xlcerror(char *msg, euxlValue arg, euxlValue errname)
 {
     // discard everything until the continuation
     while (!is_cont(xlsp))
@@ -550,7 +550,7 @@ void xlwrapup(int n)
 
 #define errprin(x) xlprin1(x, errout)
 #define errstr(x)  xlputstr(errout, x)
-static LVAL errout;
+static euxlValue errout;
 
 static void indent(int n)
 {
@@ -560,7 +560,7 @@ static void indent(int n)
     }
 }
 
-static void trace_function(LVAL fun, LVAL env)
+static void trace_function(euxlValue fun, euxlValue env)
 {
     extern FUNDEF funtab[];
 
@@ -601,10 +601,10 @@ static void trace_function(LVAL fun, LVAL env)
     {
         if (envp(env))
         {
-            LVAL frame = car(env);
+            euxlValue frame = car(env);
             if (vectorp(frame))
             {
-                LVAL vars = getelement(frame, 0);
+                euxlValue vars = getelement(frame, 0);
                 for (int i = 1; vars; vars = cdr(vars), i++)
                 {
                     errprin(car(vars));
@@ -633,13 +633,13 @@ static void trace_function(LVAL fun, LVAL env)
 }
 
 // print a backtrace
-void do_backtrace(LVAL * from)
+void do_backtrace(euxlValue * from)
 {
     errout = getvalue(s_stderr);
 
     errstr("\nStack backtrace:\n\n");
 
-    for (LVAL *sp = from; sp < xlstktop; sp++)
+    for (euxlValue *sp = from; sp < xlstktop; sp++)
     {
         if (is_cont(sp))
         {
@@ -650,15 +650,15 @@ void do_backtrace(LVAL * from)
 }
 
 // lisp backtrace
-LVAL xbacktrace()
+euxlValue xbacktrace()
 {
     static char *cfn_name = "backtrace";
-    extern LVAL true;
+    extern euxlValue true;
 
-    LVAL *ptr;
+    euxlValue *ptr;
     if (moreargs())
     {
-        LVAL frameptr = xlgafixnum();
+        euxlValue frameptr = xlgafixnum();
         ptr = xlstktop - getfixnum(frameptr);
         xllastarg();
     }
@@ -673,12 +673,12 @@ LVAL xbacktrace()
 }
 
 // debugging -- move up a frame
-LVAL xframe_up()
+euxlValue xframe_up()
 {
     static char *cfn_name = "frame-up";
 
-    LVAL frameptr = xlgafixnum();
-    LVAL arg = xlgetarg();   // cc
+    euxlValue frameptr = xlgafixnum();
+    euxlValue arg = xlgetarg();   // cc
     arg = xlgetarg();        // condition
     int n;
     if (moreargs())
@@ -692,11 +692,11 @@ LVAL xframe_up()
         n = 1;
     }
 
-    LVAL *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue *ptr = xlstktop - getfixnum(frameptr);
 
     for (; n > 0; n--)
     {
-        LVAL *old = ptr;
+        euxlValue *old = ptr;
         for (ptr++; ptr < xlstktop; ptr++)
         {
             if (is_cont(ptr))
@@ -718,12 +718,12 @@ LVAL xframe_up()
 }
 
 // debugging -- move down a frame
-LVAL xframe_down()
+euxlValue xframe_down()
 {
     static char *cfn_name = "frame-down";
 
-    LVAL frameptr = xlgafixnum();
-    LVAL arg = xlgetarg();   // cc
+    euxlValue frameptr = xlgafixnum();
+    euxlValue arg = xlgetarg();   // cc
     arg = xlgetarg();   // condition
     int n;
     if (moreargs())
@@ -737,11 +737,11 @@ LVAL xframe_down()
         n = 1;
     }
 
-    LVAL *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue *ptr = xlstktop - getfixnum(frameptr);
 
     for (; n > 0; n--)
     {
-        LVAL *old = ptr;
+        euxlValue *old = ptr;
         for (ptr--; ptr >= xlsp; ptr--)
         {
             if (is_cont(ptr))
@@ -763,25 +763,25 @@ LVAL xframe_down()
 }
 
 // debugging -- get current env
-LVAL xframe_env()
+euxlValue xframe_env()
 {
     static char *cfn_name = "frame-env";
 
-    LVAL frameptr = xlgafixnum();
+    euxlValue frameptr = xlgafixnum();
     xllastarg();
-    LVAL *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue *ptr = xlstktop - getfixnum(frameptr);
 
     return *ptr;
 }
 
 // debugging -- get current fun
-LVAL xframe_fun()
+euxlValue xframe_fun()
 {
     static char *cfn_name = "frame-fun";
 
-    LVAL frameptr = xlgafixnum();
+    euxlValue frameptr = xlgafixnum();
     xllastarg();
-    LVAL *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue *ptr = xlstktop - getfixnum(frameptr);
 
     return ptr[1];
 }

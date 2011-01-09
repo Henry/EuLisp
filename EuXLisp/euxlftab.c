@@ -1,6 +1,6 @@
 /// Copyright 1988 David Michael Betz
 /// Copyright 1994 Russell Bradford
-/// Copyright 2010 Henry G. Weller
+/// Copyright 2010, 2011 Henry G. Weller
 ///-----------------------------------------------------------------------------
 //  This file is part of
 /// ---                           EuLisp System 'EuXLisp'
@@ -33,7 +33,7 @@
 int xsubrcnt = 12;              // number of XSUBR functions
 int csubrcnt = 18;              // number of CSUBR functions + xsubrcnt
 
-typedef LVAL(*FP) ();
+typedef euxlValue(*FP) ();
 
 ///-----------------------------------------------------------------------------
 /// Built-in functions
@@ -463,19 +463,19 @@ FUNDEF funtab[] =
 /// Functions
 ///-----------------------------------------------------------------------------
 // xstdin - get the stdin stream
-LVAL xstdin()
+euxlValue xstdin()
 {
     return (getvalue(s_stdin));
 }
 
 // xstdout - get the stdout stream
-LVAL xstdout()
+euxlValue xstdout()
 {
     return (getvalue(s_stdout));
 }
 
 // eq - internal 'eq' function
-int eq(LVAL arg1, LVAL arg2)
+int eq(euxlValue arg1, euxlValue arg2)
 {
     if (symbolp(arg1) && symbolp(arg2))
     {
@@ -485,7 +485,7 @@ int eq(LVAL arg1, LVAL arg2)
 }
 
 // eqv - internal 'eql' function
-int eqv(LVAL arg1, LVAL arg2)
+int eqv(euxlValue arg1, euxlValue arg2)
 {
     // try the eq test first
     if (arg1 == arg2)
@@ -512,7 +512,7 @@ int eqv(LVAL arg1, LVAL arg2)
 }
 
 // equal - internal 'equal' function
-int equal(LVAL arg1, LVAL arg2)
+int equal(euxlValue arg1, euxlValue arg2)
 {
     // try the eq test first
     if (arg1 == arg2)
@@ -548,7 +548,7 @@ int equal(LVAL arg1, LVAL arg2)
 }
 
 // equality of two numbers
-int equals(LVAL arg1, LVAL arg2)
+int equals(euxlValue arg1, euxlValue arg2)
 {
     if (fixp(arg1))
     {
@@ -579,7 +579,7 @@ int equals(LVAL arg1, LVAL arg2)
 }
 
 // vectorequal - compare two vectors
-int vectorequal(LVAL v1, LVAL v2)
+int vectorequal(euxlValue v1, euxlValue v2)
 {
     // compare the vector sizes
     int len;
@@ -601,9 +601,9 @@ int vectorequal(LVAL v1, LVAL v2)
 }
 
 // xltoofew - too few arguments to this function
-LVAL xltoofew(char *cfn_name)
+euxlValue xltoofew(char *cfn_name)
 {
-    LVAL name = cvstring(cfn_name);
+    euxlValue name = cvstring(cfn_name);
     xlcerror("too few arguments", name, NIL);
     return NIL; // notreached
 }
@@ -611,37 +611,37 @@ LVAL xltoofew(char *cfn_name)
 // xltoofew - too few arguments to this function
 void xltoofew_int()
 {
-    extern LVAL xlfun;
+    extern euxlValue xlfun;
     xlinterror("too few arguments", xlfun, NIL);
 }
 
 // xltoomany - too many arguments to this function
 void xltoomany(char *cfn_name)
 {
-    LVAL name = cvstring(cfn_name);
+    euxlValue name = cvstring(cfn_name);
     xlcerror("too many arguments", name, NIL);
 }
 
 // xltoomany - too many arguments to this function
 void xltoomany_int()
 {
-    extern LVAL xlfun;
+    extern euxlValue xlfun;
     xlinterror("too many arguments", xlfun, NIL);
 }
 
 // xlbadtype - incorrect argument type
 // cf badargtype in xsint.c
-LVAL xlbadtype(LVAL val, char *name, char *fn)
+euxlValue xlbadtype(euxlValue val, char *name, char *fn)
 {
-    extern LVAL s_bad_type_error, s_unbound;
+    extern euxlValue s_bad_type_error, s_unbound;
 
     char buf[256];
     sprintf(buf, "incorrect type in %s", fn);
 
-    LVAL cond = getvalue(s_bad_type_error);
+    euxlValue cond = getvalue(s_bad_type_error);
     if (cond != s_unbound)
     {
-        LVAL class = name[0] == '<' ?
+        euxlValue class = name[0] == '<' ?
         getvalue(xlenter_module(name, root_module)) : cvstring(name);
         setivar(cond, 3, class);        // cf condcl.em
     }
