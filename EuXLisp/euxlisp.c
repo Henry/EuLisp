@@ -22,59 +22,57 @@
 /// Title: EuXLisp main function
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "euxlisp.h"
-#include "euxlobj.h"
-#include "euxlbanner.h"
 #include <getopt.h>
+#include <signal.h>
 
 ///-----------------------------------------------------------------------------
 /// Macros
 ///-----------------------------------------------------------------------------
-#define is_cont(sp)                                                            \
-    (envp(sp[0]) && (codep(sp[1]) || csubrp(sp[1])) && !ispointer(sp[2]))
+#define ieuxls_cont(sp)                                                        \
+    (                                                                          \
+        euxmEnvp(sp[0])                                                        \
+     && (euxmCodep(sp[1]) || euxmXFunContp(sp[1])) && !euxmIsPointer(sp[2])    \
+    )
 
 ///-----------------------------------------------------------------------------
-/// Global variable
+/// Global variables
 ///-----------------------------------------------------------------------------
-const char* program_name;       // The name of this program (euxlisp).
-int clargc;                     // command line argument count
-char **clargv;                  // array of command line arguments
+///  Banner
+const char* euxlBanner =
+"EuLisp System EuXLisp (formally Euscheme) - Version 0.991";
 
-JMP_BUF top_level;
-void do_backtrace();
+///  Command-line arguments
+int clargc;            // command line argument count
+char * const *clargv;  // array of command line arguments
 
-// trace file pointer
+///  Stack top
+euxmJmpBuf euxmStackTopLevel;
+
+///  Trace file pointer
 FILE *tfp = NULL;
 
-///-----------------------------------------------------------------------------
-/// External variables
-///-----------------------------------------------------------------------------
-extern euxlValue xlfun, xlenv, xlval;
+///  Don't print prompt in script-mode
+int quiet;
 
-#include "euxlsymbols.h"
-#include "euxlproto.h"
-
-extern int trace;
-extern int reading;
-int quiet, no_system;
+///  Current input file
 FILE *filein;
 
-static void print_usage(FILE* stream, int exit_code);
-
-void xltoplevel();
-void xlerror(char *msg, euxlValue arg);
-void callerrorhandler();
-void xlwrapup(int);
-void do_xlerror(char *msg, euxlValue arg, euxlValue errname, int cc);
-
-///-----------------------------------------------------------------------------
-/// Signal handling
-///-----------------------------------------------------------------------------
-#include <signal.h>
-
+///  Has a ^C been signalled
 int ctrl_c = 0;
 
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
+///  The name of this program (euxlisp).
+static const char* program_name;
+
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
+static void print_usage(FILE* stream, int exit_code);
+
+///  Signal handling
 static void eux_signal_handler_int(int signo)
 {
     ctrl_c = 1;
@@ -84,9 +82,9 @@ static void eux_signal_handler_int(int signo)
     {
         ctrl_c = 0;
         reading = 0;
-        osflush();
-        ostputc('\n');
-        xltoplevel();
+        euxcOSFlush();
+        euxcOSTPutc('\n');
+        euxcToplevel();
     }
 }
 
@@ -108,22 +106,23 @@ static void eux_signal_handler_pipe(int signo)
     {
         broken_pipe = 0;
         reading = 0;
-        osflush();
-        ostputc('\n');
-        xltoplevel();
+        euxcOSFlush();
+        euxcOSTPutc('\n');
+        euxcToplevel();
     }
 }
 #endif
 
 ///-----------------------------------------------------------------------------
-/// xlmain - the main function
+/// Functions
 ///-----------------------------------------------------------------------------
-void xlmain(int argc, char **argv)
+
+///  euxcMain - the main function
+void euxcMain(int argc, char * const *argv)
 {
-    int image = TRUE;
-    quiet = FALSE;
+    int image = euxmTrue;
+    quiet = euxmFalse;
     filein = stdin;
-    no_system = FALSE;
     char* image_name = IMAGE;
 
     // Remember the name of the program, to incorporate in messages.
@@ -152,8 +151,14 @@ void xlmain(int argc, char **argv)
 
     do
     {
-        next_option = getopt_long (argc, argv, short_options,
-        long_options, NULL);
+        next_option = getopt_long
+        (
+            argc,
+            argv,
+            short_options,
+            long_options,
+            NULL
+        );
 
         switch (next_option)
         {
@@ -163,19 +168,15 @@ void xlmain(int argc, char **argv)
                 print_usage(stdout, 0);
 
             case 'q':   // -q or --quiet
-                quiet = TRUE;   // no messages
+                quiet = euxmTrue;   // no messages
                 break;
 
             case 'n':   // -n or --no-image
-                image = FALSE; // no image
-                break;
-
-            case 'N':   // -N or --no-sys-calls
-                no_system = TRUE;       // don't allow a system call
+                image = euxmFalse; // no image
                 break;
 
             case 's':   // -s file or --script file
-                filein = osaopen(optarg, "r");
+                filein = euxcOSAOpen(optarg, "r");
                 if (filein == NULL)
                 {
                     fprintf
@@ -192,10 +193,10 @@ void xlmain(int argc, char **argv)
                 do
                 {
                     // skip #! line
-                    ch = osagetc(filein);
+                    ch = euxcOSAGetc(filein);
                 } while (ch != '\n' && ch != EOF);
 
-                quiet = TRUE;   // no mesages
+                quiet = euxmTrue;   // no mesages
                 break;
 
             case 'm':   // -m file or --module file
@@ -209,7 +210,7 @@ void xlmain(int argc, char **argv)
                 char module_file_name[256];
                 strcpy(module_file_name ,optarg);
                 strcat(module_file_name, ".em");
-                filein = osaopen(module_file_name, "r");
+                filein = euxcOSAOpen(module_file_name, "r");
                 if (filein == NULL)
                 {
                     fprintf
@@ -222,7 +223,7 @@ void xlmain(int argc, char **argv)
                     print_usage(stderr, 6);
                 }
 
-                quiet = TRUE;   // no messages
+                quiet = euxmTrue;   // no messages
                 break;
 
             case 'i':   // -i file or --image file
@@ -231,7 +232,7 @@ void xlmain(int argc, char **argv)
                 break;
 
             case 't':   // -t or --trace
-                trace = TRUE;
+                trace = euxmTrue;
                 break;
 
             case '?':   // The user specified an invalid option.
@@ -249,17 +250,17 @@ void xlmain(int argc, char **argv)
 
 
     // setup an initialization error handler
-    if (SETJMP(top_level))
+    if (euxmSetJmp(euxmStackTopLevel))
     {
         fprintf(stderr, "Error in initialisation\n");
         exit(2);
     }
 
     // initialize
-    osinit(BANNER);
+    euxcOSInit(euxlBanner);
 
     // restore the default workspace, otherwise create a new one
-    if (!image || !xlirestore(image_name))
+    if (!image || !euxlRestoreImage(image_name))
     {
         if (image)
         {
@@ -274,20 +275,20 @@ void xlmain(int argc, char **argv)
             exit(3);
         }
 
-        xlinitws(5000);
+        euxcInitWorkspace(5000);
     }
 
     // do the initialization code first
-    euxlValue code = xlenter_module("*INITIALIZE*", root_module);
-    code = (boundp(code) ? getvalue(code) : NIL);
+    euxlValue code = euxcEnterModule("*INITIALIZE*", euxcRootModule);
+    code = (euxmBoundp(code) ? euxmGetValue(code) : euxmNil);
 
     // trap errors
-    if (SETJMP(top_level))
+    if (euxmSetJmp(euxmStackTopLevel))
     {
-        code = xlenter_module("*toplevel*", root_module);
-        code = (boundp(code) ? getvalue(code) : NIL);
-        xlfun = xlenv = xlval = NIL;
-        xlsp = xlstktop;
+        code = euxcEnterModule("*toplevel*", euxcRootModule);
+        code = (euxmBoundp(code) ? euxmGetValue(code) : euxmNil);
+        xlfun = xlenv = xlval = euxmNil;
+        euxcStackPtr = euxcStackTop;
     }
 
     // SIGINT
@@ -324,17 +325,15 @@ void xlmain(int argc, char **argv)
     #endif
 
     // execute the main loop
-    if (code != NIL)
+    if (code != euxmNil)
     {
-        xlexecute(code);
+        euxcExecute(code);
     }
 
-    xlwrapup(1);
+    euxcWrapup(1);
 }
 
-///-----------------------------------------------------------------------------
-/// print_usage helper function
-///-----------------------------------------------------------------------------
+///  print_usage - helper function
 static void print_usage(FILE* stream, int exit_code)
 {
     fprintf(stream, "Usage: euxlisp [OPTION]... [FILE]...\n");
@@ -353,205 +352,212 @@ static void print_usage(FILE* stream, int exit_code)
     exit(exit_code);
 }
 
-void xlload()
+///  euxcLoad -
+void euxcLoad()
 {
 }
 
-void xlcontinue()
+///  euxcContinue -
+void euxcContinue()
 {
 }
 
-void xlcleanup()
+///  euxcCleanup -
+void euxcCleanup()
 {
 }
 
-// xltoplevel - return to the top level
-static void do_xltoplevel(int cc)
+///  top_level - return to the euxmStackTop level
+static void top_level(int cc)
 {
-    if (getvalue(s_general_error) == s_unbound)
+    if (euxmGetValue(euxls_general_error) == euxls_unbound)
     {   // no conditions yet
-        stdputstr("[ back to top level ]\n");
-        LONGJMP(top_level, 1);
+        euxcStdPutString("[ back to top level ]\n");
+        euxmLongJmp(euxmStackTopLevel, 1);
     }
 
-    do_xlerror("user interrupt", NIL, s_user_intr, cc);
+    euxcDoError("user interrupt", euxmNil, euxls_user_intr, cc);
 }
 
-void xltoplevel()
+///  euxcToplevel - return to the euxmStackTop level
+void euxcToplevel()
 {
-    do_xltoplevel(FALSE);
+    top_level(euxmFalse);
 }
 
-void xltoplevel_int()
+///  euxcToplevelInt -
+void euxcToplevelInt()
 {
-    do_xltoplevel(TRUE);
+    top_level(euxmTrue);
 }
 
-// xlfail - report an error
-void xlfail(char *msg, euxlValue err)
+///  euxcFail - report an error
+void euxcFail(const char *msg, euxlValue err)
 {
-    xlcerror(msg, s_unbound, err);
+    euxcCerror(msg, euxls_unbound, err);
 }
 
-// xlerror - report an error
-void xlerror(char *msg, euxlValue arg)
+///  euxcError - report an error
+void euxcError(const char *msg, euxlValue arg)
 {
     // print the error message
-    errputstr("Error: ");
-    errputstr(msg);
-    errputstr("\n");
+    euxcErrorPutString("Error: ");
+    euxcErrorPutString(msg);
+    euxcErrorPutString("\n");
 
     // print the argument on a separate line
-    if (arg != s_unbound)
+    if (arg != euxls_unbound)
     {
-        errputstr("  ");
-        errprint(arg);
+        euxcErrorPutString("  ");
+        euxcErrorPrint(arg);
     }
 
     // print the function where the error occurred
-    errputstr("happened in: ");
-    errprint(xlfun);
+    euxcErrorPutString("happened in: ");
+    euxcErrorPrint(xlfun);
 
     // call the handler
-    callerrorhandler();
+    euxcCallErrorHandler();
 }
 
-void set_xlframe(int n)
+///  euxcSetFrame -
+void euxcSetFrame(int n)
 {
-    extern euxlValue s_xlframe;
-
-    euxlValue *ptr = xlsp + n;
-    while(!is_cont(ptr) && ptr < xlstktop)
+    euxlValue *ptr = euxcStackPtr + n;
+    while(!ieuxls_cont(ptr) && ptr < euxcStackTop)
     {
         ptr++;
     }
 
-    if (ptr == xlstktop)
+    if (ptr == euxcStackTop)
     {
-        ptr = xlsp;
+        ptr = euxcStackPtr;
     }
 
-    setvalue(s_xlframe, cvsfixnum((FIXTYPE) (xlstktop - ptr)));
+    euxmSetValue
+    (
+        euxls_xlframe,
+        euxmMakeSmallFPI((euxmFPIType) (euxcStackTop - ptr))
+    );
 }
 
-// cc is TRUE if return address is needed, e.g., in interpreter
-void do_xlerror(char *msg, euxlValue arg, euxlValue errname, int cc)
+///  euxcDoError - cc is euxmTrue if return address is needed,
+//    e.g., in interpreter
+void euxcDoError(const char *msg, euxlValue arg, euxlValue errname, int cc)
 {
-    extern euxlValue current_continuation();
-    extern JMP_BUF bc_dispatch;
-
     #ifdef NOERROR
-    xlerror(msg, arg);
+    euxcError(msg, arg);
     #endif
 
     euxlValue cond;
-    if (errname == NIL)
+    if (errname == euxmNil)
     {
-        cond = getvalue(s_general_error);
+        cond = euxmGetValue(euxls_general_error);
     }
     else
     {
-        cond = getvalue(errname);
+        cond = euxmGetValue(errname);
     }
 
-    xlval = getvalue(s_signal);
+    xlval = euxmGetValue(euxls_signal);
 
-    if (cond == s_unbound || xlval == s_unbound)
+    if (cond == euxls_unbound || xlval == euxls_unbound)
     {
         // no conditions yet
-        errputstr("Run-Time ");
-        xlerror(msg, arg);
+        euxcErrorPutString("Run-Time ");
+        euxcError(msg, arg);
     }
     else
     {
-        set_xlframe(1);
-        setivar(cond, 1, cvstring(msg));
-        euxlValue condcl = getclass(cond);
-        if (getsfixnum(getivar(condcl, INSTSIZE)) > 1)
+        euxcSetFrame(1);
+        euxmSetIVar(cond, 1, euxcMakeString(msg));
+        euxlValue condcl = euxmGetClass(cond);
+        if (euxmGetSmallFPI(euxmGetIVar(condcl, euxmInstanceSizeId)) > 1)
         {
-            setivar(cond, 2, arg);
+            euxmSetIVar(cond, 2, arg);
         }
-        oscheck();
-        euxlValue cont = current_continuation(cc);
-        check(2);
-        push(cont);     // resume continuation
-        push(cond);     // condition
-        xlargc = 2;
-        xlapply();
-        LONGJMP(bc_dispatch, 1);
+        euxcOSCheck();
+        euxlValue cont = euxcCurrentContinuation(cc);
+        euxmStackCheck(2);
+        euxmStackPush(cont);     // resume continuation
+        euxmStackPush(cond);     // condition
+        euxcArgC = 2;
+        euxcApply();
+        euxmLongJmp(bc_dispatch, 1);
     }
 }
 
-// xlinterror - report run-time error in the interpreter
-void xlinterror(char *msg, euxlValue arg, euxlValue errname)
+///  euxcIntError - report run-time error in the interpreter
+void euxcIntError(const char *msg, euxlValue arg, euxlValue errname)
 {
-    do_xlerror(msg, arg, errname, TRUE);
+    euxcDoError(msg, arg, errname, euxmTrue);
 }
 
-// xlcerror - report run-time error in C code
-void xlcerror(char *msg, euxlValue arg, euxlValue errname)
+///  euxcCerror - report run-time error in C code
+void euxcCerror(const char *msg, euxlValue arg, euxlValue errname)
 {
-    // discard everything until the continuation
-    while (!is_cont(xlsp))
+    // diseuxmCard everything until the continuation
+    while (!ieuxls_cont(euxcStackPtr))
     {
-        drop(1);
+        euxmStackDrop(1);
     }
 
-    do_xlerror(msg, arg, errname, FALSE);
+    euxcDoError(msg, arg, errname, euxmFalse);
 }
 
-// callerrorhandler - call the error handler
-void callerrorhandler()
+///  euxcCallErrorHandler - call the error handler
+void euxcCallErrorHandler()
 {
-    if (getvalue(s_backtracep) != NIL)
+    if (euxmGetValue(euxls_backtracep) != euxmNil)
     {
-        do_backtrace(xlsp);
+        euxcDoBacktrace(euxcStackPtr);
     }
 
-    // no handler, just reset back to the top level
+    // no handler, just reset back to the euxmStackTop level
     // this probably leaves the thread state in a state
-    LONGJMP(top_level, 1);
+    euxmLongJmp(euxmStackTopLevel, 1);
 }
 
-// xlabort - print an error message and abort
-void xlabort(char *msg)
+///  euxcAbort - print an error message and abort
+void euxcAbort(const char *msg)
 {
     // print the error message
-    errputstr("Abort: ");
-    errputstr(msg);
-    errputstr("\n");
+    euxcErrorPutString("Abort: ");
+    euxcErrorPutString(msg);
+    euxcErrorPutString("\n");
 
     // print the function where the error occurred
-    errputstr("happened in: ");
-    errprint(xlfun);
+    euxcErrorPutString("happened in: ");
+    euxcErrorPrint(xlfun);
 
-    // reset back to the top level
-    oscheck();  // an opportunity to break out
-    LONGJMP(top_level, 1);
+    // reset back to the euxmStackTop level
+    euxcOSCheck();  // an opportunity to break out
+    euxmLongJmp(euxmStackTopLevel, 1);
 }
 
-// xlfatal - print a fatal error message and exit
-void xlfatal(char *msg)
+///  euxcFatal - print a fatal error message and exit
+void euxcFatal(const char *msg)
 {
-    oserror(msg);
+    euxcOSError(msg);
     exit(4);
 }
 
-// xlwrapup - clean up and exit to the operating system
-void xlwrapup(int n)
+///  euxcWrapup - clean up and exit to the operating system
+void euxcWrapup(int n)
 {
     if (tfp)
     {
-        osclose(tfp);
+        euxcOSClose(tfp);
     }
-    osfinish();
+    euxcOSFinish();
     exit(n);
 }
 
-#define errprin(x) xlprin1(x, errout)
-#define errstr(x)  xlputstr(errout, x)
+#define euxcErrorPrin(x) euxcPrin1(x, errout)
+#define errstr(x)  euxcPutString(errout, x)
 static euxlValue errout;
 
+///  indent -
 static void indent(int n)
 {
     while (n++ < 15)
@@ -560,88 +566,87 @@ static void indent(int n)
     }
 }
 
+///  trace_function -
 static void trace_function(euxlValue fun, euxlValue env)
 {
-    extern FUNDEF funtab[];
+    errout = euxmGetValue(euxls_stderr);
 
-    errout = getvalue(s_stderr);
-
-    if (codep(fun))
+    if (euxmCodep(fun))
     {
         errstr("function ");
-        if (getcname(fun) == NIL)
+        if (euxmGetCName(fun) == euxmNil)
         {
             errstr("<anon>");
         }
         else
         {
-            errprin(getcname(fun));
+            euxcErrorPrin(euxmGetCName(fun));
         }
         errstr(" ");
-        errprin(getvnames(fun));
+        euxcErrorPrin(euxmGetVNames(fun));
     }
-    else if (csubrp(fun))
+    else if (euxmXFunContp(fun))
     {
-        errstr("csubr ");
-        errstr(funtab[getoffset(fun)].fd_name);
+        errstr("xfuncont ");
+        errstr(euxmGetFunName(fun));
     }
     else
     {
         errstr("???");
     }
-    xlterpri(errout);
+    euxcTerpri(errout);
 
-    // Check to see if the trace has reached the top-level and return
-    if (getcname(fun) ==  xlenter_module("*toplevel*", root_module))
+    // Check to see if the trace has reached the euxmStackTop-level and return
+    if (euxmGetCName(fun) ==  euxcEnterModule("*toplevel*", euxcRootModule))
     {
         return;
     }
 
-    if (env != NIL)
+    if (env != euxmNil)
     {
-        if (envp(env))
+        if (euxmEnvp(env))
         {
-            euxlValue frame = car(env);
-            if (vectorp(frame))
+            euxlValue frame = euxmCar(env);
+            if (euxmVectorp(frame))
             {
-                euxlValue vars = getelement(frame, 0);
-                for (int i = 1; vars; vars = cdr(vars), i++)
+                euxlValue vars = euxmGetElement(frame, 0);
+                for (int i = 1; vars; vars = euxmCdr(vars), i++)
                 {
-                    errprin(car(vars));
+                    euxcErrorPrin(euxmCar(vars));
                     errstr(": ");
-                    indent(strlen(getstring(getpname(car(vars)))));
-                    errprin(getelement(frame, i));
-                    xlterpri(errout);
+                    indent(strlen(euxmGetString(euxmGetPName(euxmCar(vars)))));
+                    euxcErrorPrin(euxmGetElement(frame, i));
+                    euxcTerpri(errout);
                 }
             }
             else
             {
                 errstr("mangled frame: ");
-                errprin(frame);
-                xlterpri(errout);
+                euxcErrorPrin(frame);
+                euxcTerpri(errout);
             }
         }
         else
         {
             errstr("mangled environment list: ");
-            errprin(env);
-            xlterpri(errout);
+            euxcErrorPrin(env);
+            euxcTerpri(errout);
         }
     }
 
-    xlterpri(errout);
+    euxcTerpri(errout);
 }
 
-// print a backtrace
-void do_backtrace(euxlValue * from)
+///  euxcDoBacktrace - print a backtrace
+void euxcDoBacktrace(euxlValue * from)
 {
-    errout = getvalue(s_stderr);
+    errout = euxmGetValue(euxls_stderr);
 
     errstr("\nStack backtrace:\n\n");
 
-    for (euxlValue *sp = from; sp < xlstktop; sp++)
+    for (euxlValue *sp = from; sp < euxcStackTop; sp++)
     {
-        if (is_cont(sp))
+        if (ieuxls_cont(sp))
         {
             trace_function(sp[1], sp[0]);
             sp += 2;
@@ -649,63 +654,62 @@ void do_backtrace(euxlValue * from)
     }
 }
 
-// lisp backtrace
-euxlValue xbacktrace()
+///  euxlBacktrace - lisp backtrace
+euxlValue euxlBacktrace()
 {
-    static char *cfn_name = "backtrace";
-    extern euxlValue true;
+    static char *functionName = "backtrace";
 
     euxlValue *ptr;
-    if (moreargs())
+    if (euxmMoreArgs())
     {
-        euxlValue frameptr = xlgafixnum();
-        ptr = xlstktop - getfixnum(frameptr);
-        xllastarg();
+        euxlValue frameptr = euxmGetArgFPI();
+        ptr = euxcStackTop - euxmGetFPI(frameptr);
+        euxmLastArg();
     }
     else
     {
-        ptr = xlsp;
+        ptr = euxcStackPtr;
     }
 
-    do_backtrace(ptr);
+    euxcDoBacktrace(ptr);
 
-    return true;
+    return euxl_true;
 }
 
-// debugging -- move up a frame
-euxlValue xframe_up()
+///  euxlFrameUp - debugging -- move up a frame
+euxlValue euxlFrameUp()
 {
-    static char *cfn_name = "frame-up";
+    static char *functionName = "frame-up";
 
-    euxlValue frameptr = xlgafixnum();
-    euxlValue arg = xlgetarg();   // cc
-    arg = xlgetarg();        // condition
+    euxlValue frameptr = euxmGetArgFPI();
+    euxlValue arg = euxmGetArg();   // cc
+    arg = euxmGetArg();        // condition
     int n;
-    if (moreargs())
+    if (euxmMoreArgs())
     {
-        arg = xlgafixnum();
-        xllastarg();
-        n = getfixnum(arg);
+        arg = euxmGetArgFPI();
+        euxmLastArg();
+        n = euxmGetFPI(arg);
     }
     else
     {
         n = 1;
     }
 
-    euxlValue *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue *ptr = euxcStackTop - euxmGetFPI(frameptr);
 
     for (; n > 0; n--)
     {
         euxlValue *old = ptr;
-        for (ptr++; ptr < xlstktop; ptr++)
+        for (ptr++; ptr < euxcStackTop; ptr++)
         {
-            if (is_cont(ptr))
+            if (ieuxls_cont(ptr))
             {
                 break;
             }
         }
 
-        if (ptr >= xlstktop)
+        if (ptr >= euxcStackTop)
         {
             errstr("(no more frames)\n");
             ptr = old;
@@ -714,43 +718,43 @@ euxlValue xframe_up()
     }
 
     trace_function(ptr[1], ptr[0]);
-    return cvfixnum((FIXTYPE) (xlstktop - ptr));
+    return euxcMakeFPI((euxmFPIType) (euxcStackTop - ptr));
 }
 
-// debugging -- move down a frame
-euxlValue xframe_down()
+///  euxlFrameDown - debugging -- move down a frame
+euxlValue euxlFrameDown()
 {
-    static char *cfn_name = "frame-down";
+    static char *functionName = "frame-down";
 
-    euxlValue frameptr = xlgafixnum();
-    euxlValue arg = xlgetarg();   // cc
-    arg = xlgetarg();   // condition
+    euxlValue frameptr = euxmGetArgFPI();
+    euxlValue arg = euxmGetArg();   // cc
+    arg = euxmGetArg();   // condition
     int n;
-    if (moreargs())
+    if (euxmMoreArgs())
     {
-        arg = xlgafixnum();
-        xllastarg();
-        n = getfixnum(arg);
+        arg = euxmGetArgFPI();
+        euxmLastArg();
+        n = euxmGetFPI(arg);
     }
     else
     {
         n = 1;
     }
 
-    euxlValue *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue *ptr = euxcStackTop - euxmGetFPI(frameptr);
 
     for (; n > 0; n--)
     {
         euxlValue *old = ptr;
-        for (ptr--; ptr >= xlsp; ptr--)
+        for (ptr--; ptr >= euxcStackPtr; ptr--)
         {
-            if (is_cont(ptr))
+            if (ieuxls_cont(ptr))
             {
                 break;
             }
         }
 
-        if (ptr < xlsp)
+        if (ptr < euxcStackPtr)
         {
             errstr("(no more frames)\n");
             ptr = old;
@@ -759,29 +763,29 @@ euxlValue xframe_down()
     }
 
     trace_function(ptr[1], ptr[0]);
-    return cvfixnum((FIXTYPE) (xlstktop - ptr));
+    return euxcMakeFPI((euxmFPIType) (euxcStackTop - ptr));
 }
 
-// debugging -- get current env
-euxlValue xframe_env()
+///  euxlFrameEnv - debugging -- get current env
+euxlValue euxlFrameEnv()
 {
-    static char *cfn_name = "frame-env";
+    static char *functionName = "frame-env";
 
-    euxlValue frameptr = xlgafixnum();
-    xllastarg();
-    euxlValue *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue frameptr = euxmGetArgFPI();
+    euxmLastArg();
+    euxlValue *ptr = euxcStackTop - euxmGetFPI(frameptr);
 
     return *ptr;
 }
 
-// debugging -- get current fun
-euxlValue xframe_fun()
+///  euxlFrameFun - debugging -- get current fun
+euxlValue euxlFrameFun()
 {
-    static char *cfn_name = "frame-fun";
+    static char *functionName = "frame-fun";
 
-    euxlValue frameptr = xlgafixnum();
-    xllastarg();
-    euxlValue *ptr = xlstktop - getfixnum(frameptr);
+    euxlValue frameptr = euxmGetArgFPI();
+    euxmLastArg();
+    euxlValue *ptr = euxcStackTop - euxmGetFPI(frameptr);
 
     return ptr[1];
 }

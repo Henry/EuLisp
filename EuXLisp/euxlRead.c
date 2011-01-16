@@ -22,151 +22,146 @@
 /// Title: Input functions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "euxlisp.h"
-
-///-----------------------------------------------------------------------------
-/// External variables
-///-----------------------------------------------------------------------------
-extern euxlValue true;
-
-// external functions
-extern double atof();
-extern ITYPE;
-extern euxlValue cvstring2(), s_syntax_error, s_unbound;
-extern euxlValue xlenter_keyword();
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static void read_cdr(euxlValue fptr, euxlValue last);
-static void read_comment(euxlValue fptr);
-static euxlValue read_list(euxlValue fptr);
-static euxlValue read_vector(euxlValue fptr);
-static euxlValue read_comma(euxlValue fptr);
-static euxlValue read_quote(euxlValue fptr, char *sym);
-static euxlValue read_string(euxlValue fptr);
-static euxlValue read_special(euxlValue fptr);
-static euxlValue read_radix(euxlValue fptr, int radix);
-static euxlValue read_with_radix(euxlValue fptr, FIXTYPE radix);
-static int isradixdigit(int ch, int radix);
-static int getdigit(int ch);
+static void readCdr(euxlValue fptr, euxlValue last);
+static void readComment(euxlValue fptr);
+static euxlValue readList(euxlValue fptr);
+static euxlValue readVector(euxlValue fptr);
+static euxlValue readComma(euxlValue fptr);
+static euxlValue readQuote(euxlValue fptr, const char *sym);
+static euxlValue readString(euxlValue fptr);
+static euxlValue readSpecial(euxlValue fptr);
+static euxlValue readRadix(euxlValue fptr, int radix);
+static euxlValue readWithRadix(euxlValue fptr, euxmFPIType radix);
+static int isRadixDigit(int ch, int radix);
+static int getDigit(int ch);
 static int scan(euxlValue fptr);
-static int checkeof(euxlValue fptr);
-static int issym(int ch);
-static int getsymbol(euxlValue fptr, char *buf);
-static euxlValue read_symbol_or_number(euxlValue fptr), read_symbol(euxlValue fptr, int ch);
-static void read_unescaped(euxlValue fptr, int ch, char *buf, int index,
-int *keyword);
-static void read_escaped(euxlValue fptr, char *buf, int index, int *keyword);
-static euxlValue read_number(euxlValue fptr, int ch, char *buf, int index);
-static euxlValue read_peculiar(euxlValue fptr, int ch);
+static int stackCheckEOF(euxlValue fptr);
+static int isSymbol(int ch);
+static int getSymbol(euxlValue fptr, char *buf);
+static euxlValue readSymbolOrNumber(euxlValue fptr);
+static euxlValue readSymbol(euxlValue fptr, int ch);
+static void readUnescaped
+(
+    euxlValue fptr,
+    int ch,
+    char *buf,
+    int index,
+    int *keyword
+);
+static void readEscaped(euxlValue fptr, char *buf, int index, int *keyword);
+static euxlValue readNumber(euxlValue fptr, int ch, char *buf, int index);
+static euxlValue readPeculiar(euxlValue fptr, int ch);
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
-// xlread - read an expression
-int xlread(euxlValue fptr, euxlValue * pval)
+///  euxcRead - read an expression
+int euxcRead(euxlValue fptr, euxlValue * pval)
 {
-    // check the next non-blank character
+    // Check the next non-blank character
     int ch;
     while ((ch = scan(fptr)) != EOF)
     {
         switch (ch)
         {
             case '(':
-                *pval = read_list(fptr);
-                return (TRUE);
+                *pval = readList(fptr);
+                return (euxmTrue);
             case ')':
-                xlfail("misplaced right paren", s_syntax_error);
+                euxcFail("misplaced right paren", euxls_syntax_error);
             case '\'':
-                *pval = read_quote(fptr, "quote");
-                return (TRUE);
+                *pval = readQuote(fptr, "quote");
+                return (euxmTrue);
             case '`':
-                *pval = read_quote(fptr, "quasiquote");
-                return (TRUE);
+                *pval = readQuote(fptr, "quasiquote");
+                return (euxmTrue);
             case ',':
-                *pval = read_comma(fptr);
-                return (TRUE);
+                *pval = readComma(fptr);
+                return (euxmTrue);
             case '"':
-                *pval = read_string(fptr);
-                return (TRUE);
+                *pval = readString(fptr);
+                return (euxmTrue);
             case '#':
-                ch = checkeof(fptr);
-                xlungetc(fptr, ch);
-                *pval = read_special(fptr);
-                return (TRUE);
+                ch = stackCheckEOF(fptr);
+                euxcUngetc(fptr, ch);
+                *pval = readSpecial(fptr);
+                return (euxmTrue);
             case ';':
-                read_comment(fptr);
+                readComment(fptr);
                 break;
             default:
-                xlungetc(fptr, ch);
-                *pval = read_symbol_or_number(fptr);
-                return (TRUE);
+                euxcUngetc(fptr, ch);
+                *pval = readSymbolOrNumber(fptr);
+                return (euxmTrue);
         }
     }
-    return (FALSE);
+    return (euxmFalse);
 }
 
-// read_list - read a list
-static euxlValue read_list(euxlValue fptr)
+///  readList - read a list
+static euxlValue readList(euxlValue fptr)
 {
-    cpush(NIL);
-    euxlValue last = NIL;
+    euxmStackCheckPush(euxmNil);
+    euxlValue last = euxmNil;
     int ch;
     while ((ch = scan(fptr)) != EOF)
     {
         switch (ch)
         {
             case ';':
-                read_comment(fptr);
+                readComment(fptr);
                 break;
             case '#':
                 {
-                    ch = checkeof(fptr);
-                    xlungetc(fptr, ch);
-                    euxlValue val = read_special(fptr);
-                    val = cons(val, NIL);
+                    ch = stackCheckEOF(fptr);
+                    euxcUngetc(fptr, ch);
+                    euxlValue val = readSpecial(fptr);
+                    val = euxcCons(val, euxmNil);
                     if (last)
                     {
-                        rplacd(last, val);
+                        euxmSetCdr(last, val);
                     }
                     else
                     {
-                        settop(val);
+                        euxmSetStackTop(val);
                     }
                     last = val;
                 }
                 break;
             case ')':
-                return (pop());
+                return (euxmStackPop());
             default:
                 {
-                    xlungetc(fptr, ch);
+                    euxcUngetc(fptr, ch);
                     euxlValue val;
-                    if (!xlread(fptr, &val))
+                    if (!euxcRead(fptr, &val))
                     {
-                        xlfail("unexpected EOF", s_syntax_error);
+                        euxcFail("unexpected EOF", euxls_syntax_error);
                     }
-                    if (val == xlenter("."))
+                    if (val == euxmEnter("."))
                     {
-                        if (last == NIL)
+                        if (last == euxmNil)
                         {
-                            xlfail("misplaced dot", s_syntax_error);
+                            euxcFail("misplaced dot", euxls_syntax_error);
                         }
-                        read_cdr(fptr, last);
-                        return (pop());
+                        readCdr(fptr, last);
+                        return (euxmStackPop());
                     }
                     else
                     {
-                        val = cons(val, NIL);
+                        val = euxcCons(val, euxmNil);
                         if (last)
                         {
-                            rplacd(last, val);
+                            euxmSetCdr(last, val);
                         }
                         else
                         {
-                            settop(val);
+                            euxmSetStackTop(val);
                         }
                         last = val;
                     }
@@ -175,34 +170,34 @@ static euxlValue read_list(euxlValue fptr)
         }
     }
 
-    xlfail("unexpected EOF", s_syntax_error);
-    return (NIL);       // never reached
+    euxcFail("unexpected EOF", euxls_syntax_error);
+    return (euxmNil);       // never reached
 }
 
-// read_cdr - read the cdr of a dotted pair
-static void read_cdr(euxlValue fptr, euxlValue last)
+///  readCdr - read the euxmCdr of a dotted pair
+static void readCdr(euxlValue fptr, euxlValue last)
 {
-    // read the cdr expression
+    // read the euxmCdr expression
     euxlValue val;
-    if (!xlread(fptr, &val))
+    if (!euxcRead(fptr, &val))
     {
-        xlfail("unexpected EOF", s_syntax_error);
+        euxcFail("unexpected EOF", euxls_syntax_error);
     }
-    rplacd(last, val);
+    euxmSetCdr(last, val);
 
-    // check for the close paren
+    // Check for the close paren
     int ch;
     while (1)
     {
         ch = scan(fptr);
         if (ch == ';')
         {
-            read_comment(fptr);
+            readComment(fptr);
         }
         else if (ch == '#')
         {
-            ch = checkeof(fptr);
-            xlungetc(fptr, ch);
+            ch = stackCheckEOF(fptr);
+            euxcUngetc(fptr, ch);
             ch = '#';
             break;
         }
@@ -214,49 +209,49 @@ static void read_cdr(euxlValue fptr, euxlValue last)
 
     if (ch != ')')
     {
-        xlfail("missing right paren", s_syntax_error);
+        euxcFail("missing right paren", euxls_syntax_error);
     }
 }
 
-// read_comment - read a comment (to end of line)
-static void read_comment(euxlValue fptr)
+///  readComment - read a comment (to end of line)
+static void readComment(euxlValue fptr)
 {
     int ch;
-    while ((ch = xlgetc(fptr)) != EOF && ch != '\n');
+    while ((ch = euxcGetc(fptr)) != EOF && ch != '\n');
     if (ch != EOF)
     {
-        xlungetc(fptr, ch);
+        euxcUngetc(fptr, ch);
     }
 }
 
-// read_vector - read a vector
-static euxlValue read_vector(euxlValue fptr)
+///  readVector - read a vector
+static euxlValue readVector(euxlValue fptr)
 {
     int len = 0, i;
 
-    cpush(NIL);
-    euxlValue last = NIL;
+    euxmStackCheckPush(euxmNil);
+    euxlValue last = euxmNil;
     int ch;
     while ((ch = scan(fptr)) != EOF)
     {
         switch (ch)
         {
             case ';':
-                read_comment(fptr);
+                readComment(fptr);
                 break;
             case '#':
                 {
-                    ch = checkeof(fptr);
-                    xlungetc(fptr, ch);
-                    euxlValue val = read_special(fptr);
-                    val = cons(val, NIL);
+                    ch = stackCheckEOF(fptr);
+                    euxcUngetc(fptr, ch);
+                    euxlValue val = readSpecial(fptr);
+                    val = euxcCons(val, euxmNil);
                     if (last)
                     {
-                        rplacd(last, val);
+                        euxmSetCdr(last, val);
                     }
                     else
                     {
-                        settop(val);
+                        euxmSetStackTop(val);
                     }
                     last = val;
                     ++len;
@@ -264,29 +259,34 @@ static euxlValue read_vector(euxlValue fptr)
                 break;
             case ')':
                 {
-                    euxlValue val = newvector(len);
-                    for (last = pop(), i = 0; i < len; ++i, last = cdr(last))
+                    euxlValue val = euxcNewVector(len);
+                    for
+                    (
+                        last = euxmStackPop(), i = 0;
+                        i < len;
+                        ++i, last = euxmCdr(last)
+                    )
                     {
-                        setelement(val, i, car(last));
+                        euxmSetElement(val, i, euxmCar(last));
                     }
                     return (val);
                 }
             default:
                 {
-                    xlungetc(fptr, ch);
+                    euxcUngetc(fptr, ch);
                     euxlValue val;
-                    if (!xlread(fptr, &val))
+                    if (!euxcRead(fptr, &val))
                     {
-                        xlfail("unexpected EOF", s_syntax_error);
+                        euxcFail("unexpected EOF", euxls_syntax_error);
                     }
-                    val = cons(val, NIL);
+                    val = euxcCons(val, euxmNil);
                     if (last)
                     {
-                        rplacd(last, val);
+                        euxmSetCdr(last, val);
                     }
                     else
                     {
-                        settop(val);
+                        euxmSetStackTop(val);
                     }
                     last = val;
                     ++len;
@@ -295,51 +295,51 @@ static euxlValue read_vector(euxlValue fptr)
         }
     }
 
-    xlfail("unexpected EOF", s_syntax_error);
+    euxcFail("unexpected EOF", euxls_syntax_error);
 
-    return (NIL);       // never reached
+    return (euxmNil);       // never reached
 }
 
-// read_comma - read a unquote or unquote-splicing expression
-static euxlValue read_comma(euxlValue fptr)
+///  readComma - read a unquote or unquote-splicing expression
+static euxlValue readComma(euxlValue fptr)
 {
     int ch;
-    if ((ch = xlgetc(fptr)) == '@')
+    if ((ch = euxcGetc(fptr)) == '@')
     {
-        return (read_quote(fptr, "unquote-splicing"));
+        return (readQuote(fptr, "unquote-splicing"));
     }
     else
     {
-        xlungetc(fptr, ch);
-        return (read_quote(fptr, "unquote"));
+        euxcUngetc(fptr, ch);
+        return (readQuote(fptr, "unquote"));
     }
 }
 
-// read_quote - parse the tail of a quoted expression
-static euxlValue read_quote(euxlValue fptr, char *sym)
+///  readQuote - parse the tail of a quoted expression
+static euxlValue readQuote(euxlValue fptr, const char *sym)
 {
     euxlValue val;
-    if (!xlread(fptr, &val))
+    if (!euxcRead(fptr, &val))
     {
-        xlfail("unexpected EOF", s_syntax_error);
+        euxcFail("unexpected EOF", euxls_syntax_error);
     }
-    cpush(cons(val, NIL));
-    settop(cons(xlenter(sym), top()));
-    return (pop());
+    euxmStackCheckPush(euxcCons(val, euxmNil));
+    euxmSetStackTop(euxcCons(euxmEnter(sym), euxmStackTop()));
+    return (euxmStackPop());
 }
 
-// read_string - parse a string
-static euxlValue read_string(euxlValue fptr)
+///  readString - parse a string
+static euxlValue readString(euxlValue fptr)
 {
-    char buf[VSSIZE + 1];
+    char buf[euxmVsSize + 1];
     int ch, i;
 
     // get symbol name
-    for (i = 0; (ch = checkeof(fptr)) != '"';)
+    for (i = 0; (ch = stackCheckEOF(fptr)) != '"';)
     {
         if (ch == '\\')
         {
-            ch = checkeof(fptr);
+            ch = stackCheckEOF(fptr);
             switch (ch)
             {
                 case '\\':
@@ -374,7 +374,7 @@ static euxlValue read_string(euxlValue fptr)
                 case 'X':
                 {
                     int x = ch;
-                    ch = checkeof(fptr);
+                    ch = stackCheckEOF(fptr);
                     int count = 0;
                     int value = 0;
                     while
@@ -391,9 +391,9 @@ static euxlValue read_string(euxlValue fptr)
                             ('a' <= ch && ch <= 'f') ? ch - 'a' + 10 :
                             ch - 'A' + 10
                         );
-                        ch = xlgetc(fptr);
+                        ch = euxcGetc(fptr);
                     }
-                    xlungetc(fptr, ch);
+                    euxcUngetc(fptr, ch);
                     if (count == 0)
                     {
                         ch = x; // just 'x' or 'X'
@@ -409,7 +409,7 @@ static euxlValue read_string(euxlValue fptr)
             }
         }
 
-        if (i < VSSIZE)
+        if (i < euxmVsSize)
         {
             buf[i++] = ch;
         }
@@ -418,15 +418,15 @@ static euxlValue read_string(euxlValue fptr)
     buf[i] = 0;
 
     // return a string
-    return (cvstring2(buf, i));
+    return (euxcMakeString2(buf, i));
 }
 
-// read_hex_char: #\x1234
-static euxlValue read_hex_char(euxlValue fptr, int x)
+///  readHexChar - #\x1234
+static euxlValue readHexChar(euxlValue fptr, int x)
 {
     int count = 0;
     int value = 0;
-    int ch = xlgetc(fptr);
+    int ch = euxcGetc(fptr);
 
     while (ch != EOF && isascii(ch) && isxdigit(ch) && count++ < 4)
     {
@@ -436,23 +436,23 @@ static euxlValue read_hex_char(euxlValue fptr, int x)
             ('a' <= ch && ch <= 'f') ? ch - 'a' + 10 :
             ch - 'A' + 10
         );
-        ch = xlgetc(fptr);
+        ch = euxcGetc(fptr);
     }
 
-    xlungetc(fptr, ch);
+    euxcUngetc(fptr, ch);
 
     if (count == 0)
     {
-        return cvchar(x);       // just #\x or #\X
+        return euxcMakeChar(x);       // just #\x or #\X
     }
 
-    return cvchar(value);
+    return euxcMakeChar(value);
 }
 
-// read_control_char: #\^r
-static euxlValue read_control_char(euxlValue fptr)
+///  readControlChar - #\^r
+static euxlValue readControlChar(euxlValue fptr)
 {
-    int ch = checkeof(fptr);
+    int ch = stackCheckEOF(fptr);
     if (isascii(ch))
     {
         if
@@ -466,7 +466,7 @@ static euxlValue read_control_char(euxlValue fptr)
          || ch == '_'
         )
         {
-            return cvchar(ch - '@');
+            return euxcMakeChar(ch - '@');
         }
         else if
         (
@@ -478,33 +478,33 @@ static euxlValue read_control_char(euxlValue fptr)
          || ch == '~'
         )
         {
-            return cvchar(ch - '`');
+            return euxcMakeChar(ch - '`');
         }
     }
 
-    xlungetc(fptr, ch); // just #\^ (caret)
-    return cvchar('^');
+    euxcUngetc(fptr, ch); // just #\^ (euxmCaret)
+    return euxcMakeChar('^');
 }
 
-// read_special - parse an atom starting with '#'
-static euxlValue read_special(euxlValue fptr)
+///  readSpecial - parse an euxmAtom starting with '#'
+static euxlValue readSpecial(euxlValue fptr)
 {
-    char buf[STRMAX + 1];
+    char buf[euxmStringMax + 1];
     int ch;
-    switch (ch = checkeof(fptr))
+    switch (ch = stackCheckEOF(fptr))
     {
         case '\\':
-            ch = checkeof(fptr);        // get the next character
+            ch = stackCheckEOF(fptr);        // get the next character
             if (ch == 'x' || ch == 'X')
             {
-                return read_hex_char(fptr, ch);
+                return readHexChar(fptr, ch);
             }
             if (ch == '^')
             {
-                return read_control_char(fptr);
+                return readControlChar(fptr);
             }
-            xlungetc(fptr, ch); // but allow getsymbol to get it also
-            if (getsymbol(fptr, buf))
+            euxcUngetc(fptr, ch); // but allow getSymbol to get it also
+            if (getSymbol(fptr, buf))
             {
                 for (char *p = buf; *p; p++)
                 {
@@ -555,29 +555,33 @@ static euxlValue read_special(euxlValue fptr)
                 }
                 else if (strlen(buf) > 1)
                 {
-                    xlcerror("unexpected symbol after '#\\'", cvstring(buf),
-                    s_syntax_error);
+                    euxcCerror
+                    (
+                        "unexpected symbol after '#\\'",
+                        euxcMakeString(buf),
+                        euxls_syntax_error
+                    );
                 }
             }
             else        // wasn't a symbol, get the character
             {
-                ch = checkeof(fptr);
+                ch = stackCheckEOF(fptr);
             }
-            return (cvchar(ch));
+            return (euxcMakeChar(ch));
         case '(':
-            return (read_vector(fptr));
+            return (readVector(fptr));
         case 'b':
         case 'B':
-        return (read_radix(fptr, 2));
+        return (readRadix(fptr, 2));
         case 'o':
         case 'O':
-        return (read_radix(fptr, 8));
+        return (readRadix(fptr, 8));
         case 'd':
         case 'D':
-        return (read_radix(fptr, 10));
+        return (readRadix(fptr, 10));
         case 'x':
         case 'X':
-        return (read_radix(fptr, 16));
+        return (readRadix(fptr, 16));
         case '0':
         case '1':
         case '2':
@@ -588,10 +592,10 @@ static euxlValue read_special(euxlValue fptr)
         case '7':
         case '8':
         case '9':
-        return (read_with_radix(fptr, ch - '0'));
+        return (readWithRadix(fptr, ch - '0'));
         default:
-            xlungetc(fptr, ch);
-            if (getsymbol(fptr, buf))
+            euxcUngetc(fptr, ch);
+            if (getSymbol(fptr, buf))
             {
                 for (char *p = buf; *p; p++)
                 {
@@ -602,85 +606,98 @@ static euxlValue read_special(euxlValue fptr)
                 }
                 if (strcmp(buf, "t") == 0)
                 {
-                    return (true);
+                    return (euxl_true);
                 }
                 else if (strcmp(buf, "f") == 0)
                 {
-                    return (NIL);
+                    return (euxmNil);
                 }
                 else
                 {
-                    xlcerror("unexpected symbol after '#'", cvstring(buf),
-                    s_syntax_error);
+                    euxcCerror
+                    (
+                        "unexpected symbol after '#'",
+                        euxcMakeString(buf),
+                        euxls_syntax_error
+                    );
                 }
             }
             else
             {
-                xlcerror("unexpected character after '#'", cvchar(xlgetc(fptr)),
-                s_syntax_error);
+                euxcCerror
+                (
+                    "unexpected character after '#'",
+                    euxcMakeChar(euxcGetc(fptr)),
+                    euxls_syntax_error
+                );
             }
             break;
     }
 
-    return (NIL);       // never reached
+    return (euxmNil);       // never reached
 }
 
-// read_radix - read a number in a specified radix
-static euxlValue read_radix(euxlValue fptr, int radix)
+///  readRadix - read a number in a specified radix
+static euxlValue readRadix(euxlValue fptr, int radix)
 {
     if (radix < 2 || radix > 36)
     {
-        xlcerror("invalid base in radix integer", cvfixnum(radix),
-        s_syntax_error);
+        euxcCerror("invalid base in radix integer", euxcMakeFPI(radix),
+        euxls_syntax_error);
     }
 
     // get symbol name
-    FIXTYPE val;
+    euxmFPIType val;
     int ch;
-    for (val = (FIXTYPE)0; (ch = xlgetc(fptr)) != EOF && issym(ch);)
+    for (val = (euxmFPIType)0; (ch = euxcGetc(fptr)) != EOF && isSymbol(ch);)
     {
         if (islower(ch))
         {
             ch = toupper(ch);
         }
 
-        if (!isradixdigit(ch, radix))
+        if (!isRadixDigit(ch, radix))
         {
             char buf[64];
             sprintf(buf, "invalid digit in radix %d integer", radix);
-            xlcerror(buf, cvchar(ch), s_syntax_error);
+            euxcCerror(buf, euxcMakeChar(ch), euxls_syntax_error);
         }
 
-        val = val * radix + getdigit(ch);
+        val = val * radix + getDigit(ch);
     }
 
     // save the break character
-    xlungetc(fptr, ch);
+    euxcUngetc(fptr, ch);
 
     // return the number
-    return (cvfixnum(val));
+    return (euxcMakeFPI(val));
 }
 
-// integers of the form #23r42
-static euxlValue read_with_radix(euxlValue fptr, FIXTYPE radix)
+///  readWithRadix - integers of the form #23r42
+static euxlValue readWithRadix(euxlValue fptr, euxmFPIType radix)
 {
     int ch;
 
-    for (; (ch = xlgetc(fptr)) != EOF && ('0' <= ch && ch <= '9');)
+    for (; (ch = euxcGetc(fptr)) != EOF && ('0' <= ch && ch <= '9');)
     {
-        radix = radix * 10 + getdigit(ch);
+        radix = radix * 10 + getDigit(ch);
     }
 
     if (ch != 'r')
     {
-        xlcerror("malformed radix integer", cvfixnum(radix), s_syntax_error);
+        euxcCerror
+        (
+            "malformed radix integer",
+            euxcMakeFPI(radix),
+            euxls_syntax_error
+        );
     }
 
-    return read_radix(fptr, radix);
+    return readRadix(fptr, radix);
 }
 
-// isradixdigit - check to see if a character is a digit in a radix
-static int isradixdigit(int ch, int radix)
+///  isRadixDigit - Check to see if a character is a digit in a radix
+static int isRadixDigit(int ch, int radix)
 {
     if (radix <= 10)
     {
@@ -690,34 +707,34 @@ static int isradixdigit(int ch, int radix)
     return ((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'A' + radix - 11));
 }
 
-// getdigit - convert an ascii code to a digit
-static int getdigit(int ch)
+///  getDigit - convert an ascii code to a digit
+static int getDigit(int ch)
 {
     return ('0' <= ch && ch <= '9') ? ch - '0' : ch - 'A' + 10;
 }
 
-// scan - scan for the first non-blank character
+///  scan - scan for the first non-blank character
 static int scan(euxlValue fptr)
 {
     // look for a non-blank character
     int ch;
-    while ((ch = xlgetc(fptr)) != EOF && isspace(ch));
+    while ((ch = euxcGetc(fptr)) != EOF && isspace(ch));
     return (ch);
 }
 
-// checkeof - get a character and check for end of file
-static int checkeof(euxlValue fptr)
+///  stackCheckEOF - get a character and Check for end of file
+static int stackCheckEOF(euxlValue fptr)
 {
     int ch;
-    if ((ch = xlgetc(fptr)) == EOF)
+    if ((ch = euxcGetc(fptr)) == EOF)
     {
-        xlfail("unexpected EOF", s_syntax_error);
+        euxcFail("unexpected EOF", euxls_syntax_error);
     }
     return (ch);
 }
 
-// issym - is this a symbol character?
-static int issym(int ch)
+///  isSymbol - is this a symbol character?
+static int isSymbol(int ch)
 {
     if (!isspace(ch))
     {
@@ -725,23 +742,23 @@ static int issym(int ch)
         {
             if (*p++ == ch)
             {
-                return (FALSE);
+                return (euxmFalse);
             }
         }
-        return (TRUE);
+        return (euxmTrue);
     }
 
-    return (FALSE);
+    return (euxmFalse);
 }
 
-// getsymbol - get a symbol name
-static int getsymbol(euxlValue fptr, char *buf)
+///  getSymbol - get a symbol name
+static int getSymbol(euxlValue fptr, char *buf)
 {
     // get symbol name
     int ch, i;
-    for (i = 0; (ch = xlgetc(fptr)) != EOF && issym(ch);)
+    for (i = 0; (ch = euxcGetc(fptr)) != EOF && isSymbol(ch);)
     {
-        if (i < STRMAX)
+        if (i < euxmStringMax)
         {
             buf[i++] = ch;
         }
@@ -750,67 +767,79 @@ static int getsymbol(euxlValue fptr, char *buf)
     buf[i] = 0;
 
     // save the break character
-    xlungetc(fptr, ch);
+    euxcUngetc(fptr, ch);
 
     return (buf[0] != 0);
 }
 
-static euxlValue read_symbol_or_number(euxlValue fptr)
+///  readSymbolOrNumber -
+static euxlValue readSymbolOrNumber(euxlValue fptr)
 {
-    char buf[STRMAX + 1];
+    char buf[euxmStringMax + 1];
 
-    int ch = xlgetc(fptr);  // can't be EOF, as just did ungetc
+    int ch = euxcGetc(fptr);  // can't be EOF, as just did ungetc
 
     if (isascii(ch))
     {
         if (isdigit(ch))
         {
-            return read_number(fptr, ch, buf, 0);
+            return readNumber(fptr, ch, buf, 0);
         }
 
         if (ch == '.' || ch == '+' || ch == '-')
         {
-            return read_peculiar(fptr, ch);
+            return readPeculiar(fptr, ch);
         }
 
-        return read_symbol(fptr, ch);
+        return readSymbol(fptr, ch);
 
     }
     else
     {
-        xlcerror("bad character in input", cvchar(ch), s_syntax_error);
+        euxcCerror
+        (
+            "bad character in input",
+            euxcMakeChar(ch),
+            euxls_syntax_error
+        );
     }
 
-    return NIL; // not reached
+    return euxmNil; // not reached
 }
 
-static euxlValue read_symbol(euxlValue fptr, int ch)
+///  readSymbol -
+static euxlValue readSymbol(euxlValue fptr, int ch)
 {
     if (!isprint(ch))
     {
-        xlcerror("bad character in input", cvchar(ch), s_syntax_error);
+        euxcCerror
+        (
+            "bad character in input",
+            euxcMakeChar(ch),
+            euxls_syntax_error
+        );
     }
 
-    char buf[STRMAX + 1];
+    char buf[euxmStringMax + 1];
     buf[0] = 0;
 
     int keyword;
 
     if (ch == '|')
     {
-        read_escaped(fptr, buf, 0, &keyword);
+        readEscaped(fptr, buf, 0, &keyword);
     }
     else
     {
-        read_unescaped(fptr, ch, buf, 0, &keyword);
+        readUnescaped(fptr, ch, buf, 0, &keyword);
     }
 
     if (keyword)
     {
-        return xlenter_keyword(buf);
+        return euxcEnterKeyword(buf);
     }
 
-    return xlenter(buf);
+    return euxmEnter(buf);
 
 }
 
@@ -828,165 +857,175 @@ static euxlValue read_symbol(euxlValue fptr, int ch)
         && ch != '`'                                                           \
     )
 
-static void
-read_unescaped(euxlValue fptr, int ch, char *buf, int index, int *keyword)
+///  readUnescaped -
+static void readUnescaped
+(
+    euxlValue fptr,
+    int ch,
+    char *buf,
+    int index,
+    int *keyword
+)
 {
     while (isconstituent(ch))
     {
         if (ch == '|')
         {
-            read_escaped(fptr, buf, index, keyword);
+            readEscaped(fptr, buf, index, keyword);
             return;
         }
         if (ch == '\\')
         {
-            ch = checkeof(fptr);
+            ch = stackCheckEOF(fptr);
             buf[index++] = ch;
-            *keyword = FALSE;
+            *keyword = euxmFalse;
         }
         else
         {
             buf[index++] = ch;
             if (ch == ':')
             {
-                *keyword = TRUE;
+                *keyword = euxmTrue;
             }
             else
             {
-                *keyword = FALSE;
+                *keyword = euxmFalse;
             }
         }
-        ch = xlgetc(fptr);
+        ch = euxcGetc(fptr);
     }
 
-    xlungetc(fptr, ch); // restore the break character
+    euxcUngetc(fptr, ch); // restore the break character
     buf[index] = 0;
 }
 
-static void read_escaped(euxlValue fptr, char *buf, int index, int *keyword)
+static void readEscaped(euxlValue fptr, char *buf, int index, int *keyword)
 {
-    *keyword = FALSE;
+    *keyword = euxmFalse;
 
-    int ch = checkeof(fptr);
+    int ch = stackCheckEOF(fptr);
     while (ch != '|')
     {
         if (ch == '\\')
         {
-            ch = checkeof(fptr);
+            ch = stackCheckEOF(fptr);
         }
         buf[index++] = ch;
-        ch = checkeof(fptr);
+        ch = stackCheckEOF(fptr);
     }
 
-    ch = xlgetc(fptr);
-    read_unescaped(fptr, ch, buf, index, keyword);
+    ch = euxcGetc(fptr);
+    readUnescaped(fptr, ch, buf, index, keyword);
 }
 
-static int read_integer(euxlValue fptr, int ch, char *buf, int index)
+///  readInteger -
+static int readInteger(euxlValue fptr, int ch, char *buf, int index)
 {
     while (ch != EOF && isascii(ch) && isdigit(ch))
     {
         buf[index++] = ch;
-        ch = xlgetc(fptr);
+        ch = euxcGetc(fptr);
     }
 
-    xlungetc(fptr, ch);
+    euxcUngetc(fptr, ch);
     return index;
 }
 
-static euxlValue read_exponent(euxlValue fptr, char *buf, int index)
+///  readExponent -
+static euxlValue readExponent(euxlValue fptr, char *buf, int index)
 {
     buf[index++] = 'E';
-    int ch = checkeof(fptr);
+    int ch = stackCheckEOF(fptr);
 
     if (ch == '+' || ch == '-')
     {
         buf[index++] = ch;
-        ch = checkeof(fptr);
+        ch = stackCheckEOF(fptr);
     }
     if (!isascii(ch) || !isdigit(ch))
     {
         buf[index] = 0;
-        xlungetc(fptr, ch);
-        xlcerror("malformed floating point number", cvstring(buf),
-        s_syntax_error);
+        euxcUngetc(fptr, ch);
+        euxcCerror("malformed floating point number", euxcMakeString(buf),
+        euxls_syntax_error);
     }
-    index = read_integer(fptr, ch, buf, index);
+    index = readInteger(fptr, ch, buf, index);
 
     buf[index] = 0;
-    return cvflonum(atof(buf));
+    return euxcMakeDoubleFloat(atof(buf));
 
 }
 
-// point and at least one digit has been read
-static euxlValue read_point_float(euxlValue fptr, int ch, char *buf, int index)
+///  readPointFloat - point and at least one digit has been read
+static euxlValue readPointFloat(euxlValue fptr, int ch, char *buf, int index)
 {
-    index = read_integer(fptr, ch, buf, index);
+    index = readInteger(fptr, ch, buf, index);
 
-    ch = xlgetc(fptr);
+    ch = euxcGetc(fptr);
     if (ch == EOF)
     {
         buf[index] = 0;
-        return cvflonum(atof(buf));
+        return euxcMakeDoubleFloat(atof(buf));
     }
 
     if (ch == 'e' || ch == 'E' || ch == 'd' || ch == 'D')
     {
-        return read_exponent(fptr, buf, index);
+        return readExponent(fptr, buf, index);
     }
 
-    xlungetc(fptr, ch);
+    euxcUngetc(fptr, ch);
     buf[index] = 0;
-    return cvflonum(atof(buf));
+    return euxcMakeDoubleFloat(atof(buf));
 
 }
 
-static euxlValue read_number(euxlValue fptr, int ch, char *buf, int index)
+///  readNumber -
+static euxlValue readNumber(euxlValue fptr, int ch, char *buf, int index)
 {
-    index = read_integer(fptr, ch, buf, index);
+    index = readInteger(fptr, ch, buf, index);
 
     buf[index] = 0;
-    ch = xlgetc(fptr);
+    ch = euxcGetc(fptr);
     if (ch == EOF)
     {
-        return cvfixnum(ICNV(buf));
+        return euxcMakeFPI(euxmCstringToFPI(buf));
     }
 
     if (ch != '.' && ch != 'e' && ch != 'E' && ch != 'd' && ch != 'D')
     {
-        xlungetc(fptr, ch);
-        return cvfixnum(ICNV(buf));
+        euxcUngetc(fptr, ch);
+        return euxcMakeFPI(euxmCstringToFPI(buf));
     }
 
     if (ch == '.')
     {
         buf[index++] = ch;
-        ch = xlgetc(fptr);
-        return read_point_float(fptr, ch, buf, index);
+        ch = euxcGetc(fptr);
+        return readPointFloat(fptr, ch, buf, index);
     }
 
     if (ch == 'e' || ch == 'E' || ch == 'd' || ch == 'D')
     {
-        return read_exponent(fptr, buf, index);
+        return readExponent(fptr, buf, index);
     }
 
-    xlungetc(fptr, ch);
-    return cvflonum(atof(buf));
+    euxcUngetc(fptr, ch);
+    return euxcMakeDoubleFloat(atof(buf));
 
 }
 
-// symbols that nearly look like numbers
-// ch is . or + or -
-static euxlValue read_peculiar(euxlValue fptr, int ch)
+///  readPeculiar - symbols that nearly look like numbers
+///  ch is . or + or -
+static euxlValue readPeculiar(euxlValue fptr, int ch)
 {
-    char buf[STRMAX + 1];
+    char buf[euxmStringMax + 1];
     buf[0] = ch;
     buf[1] = 0;
 
-    int ch1 = xlgetc(fptr);
+    int ch1 = euxcGetc(fptr);
     if (ch1 == EOF)     // . or + or -
     {
-        return xlenter(buf);
+        return euxmEnter(buf);
     }
 
     buf[1] = ch1;
@@ -997,16 +1036,21 @@ static euxlValue read_peculiar(euxlValue fptr, int ch)
 
         if (ch == '.')       // .#
         {
-            xlungetc(fptr, ch1);
+            euxcUngetc(fptr, ch1);
             buf[1] = 0;
-            return xlenter(buf);
+            return euxmEnter(buf);
         }
 
-        int ch2 = xlgetc(fptr);
+        int ch2 = euxcGetc(fptr);
 
         if (ch2 == EOF || !isascii(ch2))
         {
-            xlcerror("malformed number", cvstring(buf), s_syntax_error);
+            euxcCerror
+            (
+                "malformed number",
+                euxcMakeString(buf),
+                euxls_syntax_error
+            );
         }
 
         if
@@ -1020,15 +1064,15 @@ static euxlValue read_peculiar(euxlValue fptr, int ch)
          || isdigit(ch2)
         )
         {
-            xlungetc(fptr, ch2);
-            euxlValue val = read_special(fptr);
+            euxcUngetc(fptr, ch2);
+            euxlValue val = readSpecial(fptr);
 
             if (ch == '+')
             {
                 return val;
             }
 
-            return cvfixnum(-getfixnum(val));
+            return euxcMakeFPI(-euxmGetFPI(val));
         }
 
         char *p = &buf[2];
@@ -1036,72 +1080,77 @@ static euxlValue read_peculiar(euxlValue fptr, int ch)
         while (isconstituent(ch2))
         {
             *p++ = ch2;
-            ch2 = xlgetc(fptr);
+            ch2 = euxcGetc(fptr);
         }
 
-        xlungetc(fptr, ch2);
+        euxcUngetc(fptr, ch2);
         *p = 0;
-        xlcerror("malformed symbol or number", cvstring(buf), s_syntax_error);
+        euxcCerror
+        (
+            "malformed symbol or number",
+            euxcMakeString(buf),
+            euxls_syntax_error
+        );
     }
 
     if (!isconstituent(ch1))   // . or + or -
     {
-        xlungetc(fptr, ch1);
+        euxcUngetc(fptr, ch1);
         buf[1] = 0;
-        return xlenter(buf);
+        return euxmEnter(buf);
     }
 
     if (isdigit(ch1))   // .1 or +1 or -1
     {
         if (ch == '.')
         {
-            return read_point_float(fptr, ch1, buf, 1);
+            return readPointFloat(fptr, ch1, buf, 1);
         }
         else
         {
-            return read_number(fptr, ch1, buf, 1);
+            return readNumber(fptr, ch1, buf, 1);
         }
     }
 
     if (ch == '.')   // .x
     {
         int keyword;
-        read_unescaped(fptr, ch1, buf, 1, &keyword);
+        readUnescaped(fptr, ch1, buf, 1, &keyword);
         if (keyword)
         {
-            return xlenter_keyword(buf);
+            return euxcEnterKeyword(buf);
         }
 
-        return xlenter(buf);
+        return euxmEnter(buf);
     }
 
-    int ch2 = xlgetc(fptr);
+    int ch2 = euxcGetc(fptr);
 
     if (ch2 == EOF)     // +x or -x
     {
-        return xlenter(buf);
+        return euxmEnter(buf);
     }
 
     if (!isconstituent(ch2))   // +x or -x
     {
-        xlungetc(fptr, ch2);
-        return xlenter(buf);
+        euxcUngetc(fptr, ch2);
+        return euxmEnter(buf);
     }
 
     if (ch1 == '.' && isdigit(ch2))     // +.1 or -.1
     {
-        return read_point_float(fptr, ch2, buf, 2);
+        return readPointFloat(fptr, ch2, buf, 2);
     }
 
     // +xy or -xy
     int keyword;
-    read_unescaped(fptr, ch2, buf, 2, &keyword);
+    readUnescaped(fptr, ch2, buf, 2, &keyword);
     if (keyword)
     {
-        return xlenter_keyword(buf);
+        return euxcEnterKeyword(buf);
     }
 
-    return xlenter(buf);
+    return euxmEnter(buf);
 }
 
 

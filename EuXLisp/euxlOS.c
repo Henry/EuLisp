@@ -22,12 +22,11 @@
 /// Title: OS specific functions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "euxlisp.h"
+
 #include <errno.h>
 #include <unistd.h>
 #include <sys/times.h>
-#include "euxlisp.h"
 
 #ifdef READLINE
 #include <readline/readline.h>
@@ -39,17 +38,18 @@
 #endif
 
 ///-----------------------------------------------------------------------------
-/// External variables
+/// Global variables
 ///-----------------------------------------------------------------------------
-#include "euxlsymbols.h"
-extern FILE *tfp;
-extern int errno;
-
-// Used in euxlisp.c
 int reading;
 
-// Line buffer size when not using readline
+///-----------------------------------------------------------------------------
+/// Macros
+///-----------------------------------------------------------------------------
+///  Line buffer size when not using readline
 #define LBSIZE 200
+
+///  Maximum number of file descriptors
+#define MAXFDS                  32
 
 ///-----------------------------------------------------------------------------
 /// Local variables
@@ -63,48 +63,31 @@ static int lindex;
 static int lcount;
 static int lposition;
 
-#define xputc putchar
-#define MAXFDS                  32
-#ifndef FD_SET
-#define FD_SET(fd,fdset)        (fdset)->fds_bits[0] |= (1<<(fd))
-#define FD_CLR(fd,fdset)        (fdset)->fds_bits[0] &= ~(1<<(fd))
-#define FD_ZERO(fdset)          (fdset)->fds_bits[0] = 0
-#define FD_ISSET(fd,fdset)      (((fdset)->fds_bits[0]) & (1<<(fd)))
-typedef struct fd_set
-{
-    long fds_bits[32];
-} fd_set;
-#endif
-
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static void osflushn();
-void ostputc(), ostputs(), oscheck(), osflush();
-void check_if_disabled();
+static void osFlushNl();
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
-// main - the main function
-int main(int argc, char *argv[])
+///  main - the main function
+int main(int argc, char * const argv[])
 {
-    xlmain(argc, argv);
+    euxcMain(argc, argv);
     return 0;
 }
 
-// osinit - initialize
-void osinit(char *banner)
+///  euxcOSInit - initialize
+void euxcOSInit(const char *banner)
 {
-    extern int quiet;
-
     if (!quiet)
     {
-        ostputs(banner);
+        euxcOSTPuts(banner);
         #ifdef SOCK
-        ostputs("s");
+        euxcOSTPuts("s");
         #endif
-        ostputc('\n');
+        euxcOSTPutc('\n');
     }
     lposition = 0;
     lindex = 0;
@@ -120,8 +103,8 @@ void osinit(char *banner)
         char* home = getenv("HOME");
         if (home == NULL)
         {
-            ostputs("Cannot find environment variable HOME for reading ~/");
-            oserror(eulisp_history);
+            euxcOSTPuts("Cannot find environment variable HOME for reading ~/");
+            euxcOSError(eulisp_history);
         }
         else
         {
@@ -130,9 +113,9 @@ void osinit(char *banner)
 
             if (!read_history(rl_histfile))
             {
-                ostputs("Reading readline history from ");
-                ostputs(rl_histfile);
-                ostputc('\n');
+                euxcOSTPuts("Reading readline history from ");
+                euxcOSTPuts(rl_histfile);
+                euxcOSTPutc('\n');
             }
         }
     }
@@ -143,11 +126,9 @@ void osinit(char *banner)
     }
 }
 
-// osfinish - clean up before returning to the operating system
-void osfinish()
+///  euxcOSFinish - clean up before returning to the operating system
+void euxcOSFinish()
 {
-    extern int quiet;
-
     #ifdef READLINE
     if (quiet)
     #endif
@@ -156,17 +137,17 @@ void osfinish()
     }
 }
 
-// oserror - print an error message
-void oserror(char *msg)
+///  euxcOSError - print an error message
+void euxcOSError(const char *msg)
 {
-    ostputs("error: ");
-    ostputs(msg);
-    ostputc('\n');
+    euxcOSTPuts("error: ");
+    euxcOSTPuts(msg);
+    euxcOSTPutc('\n');
 }
 
-// osrand - return a random number between 0 and n-1
+///  euxcOSRand - return a random number between 0 and n-1
 #ifdef DOBBS
-int osrand(int n)
+int euxcOSRand(int n)
 {
     // make sure we don't get stuck at zero
     if (rseed == 0L)
@@ -185,8 +166,8 @@ int osrand(int n)
     return ((int)(rseed % (long)n));
 }
 #else
-// Wichmann & Hill
-int osrand(int n)
+///  Wichmann & Hill
+int euxcOSRand(int n)
 {
     static int x = 50, y = 100, z = 150;
 
@@ -201,44 +182,44 @@ int osrand(int n)
 }
 #endif
 
-// osaopen - open an ascii file
-FILE *osaopen(char *name, char *mode)
+///  euxcOSAOpen - open an ascii file
+FILE *euxcOSAOpen(const char *name, const char *mode)
 {
     return (fopen(name, mode));
 }
 
-// osbopen - open a binary file
-FILE *osbopen(char *name, char *mode)
+///  euxcOSBOpen - open a binary file
+FILE *euxcOSBOpen(const char *name, const char *mode)
 {
     return (fopen(name, mode));
 }
 
-// osclose - close a file
-int osclose(FILE *fp)
+///  euxcOSClose - close a file
+int euxcOSClose(FILE *fp)
 {
     return (fclose(fp));
 }
 
-// ostell - get the current file position
-long ostell(FILE *fp)
+///  euxcOSTell - get the current file position
+long euxcOSTell(FILE *fp)
 {
     return (ftell(fp));
 }
 
-// osunlink - remove a file
-int osunlink(char *path)
+///  euxcOSUnlink - remove a file
+int euxcOSUnlink(const char *path)
 {
     return remove(path);
 }
 
-// osseek - set the current file position
-int osseek(FILE *fp, long offset, int whence)
+///  euxcOSSeek - set the current file position
+int euxcOSSeek(FILE *fp, long offset, int whence)
 {
     return (fseek(fp, offset, whence));
 }
 
-// osagetc - get a character from an ascii file
-int osagetc(FILE *fp)
+///  euxcOSAGetc - get a character from an ascii file
+int euxcOSAGetc(FILE *fp)
 {
     reading = 1;
     int ch = getc(fp);
@@ -247,14 +228,14 @@ int osagetc(FILE *fp)
     return ch;
 }
 
-// osaputc - put a character to an ascii file
-int osaputc(int ch, FILE *fp)
+///  euxcOSAPutc - put a character to an ascii file
+int euxcOSAPutc(int ch, FILE *fp)
 {
     return (putc(ch, fp));
 }
 
-// osbgetc - get a character from a binary file
-int osbgetc(FILE *fp)
+///  euxcOSBGetc - get a character from a binary file
+int euxcOSBGetc(FILE *fp)
 {
     reading = 1;
     int ch = getc(fp);
@@ -262,14 +243,14 @@ int osbgetc(FILE *fp)
     return ch;
 }
 
-// osbputc - put a character to a binary file
-int osbputc(int ch, FILE *fp)
+///  euxcOSBPutc - put a character to a binary file
+int euxcOSBPutc(int ch, FILE *fp)
 {
     return (putc(ch, fp));
 }
 
-// Read a string, and return a pointer to it.
-// Returns NULL on EOF.
+///  Read a string, and return a pointer to it.
+///  Returns NULL on EOF.
 #ifdef READLINE
 void rlgets()
 {
@@ -285,16 +266,18 @@ void rlgets()
     static char prompt[255];
     int debug_depth = 0;
 
-    euxlValue thread_module = get_module("thread");
+    euxlValue thread_module = euxcGetModule("thread");
 
     if (thread_module)
     {
         // Tell the debugger that readline is handling the prompt
-        setvalue(xlenter_module("*debug-rl*", thread_module), true);
+        euxmSetValue(euxcEnterModule("*debug-rl*", thread_module), euxl_true);
 
         // Get the debug-depth; 0 = no error
-        debug_depth =
-            getfixnum(getvalue(xlenter_module("*debug-depth*", thread_module)));
+        debug_depth = euxmGetFPI
+        (
+            euxmGetValue(euxcEnterModule("*debug-depth*", thread_module))
+        );
     }
 
     if (debug_depth)
@@ -304,7 +287,7 @@ void rlgets()
             prompt,
             "[error%d] %s> ",
             debug_depth,
-            getstring(getmname(current_module))
+            euxmGetString(euxmGetModuleName(euxcCurrentModule))
         );
     }
     else
@@ -313,7 +296,7 @@ void rlgets()
         (
             prompt,
             "%s> ",
-            getstring(getmname(current_module))
+            euxmGetString(euxmGetModuleName(euxcCurrentModule))
         );
     }
 
@@ -330,12 +313,9 @@ void rlgets()
 }
 #endif
 
-// ostgetc - get a character from the terminal
-int ostgetc()
+///  euxcOSTGetc - get a character from the terminal
+int euxcOSTGetc()
 {
-    extern int ctrl_c;
-    extern int quiet;
-
     // Check for a buffered character
     if (lcount--)
     {
@@ -371,9 +351,9 @@ int ostgetc()
     {
         lcount = 0;
         ctrl_c = 0;
-        osflush();
-        ostputc('\n');
-        xltoplevel();
+        euxcOSFlush();
+        euxcOSTPutc('\n');
+        euxcToplevel();
     }
 
     // If the line buffer is not allocated or the stdin is at eof
@@ -386,7 +366,7 @@ int ostgetc()
     {
         if (!quiet)
         {
-            ostputc('\n');
+            euxcOSTPutc('\n');
         }
         clearerr(stdin);
         lcount = 0;
@@ -409,7 +389,7 @@ int ostgetc()
     {
         for (lindex = 0; lindex < lcount; ++lindex)
         {
-            osaputc(lbuf[lindex], tfp);
+            euxcOSAPutc(lbuf[lindex], tfp);
         }
     }
 
@@ -429,7 +409,7 @@ int ostgetc()
     }
 }
 
-int osselect(FILE *fp)
+int euxcOSSelect(FILE *fp)
 {
     int ch, fd;
     fd_set readfds;
@@ -443,7 +423,7 @@ int osselect(FILE *fp)
 
     if (select(MAXFDS, &readfds, NULL, NULL, &poll) < 0)
     {
-        return NOCHAR;
+        return euxmNoChar;
     }
 
     if (FD_ISSET(fd, &readfds))
@@ -453,15 +433,15 @@ int osselect(FILE *fp)
     }
     else
     {
-        ch = NOCHAR;
+        ch = euxmNoChar;
     }
 
     return ch;
 }
 
 
-// ospeekchar
-int ospeekchar(FILE *fp)
+///  euxcOSPeekChar
+int euxcOSPeekChar(FILE *fp)
 {
     // grub around in the internals of stdio.h
     #ifdef __linux
@@ -485,237 +465,206 @@ int ospeekchar(FILE *fp)
     #endif // linux
     #endif
 
-    return osselect(fp);
+    return euxcOSSelect(fp);
 }
 
-// ostputc - put a character to the terminal
-void ostputc(int ch)
+///  euxcOSTPutc - put a character to the terminal
+void euxcOSTPutc(int ch)
 {
-    // check for control characters
-    oscheck();
+    // Check for control characters
+    euxcOSCheck();
 
     // output the character
     if (ch == '\n')
     {
-        xputc('\n');
+        putchar('\n');
         lposition = 0;
     }
     else
     {
-        xputc(ch);
+        putchar(ch);
         lposition++;
     }
 
     // output the character to the transcript file
     if (tfp)
     {
-        osaputc(ch, tfp);
+        euxcOSAPutc(ch, tfp);
     }
 }
 
-// ostputs - output a string to the terminal
-void ostputs(char *str)
+///  euxcOSTPuts - output a string to the terminal
+void euxcOSTPuts(const char *str)
 {
     while (*str != '\0')
     {
-        ostputc(*str++);
+        euxcOSTPutc(*str++);
     }
 }
 
-// osflush - flush the terminal input buffer
-void osflush()
+///  euxcOSFlush - flush the terminal input buffer
+void euxcOSFlush()
 {
     lindex = lcount = lposition = 0;
 }
 
-// oscheck - check for control characters during execution
-void oscheck()
+///  euxcOSCheck - Check for control characters during execution
+void euxcOSCheck()
 {
-    extern int ctrl_c;
-
     if (ctrl_c)
     {
         ctrl_c = 0;
-        osflushn();
-        xltoplevel();
+        osFlushNl();
+        euxcToplevel();
     }
 }
 
-// oscheck_int - check for control characters during interpreting
-void oscheck_int()
+///  euxcOSCheckInt - Check for control characters during interpreting
+void euxcOSCheckInt()
 {
-    extern int ctrl_c;
-
     if (ctrl_c)
     {
         ctrl_c = 0;
-        osflushn();
-        xltoplevel_int();
+        osFlushNl();
+        euxcToplevelInt();
     }
 }
 
-// osflushn - flush the input line buffer and start a new line
-static void osflushn()
+///  osFlushNl - flush the input line buffer and start a new line
+static void osFlushNl()
 {
-    osflush();
-    ostputc('\n');
+    euxcOSFlush();
+    euxcOSTPutc('\n');
 }
 
-void set_ticks_per_second()
+void euxcSetTicksPerSecond()
 {
-    setvalue(xlenter("ticks-per-second"), cvfixnum(sysconf(_SC_CLK_TCK)));
+    euxmSetValue
+    (
+        euxmEnter("ticks-per-second"), euxcMakeFPI(sysconf(_SC_CLK_TCK))
+    );
 }
 
 #define TIMES_SIZE 3
-#define TIMES_REAL(x) x->n_vdata[0]
-#define TIMES_USER(x) x->n_vdata[1]
-#define TIMES_SYS(x) x->n_vdata[2]
+#define TIMES_REAL(x) x->value.vector.data[0]
+#define TIMES_USER(x) x->value.vector.data[1]
+#define TIMES_SYS(x) x->value.vector.data[2]
 
-euxlValue x_cpu_time()
+euxlValue euxlCpuTime()
 {
     static struct tms buffer;
 
-    euxlValue res = newvector(TIMES_SIZE);
+    euxlValue res = euxcNewVector(TIMES_SIZE);
 
-    FIXTYPE r = (FIXTYPE)times(&buffer);
+    euxmFPIType r = (euxmFPIType)times(&buffer);
     if (r == -1)
     {
-        return NIL;
+        return euxmNil;
     }
 
-    FIXTYPE u = (FIXTYPE)buffer.tms_utime;
-    FIXTYPE s = (FIXTYPE)buffer.tms_stime;
+    euxmFPIType u = (euxmFPIType)buffer.tms_utime;
+    euxmFPIType s = (euxmFPIType)buffer.tms_stime;
 
-    TIMES_REAL(res) = cvfixnum(r);
-    TIMES_USER(res) = cvfixnum(u);
-    TIMES_SYS(res) = cvfixnum(s);
+    TIMES_REAL(res) = euxcMakeFPI(r);
+    TIMES_USER(res) = euxcMakeFPI(u);
+    TIMES_SYS(res) = euxcMakeFPI(s);
 
     return res;
 }
 
-void check_if_disabled(char *name)
+///  euxlSystem - execute a system command
+euxlValue euxlSystem()
 {
-    extern int no_system;
-
-    if (no_system)
-    {
-        xlcerror("function disabled", cvstring(name), NIL);
-    }
-}
-
-// xsystem - execute a system command
-euxlValue xsystem()
-{
-    static char *cfn_name = "system";
+    static char *functionName = "system";
     char *cmd;
 
-    check_if_disabled(cfn_name);
+    cmd = euxmGetString(euxmGetArgString());
+    euxmLastArg();
 
-    cmd = (char *)getstring(xlgastring());
-    xllastarg();
-
-    return (system(cmd) == 0 ? true : cvfixnum((FIXTYPE) errno));
+    return (system(cmd) == 0 ? euxl_true : euxcMakeFPI((euxmFPIType) errno));
 }
 
-#if 0
-// tmpfile - open a temporary file
-euxlValue xtmpfile()
+///  tmpfile - open a temporary file
+euxlValue euxlTmpFile()
 {
-    static char *cfn_name = "tmpfile";
+    static char *functionName = "tmpfile";
 
-    xllastarg();
-
-    FILE *fp = tmpfile();
-    if (fp == NULL)
-    {
-        xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
-    }
-
-    return cvstream(fp, PF_INPUT | PF_OUTPUT);
-}
-
-#else
-
-euxlValue xtmpfile()
-{
-    static char *cfn_name = "tmpfile";
-
-    xllastarg();
+    euxmLastArg();
 
     // tmpfile doesn't seem to work on dos gcc
     FILE *fp = tmpfile();
     if (fp == NULL)
     {
-        xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
+        euxcCerror
+        (
+            "failed to create temporary file",
+            euxcMakeString(functionName),
+            euxmNil
+        );
     }
 
-    euxlValue stream = cvstream(fp, PF_INPUT | PF_OUTPUT);
-
-    return stream;
+    return euxcMakeStream(fp, euxmPortFlagInput | euxmPortFlagOutput);
 }
-#endif
 
-// xgetenv - getenv
-euxlValue xgetenv()
+///  euxlGetenv - getenv
+euxlValue euxlGetenv()
 {
-    static char *cfn_name = "getenv";
-    extern char *getenv();
+    static char *functionName = "getenv";
 
-    euxlValue arg = xlgastring();
-    xllastarg();
+    euxlValue arg = euxmGetArgString();
+    euxmLastArg();
 
-    char *str = getenv(getstring(arg));
+    char *str = getenv(euxmGetString(arg));
     if (str == NULL)
     {
-        return NIL;
+        return euxmNil;
     }
 
-    return cvstring(str);
+    return euxcMakeString(str);
 }
 
-// xputenv - (putenv name val)
-// some contortions to keep a chunk of string memory
-euxlValue xputenv()
+///  euxlPutenv - (putenv name val)
+//    some contortions to keep a chunk of string memory
+euxlValue euxlPutenv()
 {
-    static char *cfn_name = "putenv";
-    extern int putenv();
-    extern euxlValue s_supplied_env, xassoc();
+    static char *functionName = "putenv";
 
-    euxlValue name = xlgastring();
-    euxlValue val = xlgastring();
-    xllastarg();
+    euxlValue name = euxmGetArgString();
+    euxlValue val = euxmGetArgString();
+    euxmLastArg();
 
     char buf[1024];
-    sprintf(buf, "%s=%s", getstring(name), getstring(val));
-    euxlValue new = cvstring(buf);
+    sprintf(buf, "%s=%s", euxmGetString(name), euxmGetString(val));
+    euxlValue new = euxcMakeString(buf);
 
-    int retval = putenv(getstring(new));
+    int retval = putenv(euxmGetString(new));
     if (retval > 0)
     {
-        return NIL;
+        return euxmNil;
     }
 
-    check(3);
-    push(new);
+    euxmStackCheck(3);
+    euxmStackPush(new);
 
-    euxlValue env = getvalue(s_supplied_env);
-    push(env);
-    push(name);
-    xlargc = 2;
-    euxlValue old = xassoc();
+    euxlValue env = euxmGetValue(euxls_supplied_env);
+    euxmStackPush(env);
+    euxmStackPush(name);
+    euxcArgC = 2;
+    euxlValue old = euxlAssoc();
 
     if (old)
     {
-        rplacd(old, new);
+        euxmSetCdr(old, new);
     }
     else
     {
-        env = cons(cons(name, new), env);
-        setvalue(s_supplied_env, env);
+        env = euxcCons(euxcCons(name, new), env);
+        euxmSetValue(euxls_supplied_env, env);
     }
 
-    drop(1);
+    euxmStackDrop(1);
     return new;
 }
+
 
 ///-----------------------------------------------------------------------------

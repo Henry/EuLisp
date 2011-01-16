@@ -162,7 +162,7 @@
 
 (defsyntax letfuns (funs . body)
   `(letrec
-    ,(map-list letfun-binding funs)
+    ,(%map-list letfun-binding funs)
     ,@body))
 
 ;;;-----------------------------------------------------------------------------

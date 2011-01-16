@@ -115,7 +115,7 @@
 ;; tables
 (defmethod deep-copy ((t <hash-table>))
   (let ((new (make-table (table-comparator t) (deep-copy (table-fill t)))))
-    (map-list
+    (%map-list
      (lambda (k v)
        ((setter table-ref) new k (deep-copy v)))
      (table-keys t)
@@ -124,7 +124,7 @@
 
 (defmethod shallow-copy ((t <hash-table>))
   (let ((new (make-table (table-comparator t) (table-fill t))))
-    (map-list
+    (%map-list
      (lambda (k v)
        ((setter table-ref) new k v))
      (table-keys t)

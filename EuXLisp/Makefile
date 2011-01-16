@@ -69,13 +69,12 @@ CPPFLAGS = -DIMAGE='"$(IMAGE)"' -DIMAGE_MOD='"$(IMAGE_MOD)"' \
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
-EUXL_C = euxldmem.c euxlfun2.c euxlint.c euxlobj.c euxlsym.c \
-         euxlisp.c euxlftab.c euxlimage.c euxlio.c euxlprint.c \
-         euxlcom.c euxlfun1.c euxlinit.c euxlmath.c euxlread.c \
-         euxlmodule.c euxltable.c euxlos.c euxlsocket.c
+EUXL_C = euxlAlloc.c euxlFun2.c euxlVM.c euxlTelos.c euxlSymbol.c \
+         euxlisp.c euxlFunTab.c euxlImage.c euxlIO.c euxlPrint.c \
+         euxlBCodeCompiler.c euxlFun1.c euxlInit.c euxlMath.c euxlRead.c \
+         euxlModule.c euxlTable.c euxlOS.c euxlSocket.c
 
-EUXL_H = euxlosdefs.h euxlosptrs.h euxlbcode.h euxlisp.h euxlproto.h \
-         euxlsymbols.h euxlbanner.h euxlobj.h
+EUXL_H = euxlisp.h euxlSymbols.h euxlTelos.h euxlBCodes.h euxlProto.h
 
 EULX_O = $(EUXL_C:%.c=$(ARCH_DIR)/%.o)
 
@@ -116,8 +115,8 @@ all:
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-version: euxlbanner.h
-	awk '/define BANNER/ {print $$10}' < euxlbanner.h | sed 's/[."]//g' > version
+version: euxlisp.c
+	@awk -F'[ "]' '/const char\* euxlBanner/ {print $$13}' < euxlisp.c > version
 
 TAGS: $(EUXL_C) $(EUXL_H) $(LISP)
 	etags $(EUXL_C) $(EUXL_H) $(LISP)

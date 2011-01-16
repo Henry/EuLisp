@@ -40,7 +40,10 @@
            formatted-io
            math
            eval)
-   export (;; Special operators
+   export (%=
+           %-
+           define
+           ;; Special operators
            deflocal
            defconstant
            defclass
@@ -330,7 +333,7 @@
            <hash-table>
            <function>
            <simple-function>
-           <subr>
+           <fun>
            <continuation>
            <generic>
            <simple-generic>

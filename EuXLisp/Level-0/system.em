@@ -26,12 +26,14 @@
 
 (defmodule system
   (import (root)
-   export (%map1
-           %for-each1
-           %with-file1
-           %load1
-           %force1
-           %initloop1
+   export (;; Continuations
+           %map-cont
+           %do-list-cont
+           %with-file-cont
+           %load-cont
+           %force-cont
+           %initloop-cont
+
            %car
            %cdr
            %set-car
@@ -48,7 +50,7 @@
            **eof**
            **default**
            *unbound*
-           *fixnum-format*
+           *fpi-format*
            *flonum-format*
            *print-case*
 

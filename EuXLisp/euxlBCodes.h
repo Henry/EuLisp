@@ -22,10 +22,10 @@
 /// Title: EuXLisp compiler byte code definitions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-#ifndef EUXLBCODE_H
-#define EUXLBCODE_H
+#ifndef EUXLBCode_H
+#define EUXLBCode_H
 
-#define OP_BRT          0x01    // branch on true
+#define OP_BRT          0x01    // branch on euxl_true
 #define OP_BRF          0x02    // branch on false
 #define OP_BR           0x03    // branch unconditionally
 #define OP_LIT          0x04    // load literal
@@ -53,9 +53,9 @@
 #define OP_ASET         0x1D    // set a variable in an environment
 
 #define OP_ATOM         0x1E    // atom predicate
-#define OP_EQ           0x1F    // eq predicate
+#define OP_EQ           0x1F    // euxcEq predicate
 #define OP_NULL         0x20    // null? (or not) predicate
-#define OP_CONS         0x21    // cons
+#define OP_CONS         0x21    // euxcCons
 #define OP_CAR          0x22    // car
 #define OP_CDR          0x23    // cdr
 #define OP_SETCAR       0x24    // set-car!
@@ -74,7 +74,7 @@
 #define OP_MUL          0x42    // multiply two numeric expressions
 #define OP_QUO          0x43    // divide two integer expressions
 #define OP_LSS          0x44    // less than
-#define OP_EQL          0x45    // equal to
+#define OP_EQL          0x45    // euxcEqual to
 #define OP_GTR          0x46    // greater than
 
 #define OP_CLASSOF      0x47    // class-of
@@ -90,7 +90,7 @@
 #define OP_CONSP        0x51    // cons?
 #define OP_SYMBOLP      0x52    // symbol?
 #define OP_VECTORP      0x53    // vector?
-#define OP_APPEND       0x54    // append of two args
+#define OP_APPEND       0x54    // euxcAppend of two args
 #define OP_LIST         0x55    // list of two args
 #define OP_SIZE         0x56    // length of a list
 #define OP_REVERSE      0x57
@@ -109,5 +109,5 @@
 #endif
 
 ///-----------------------------------------------------------------------------
-#endif // EUXLBCODE_H
+#endif // EUXLBCode_H
 ///-----------------------------------------------------------------------------

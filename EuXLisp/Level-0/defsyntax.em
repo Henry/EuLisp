@@ -71,7 +71,7 @@
 (define (%expand-list lyst)
         (if (atom? lyst)
             lyst
-          (map-list %expand-syntax lyst)))
+          (%map-list %expand-syntax lyst)))
 
 (define (%expand-list-or-symbol form)
         (if (symbol? form)
@@ -133,7 +133,7 @@
 
 ;; (put-syntax 'cond 'built-in-syntax
 ;;             (lambda (form)
-;;               (cons 'cond (map-list %expand-list (cdr form)))))
+;;               (cons 'cond (%map-list %expand-list (cdr form)))))
 
 ;; (define (%expand-let-form form)
 ;;         (cons
@@ -141,11 +141,11 @@
 ;;          (let ((bindings (cadr form)))
 ;;            (cond ((symbol? bindings)
 ;;                   (cons (or (get-syntax bindings '%rename) bindings)
-;;                         (cons (map-list %expand-list-or-symbol
+;;                         (cons (%map-list %expand-list-or-symbol
 ;;                                         (caddr form))
 ;;                               (%expand-list (cdddr form)))))
 ;;                  ((list? bindings)
-;;                   (cons (map-list %expand-list-or-symbol (cadr form))
+;;                   (cons (%map-list %expand-list-or-symbol (cadr form))
 ;;                         (%expand-list (cddr form))))
 ;;                  (t (raise-syntax-error "bad let form" form))))))
 

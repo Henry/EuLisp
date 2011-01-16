@@ -22,14 +22,8 @@
 /// Title: euxlisp built-in arithmetic functions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "euxlisp.h"
 #include <math.h>
-
-///-----------------------------------------------------------------------------
-/// External variables
-///-----------------------------------------------------------------------------
-extern euxlValue true, s_arith_error;
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
@@ -38,278 +32,294 @@ static euxlValue binary(int fcn);
 static euxlValue unary(int fcn);
 static euxlValue predicate(int fcn);
 static euxlValue compare(int fcn);
-static FLOTYPE toflotype(euxlValue val);
-static void checkizero(FIXTYPE iarg, FIXTYPE num);
-static void checkineg(FIXTYPE iarg);
-static void checkfzero(FLOTYPE farg, FLOTYPE num);
-static void checkfneg(FLOTYPE farg);
-static void badiop();
-static void badfop();
+static euxmDoubleFloatType convertToDoubleFloat(euxlValue val);
+static void checkFPIZero(euxmFPIType iarg, euxmFPIType num);
+static void checkFPINegative(euxmFPIType iarg);
+static void checkDoubleFloatZero
+(
+    euxmDoubleFloatType farg,
+    euxmDoubleFloatType num
+);
+static void checkDoubleFloatNegative(euxmDoubleFloatType farg);
+static void badFPIOp();
+static void badDoubleFloadOp();
 
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
-// xexactp - built-in function 'exact?'
-// *** THIS IS REALLY JUST A STUB FOR NOW ***
-euxlValue xexactp()
+///  euxlExactp - built-in function 'exact?'
+//    *** THIS IS REALLY JUST A STUB FOR NOW ***
+euxlValue euxlExactp()
 {
-    static char *cfn_name = "exact?";
-    (void)xlganumber();
-    xllastarg();
-    return (NIL);
+    static char *functionName = "exact?";
+    (void)euxmGetArgNumber();
+    euxmLastArg();
+    return (euxmNil);
 }
 
-// xinexactp - built-in function 'inexact?'
-// *** THIS IS REALLY JUST A STUB FOR NOW ***
-euxlValue xinexactp()
+///  euxlInexactp - built-in function 'inexact?'
+//    *** THIS IS REALLY JUST A STUB FOR NOW ***
+euxlValue euxlInexactp()
 {
-    static char *cfn_name = "inexact?";
-    (void)xlganumber();
-    xllastarg();
-    return (true);
+    static char *functionName = "inexact?";
+    (void)euxmGetArgNumber();
+    euxmLastArg();
+    return (euxl_true);
 }
 
-// xatan - built-in function 'atan'
-euxlValue xatan()
+///  euxlAtan - built-in function 'atan'
+euxlValue euxlAtan()
 {
-    static char *cfn_name = "atan";
+    static char *functionName = "atan";
 
     // get the first argument
-    euxlValue arg = xlganumber();
+    euxlValue arg = euxmGetArgNumber();
 
-    FLOTYPE val;
-    if (moreargs())    // handle two argument (atan y x)
+    euxmDoubleFloatType val;
+    if (euxmMoreArgs())    // handle two argument (atan y x)
     {
-        euxlValue arg2 = xlganumber();
-        xllastarg();
-        val = atan2(toflotype(arg), toflotype(arg2));
+        euxlValue arg2 = euxmGetArgNumber();
+        euxmLastArg();
+        val = atan2(convertToDoubleFloat(arg), convertToDoubleFloat(arg2));
     }
     else    // handle one argument (atan x)
     {
-        val = atan(toflotype(arg));
+        val = atan(convertToDoubleFloat(arg));
     }
 
-    // return the resulting flonum
-    return (cvflonum(val));
+    // return the resulting float
+    return (euxcMakeDoubleFloat(val));
 }
 
-// xfloor - built-in function 'floor'
-euxlValue xfloor()
+///  euxlFloor - built-in function 'floor'
+euxlValue euxlFloor()
 {
-    static char *cfn_name = "floor";
+    static char *functionName = "floor";
 
     // get the argument
-    euxlValue arg = xlgetarg();
-    xllastarg();
+    euxlValue arg = euxmGetArg();
+    euxmLastArg();
 
     // check its type
-    if (fixp(arg))
+    if (euxmFPIp(arg))
     {
         return (arg);
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        return (cvfixnum((FIXTYPE) floor(getflonum(arg))));
+        return (euxcMakeFPI((euxmFPIType) floor(euxmGetDoubleFloat(arg))));
     }
 
-    xlbadtype(arg, "<number>", cfn_name);
+    euxcBadType(arg, "<number>", functionName);
 
-    return (NIL);       // never reached
+    return (euxmNil);       // never reached
 }
 
-// xceiling - built-in function 'ceiling'
-euxlValue xceiling()
+///  euxlCeiling - built-in function 'ceiling'
+euxlValue euxlCeiling()
 {
-    static char *cfn_name = "ceiling";
+    static char *functionName = "ceiling";
 
     // get the argument
-    euxlValue arg = xlgetarg();
-    xllastarg();
+    euxlValue arg = euxmGetArg();
+    euxmLastArg();
 
     // check its type
-    if (fixp(arg))
+    if (euxmFPIp(arg))
     {
         return (arg);
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        return (cvfixnum((FIXTYPE) ceil(getflonum(arg))));
+        return (euxcMakeFPI((euxmFPIType) ceil(euxmGetDoubleFloat(arg))));
     }
 
-    xlbadtype(arg, "<number>", cfn_name);
+    euxcBadType(arg, "<number>", functionName);
 
-    return (NIL);       // never reached
+    return (euxmNil);       // never reached
 }
 
-// xround - built-in function 'round'
-euxlValue xround()
+///  euxlRound - built-in function 'round'
+euxlValue euxlRound()
 {
-    static char *cfn_name = "round";
+    static char *functionName = "round";
 
     // get the argument
-    euxlValue arg = xlgetarg();
-    xllastarg();
+    euxlValue arg = euxmGetArg();
+    euxmLastArg();
 
     // check its type
-    if (fixp(arg))
+    if (euxmFPIp(arg))
     {
         return (arg);
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        FLOTYPE x = getflonum(arg);
-        FLOTYPE y = floor(x);
-        FLOTYPE z = x - y;
+        euxmDoubleFloatType x = euxmGetDoubleFloat(arg);
+        euxmDoubleFloatType y = floor(x);
+        euxmDoubleFloatType z = x - y;
 
         if (z == 0.5)
         {
-            if (((FIXTYPE) y & 1) == 1)
+            if (((euxmFPIType) y & 1) == 1)
             {
                 y += 1.0;
             }
-            return (cvfixnum((FIXTYPE) y));
+            return (euxcMakeFPI((euxmFPIType) y));
         }
         else if (z < 0.5)
         {
-            return (cvfixnum((FIXTYPE) y));
+            return (euxcMakeFPI((euxmFPIType) y));
         }
         else
         {
-            return (cvfixnum((FIXTYPE) (y + 1.0)));
+            return (euxcMakeFPI((euxmFPIType) (y + 1.0)));
         }
     }
 
-    xlbadtype(arg, "<number>", cfn_name);
+    euxcBadType(arg, "<number>", functionName);
 
-    return (NIL);       // never reached
+    return (euxmNil);       // never reached
 }
 
-// xtruncate - built-in function 'truncate'
-euxlValue xtruncate()
+///  euxlTruncate - built-in function 'truncate'
+euxlValue euxlTruncate()
 {
-    static char *cfn_name = "truncate";
+    static char *functionName = "truncate";
 
     // get the argument
-    euxlValue arg = xlgetarg();
-    xllastarg();
+    euxlValue arg = euxmGetArg();
+    euxmLastArg();
 
     // check its type
-    if (fixp(arg))
+    if (euxmFPIp(arg))
     {
         return (arg);
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        return (cvfixnum((FIXTYPE) (getflonum(arg))));
+        return (euxcMakeFPI((euxmFPIType) (euxmGetDoubleFloat(arg))));
     }
 
-    xlbadtype(arg, "<number>", cfn_name);
+    euxcBadType(arg, "<number>", functionName);
 
-    return (NIL);       // never reached
+    return (euxmNil);       // never reached
 }
 
 ///-----------------------------------------------------------------------------
 /// binary functions
 ///-----------------------------------------------------------------------------
 
-euxlValue xadd() // +
+/// euxlAdd - +
+euxlValue euxlAdd()
 {
-    if (!moreargs())
+    if (!euxmMoreArgs())
     {
-        return (cvfixnum((FIXTYPE) 0));
+        return (euxcMakeFPI((euxmFPIType) 0));
     }
     return (binary('+'));
 }
 
-euxlValue xmul() // *
+///  euxlMul - *
+euxlValue euxlMul()
 {
-    if (!moreargs())
+    if (!euxmMoreArgs())
     {
-        return (cvfixnum((FIXTYPE) 1));
+        return (euxcMakeFPI((euxmFPIType) 1));
     }
     return (binary('*'));
 }
 
-euxlValue xsub()  // -
+///  euxlSub - -
+euxlValue euxlSub()
 {
     return (binary('-'));
 }
 
-euxlValue xdiv()  // /
+///  euxlDiv - /
+euxlValue euxlDiv()
 {
     return (binary('/'));
 }
 
-euxlValue xquo()  // quotient
+///  euxlQuo - quotient
+euxlValue euxlQuo()
 {
     return (binary('Q'));
 }
 
-euxlValue xrem()  // remainder
+///  euxlRem - remainder
+euxlValue euxlRem()
 {
     return (binary('R'));
 }
 
-euxlValue xmin()
+///  euxlMin
+euxlValue euxlMin()
 {
     return (binary('m'));
 }
 
-euxlValue xmax()
+///  euxlMax
+euxlValue euxlMax()
 {
     return (binary('M'));
 }
 
-euxlValue xexpt()
+///  euxlExpt
+euxlValue euxlExpt()
 {
     return (binary('E'));
 }
 
-euxlValue xlogand()
+///  euxlLogand
+euxlValue euxlLogand()
 {
     return (binary('&'));
 }
 
-euxlValue xlogior()
+///  euxlLogior
+euxlValue euxlLogior()
 {
     return (binary('|'));
 }
 
-euxlValue xlogxor()
+///  euxlLogxor
+euxlValue euxlLogxor()
 {
     return (binary('^'));
 }
 
-// binary - handle binary operations
+///  binary - handle binary operations
 static euxlValue binary(int fcn)
 {
 
-    static char *cfn_name = "binary arith op";
+    static char *functionName = "binary arith op";
 
     // get the first argument
-    euxlValue arg = xlgetarg();
+    euxlValue arg = euxmGetArg();
 
     // set the type of the first argument
     int mode = 0;
-    FIXTYPE ival = 0;
-    FLOTYPE fval = 0;
-    if (fixp(arg))
+    euxmFPIType ival = 0;
+    euxmDoubleFloatType fval = 0;
+    if (euxmFPIp(arg))
     {
-        ival = getfixnum(arg);
+        ival = euxmGetFPI(arg);
         mode = 'I';
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        fval = getflonum(arg);
+        fval = euxmGetDoubleFloat(arg);
         mode = 'F';
     }
     else
     {
-        xlbadtype(arg, "<number>", cfn_name);
+        euxcBadType(arg, "<number>", functionName);
     }
 
     // treat a single argument as a special case
-    if (!moreargs())
+    if (!euxmMoreArgs())
     {
         switch (fcn)
         {
@@ -328,56 +338,56 @@ static euxlValue binary(int fcn)
                 switch (mode)
                 {
                     case 'I':
-                        checkizero(ival, (FIXTYPE) 1);
+                        checkFPIZero(ival, (euxmFPIType) 1);
                         ival = 1 / ival;
                         break;
                     case 'F':
-                        checkfzero(fval, (FLOTYPE) 1.0);
+                        checkDoubleFloatZero(fval, (euxmDoubleFloatType) 1.0);
                         fval = 1.0 / fval;
                         break;
                 }
         }
     }
 
-    FIXTYPE iarg = 0;
-    FLOTYPE farg = 0;
+    euxmFPIType iarg = 0;
+    euxmDoubleFloatType farg = 0;
 
     // handle each remaining argument
-    while (moreargs())
+    while (euxmMoreArgs())
     {
         // get the next argument
-        arg = xlgetarg();
+        arg = euxmGetArg();
 
         // check its type
-        if (fixp(arg))
+        if (euxmFPIp(arg))
         {
             switch (mode)
             {
                 case 'I':
-                    iarg = getfixnum(arg);
+                    iarg = euxmGetFPI(arg);
                     break;
                 case 'F':
-                    farg = (FLOTYPE) getfixnum(arg);
+                    farg = (euxmDoubleFloatType) euxmGetFPI(arg);
                     break;
             }
         }
-        else if (floatp(arg))
+        else if (euxmDoubleFloatp(arg))
         {
             switch (mode)
             {
                 case 'I':
-                    fval = (FLOTYPE) ival;
-                    farg = getflonum(arg);
+                    fval = (euxmDoubleFloatType) ival;
+                    farg = euxmGetDoubleFloat(arg);
                     mode = 'F';
                     break;
                 case 'F':
-                    farg = getflonum(arg);
+                    farg = euxmGetDoubleFloat(arg);
                     break;
             }
         }
         else
         {
-            xlbadtype(arg, "<number>", cfn_name);
+            euxcBadType(arg, "<number>", functionName);
         }
 
         // accumulate the result value
@@ -396,15 +406,15 @@ static euxlValue binary(int fcn)
                         ival *= iarg;
                         break;
                     case '/':
-                        checkizero(iarg, ival);
+                        checkFPIZero(iarg, ival);
                         ival /= iarg;
                         break;
                     case 'Q':
-                        checkizero(iarg, ival);
+                        checkFPIZero(iarg, ival);
                         ival /= iarg;
                         break;
                     case 'R':
-                        checkizero(iarg, ival);
+                        checkFPIZero(iarg, ival);
                         ival %= iarg;
                         break;
                     case 'M':
@@ -416,8 +426,17 @@ static euxlValue binary(int fcn)
                             ival = iarg;
                         break;
                     case 'E':
-                        return (cvflonum((FLOTYPE) pow((FLOTYPE) ival,
-                        (FLOTYPE) iarg)));
+                        return
+                        (
+                            euxcMakeDoubleFloat
+                            (
+                                (euxmDoubleFloatType) pow
+                                (
+                                    (euxmDoubleFloatType) ival,
+                                    (euxmDoubleFloatType) iarg
+                                )
+                            )
+                        );
                     case '&':
                         ival &= iarg;
                         break;
@@ -428,7 +447,7 @@ static euxlValue binary(int fcn)
                         ival ^= iarg;
                         break;
                     default:
-                        badiop();
+                        badFPIOp();
                 }
                 break;
             case 'F':
@@ -444,7 +463,7 @@ static euxlValue binary(int fcn)
                         fval *= farg;
                         break;
                     case '/':
-                        checkfzero(farg, fval);
+                        checkDoubleFloatZero(farg, fval);
                         fval /= farg;
                         break;
                     case 'M':
@@ -462,7 +481,7 @@ static euxlValue binary(int fcn)
                         fval = fmod(fval, farg);
                         break;
                     default:
-                        badfop();
+                        badDoubleFloadOp();
                 }
                 break;
         }
@@ -472,83 +491,97 @@ static euxlValue binary(int fcn)
     switch (mode)
     {
         case 'I':
-            return (cvfixnum(ival));
+            return (euxcMakeFPI(ival));
         case 'F':
-            return (cvflonum(fval));
+            return (euxcMakeDoubleFloat(fval));
     }
 
-    return (NIL);       // never reached
+    return (euxmNil);       // never reached
 }
 
 ///-----------------------------------------------------------------------------
 /// Unary functions
 ///-----------------------------------------------------------------------------
-euxlValue xlognot()
+///  euxlLognot
+euxlValue euxlLognot()
 {
     return (unary('~'));
 }
 
-euxlValue xabs()
+///  euxlAbs
+euxlValue euxlAbs()
 {
     return (unary('A'));
 }
 
-euxlValue xadd1()
+///  euxlAdd1
+euxlValue euxlAdd1()
 {
     return (unary('+'));
 }
 
-euxlValue xsub1()
+///  euxlSub1
+euxlValue euxlSub1()
 {
     return (unary('-'));
 }
 
-euxlValue xsin()
+///  euxlSin
+euxlValue euxlSin()
 {
     return (unary('S'));
 }
 
-euxlValue xcos()
+///  euxlCos
+euxlValue euxlCos()
 {
     return (unary('C'));
 }
 
-euxlValue xtan()
+///  euxlTan
+euxlValue euxlTan()
 {
     return (unary('T'));
 }
 
-euxlValue xasin()
+///  euxlAsin
+euxlValue euxlAsin()
 {
     return (unary('s'));
 }
 
-euxlValue xacos()
+///  euxlAcos
+euxlValue euxlAcos()
 {
     return (unary('c'));
 }
 
-euxlValue xxexp()
+///  euxlXexp
+euxlValue euxlXexp()
 {
     return (unary('E'));
 }
 
-euxlValue xsqrt()
+///  euxlSqrt
+euxlValue euxlSqrt()
 {
     return (unary('R'));
 }
 
-euxlValue xxlog()
+///  euxlXlog
+euxlValue euxlXlog()
 {
     return (unary('L'));
 }
 
-euxlValue xrandom()
+///  euxlRandom
+euxlValue euxlRandom()
 {
     return (unary('?'));
 }
 
-static char *unary_to_name(int fcn)
+///  unaryToName
+static char *unaryToName(int fcn)
 {
     switch (fcn)
     {
@@ -583,31 +616,31 @@ static char *unary_to_name(int fcn)
     return "unknown unary op";
 }
 
-// unary - handle unary operations
+///  unary - handle unary operations
 static euxlValue unary(int fcn)
 {
     euxlValue arg = NULL;
 
     // get the argument
-    if (moreargs())
+    if (euxmMoreArgs())
     {
-        // arg = xlgetarg();
-        arg = nextarg();
+        // arg = euxmGetArg();
+        arg = euxmNextArg();
     }
     else
     {
-        xltoofew(unary_to_name(fcn));
+        euxcTooFew(unaryToName(fcn));
     }
 
-    if (xlargc != 0)
-    {   // xllastarg();
-        xltoomany(unary_to_name(fcn));
+    if (euxcArgC != 0)
+    {   // euxmLastArg();
+        euxcTooMany(unaryToName(fcn));
     }
 
     // check its type
-    if (fixp(arg))
+    if (euxmFPIp(arg))
     {
-        FIXTYPE ival = getfixnum(arg);
+        euxmFPIType ival = euxmGetFPI(arg);
         switch (fcn)
         {
             case '~':
@@ -623,35 +656,87 @@ static euxlValue unary(int fcn)
                 ival--;
                 break;
             case 'S':
-                return (cvflonum((FLOTYPE) sin((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) sin((euxmDoubleFloatType) ival)
+                    )
+                );
             case 'C':
-                return (cvflonum((FLOTYPE) cos((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) cos((euxmDoubleFloatType) ival)
+                    )
+                );
             case 'T':
-                return (cvflonum((FLOTYPE) tan((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) tan((euxmDoubleFloatType) ival)
+                    )
+                );
             case 's':
-                return (cvflonum((FLOTYPE) asin((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) asin((euxmDoubleFloatType) ival)
+                    )
+                );
             case 'c':
-                return (cvflonum((FLOTYPE) acos((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) acos((euxmDoubleFloatType) ival)
+                    )
+                );
             case 't':
-                return (cvflonum((FLOTYPE) atan((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) atan((euxmDoubleFloatType) ival)
+                    )
+                );
             case 'E':
-                return (cvflonum((FLOTYPE) exp((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) exp((euxmDoubleFloatType) ival)
+                    )
+                );
             case 'L':
-                return (cvflonum((FLOTYPE) log((FLOTYPE) ival)));
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) log((euxmDoubleFloatType) ival)));
             case 'R':
-                checkineg(ival);
-                return (cvflonum((FLOTYPE) sqrt((FLOTYPE) ival)));
+                checkFPINegative(ival);
+                return
+                (
+                    euxcMakeDoubleFloat
+                    (
+                        (euxmDoubleFloatType) sqrt((euxmDoubleFloatType) ival)
+                    )
+                );
             case '?':
-                ival = (FIXTYPE) osrand((int)ival);
+                ival = (euxmFPIType) euxcOSRand((int)ival);
                 break;
             default:
-                badiop();
+                badFPIOp();
         }
-        return (cvfixnum(ival));
+        return (euxcMakeFPI(ival));
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        FLOTYPE fval = getflonum(arg);
+        euxmDoubleFloatType fval = euxmGetDoubleFloat(arg);
         switch (fcn)
         {
             case 'A':
@@ -688,43 +773,43 @@ static euxlValue unary(int fcn)
                 fval = log(fval);
                 break;
             case 'R':
-                checkfneg(fval);
+                checkDoubleFloatNegative(fval);
                 fval = sqrt(fval);
                 break;
             default:
-                badfop();
+                badDoubleFloadOp();
         }
-        return (cvflonum(fval));
+        return (euxcMakeDoubleFloat(fval));
     }
 
-    xlbadtype(arg, "<number>", unary_to_name(fcn));
-    return (NIL);       // never reached
+    euxcBadType(arg, "<number>", unaryToName(fcn));
+    return (euxmNil);       // never reached
 }
 
-// xgcd - greatest common divisor
-euxlValue xgcd()
+///  euxlGcd - greatest common divisor
+euxlValue euxlGcd()
 {
-    static char *cfn_name = "gcd";
+    static char *functionName = "gcd";
 
-    if (!moreargs())    // check for identity case
+    if (!euxmMoreArgs())    // check for identity case
     {
-        return (cvfixnum((FIXTYPE) 0));
+        return (euxcMakeFPI((euxmFPIType) 0));
     }
 
-    euxlValue arg = xlgafixnum();
-    FIXTYPE n = getfixnum(arg);
+    euxlValue arg = euxmGetArgFPI();
+    euxmFPIType n = euxmGetFPI(arg);
 
-    if (n < (FIXTYPE) 0)
+    if (n < (euxmFPIType) 0)
     {
         n = -n; // absolute value
     }
 
-    while (moreargs())
+    while (euxmMoreArgs())
     {
-        arg = xlgafixnum();
-        FIXTYPE m = getfixnum(arg);
+        arg = euxmGetArgFPI();
+        euxmFPIType m = euxmGetFPI(arg);
 
-        if (m < (FIXTYPE) 0)
+        if (m < (euxmFPIType) 0)
         {
             m = -m;     // absolute value
         }
@@ -734,8 +819,8 @@ euxlValue xgcd()
             for (;;)
             {
                 // euclid's algorithm
-                FIXTYPE r = m % n;
-                if (r == (FIXTYPE) 0)
+                euxmFPIType r = m % n;
+                if (r == (euxmFPIType) 0)
                 {
                     break;
                 }
@@ -748,52 +833,57 @@ euxlValue xgcd()
             n = m;      // (gcd 0 m)
         }
     }
-    return (cvfixnum(n));
+    return (euxcMakeFPI(n));
 }
 
 ///-----------------------------------------------------------------------------
 /// unary predicates
 ///-----------------------------------------------------------------------------
-euxlValue xnegativep()  // negative?
+///  euxlNegativep - negative?
+euxlValue euxlNegativep()
 {
     return (predicate('-'));
 }
 
-euxlValue xzerop()  // zero?
+///  euxlZerop - zero?
+euxlValue euxlZerop()
 {
     return (predicate('Z'));
 }
 
-euxlValue xpositivep()  // positive?
+///  euxlPositivep - positive?
+euxlValue euxlPositivep()
 {
     return (predicate('+'));
 }
 
-euxlValue xevenp()  // even?
+///  euxlEvenp - even?
+euxlValue euxlEvenp()
 {
     return (predicate('E'));
 }
 
-euxlValue xoddp()  // odd?
+///  euxlOddp - odd?
+euxlValue euxlOddp()
 {
     return (predicate('O'));
 }
 
-// predicate - handle a predicate function
+///  predicate - handle a predicate function
 static euxlValue predicate(int fcn)
 {
-    static char *cfn_name = "arith predicate";
+    static char *functionName = "arith predicate";
 
     // get the argument
-    euxlValue arg = xlgetarg();
-    xllastarg();
+    euxlValue arg = euxmGetArg();
+    euxmLastArg();
 
-    FIXTYPE ival = 0;
+    euxmFPIType ival = 0;
 
     // check the argument type
-    if (fixp(arg))
+    if (euxmFPIp(arg))
     {
-        ival = getfixnum(arg);
+        ival = euxmGetFPI(arg);
         switch (fcn)
         {
             case '-':
@@ -812,12 +902,12 @@ static euxlValue predicate(int fcn)
                 ival = ((ival & 1) != 0);
                 break;
             default:
-                badiop();
+                badFPIOp();
         }
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        FLOTYPE fval = getflonum(arg);
+        euxmDoubleFloatType fval = euxmGetDoubleFloat(arg);
         switch (fcn)
         {
             case '-':
@@ -830,111 +920,116 @@ static euxlValue predicate(int fcn)
                 ival = (fval > 0);
                 break;
             default:
-                badfop();
+                badDoubleFloadOp();
         }
     }
     else
     {
-        xlbadtype(arg, "<number>", cfn_name);
+        euxcBadType(arg, "<number>", functionName);
     }
 
     // return the result value
-    return (ival ? true : NIL);
+    return (ival ? euxl_true : euxmNil);
 }
 
 ///-----------------------------------------------------------------------------
 /// comparison functions
 ///-----------------------------------------------------------------------------
-euxlValue xlss()  // <
+///  euxlLt - <
+euxlValue euxlLt()
 {
     return (compare('<'));
 }
 
-euxlValue xleq()  // <=
+///  euxlLtEq - <=
+euxlValue euxlLtEq()
 {
     return (compare('L'));
 }
 
-euxlValue xeql()  // =
+///  euxlEql - =
+euxlValue euxlEql()
 {
     return (compare('='));
 }
 
-euxlValue xgeq()  // >=
+///  euxlGtEq - >=
+euxlValue euxlGtEq()
 {
     return (compare('G'));
 }
 
-euxlValue xgtr()  // >
+///  euxlGt - >
+euxlValue euxlGt()
 {
     return (compare('>'));
 }
 
-// compare - common compare function
+///  compare - common compare function
 static euxlValue compare(int fcn)
 {
-    static char *cfn_name = "arith compare op";
+    static char *functionName = "arith compare op";
 
     // get the first argument
-    euxlValue arg = xlgetarg();
+    euxlValue arg = euxmGetArg();
 
     // set the type of the first argument
     int mode = 0;
-    FIXTYPE ival = 0;
-    FLOTYPE fval = 0;
-    if (fixp(arg))
+    euxmFPIType ival = 0;
+    euxmDoubleFloatType fval = 0;
+    if (euxmFPIp(arg))
     {
-        ival = getfixnum(arg);
+        ival = euxmGetFPI(arg);
         mode = 'I';
     }
-    else if (floatp(arg))
+    else if (euxmDoubleFloatp(arg))
     {
-        fval = getflonum(arg);
+        fval = euxmGetDoubleFloat(arg);
         mode = 'F';
     }
     else
     {
-        xlbadtype(arg, "<number>", cfn_name);
+        euxcBadType(arg, "<number>", functionName);
     }
 
     // handle each remaining argument
-    FIXTYPE icmp, iarg = 0;
-    FLOTYPE fcmp, farg = 0;
-    for (icmp = TRUE; icmp && moreargs();)
+    euxmFPIType icmp, iarg = 0;
+    euxmDoubleFloatType fcmp, farg = 0;
+    for (icmp = euxmTrue; icmp && euxmMoreArgs();)
     {
         // get the next argument
-        arg = xlgetarg();
+        arg = euxmGetArg();
 
         // check its type
-        if (fixp(arg))
+        if (euxmFPIp(arg))
         {
             switch (mode)
             {
                 case 'I':
-                    iarg = getfixnum(arg);
+                    iarg = euxmGetFPI(arg);
                     break;
                 case 'F':
-                    farg = (FLOTYPE) getfixnum(arg);
+                    farg = (euxmDoubleFloatType) euxmGetFPI(arg);
                     break;
             }
         }
-        else if (floatp(arg))
+        else if (euxmDoubleFloatp(arg))
         {
             switch (mode)
             {
                 case 'I':
-                    fval = (FLOTYPE) ival;
-                    farg = getflonum(arg);
+                    fval = (euxmDoubleFloatType) ival;
+                    farg = euxmGetDoubleFloat(arg);
                     mode = 'F';
                     break;
                 case 'F':
-                    farg = getflonum(arg);
+                    farg = euxmGetDoubleFloat(arg);
                     break;
             }
         }
         else
         {
-            xlbadtype(arg, "<number>", cfn_name);
+            euxcBadType(arg, "<number>", functionName);
         }
 
         // compute result of the compare
@@ -990,85 +1085,94 @@ static euxlValue compare(int fcn)
     }
 
     // get rid of extra arguments
-    if (moreargs())
+    if (euxmMoreArgs())
     {
-        xlpoprest();
+        xleuxmStackPopRest();
     }
 
     // return the result
-    return (icmp ? true : NIL);
+    return (icmp ? euxl_true : euxmNil);
 }
 
-// toflotype - convert a lisp value to a floating point number
-static FLOTYPE toflotype(euxlValue val)
+///  convertToDoubleFloat - convert a lisp value to a floating point number
+static euxmDoubleFloatType convertToDoubleFloat(euxlValue val)
 {
     // must be a number for this to work
-    switch (ntype(val))
+    switch (euxmNodeType(val))
     {
-        case FIXNUM:
-            return ((FLOTYPE) getfixnum(val));
-        case FLONUM:
-            return (getflonum(val));
+        case euxmFPI:
+            return ((euxmDoubleFloatType) euxmGetFPI(val));
+        case euxmDoubleFloat:
+            return (euxmGetDoubleFloat(val));
     }
-    return ((FLOTYPE) 0);       // never reached
+    return ((euxmDoubleFloatType) 0);       // never reached
 }
 
-// checkizero - check for integer division by zero
-static void checkizero(FIXTYPE iarg, FIXTYPE num)
+///  checkFPIZero - check for integer division by zero
+static void checkFPIZero(euxmFPIType iarg, euxmFPIType num)
 {
     if (iarg == 0)
     {
-        xlcerror("division by zero", cvfixnum(num), s_arith_error);
+        euxcCerror("division by zero", euxcMakeFPI(num), euxls_arith_error);
     }
 }
 
-// checkineg - check for square root of a negative number
-static void checkineg(FIXTYPE iarg)
+///  checkFPINegative - check for square root of a negative number
+static void checkFPINegative(euxmFPIType iarg)
 {
     if (iarg < 0)
     {
-        xlcerror
+        euxcCerror
         (
             "square root of a negative number",
-            cvfixnum(iarg),
-            s_arith_error
+            euxcMakeFPI(iarg),
+            euxls_arith_error
         );
     }
 }
 
-// checkfzero - check for floating point division by zero
-static void checkfzero(FLOTYPE farg, FLOTYPE num)
+///  checkDoubleFloatZero - check for floating point division by zero
+static void checkDoubleFloatZero
+(
+    euxmDoubleFloatType farg,
+    euxmDoubleFloatType num
+)
 {
     if (farg == 0.0)
     {
-        xlcerror("division by zero", cvflonum(num), s_arith_error);
-    }
-}
-
-// checkfneg - check for square root of a negative number
-static void checkfneg(FLOTYPE farg)
-{
-    if (farg < 0.0)
-    {
-        xlcerror
+        euxcCerror
         (
-            "square root of a negative number",
-            cvflonum(farg),
-            s_arith_error
+            "division by zero",
+            euxcMakeDoubleFloat(num),
+            euxls_arith_error
         );
     }
 }
 
-// badiop - bad integer operation
-static void badiop()
+///  checkDoubleFloatNegative - check for square root of a negative number
+static void checkDoubleFloatNegative(euxmDoubleFloatType farg)
 {
-    xlfail("bad integer operation", s_arith_error);
+    if (farg < 0.0)
+    {
+        euxcCerror
+        (
+            "square root of a negative number",
+            euxcMakeDoubleFloat(farg),
+            euxls_arith_error
+        );
+    }
 }
 
-// badfop - bad floating point operation
-static void badfop()
+///  badFPIOp - bad integer operation
+static void badFPIOp()
 {
-    xlfail("bad floating point operation", s_arith_error);
+    euxcFail("bad integer operation", euxls_arith_error);
+}
+
+///  badDoubleFloadOp - bad floating point operation
+static void badDoubleFloadOp()
+{
+    euxcFail("bad floating point operation", euxls_arith_error);
 }
 
 

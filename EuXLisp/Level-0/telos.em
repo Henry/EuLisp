@@ -57,12 +57,12 @@
            <function>
            <simple-function>
            <closure>
-           <subr>
+           <fun>
            <continuation>
            <generic>
            <simple-generic>
-           <xsubr>
-           <csubr>
+           <xfun>
+           <xfuncont>
            <method>
            <simple-method>
            <slot>
@@ -162,7 +162,7 @@
   (indent depth)
   (%print cl)
   (print nl)
-  (for-each
+  (%do-list
    (lambda (c)
      (hierarchy c (%+ depth 2)))
    (reverse-list (class-subclasses cl))))
@@ -203,7 +203,7 @@
 ;;;  N-ary print functions
 ;;;-----------------------------------------------------------------------------
 (defun sprint-1 (s objs)
-  (for-each (lambda (x) (generic-print x s)) objs)
+  (%do-list (lambda (x) (generic-print x s)) objs)
   s)
 
 (defun sprint (s . objs)
@@ -235,7 +235,7 @@
 ;;;  N-ary write functions
 ;;;-----------------------------------------------------------------------------
 (defun swrite-1 (s objs)
-  (for-each (lambda (x) (generic-write x s)) objs)
+  (%do-list (lambda (x) (generic-write x s)) objs)
   s)
 
 (defun swrite (s . objs)

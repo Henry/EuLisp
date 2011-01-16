@@ -207,7 +207,7 @@
          (all?-1 fn l))
         ((null? (cdr more))
          (all?-2 fn l (convert (car more) <list>)))
-        (t (all?-n fn (cons l (map-list (converter <list>) more))))))
+        (t (all?-n fn (cons l (%map-list (converter <list>) more))))))
 
 (defun all?-1 (fn l)
   (cond ((atom? l) t)
@@ -223,8 +223,8 @@
 
 (defun any?-n (fn ls)
   (cond ((any-atoms? ls) t)
-        ((apply fn (map-list car ls))
-         (any?-n fn (map-list cdr ls)))
+        ((apply fn (%map-list car ls))
+         (any?-n fn (%map-list cdr ls)))
         (t ())))
 
 (defmethod any? ((fn <function>) (l <list>) . more)
@@ -235,7 +235,7 @@
          (any?-1 fn l))
         ((null? (cdr more))
          (any?-2 fn l (convert (car more) <list>)))
-        (t (any?-n fn (cons l (map-list (converter <list>) more))))))
+        (t (any?-n fn (cons l (%map-list (converter <list>) more))))))
 
 (defun any?-1 (fn l)
   (cond ((atom? l) ())
@@ -249,8 +249,8 @@
 
 (defun any?-n (fn ls)
   (cond ((any-atoms? ls) ())
-        ((apply fn (map-list car ls)) t)
-        (t (any?-n fn (map-list cdr ls)))))
+        ((apply fn (%map-list car ls)) t)
+        (t (any?-n fn (%map-list cdr ls)))))
 
 (defun any-atoms? (l)
   (cond ((atom? l) ())
@@ -263,7 +263,7 @@
     (concatenate-lists l more)))
 
 (defun concatenate-lists (l more)
-  (apply append l (map-list (converter <list>) more)))
+  (apply append l (%map-list (converter <list>) more)))
 
 (defmethod delete (obj (l <list>) . fn)
   (delete-list obj l (if (null? fn) eql (car fn))))
@@ -278,12 +278,12 @@
 
 (defun do-list (fn l more)
   (cond ((null? more)
-         (for-each fn l))
+         (%do-list fn l))
         ((null? (cdr more))
-         (for-each fn l (convert (car more) <list>)))
+         (%do-list fn l (convert (car more) <list>)))
         (t
-         (apply for-each fn l
-                (map-list (converter <list>) more)))))
+         (apply %do-list fn l
+                (%map-list (converter <list>) more)))))
 
 (defmethod element ((l <list>) (n <integer>))
   (list-ref l n))
@@ -317,7 +317,7 @@
            (fill-all-list (cdr l) o))))
 
 (defun fill-keyed-list (l o k)
-  (for-each
+  (%do-list
    (lambda (key)
      (set-car (list-tail l key) o))
    (convert k <list>)))
@@ -332,15 +332,15 @@
         (fill-index-list-aux (cdr l) o (%+ index 1) end))))
 
 (defmethod map ((fn <function>) (c <list>) . more)
-  (maplist fn c more))
+  (map-list fn c more))
 
-(defun maplist (fn c more)
+(defun map-list (fn c more)
   (cond ((null? more)
-         (map-list fn c))
+         (%map-list fn c))
         ((null? (cdr more))
-         (map-list fn c (convert (car more) <list>)))
-        (t (apply map-list fn c
-                  (map-list (converter <list>) more)))))
+         (%map-list fn c (convert (car more) <list>)))
+        (t (apply %map-list fn c
+                  (%map-list (converter <list>) more)))))
 
 (defmethod member (o (l <list>) . test)
   (memberlist o l (if (null? test) eql (car test))))
@@ -432,13 +432,13 @@
         (fill-all-string s o (%+ index 1) end))))
 
 (defun fill-keyed-string (s o k)
-  (for-each
+  (%do-list
    (lambda (key)
      (string-set s key o))
    (convert k <list>)))
 
 (defmethod map ((fn <function>) (s <string>) . more)
-  (let ((result (maplist fn (convert s <list>) more)))
+  (let ((result (map-list fn (convert s <list>) more)))
     (if (all?-1 char? result)
         (convert result <string>)
       (error <collection-error>
@@ -518,13 +518,13 @@
         (fill-vector v o (%+ index 1) end))))
 
 (defun fill-keyed-vector (v o k)
-  (for-each
+  (%do-list
    (lambda (key)
      (vector-set v key o))
    (convert k <list>)))
 
 (defmethod map ((fn <function>) (v <vector>) . more)
-  (convert (maplist fn (convert v <list>) more) <vector>))
+  (convert (map-list fn (convert v <list>) more) <vector>))
 
 (defmethod member (o (v <vector>) . test)
   (if (memberlist o (convert v <list>)
@@ -560,13 +560,13 @@
   (if (null? more)
       t
     (let ((new (make-table (table-comparator t) (table-fill t))))
-      (for-each
+      (%do-list
        (lambda (old)
-         (for-each
+         (%do-list
           (lambda (key)
             (table-set new key (table-ref old key)))
           (table-keys old)))
-       (cons t (map-list (converter <table>) more)))
+       (cons t (%map-list (converter <table>) more)))
       new)))
 
 (defmethod delete (obj (t <table>) . fn)
@@ -592,7 +592,7 @@
 
 (defmethod fill ((t <table>) o . k)
   (cond ((null? k)
-         (for-each
+         (%do-list
           (lambda (key)
             (table-set t key o))
           (table-keys t))
@@ -612,7 +612,7 @@
 
 (defun map-table (fn t)
   (let ((new (make-table (table-comparator t) (fn (table-fill t)))))
-    (for-each
+    (%do-list
      (lambda (k)
        (table-set new k (fn (table-ref t k))))
      (table-keys t))

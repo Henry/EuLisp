@@ -195,7 +195,7 @@
 (table-set builtin-make-table <simple-char> mkchar)
 
 ;; promise, env, code, module, simple-function, closure,
-;; subr, xsubr, csubr, continuation, slot
+;; fun, xfun, xfuncont, continuation, slot
 (defun cant-make (cl)
   (lambda (inits)
     (raise-telos-error "can't make instance of class" cl)))
@@ -207,9 +207,9 @@
 (table-set builtin-make-table <simple-function>
            (cant-make <simple-function>))
 (table-set builtin-make-table <closure> (cant-make <closure>))
-(table-set builtin-make-table <subr> (cant-make <subr>))
-(table-set builtin-make-table <xsubr> (cant-make <xsubr>))
-(table-set builtin-make-table <csubr> (cant-make <csubr>))
+(table-set builtin-make-table <fun> (cant-make <fun>))
+(table-set builtin-make-table <xfun> (cant-make <xfun>))
+(table-set builtin-make-table <xfuncont> (cant-make <xfuncont>))
 (table-set builtin-make-table <continuation> (cant-make <continuation>))
 
 ;; slot

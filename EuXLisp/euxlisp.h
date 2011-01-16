@@ -31,484 +31,678 @@
 #include <setjmp.h>
 #include <string.h>
 
-// save signal masks
+extern const char* euxlBanner;
+
+///-----------------------------------------------------------------------------
+///  Save signal masks in jmp
+///-----------------------------------------------------------------------------
 #ifdef _POSIX_SOURCE
-#define JMP_BUF sigjmp_buf
-#define LONGJMP siglongjmp
-#define SETJMP(env) sigsetjmp(env, 1)
+#define euxmJmpBuf sigjmp_buf
+#define euxmLongJmp siglongjmp
+#define euxmSetJmp(env) sigsetjmp(env, 1)
 #else
-#define JMP_BUF jmp_buf
-#define LONGJMP longjmp
-#define SETJMP(env) setjmp(env)
+#define euxmJmpBuf jmp_buf
+#define euxmLongJmp longjmp
+#define euxmSetJmp(env) setjmp(env)
 #endif
 
-// for segmented addresses on Intel processors
+///-----------------------------------------------------------------------------
+///  For segmented addresses on Intel processors
+///-----------------------------------------------------------------------------
 #ifdef SEGADDR
-#define INSEGMENT(n,s)  ((unsigned long)(n) >> 16 \
-                      == (unsigned long)(s) >> 16)
+#define euxmInSegment(n,s)                                                     \
+    ((unsigned long)(n) >> 16 == (unsigned long)(s) >> 16)
 #endif
 
-// size of each type of memory segment
-#ifndef NSSIZE
-#define NSSIZE  4000    // number of nodes per node segment
+///-----------------------------------------------------------------------------
+///  Size of each type of memory segment
+///-----------------------------------------------------------------------------
+#ifndef euxmNsSize
+#define euxmNsSize  4000    // number of nodes per node segment
 #endif
-#ifndef VSSIZE
-#define VSSIZE  10000   // number of euxlValue's per vector segment
+#ifndef euxmVsSize
+#define euxmVsSize  10000   // number of euxlValue's per vector segment
 #endif
 
-// reasons for GC
-#define GC_NODE   0
-#define GC_VECTOR 1
-#define GC_USER   2
-#define GC_SAVE   3
+///-----------------------------------------------------------------------------
+///  Reasons for GC
+///-----------------------------------------------------------------------------
+#define euxmGcNode   0
+#define euxmGcVector 1
+#define euxmGcUser   2
+#define euxmGcSave   3
 
-// AFMT         printf format for addresses ("%x" or "%lx")
-// OFFTYPE      number the size of an address (int or long)
-// FIXTYPE      data type for fixed point numbers (long)
-// ITYPE        fixed point input conversion function type (long atol())
-// ICNV         fixed point input conversion function (atol)
-// IFMT         printf format for fixed point numbers ("%ld")
-// FLOTYPE      data type for floating point numbers (float)
-// FFMT         printf format for floating point numbers (%.15g)
+///-----------------------------------------------------------------------------
+/// Primitive types, formatting and limits
+///-----------------------------------------------------------------------------
+// euxmAddrFmt         printf format for addresses ("%x" or "%lx")
+// euxmOffType         number the size of an address (int or long)
 
-// default important word-size dependent definitions
+// euxmFPIType         data type for fixed point integers (long)
+// euxmCstringToFPI    fixed point input conversion function (atol)
+// euxmFPIFmt          printf format for fixed point integers ("%ld")
+
+// euxmDoubleFloatType data type for double precision numbers (double)
+// euxmDoubleFloatFmt  printf format for double precision numbers (%.15g)
+
+// Default important word-size dependent definitions
 #if WORD_LENGTH==32 // 32bit OS
-#   define AFMT             "%x"
-#   define OFFTYPE         int
+#   define euxmAddrFmt         "%x"
+#   define euxmOffType         int
 #elif WORD_LENGTH==64 // 64bit OS
-#   define AFMT            "%lx"
-#   define OFFTYPE         long
+#   define euxmAddrFmt         "%lx"
+#   define euxmOffType         long
 #else
 #   error WORD_LENGTH set incorrectly
 #endif
 
-// default important definitions
-#define FIXTYPE         long
-#define ITYPE           long atol()
-#define ICNV(n)         atol(n)
-#define IFMT            "%ld"
-#define FLOTYPE         double
-#define FFMT            "%#.15g"
-#define SFIXMIN         -1048576
-#define SFIXMAX         1048575
+#define euxmFPIType         long
+#define euxmCstringToFPI(n) atol(n)
+#define euxmFPIFmt          "%ld"
+#define euxmDoubleFloatType       double
+#define euxmDoubleFloatFmt        "%#.15g"
+#define euxmFPIMin          -1073741824L
+#define euxmFPIMax          1073741823L
 
-#ifndef INSEGMENT
-#define INSEGMENT(n,s)  ((n) >= &(s)->ns_data[0] \
-                      && (n) <  &(s)->ns_data[0] + (s)->ns_size)
+#ifndef euxmInSegment
+#define euxmInSegment(n,s)                                                     \
+    (                                                                          \
+        (n) >= &(s)->data[0]                                                   \
+     && (n) <  &(s)->data[0] + (s)->size                                       \
+    )
 #endif
-#ifndef VCOMPARE
-#define VCOMPARE(f,s,t) ((f) + (s) <= (t))
+#ifndef euxmVcompare
+#define euxmVcompare(f,s,t)                                                    \
+    ((f) + (s) <= (t))
 #endif
 
-// useful definitions
-#ifndef TRUE
-#define TRUE    1
+///-----------------------------------------------------------------------------
+///  Useful definitions
+///-----------------------------------------------------------------------------
+#ifndef euxmTrue
+#define euxmTrue    1
 #endif
-#ifndef FALSE
-#define FALSE   0
+#ifndef euxmFalse
+#define euxmFalse   0
 #endif
-#ifndef NIL
-#define NIL     (euxlValue)0
+#ifndef euxmNil
+#define euxmNil     (euxlValue)0
 #endif
 
 extern FILE *filein;
-#define NOCHAR -2
+#define euxmNoChar -2
 
-// program limits
-#define STRMAX          100     // maximum length of a string constant
-#define HSIZE           199     // symbol hash table size
-#define SAMPLE          100     // control character sample rate
+///-----------------------------------------------------------------------------
+///  Program limits
+///-----------------------------------------------------------------------------
+#define euxmStringMax          100     // maximum length of a string constant
+#define euxmSymbolTableSize           199     // symbol euxcHash table size
+#define euxmSampleRate          100     // control character sample rate
 
-// stack manipulation macros
-#define check(n)        { if (xlsp - (n) < xlstkbase) xlstkover(); }
-#define cpush(v)        { if (xlsp > xlstkbase) push(v); else xlstkover(); }
-#define push(v)         (*--xlsp = (v))
-#define pop()           (*xlsp++)
-#define top()           (*xlsp)
-#define settop(v)       (*xlsp = (v))
-#define drop(n)         (xlsp += (n))
+///-----------------------------------------------------------------------------
+/// Stack manipulation macros
+///-----------------------------------------------------------------------------
+#define euxmStackCheck(n)                                                      \
+    {                                                                          \
+        if (euxcStackPtr - (n) < euxcStackBase) euxcStackOverflow();           \
+    }
 
-// argument list parsing macros
-#define xlgetarg()      (testarg(nextarg()))
-#define xllastarg()     {if (xlargc != 0) xltoomany(cfn_name);}
-#define xlpoprest()     {xlsp += xlargc;}
-#define testarg(e)      (moreargs() ? (e) : xltoofew(cfn_name))
-#define typearg(tp,n)   (tp(*xlsp) ? nextarg() : xlbadtype(*xlsp,n,cfn_name))
-#define nextarg()       (--xlargc, *xlsp++)
-#define moreargs()      (xlargc > 0)
+#define euxmStackCheckPush(v)                                                  \
+    {                                                                          \
+        if (euxcStackPtr > euxcStackBase) euxmStackPush(v);                    \
+        else euxcStackOverflow();                                              \
+    }
 
-// macros to get arguments of a particular type
-#define xlgacons()      (testarg(typearg(consp,"<cons>")))
-#define xlgalist()      (testarg(typearg(listp,"<list>")))
-#define xlgasymbol()    (testarg(typearg(symbolp,"<symbol>")))
-#define xlgastring()    (testarg(typearg(stringp,"<string>")))
-#define xlgaobject()    (testarg(typearg(objectp,"<object>")))
-#define xlgafixnum()    (testarg(typearg(fixp,"<integer>")))
-#define xlgafloat()     (testarg(typearg(floatp,"<float>")))
-#define xlganumber()    (testarg(typearg(numberp,"<number>")))
-#define xlgachar()      (testarg(typearg(charp,"<char>")))
-#define xlgavector()    (testarg(typearg(vectorp,"<vector>")))
-#define xlgastream()    (testarg(typearg(streamp,"<stream>")))
-#define xlgaistream()   (testarg(typearg(istreamp,"<input-stream>")))
-#define xlgaostream()   (testarg(typearg(ostreamp,"<output-stream>")))
-#define xlgaclosure()   (testarg(typearg(closurep,"<closure>")))
-#define xlgaenv()       (testarg(typearg(envp,"<env>")))
-#define xlgamodule()    (testarg(typearg(modulep,"<module>")))
-#define xlgageneric()   (testarg(typearg(genericp,"<generic>")))
-#define xlgamethod()    (testarg(typearg(methodp,"<method>")))
-#define xlgaslot()      (testarg(typearg(slotp,"<slot>")))
-#define xlgatable()     (testarg(typearg(tablep,"<table>")))
+#define euxmStackPush(v)                                                       \
+    (*--euxcStackPtr = (v))
 
-// node types
-#define FREE            0
-#define CONS            1
-#define SYMBOL          2
-#define FIXNUM          3
-#define FLONUM          4
-#define STRING          5
-#define OBJECT          6
-#define STREAM          7
-#define VECTOR          8
-#define CLOSURE         9
-#define CODE            11
-#define SUBR            12
-#define XSUBR           13
-#define CSUBR           14
-#define CONTINUATION    15
-#define CHAR            16
-#define PROMISE         17
-#define ENV             18
-#define MODULE          19
-#define GENERIC         20
-#define METHOD          21
-#define SLOT            22
-#define TABLE           23
+#define euxmStackPop()                                                         \
+    (*euxcStackPtr++)
 
-// number of node types
-#define NTYPES          24
-#define NULLTYPE        NTYPES
-#define KEYWORD         (NTYPES+1)
-#define ISTREAM         (NTYPES+2)
-#define OSTREAM         (NTYPES+3)
-#define IOSTREAM        (NTYPES+4)
-#define EXTRA_TYPES     5
+#define euxmStackTop()                                                         \
+    (*euxcStackPtr)
 
-// node flags
-#define MARK            1
-#define LEFT            2
+#define euxmSetStackTop(v)                                                     \
+    (*euxcStackPtr = (v))
 
-// stream flags
-#define PF_INPUT        1
-#define PF_OUTPUT       2
-#define PF_BINARY       4
+#define euxmStackDrop(n)                                                       \
+    (euxcStackPtr += (n))
 
-// new node access macros
-#define ntype(x)        ((OFFTYPE)(x) & 1 ? FIXNUM : (x)->n_type)
+// Argument list parsing macros
+#define euxmGetArg()                                                           \
+    (euxmTestArg(euxmNextArg()))
 
-// macro to determine if a non-nil value is a pointer
-#define ispointer(x)    (((OFFTYPE)(x) & 1) == 0)
+#define euxmLastArg()                                                          \
+    {if (euxcArgC != 0) euxcTooMany(functionName);}
 
-// type predicates
-#define atom(x)         ((x) == NIL || ntype(x) != CONS)
-#define null(x)         ((x) == NIL)
-#define listp(x)        ((x) == NIL || ntype(x) == CONS)
-#define numberp(x)      ((x) && (ntype(x) == FIXNUM || ntype(x) == FLONUM))
-#define boundp(x)       (getvalue(x) != s_unbound)
-#define istreamp(x)     (streamp(x) && (getpflags(x) & PF_INPUT) != 0)
-#define ostreamp(x)     (streamp(x) && (getpflags(x) & PF_OUTPUT) != 0)
+#define xleuxmStackPopRest()                                                   \
+    {euxcStackPtr += euxcArgC;}
 
-// basic type predicates
-#define consp(x)        ((x) && ntype(x) == CONS)
-#define stringp(x)      ((x) && ntype(x) == STRING)
-#define symbolp(x)      ((x) && ntype(x) == SYMBOL)
-#define streamp(x)      ((x) && ntype(x) == STREAM)
-#define objectp(x)      ((x) && ntype(x) == OBJECT)
-#define fixp(x)         ((x) && ntype(x) == FIXNUM)
-#define floatp(x)       ((x) && ntype(x) == FLONUM)
-#define vectorp(x)      ((x) && ntype(x) == VECTOR)
-#define closurep(x)     ((x) && ntype(x) == CLOSURE)
-#define continuationp(x) ((x) && ntype(x) == CONTINUATION)
-#define codep(x)        ((x) && ntype(x) == CODE)
-#define subrp(x)        ((x) && ntype(x) == SUBR)
-#define csubrp(x)       ((x) && ntype(x) == CSUBR)
-#define xsubrp(x)       ((x) && ntype(x) == XSUBR)
-#define charp(x)        ((x) && ntype(x) == CHAR)
-#define promisep(x)     ((x) && ntype(x) == PROMISE)
-#define envp(x)         ((x) && ntype(x) == ENV)
-#define booleanp(x)     ((x) == NIL || ntype(x) == BOOLEAN)
-#define modulep(x)      ((x) && ntype(x) == MODULE)
-#define classp(x)       (objectp(x) && ((getclass(x) == simple_class) || \
-                                        (xlsubclassp(getclass(x), class))))
-#define genericp(x)     ((x) && ntype(x) == GENERIC)
-#define methodp(x)      ((x) && ntype(x) == METHOD)
-#define keywordp(x)     (symbolp(x) && (getmodule(x) == NIL))
-#define slotp(x)        ((x) && ntype(x) == SLOT)
-#define tablep(x)        ((x) && ntype(x) == TABLE)
+#define euxmTestArg(e)                                                         \
+    (euxmMoreArgs() ? (e) : euxcTooFew(functionName))
 
-// vector update macro
-// This is necessary because the memory pointed to by the n_vdata field
+#define euxmTypeArg(tp,n)                                                      \
+    (tp(*euxcStackPtr) ? euxmNextArg() : euxcBadType(*euxcStackPtr,n,functionName))
+
+#define euxmNextArg()                                                          \
+    (--euxcArgC, *euxcStackPtr++)
+
+#define euxmMoreArgs()                                                         \
+    (euxcArgC > 0)
+
+///-----------------------------------------------------------------------------
+/// Macros to get arguments of a particular type
+///-----------------------------------------------------------------------------
+#define euxmGetArgCons()      (euxmTestArg(euxmTypeArg(euxmConsp,"<cons>")))
+#define euxmGetArgList()      (euxmTestArg(euxmTypeArg(euxmListp,"<list>")))
+#define euxmGetArgSymbol()    (euxmTestArg(euxmTypeArg(euxmSymbolp,"<symbol>")))
+#define euxmGetArgString()    (euxmTestArg(euxmTypeArg(euxmStringp,"<string>")))
+#define euxmGetArgObject()    (euxmTestArg(euxmTypeArg(euxmObjectp,"<object>")))
+#define euxmGetArgFPI()       (euxmTestArg(euxmTypeArg(euxmFPIp,"<integer>")))
+#define euxmGetArgDoubleFloat() \
+    (euxmTestArg(euxmTypeArg(euxmDoubleFloatp,"<float>")))
+#define euxmGetArgNumber()    (euxmTestArg(euxmTypeArg(euxmNumberp,"<number>")))
+#define euxmGetArgChar()      (euxmTestArg(euxmTypeArg(euxmCharp,"<char>")))
+#define euxmGetArgVector()    (euxmTestArg(euxmTypeArg(euxmVectorp,"<vector>")))
+#define euxmGetArgStream()    (euxmTestArg(euxmTypeArg(euxmStreamp,"<stream>")))
+#define euxmGetArgIstream()                                                    \
+    (euxmTestArg(euxmTypeArg(euxmeuxmIStreamp,"<input-stream>")))
+#define euxmGetArgOstream()                                                    \
+    (euxmTestArg(euxmTypeArg(euxmeuxmOStreamp,"<output-stream>")))
+#define euxmGetArgClosure() \
+    (euxmTestArg(euxmTypeArg(euxmClosurep,"<closure>")))
+#define euxmGetArgEnv()       (euxmTestArg(euxmTypeArg(euxmEnvp,"<env>")))
+#define euxmGetArgModule()    (euxmTestArg(euxmTypeArg(euxmModulep,"<module>")))
+#define euxmGetArgGeneric() \
+    (euxmTestArg(euxmTypeArg(euxmGenericp,"<generic>")))
+#define euxmGetArgMethod()    (euxmTestArg(euxmTypeArg(euxmMethodp,"<method>")))
+#define euxmGetArgSlot()      (euxmTestArg(euxmTypeArg(euxmSlotp,"<slot>")))
+#define euxmGetArgTable()     (euxmTestArg(euxmTypeArg(euxmTablep,"<table>")))
+
+///-----------------------------------------------------------------------------
+/// Node types
+///-----------------------------------------------------------------------------
+#define euxmFree            0
+#define euxmCons            1
+#define euxmSymbol          2
+#define euxmFPI             3
+#define euxmDoubleFloat     4
+#define euxmString          5
+#define euxmObject          6
+#define euxmStream          7
+#define euxmVector          8
+#define euxmClosure         9
+#define euxmCode            11
+#define euxmFun             12
+#define euxmXFun            13
+#define euxmXFunCont        14
+#define euxmContinuation    15
+#define euxmChar            16
+#define euxmPromise         17
+#define euxmEnv             18
+#define euxmModule          19
+#define euxmGeneric         20
+#define euxmMethod          21
+#define euxmSlot            22
+#define euxmTable           23
+
+// Number of node types
+#define euxmNTypes          24
+#define euxmNullType        euxmNTypes
+#define euxmKeyword         (euxmNTypes+1)
+#define euxmIStream         (euxmNTypes+2)
+#define euxmOStream         (euxmNTypes+3)
+#define IeuxmOStream        (euxmNTypes+4)
+#define euxmExtraTypes      5
+
+// Node flags
+#define euxmMark            1
+#define euxmLeft            2
+
+///-----------------------------------------------------------------------------
+/// Stream flags
+///-----------------------------------------------------------------------------
+#define euxmPortFlagInput        1
+#define euxmPortFlagOutput       2
+#define euxmPortFlagBinary       4
+
+///-----------------------------------------------------------------------------
+/// New node access macros
+///-----------------------------------------------------------------------------
+#define euxmNodeType(x)        ((euxmOffType)(x) & 1 ? euxmFPI : (x)->type)
+
+// Macro to determine if a non-nil value is a pointer
+#define euxmIsPointer(x)    (((euxmOffType)(x) & 1) == 0)
+
+// Type predicates
+#define euxmAtom(x)                                                            \
+    ((x) == euxmNil || euxmNodeType(x) != euxmCons)
+
+#define euxmNull(x)                                                            \
+    ((x) == euxmNil)
+
+#define euxmListp(x)                                                           \
+    ((x) == euxmNil || euxmNodeType(x) == euxmCons)
+
+#define euxmNumberp(x)                                                         \
+    ((x) && (euxmNodeType(x) == euxmFPI || euxmNodeType(x) == euxmDoubleFloat))
+
+#define euxmBoundp(x)                                                          \
+    (euxmGetValue(x) != euxls_unbound)
+
+#define euxmeuxmIStreamp(x)                                                    \
+    (euxmStreamp(x) && (euxmGetPFlags(x) & euxmPortFlagInput) != 0)
+
+#define euxmeuxmOStreamp(x)                                                    \
+    (euxmStreamp(x) && (euxmGetPFlags(x) & euxmPortFlagOutput) != 0)
+
+///-----------------------------------------------------------------------------
+/// Basic type predicates
+///-----------------------------------------------------------------------------
+#define euxmConsp(x)        ((x) && euxmNodeType(x) == euxmCons)
+#define euxmStringp(x)      ((x) && euxmNodeType(x) == euxmString)
+#define euxmSymbolp(x)      ((x) && euxmNodeType(x) == euxmSymbol)
+#define euxmStreamp(x)      ((x) && euxmNodeType(x) == euxmStream)
+#define euxmObjectp(x)      ((x) && euxmNodeType(x) == euxmObject)
+#define euxmFPIp(x)         ((x) && euxmNodeType(x) == euxmFPI)
+#define euxmDoubleFloatp(x)       ((x) && euxmNodeType(x) == euxmDoubleFloat)
+#define euxmVectorp(x)      ((x) && euxmNodeType(x) == euxmVector)
+#define euxmClosurep(x)     ((x) && euxmNodeType(x) == euxmClosure)
+#define euxmContinuationp(x) ((x) && euxmNodeType(x) == euxmContinuation)
+#define euxmCodep(x)        ((x) && euxmNodeType(x) == euxmCode)
+#define euxmFunp(x)        ((x) && euxmNodeType(x) == euxmFun)
+#define euxmXFunContp(x)       ((x) && euxmNodeType(x) == euxmXFunCont)
+#define euxmXFunp(x)       ((x) && euxmNodeType(x) == euxmXFun)
+#define euxmCharp(x)        ((x) && euxmNodeType(x) == euxmChar)
+#define euxmPromisep(x)     ((x) && euxmNodeType(x) == euxmPromise)
+#define euxmEnvp(x)         ((x) && euxmNodeType(x) == euxmEnv)
+#define euxmBooleanp(x)     ((x) == euxmNil || euxmNodeType(x) == BOOLEAN)
+#define euxmModulep(x)      ((x) && euxmNodeType(x) == euxmModule)
+#define euxmClassp(x)                                                          \
+    (                                                                          \
+        euxmObjectp(x)                                                         \
+     && ((euxmGetClass(x) == euxlc_simple_class)                               \
+     || (euxcSubClassp(euxmGetClass(x), euxlc_class)))                         \
+    )
+#define euxmGenericp(x)     ((x) && euxmNodeType(x) == euxmGeneric)
+#define euxmMethodp(x)      ((x) && euxmNodeType(x) == euxmMethod)
+#define euxmKeywordp(x)     (euxmSymbolp(x) && (euxmGetModule(x) == euxmNil))
+#define euxmSlotp(x)        ((x) && euxmNodeType(x) == euxmSlot)
+#define euxmTablep(x)       ((x) && euxmNodeType(x) == euxmTable)
+
+///-----------------------------------------------------------------------------
+/// Vector update macro
+///-----------------------------------------------------------------------------
+// This is necessary because the memory pointed to by the value.vector.data field
 // of a vector object can move during a garbage collection.  This macro
 // guarantees that evaluation happens in the right order.
-#define vupdate(x,i,v)  { euxlValue vutmp=(v); (x)->n_vdata[i] = vutmp; }
+#define euxmVupdate(x,i,v)                                                     \
+    {                                                                          \
+        euxlValue vutmp=(v);                                                   \
+        (x)->value.vector.data[i] = vutmp;                                     \
+    }
 
-// cons access macros
-#define car(x)          ((x)->n_car)
-#define cdr(x)          ((x)->n_cdr)
-#define rplaca(x,y)     ((x)->n_car = (y))
-#define rplacd(x,y)     ((x)->n_cdr = (y))
+///-----------------------------------------------------------------------------
+/// Access macros
+///-----------------------------------------------------------------------------
 
-// symbol access macros
-#define getvalue(x)      ((x)->n_vdata[0])
-#define setvalue(x,v)    vupdate(x,0,v)
-#define getpname(x)      ((x)->n_vdata[1])
-#define setpname(x,v)    vupdate(x,1,v)
-#define gettheplist(x)   ((x)->n_vdata[2])
-#define settheplist(x,v) vupdate(x,2,v)
-#define getplist(x)      car(gettheplist(x))
-#define setplist(x,v)    rplaca(gettheplist(x),v)
-#define symboleq(a,b)    (getpname(a) == getpname(b))
-#define getmodule(x)     ((x)->n_vdata[3])
-#define setmodule(x,v)   vupdate(x,3,v)
-#define constantp(x)     ((x)->n_vdata[4])
-#define setconstant(x,v) vupdate(x,4,v)
-#define getsyntax(x)     ((x)->n_vdata[5])
-#define putsyntax(x,v)   vupdate(x,5,v)
-#define SYMSIZE         6
+///-----------------------------------------------------------------------------
+///  Cons access macros
+///-----------------------------------------------------------------------------
+#define euxmCar(x)          ((x)->value.cons.car)
+#define euxmCdr(x)          ((x)->value.cons.cdr)
+#define euxmSetCar(x,y)     ((x)->value.cons.car = (y))
+#define euxmSetCdr(x,y)     ((x)->value.cons.cdr = (y))
 
-#define SYNTAX_OPEN     '{'
-#define SYNTAX_CLOSE    '}'
+///-----------------------------------------------------------------------------
+///  Symbol access macros
+///-----------------------------------------------------------------------------
+#define euxmGetValue(x)      ((x)->value.vector.data[0])
+#define euxmSetValue(x,v)    euxmVupdate(x,0,v)
+#define euxmGetPName(x)      ((x)->value.vector.data[1])
+#define euxmSetPName(x,v)    euxmVupdate(x,1,v)
+#define euxmGetThePList(x)   ((x)->value.vector.data[2])
+#define euxmSetThePList(x,v) euxmVupdate(x,2,v)
+#define euxmGetPList(x)      euxmCar(euxmGetThePList(x))
+#define euxmSetPList(x,v)    euxmSetCar(euxmGetThePList(x),v)
+#define euxmSymbolEq(a,b)    (euxmGetPName(a) == euxmGetPName(b))
+#define euxmGetModule(x)     ((x)->value.vector.data[3])
+#define euxmSetModule(x,v)   euxmVupdate(x,3,v)
+#define euxmConstantp(x)     ((x)->value.vector.data[4])
+#define euxmSetConstant(x,v) euxmVupdate(x,4,v)
+#define euxmGetSyntax(x)     ((x)->value.vector.data[5])
+#define euxmPutSyntax(x,v)   euxmVupdate(x,5,v)
+#define euxmSymbolSize       6
 
-// vector access macros
-#define getsize(x)      ((x)->n_vsize)
-#define getelement(x,i) ((x)->n_vdata[(int)(i)])
-#define setelement(x,i,v) vupdate(x,i,v)
+#define euxmSyntaxOpen     '{'
+#define euxmSyntaxClose    '}'
 
-// object access macros
-#define getclass(x)     ((x)->n_vdata[0])
-#define setclass(x,v)   vupdate(x,0,v)
-#define getivar(x,i)    ((x)->n_vdata[(int)(i)])
-#define setivar(x,i,v)  vupdate(x,i,v)
+///-----------------------------------------------------------------------------
+///  Vector access macros
+///-----------------------------------------------------------------------------
+#define euxmGetSize(x)      ((x)->value.vector.size)
+#define euxmGetElement(x,i) ((x)->value.vector.data[(int)(i)])
+#define euxmSetElement(x,i,v) euxmVupdate(x,i,v)
 
-// promise access macros
-#define getpproc(x)     ((x)->n_car)
-#define setpproc(x,v)   ((x)->n_car = (v))
-#define getpvalue(x)    ((x)->n_cdr)
-#define setpvalue(x,v)  ((x)->n_cdr = (v))
+///-----------------------------------------------------------------------------
+///  Object access macros
+///-----------------------------------------------------------------------------
+#define euxmGetClass(x)     ((x)->value.vector.data[0])
+#define euxmSetClass(x,v)   euxmVupdate(x,0,v)
+#define euxmGetIVar(x,i)    ((x)->value.vector.data[(int)(i)])
+#define euxmSetIVar(x,i,v)  euxmVupdate(x,i,v)
 
-// closure access macros
-#define getcode(x)      ((x)->n_car)
-#define getcenv(x)      ((x)->n_cdr)
+///-----------------------------------------------------------------------------
+///  Promise access macros
+///-----------------------------------------------------------------------------
+#define euxmGetPProc(x)     ((x)->value.cons.car)
+#define euxmSetPProc(x,v)   ((x)->value.cons.car = (v))
+#define euxmGetPValue(x)    ((x)->value.cons.cdr)
+#define euxmSetPValue(x,v)  ((x)->value.cons.cdr = (v))
 
-// code access macros
-#define getbcode(x)             ((x)->n_vdata[0])
-#define setbcode(x,v)           vupdate(x,0,v)
-#define getcname(x)             ((x)->n_vdata[1])
-#define setcname(x,v)           vupdate(x,1,v)
-#define getvnames(x)            ((x)->n_vdata[2])
-#define setvnames(x,v)          vupdate(x,2,v)
-#define FIRSTLIT                3
+///-----------------------------------------------------------------------------
+///  Closure access macros
+///-----------------------------------------------------------------------------
+#define euxmGetCode(x)      ((x)->value.cons.car)
+#define euxmGetCEnv(x)      ((x)->value.cons.cdr)
 
-// fixnum/flonum/character access macros
-#define getfixnum(x)    ((OFFTYPE)(x) & 1 ? getsfixnum(x) : (x)->n_int)
-#define getflonum(x)    ((x)->n_flonum)
-#define getchcode(x)    ((x)->n_chcode)
+///-----------------------------------------------------------------------------
+///  Code access macros
+///-----------------------------------------------------------------------------
+#define euxmGetBCode(x)     ((x)->value.vector.data[0])
+#define euxmSetBCode(x,v)   euxmVupdate(x,0,v)
+#define euxmGetCName(x)     ((x)->value.vector.data[1])
+#define euxmSetCName(x,v)   euxmVupdate(x,1,v)
+#define euxmGetVNames(x)    ((x)->value.vector.data[2])
+#define euxmSetVNames(x,v)  euxmVupdate(x,2,v)
+#define euxmFirstLiteral    3
 
-// small fixnum access macros
-#define cvsfixnum(x)    ((euxlValue)(((OFFTYPE)x << 1) | 1))
-#define getsfixnum(x)   ((FIXTYPE)((OFFTYPE)(x) >> 1))
+///-----------------------------------------------------------------------------
+///  FPI/float/character access macros
+///-----------------------------------------------------------------------------
+#define euxmGetFPI(x)                                                          \
+    ((euxmOffType)(x) & 1 ? euxmGetSmallFPI(x) : (x)->value.fpi)
+#define euxmGetDoubleFloat(x)     ((x)->value.euxcDoubleFloat)
+#define euxmGetCharCode(x)  ((x)->value.charCode)
 
-// string access macros
-#define getstring(x)    ((char *)(x)->n_vdata)
-#define getslength(x)   ((x)->n_vsize)
+///-----------------------------------------------------------------------------
+///  Small FPI access macros
+///-----------------------------------------------------------------------------
+#define euxmMakeSmallFPI(x) ((euxlValue)(((euxmOffType)x << 1) | 1))
+#define euxmGetSmallFPI(x)  ((euxmFPIType)((euxmOffType)(x) >> 1))
 
-// istream/ostream access macros
-#define getfile(x)      ((x)->n_fp)
-#define setfile(x,v)    ((x)->n_fp = (v))
-#define getsavech(x)    ((x)->n_savech)
-#define setsavech(x,v)  ((x)->n_savech = (v))
-#define getpflags(x)    ((x)->n_pflags)
-#define setpflags(x,v)  ((x)->n_pflags = (v))
+///-----------------------------------------------------------------------------
+///  String access macros
+///-----------------------------------------------------------------------------
+#define euxmGetString(x)        ((x)->value.vector.sdata)
+#define euxmGetStringlength(x)  ((x)->value.vector.size)
 
-// subr access macros
-#define getsubr(x)      ((x)->n_subr)
-#define getoffset(x)    ((x)->n_offset)
+///-----------------------------------------------------------------------------
+///  Istream/Ostream access macros
+///-----------------------------------------------------------------------------
+#define euxmGetFile(x)          ((x)->value.filePtr.fp)
+#define euxmSetFile(x,v)        ((x)->value.filePtr.fp = (v))
+#define euxmGetSaveChar(x)      ((x)->value.filePtr.savech)
+#define euxmSetSaveChar(x,v)    ((x)->value.filePtr.savech = (v))
+#define euxmGetPFlags(x)        ((x)->value.filePtr.pflags)
+#define euxmSetPFlags(x,v)      ((x)->value.filePtr.pflags = (v))
 
-// module access macros
-#define getmname(x)     ((x)->n_vdata[0])
-#define setmname(x,v)   vupdate(x,0,v)
-#define getmsymbols(x)  ((x)->n_vdata[1])
-#define setmsymbols(x,v) vupdate(x,1,v)
-#define getmexports(x)  ((x)->n_vdata[2])
-#define setmexports(x,v) vupdate(x,2,v)
-#define MODSIZE         3
+///-----------------------------------------------------------------------------
+///  Fun access macros
+///-----------------------------------------------------------------------------
+#define euxmGetFun(x)           ((x)->value.fun.fun)
+#define euxmGetXFun(x)          ((x)->value.fun.xfun)
+#define euxmGetFunOffset(x)     ((x)->value.fun.offset)
+#define euxmGetFunName(v)                                                      \
+    (                                                                          \
+        v->type == euxmXFun                                                    \
+      ? xFunTab[euxmGetFunOffset(v)].name                                      \
+      : funTab[euxmGetFunOffset(v)].name                                       \
+    )
 
-// generic access macros
-#define getgname(x)     ((x)->n_vdata[0])
-#define setgname(x,v)   vupdate(x,0,v)
-#define getgargs(x)     ((x)->n_vdata[1])
-#define setgargs(x,v)   vupdate(x,1,v)
-#define getgopt(x)      ((x)->n_vdata[2])
-#define setgopt(x,v)    vupdate(x,2,v)
-#define getgmethods(x)  ((x)->n_vdata[3])
-#define setgmethods(x,v) vupdate(x,3,v)
-#define getgcache1(x)    ((x)->n_vdata[4])
-#define setgcache1(x,v)  vupdate(x,4,v)
-#define getgcache2(x)    ((x)->n_vdata[5])
-#define setgcache2(x,v)  vupdate(x,5,v)
-#define GENSIZE         6
+///-----------------------------------------------------------------------------
+///  Module access macros
+///-----------------------------------------------------------------------------
+#define euxmGetModuleName(x)        ((x)->value.vector.data[0])
+#define euxmSetModuleName(x,v)      euxmVupdate(x,0,v)
+#define euxmGetModuleSymbols(x)     ((x)->value.vector.data[1])
+#define euxmSetModuleSymbols(x,v)   euxmVupdate(x,1,v)
+#define euxmGetModuleExports(x)     ((x)->value.vector.data[2])
+#define euxmSetModuleExports(x,v)   euxmVupdate(x,2,v)
+#define euxmModuleSize              3
 
-// method access macros
-#define getmdgf(x)      ((x)->n_vdata[0])
-#define setmdgf(x,v)    vupdate(x,0,v)
-#define getmdfun(x)     ((x)->n_vdata[1])
-#define setmdfun(x,v)   vupdate(x,1,v)
-#define getmddomain(x)  ((x)->n_vdata[2])
-#define setmddomain(x,v) vupdate(x,2,v)
-#define getmdopt(x)     ((x)->n_vdata[3])
-#define setmdopt(x,v)   vupdate(x,3,v)
-#define MDSIZE 4
+///-----------------------------------------------------------------------------
+///  Generic access macros
+///-----------------------------------------------------------------------------
+#define euxmGetGenericName(x)         ((x)->value.vector.data[0])
+#define euxmSetGenericName(x,v)       euxmVupdate(x,0,v)
+#define euxmGetGenericArgs(x)         ((x)->value.vector.data[1])
+#define euxmSetGenericArgs(x,v)       euxmVupdate(x,1,v)
+#define euxmGetGenericOpt(x)          ((x)->value.vector.data[2])
+#define euxmSetGenericOpt(x,v)        euxmVupdate(x,2,v)
+#define euxmGetGenericMethods(x)      ((x)->value.vector.data[3])
+#define euxmSetGenericMethods(x,v)    euxmVupdate(x,3,v)
+#define euxmGetGenericCache1(x)       ((x)->value.vector.data[4])
+#define euxmSetGenericCache1(x,v)     euxmVupdate(x,4,v)
+#define euxmGetGenericCache2(x)       ((x)->value.vector.data[5])
+#define euxmSetGenericCache2(x,v)     euxmVupdate(x,5,v)
+#define euxmGenericSize               6
 
-// slot access macros
-#define getslotname(x)      ((x)->n_vdata[0])
-#define setslotname(x,v)    vupdate(x,0,v)
-#define getslotkey(x)       ((x)->n_vdata[1])
-#define setslotkey(x,v)     vupdate(x,1,v)
-#define getslotdefault(x)   ((x)->n_vdata[2])
-#define setslotdefault(x,v) vupdate(x,2,v)
-#define getslotrequiredp(x) ((x)->n_vdata[3])
-#define setslotrequiredp(x,v) vupdate(x,3,v)
-#define SLOTSIZE 4
+///-----------------------------------------------------------------------------
+///  Method access macros
+///-----------------------------------------------------------------------------
+#define euxmGetMethodGenericFun(x)    ((x)->value.vector.data[0])
+#define euxmSetMethodGenericFun(x,v)  euxmVupdate(x,0,v)
+#define euxmGetMethodFun(x)           ((x)->value.vector.data[1])
+#define euxmSetMethodFun(x,v)         euxmVupdate(x,1,v)
+#define euxmGetMethodDomain(x)        ((x)->value.vector.data[2])
+#define euxmSetMethodDomain(x,v)      euxmVupdate(x,2,v)
+#define euxmGetMethodOpt(x)           ((x)->value.vector.data[3])
+#define euxmSetMethodOpt(x,v)         euxmVupdate(x,3,v)
+#define euxmMethodSize 4
 
-// table access macros
-#define gettablecomp(x)     ((x)->n_vdata[0])
-#define settablecomp(x,v)   vupdate(x,0,v)
-#define gettabletable(x)    ((x)->n_vdata[1])
-#define settabletable(x,v)  vupdate(x,1,v)
-#define gettablefill(x)     ((x)->n_vdata[2])
-#define settablefill(x,v)   vupdate(x,2,v)
-#define TABLESIZE 3
+///-----------------------------------------------------------------------------
+///  Slot access macros
+///-----------------------------------------------------------------------------
+#define euxmGetSlotName(x)            ((x)->value.vector.data[0])
+#define euxmSetSlotName(x,v)          euxmVupdate(x,0,v)
+#define euxmGetSlotKey(x)             ((x)->value.vector.data[1])
+#define euxmSetSlotKey(x,v)           euxmVupdate(x,1,v)
+#define euxmGetSlotDefault(x)         ((x)->value.vector.data[2])
+#define euxmSetSlotDefault(x,v)       euxmVupdate(x,2,v)
+#define euxmGetSlotRequiredp(x)       ((x)->value.vector.data[3])
+#define euxmSetSlotRequiredp(x,v)     euxmVupdate(x,3,v)
+#define euxmSlotSIZE 4
 
-// size of a table
-#define HTABLESIZE 31
+///-----------------------------------------------------------------------------
+///  Table access macros
+///-----------------------------------------------------------------------------
+#define euxmGetTableComp(x)           ((x)->value.vector.data[0])
+#define euxmSetTablecomp(x,v)         euxmVupdate(x,0,v)
+#define euxmGetTableTable(x)          ((x)->value.vector.data[1])
+#define euxmSetTableTable(x,v)        euxmVupdate(x,1,v)
+#define euxmGetTableFill(x)           ((x)->value.vector.data[2])
+#define euxmSetTableFill(x,v)         euxmVupdate(x,2,v)
+#define euxmTableSIZE 3
 
-// list node
-#define n_car           n_info.n_xlist.xl_car
-#define n_cdr           n_info.n_xlist.xl_cdr
+// Size of a table
+#define euxmHashTableSize 31
 
-// integer node
-#define n_int           n_info.n_xint.xi_int
+///-----------------------------------------------------------------------------
+/// Node structure
+///-----------------------------------------------------------------------------
+typedef struct euxcNode euxcNode, *euxlValue;
+typedef euxlValue (*euxcFunType)(void);
+typedef void (*euxcXFunType)(void);
 
-// flonum node
-#define n_flonum        n_info.n_xflonum.xf_flonum
-
-// character node
-#define n_chcode        n_info.n_xchar.xc_chcode
-
-// file pointer node
-#define n_fp            n_info.n_xfptr.xf_fp
-#define n_savech        n_info.n_xfptr.xf_savech
-#define n_pflags        n_info.n_xfptr.xf_pflags
-
-// vector/object node
-#define n_vsize         n_info.n_xvect.xv_size
-#define n_vdata         n_info.n_xvect.xv_data
-
-// subr node
-#define n_subr          n_info.n_xsubr.xs_subr
-#define n_offset        n_info.n_xsubr.xs_offset
-
-// node structure
-typedef struct node
+struct euxcNode
 {
-    char n_type;                // type of node
-    char n_flags;               // flag bits
-    union ninfo
-    {                           // value
-        struct xlist
-        {                       // list node (cons)
-            struct node *xl_car;        // the car pointer
-            struct node *xl_cdr;        // the cdr pointer
-        } n_xlist;
-        struct xint
-        {                       // integer node
-            FIXTYPE xi_int;     // integer value
-        } n_xint;
-        struct xflonum
-        {                       // flonum node
-            FLOTYPE xf_flonum;  // flonum value
-        } n_xflonum;
-        struct xchar
-        {                       // character node
-            int xc_chcode;      // character code
-        } n_xchar;
-        struct xfptr
-        {                       // file pointer node
-            FILE *xf_fp;        // the file pointer
-            short xf_savech;    // lookahead character for input files
-            short xf_pflags;    // stream flags
-        } n_xfptr;
-        struct xvect
-        {                       // vector node
-            int xv_size;        // vector size
-            struct node **xv_data;      // vector data
-        } n_xvect;
-        struct xsubr
-        {                       // subr/fsubr node
-            struct node *(*xs_subr) (); // function pointer
-            int xs_offset;      // offset into funtab
-        } n_xsubr;
-    } n_info;
-} NODE, *euxlValue;
+    char type;          // Type of node
+    char flags;         // Flag bits
 
-// memory allocator definitions
+    union euxcNodeValue // Value
+    {
+        // FPI value
+        euxmFPIType fpi;
 
-// macros to compute the size of a segment
-#define nsegsize(n) (sizeof(NSEGMENT)+((n)-1)*sizeof(struct node))
-#define vsegsize(n) (sizeof(VSEGMENT)+((n)-1)*sizeof(euxlValue))
+        // Float value
+        euxmDoubleFloatType euxcDoubleFloat;
 
-// macro to convert a byte size to a word size
-#define btow_size(n)    (((n) + sizeof(euxlValue) - 1) / sizeof(euxlValue))
+        // Character code
+        int charCode;
 
-// node segment structure
-typedef struct nsegment
+        // List (cons cell)
+        struct
+        {
+            euxlValue car;      // The car pointer
+            euxlValue cdr;      // The cdr pointer
+        } cons;
+
+        // File pointer
+        struct
+        {
+            FILE *fp;           // The file pointer
+            short savech;       // Lookahead character for input files
+            short pflags;       // Stream flags
+        } filePtr;
+
+        // Vector
+        struct
+        {
+            euxmFPIType size;   // Vector size
+            union
+            {
+                euxlValue *data;    // Vector data
+                char *sdata;        // c-string data
+            };
+        } vector;
+
+        // Functions
+        struct
+        {
+            union
+            {
+                euxcFunType fun;    // Function pointer
+                euxcXFunType xfun;  // X-function pointer
+            };
+            int offset;         // Offset into funtab
+        } fun;
+    } value;
+};
+
+///-----------------------------------------------------------------------------
+/// Memory allocator definitions
+///-----------------------------------------------------------------------------
+
+// Macros to compute the size of a segment
+#define euxmNSegSize(n) (sizeof(euxcNodeSegment)+((n)-1)*sizeof(euxcNode))
+#define euxmVSegSize(n) (sizeof(euxcVectorSegment)+((n)-1)*sizeof(euxlValue))
+
+// Macro to convert a byte size to a word size
+#define euxmByteToWordSize(n)                                                  \
+    (((n) + sizeof(euxlValue) - 1)/sizeof(euxlValue))
+
+// Node segment structure
+typedef struct euxcNodeSegment euxcNodeSegment;
+struct euxcNodeSegment
 {
-    struct nsegment *ns_next;   // next node segment
-    unsigned int ns_size;       // number of nodes in this segment
-    struct node ns_data[1];     // segment data
-} NSEGMENT;
+    euxcNodeSegment *next;      // next node segment
+    unsigned int size;          // number of nodes in this segment
+    euxcNode data[1];           // segment data
+};
 
-// vector segment structure
-typedef struct vsegment
+// Vector segment structure
+typedef struct euxcVectorSegment euxcVectorSegment;
+struct euxcVectorSegment
 {
-    struct vsegment *vs_next;   // next vector segment
-    euxlValue *vs_free;              // next free location in this segment
-    euxlValue *vs_top;               // top of segment (plus one)
-    euxlValue vs_data[1];            // segment data
-} VSEGMENT;
+    euxcVectorSegment *next;    // next vector segment
+    euxlValue *free;            // next free location in this segment
+    euxlValue *top;             // top of segment (plus one)
+    euxlValue data[1];          // segment data
+};
 
-// function definition structure
+// Eval/apply built-in function definition structure
 typedef struct
 {
-    char *fd_name;              // function name
-        euxlValue(*fd_subr) ();      // function entry point
-} FUNDEF;
+    char *name;                  // function name
+    euxcXFunType fun;            // function pointer
+} euxcXFunDef;
 
-// external variables
-extern euxlValue *xlstkbase;         // base of value stack
-extern euxlValue *xlstktop;          // top of value stack
-extern euxlValue *xlsp;              // value stack pointer
-extern int xlargc;              // argument count for current call
-extern euxlValue current_module;     // current module
-extern euxlValue root_module;        // the root module
-extern euxlValue reintern_module;    // module for reinterning symbols
-extern euxlValue module_list;        // all the modules
-extern euxlValue keyword_array;      // all the keywords
-extern euxlValue obarray;            // prototype symbols
+// Built-in unction definition structure
+typedef struct
+{
+    char *name;                  // function name
+    euxcFunType fun;             // function pointer
+} euxcFunDef;
 
-#define xlenter(name)           xlenter_module(name,current_module)
+// External variables
+extern euxlValue *euxcStackBase;    // base of value stack
+extern euxlValue *euxcStackTop;     // euxmStackTop of value stack
+extern euxlValue *euxcStackPtr;     // value stack pointer
+extern int euxcArgC;                // argument count for current call
+extern euxlValue euxcCurrentModule; // current module
+extern euxlValue euxcRootModule;    // the root module
+extern euxlValue euxcReinternModule;// module for reinterning symbols
+extern euxlValue euxcModuleList;    // all the modules
+extern euxlValue euxcKeywordArray;  // all the keywords
+extern euxlValue euxcObArray;       // prototype symbols
 
-// external function declarations
-#include "euxlproto.h"
+#define euxmEnter(name)                                                        \
+    euxcEnterModule(name, euxcCurrentModule)
+
+///-----------------------------------------------------------------------------
+/// Virtual machine registers
+///-----------------------------------------------------------------------------
+extern euxlValue xlfun;              // current function
+extern euxlValue xlenv;              // current environment
+extern euxlValue xlval;              // value of most recent instruction
+
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
+extern euxmJmpBuf euxmStackTopLevel;
+extern euxcXFunDef xFunTab[];
+extern euxcXFunDef xContFunTab[];
+extern euxcFunDef funTab[];
+
+extern int reading, ctrl_c, quiet, trace;
+
+// Special form table
+typedef struct
+{
+    char *name;
+    void (*fun) ();
+} specialFormDef;
+
+extern specialFormDef specialFormTab[];
+
+extern int printBreadth, printDepth;
+extern FILE *tfp;
+extern euxmFPIType nnodes, nfree, gccalls, total;
+extern int nscount, vscount;
+extern euxmJmpBuf bc_dispatch;
+extern char * const *clargv;
+extern int clargc;
+
+extern euxcNodeSegment *nsegments;     // list of node segments
+extern euxcVectorSegment *vsegments;     // list of vector segments
+extern euxlValue *vfree;             // next free location in vector space
+extern euxlValue *veuxmStackTop;              // euxmStackTop of vector space
+
+///-----------------------------------------------------------------------------
+/// External symbol declarations
+///-----------------------------------------------------------------------------
+#include "euxlSymbols.h"
+
+///-----------------------------------------------------------------------------
+/// External TELOS declarations
+///-----------------------------------------------------------------------------
+#include "euxlTelos.h"
+
+///-----------------------------------------------------------------------------
+/// External function declarations
+///-----------------------------------------------------------------------------
+#include "euxlProto.h"
 
 ///-----------------------------------------------------------------------------
 #endif // EUXLISP_H

@@ -19,14 +19,26 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: extern declarations for machine specific functions
+/// Title: Definitions for classes and objects
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-#ifndef OSDEFS_H
-#define OSDEFS_H
+#ifndef EUXLOBJ_H
+#define EUXLOBJ_H
 
-extern euxlValue xsystem();
+// See euxcOInit in euxlTelos.c
+#define euxmClassNameId             1
+#define euxmSuperClassId            2
+#define euxmClassPrecedenceListId   3
+#define euxmSlotsId                 4
+#define euxmKeywordS                5
+#define euxmSubClassesId            6
+#define euxmInstanceSizeId          7
+#define euxmAbstractpId             8
+
+#define euxmClassSize               8
+
+extern euxlValue euxlc_object, euxlc_class, euxlc_simple_class, euxlc_vector;
 
 ///-----------------------------------------------------------------------------
-#endif // OSDEFS_H
+#endif // EUXLOBJ_H
 ///-----------------------------------------------------------------------------

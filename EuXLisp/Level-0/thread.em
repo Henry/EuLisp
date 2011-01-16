@@ -220,7 +220,7 @@
         ((get-cont new) t)
       (progn
         (set-signals new ())
-        (for-each                    ; deliver waiting signals
+        (%do-list                    ; deliver waiting signals
          (lambda (s)
            (call/cc                  ; (let/cc here (signal ...))
             (lambda (here)
@@ -506,7 +506,7 @@
   (let ((locks (get-locks thread)))
     (if locks
         (let ((len (list-size locks)))
-          (for-each unlockit (get-locks thread))
+          (%do-list unlockit (get-locks thread))
           (%print ";; warning: thread finished holding ")
           (%print len)
           (%print " lock")
