@@ -467,7 +467,7 @@ static int tableHashEquals(euxlValue key)
             break;
 
         case euxmString:
-            // from euxmEnter
+            // from euxmInternAndExport
             val = euxcHash(euxmGetString(key), euxmHashTableSize);
             break;
 
@@ -510,7 +510,7 @@ static int tableHashEqual(euxlValue key)
             break;
 
         case euxmString:
-            // from euxmEnter
+            // from euxmInternAndExport
             val = euxcHash(euxmGetString(key), euxmHashTableSize);
             break;
 

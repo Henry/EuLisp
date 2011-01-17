@@ -290,7 +290,7 @@ euxlValue euxlDescribe()
     euxmLastArg();
     euxcDescribe(obj);
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxlAllocate
@@ -437,13 +437,13 @@ static void checkRequiredKeywords(euxlValue inits, euxlValue slots)
 ///  euxlInitLoopCont - Continuation for initializationLoop
 void euxlInitLoopCont()
 {
-    euxlValue val = xlval;
+    euxlValue val = euxcCurVal;
     euxlValue inits = euxmStackPop();
     euxlValue slots = euxmStackPop();
     euxlValue ind = euxmStackPop();
     int index = (int)euxmGetFPI(ind);
-    xlval = euxmStackPop();
-    euxmSetIVar(xlval, index, val);
+    euxcCurVal = euxmStackPop();
+    euxmSetIVar(euxcCurVal, index, val);
     initializationLoop(index + 1, euxmCdr(slots), inits);
 }
 
@@ -467,27 +467,27 @@ static void initializationLoop(int index, euxlValue slots, euxlValue inits)
         {
             // no keyword, a defaultfn
             euxmStackCheck(6);
-            euxmStackPush(xlval);        // the object
+            euxmStackPush(euxcCurVal);        // the object
             euxmStackPush(euxcMakeFPI((euxmFPIType) index));
             euxmStackPush(slots);
             euxmStackPush(inits);
             euxmStackPush(euxls_init_loop_cont);
-            euxmStackPush(xlenv);
-            xlval = defaultfn;
+            euxmStackPush(euxcCurEnv);
+            euxcCurVal = defaultfn;
             euxcArgC = 0;
             euxcApply();
         }
         else
         {
             // no keyword, no default function
-            euxmSetIVar(xlval, index, euxls_unbound);
+            euxmSetIVar(euxcCurVal, index, euxls_unbound);
             initializationLoop(index + 1, euxmCdr(slots), inits);
         }
     }
     else
     {
         // a keyword
-        euxmSetIVar(xlval, index, euxmCar(euxmCdr(init)));
+        euxmSetIVar(euxcCurVal, index, euxmCar(euxmCdr(init)));
         initializationLoop(index + 1, euxmCdr(slots), inits);
     }
 }
@@ -497,11 +497,11 @@ void euxlInitializeObject()
 {
     static char *functionName = "initialize <object>";
 
-    xlval = euxmGetArg();
+    euxcCurVal = euxmGetArg();
     euxlValue inits = euxmGetArgList();
     euxmLastArg();
 
-    if (!euxmObjectp(xlval))
+    if (!euxmObjectp(euxcCurVal))
     {
         euxcReturn();
     }
@@ -517,7 +517,7 @@ void euxlInitializeObject()
             );
         }
 
-        euxlValue cls = euxcClassOf(xlval);
+        euxlValue cls = euxcClassOf(euxcCurVal);
 
         checkLegalKeywords(inits, euxmGetIVar(cls, euxmKeywordS));
         checkRequiredKeywords(inits, euxmGetIVar(cls, euxmSlotsId));
@@ -972,7 +972,7 @@ euxlValue euxlClassp()
     euxlValue obj = euxmGetArg();
     euxmLastArg();
 
-    return euxmClassp(obj) ? euxl_true : euxmNil;
+    return euxmClassp(obj) ? euxs_t : euxmNil;
 }
 
 ///  euxcSubClassp - cl1 and cl2 are classes
@@ -1009,7 +1009,7 @@ euxlValue euxlSubClassp()
         euxcBadType(cl2, expect_class, functionName);
     }
 
-    return euxcSubClassp(cl1, cl2) ? euxl_true : euxmNil;
+    return euxcSubClassp(cl1, cl2) ? euxs_t : euxmNil;
 }
 
 ///  euxlSetIVar
@@ -1282,14 +1282,25 @@ euxlValue euxlFindSlotIndex()
 }
 
 ///  initClass
-static euxlValue initClass(int type, const char *name, euxlValue super, euxlValue absp)
+static euxlValue initClass
+(
+    int type,
+    const char *name,
+    euxlValue super,
+    euxlValue absp
+)
 {
     euxlValue cl = euxcNewObject(euxlc_simple_class, euxmClassSize);
-    euxlValue sym = euxmEnter(name);
+    euxlValue sym = euxmInternAndExport(name);
     euxmSetValue(sym, cl);
     euxmSetIVar(cl, euxmClassNameId, sym);
     euxmSetIVar(cl, euxmSuperClassId, euxcCons(super, euxmNil));
-    euxmSetIVar(cl, euxmClassPrecedenceListId, euxcCons(cl, euxmGetIVar(super, euxmClassPrecedenceListId)));
+    euxmSetIVar
+    (
+        cl,
+        euxmClassPrecedenceListId,
+        euxcCons(cl, euxmGetIVar(super, euxmClassPrecedenceListId))
+    );
     euxmSetIVar(cl, euxmSlotsId, euxmNil);
     euxmSetIVar(cl, euxmKeywordS, euxmNil);
     euxmSetIVar(cl, euxmSubClassesId, euxmNil);
@@ -1318,25 +1329,25 @@ static void initBuiltinClasses()
     euxlc_vector = euxcNewVector(euxmNTypes + euxmExtraTypes);
 
     euxlValue collection_cl =
-        initClass(-1, "<collection>", euxlc_object, euxl_true);
+        initClass(-1, "<collection>", euxlc_object, euxs_t);
     euxlValue sequence_cl =
-        initClass(-1, "<sequence>", collection_cl, euxl_true);
+        initClass(-1, "<sequence>", collection_cl, euxs_t);
     euxlValue character_sequence_cl =
-        initClass(-1, "<character-sequence>", sequence_cl, euxl_true);
+        initClass(-1, "<character-sequence>", sequence_cl, euxs_t);
     initClass(euxmString, "<string>", character_sequence_cl, euxmNil);
     initClass(euxmVector, "<vector>", sequence_cl, euxmNil);
     euxlValue list_cl =
-        initClass(-1, "<list>", sequence_cl, euxl_true);
+        initClass(-1, "<list>", sequence_cl, euxs_t);
     initClass(euxmCons, "<cons>", list_cl, euxmNil);
     initClass(euxmNTypes, "<null>", list_cl, euxmNil);
 
     euxlValue number_cl =
-        initClass(-1, "<number>", euxlc_object, euxl_true);
+        initClass(-1, "<number>", euxlc_object, euxs_t);
     euxlValue integer_cl =
-        initClass(-1, "<integer>", number_cl, euxl_true);
+        initClass(-1, "<integer>", number_cl, euxs_t);
     initClass(euxmFPI, "<fpi>", integer_cl, euxmNil);
     euxlValue float_cl =
-        initClass(-1, "<float>", number_cl, euxl_true);
+        initClass(-1, "<float>", number_cl, euxs_t);
     initClass(euxmDoubleFloat, "<double-float>", float_cl, euxmNil);
 
     euxlValue symbol_cl =
@@ -1344,13 +1355,13 @@ static void initBuiltinClasses()
     initClass(euxmKeyword, "<keyword>", symbol_cl, euxmNil);
 
     euxlValue stream_cl =
-        initClass(euxmStream, "<stream>", euxlc_object, euxl_true);
+        initClass(euxmStream, "<stream>", euxlc_object, euxs_t);
     initClass(euxmIStream, "<input-stream>", stream_cl, euxmNil);
     initClass(euxmOStream, "<output-stream>", stream_cl, euxmNil);
     initClass(IeuxmOStream, "<i/o-stream>", stream_cl, euxmNil);
 
     euxlValue char_cl =
-        initClass(-1, "<char>", euxlc_object, euxl_true);
+        initClass(-1, "<char>", euxlc_object, euxs_t);
     initClass(euxmChar, "<simple-char>", char_cl, euxmNil);
 
     initClass(euxmPromise, "<promise>", euxlc_object, euxmNil);
@@ -1358,11 +1369,11 @@ static void initBuiltinClasses()
     initClass(euxmCode, "<code>", euxlc_object, euxmNil);
     initClass(euxmModule, "<module>", euxlc_object, euxmNil);
     euxlValue table_cl =
-        initClass(-1, "<table>", euxlc_object, euxl_true);
+        initClass(-1, "<table>", euxlc_object, euxs_t);
     initClass(euxmTable, "<hash-table>", table_cl, euxmNil);
 
     euxlValue function_cl =
-        initClass(-1, "<function>", euxlc_object, euxl_true);
+        initClass(-1, "<function>", euxlc_object, euxs_t);
     euxlValue simplefun_cl =
         initClass(-1, "<simple-function>", function_cl, euxmNil);
     initClass(euxmClosure, "<closure>", simplefun_cl, euxmNil);
@@ -1371,29 +1382,29 @@ static void initBuiltinClasses()
     initClass(euxmXFunCont, "<xfuncont>", euxlc_object, euxmNil);
     initClass(euxmContinuation, "<continuation>", function_cl, euxmNil);
 
-    euxlValue generic_cl = initClass(-1, "<generic>", function_cl, euxl_true);
+    euxlValue generic_cl = initClass(-1, "<generic>", function_cl, euxs_t);
     initClass(euxmGeneric, "<simple-generic>", generic_cl, euxmNil);
 
-    euxlValue method_cl = initClass(-1, "<method>", euxlc_object, euxl_true);
+    euxlValue method_cl = initClass(-1, "<method>", euxlc_object, euxs_t);
     initClass(euxmMethod, "<simple-method>", method_cl, euxmNil);
 
-    euxlValue slot_cl = initClass(-1, "<slot>", euxlc_object, euxl_true);
+    euxlValue slot_cl = initClass(-1, "<slot>", euxlc_object, euxs_t);
     initClass(euxmSlot, "<local-slot>", slot_cl, euxmNil);
 }
 
-///  euxcOInit
-void euxcOInit()
+///  euxcInitTelos
+void euxcInitTelos()
 {
-    euxlValue scls = euxmEnter("<simple-class>");
+    euxlValue scls = euxmInternAndExport("<simple-class>");
     euxlc_simple_class = euxcNewObject(euxmNil, euxmClassSize);
     euxmSetClass(euxlc_simple_class, euxlc_simple_class);
     euxmSetValue(scls, euxlc_simple_class);
 
-    euxlValue cls = euxmEnter("<class>");
+    euxlValue cls = euxmInternAndExport("<class>");
     euxlc_class = euxcNewObject(euxlc_simple_class, euxmClassSize);
     euxmSetValue(cls, euxlc_class);
 
-    euxlValue obj = euxmEnter("<object>");
+    euxlValue obj = euxmInternAndExport("<object>");
     euxlc_object = euxcNewObject(euxlc_simple_class, euxmClassSize);
     euxmSetValue(obj, euxlc_object);
 
@@ -1440,7 +1451,7 @@ void euxcOInit()
     (
         euxlc_object,
         euxmAbstractpId,
-        euxl_true
+        euxs_t
     );
 
     euxmSetIVar
@@ -1480,7 +1491,7 @@ void euxcOInit()
     (
         euxlc_class,
         euxmAbstractpId,
-        euxl_true
+        euxs_t
     );
 
     euxmSetIVar
@@ -1523,16 +1534,24 @@ void euxcOInit()
         euxmNil
     );
 
-    euxlValue sds = euxcCons(euxcNewSlot(euxmEnter("abstract?")), euxmNil);
+    euxlValue sds = euxcCons
+    (
+        euxcNewSlot(euxmInternAndExport("abstract?")),
+        euxmNil
+    );
     euxmSetSlotKey(euxmCar(sds), euxcEnterKeyword("abstract?:"));
-    sds = euxcCons(euxcNewSlot(euxmEnter("instance-size")), sds);
-    sds = euxcCons(euxcNewSlot(euxmEnter("subclasses")), sds);
-    sds = euxcCons(euxcNewSlot(euxmEnter("keywords")), sds);
-    sds = euxcCons(euxcNewSlot(euxmEnter("slots")), sds);
-    sds = euxcCons(euxcNewSlot(euxmEnter("class-precedence-list")), sds);
-    sds = euxcCons(euxcNewSlot(euxmEnter("superclasses")), sds);
+    sds = euxcCons(euxcNewSlot(euxmInternAndExport("instance-size")), sds);
+    sds = euxcCons(euxcNewSlot(euxmInternAndExport("subclasses")), sds);
+    sds = euxcCons(euxcNewSlot(euxmInternAndExport("keywords")), sds);
+    sds = euxcCons(euxcNewSlot(euxmInternAndExport("slots")), sds);
+    sds = euxcCons
+    (
+        euxcNewSlot(euxmInternAndExport("class-precedence-list")),
+        sds
+    );
+    sds = euxcCons(euxcNewSlot(euxmInternAndExport("superclasses")), sds);
     euxmSetSlotKey(euxmCar(sds), euxcEnterKeyword("superclasses:"));
-    sds = euxcCons(euxcNewSlot(euxmEnter("name")), sds);
+    sds = euxcCons(euxcNewSlot(euxmInternAndExport("name")), sds);
     euxmSetSlotKey(euxmCar(sds), euxcEnterKeyword("name:"));
     euxmSetIVar(euxlc_class, euxmSlotsId, sds);
     euxmSetIVar(euxlc_simple_class, euxmSlotsId, sds);
@@ -1993,7 +2012,7 @@ euxlValue euxlCheckRef()
 
     if (euxcSubClassp(euxcClassOf(object), class))
     {
-        return euxl_true;
+        return euxs_t;
     }
 
     euxcTelosBadRefError(object, euxlc_class, euxmFalse);

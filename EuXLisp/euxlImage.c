@@ -75,8 +75,8 @@ int euxlSaveImage(const char *fname)
     writePtr((euxmOffType) (euxcStackTop - euxcStackBase));
 
     // write out various constants
-    writePtr(euxcMakePtr(euxl_eof_object));
-    writePtr(euxcMakePtr(euxl_default_object));
+    writePtr(euxcMakePtr(euxs_eof));
+    writePtr(euxcMakePtr(euxs_default));
     writePtr(euxcMakePtr(euxcRootModule));
     writePtr(euxcMakePtr(euxcReinternModule));
     writePtr(euxcMakePtr(euxcCurrentModule));
@@ -283,11 +283,11 @@ int euxlRestoreImage(const char *fname)
     unsigned int ssize = (unsigned int)readPtr();
 
     // allocate memory for the workspace
-    euxcMinit(ssize);
+    euxcAllocInit(ssize);
 
     // read various constants
-    euxl_eof_object = convertOffsetToPtr(readPtr());
-    euxl_default_object = convertOffsetToPtr(readPtr());
+    euxs_eof = convertOffsetToPtr(readPtr());
+    euxs_default = convertOffsetToPtr(readPtr());
     euxcRootModule = convertOffsetToPtr(readPtr());
     euxcReinternModule = convertOffsetToPtr(readPtr());
     euxcCurrentModule = convertOffsetToPtr(readPtr());
@@ -386,6 +386,7 @@ done:
 
     // collect to initialize the free space
     gc(euxmGcSave);
+
     // plenty of room
     euxcVexpand(euxmVsSize);
 
@@ -393,7 +394,7 @@ done:
     {
         euxlValue curmod = euxcCurrentModule;
         euxcCurrentModule = euxcRootModule;
-        euxcSymbols();
+        euxcInitSymbols();
         euxcCurrentModule = curmod;
     }
 
@@ -586,7 +587,7 @@ static euxlValue *getVectorSpace(euxlValue node, unsigned int size)
     ++size;     // space for the back pointer
     if
     (
-        !euxmVcompare(vfree, size, veuxmStackTop)
+        !euxmVcompare(vfree, size, euxmVecStackTop)
      && !euxcCheckVmemory(size)
      && !euxcMakeVmemory(size)
     )

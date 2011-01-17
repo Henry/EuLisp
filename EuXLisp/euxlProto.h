@@ -25,7 +25,9 @@
 #ifndef EUXLPROTO_H
 #define EUXLPROTO_H
 
-// euxlos.c
+///-----------------------------------------------------------------------------
+/// euxlOS.c
+///-----------------------------------------------------------------------------
 extern void euxcOSInit(const char *banner);
 extern void euxcOSFinish();
 extern void euxcOSError(const char *msg);
@@ -55,13 +57,11 @@ extern euxlValue euxlTmpFile();
 extern euxlValue euxlGetenv();
 extern euxlValue euxlPutenv();
 
-// euxlisp.c
-extern void euxcMain(int argc, char * const *argv);
-extern void euxcLoad();
-extern void euxcContinue();
-extern void euxcCleanup();
-extern void euxcToplevel();
-extern void euxcToplevelInt();
+///-----------------------------------------------------------------------------
+/// euxlisp.c
+///-----------------------------------------------------------------------------
+extern void euxcTopLevel();
+extern void euxcTopLevelInt();
 extern void euxcFail(const char *msg, euxlValue err);
 extern void euxcError(const char *msg, euxlValue arg);
 extern void euxcSetFrame(int n);
@@ -79,7 +79,9 @@ extern euxlValue euxlFrameDown();
 extern euxlValue euxlFrameEnv();
 extern euxlValue euxlFrameFun();
 
+///-----------------------------------------------------------------------------
 // euxlBCodeCompiler.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxcCompile(euxlValue expr, euxlValue ctenv);
 extern euxlValue euxcCompileFunction(euxlValue fun, euxlValue fargs, euxlValue body, euxlValue ctenv);
 extern int euxcListSize(euxlValue list);
@@ -93,7 +95,9 @@ extern euxlValue euxlSyntaxError();
 extern void euxcDecodeProcedure(euxlValue fptr, euxlValue fun);
 extern int euxcDecodeInstruction(euxlValue fptr, euxlValue code, int lc, euxlValue env);
 
-// euxldmem.c
+///-----------------------------------------------------------------------------
+/// euxlAlloc.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxcCons(euxlValue x, euxlValue y);
 extern euxlValue euxcNewFrame(euxlValue parent, int size);
 extern euxlValue euxcMakeString(const char *str);
@@ -125,9 +129,11 @@ extern euxcNodeSegment *euxcNewnsegment(unsigned int n);
 extern euxcVectorSegment *euxcNewvsegment(unsigned int n);
 extern void euxcPstack();
 extern void gc(int reason);
-extern void euxcMinit(unsigned int ssize);
+extern void euxcAllocInit(unsigned int ssize);
 
-// euxlftab.c
+///-----------------------------------------------------------------------------
+/// euxlFunTab.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxlStdin();
 extern euxlValue euxlStdout();
 extern int euxcEq(euxlValue arg1, euxlValue arg2);
@@ -141,7 +147,9 @@ extern void euxcTooMany(const char *functionName);
 extern void euxcTooManyInt();
 extern euxlValue euxcBadType(euxlValue val, const char *name, const char *fn);
 
-// euxlfun1.c
+///-----------------------------------------------------------------------------
+/// euxlFun1.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxlCons();
 extern euxlValue euxlCar();
 extern euxlValue euxlICar();
@@ -243,7 +251,9 @@ extern euxlValue euxlEqual();
 extern euxlValue euxlGensym();
 extern euxlValue euxlSprintf();
 
-// euxlfun2.c
+///-----------------------------------------------------------------------------
+/// euxlFun2.c
+///-----------------------------------------------------------------------------
 extern void euxlApply();
 extern void euxlValues();
 extern void euxlCallCC();
@@ -329,6 +339,7 @@ extern euxlValue euxlCharCaInEql();
 extern euxlValue euxlCharCaInGtEq();
 extern euxlValue euxlCharCaInGt();
 extern euxlValue euxlCompile();
+extern void euxlEvalCm();
 extern euxlValue euxlDecompile();
 extern euxlValue euxlSave();
 extern euxlValue euxlRestore();
@@ -339,17 +350,23 @@ extern euxlValue euxlReset();
 extern euxlValue euxlGetArg();
 extern euxlValue euxlExit();
 
-// euxlimage.c
+///-----------------------------------------------------------------------------
+/// euxlImage.c
+///-----------------------------------------------------------------------------
 extern int euxlSaveImage(const char *fname);
 extern FILE *euxcPathOpen(const char *fname, const char *env_var_name, const char **builtin_path, char *found);
 extern int euxlRestoreImage(const char *fname);
 extern euxmOffType euxcMakePtr(euxlValue p);
 
-// euxlinit.c
+///-----------------------------------------------------------------------------
+/// euxlInit.c
+///-----------------------------------------------------------------------------
 extern void euxcInitWorkspace(unsigned int ssize);
-extern void euxcSymbols();
+extern void euxcInitSymbols();
 
-// euxlint.c
+///-----------------------------------------------------------------------------
+/// euxlVM.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxlTraceOn();
 extern euxlValue euxlTraceOff();
 extern void euxcExecute(euxlValue fun);
@@ -359,7 +376,9 @@ extern euxlValue euxcCurrentContinuation(int cc);
 extern void euxcGcProtect(void (*protected_fcn)(void));
 extern void euxcStackOverflow();
 
-// euxlio.c
+///-----------------------------------------------------------------------------
+/// euxlIO.c
+///-----------------------------------------------------------------------------
 extern int euxcGetc(euxlValue fptr);
 extern void euxcUngetc(euxlValue fptr, int ch);
 extern int euxcPeekChar(euxlValue fptr);
@@ -370,7 +389,9 @@ extern void euxcErrorPrint(euxlValue expr);
 extern void euxcErrorPrin(euxlValue expr);
 extern void euxcErrorPutString(const char *str);
 
-// euxlmath.c
+///-----------------------------------------------------------------------------
+/// euxlMath.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxlExactp();
 extern euxlValue euxlInexactp();
 extern euxlValue euxlAtan();
@@ -415,7 +436,9 @@ extern euxlValue euxlEql();
 extern euxlValue euxlGtEq();
 extern euxlValue euxlGt();
 
-// euxlmodule.c
+///-----------------------------------------------------------------------------
+/// euxlModule.c
+///-----------------------------------------------------------------------------
 extern void euxcInitRootModule();
 extern void euxcInitRootExports();
 extern euxlValue euxcModuleSymbols();
@@ -430,7 +453,9 @@ extern euxlValue euxcFindModule(euxlValue sym);
 extern euxlValue euxlFindModule();
 extern euxlValue euxcGetModule(const char *name);
 
-// euxlTelos.c
+///-----------------------------------------------------------------------------
+/// euxlTelos.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxcClassOf(euxlValue obj);
 extern euxlValue euxlClassOf();
 extern void euxcDescribe(euxlValue obj);
@@ -473,7 +498,7 @@ extern euxlValue euxlSetSlotDefault();
 extern euxlValue euxlSlotRequiredp();
 extern euxlValue euxlSetSlotRequiredp();
 extern euxlValue euxlFindSlotIndex();
-extern void euxcOInit();
+extern void euxcInitTelos();
 extern euxlValue euxcFindAndCacheMethods(euxlValue gf, euxlValue arglist);
 extern euxlValue euxlMakeAndAddMethod();
 extern euxlValue euxlMakeMethod();
@@ -482,16 +507,22 @@ extern euxlValue euxlMakeGeneric();
 extern void euxcTelosBadRefError(euxlValue object, euxlValue wanted, int interp);
 extern euxlValue euxlCheckRef();
 
-// euxlprint.c
+///-----------------------------------------------------------------------------
+/// euxlPrint.c
+///-----------------------------------------------------------------------------
 extern void euxcPrin1(euxlValue expr, euxlValue file);
 extern void euxcPrint(euxlValue expr, euxlValue file);
 extern void euxcTerpri(euxlValue fptr);
 extern void euxcPutString(euxlValue fptr, const char *str);
 
-// euxlread.c
+///-----------------------------------------------------------------------------
+/// euxlRead.c
+///-----------------------------------------------------------------------------
 extern int euxcRead(euxlValue fptr, euxlValue *pval);
 
-// euxlsym.c
+///-----------------------------------------------------------------------------
+/// euxlSymbol.c
+///-----------------------------------------------------------------------------
 extern void euxcXFun(const char *sname, int type, euxcXFunType fcn, int offset);
 extern void euxcFun(const char *sname, int type, euxcFunType fcn, int offset);
 extern euxlValue euxcEnterKeyword(const char *name);
@@ -502,7 +533,9 @@ extern euxlValue euxcGetSyntax(euxlValue sym, euxlValue prp);
 extern void euxcPutSyntax(euxlValue sym, euxlValue val, euxlValue prp);
 extern int euxcHash(const char *str, int len);
 
-// euxltable.c
+///-----------------------------------------------------------------------------
+/// euxlTable.c
+///-----------------------------------------------------------------------------
 extern euxlValue euxlMakeTable();
 extern euxlValue euxlTableRef();
 extern euxlValue euxlTableSet();
@@ -515,7 +548,9 @@ extern euxlValue euxlTableFill();
 extern euxlValue euxlTableSetFill();
 extern euxlValue euxlTableClear();
 
-// euxlsocket.c
+///-----------------------------------------------------------------------------
+/// euxlSocket.c
+///-----------------------------------------------------------------------------
 #ifdef SOCK
 extern void euxlSocketError(const char *msg, euxlValue val);
 extern euxlValue euxcSocketSocket();

@@ -56,7 +56,7 @@ void euxcInitRootExports()
     // Ensure all specials are entered
     for (specialFormDef *fptr = specialFormTab; fptr->name; fptr++)
     {
-        euxmEnter(fptr->name);
+        euxmInternAndExport(fptr->name);
     }
 
     euxlValue array = euxmGetModuleSymbols(euxcRootModule);
@@ -190,7 +190,7 @@ euxlValue euxcUnintern()
         }
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxlKeywordArray - (keyword-array)

@@ -143,7 +143,7 @@ static euxlValue readList(euxlValue fptr)
                     {
                         euxcFail("unexpected EOF", euxls_syntax_error);
                     }
-                    if (val == euxmEnter("."))
+                    if (val == euxmInternAndExport("."))
                     {
                         if (last == euxmNil)
                         {
@@ -324,7 +324,7 @@ static euxlValue readQuote(euxlValue fptr, const char *sym)
         euxcFail("unexpected EOF", euxls_syntax_error);
     }
     euxmStackCheckPush(euxcCons(val, euxmNil));
-    euxmSetStackTop(euxcCons(euxmEnter(sym), euxmStackTop()));
+    euxmSetStackTop(euxcCons(euxmInternAndExport(sym), euxmStackTop()));
     return (euxmStackPop());
 }
 
@@ -606,7 +606,7 @@ static euxlValue readSpecial(euxlValue fptr)
                 }
                 if (strcmp(buf, "t") == 0)
                 {
-                    return (euxl_true);
+                    return (euxs_t);
                 }
                 else if (strcmp(buf, "f") == 0)
                 {
@@ -839,7 +839,7 @@ static euxlValue readSymbol(euxlValue fptr, int ch)
         return euxcEnterKeyword(buf);
     }
 
-    return euxmEnter(buf);
+    return euxmInternAndExport(buf);
 
 }
 
@@ -1025,7 +1025,7 @@ static euxlValue readPeculiar(euxlValue fptr, int ch)
     int ch1 = euxcGetc(fptr);
     if (ch1 == EOF)     // . or + or -
     {
-        return euxmEnter(buf);
+        return euxmInternAndExport(buf);
     }
 
     buf[1] = ch1;
@@ -1038,7 +1038,7 @@ static euxlValue readPeculiar(euxlValue fptr, int ch)
         {
             euxcUngetc(fptr, ch1);
             buf[1] = 0;
-            return euxmEnter(buf);
+            return euxmInternAndExport(buf);
         }
 
         int ch2 = euxcGetc(fptr);
@@ -1097,7 +1097,7 @@ static euxlValue readPeculiar(euxlValue fptr, int ch)
     {
         euxcUngetc(fptr, ch1);
         buf[1] = 0;
-        return euxmEnter(buf);
+        return euxmInternAndExport(buf);
     }
 
     if (isdigit(ch1))   // .1 or +1 or -1
@@ -1121,20 +1121,20 @@ static euxlValue readPeculiar(euxlValue fptr, int ch)
             return euxcEnterKeyword(buf);
         }
 
-        return euxmEnter(buf);
+        return euxmInternAndExport(buf);
     }
 
     int ch2 = euxcGetc(fptr);
 
     if (ch2 == EOF)     // +x or -x
     {
-        return euxmEnter(buf);
+        return euxmInternAndExport(buf);
     }
 
     if (!isconstituent(ch2))   // +x or -x
     {
         euxcUngetc(fptr, ch2);
-        return euxmEnter(buf);
+        return euxmInternAndExport(buf);
     }
 
     if (ch1 == '.' && isdigit(ch2))     // +.1 or -.1
@@ -1150,7 +1150,7 @@ static euxlValue readPeculiar(euxlValue fptr, int ch)
         return euxcEnterKeyword(buf);
     }
 
-    return euxmEnter(buf);
+    return euxmInternAndExport(buf);
 }
 
 

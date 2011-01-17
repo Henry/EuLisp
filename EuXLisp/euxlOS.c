@@ -71,13 +71,6 @@ static void osFlushNl();
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
-///  main - the main function
-int main(int argc, char * const argv[])
-{
-    euxcMain(argc, argv);
-    return 0;
-}
-
 ///  euxcOSInit - initialize
 void euxcOSInit(const char *banner)
 {
@@ -271,7 +264,7 @@ void rlgets()
     if (thread_module)
     {
         // Tell the debugger that readline is handling the prompt
-        euxmSetValue(euxcEnterModule("*debug-rl*", thread_module), euxl_true);
+        euxmSetValue(euxcEnterModule("*debug-rl*", thread_module), euxs_t);
 
         // Get the debug-depth; 0 = no error
         debug_depth = euxmGetFPI
@@ -353,7 +346,7 @@ int euxcOSTGetc()
         ctrl_c = 0;
         euxcOSFlush();
         euxcOSTPutc('\n');
-        euxcToplevel();
+        euxcTopLevel();
     }
 
     // If the line buffer is not allocated or the stdin is at eof
@@ -515,18 +508,18 @@ void euxcOSCheck()
     {
         ctrl_c = 0;
         osFlushNl();
-        euxcToplevel();
+        euxcTopLevel();
     }
 }
 
-///  euxcOSCheckInt - Check for control characters during interpreting
+///  euxcOSCheckInt - Check for control characters during interruption
 void euxcOSCheckInt()
 {
     if (ctrl_c)
     {
         ctrl_c = 0;
         osFlushNl();
-        euxcToplevelInt();
+        euxcTopLevelInt();
     }
 }
 
@@ -541,7 +534,7 @@ void euxcSetTicksPerSecond()
 {
     euxmSetValue
     (
-        euxmEnter("ticks-per-second"), euxcMakeFPI(sysconf(_SC_CLK_TCK))
+        euxmInternAndExport("ticks-per-second"), euxcMakeFPI(sysconf(_SC_CLK_TCK))
     );
 }
 
@@ -581,7 +574,7 @@ euxlValue euxlSystem()
     cmd = euxmGetString(euxmGetArgString());
     euxmLastArg();
 
-    return (system(cmd) == 0 ? euxl_true : euxcMakeFPI((euxmFPIType) errno));
+    return (system(cmd) == 0 ? euxs_t : euxcMakeFPI((euxmFPIType) errno));
 }
 
 ///  tmpfile - open a temporary file

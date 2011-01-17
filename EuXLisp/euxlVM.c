@@ -85,15 +85,15 @@ euxlValue euxlTraceOff()
 void euxcExecute(euxlValue fun)
 {
     // initialize the registers
-    xlfun = euxmGetCode(fun);
-    xlenv = euxmGetCEnv(fun);
-    xlval = euxmNil;
+    euxcCurFun = euxmGetCode(fun);
+    euxcCurEnv = euxmGetCEnv(fun);
+    euxcCurVal = euxmNil;
 
     // initialize the argument count
     euxcArgC = 0;
 
     // set the initial pc
-    base = pc = euxmGetCodestr(xlfun);
+    base = pc = euxmGetCodestr(euxcCurFun);
 
     // setup a target for the error handler
     euxmSetJmp(bc_dispatch);
@@ -115,7 +115,13 @@ void euxcExecute(euxlValue fun)
         // print the trace information
         if (trace)
         {
-            euxcDecodeInstruction(euxlStdout(), xlfun, (int)(pc - base), xlenv);
+            euxcDecodeInstruction
+            (
+                euxlStdout(),
+                euxcCurFun,
+                (int)(pc - base),
+                euxcCurEnv
+            );
         }
 
         // execute the next bytecode instruction
@@ -124,7 +130,7 @@ void euxcExecute(euxlValue fun)
             case OP_BRT:
                 i = *pc++ << 8;
                 i |= *pc++;
-                if (xlval)
+                if (euxcCurVal)
                 {
                     pc = base + i;
                 }
@@ -132,7 +138,7 @@ void euxcExecute(euxlValue fun)
             case OP_BRF:
                 i = *pc++ << 8;
                 i |= *pc++;
-                if (!xlval)
+                if (!euxcCurVal)
                 {
                     pc = base + i;
                 }
@@ -143,12 +149,12 @@ void euxcExecute(euxlValue fun)
                 pc = base + i;
                 break;
             case OP_LIT:
-                xlval = euxmGetElement(xlfun, *pc++);
+                euxcCurVal = euxmGetElement(euxcCurFun, *pc++);
                 break;
             case OP_GREF:
-                tmp = euxmGetElement(xlfun, *pc++);
-                xlval = euxmGetValue(tmp);
-                if (xlval == euxls_unbound)
+                tmp = euxmGetElement(euxcCurFun, *pc++);
+                euxcCurVal = euxmGetValue(tmp);
+                if (euxcCurVal == euxls_unbound)
                 {
                     char buf[128];
                     sprintf(buf, "variable unbound in module '%s'",
@@ -157,30 +163,30 @@ void euxcExecute(euxlValue fun)
                 }
                 break;
             case OP_GSET:
-                euxmSetValue(euxmGetElement(xlfun, *pc++), xlval);
+                euxmSetValue(euxmGetElement(euxcCurFun, *pc++), euxcCurVal);
                 break;
             case OP_EREF:
                 k = *pc++;
-                tmp = xlenv;
+                tmp = euxcCurEnv;
                 while (--k >= 0)
                 {
                     tmp = euxmCdr(tmp);
                 }
-                xlval = euxmGetElement(euxmCar(tmp), *pc++);
+                euxcCurVal = euxmGetElement(euxmCar(tmp), *pc++);
                 break;
             case OP_ESET:
                 k = *pc++;
-                tmp = xlenv;
+                tmp = euxcCurEnv;
                 while (--k >= 0)
                 {
                     tmp = euxmCdr(tmp);
                 }
-                euxmSetElement(euxmCar(tmp), *pc++, xlval);
+                euxmSetElement(euxmCar(tmp), *pc++, euxcCurVal);
                 break;
             case OP_AREF:
                 {
                     i = *pc++;
-                    tmp = xlval;
+                    tmp = euxcCurVal;
                     if (!euxmEnvp(tmp))
                     {
                         badArgType(tmp, "<env>", "aref");
@@ -188,15 +194,22 @@ void euxcExecute(euxlValue fun)
                     int off = 0;
                     if
                     (
-                        (tmp = findVar(tmp, euxmGetElement(xlfun, i), &off))
+                        (
+                            tmp = findVar
+                            (
+                                tmp,
+                                euxmGetElement(euxcCurFun, i),
+                                &off
+                            )
+                        )
                      != euxmNil
                     )
                     {
-                        xlval = euxmGetElement(euxmCar(tmp), off);
+                        euxcCurVal = euxmGetElement(euxmCar(tmp), off);
                     }
                     else
                     {
-                        xlval = euxls_unassigned;
+                        euxcCurVal = euxls_unassigned;
                     }
                 }
                 break;
@@ -211,18 +224,24 @@ void euxcExecute(euxlValue fun)
                     int off = 0;
                     if
                     (
-                        (tmp = findVar(tmp, euxmGetElement(xlfun, i), &off))
+                        (tmp = findVar
+                        (
+                            tmp,
+                            euxmGetElement(euxcCurFun, i),
+                            &off
+                        )
+                        )
                      == euxmNil
                     )
                     {
                         euxcIntError
                         (
                             "no binding for variable",
-                            euxmGetElement(xlfun, i),
+                            euxmGetElement(euxcCurFun, i),
                             euxls_unbound_error
                         );
                     }
-                    euxmSetElement(euxmCar(tmp), off, xlval);
+                    euxmSetElement(euxmCar(tmp), off, euxcCurVal);
                 }
                 break;
             case OP_SAVE:      // save a continuation
@@ -230,8 +249,8 @@ void euxcExecute(euxlValue fun)
                 i |= *pc++;
                 euxmStackCheck(3);
                 euxmStackPush(euxmMakeSmallFPI((euxmFPIType) i));
-                euxmStackPush(xlfun);
-                euxmStackPush(xlenv);
+                euxmStackPush(euxcCurFun);
+                euxmStackPush(euxcCurEnv);
                 break;
             case OP_CALL:      // call a function (or built-in)
                 euxcArgC = *pc++; // get argument count
@@ -242,8 +261,13 @@ void euxcExecute(euxlValue fun)
                 break;
             case OP_FRAME:     // create an environment frame
                 i = *pc++;      // get the frame size
-                xlenv = euxcNewFrame(xlenv, i);
-                euxmSetElement(euxmCar(xlenv), 0, euxmGetVNames(xlfun));
+                euxcCurEnv = euxcNewFrame(euxcCurEnv, i);
+                euxmSetElement
+                (
+                    euxmCar(euxcCurEnv),
+                    0,
+                    euxmGetVNames(euxcCurFun)
+                );
                 break;
             case OP_MVARG:     // move required argument to frame slot
                 i = *pc++;      // get the slot number
@@ -251,27 +275,27 @@ void euxcExecute(euxlValue fun)
                 {
                     euxcTooFewInt();
                 }
-                euxmSetElement(euxmCar(xlenv), i, euxmStackPop());
+                euxmSetElement(euxmCar(euxcCurEnv), i, euxmStackPop());
                 break;
             case OP_MVOARG:    // move optional argument to frame slot
                 i = *pc++;      // get the slot number
                 if (euxcArgC > 0)
                 {
-                    euxmSetElement(euxmCar(xlenv), i, euxmStackPop());
+                    euxmSetElement(euxmCar(euxcCurEnv), i, euxmStackPop());
                     --euxcArgC;
                 }
                 else
                 {
-                    euxmSetElement(euxmCar(xlenv), i, euxl_default_object);
+                    euxmSetElement(euxmCar(euxcCurEnv), i, euxs_default);
                 }
                 break;
             case OP_MVRARG:    // build rest argument and move to frame slot
                 i = *pc++;      // get the slot number
-                for (xlval = euxmNil, k = euxcArgC; --k >= 0;)
+                for (euxcCurVal = euxmNil, k = euxcArgC; --k >= 0;)
                 {
-                    xlval = euxcCons(euxcStackPtr[k], xlval);
+                    euxcCurVal = euxcCons(euxcStackPtr[k], euxcCurVal);
                 }
-                euxmSetElement(euxmCar(xlenv), i, xlval);
+                euxmSetElement(euxmCar(euxcCurEnv), i, euxcCurVal);
                 euxmStackDrop(euxcArgC);
                 break;
             case OP_ALAST:     // make sure there are no more arguments
@@ -281,86 +305,91 @@ void euxcExecute(euxlValue fun)
                 }
                 break;
             case OP_T:
-                xlval = euxl_true;
+                euxcCurVal = euxs_t;
                 break;
             case OP_NIL:
-                xlval = euxmNil;
+                euxcCurVal = euxmNil;
                 break;
             case OP_PUSH:
-                euxmStackCheckPush(xlval);
+                euxmStackCheckPush(euxcCurVal);
                 break;
             case OP_CLOSE:
-                if (!euxmCodep(xlval))
+                if (!euxmCodep(euxcCurVal))
                 {
-                    badArgType(xlval, "<code>", "close");
+                    badArgType(euxcCurVal, "<code>", "close");
                 }
-                xlval = euxcMakeClosure(xlval, xlenv);
+                euxcCurVal = euxcMakeClosure(euxcCurVal, euxcCurEnv);
                 break;
             case OP_DELAY:
-                if (!euxmCodep(xlval))
+                if (!euxmCodep(euxcCurVal))
                 {
-                    badArgType(xlval, "<code>", "delay");
+                    badArgType(euxcCurVal, "<code>", "delay");
                 }
-                xlval = euxcMakePromise(xlval, xlenv);
+                euxcCurVal = euxcMakePromise(euxcCurVal, euxcCurEnv);
                 break;
             case OP_ATOM:
-                xlval = (euxmAtom(xlval) ? euxl_true : euxmNil);
+                euxcCurVal = (euxmAtom(euxcCurVal) ? euxs_t : euxmNil);
                 break;
             case OP_EQ:
                 tmp = euxmStackPop();
-                if (euxmSymbolp(xlval) && euxmSymbolp(tmp))
+                if (euxmSymbolp(euxcCurVal) && euxmSymbolp(tmp))
                 {
-                    xlval = (euxmSymbolEq(xlval, tmp) ? euxl_true : euxmNil);
+                    euxcCurVal =
+                    (
+                        euxmSymbolEq(euxcCurVal, tmp)
+                      ? euxs_t
+                      : euxmNil
+                    );
                 }
                 else
                 {
-                    xlval = (xlval == tmp ? euxl_true : euxmNil);
+                    euxcCurVal = (euxcCurVal == tmp ? euxs_t : euxmNil);
                 }
                 break;
             case OP_NULL:
-                xlval = (xlval ? euxmNil : euxl_true);
+                euxcCurVal = (euxcCurVal ? euxmNil : euxs_t);
                 break;
             case OP_CONS:
-                xlval = euxcCons(xlval, euxmStackPop());
+                euxcCurVal = euxcCons(euxcCurVal, euxmStackPop());
                 break;
             case OP_CAR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "car");
+                    badArgType(euxcCurVal, "<cons>", "car");
                 }
-                xlval = euxmCar(xlval);
+                euxcCurVal = euxmCar(euxcCurVal);
                 break;
             case OP_CDR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "cdr");
+                    badArgType(euxcCurVal, "<cons>", "cdr");
                 }
-                xlval = euxmCdr(xlval);
+                euxcCurVal = euxmCdr(euxcCurVal);
                 break;
             case OP_SETCAR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "set-car");
+                    badArgType(euxcCurVal, "<cons>", "set-car");
                 }
                 tmp = euxmStackPop();
-                euxmSetCar(xlval, tmp);
-                xlval = tmp;
+                euxmSetCar(euxcCurVal, tmp);
+                euxcCurVal = tmp;
                 break;
             case OP_SETCDR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "set-cdr");
+                    badArgType(euxcCurVal, "<cons>", "set-cdr");
                 }
                 tmp = euxmStackPop();
-                euxmSetCdr(xlval, tmp);
-                xlval = tmp;
+                euxmSetCdr(euxcCurVal, tmp);
+                euxcCurVal = tmp;
                 break;
             case OP_GREFL:
                 i = *pc++ << 8;
                 i |= *pc++;
-                tmp = euxmGetElement(xlfun, i);
-                xlval = euxmGetValue(tmp);
-                if (xlval == euxls_unbound)
+                tmp = euxmGetElement(euxcCurFun, i);
+                euxcCurVal = euxmGetValue(tmp);
+                if (euxcCurVal == euxls_unbound)
                 {
                     char buf[128];
                     sprintf(buf, "variable unbound in module '%s'",
@@ -371,192 +400,204 @@ void euxcExecute(euxlValue fun)
             case OP_GSETL:
                 i = *pc++ << 8;
                 i |= *pc++;
-                euxmSetValue(euxmGetElement(xlfun, i), xlval);
+                euxmSetValue(euxmGetElement(euxcCurFun, i), euxcCurVal);
                 break;
             case OP_LITL:
                 i = *pc++ << 8;
                 i |= *pc++;
-                xlval = euxmGetElement(xlfun, i);
+                euxcCurVal = euxmGetElement(euxcCurFun, i);
                 break;
             case OP_ADD:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval = euxcMakeFPI(euxmGetFPI(xlval) + euxmGetFPI(tmp));
-                }
-                else if (euxmFPIp(xlval) && euxmDoubleFloatp(tmp))
-                {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeFPI
                     (
-                        euxmGetFPI(xlval) + euxmGetDoubleFloat(tmp)
+                        euxmGetFPI(euxcCurVal) + euxmGetFPI(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmFPIp(tmp))
+                else if (euxmFPIp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) + euxmGetFPI(tmp)
+                        euxmGetFPI(euxcCurVal) + euxmGetDoubleFloat(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) + euxmGetDoubleFloat(tmp)
+                        euxmGetDoubleFloat(euxcCurVal) + euxmGetFPI(tmp)
                     );
                 }
-                else if (!genericCall(euxls_binary_plus, tmp, xlval))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmDoubleFloatp(tmp))
+                {
+                    euxcCurVal = euxcMakeDoubleFloat
+                    (
+                        euxmGetDoubleFloat(euxcCurVal) + euxmGetDoubleFloat(tmp)
+                    );
+                }
+                else if (!genericCall(euxls_binary_plus, tmp, euxcCurVal))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlAdd();
+                    euxcCurVal = euxlAdd();
                 }
                 break;
             case OP_SUB:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval = euxcMakeFPI(euxmGetFPI(xlval) - euxmGetFPI(tmp));
-                }
-                else if (euxmFPIp(xlval) && euxmDoubleFloatp(tmp))
-                {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeFPI
                     (
-                        euxmGetFPI(xlval) - euxmGetDoubleFloat(tmp)
+                        euxmGetFPI(euxcCurVal) - euxmGetFPI(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmFPIp(tmp))
+                else if (euxmFPIp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) - euxmGetFPI(tmp)
+                        euxmGetFPI(euxcCurVal) - euxmGetDoubleFloat(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) - euxmGetDoubleFloat(tmp)
+                        euxmGetDoubleFloat(euxcCurVal) - euxmGetFPI(tmp)
                     );
                 }
-                else if (!genericCall(euxls_binary_minus, tmp, xlval))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmDoubleFloatp(tmp))
+                {
+                    euxcCurVal = euxcMakeDoubleFloat
+                    (
+                        euxmGetDoubleFloat(euxcCurVal) - euxmGetDoubleFloat(tmp)
+                    );
+                }
+                else if (!genericCall(euxls_binary_minus, tmp, euxcCurVal))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlSub();
+                    euxcCurVal = euxlSub();
                 }
                 break;
             case OP_MUL:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval = euxcMakeFPI(euxmGetFPI(xlval) * euxmGetFPI(tmp));
-                }
-                else if (euxmFPIp(xlval) && euxmDoubleFloatp(tmp))
-                {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeFPI
                     (
-                        euxmGetFPI(xlval) * euxmGetDoubleFloat(tmp)
+                        euxmGetFPI(euxcCurVal) * euxmGetFPI(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmFPIp(tmp))
+                else if (euxmFPIp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) * euxmGetFPI(tmp)
+                        euxmGetFPI(euxcCurVal) * euxmGetDoubleFloat(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) * euxmGetDoubleFloat(tmp)
+                        euxmGetDoubleFloat(euxcCurVal) * euxmGetFPI(tmp)
                     );
                 }
-                else if (!genericCall(euxls_binary_times, tmp, xlval))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmDoubleFloatp(tmp))
+                {
+                    euxcCurVal = euxcMakeDoubleFloat
+                    (
+                        euxmGetDoubleFloat(euxcCurVal) * euxmGetDoubleFloat(tmp)
+                    );
+                }
+                else if (!genericCall(euxls_binary_times, tmp, euxcCurVal))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlMul();
+                    euxcCurVal = euxlMul();
                 }
                 break;
             case OP_DIV:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
                     if (euxmGetFPI(tmp) == (euxmFPIType) 0)
                     {
                         euxcIntError
                         (
                             "division by zero",
-                            xlval,
+                            euxcCurVal,
                             euxls_arith_error
                         );
                     }
-                    xlval = euxcMakeFPI(euxmGetFPI(xlval) / euxmGetFPI(tmp));
+                    euxcCurVal = euxcMakeFPI
+                    (
+                        euxmGetFPI(euxcCurVal) / euxmGetFPI(tmp)
+                    );
                 }
-                else if (euxmFPIp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmFPIp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
                     if (euxmGetDoubleFloat(tmp) == (euxmDoubleFloatType) 0.0)
                     {
                         euxcIntError
                         (
                             "division by zero",
-                            xlval,
+                            euxcCurVal,
                             euxls_arith_error
                         );
                     }
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetFPI(xlval) / euxmGetDoubleFloat(tmp)
+                        euxmGetFPI(euxcCurVal) / euxmGetDoubleFloat(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmFPIp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmFPIp(tmp))
                 {
                     if (euxmGetFPI(tmp) == (euxmFPIType) 0)
                     {
                         euxcIntError
                         (
                             "division by zero",
-                            xlval,
+                            euxcCurVal,
                             euxls_arith_error
                         );
                     }
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) / euxmGetFPI(tmp)
+                        euxmGetDoubleFloat(euxcCurVal) / euxmGetFPI(tmp)
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
                     if (euxmGetDoubleFloat(tmp) == (euxmDoubleFloatType) 0.0)
                     {
                         euxcIntError
                         (
                             "division by zero",
-                            xlval,
+                            euxcCurVal,
                             euxls_arith_error
                         );
                     }
-                    xlval = euxcMakeDoubleFloat
+                    euxcCurVal = euxcMakeDoubleFloat
                     (
-                        euxmGetDoubleFloat(xlval) / euxmGetDoubleFloat(tmp)
+                        euxmGetDoubleFloat(euxcCurVal) / euxmGetDoubleFloat(tmp)
                     );
                 }
-                else if (!genericCall(euxls_binary_divide, tmp, xlval))
+                else if (!genericCall(euxls_binary_divide, tmp, euxcCurVal))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlDiv();
+                    euxcCurVal = euxlDiv();
                 }
                 break;
             case OP_QUO:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
                     euxmFPIType fixtmp;
                     if ((fixtmp = euxmGetFPI(tmp)) == (euxmFPIType) 0)
@@ -564,174 +605,175 @@ void euxcExecute(euxlValue fun)
                         euxcIntError
                         (
                             "division by zero",
-                            xlval,
+                            euxcCurVal,
                             euxls_arith_error
                         );
                     }
-                    xlval = euxcMakeFPI(euxmGetFPI(xlval) / fixtmp);
+                    euxcCurVal = euxcMakeFPI(euxmGetFPI(euxcCurVal) / fixtmp);
                 }
-                else if (!genericCall(euxls_quotient, tmp, xlval))
+                else if (!genericCall(euxls_quotient, tmp, euxcCurVal))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlQuo();
+                    euxcCurVal = euxlQuo();
                 }
                 break;
             case OP_LSS:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetFPI(xlval) < euxmGetFPI(tmp)
-                      ? euxl_true
+                        euxmGetFPI(euxcCurVal) < euxmGetFPI(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmFPIp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmFPIp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetFPI(xlval) < euxmGetDoubleFloat(tmp)
-                      ? euxl_true
+                        euxmGetFPI(euxcCurVal) < euxmGetDoubleFloat(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmFPIp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetDoubleFloat(xlval) < euxmGetFPI(tmp)
-                      ? euxl_true
+                        euxmGetDoubleFloat(euxcCurVal) < euxmGetFPI(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetDoubleFloat(xlval) < euxmGetDoubleFloat(tmp)
-                      ? euxl_true
+                        euxmGetDoubleFloat(euxcCurVal) < euxmGetDoubleFloat(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (!genericCall(euxls_binary_less, tmp, xlval))
+                else if (!genericCall(euxls_binary_less, tmp, euxcCurVal))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlLt();
+                    euxcCurVal = euxlLt();
                 }
                 break;
             case OP_EQL:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetFPI(xlval) == euxmGetFPI(tmp)
-                      ? euxl_true
+                        euxmGetFPI(euxcCurVal) == euxmGetFPI(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmFPIp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmFPIp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetFPI(xlval) == euxmGetDoubleFloat(tmp)
-                      ? euxl_true
+                        euxmGetFPI(euxcCurVal) == euxmGetDoubleFloat(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmFPIp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetDoubleFloat(xlval) == euxmGetFPI(tmp)
-                      ? euxl_true
+                        euxmGetDoubleFloat(euxcCurVal) == euxmGetFPI(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetDoubleFloat(xlval) == euxmGetDoubleFloat(tmp)
-                      ? euxl_true
-                      : euxmNil
+                        euxmGetDoubleFloat(euxcCurVal) ==
+                            euxmGetDoubleFloat(tmp)
+                          ? euxs_t
+                          : euxmNil
                     );
                 }
-                else if (!genericCall(euxls_binary_equal, tmp, xlval))
+                else if (!genericCall(euxls_binary_equal, tmp, euxcCurVal))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlEql();
+                    euxcCurVal = euxlEql();
                 }
                 break;
             case OP_GTR:
                 tmp = euxmStackPop();
-                if (euxmFPIp(xlval) && euxmFPIp(tmp))
+                if (euxmFPIp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetFPI(xlval) > euxmGetFPI(tmp)
-                      ? euxl_true
+                        euxmGetFPI(euxcCurVal) > euxmGetFPI(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmFPIp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmFPIp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetFPI(xlval) > euxmGetDoubleFloat(tmp)
-                      ? euxl_true
+                        euxmGetFPI(euxcCurVal) > euxmGetDoubleFloat(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmFPIp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmFPIp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetDoubleFloat(xlval) > euxmGetFPI(tmp)
-                      ? euxl_true
+                        euxmGetDoubleFloat(euxcCurVal) > euxmGetFPI(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (euxmDoubleFloatp(xlval) && euxmDoubleFloatp(tmp))
+                else if (euxmDoubleFloatp(euxcCurVal) && euxmDoubleFloatp(tmp))
                 {
-                    xlval =
+                    euxcCurVal =
                     (
-                        euxmGetDoubleFloat(xlval) > euxmGetDoubleFloat(tmp)
-                      ? euxl_true
+                        euxmGetDoubleFloat(euxcCurVal) > euxmGetDoubleFloat(tmp)
+                      ? euxs_t
                       : euxmNil
                     );
                 }
-                else if (!genericCall(euxls_binary_less, xlval, tmp))
+                else if (!genericCall(euxls_binary_less, euxcCurVal, tmp))
                 {
                     euxmStackPush(tmp);
-                    euxmStackPush(xlval);
+                    euxmStackPush(euxcCurVal);
                     euxcArgC = 2;
-                    xlval = euxlGt();
+                    euxcCurVal = euxlGt();
                 }
                 break;
             case OP_CLASSOF:
-                xlval = euxcClassOf(xlval);
+                euxcCurVal = euxcClassOf(euxcCurVal);
                 break;
             case OP_CNM:       // (apply (euxmCar mfl) (euxmCdr mfl) al al)
-                if (xlval == euxmNil)
+                if (euxcCurVal == euxmNil)
                 {
                     // next method list
                     euxmStackDrop(1);    // arg list
-                    euxcCerror("no next method in call-next-method", xlfun,
+                    euxcCerror("no next method in call-next-method", euxcCurFun,
                     euxls_no_next_md_error);
                 }
                 {
                     euxlValue *p;
                     euxlValue mfl, al, args;
                     al = euxmStackPop();
-                    mfl = xlval;
+                    mfl = euxcCurVal;
                     euxcArgC = euxcListSize(al);
                     euxmStackCheck(euxcArgC + 2);
                     args = al;
@@ -746,7 +788,7 @@ void euxcExecute(euxlValue fun)
                     }
                     euxmStackPush(al);
                     euxmStackPush(euxmCdr(mfl));
-                    xlval = euxmCar(mfl);
+                    euxcCurVal = euxmCar(mfl);
                     euxcArgC += 2;
                     euxcApply();
                 }
@@ -757,19 +799,19 @@ void euxcExecute(euxlValue fun)
                 if
                 (
                     !euxmFPIp(tmp)
-                 || !euxmObjectp(xlval)
+                 || !euxmObjectp(euxcCurVal)
                  || euxmGetFPI(tmp)
                   > euxmGetFPI
                     (
-                        euxmGetIVar(euxmGetClass(xlval),
+                        euxmGetIVar(euxmGetClass(euxcCurVal),
                         euxmInstanceSizeId)
                     )
                 )
                 {
-                    badSlotAccess("read", tmp, xlval);
+                    badSlotAccess("read", tmp, euxcCurVal);
                 }
                 #endif
-                xlval = euxmGetIVar(xlval, euxmGetFPI(tmp));
+                euxcCurVal = euxmGetIVar(euxcCurVal, euxmGetFPI(tmp));
                 break;
             case OP_SETIVAR:
                 {
@@ -778,206 +820,214 @@ void euxcExecute(euxlValue fun)
                     if
                     (
                         !euxmFPIp(tmp)
-                     || !euxmObjectp(xlval)
+                     || !euxmObjectp(euxcCurVal)
                      || euxmGetFPI(tmp)
                       > euxmGetFPI
                         (
-                            euxmGetIVar(euxmGetClass(xlval), euxmInstanceSizeId)
+                            euxmGetIVar
+                            (
+                                euxmGetClass(euxcCurVal),
+                                euxmInstanceSizeId
+                            )
                         )
                     )
                     {
-                        badSlotAccess("write", tmp, xlval);
+                        badSlotAccess("write", tmp, euxcCurVal);
                     }
                     #endif
                     euxmFPIType fixtmp = euxmGetFPI(tmp);
                     tmp = euxmStackPop();
-                    euxmSetIVar(xlval, fixtmp, tmp);
-                    xlval = tmp;
+                    euxmSetIVar(euxcCurVal, fixtmp, tmp);
+                    euxcCurVal = tmp;
                 }
                 break;
                 // these don't need the bother of frames and are used a lot
             case OP_GET:
                 tmp = euxmStackPop();
-                if (!euxmSymbolp(xlval))
+                if (!euxmSymbolp(euxcCurVal))
                 {
-                    badArgType(xlval, "<symbol>", "get");
+                    badArgType(euxcCurVal, "<symbol>", "get");
                 }
                 if (!euxmSymbolp(tmp))
                 {
                     badArgType(tmp, "<symbol>", "get");
                 }
-                xlval = euxcGetProp(xlval, tmp);
+                euxcCurVal = euxcGetProp(euxcCurVal, tmp);
                 break;
             case OP_PUT:
                 tmp = euxmStackPop();
                 tmp2 = euxmStackPop();
-                if (!euxmSymbolp(xlval))
+                if (!euxmSymbolp(euxcCurVal))
                 {
-                    badArgType(xlval, "<symbol>", "put");
+                    badArgType(euxcCurVal, "<symbol>", "put");
                 }
                 if (!euxmSymbolp(tmp))
                 {
                     badArgType(tmp, "<symbol>", "put");
                 }
-                euxcPutProp(xlval, tmp2, tmp);
-                xlval = tmp2;
+                euxcPutProp(euxcCurVal, tmp2, tmp);
+                euxcCurVal = tmp2;
                 break;
             case OP_CURMOD:
                 euxcArgC = 0;
-                xlval = euxcCurrentMod();
+                euxcCurVal = euxcCurrentMod();
                 break;
             case OP_CONSP:
-                xlval = euxmConsp(xlval) ? euxl_true : euxmNil;
+                euxcCurVal = euxmConsp(euxcCurVal) ? euxs_t : euxmNil;
                 break;
             case OP_SYMBOLP:
-                xlval = euxmSymbolp(xlval) ? euxl_true : euxmNil;
+                euxcCurVal = euxmSymbolp(euxcCurVal) ? euxs_t : euxmNil;
                 break;
             case OP_VECTORP:
-                xlval = euxmVectorp(xlval) ? euxl_true : euxmNil;
+                euxcCurVal = euxmVectorp(euxcCurVal) ? euxs_t : euxmNil;
                 break;
             case OP_APPEND:    // 2 args
                 tmp = euxmStackPop();
-                if (!euxmListp(xlval))
+                if (!euxmListp(euxcCurVal))
                 {
-                    badArgType(xlval, "<list>", "append");
+                    badArgType(euxcCurVal, "<list>", "append");
                 }
-                if (xlval == euxmNil)
+                if (euxcCurVal == euxmNil)
                 {
-                    xlval = tmp;
+                    euxcCurVal = tmp;
                 }
                 else
                 {
                     euxlValue end;
                     euxmStackPush(tmp);
-                    end = euxcCons(euxmCar(xlval), euxmNil);
+                    end = euxcCons(euxmCar(euxcCurVal), euxmNil);
                     euxmStackCheckPush(end);
                     for
                     (
-                        xlval = euxmCdr(xlval);
-                        euxmConsp(xlval);
-                        xlval = euxmCdr(xlval)
+                        euxcCurVal = euxmCdr(euxcCurVal);
+                        euxmConsp(euxcCurVal);
+                        euxcCurVal = euxmCdr(euxcCurVal)
                     )
                     {
-                        euxmSetCdr(end, euxcCons(euxmCar(xlval), euxmNil));
+                        euxmSetCdr(end, euxcCons(euxmCar(euxcCurVal), euxmNil));
                         end = euxmCdr(end);
                     }
                     euxmSetCdr(end, tmp);
-                    xlval = euxmStackPop();
+                    euxcCurVal = euxmStackPop();
                     euxmStackDrop(1);    // tmp
                 }
                 break;
             case OP_LIST:      // 2 args
-                xlval = euxcCons(xlval, euxcCons(euxmStackPop(), euxmNil));
+                euxcCurVal = euxcCons
+                (
+                    euxcCurVal,
+                    euxcCons(euxmStackPop(), euxmNil)
+                );
                 break;
             case OP_SIZE:
-                if (!euxmListp(xlval))
+                if (!euxmListp(euxcCurVal))
                 {
-                    badArgType(xlval, "<list>", "list-size");
+                    badArgType(euxcCurVal, "<list>", "list-size");
                 }
-                euxmStackCheckPush(xlval);
+                euxmStackCheckPush(euxcCurVal);
                 euxcArgC = 1;
-                xlval = euxlSize();
+                euxcCurVal = euxlSize();
                 break;
             case OP_REVERSE:
-                if (!euxmListp(xlval))
+                if (!euxmListp(euxcCurVal))
                 {
-                    badArgType(xlval, "<list>", "reverse");
+                    badArgType(euxcCurVal, "<list>", "reverse");
                 }
-                euxmStackCheckPush(xlval);
+                euxmStackCheckPush(euxcCurVal);
                 euxcArgC = 1;
-                xlval = euxlReverseList();
+                euxcCurVal = euxlReverseList();
                 break;
             case OP_CAAR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "caar");
+                    badArgType(euxcCurVal, "<cons>", "caar");
                 }
-                xlval = euxmCar(xlval);
-                if (!euxmConsp(xlval))
+                euxcCurVal = euxmCar(euxcCurVal);
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "caar");
+                    badArgType(euxcCurVal, "<cons>", "caar");
                 }
-                xlval = euxmCar(xlval);
+                euxcCurVal = euxmCar(euxcCurVal);
                 break;
             case OP_CADR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "cadr");
+                    badArgType(euxcCurVal, "<cons>", "cadr");
                 }
-                xlval = euxmCdr(xlval);
-                if (!euxmConsp(xlval))
+                euxcCurVal = euxmCdr(euxcCurVal);
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "cadr");
+                    badArgType(euxcCurVal, "<cons>", "cadr");
                 }
-                xlval = euxmCar(xlval);
+                euxcCurVal = euxmCar(euxcCurVal);
                 break;
             case OP_CDAR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "cdar");
+                    badArgType(euxcCurVal, "<cons>", "cdar");
                 }
-                xlval = euxmCar(xlval);
-                if (!euxmConsp(xlval))
+                euxcCurVal = euxmCar(euxcCurVal);
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "cdar");
+                    badArgType(euxcCurVal, "<cons>", "cdar");
                 }
-                xlval = euxmCdr(xlval);
+                euxcCurVal = euxmCdr(euxcCurVal);
                 break;
             case OP_CDDR:
-                if (!euxmConsp(xlval))
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "cddr");
+                    badArgType(euxcCurVal, "<cons>", "cddr");
                 }
-                xlval = euxmCdr(xlval);
-                if (!euxmConsp(xlval))
+                euxcCurVal = euxmCdr(euxcCurVal);
+                if (!euxmConsp(euxcCurVal))
                 {
-                    badArgType(xlval, "<cons>", "cddr");
+                    badArgType(euxcCurVal, "<cons>", "cddr");
                 }
-                xlval = euxmCdr(xlval);
+                euxcCurVal = euxmCdr(euxcCurVal);
                 break;
             case OP_GETSYNTAX:
                 tmp = euxmStackPop();
-                if (!euxmSymbolp(xlval))
+                if (!euxmSymbolp(euxcCurVal))
                 {
-                    badArgType(xlval, "<symbol>", "get");
+                    badArgType(euxcCurVal, "<symbol>", "get");
                 }
                 if (!euxmSymbolp(tmp))
                 {
                     badArgType(tmp, "<symbol>", "get");
                 }
-                xlval = euxcGetSyntax(xlval, tmp);
+                euxcCurVal = euxcGetSyntax(euxcCurVal, tmp);
                 break;
             case OP_PUTSYNTAX:
                 tmp = euxmStackPop();
                 tmp2 = euxmStackPop();
-                if (!euxmSymbolp(xlval))
+                if (!euxmSymbolp(euxcCurVal))
                 {
-                    badArgType(xlval, "<symbol>", "put");
+                    badArgType(euxcCurVal, "<symbol>", "put");
                 }
                 if (!euxmSymbolp(tmp))
                 {
                     badArgType(tmp, "<symbol>", "put");
                 }
-                euxcPutSyntax(xlval, tmp2, tmp);
-                xlval = tmp2;
+                euxcPutSyntax(euxcCurVal, tmp2, tmp);
+                euxcCurVal = tmp2;
                 break;
                 #ifndef NO_CHECK_REF
             case OP_CHECKREF:
                 tmp = euxmStackPop();    // the object
-                if (!euxmClassp(xlval))     // the class
+                if (!euxmClassp(euxcCurVal))     // the class
                 {
                     euxcIntError
                     (
                         "not a class in check-ref",
-                        xlval,
+                        euxcCurVal,
                         euxls_telos_error
                     );
                 }
-                if (!euxcSubClassp(euxcClassOf(tmp), xlval))
+                if (!euxcSubClassp(euxcClassOf(tmp), euxcCurVal))
                 {
-                    euxcTelosBadRefError(tmp, xlval, euxmTrue);
+                    euxcTelosBadRefError(tmp, euxcCurVal, euxmTrue);
                 }
-                xlval = euxl_true;
+                euxcCurVal = euxs_t;
                 break;
                 #endif
             default:
@@ -1006,32 +1056,32 @@ static euxlValue findVar(euxlValue env, euxlValue var, int *poff)
 }
 
 ///  euxcApply - apply a function to arguments
-//    The function should be in xlval and the arguments should
+//    The function should be in euxcCurVal and the arguments should
 //    be on the stack.  The number of arguments should be in euxcArgC.
 void euxcApply()
 {
     static char *functionName = "function apply";
 
     // Check for euxmNull function
-    if (euxmNull(xlval))
+    if (euxmNull(euxcCurVal))
     {
-        badFunctionNodeType(xlval);
+        badFunctionNodeType(euxcCurVal);
     }
 
     // dispatch on function type
-    switch (euxmNodeType(xlval))
+    switch (euxmNodeType(euxcCurVal))
     {
         case euxmFun:
-            xlval = (*euxmGetFun(xlval)) ();
+            euxcCurVal = (*euxmGetFun(euxcCurVal)) ();
             euxcReturn();
             break;
         case euxmXFun:
-            (*euxmGetXFun(xlval)) ();
+            (*euxmGetXFun(euxcCurVal)) ();
             break;
         case euxmClosure:
-            xlfun = euxmGetCode(xlval);
-            xlenv = euxmGetCEnv(xlval);
-            base = pc = euxmGetCodestr(xlfun);
+            euxcCurFun = euxmGetCode(euxcCurVal);
+            euxcCurEnv = euxmGetCEnv(euxcCurVal);
+            base = pc = euxmGetCodestr(euxcCurFun);
             break;
         case euxmGeneric:
             {
@@ -1043,21 +1093,21 @@ void euxcApply()
                     al = euxcCons(euxcStackPtr[i], al);     // the arg list
                 }
                 euxmStackCheckPush(al);
-                applicable = euxcFindAndCacheMethods(xlval, al);
+                applicable = euxcFindAndCacheMethods(euxcCurVal, al);
                 if (applicable == euxmNil)
                 {
-                    xlval = euxcCons(euxmGetGenericName(xlval), al);
+                    euxcCurVal = euxcCons(euxmGetGenericName(euxcCurVal), al);
                     // discard the args and arglist
                     euxmStackDrop(euxcArgC + 1);
                     euxcCerror
                     (
                         "no applicable methods",
-                        xlval,
+                        euxcCurVal,
                         euxls_no_applic_error
                     );
                 }
                 euxmStackCheckPush(euxmCdr(applicable));
-                xlval = euxmCar(applicable);
+                euxcCurVal = euxmCar(applicable);
                 euxcArgC += 2;
                 euxcApply();
             }
@@ -1068,12 +1118,12 @@ void euxcApply()
                 euxlValue tmp = euxmMoreArgs()? euxmGetArg() : euxmNil;
                 euxmLastArg();
                 restoreContinuation();
-                xlval = tmp;
+                euxcCurVal = tmp;
                 euxcReturn();
             }
             break;
         default:
-            badFunctionNodeType(xlval);
+            badFunctionNodeType(euxcCurVal);
     }
 }
 
@@ -1081,16 +1131,16 @@ void euxcApply()
 void euxcReturn()
 {
     // restore the environment and the continuation function
-    xlenv = euxmStackPop();
+    euxcCurEnv = euxmStackPop();
     euxlValue tmp = euxmStackPop();
 
     // dispatch on the function type
     switch (euxmNodeType(tmp))
     {
         case euxmCode:
-            xlfun = tmp;
+            euxcCurFun = tmp;
             tmp = euxmStackPop();
-            base = euxmGetCodestr(xlfun);
+            base = euxmGetCodestr(euxcCurFun);
             pc = base + (int)euxmGetSmallFPI(tmp);
             break;
         case euxmXFunCont:
@@ -1102,15 +1152,15 @@ void euxcReturn()
 }
 
 ///  euxcCurrentContinuation - save a stack snapshot
-//    cc is euxl_true if return address is needed, e.g., in the interpreter
+//    cc is euxs_t if return address is needed, e.g., in the interpreter
 euxlValue euxcCurrentContinuation(int cc)
 {
     if (cc)
     {
         euxmStackCheck(4);
         euxmStackPush(euxmMakeSmallFPI((euxmFPIType) (pc - base)));
-        euxmStackPush(xlfun);
-        euxmStackPush(xlenv);
+        euxmStackPush(euxcCurFun);
+        euxmStackPush(euxcCurEnv);
     }
     else
     {
@@ -1142,14 +1192,14 @@ euxlValue euxcCurrentContinuation(int cc)
 }
 
 ///  restoreContinuation - restore a continuation to the stack
-///       The continuation should be in xlval.
+///       The continuation should be in euxcCurVal.
 static void restoreContinuation()
 {
-    int size = euxmGetSize(xlval);
+    int size = euxmGetSize(euxcCurVal);
     euxlValue *src;
     for
     (
-        src = &xlval->value.vector.data[size], euxcStackPtr = euxcStackTop;
+        src = &euxcCurVal->value.vector.data[size], euxcStackPtr = euxcStackTop;
         --size >= 0;
     )
     {
@@ -1180,12 +1230,12 @@ static int genericCall(euxlValue sym, euxlValue val1, euxlValue val2)
     int i = (int)(pc - base);
     euxmStackCheck(5);
     euxmStackPush(euxmMakeSmallFPI((euxmFPIType) i));
-    euxmStackPush(xlfun);
-    euxmStackPush(xlenv);
+    euxmStackPush(euxcCurFun);
+    euxmStackPush(euxcCurEnv);
     // args and function
     euxmStackPush(val1);
     euxmStackPush(val2);
-    xlval = op;
+    euxcCurVal = op;
     // OP_CALL
     euxcArgC = 2;
     euxcApply();
@@ -1198,9 +1248,9 @@ void euxcGcProtect(void (*protected_fcn) ())
 {
     int pcoff = pc - base;
     (*protected_fcn) ();
-    if (xlfun)
+    if (euxcCurFun)
     {
-        base = euxmGetCodestr(xlfun);
+        base = euxmGetCodestr(euxcCurFun);
         pc = base + pcoff;
     }
 }
@@ -1243,9 +1293,9 @@ static void badSlotAccess(const char *msg, euxlValue index, euxlValue object)
     char buf[20];
     sprintf(buf, "bad slot %s", msg);
     object = euxcCons(object, euxmNil);
-    object = euxcCons(euxmEnter("object:"), object);
+    object = euxcCons(euxmInternAndExport("object:"), object);
     object = euxcCons(index, object);
-    object = euxcCons(euxmEnter("slot:"), object);
+    object = euxcCons(euxmInternAndExport("slot:"), object);
     euxmStackDrop(1);
     euxcCerror(buf, object, euxmNil);
 }

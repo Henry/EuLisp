@@ -45,8 +45,7 @@
            %make-constant
            %import
 
-           *intialize*
-           *toplevel*
+           main
            **eof**
            **default**
            *unbound*

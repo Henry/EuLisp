@@ -175,7 +175,7 @@ extern FILE *filein;
 #define euxmLastArg()                                                          \
     {if (euxcArgC != 0) euxcTooMany(functionName);}
 
-#define xleuxmStackPopRest()                                                   \
+#define euxmStackPopRest()                                                     \
     {euxcStackPtr += euxcArgC;}
 
 #define euxmTestArg(e)                                                         \
@@ -647,15 +647,15 @@ extern euxlValue euxcModuleList;    // all the modules
 extern euxlValue euxcKeywordArray;  // all the keywords
 extern euxlValue euxcObArray;       // prototype symbols
 
-#define euxmEnter(name)                                                        \
+#define euxmInternAndExport(name)                                                        \
     euxcEnterModule(name, euxcCurrentModule)
 
 ///-----------------------------------------------------------------------------
 /// Virtual machine registers
 ///-----------------------------------------------------------------------------
-extern euxlValue xlfun;              // current function
-extern euxlValue xlenv;              // current environment
-extern euxlValue xlval;              // value of most recent instruction
+extern euxlValue euxcCurFun;        // current function
+extern euxlValue euxcCurEnv;        // current environment
+extern euxlValue euxcCurVal;        // value of most recent instruction
 
 ///-----------------------------------------------------------------------------
 /// External variables
@@ -685,9 +685,9 @@ extern char * const *clargv;
 extern int clargc;
 
 extern euxcNodeSegment *nsegments;     // list of node segments
-extern euxcVectorSegment *vsegments;     // list of vector segments
-extern euxlValue *vfree;             // next free location in vector space
-extern euxlValue *veuxmStackTop;              // euxmStackTop of vector space
+extern euxcVectorSegment *vsegments;   // list of vector segments
+extern euxlValue *vfree;               // next free location in vector space
+extern euxlValue *euxmVecStackTop;     // stack top of vector space
 
 ///-----------------------------------------------------------------------------
 /// External symbol declarations

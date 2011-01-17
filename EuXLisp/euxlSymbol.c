@@ -50,14 +50,14 @@ static euxlValue findSyntax(euxlValue sym, euxlValue prp);
 ///  euxcXFun - define a builtin eval/apply function
 void euxcXFun(const char *sname, int type, euxcXFunType fcn, int offset)
 {
-    euxlValue sym = euxmEnter(sname);
+    euxlValue sym = euxmInternAndExport(sname);
     euxmSetValue(sym, euxcMakeXFun(type, fcn, offset));
 }
 
 ///  euxcFun - define a builtin function
 void euxcFun(const char *sname, int type, euxcFunType fcn, int offset)
 {
-    euxlValue sym = euxmEnter(sname);
+    euxlValue sym = euxmInternAndExport(sname);
     euxmSetValue(sym, euxcMakeFun(type, fcn, offset));
 }
 
@@ -95,7 +95,8 @@ euxlValue euxcEnterKeyword(const char *name)
     return (symbol);
 }
 
-///  euxmEnter - enter a symbol into the euxcObArray of the given module
+///  euxmInternAndExport - enter a symbol into the euxcObArray
+//    of the given module
 euxlValue euxcEnterModule(const char *name, euxlValue module)
 {
     // see if symbol is marked for reinternment
@@ -188,7 +189,8 @@ static euxlValue findProperty(euxlValue sym, euxlValue prp)
 }
 
 ///  reinternSymbol - intern symbol in current module
-//    can't use symbol name directly as it might move during a GC in euxmEnter
+//    can't use symbol name directly as it might move during a GC in
+//    euxmInternAndExport
 static euxlValue reinternSymbol(euxlValue sym)
 {
     if (euxmKeywordp(sym))
@@ -198,7 +200,7 @@ static euxlValue reinternSymbol(euxlValue sym)
 
     char buf[euxmStringMax + 1];
     strcpy(buf, euxmGetString(euxmGetPName(sym)));
-    return euxmEnter(buf);
+    return euxmInternAndExport(buf);
 }
 
 ///  euxcGetSyntax - find a syntax property

@@ -58,7 +58,7 @@
     {                                                                          \
         ctrl_c = 0;                                                            \
         euxcOSFlush();                                                         \
-        euxcToplevel();                                                        \
+        euxcTopLevel();                                                        \
     }
 #else
 #define HANDLE(expr) expr
@@ -149,7 +149,7 @@ euxlValue euxcSocketConnect()
         euxlSocketError("socket-connect", euxcCons(arg_name, arg_stream));
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketBind - (socket-bind fd stream)
@@ -185,7 +185,7 @@ euxlValue euxcSocketBind()
         euxlSocketError(functionName, arg_stream);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketListen - (socket-listen fd backlog)
@@ -206,7 +206,7 @@ euxlValue euxcSocketListen()
         euxlSocketError(functionName, arg_s);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketAccept - (socket-accept fd)
@@ -252,7 +252,7 @@ euxlValue euxcSocketBlock()
         euxlSocketError(functionName, arg_s);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketNonBlock - (socket-nonblock fd)
@@ -276,7 +276,7 @@ euxlValue euxcSocketNonBlock()
         euxlSocketError(functionName, arg_s);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketReuse - (socket-reuse fd)
@@ -292,7 +292,7 @@ euxlValue euxcSocketReuse()
     int val = 1;
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char *)&val, sizeof val);
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketNoReuse - (socket-noreuse fd)
@@ -308,7 +308,7 @@ euxlValue euxcSocketNoReuse()
     int val = 0;
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char *)&val, sizeof val);
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketClose - (socket-close fd)
@@ -323,7 +323,7 @@ euxlValue euxcSocketClose()
 
     euxcSocketClose(s);
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketShutdown - (socket-shutdown fd how)
@@ -344,7 +344,7 @@ euxlValue euxcSocketShutdown()
         euxlSocketError(functionName, arg_s);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketPeerAddr - (socket-peeraddr fd)
@@ -575,7 +575,7 @@ euxlValue euxcStreamUnbuffered()
         euxlSocketError(functionName, arg_handle);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcStreamBlockBuffered - (stream-block-buffered stream . bufsize)
@@ -604,7 +604,7 @@ euxlValue euxcStreamBlockBuffered()
         euxlSocketError(functionName, arg_handle);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcStreamLineBuffered - (stream-line-buffered stream)
@@ -623,7 +623,7 @@ euxlValue euxcStreamLineBuffered()
         euxlSocketError(functionName, arg_handle);
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 #else
 ///  euxcStreamUnbuffered - (stream-unbuffered stream)
@@ -638,7 +638,7 @@ euxlValue euxcStreamUnbuffered()
 
     // do nothing
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcStreamBlockBuffered - (stream-block-buffered stream . bufsize)
@@ -663,7 +663,7 @@ euxlValue euxcStreamBlockBuffered()
 
     // do nothing
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcStreamLineBuffered - (stream-line-buffered stream)
@@ -678,7 +678,7 @@ euxlValue euxcStreamLineBuffered()
 
     // do nothing
 
-    return euxl_true;
+    return euxs_t;
 }
 #endif // no more buffering
 
@@ -694,7 +694,7 @@ euxlValue euxcSocketFdZeroRead()
 
     euxmLastArg();
     FD_ZERO(&readfds);
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketFdSetRead - (socket-fd-set-read fd)
@@ -708,7 +708,7 @@ euxlValue euxcSocketFdSetRead()
     euxmLastArg();
 
     FD_SET(fd, &readfds);
-    return euxl_true;
+    return euxs_t;
 
 }
 
@@ -722,7 +722,7 @@ euxlValue euxcSocketFdIssetRead()
 
     euxmLastArg();
 
-    return FD_ISSET(fd, &readfds) ? euxl_true : euxmNil;
+    return FD_ISSET(fd, &readfds) ? euxs_t : euxmNil;
 }
 
 ///  euxcSocketSelectRead - (socket-select-read timeout)
@@ -760,7 +760,7 @@ euxlValue euxcSocketSelectRead()
         case 0:
             return euxmNil;
         default:
-            return euxl_true;
+            return euxs_t;
     }
 
     return euxmNil; // not reached
@@ -773,7 +773,7 @@ euxlValue euxcSocketFdZeroWrite()
 
     euxmLastArg();
     FD_ZERO(&writefds);
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketFdSetWrite - (socket-fd-set-write fd)
@@ -787,7 +787,7 @@ euxlValue euxcSocketFdSetWrite()
     euxmLastArg();
 
     FD_SET(fd, &writefds);
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcSocketFdIssetWrite - (socket-fd-isset-write fd)
@@ -800,7 +800,7 @@ euxlValue euxcSocketFdIssetWrite()
 
     euxmLastArg();
 
-    return FD_ISSET(fd, &writefds) ? euxl_true : euxmNil;
+    return FD_ISSET(fd, &writefds) ? euxs_t : euxmNil;
 }
 
 ///  euxcSocketSelectWrite - (socket-select-write timeout)
@@ -838,7 +838,7 @@ euxlValue euxcSocketSelectWrite()
         case 0:
             return euxmNil;
         default:
-            return euxl_true;
+            return euxs_t;
     }
 
     return euxmNil; // not reached
@@ -953,7 +953,7 @@ euxlValue euxcStreamXdrSendInt()
         euxlSocketError(functionName, euxcCons(arg_handle, arg_i));
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcStreamXdrRecvInt - (stream-xdr-recv-int stream)
@@ -1002,7 +1002,7 @@ euxlValue euxcStreamXdrSendDoubleFloat()
         euxlSocketError(functionName, euxcCons(arg_handle, arg_i));
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcStreamXdrRecvDoubleFloat - (stream-xdr-recv-float stream)
@@ -1049,7 +1049,7 @@ euxlValue euxcStreamXdrSendString()
         euxlSocketError(functionName, euxcCons(arg_handle, arg_string));
     }
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxcStreamXdrRecvString - (stream-xdr-recv-string stream)
@@ -1094,7 +1094,7 @@ euxlValue euxcStreamXdrRecvString()
 
 #else
 // some linkers complain of empty files
-static void euxcNoSockets()
+void euxcNoSockets()
 {
 }
 #endif

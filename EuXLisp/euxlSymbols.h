@@ -25,7 +25,7 @@
 #ifndef EUXLSYMBOLS_H
 #define EUXLSYMBOLS_H
 
-extern euxlValue euxl_true, euxl_eof_object, euxl_default_object, euxls_unassigned;
+extern euxlValue euxs_t, euxs_eof, euxs_default, euxls_unassigned;
 extern euxlValue euxls_map_list_cont, euxls_do_list_cont, euxls_with_file_cont, euxls_load_cont, euxls_force_cont;
 extern euxlValue euxls_init_loop_cont, euxlp_left_paren, euxlp_right_paren, euxlp_dot, euxlp_quote, euxls_quote;
 extern euxlValue euxls_eval_cm, euxls_unbound, euxls_stdin, euxls_stdout, euxls_stderr, euxls_filein;
@@ -56,6 +56,10 @@ extern euxlValue euxls_check_ref;
 #endif
 #ifdef SOCK
 extern euxlValue euxls_socket_error;
+#endif
+
+#ifdef READLINE
+extern euxlValue euxls_readline;
 #endif
 
 ///-----------------------------------------------------------------------------

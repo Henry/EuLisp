@@ -47,7 +47,7 @@ void euxlApply()
     static char *functionName = "apply";
 
     // get the function
-    xlval = euxmGetArg();
+    euxcCurVal = euxmGetArg();
 
     euxlValue arglist = euxcStackPtr[euxcArgC - 1];
     if (!euxmListp(arglist))
@@ -112,7 +112,7 @@ void euxlValues()
     static char *functionName = "values";
 
     // get the function
-    xlval = euxmGetArg();
+    euxcCurVal = euxmGetArg();
 
     euxlValue arglist = euxcStackPtr[euxcArgC - 1];
     if (!euxmListp(arglist))
@@ -183,7 +183,7 @@ void euxlCallCC()
     static char *functionName = "call/cc";
 
     // get the function to call
-    xlval = euxmGetArg();
+    euxcCurVal = euxmGetArg();
     euxmLastArg();
 
     // create a continuation object
@@ -207,7 +207,7 @@ void euxlMapList()
         euxcTooFew(functionName);
     }
 
-    xlval = euxmNil;
+    euxcCurVal = euxmNil;
     mapLoop(euxmNil);
 }
 
@@ -219,10 +219,10 @@ static void mapLoop(euxlValue last)
     euxlValue *oldsp = euxcStackPtr;
 
     // save a continuation
-    if (xlval)
+    if (euxcCurVal)
     {
         euxmStackCheck(5);
-        euxmStackPush(xlval);
+        euxmStackPush(euxcCurVal);
         euxmStackPush(last);
     }
     else
@@ -232,7 +232,7 @@ static void mapLoop(euxlValue last)
     }
     euxmStackPush(euxcMakeFPI((euxmFPIType) euxcArgC));
     euxmStackPush(euxls_map_list_cont);
-    euxmStackPush(xlenv);
+    euxmStackPush(euxcCurEnv);
 
     // build the argument list for the next application
     for (int cnt = euxcArgC; --cnt >= 1;)
@@ -251,7 +251,7 @@ static void mapLoop(euxlValue last)
             return;
         }
     }
-    xlval = *--p;       // get the function to apply
+    euxcCurVal = *--p;       // get the function to apply
     euxcArgC -= 1;        // count shouldn't include the function itself
     euxcApply();  // apply the function
 }
@@ -267,13 +267,14 @@ void euxlMapListCont()
     if ((last = euxmStackPop()) != euxmNil)
     {
         // add the new value to the tail
-        euxmSetCdr(last, euxcCons(xlval, euxmNil));
+        euxmSetCdr(last, euxcCons(euxcCurVal, euxmNil));
         last = euxmCdr(last);    // remember the new tail
-        xlval = euxmStackPop();  // restore the head of the list
+        euxcCurVal = euxmStackPop();  // restore the head of the list
     }
     else
     {
-        xlval = last = euxcCons(xlval, euxmNil); // build the initial value list
+        // build the initial value list
+        euxcCurVal = last = euxcCons(euxcCurVal, euxmNil);
     }
 
     // convert the argument count and loop
@@ -305,7 +306,7 @@ static void forLoop()
     euxmStackCheck(3);
     euxmStackPush(euxcMakeFPI((euxmFPIType) euxcArgC));
     euxmStackPush(euxls_do_list_cont);
-    euxmStackPush(xlenv);
+    euxmStackPush(euxcCurEnv);
 
     // build the argument list for the next application
     for (int cnt = euxcArgC; --cnt >= 1;)
@@ -320,13 +321,13 @@ static void forLoop()
         {
             euxcStackPtr = oldsp;
             euxmStackDrop(euxcArgC);
-            xlval = euxmNil;
+            euxcCurVal = euxmNil;
             euxcReturn();
             return;
         }
     }
 
-    xlval = *--p;       // get the function to apply
+    euxcCurVal = *--p;       // get the function to apply
     euxcArgC -= 1;        // count shouldn't include the function itself
     euxcApply();  // apply the function
 }
@@ -361,7 +362,7 @@ static void withFile(int flags, const char *mode)
 
     // get the function to call
     euxlValue name = euxmGetArgString();
-    xlval = euxmGetArg();
+    euxcCurVal = euxmGetArg();
     euxmLastArg();
 
     // create a file object
@@ -377,7 +378,7 @@ static void withFile(int flags, const char *mode)
     euxmStackCheck(3);
     euxmStackPush(file);
     euxmStackPush(euxls_with_file_cont);
-    euxmStackPush(xlenv);
+    euxmStackPush(euxcCurEnv);
 
     // setup the argument list
     euxmStackCheckPush(file);
@@ -405,7 +406,7 @@ void euxlLoad()
 ///  euxlLoadNoisily - built-in function 'load-noisily'
 void euxlLoadNoisily()
 {
-    load(euxl_true);
+    load(euxs_t);
 }
 
 ///  load - open the file and setup the load loop
@@ -414,20 +415,20 @@ static void load(euxlValue print)
     static char *functionName = "load";
 
     // get the function to call
-    xlval = euxmGetArgString();
+    euxcCurVal = euxmGetArgString();
     euxmLastArg();
 
     // create a file object
     euxlValue file = euxcMakeStream(NULL, euxmPortFlagInput);
     FILE *fp;
-    if ((fp = euxcOSAOpen(euxmGetString(xlval), "r")) == NULL)
+    if ((fp = euxcOSAOpen(euxmGetString(euxcCurVal), "r")) == NULL)
     {
-        xlval = euxmNil;
+        euxcCurVal = euxmNil;
         euxcReturn();
         return;
     }
     euxmSetFile(file, fp);
-    xlval = file;
+    euxcCurVal = file;
 
     // do the first read
     loadLoop(print);
@@ -438,17 +439,17 @@ static void loadLoop(euxlValue print)
 {
     // try to read the next expression from the file
     euxlValue expr;
-    if (euxcRead(xlval, &expr))
+    if (euxcRead(euxcCurVal, &expr))
     {
         // save a continuation
         euxmStackCheck(4);
-        euxmStackPush(xlval);
+        euxmStackPush(euxcCurVal);
         euxmStackPush(print);
         euxmStackPush(euxls_load_cont);
-        euxmStackPush(xlenv);
+        euxmStackPush(euxcCurEnv);
 
         // setup the argument list
-        xlval = euxmGetValue(euxls_eval_cm);
+        euxcCurVal = euxmGetValue(euxls_eval_cm);
         euxmStackCheckPush(expr);
         euxcArgC = 1;
 
@@ -457,9 +458,9 @@ static void loadLoop(euxlValue print)
     }
     else
     {
-        euxcOSClose(euxmGetFile(xlval));
-        euxmSetFile(xlval, NULL);
-        xlval = euxl_true;
+        euxcOSClose(euxmGetFile(euxcCurVal));
+        euxmSetFile(euxcCurVal, NULL);
+        euxcCurVal = euxs_t;
         euxcReturn();
     }
 }
@@ -471,10 +472,10 @@ void euxlLoadCont()
     euxlValue print;
     if ((print = euxmStackPop()) != euxmNil)
     {
-        euxcPrin1(xlval, euxlStdout());
+        euxcPrin1(euxcCurVal, euxlStdout());
         euxcTerpri(euxlStdout());
     }
-    xlval = euxmStackPop();
+    euxcCurVal = euxmStackPop();
 
     // setup for the next read
     loadLoop(print);
@@ -486,21 +487,21 @@ void euxlForce()
     static char *functionName = "force";
 
     // get the promise
-    xlval = euxmGetArg();
+    euxcCurVal = euxmGetArg();
     euxmLastArg();
 
     // Check for a promise
-    if (euxmPromisep(xlval))
+    if (euxmPromisep(euxcCurVal))
     {
 
         // force the promise the first time
-        if ((xlfun = euxmGetPProc(xlval)) != euxmNil)
+        if ((euxcCurFun = euxmGetPProc(euxcCurVal)) != euxmNil)
         {
             euxmStackCheck(3);
-            euxmStackPush(xlval);
+            euxmStackPush(euxcCurVal);
             euxmStackPush(euxls_force_cont);
-            euxmStackPush(xlenv);
-            xlval = xlfun;
+            euxmStackPush(euxcCurEnv);
+            euxcCurVal = euxcCurFun;
             euxcArgC = 0;
             euxcApply();
         }
@@ -508,7 +509,7 @@ void euxlForce()
         // return the saved value if the promise has already been forced
         else
         {
-            xlval = euxmGetPValue(xlval);
+            euxcCurVal = euxmGetPValue(euxcCurVal);
             euxcReturn();
         }
 
@@ -524,7 +525,7 @@ void euxlForce()
 void euxlForceCont()
 {
     euxlValue promise = euxmStackPop();
-    euxmSetPValue(promise, xlval);
+    euxmSetPValue(promise, euxcCurVal);
     euxmSetPProc(promise, euxmNil);
     euxcReturn();
 }
@@ -534,9 +535,9 @@ euxlValue euxlSymbolToString()
 {
     static char *functionName = "symbol->string";
 
-    xlval = euxmGetArgSymbol();
+    euxcCurVal = euxmGetArgSymbol();
     euxmLastArg();
-    return (euxmGetPName(xlval));
+    return (euxmGetPName(euxcCurVal));
 }
 
 ///  euxlStringToSymbol - built-in function 'string->symbol'
@@ -544,9 +545,9 @@ euxlValue euxlStringToSymbol()
 {
     static char *functionName = "string->symbol";
 
-    xlval = euxmGetArgString();
+    euxcCurVal = euxmGetArgString();
     euxmLastArg();
-    return (euxmEnter(euxmGetString(xlval)));
+    return (euxmInternAndExport(euxmGetString(euxcCurVal)));
 }
 
 ///  euxlRead - built-in function 'read'
@@ -562,7 +563,7 @@ euxlValue euxlRead()
     euxlValue val;
     if (!euxcRead(fptr, &val))
     {
-        val = euxl_eof_object;
+        val = euxs_eof;
     }
 
     // return the expression
@@ -577,7 +578,7 @@ euxlValue euxlReadChar()
     euxlValue fptr = (euxmMoreArgs()? euxmGetArgIstream() : euxlStdin());
     euxmLastArg();
     int ch;
-    return ((ch = euxcGetc(fptr)) == EOF ? euxl_eof_object : euxcMakeChar(ch));
+    return ((ch = euxcGetc(fptr)) == EOF ? euxs_eof : euxcMakeChar(ch));
 }
 
 ///  euxlReadByte - built-in function 'read-byte'
@@ -592,7 +593,7 @@ euxlValue euxlReadByte()
     return
     (
         (ch = euxcGetc(fptr)) == EOF
-      ? euxl_eof_object
+      ? euxs_eof
       : euxcMakeFPI((euxmFPIType) ch)
     );
 }
@@ -612,7 +613,7 @@ euxlValue euxlReadShort()
         int ch;
         if ((ch = euxcGetc(fptr)) == EOF)
         {
-            return (euxl_eof_object);
+            return (euxs_eof);
         }
         *p++ = ch;
     }
@@ -635,7 +636,7 @@ euxlValue euxlReadLong()
         int ch;
         if ((ch = euxcGetc(fptr)) == EOF)
         {
-            return (euxl_eof_object);
+            return (euxs_eof);
         }
         *p++ = ch;
     }
@@ -658,7 +659,7 @@ euxlValue euxlPeekChar()
     }
     else if (ch == EOF)
     {
-        return euxl_eof_object;
+        return euxs_eof;
     }
     else
     {
@@ -680,7 +681,7 @@ euxlValue euxlCharReadyp()
     }
     else
     {
-        return euxl_true;
+        return euxs_t;
     }
 }
 
@@ -691,7 +692,7 @@ euxlValue euxlEOFObjectp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (arg == euxl_eof_object ? euxl_true : euxmNil);
+    return (arg == euxs_eof ? euxs_t : euxmNil);
 }
 
 ///  euxlWrite - built-in function 'write'
@@ -707,7 +708,7 @@ euxlValue euxlWrite()
     // print the value
     euxcPrin1(val, fptr);
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlPrintnl - built-in function 'printnl'
@@ -724,7 +725,7 @@ euxlValue euxlPrintnl()
     euxcPrin1(val, fptr);
     euxcTerpri(fptr);
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlWriteChar - built-in function 'write-char'
@@ -737,7 +738,7 @@ euxlValue euxlWriteChar()
     euxmLastArg();
     euxcPutc(fptr, (int)euxmGetCharCode(ch));
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlWriteByte - built-in function 'write-byte'
@@ -750,7 +751,7 @@ euxlValue euxlWriteByte()
     euxmLastArg();
     euxcPutc(fptr, (int)euxmGetFPI(ch));
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlWriteShort - built-in function 'write-short'
@@ -769,7 +770,7 @@ euxlValue euxlWriteShort()
         euxcPutc(fptr, *p++);
     }
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlWriteLong - built-in function 'write-long'
@@ -788,7 +789,7 @@ euxlValue euxlWriteLong()
         euxcPutc(fptr, *p++);
     }
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlPrint - built-in function 'print'
@@ -804,7 +805,7 @@ euxlValue euxlPrint()
     // print the value
     euxcPrint(val, fptr);
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlSFlush - flush stream
@@ -1003,7 +1004,7 @@ euxlValue euxlsetFilePosition()
     return
     (
         euxcOSSeek(euxmGetFile(fptr), position, whence) == 0
-      ? euxl_true
+      ? euxs_t
       : euxmNil
     );
 }
@@ -1016,7 +1017,7 @@ euxlValue euxlUnlink()
     euxlValue path = euxmGetArgString();
     euxmLastArg();
 
-    return (euxcOSUnlink(euxmGetString(path)) == 0 ? euxl_true : euxmNil);
+    return (euxcOSUnlink(euxmGetString(path)) == 0 ? euxs_t : euxmNil);
 }
 
 ///  euxlStreamp - built-in function 'stream?'
@@ -1027,7 +1028,7 @@ euxlValue euxlStreamp()
     euxlValue arg = euxmGetArg();
     euxmLastArg();
 
-    return (euxmStreamp(arg) ? euxl_true : euxmNil);
+    return (euxmStreamp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlInputStreamp - built-in function 'input-stream?'
@@ -1038,7 +1039,7 @@ euxlValue euxlInputStreamp()
     euxlValue arg = euxmGetArg();
     euxmLastArg();
 
-    return (euxmeuxmIStreamp(arg) ? euxl_true : euxmNil);
+    return (euxmeuxmIStreamp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlOutputStreamp - built-in function 'output-stream?'
@@ -1049,7 +1050,7 @@ euxlValue euxlOutputStreamp()
     euxlValue arg = euxmGetArg();
     euxmLastArg();
 
-    return (euxmeuxmOStreamp(arg) ? euxl_true : euxmNil);
+    return (euxmeuxmOStreamp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlTransciptOn - built-in function 'transcript-on'
@@ -1069,7 +1070,7 @@ euxlValue euxlTransciptOn()
     }
 
     // try to open the file
-    return ((tfp = euxcOSAOpen(name, "w")) == NULL ? euxmNil : euxl_true);
+    return ((tfp = euxcOSAOpen(name, "w")) == NULL ? euxmNil : euxs_t);
 }
 
 ///  euxlTranscriptOff - built-in function 'transcript-off'
@@ -1090,7 +1091,7 @@ euxlValue euxlTranscriptOff()
     euxcOSClose(tfp);
     tfp = NULL;
 
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlMakeString - built-in function 'make-string'
@@ -1151,7 +1152,7 @@ euxlValue euxlStringNullp()
     euxlValue str = euxmGetArgString();
     euxmLastArg();
 
-    return (euxmGetStringlength(str) == 1 ? euxl_true : euxmNil);
+    return (euxmGetStringlength(str) == 1 ? euxs_t : euxmNil);
 }
 
 ///  euxlStringAppend - built-in function 'string-append'
@@ -1301,13 +1302,13 @@ euxlValue euxlStringToList()
     euxmStackCheckPush(str);
     int size = euxmGetStringlength(str) - 1;
     char *p;
-    for (xlval = euxmNil, p = &euxmGetString(str)[size]; --size >= 0;)
+    for (euxcCurVal = euxmNil, p = &euxmGetString(str)[size]; --size >= 0;)
     {
-        xlval = euxcCons(euxcMakeChar(*--p), xlval);
+        euxcCurVal = euxcCons(euxcMakeChar(*--p), euxcCurVal);
     }
     euxmStackDrop(1);
 
-    return (xlval);
+    return (euxcCurVal);
 }
 
 ///  euxlListToString - built-in function 'list->string'
@@ -1316,22 +1317,22 @@ euxlValue euxlListToString()
     static char *functionName = "list->string";
 
     // get the list
-    xlval = euxmGetArgList();
+    euxcCurVal = euxmGetArgList();
     euxmLastArg();
 
     // make a vector from the list
-    int size = euxcListSize(xlval);
+    int size = euxcListSize(euxcCurVal);
     euxlValue str = euxcNewString(size + 1);
     char *p;
-    for (p = euxmGetString(str); --size >= 0; xlval = euxmCdr(xlval))
+    for (p = euxmGetString(str); --size >= 0; euxcCurVal = euxmCdr(euxcCurVal))
     {
-        if (euxmCharp(euxmCar(xlval)))
+        if (euxmCharp(euxmCar(euxcCurVal)))
         {
-            *p++ = euxmGetCharCode(euxmCar(xlval));
+            *p++ = euxmGetCharCode(euxmCar(euxcCurVal));
         }
         else
         {
-            euxcBadType(euxmCar(xlval), "<char>", functionName);
+            euxcBadType(euxmCar(euxcCurVal), "<char>", functionName);
         }
     }
 
@@ -1443,15 +1444,15 @@ static euxlValue stringCompare(int fcn, int icase)
             switch (fcn)
             {
                 case '<':
-                    return (ch1 < ch2 ? euxl_true : euxmNil);
+                    return (ch1 < ch2 ? euxs_t : euxmNil);
                 case 'L':
-                    return (ch1 <= ch2 ? euxl_true : euxmNil);
+                    return (ch1 <= ch2 ? euxs_t : euxmNil);
                 case '=':
                     return (euxmNil);
                 case 'G':
-                    return (ch1 >= ch2 ? euxl_true : euxmNil);
+                    return (ch1 >= ch2 ? euxs_t : euxmNil);
                 case '>':
-                    return (ch1 > ch2 ? euxl_true : euxmNil);
+                    return (ch1 > ch2 ? euxs_t : euxmNil);
             }
         }
     }
@@ -1460,15 +1461,15 @@ static euxlValue stringCompare(int fcn, int icase)
     switch (fcn)
     {
         case '<':
-            return (start1 >= end1 && start2 < end2 ? euxl_true : euxmNil);
+            return (start1 >= end1 && start2 < end2 ? euxs_t : euxmNil);
         case 'L':
-            return (start1 >= end1 ? euxl_true : euxmNil);
+            return (start1 >= end1 ? euxs_t : euxmNil);
         case '=':
-            return (start1 >= end1 && start2 >= end2 ? euxl_true : euxmNil);
+            return (start1 >= end1 && start2 >= end2 ? euxs_t : euxmNil);
         case 'G':
-            return (start2 >= end2 ? euxl_true : euxmNil);
+            return (start2 >= end2 ? euxs_t : euxmNil);
         case '>':
-            return (start2 >= end2 && start1 < end1 ? euxl_true : euxmNil);
+            return (start2 >= end2 && start1 < end1 ? euxs_t : euxmNil);
     }
 
     return (euxmNil);       // never reached
@@ -1744,15 +1745,15 @@ static euxlValue charCompare(int fcn, int icase)
     switch (fcn)
     {
         case '<':
-            return (ch1 < ch2 ? euxl_true : euxmNil);
+            return (ch1 < ch2 ? euxs_t : euxmNil);
         case 'L':
-            return (ch1 <= ch2 ? euxl_true : euxmNil);
+            return (ch1 <= ch2 ? euxs_t : euxmNil);
         case '=':
-            return (ch1 == ch2 ? euxl_true : euxmNil);
+            return (ch1 == ch2 ? euxs_t : euxmNil);
         case 'G':
-            return (ch1 >= ch2 ? euxl_true : euxmNil);
+            return (ch1 >= ch2 ? euxs_t : euxmNil);
         case '>':
-            return (ch1 > ch2 ? euxl_true : euxmNil);
+            return (ch1 > ch2 ? euxs_t : euxmNil);
     }
 
     return (euxmNil);       // never reached
@@ -1764,17 +1765,40 @@ euxlValue euxlCompile()
     static char *functionName = "compile";
 
     // get the expression to compile and the environment
-    xlval = euxmGetArg();
+    euxcCurVal = euxmGetArg();
     euxlValue env = (euxmMoreArgs()? euxmGetArgEnv() : euxmNil);
     euxmLastArg();
 
     // build the closure
     euxmStackCheckPush(env);
-    xlval = euxcCompile(xlval, env);
-    xlval = euxcMakeClosure(xlval, env);
+    euxcCurVal = euxcCompile(euxcCurVal, env);
+    euxcCurVal = euxcMakeClosure(euxcCurVal, env);
     euxmStackDrop(1);
 
-    return (xlval);
+    return (euxcCurVal);
+}
+
+///  euxlEvalCm - built-in function 'eval/cm'
+void euxlEvalCm()
+{
+    static char *functionName = "eval/cm";
+
+    //euxlCompile();
+    // Get the expression to compile
+    euxcCurVal = euxmGetArg();
+    euxlValue env = euxmNil;
+    euxmLastArg();
+
+    // Build the closure
+    euxmStackCheckPush(env);
+    euxcCurVal = euxcCompile(euxcCurVal, env);
+    euxcCurVal = euxcMakeClosure(euxcCurVal, env);
+    euxmStackDrop(1);
+
+    euxcArgC = 1;
+    euxcApply();
+    //euxcApply();
+    //euxcApply();
 }
 
 ///  euxlDecompile - built-in function 'decompile'
@@ -1809,7 +1833,7 @@ euxlValue euxlSave()
     euxmLastArg();
 
     // save the memory image
-    return (euxlSaveImage(name) ? euxl_true : euxmNil);
+    return (euxlSaveImage(name) ? euxs_t : euxmNil);
 }
 
 ///  euxlRestore - restore a saved memory image
@@ -1827,8 +1851,8 @@ euxlValue euxlRestore()
         return (euxmNil);
     }
 
-    // return directly to the euxmStackTop level
-    euxcStdPutString("[ returning to the euxmStackTop level ]\n");
+    // return directly to the top level
+    euxcStdPutString("[ returning to the top level ]\n");
     euxmLongJmp(euxmStackTopLevel, 1);
 
     return (euxmNil);       // never reached
@@ -1862,14 +1886,14 @@ euxlValue euxlGc()
     }
 
     // return (gccalls nnodes nfree nscount vscount total)
-    xlval = euxcCons(euxcMakeFPI(total), euxmNil);
-    xlval = euxcCons(euxcMakeFPI((euxmFPIType) vscount), xlval);
-    xlval = euxcCons(euxcMakeFPI((euxmFPIType) nscount), xlval);
-    xlval = euxcCons(euxcMakeFPI(nfree), xlval);
-    xlval = euxcCons(euxcMakeFPI(nnodes), xlval);
-    xlval = euxcCons(euxcMakeFPI(gccalls), xlval);
+    euxcCurVal = euxcCons(euxcMakeFPI(total), euxmNil);
+    euxcCurVal = euxcCons(euxcMakeFPI((euxmFPIType) vscount), euxcCurVal);
+    euxcCurVal = euxcCons(euxcMakeFPI((euxmFPIType) nscount), euxcCurVal);
+    euxcCurVal = euxcCons(euxcMakeFPI(nfree), euxcCurVal);
+    euxcCurVal = euxcCons(euxcMakeFPI(nnodes), euxcCurVal);
+    euxcCurVal = euxcCons(euxcMakeFPI(gccalls), euxcCurVal);
 
-    return (xlval);
+    return (euxcCurVal);
 }
 
 ///  euxlError - built-in function 'error'
@@ -1892,7 +1916,7 @@ euxlValue euxlError()
 
     // print the function where the error occurred
     euxcErrorPutString("happened in: ");
-    euxcErrorPrint(xlfun);
+    euxcErrorPrint(euxcCurFun);
 
     // call the handler
     euxcCallErrorHandler();
@@ -1947,7 +1971,7 @@ euxlValue euxcDefaultHandler()
     euxcOSCheck();
     euxcSetFrame(1);
     euxlValue thread_module = euxcGetModule("thread");
-    xlval = euxmGetValue(euxcEnterModule("debug", thread_module));
+    euxcCurVal = euxmGetValue(euxcEnterModule("debug", thread_module));
     euxmStackCheckPush(condition);
     euxmStackCheckPush(cc);
     euxcArgC = 2;

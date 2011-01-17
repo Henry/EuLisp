@@ -29,33 +29,33 @@
 ///-----------------------------------------------------------------------------
 
 ///  Virtual machine registers
-euxlValue xlfun = euxmNil;               // current function
-euxlValue xlenv = euxmNil;               // current environment
-euxlValue xlval = euxmNil;               // value of most recent instruction
-euxlValue *euxcStackPtr = NULL;              // value stack pointer
+euxlValue euxcCurFun = euxmNil;     // current function
+euxlValue euxcCurEnv = euxmNil;     // current environment
+euxlValue euxcCurVal = euxmNil;     // value of most recent instruction
+euxlValue *euxcStackPtr = NULL;     // value stack pointer
 
 ///  Stack limits
-euxlValue *euxcStackBase = NULL;         // base of value stack
-euxlValue *euxcStackTop = NULL;          // top of value stack (actually, one beyond)
+euxlValue *euxcStackBase = NULL;    // base of value stack
+euxlValue *euxcStackTop = NULL;     // top of value stack (actually, one beyond)
 
 ///  Variables shared with euxlImage.c
 euxmFPIType total = 0;              // total number of bytes of memory in use
 euxmFPIType gccalls = 0;            // number of calls to the garbage collector
 
 ///  Node space
-euxcNodeSegment *nsegments = NULL;     // list of node segments
-euxcNodeSegment *nslast = NULL;        // last node segment
-int nscount = 0;                // number of node segments
+euxcNodeSegment *nsegments = NULL;  // list of node segments
+euxcNodeSegment *nslast = NULL;     // last node segment
+int nscount = 0;                    // number of node segments
 euxmFPIType nnodes = 0;             // total number of nodes
 euxmFPIType nfree = 0;              // number of nodes in free list
-euxlValue fnodes = euxmNil;              // list of free nodes
+euxlValue fnodes = euxmNil;         // list of free nodes
 
 ///  Vector (and string) space
-euxcVectorSegment *vsegments = NULL;     // list of vector segments
-euxcVectorSegment *vscurrent = NULL;     // current vector segment
-int vscount = 0;                // number of vector segments
-euxlValue *vfree = NULL;             // next free location in vector space
-euxlValue *veuxmStackTop = NULL;              // euxmStackTop of vector space
+euxcVectorSegment *vsegments = NULL;// list of vector segments
+euxcVectorSegment *vscurrent = NULL;// current vector segment
+int vscount = 0;                    // number of vector segments
+euxlValue *vfree = NULL;            // next free location in vector space
+euxlValue *euxmVecStackTop = NULL;    // stack top of vector space
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
@@ -121,7 +121,8 @@ euxlValue euxcMakeString(const char *str)
     return (val);
 }
 
-///  euxcMakeString2 - convert a string (possibly containing NULLs) to a string node
+///  euxcMakeString2 - convert a string (possibly containing NULLs)
+//    to a string node
 euxlValue euxcMakeString2(const char *str, int len)
 {
     euxlValue val = euxcNewString(len + 1);
@@ -179,7 +180,14 @@ euxlValue euxcMakeModule(const char *name)
     // delete old module of same name if there
     if (euxcModuleList != euxmNil)
     {
-        if (strcmp(name, euxmGetString(euxmGetModuleName(euxmCar(euxcModuleList)))) == 0)
+        if
+        (
+            strcmp
+            (
+                name,
+                euxmGetString(euxmGetModuleName(euxmCar(euxcModuleList)))
+            ) == 0
+        )
         {
             euxcModuleList = euxmCdr(euxcModuleList);
         }
@@ -193,7 +201,14 @@ euxlValue euxcMakeModule(const char *name)
                 mods1 = euxmCdr(mods1), mods2 = euxmCdr(mods2)
             )
             {
-                if (strcmp(name, euxmGetString(euxmGetModuleName(euxmCar(mods2)))) == 0)
+                if
+                (
+                    strcmp
+                    (
+                        name,
+                        euxmGetString(euxmGetModuleName(euxmCar(mods2)))
+                    ) == 0
+                )
                 {
                     euxmSetCdr(mods1, euxmCdr(mods2));
                     break;
@@ -452,7 +467,7 @@ static euxlValue allocVector(int type, int size)
     // make sure there's enough space
     if
     (
-        !euxmVcompare(vfree, size, veuxmStackTop)
+        !euxmVcompare(vfree, size, euxmVecStackTop)
      && !euxcCheckVmemory(size)
      && !findVMemory(size)
     )
@@ -485,7 +500,7 @@ static int findVMemory(int size)
     gc(euxmGcVector);
 
     // Check to see if we found enough memory
-    if (euxmVcompare(vfree, size, veuxmStackTop) || euxcCheckVmemory(size))
+    if (euxmVcompare(vfree, size, euxmVecStackTop) || euxcCheckVmemory(size))
     {
         return (euxmTrue);
     }
@@ -506,7 +521,7 @@ int euxcCheckVmemory(int size)
                 vscurrent->free = vfree;
             }
             vfree = vseg->free;
-            veuxmStackTop = vseg->top;
+            euxmVecStackTop = vseg->top;
             vscurrent = vseg;
             return (euxmTrue);
         }
@@ -536,7 +551,7 @@ int euxcVexpand(int size)
             vscurrent->free = vfree;
         }
         vfree = vseg->free;
-        veuxmStackTop = vseg->top;
+        euxmVecStackTop = vseg->top;
         vscurrent = vseg;
     }
     return (vseg != NULL);
@@ -630,29 +645,29 @@ void gc(int reason)
     }
 
     // mark the current environment
-    if (xlfun && euxmIsPointer(xlfun))
+    if (euxcCurFun && euxmIsPointer(euxcCurFun))
     {
-        mark(xlfun);
+        mark(euxcCurFun);
     }
-    if (xlenv && euxmIsPointer(xlenv))
+    if (euxcCurEnv && euxmIsPointer(euxcCurEnv))
     {
-        mark(xlenv);
+        mark(euxcCurEnv);
     }
-    if (xlval && euxmIsPointer(xlval))
+    if (euxcCurVal && euxmIsPointer(euxcCurVal))
     {
-        mark(xlval);
+        mark(euxcCurVal);
     }
-    if (euxl_default_object && euxmIsPointer(euxl_default_object))
+    if (euxs_default && euxmIsPointer(euxs_default))
     {
-        mark(euxl_default_object);
+        mark(euxs_default);
     }
-    if (euxl_eof_object && euxmIsPointer(euxl_eof_object))
+    if (euxs_eof && euxmIsPointer(euxs_eof))
     {
-        mark(euxl_eof_object);
+        mark(euxs_eof);
     }
-    if (euxl_true && euxmIsPointer(euxl_true))
+    if (euxs_t && euxmIsPointer(euxs_t))
     {
-        mark(euxl_true);
+        mark(euxs_t);
     }
     if (euxcModuleList && euxmIsPointer(euxcModuleList))
     {
@@ -726,14 +741,22 @@ static void mark(euxlValue ptr)
                     {
                         this->flags |= euxmMark;
                         register euxlValue tmp;
-                        if ((tmp = euxmCar(this)) != euxmNil && euxmIsPointer(tmp))
+                        if
+                        (
+                            (tmp = euxmCar(this))
+                         != euxmNil && euxmIsPointer(tmp)
+                        )
                         {
                             this->flags |= euxmLeft;
                             euxmSetCar(this, prev);
                             prev = this;
                             this = tmp;
                         }
-                        else if ((tmp = euxmCdr(this)) != euxmNil && euxmIsPointer(tmp))
+                        else if
+                        (
+                            (tmp = euxmCdr(this))
+                         != euxmNil && euxmIsPointer(tmp)
+                        )
                         {
                             euxmSetCdr(this, prev);
                             prev = this;
@@ -783,7 +806,11 @@ static void mark(euxlValue ptr)
                     prev->flags &= ~euxmLeft;
                     tmp = euxmCar(prev);
                     euxmSetCar(prev, this);
-                    if ((this = euxmCdr(prev)) != euxmNil && euxmIsPointer(this))
+                    if
+                    (
+                        (this = euxmCdr(prev))
+                     != euxmNil && euxmIsPointer(this)
+                    )
                     {
                         euxmSetCdr(prev, tmp);
                         break;
@@ -846,7 +873,7 @@ static void compact()
     if ((vscurrent = vsegments) != NULL)
     {
         vfree = vscurrent->free;
-        veuxmStackTop = vscurrent->top;
+        euxmVecStackTop = vscurrent->top;
     }
 }
 
@@ -935,8 +962,8 @@ static void sweepSegment(euxcNodeSegment * nseg)
     }
 }
 
-///  euxcMinit - initialize the dynamic memory module
-void euxcMinit(unsigned int ssize)
+///  euxcAllocInit - initialize the dynamic memory allocation module
+void euxcAllocInit(unsigned int ssize)
 {
     // initialize our internal variables
     gccalls = 0;
@@ -951,7 +978,7 @@ void euxcMinit(unsigned int ssize)
     // initialize vector space
     vsegments = vscurrent = NULL;
     vscount = 0;
-    vfree = veuxmStackTop = NULL;
+    vfree = euxmVecStackTop = NULL;
 
     // allocate the value stack
     unsigned int n = ssize * sizeof(euxlValue);
@@ -962,8 +989,8 @@ void euxcMinit(unsigned int ssize)
     total += (long)n;
 
     // initialize objects that are marked by the collector
-    euxl_default_object = euxl_eof_object = euxl_true = euxmNil;
-    xlfun = xlenv = xlval = euxmNil;
+    euxs_default = euxs_eof = euxs_t = euxmNil;
+    euxcCurFun = euxcCurEnv = euxcCurVal = euxmNil;
 
     // initialize the stack
     euxcStackPtr = euxcStackTop = euxcStackBase + ssize;

@@ -391,11 +391,11 @@ static void compileDefconstant(euxlValue form, int cont)
     int off;
     if (findVariableCurrentFrame(sym, &off))
     {
-        euxmCompileError("defconstant not at euxmStackTop level", sym);
+        euxmCompileError("defconstant not at top level", sym);
     }
 
     compileVariable(OP_GSET, sym);
-    euxmSetConstant(sym, euxl_true);
+    euxmSetConstant(sym, euxs_t);
 
     compileLiteral(sym, cont);
 }
@@ -434,7 +434,7 @@ static void compileDeflocal(euxlValue form, int cont)
     int off;
     if (findVariableCurrentFrame(sym, &off))
     {
-        euxmCompileError("deflocal not at euxmStackTop level", sym);
+        euxmCompileError("deflocal not at top level", sym);
     }
 
     compileVariable(OP_GSET, sym);
@@ -467,7 +467,6 @@ static void compileDefineCont(euxlValue list, euxlValue body, int cont)
     // compile procedure definitions
     else
     {
-
         // make sure it's a symbol
         if (!euxmSymbolp(list))
         {
@@ -710,7 +709,7 @@ static int findInternalDefinitions(euxlValue body, euxlValue last)
     // look for all (define...) forms
     for
     (
-        euxlValue define = euxmEnter("define");
+        euxlValue define = euxmInternAndExport("define");
         euxmConsp(body);
         body = euxmCdr(body)
     )
@@ -1602,7 +1601,7 @@ static void compileLiteral(euxlValue lit, int cont)
     {
         putCodeByte(OP_NIL);
     }
-    else if (lit == euxl_true)
+    else if (lit == euxs_t)
     {
         putCodeByte(OP_T);
     }
@@ -1629,7 +1628,7 @@ static void compileLiteral(euxlValue lit, int cont)
 static void compileIdentifier(euxlValue sym, int cont)
 {
     int lev, off;
-    if (sym == euxl_true)
+    if (sym == euxs_t)
     {
         putCodeByte(OP_T);
     }
@@ -2319,7 +2318,10 @@ static void proceseuxls_export_directive(euxlValue export_syms)
         else
         {
             // Intern the exported symbol into the euxcCurrentModule
-            euxlValue mod_sym = euxmEnter(euxmGetString(euxmGetPName(sym)));
+            euxlValue mod_sym = euxmInternAndExport
+            (
+                euxmGetString(euxmGetPName(sym))
+            );
             exports = euxcCons(mod_sym, exports);
 
             #ifdef DEBUG
@@ -2355,7 +2357,10 @@ static void proceseuxls_expose_directive(euxlValue explist)
         else
         {
             // Intern the exported symbol into the euxcCurrentModule
-            euxlValue mod_sym = euxmEnter(euxmGetString(euxmGetPName(sym)));
+            euxlValue mod_sym = euxmInternAndExport
+            (
+                euxmGetString(euxmGetPName(sym))
+            );
             exports = euxcCons(mod_sym, exports);
 
             #ifdef DEBUG
@@ -2429,7 +2434,8 @@ static void proceseuxls_module_directives(euxlValue array, euxlValue directives)
 }
 
 ///  intern symbol in current module
-///  can't use symbol name directly as it might move during a GC in euxmEnter
+//    can't use symbol name directly as it might move during a GC
+//    in euxmInternAndExport
 static euxlValue reinternSymbol(euxlValue sym)
 {
     char buf[euxmStringMax + 1];
@@ -2440,7 +2446,7 @@ static euxlValue reinternSymbol(euxlValue sym)
     }
 
     strcpy(buf, euxmGetString(euxmGetPName(sym)));
-    return euxmEnter(buf);
+    return euxmInternAndExport(buf);
 }
 
 ///  make all symbols in a vector be in current module
@@ -2462,7 +2468,7 @@ static void reintern_vector_symbols(euxlValue form)
 }
 
 ///  make all symbols in a defmodule body be in current module
-///  classes: lists & vectors only
+//    classes: lists & vectors only
 static void reinternModuleSymbols(euxlValue body)
 {
     for (; euxmConsp(body); body = euxmCdr(body))
@@ -2501,7 +2507,7 @@ euxlValue euxlReintern()
 
     reinternModuleSymbols(euxmCdr(body)); // (begin@ROOT .... )
 
-    return euxl_true;
+    return euxs_t;
 }
 
 #if 1
@@ -2579,11 +2585,11 @@ euxlValue euxlModuleDirectives()
 
     proceseuxls_module_directives(array, form);
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  load those modules that this one depends on
-///  implist is a list of module descriptors (i.e., names or filters)
+//    implist is a list of module descriptors (i.e., names or filters)
 static void load_dependent_modules2(euxlValue implist)
 {
     for (; implist; implist = euxmCdr(implist))
@@ -2978,7 +2984,7 @@ static void genargs(euxlValue gf, euxlValue args)
     if (!euxmConsp(args))
     {
         // mark if optional args allowed
-        euxmSetGenericOpt(gf, args == euxmNil ? euxmNil : euxl_true);
+        euxmSetGenericOpt(gf, args == euxmNil ? euxmNil : euxs_t);
         return;
     }
 
@@ -3635,7 +3641,7 @@ static euxlValue mkarg(int n)
     char buf[128];
 
     sprintf(buf, "arg%d", n);
-    return euxmEnter(buf);
+    return euxmInternAndExport(buf);
 }
 
 static void compile_general_constructor(euxlValue classname, euxlValue name)

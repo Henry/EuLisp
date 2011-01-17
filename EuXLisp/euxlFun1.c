@@ -678,7 +678,7 @@ euxlValue euxlBoundp()
 
     euxlValue sym = euxmGetArgSymbol();
     euxmLastArg();
-    return (euxmBoundp(sym) ? euxl_true : euxmNil);
+    return (euxmBoundp(sym) ? euxs_t : euxmNil);
 }
 
 ///  euxlSymValue - get the value of a symbol
@@ -805,7 +805,7 @@ euxlValue euxlTheEnvironment()
 {
     static const char *functionName = "the-environment";
     euxmLastArg();
-    return (xlenv);
+    return (euxcCurEnv);
 }
 
 ///  euxlProcEnvironment - built-in function 'procedure-environment'
@@ -825,7 +825,7 @@ euxlValue euxlEnvp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmEnvp(arg) ? euxl_true : euxmNil);
+    return (euxmEnvp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlEnvBindings - built-in function 'environment-bindings'
@@ -1036,12 +1036,12 @@ euxlValue euxlVectorToList()
     // make a list from the vector
     euxmStackCheckPush(vect);
     int size = euxmGetSize(vect);
-    for (xlval = euxmNil; --size >= 0;)
+    for (euxcCurVal = euxmNil; --size >= 0;)
     {
-        xlval = euxcCons(euxmGetElement(vect, size), xlval);
+        euxcCurVal = euxcCons(euxmGetElement(vect, size), euxcCurVal);
     }
     euxmStackDrop(1);
-    return (xlval);
+    return (euxcCurVal);
 }
 
 ///  euxlListToVector - built-in function 'list->vector'
@@ -1050,20 +1050,20 @@ euxlValue euxlListToVector()
     static const char *functionName = "list->vector";
 
     // get the list
-    xlval = euxmGetArgList();
+    euxcCurVal = euxmGetArgList();
     euxmLastArg();
 
     // make a vector from the list
-    int size = euxcListSize(xlval);
+    int size = euxcListSize(euxcCurVal);
     euxlValue vect = euxcNewVector(size);
     for
     (
         euxlValue *p = &vect->value.vector.data[0];
         --size >= 0;
-        xlval = euxmCdr(xlval)
+        euxcCurVal = euxmCdr(euxcCurVal)
     )
     {
-        *p++ = euxmCar(xlval);
+        *p++ = euxmCar(euxcCurVal);
     }
 
     return (vect);
@@ -1076,7 +1076,7 @@ euxlValue euxlNullp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmNull(arg) ? euxl_true : euxmNil);
+    return (euxmNull(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlAtomp - built-in function 'euxmAtom?'
@@ -1086,7 +1086,7 @@ euxlValue euxlAtomp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmAtom(arg) ? euxl_true : euxmNil);
+    return (euxmAtom(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlListp - built-in function 'list?'
@@ -1096,7 +1096,7 @@ euxlValue euxlListp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmListp(arg) ? euxl_true : euxmNil);
+    return (euxmListp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlNumberp - built-in function 'number?'
@@ -1106,7 +1106,7 @@ euxlValue euxlNumberp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmNumberp(arg) ? euxl_true : euxmNil);
+    return (euxmNumberp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlBooleanp - built-in function 'boolean?'
@@ -1116,7 +1116,7 @@ euxlValue euxlBooleanp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (arg == euxl_true || arg == euxmNil ? euxl_true : euxmNil);
+    return (arg == euxs_t || arg == euxmNil ? euxs_t : euxmNil);
 }
 
 ///  euxlConsp - built-in function 'cons?'
@@ -1126,7 +1126,7 @@ euxlValue euxlConsp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmConsp(arg) ? euxl_true : euxmNil);
+    return (euxmConsp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlSymbolp - built-in function 'symbol?'
@@ -1136,7 +1136,7 @@ euxlValue euxlSymbolp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmSymbolp(arg) ? euxl_true : euxmNil);
+    return (euxmSymbolp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlKeywordp - built-in function 'keyword?'
@@ -1146,7 +1146,7 @@ euxlValue euxlKeywordp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmKeywordp(arg) ? euxl_true : euxmNil);
+    return (euxmKeywordp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlIntegerp - built-in function 'integer?'
@@ -1156,7 +1156,7 @@ euxlValue euxlIntegerp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmFPIp(arg) ? euxl_true : euxmNil);
+    return (euxmFPIp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlDoubleFloatp - built-in function 'float?'
@@ -1166,7 +1166,7 @@ euxlValue euxlDoubleFloatp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmDoubleFloatp(arg) ? euxl_true : euxmNil);
+    return (euxmDoubleFloatp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlCharp - built-in function 'char?'
@@ -1176,7 +1176,7 @@ euxlValue euxlCharp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmCharp(arg) ? euxl_true : euxmNil);
+    return (euxmCharp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlStringp - built-in function 'string?'
@@ -1186,7 +1186,7 @@ euxlValue euxlStringp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmStringp(arg) ? euxl_true : euxmNil);
+    return (euxmStringp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlVectorp - built-in function 'vector?'
@@ -1196,7 +1196,7 @@ euxlValue euxlVectorp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmVectorp(arg) ? euxl_true : euxmNil);
+    return (euxmVectorp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlFunctionp - built-in function 'function?'
@@ -1206,7 +1206,7 @@ euxlValue euxlFunctionp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (isprocedure(arg) ? euxl_true : euxmNil);
+    return (isprocedure(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlObjectp - built-in function 'object?'
@@ -1216,7 +1216,7 @@ euxlValue euxlObjectp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (euxmObjectp(arg) ? euxl_true : euxmNil);
+    return (euxmObjectp(arg) ? euxs_t : euxmNil);
 }
 
 ///  euxlDefaultObjectp - built-in function 'default-object?'
@@ -1226,7 +1226,7 @@ euxlValue euxlDefaultObjectp()
 
     euxlValue arg = euxmGetArg();
     euxmLastArg();
-    return (arg == euxl_default_object ? euxl_true : euxmNil);
+    return (arg == euxs_default ? euxs_t : euxmNil);
 }
 
 ///  euxlEq - built-in function 'eq'
@@ -1255,7 +1255,7 @@ static euxlValue eqEqlEqual(int (*fcn) ())
     euxlValue arg1 = euxmGetArg();
     euxlValue arg2 = euxmGetArg();
     euxmLastArg();
-    return ((*fcn) (arg1, arg2) ? euxl_true : euxmNil);
+    return ((*fcn) (arg1, arg2) ? euxs_t : euxmNil);
 }
 
 ///  euxlGensym - generate a symbol

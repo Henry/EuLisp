@@ -25,7 +25,7 @@
 #ifndef EUXLBCode_H
 #define EUXLBCode_H
 
-#define OP_BRT          0x01    // branch on euxl_true
+#define OP_BRT          0x01    // branch on euxs_t
 #define OP_BRF          0x02    // branch on false
 #define OP_BR           0x03    // branch unconditionally
 #define OP_LIT          0x04    // load literal

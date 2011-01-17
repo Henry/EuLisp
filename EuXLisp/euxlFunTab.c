@@ -43,6 +43,7 @@ euxcXFunDef xFunTab[] =
     {"force", euxlForce},
     {"initialize-object", euxlInitializeObject},
     {"values", euxlValues},
+    {"eval/cm", euxlEvalCm},
 
     {0, 0}      // end of table marker
 };
@@ -633,7 +634,7 @@ euxlValue euxcTooFew(const char *functionName)
 ///  euxcTooFew - too few arguments to this function
 void euxcTooFewInt()
 {
-    euxcIntError("too few arguments", xlfun, euxmNil);
+    euxcIntError("too few arguments", euxcCurFun, euxmNil);
 }
 
 ///  euxcTooMany - too many arguments to this function
@@ -646,7 +647,7 @@ void euxcTooMany(const char *functionName)
 ///  euxcTooMany - too many arguments to this function
 void euxcTooManyInt()
 {
-    euxcIntError("too many arguments", xlfun, euxmNil);
+    euxcIntError("too many arguments", euxcCurFun, euxmNil);
 }
 
 ///  euxcBadType - incorrect argument type

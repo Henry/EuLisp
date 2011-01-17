@@ -84,7 +84,7 @@ static void eux_signal_handler_int(int signo)
         reading = 0;
         euxcOSFlush();
         euxcOSTPutc('\n');
-        euxcToplevel();
+        euxcTopLevel();
     }
 }
 
@@ -108,7 +108,7 @@ static void eux_signal_handler_pipe(int signo)
         reading = 0;
         euxcOSFlush();
         euxcOSTPutc('\n');
-        euxcToplevel();
+        euxcTopLevel();
     }
 }
 #endif
@@ -116,9 +116,8 @@ static void eux_signal_handler_pipe(int signo)
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
-
-///  euxcMain - the main function
-void euxcMain(int argc, char * const *argv)
+///  main - the main function
+int main(int argc, char * const *argv)
 {
     int image = euxmTrue;
     quiet = euxmFalse;
@@ -278,16 +277,17 @@ void euxcMain(int argc, char * const *argv)
         euxcInitWorkspace(5000);
     }
 
-    // do the initialization code first
-    euxlValue code = euxcEnterModule("*INITIALIZE*", euxcRootModule);
+    // Do the initialization code first
+    //euxlValue code = euxcEnterModule("*initialize*", euxcRootModule);
+    euxlValue code = euxcEnterModule("main", euxcRootModule);
     code = (euxmBoundp(code) ? euxmGetValue(code) : euxmNil);
 
     // trap errors
     if (euxmSetJmp(euxmStackTopLevel))
     {
-        code = euxcEnterModule("*toplevel*", euxcRootModule);
+        code = euxcEnterModule("main", euxcRootModule);
         code = (euxmBoundp(code) ? euxmGetValue(code) : euxmNil);
-        xlfun = xlenv = xlval = euxmNil;
+        euxcCurFun = euxcCurEnv = euxcCurVal = euxmNil;
         euxcStackPtr = euxcStackTop;
     }
 
@@ -331,6 +331,8 @@ void euxcMain(int argc, char * const *argv)
     }
 
     euxcWrapup(1);
+
+    return 0;
 }
 
 ///  print_usage - helper function
@@ -352,26 +354,12 @@ static void print_usage(FILE* stream, int exit_code)
     exit(exit_code);
 }
 
-///  euxcLoad -
-void euxcLoad()
-{
-}
-
-///  euxcContinue -
-void euxcContinue()
-{
-}
-
-///  euxcCleanup -
-void euxcCleanup()
-{
-}
-
-///  top_level - return to the euxmStackTop level
-static void top_level(int cc)
+///  top_level - return to the top level
+static void topLevel(int cc)
 {
     if (euxmGetValue(euxls_general_error) == euxls_unbound)
-    {   // no conditions yet
+    {
+        // no conditions yet
         euxcStdPutString("[ back to top level ]\n");
         euxmLongJmp(euxmStackTopLevel, 1);
     }
@@ -379,16 +367,16 @@ static void top_level(int cc)
     euxcDoError("user interrupt", euxmNil, euxls_user_intr, cc);
 }
 
-///  euxcToplevel - return to the euxmStackTop level
-void euxcToplevel()
+///  euxcTopLevel - return to the top level
+void euxcTopLevel()
 {
-    top_level(euxmFalse);
+    topLevel(euxmFalse);
 }
 
-///  euxcToplevelInt -
-void euxcToplevelInt()
+///  euxcTopLevelInt - return to the top level following interrupt
+void euxcTopLevelInt()
 {
-    top_level(euxmTrue);
+    topLevel(euxmTrue);
 }
 
 ///  euxcFail - report an error
@@ -414,7 +402,7 @@ void euxcError(const char *msg, euxlValue arg)
 
     // print the function where the error occurred
     euxcErrorPutString("happened in: ");
-    euxcErrorPrint(xlfun);
+    euxcErrorPrint(euxcCurFun);
 
     // call the handler
     euxcCallErrorHandler();
@@ -459,9 +447,9 @@ void euxcDoError(const char *msg, euxlValue arg, euxlValue errname, int cc)
         cond = euxmGetValue(errname);
     }
 
-    xlval = euxmGetValue(euxls_signal);
+    euxcCurVal = euxmGetValue(euxls_signal);
 
-    if (cond == euxls_unbound || xlval == euxls_unbound)
+    if (cond == euxls_unbound || euxcCurVal == euxls_unbound)
     {
         // no conditions yet
         euxcErrorPutString("Run-Time ");
@@ -513,7 +501,7 @@ void euxcCallErrorHandler()
         euxcDoBacktrace(euxcStackPtr);
     }
 
-    // no handler, just reset back to the euxmStackTop level
+    // no handler, just reset back to the top level
     // this probably leaves the thread state in a state
     euxmLongJmp(euxmStackTopLevel, 1);
 }
@@ -528,9 +516,9 @@ void euxcAbort(const char *msg)
 
     // print the function where the error occurred
     euxcErrorPutString("happened in: ");
-    euxcErrorPrint(xlfun);
+    euxcErrorPrint(euxcCurFun);
 
-    // reset back to the euxmStackTop level
+    // reset back to the top level
     euxcOSCheck();  // an opportunity to break out
     euxmLongJmp(euxmStackTopLevel, 1);
 }
@@ -597,7 +585,7 @@ static void trace_function(euxlValue fun, euxlValue env)
     euxcTerpri(errout);
 
     // Check to see if the trace has reached the euxmStackTop-level and return
-    if (euxmGetCName(fun) ==  euxcEnterModule("*toplevel*", euxcRootModule))
+    if (euxmGetCName(fun) ==  euxcEnterModule("main", euxcRootModule))
     {
         return;
     }
@@ -673,7 +661,7 @@ euxlValue euxlBacktrace()
 
     euxcDoBacktrace(ptr);
 
-    return euxl_true;
+    return euxs_t;
 }
 
 ///  euxlFrameUp - debugging -- move up a frame

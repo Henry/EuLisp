@@ -475,7 +475,9 @@
            ;; EuXLisp/Youtoo compatible Extensions
            ticks-per-second
            cpu-time
-           time-execution)
+           time-execution
+
+           eval-cm)
    expose (eval))
 
 (defsyntax time-execution (expr stream)

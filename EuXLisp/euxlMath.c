@@ -64,7 +64,7 @@ euxlValue euxlInexactp()
     static char *functionName = "inexact?";
     (void)euxmGetArgNumber();
     euxmLastArg();
-    return (euxl_true);
+    return (euxs_t);
 }
 
 ///  euxlAtan - built-in function 'atan'
@@ -929,7 +929,7 @@ static euxlValue predicate(int fcn)
     }
 
     // return the result value
-    return (ival ? euxl_true : euxmNil);
+    return (ival ? euxs_t : euxmNil);
 }
 
 ///-----------------------------------------------------------------------------
@@ -1087,11 +1087,11 @@ static euxlValue compare(int fcn)
     // get rid of extra arguments
     if (euxmMoreArgs())
     {
-        xleuxmStackPopRest();
+        euxmStackPopRest();
     }
 
     // return the result
-    return (icmp ? euxl_true : euxmNil);
+    return (icmp ? euxs_t : euxmNil);
 }
 
 ///  convertToDoubleFloat - convert a lisp value to a floating point number
