@@ -28,7 +28,8 @@
 (defmodule eval
   (syntax (syntax)
    import (root)
-   export (eval
+   export (eval/cm
+           eval
            expand-syntax1
            expand-syntax))
 
