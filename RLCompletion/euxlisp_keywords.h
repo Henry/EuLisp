@@ -7,8 +7,8 @@
 ///-----------------------------------------------------------------------------
 
     // EuXLisp commands
-    "transcript-on",
-    "transcript-off",
+    "trace-on",
+    "trace-off",
     "getarg",
     "prompt?",
     "load-module?",
