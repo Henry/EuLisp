@@ -1677,7 +1677,7 @@ static euxlValue applicableMethods(euxlValue gf, euxlValue classes)
     return applicable;
 }
 
-///  classList - get clases of required args
+///  classList - get classes of required args
 static euxlValue classList(euxlValue l, euxlValue gf)
 {
     euxlValue reqd = euxmGetGenericArgs(gf);
@@ -1743,7 +1743,7 @@ euxlValue euxcFindAndCacheMethods(euxlValue gf, euxlValue arglist)
         {
             if (euxcEqual(classes, euxmCar(euxmCar(cache2))))
             {
-                //	fprintf(stderr, "<cache2 hit>");
+                // fprintf(stderr, "<cache2 hit>");
                 euxmSetGenericCache1(gf, euxmCar(cache2));
                 return euxmCdr(euxmCar(cache2));
             }

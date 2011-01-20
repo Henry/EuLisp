@@ -677,7 +677,6 @@ typedef struct
 extern specialFormDef specialFormTab[];
 
 extern int printBreadth, printDepth;
-extern FILE *tfp;
 extern euxmFPIType nnodes, nfree, gccalls, total;
 extern int nscount, vscount;
 extern euxmJmpBuf bc_dispatch;

@@ -7,7 +7,7 @@ main ()
        (%print "> "))
    ())
  (setq *last* (read *FILE-INPUT*))
- (if (eq *last* **eof**)
+ (if (eq *last* *eof*)
      (exit)
    ())
  (if prompt?

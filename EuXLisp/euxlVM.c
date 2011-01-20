@@ -1085,15 +1085,13 @@ void euxcApply()
             break;
         case euxmGeneric:
             {
-                euxlValue al, applicable;
-                int i;
-                al = euxmNil;       // consing on function call :-(
-                for (i = euxcArgC - 1; i >= 0; i--)
+                euxlValue al = euxmNil;       // consing on function call :-(
+                for (int i = euxcArgC - 1; i >= 0; i--)
                 {
                     al = euxcCons(euxcStackPtr[i], al);     // the arg list
                 }
                 euxmStackCheckPush(al);
-                applicable = euxcFindAndCacheMethods(euxcCurVal, al);
+                euxlValue applicable = euxcFindAndCacheMethods(euxcCurVal, al);
                 if (applicable == euxmNil)
                 {
                     euxcCurVal = euxcCons(euxmGetGenericName(euxcCurVal), al);

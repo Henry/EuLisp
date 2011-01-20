@@ -795,7 +795,7 @@
   (if (not *debug-rl*) ;; If readline is not used print prompt
       (print "[error" *debug-depth* "] " (current-module) ">"))
   (let ((op (read)))
-    (if (eq op **eof**)
+    (if (eq op *eof*)
         (if (null? cc)
             (unwrap-and-reset)
           (cc)))

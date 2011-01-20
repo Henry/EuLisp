@@ -377,15 +377,6 @@ int euxcOSTGetc()
     }
     #endif
 
-    // write it to the transcript file
-    if (tfp)
-    {
-        for (lindex = 0; lindex < lcount; ++lindex)
-        {
-            euxcOSAPutc(lbuf[lindex], tfp);
-        }
-    }
-
     lindex = 0;
     lcount--;
 
@@ -477,12 +468,6 @@ void euxcOSTPutc(int ch)
     {
         putchar(ch);
         lposition++;
-    }
-
-    // output the character to the transcript file
-    if (tfp)
-    {
-        euxcOSAPutc(ch, tfp);
     }
 }
 

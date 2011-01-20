@@ -48,12 +48,12 @@
            ;; Used in syntax only
            %defun))
 
-(define (getprop s v)
+(%defun getprop (s v)
         (if (symbol? s)
             (get-syntax s v)
           (raise-syntax-error "expected symbol" s)))
 
-(define (%expand-syntax expr)
+(%defun %expand-syntax (expr)
         (cond ((cons? expr)
                (if (symbol? (car expr))
                    (let ((expander (get-syntax (car expr) 'built-in-syntax))
@@ -68,32 +68,21 @@
               ((symbol? expr) (or (get-syntax expr '%rename) expr))
               (t expr)))
 
-(define (%expand-list lyst)
+(%defun %expand-list (lyst)
         (if (atom? lyst)
             lyst
           (%map-list %expand-syntax lyst)))
 
-(define (%expand-list-or-symbol form)
+(%defun %expand-list-or-symbol (form)
         (if (symbol? form)
             (or (get-syntax form '%rename) form)
           (%expand-list form)))
 
-(put-syntax 'define-syntax '%syntax
-            (lambda (form)
-              (list 'progn
-                    (list 'put-syntax
-                          (list 'quote (or (getprop (cadr form) '%rename)
-                                           (cadr form)))
-                          (list 'quote '%syntax)
-                          (caddr form))
-                    (list 'quote (or (getprop (cadr form) '%rename)
-                                     (cadr form))))))
-
-(define (identity form) form)
+(%defun identity (form) form)
 
 ;;(put-syntax 'quote 'built-in-syntax identity)
 
-(define (%expand-arg-list form)
+(%defun %expand-arg-list (form)
         (if (atom? form)
             (if (symbol? form)
                 (or (get-syntax form '%rename) form)
@@ -117,11 +106,12 @@
 (put-syntax '%defun 'built-in-syntax
             (lambda (form)
               (cons
-               'define
+               '%defun
                (cons
-                (cons (cadr form) (%expand-arg-list (caddr form)))
-                (%expand-list (cdddr form))))))
-
+                (cadr form)
+                (cons
+                 (%expand-arg-list (caddr form))
+                 (%expand-list (cdddr form)))))))
 
 ;; (put-syntax 'setq 'built-in-syntax
 ;;             (lambda (form)
@@ -135,7 +125,7 @@
 ;;             (lambda (form)
 ;;               (cons 'cond (%map-list %expand-list (cdr form)))))
 
-;; (define (%expand-let-form form)
+;; (%defun %expand-let-form (form)
 ;;         (cons
 ;;          (car form)
 ;;          (let ((bindings (cadr form)))
@@ -153,7 +143,7 @@
 ;; (put-syntax 'let* 'built-in-syntax %expand-let-form)
 ;; (put-syntax 'letrec 'built-in-syntax %expand-let-form)
 
-(define (%defsyntax-binds arglist n)
+(%defun %defsyntax-binds (arglist n)
         (cond ((null? arglist) ())
               ((atom? arglist) (list (list arglist
                                            (list 'list-tail '(cdr form) n))))
@@ -162,9 +152,20 @@
                         (list 'list-ref '(cdr form) n))
                   (%defsyntax-binds (cdr arglist) (%+ n 1))))))
 
+(put-syntax '%defsyntax '%syntax
+            (lambda (form)
+              (list 'progn
+                    (list 'put-syntax
+                          (list 'quote (or (getprop (cadr form) '%rename)
+                                           (cadr form)))
+                          (list 'quote '%syntax)
+                          (caddr form))
+                    (list 'quote (or (getprop (cadr form) '%rename)
+                                     (cadr form))))))
+
 (put-syntax 'defsyntax '%syntax
             (lambda (form)
-              (list 'define-syntax
+              (list '%defsyntax
                     (cadr form)
                     (list 'lambda
                           '(form)
@@ -184,17 +185,25 @@
 ;; (put-syntax 'reenter-module 'built-in-syntax identity)
 ;; (put-syntax '!>> 'built-in-syntax identity)
 
-(put-syntax 'define-generic 'built-in-syntax
+(put-syntax '%defgeneric 'built-in-syntax
             (lambda (form)
-              (cons 'define-generic
-                    (cons (%expand-arg-list (cadr form))
-                          ()))))
+              (cons
+               '%defgeneric
+               (cons
+                (cadr form)
+                (cons
+                 (%expand-arg-list (caddr form))
+                 ())))))
 
-(put-syntax 'define-method 'built-in-syntax
+(put-syntax '%defmethod 'built-in-syntax
             (lambda (form)
-              (cons 'define-method
-                    (cons (%expand-arg-list (cadr form))
-                          (%expand-list (cddr form))))))
+              (cons
+               '%defmethod
+               (cons
+                (cadr form)
+                (cons
+                 (%expand-arg-list (caddr form))
+                 (%expand-list (cdddr form)))))))
 
 ; call-next-method next-method?
 
@@ -300,7 +309,7 @@
 (put-syntax 'unquote 'built-in-syntax unq-expander)
 (put-syntax 'unquote-splicing 'built-in-syntax unq-spl-expander)
 
-(define (expand-syntax1 expr)
+(%defun expand-syntax1 (expr)
         (cond ((cons? expr)
                (if (symbol? (car expr))
                    (let ((expander (get-syntax (car expr) 'built-in-syntax))
@@ -324,7 +333,7 @@
     (deflocal %compile compile))
 
 ;; use this in compile below for debugging
-(define (expand-syntax expr)
+(%defun expand-syntax (expr)
         (let ((result (%expand-syntax expr)))
           (%write expr)
           (%print " ==>> ")
@@ -332,12 +341,12 @@
           (%print #\\n)
           result))
 
-(define (compile expr . env)
+(%defun compile (expr . env)
         (if (null? env)
             (%compile (%expand-syntax expr))
           (%compile (%expand-syntax expr) (car env))))
 
-;; (define (compile expr . env)
+;; (%defun compile (expr . env)
 ;;         (if (null? env)
 ;;             (%compile (expand-syntax expr))
 ;;           (%compile (expand-syntax expr) (car env))))

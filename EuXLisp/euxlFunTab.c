@@ -296,8 +296,6 @@ euxcFunDef funTab[] =
     {"unlink", euxlUnlink},
 
     // utility functions
-    {"transcript-on", euxlTransciptOn},
-    {"transcript-off", euxlTranscriptOff},
     {"getarg", euxlGetArg},
     {"exit", euxlExit},
     {"compile", euxlCompile},

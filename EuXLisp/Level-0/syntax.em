@@ -78,12 +78,12 @@
 ;    ...)
 (defsyntax defgeneric (name args . body)
   (cond ((symbol? name)
-         `(progn (define-generic ,(cons name args))
+         `(progn (%defgeneric ,name ,args)
                  ,@(defgeneric-methods name body)
                  ',name))
         ((definable-name? name)
          `(progn
-            (define-generic ,(cons 'setter/converter args))
+            (%defgeneric 'setter/converter ,args)
             ((setter ,(car name)) ,(cadr name) setter/converter)
             ,@(defgeneric-methods
                (list 'setter (cadr name))
@@ -110,14 +110,15 @@
 (defsyntax defmethod (name args . body)
   (if (or (symbol? name)
           (definable-name? name))
-      `(define-method ,(cons name args) ,@body)
+      `(%defmethod ,name ,args
+                   ,@body)
     (error <compilation-general-error>
            "malformed name in defgeneric"
            value: name)))
 
 (defsyntax generic-lambda (args . body)
   `(let (anonymous-generic)
-     (define-generic (anonymous-generic ,@args))
+     (defgeneric anonymous-generic ,args)
      ,@(defgeneric-methods
         'anonymous-generic
         body)

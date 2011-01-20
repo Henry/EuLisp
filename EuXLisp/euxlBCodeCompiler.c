@@ -30,8 +30,6 @@
 ///-----------------------------------------------------------------------------
 #define EUXL_NOISY_LOAD
 
-#define euxmCompileError(a,b)  euxcCerror(a,b,euxls_compile_error)
-
 // Size of code buffer
 #define euxmCodeBufferSize    10000
 
@@ -40,6 +38,14 @@
 #define euxmContNext          -2
 
 #define euxmSpaces() (spacy + 20 - (indent > 20 ? 20 : indent < 0 ? 0 : indent))
+
+///  Instruction output formats
+#define FMT_NONE        0
+#define FMT_BYTE        1
+#define FMT_LOFF        2
+#define FMT_WORD        3
+#define FMT_EOFF        4
+#define FMT_LOFFL       5
 
 ///-----------------------------------------------------------------------------
 /// Local variables
@@ -52,10 +58,55 @@ static const char *module_search_path[] =
 
 static euxlValue info; // compiler info
 
-// Code buffer
+///  Code buffer
 static unsigned char cbuff[euxmCodeBufferSize]; // base of code buffer
 static int cbase;                               // base for current function
 static int cptr;                                // code buffer pointer
+
+typedef struct
+{
+    int ot_code;
+    char *ot_name;
+    int ot_fmt;
+} byteCodeFmtDef;
+
+byteCodeFmtDef otab[] =
+{
+    {OP_BRT, "BRT", FMT_WORD},
+    {OP_BRF, "BRF", FMT_WORD},
+    {OP_BR, "BR", FMT_WORD},
+    {OP_LIT, "LIT", FMT_LOFF},
+    {OP_GREF, "GREF", FMT_LOFF},
+    {OP_GSET, "GSET", FMT_LOFF},
+    {OP_EREF, "EREF", FMT_EOFF},
+    {OP_ESET, "ESET", FMT_EOFF},
+    {OP_SAVE, "SAVE", FMT_WORD},
+    {OP_CALL, "CALL", FMT_BYTE},
+    {OP_RETURN, "RETURN", FMT_NONE},
+    {OP_T, "T", FMT_NONE},
+    {OP_NIL, "NIL", FMT_NONE},
+    {OP_PUSH, "PUSH", FMT_NONE},
+    {OP_CLOSE, "CLOSE", FMT_NONE},
+    {OP_DELAY, "DELAY", FMT_NONE},
+
+    {OP_FRAME, "FRAME", FMT_BYTE},
+    {OP_MVARG, "MVARG", FMT_BYTE},
+    {OP_MVOARG, "MVOARG", FMT_BYTE},
+    {OP_MVRARG, "MVRARG", FMT_BYTE},
+    {OP_ADROP, "ADROP", FMT_NONE},
+    {OP_ALAST, "ALAST", FMT_NONE},
+
+    {OP_AREF, "AREF", FMT_LOFF},
+    {OP_ASET, "ASET", FMT_LOFF},
+
+    {OP_CNM, "CALL-NEXT-METHOD", FMT_NONE},
+
+    {OP_GREFL, "GREFL", FMT_LOFFL},
+    {OP_GSETL, "GSETL", FMT_LOFFL},
+    {OP_LITL, "LITL", FMT_LOFFL},
+
+    {0, 0, 0}
+};
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
@@ -63,10 +114,9 @@ static int cptr;                                // code buffer pointer
 static void compileExpr(euxlValue expr, int cont);
 static int inNtab(euxlValue expr, int cont);
 static int inFtab(euxlValue expr, int cont);
-static void compileDefine(euxlValue form, int cont);
+static void compileDefun(euxlValue form, int cont);
 static void compileDefconstant(euxlValue form, int cont);
 static void compileDeflocal(euxlValue form, int cont);
-static void compileDefineCont(euxlValue list, euxlValue body, int cont);
 static void compileSet(euxlValue form, int cont);
 static void compileSetVar(euxlValue form, int cont);
 static void compileQuote(euxlValue form, int cont);
@@ -103,8 +153,8 @@ static void compileIdentifier(euxlValue sym, int cont);
 static void compileContinuation(int cont);
 static int addLevel();
 static void removeLevel(int oldcbase);
-static int findVariable(euxlValue sym, int *plev, int *poff);
-static int findVariableCurrentFrame(euxlValue sym, int *poff);
+static int findVariable(euxlValue sym, int *plev);
+static int findVariableCurrentFrame(euxlValue sym);
 static int findLiteral(euxlValue lit);
 static void compileVariable(int op, euxlValue sym);
 static void compileEVariable(int op, int lev, int off);
@@ -115,7 +165,7 @@ static void fixup(int chn);
 static void compileDefmodule(euxlValue form, int cont);
 static void compileExport(euxlValue form, int cont);
 static void compileExpose(euxlValue form, int cont);
-static void compileEnter_module(euxlValue form, int cont);
+static void compileEnterModule(euxlValue form, int cont);
 static void compileReenterModule(euxlValue form, int cont);
 static void compileImport(euxlValue form, int cont);
 static void reinternModuleSymbols(euxlValue body);
@@ -190,7 +240,7 @@ specialFormDef specialFormTab[] =
     {"let", compileLet},
     {"let*", compileLetstar},
     {"letrec", compileLetrec},
-    {"define", compileDefine},
+    {"%defun", compileDefun},
     {"defconstant", compileDefconstant},
     {"deflocal", compileDeflocal},
     {"setq", compileSet},
@@ -205,13 +255,13 @@ specialFormDef specialFormTab[] =
     {"defmodule", compileDefmodule},
     {"export", compileExport},
     {"expose", compileExpose},
-    {"enter-module", compileEnter_module},
-    {"!>", compileEnter_module},
+    {"enter-module", compileEnterModule},
+    {"!>", compileEnterModule},
     {"reenter-module", compileReenterModule},
     {"!>>", compileReenterModule},
     {"%import", compileImport},
-    {"define-generic", compileDefineGeneric},
-    {"define-method", compileDefineMethod},
+    {"%defgeneric", compileDefineGeneric},
+    {"%defmethod", compileDefineMethod},
     {"call-next-method", compileCnm},
     {"next-method?", compileNextMethodp},
     {"defclass", compileDefclass},
@@ -222,7 +272,13 @@ specialFormDef specialFormTab[] =
 ///-----------------------------------------------------------------------------
 /// Functions
 ///-----------------------------------------------------------------------------
-///  euxcCompile: Compile an expression
+///  euxmCompileError - signal a compilation error
+static void euxmCompileError(const char *msg, euxlValue arg)
+{
+    euxcCerror(msg, arg, euxls_compile_error);
+}
+
+///  euxcCompile - Compile an expression
 euxlValue euxcCompile(euxlValue expr, euxlValue ctenv)
 {
     // initialize the compile time environment
@@ -247,7 +303,7 @@ euxlValue euxcCompile(euxlValue expr, euxlValue ctenv)
     return (euxmStackPop());
 }
 
-///  euxcCompileFunction: Compile a function
+///  euxcCompileFunction - Compile a function
 euxlValue euxcCompileFunction
 (
     euxlValue fun,
@@ -275,7 +331,7 @@ euxlValue euxcCompileFunction
 }
 
 ///  compileExpr - compile an expression
-// (deflocal a (let ((lambda (lambda (lambda) lambda))) (lambda lambda)))
+//    (deflocal a (let ((lambda (lambda (lambda) lambda))) (lambda lambda)))
 static void compileExpr(euxlValue expr, int cont)
 {
     euxmStackCheckPush(expr);
@@ -290,7 +346,7 @@ static void compileExpr(euxlValue expr, int cont)
             // ((foo 1) 2)
             !euxmSymbolp(sym)
             // (let ((euxmCar euxmCdr)) (euxmCar x))
-         || findVariable(sym, &lev, &off)
+         || (off = findVariable(sym, &lev))
          || euxmGetModule(sym) != euxcRootModule
          || (!inNtab(expr, cont) && !inFtab(expr, cont))
         )
@@ -347,15 +403,43 @@ static int inFtab(euxlValue expr, int cont)
     return (euxmFalse);
 }
 
-///  compileDefine - handle the (define ... ) expression
-static void compileDefine(euxlValue form, int cont)
+///  compileDefun - handle the (defun ... ) expression
+static void compileDefun(euxlValue form, int cont)
 {
     if (euxmAtom(form))
     {
-        euxmCompileError("expecting symbol or function template", form);
+        euxmCompileError("expecting function name symbol in defun", form);
     }
 
-    compileDefineCont(euxmCar(form), euxmCdr(form), cont);
+    euxlValue funname = euxmCar(form);
+    if (!euxmSymbolp(funname) || euxmKeywordp(funname))
+    {
+        euxmCompileError("expecting a function name symbol in defun", funname);
+    }
+
+    form = euxmCdr(form);
+    if (!euxmConsp(form))
+    {
+        euxmCompileError("expecting argument list in defun", funname);
+    }
+
+    euxlValue args = euxmCar(form);
+    euxlValue body = euxmCdr(form);
+
+    compileFunction(funname, args, body);
+
+    // Define the variable value
+    int off = findVariableCurrentFrame(funname);
+    if (off)
+    {
+        compileEVariable(OP_ESET, 0, off);
+    }
+    else
+    {
+        compileVariable(OP_GSET, funname);
+    }
+
+    compileLiteral(funname, cont);
 }
 
 ///  compileDefconstant - handle the (defconstant ... ) expression
@@ -387,9 +471,9 @@ static void compileDefconstant(euxlValue form, int cont)
     // compile the value expression
     compileExpr(form == euxmNil ? euxmNil : euxmCar(form), euxmContNext);
 
-    // define the variable value
-    int off;
-    if (findVariableCurrentFrame(sym, &off))
+    // Define the variable value
+    int off = findVariableCurrentFrame(sym);
+    if (off)
     {
         euxmCompileError("defconstant not at top level", sym);
     }
@@ -430,9 +514,9 @@ static void compileDeflocal(euxlValue form, int cont)
     // compile the value expression
     compileExpr(form == euxmNil ? euxmNil : euxmCar(form), euxmContNext);
 
-    // define the variable value
-    int off;
-    if (findVariableCurrentFrame(sym, &off))
+    // Define the variable value
+    int off = findVariableCurrentFrame(sym);
+    if (off)
     {
         euxmCompileError("deflocal not at top level", sym);
     }
@@ -440,70 +524,6 @@ static void compileDeflocal(euxlValue form, int cont)
     compileVariable(OP_GSET, sym);
 
     compileLiteral(sym, cont);
-}
-
-
-///  compileDefineCont - helper function for compileDefine
-static void compileDefineCont(euxlValue list, euxlValue body, int cont)
-{
-    // handle nested definitions
-    if (euxmConsp(list))
-    {
-        // (lambda)
-        euxmStackCheckPush(euxcCons(euxls_lambda, euxmNil));
-
-        // (lambda args)
-        euxmSetCdr(euxmStackTop(), euxcCons(euxmCdr(list), euxmNil));
-
-        // (lambda args body)
-        euxmSetCdr(euxmCdr(euxmStackTop()), body);
-
-        // ((lambda args body))
-        euxmSetStackTop(euxcCons(euxmStackTop(), euxmNil));
-
-        compileDefineCont(euxmCar(list), euxmStackTop(), cont);
-        euxmStackDrop(1);
-    }
-    // compile procedure definitions
-    else
-    {
-        // make sure it's a symbol
-        if (!euxmSymbolp(list))
-        {
-            euxmCompileError("expecting a symbol", list);
-        }
-
-        // Check for a procedure definition
-        if
-        (
-            euxmConsp(body)
-         && euxmConsp(euxmCar(body))
-         && (euxmCar(euxmCar(body)) == euxls_lambda)
-        )
-        {
-            euxlValue fargs = euxmCar(euxmCdr(euxmCar(body)));
-            body = euxmCdr(euxmCdr(euxmCar(body)));
-            compileFunction(list, fargs, body);
-        }
-        // compile the value expression or procedure body
-        else
-        {
-            compileProgn(body, euxmContNext);
-        }
-
-        // define the variable value
-        int off;
-        if (findVariableCurrentFrame(list, &off))
-        {
-            compileEVariable(OP_ESET, 0, off);
-        }
-        else
-        {
-            compileVariable(OP_GSET, list);
-        }
-
-        compileLiteral(list, cont);
-    }
 }
 
 ///  compileSet - compile the (set! ... ) expression
@@ -547,8 +567,8 @@ static void compileSetVar(euxlValue form, int cont)
     compileExpr(euxmCar(form), euxmContNext);
 
     // set the variable value
-    int lev, off;
-    if (findVariable(sym, &lev, &off))
+    int lev, off = findVariable(sym, &lev);
+    if (off)
     {
         compileEVariable(OP_ESET, lev, off);
     }
@@ -706,17 +726,17 @@ static int findInternalDefinitions(euxlValue body, euxlValue last)
 {
     int n = 0;
 
-    // look for all (define...) forms
+    // look for all (defun ...) forms
     for
     (
-        euxlValue define = euxmInternAndExport("define");
+        euxlValue defun = euxmInternAndExport("defun");
         euxmConsp(body);
         body = euxmCdr(body)
     )
     {
-        if (euxmConsp(euxmCar(body)) && euxmCar(euxmCar(body)) == define)
+        if (euxmConsp(euxmCar(body)) && euxmCar(euxmCar(body)) == defun)
         {
-            // the rest of the (define...) form
+            // the rest of the (defun ...) form
             euxlValue sym = euxmCdr(euxmCar(body));
 
             if (euxmConsp(sym))
@@ -725,12 +745,6 @@ static int findInternalDefinitions(euxlValue body, euxlValue last)
 
                 // get the second subform
                 sym = euxmCar(sym);
-
-                // Check for a procedure definition
-                while (euxmConsp(sym))
-                {
-                    sym = euxmCar(sym);
-                }
 
                 if (euxmSymbolp(sym))
                 {
@@ -883,8 +897,8 @@ static void compileLetNamedLet(euxlValue name, euxlValue form, int cont)
     putCodeByte(OP_CLOSE);
 
     // store the procedure
-    int lev, off;
-    if (name && findVariable(name, &lev, &off))
+    int lev = 0, off = findVariable(name, &lev);
+    if (name && off)
     {
         compileEVariable(OP_ESET, lev, off);
     }
@@ -1173,8 +1187,8 @@ static void setBoundVariables(euxlValue blist)
         if (euxmConsp(euxmCar(blist)) && euxmConsp(euxmCdr(euxmCar(blist))))
         {
             compileExpr(euxmCar(euxmCdr(euxmCar(blist))), euxmContNext);
-            int lev, off;
-            if (findVariable(euxmCar(euxmCar(blist)), &lev, &off))
+            int lev, off = findVariable(euxmCar(euxmCar(blist)), &lev);
+            if (off)
             {
                 compileEVariable(OP_ESET, lev, off);
             }
@@ -1632,7 +1646,7 @@ static void compileIdentifier(euxlValue sym, int cont)
     {
         putCodeByte(OP_T);
     }
-    else if (findVariable(sym, &lev, &off))
+    else if ((off = findVariable(sym, &lev)))
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -1685,7 +1699,7 @@ static void removeLevel(int oldcbase)
 }
 
 ///  findVariable - find an environment variable
-static int findVariable(euxlValue sym, int *plev, int *poff)
+static int findVariable(euxlValue sym, int *plev)
 {
     int lev, off;
     euxlValue e, a;
@@ -1701,17 +1715,16 @@ static int findVariable(euxlValue sym, int *plev, int *poff)
             if (sym == euxmCar(a))
             {
                 *plev = lev;
-                *poff = off;
-                return (euxmTrue);
+                return off;
             }
         }
     }
 
-    return (euxmFalse);
+    return 0;
 }
 
 ///  find an environment variable in the current frame
-static int findVariableCurrentFrame(euxlValue sym, int *poff)
+static int findVariableCurrentFrame(euxlValue sym)
 {
     euxlValue a = euxmGetElement(euxmCar(euxmCar(info)), 0);
 
@@ -1719,15 +1732,15 @@ static int findVariableCurrentFrame(euxlValue sym, int *poff)
     {
         if (sym == euxmCar(a))
         {
-            *poff = off;
-            return (euxmTrue);
+            return off;
         }
     }
-    return (euxmFalse);
+
+    return 0;
 }
 
-///  litequal - test for equality that distinguishes symbols from
-///  different modules
+///  litequal - test for equality that distinguishes symbols
+//    from  different modules
 static int litequal(euxlValue a, euxlValue b)
 {
     if (a == b)
@@ -1870,7 +1883,7 @@ euxlValue euxcFindSym(euxlValue symbol, euxlValue list)
 }
 
 ///  try to load a module
-static int load_module(euxlValue sym)
+static int loadModule(euxlValue sym)
 {
     char name[256];
 
@@ -1976,7 +1989,7 @@ euxlValue euxcFindOrLoadModule(euxlValue sym)
 
     if (mod == euxmNil)
     {
-        (void)load_module(sym);
+        (void)loadModule(sym);
         mod = euxcFindModule(sym);
     }
 
@@ -1985,7 +1998,8 @@ euxlValue euxcFindOrLoadModule(euxlValue sym)
     return mod;
 }
 
-static void add_imported_symbols(euxlValue array, euxlValue syms)
+///  addImportedSymbols
+static void addImportedSymbols(euxlValue array, euxlValue syms)
 {
     for (; syms; syms = euxmCdr(syms))
     {
@@ -2000,6 +2014,7 @@ static void add_imported_symbols(euxlValue array, euxlValue syms)
     }
 }
 
+///  euxmCheckSymbolList
 static void euxmCheckSymbolList(euxlValue symlist)
 {
     for (; symlist; symlist = euxmCdr(symlist))
@@ -2015,7 +2030,8 @@ static void euxmCheckSymbolList(euxlValue symlist)
     }
 }
 
-static int same_name(euxlValue a, euxlValue b)
+///  sameName
+static int sameName(euxlValue a, euxlValue b)
 {
     return
     (
@@ -2027,7 +2043,8 @@ static int same_name(euxlValue a, euxlValue b)
     );
 }
 
-static euxlValue filter_all(euxlValue modname, euxlValue sofar)
+///  filterAll
+static euxlValue filterAll(euxlValue modname, euxlValue sofar)
 {
     euxmStackCheckPush(sofar);
     euxlValue module = euxcFindOrLoadModule(modname);
@@ -2051,7 +2068,8 @@ static euxlValue filter_all(euxlValue modname, euxlValue sofar)
     return sofar;
 }
 
-static euxlValue filter_only
+///  filterOnly
+static euxlValue filterOnly
 (
     euxlValue symlist,
     euxlValue implist,
@@ -2068,7 +2086,7 @@ static euxlValue filter_only
 
     for (; symlist; symlist = euxmCdr(symlist))
     {
-        euxlValue sym = euxcMember(euxmCar(symlist), syms, same_name);
+        euxlValue sym = euxcMember(euxmCar(symlist), syms, sameName);
         if (sym != euxmNil)
         {
             sofar = euxcCons(euxmCar(sym), sofar);
@@ -2080,7 +2098,8 @@ static euxlValue filter_only
     return sofar;
 }
 
-static euxlValue filter_except
+///  filterExcept
+static euxlValue filterExcept
 (
     euxlValue symlist,
     euxlValue implist,
@@ -2097,7 +2116,7 @@ static euxlValue filter_except
 
     for (; syms; syms = euxmCdr(syms))
     {
-        if (euxcMember(euxmCar(syms), symlist, same_name) == euxmNil)
+        if (euxcMember(euxmCar(syms), symlist, sameName) == euxmNil)
         {
             sofar = euxcCons(euxmCar(syms), sofar);
         }
@@ -2108,6 +2127,7 @@ static euxlValue filter_except
     return sofar;
 }
 
+///  euxmCheckRenameList
 static void euxmCheckRenameList(euxlValue renamelist)
 {
     if (!euxmListp(renamelist))
@@ -2192,7 +2212,7 @@ static euxlValue filter_rename
             continue;
         }
 
-        euxlValue found = euxcMember(oldname, syms, same_name);
+        euxlValue found = euxcMember(oldname, syms, sameName);
         if (found == euxmNil)
         {
             euxmCompileError
@@ -2222,7 +2242,7 @@ static euxlValue filter_rename
 
     for (; syms; syms = euxmCdr(syms))
     {
-        if (euxcMember(euxmCar(syms), except, same_name) == euxmNil)
+        if (euxcMember(euxmCar(syms), except, sameName) == euxmNil)
         {
             sofar = euxcCons(euxmCar(syms), sofar);
         }
@@ -2233,6 +2253,7 @@ static euxlValue filter_rename
     return sofar;
 }
 
+///  filterImports
 static euxlValue filterImports(euxlValue implist, euxlValue sofar)
 {
     for (; implist; implist = euxmCdr(implist))
@@ -2241,7 +2262,7 @@ static euxlValue filterImports(euxlValue implist, euxlValue sofar)
 
         if (euxmSymbolp(imp))
         {
-            sofar = filter_all(imp, sofar);
+            sofar = filterAll(imp, sofar);
         }
         else if
         (
@@ -2259,7 +2280,7 @@ static euxlValue filterImports(euxlValue implist, euxlValue sofar)
         }
         else if (euxmCar(imp) == euxls_only)
         {
-            sofar = filter_only
+            sofar = filterOnly
             (
                 euxmCar(euxmCdr(imp)),
                 euxmCdr(euxmCdr(imp)),
@@ -2268,7 +2289,7 @@ static euxlValue filterImports(euxlValue implist, euxlValue sofar)
         }
         else if (euxmCar(imp) == euxls_except)
         {
-            sofar = filter_except
+            sofar = filterExcept
             (
                 euxmCar(euxmCdr(imp)),
                 euxmCdr(euxmCdr(imp)),
@@ -2293,17 +2314,19 @@ static euxlValue filterImports(euxlValue implist, euxlValue sofar)
     return sofar;
 }
 
-static void proceseuxls_import_directive(euxlValue array, euxlValue implist)
+///  processImportDirective
+static void processImportDirective(euxlValue array, euxlValue implist)
 {
     euxlValue symlist = filterImports(implist, euxmNil);
     euxmStackCheckPush(symlist);
 
-    add_imported_symbols(array, symlist);
+    addImportedSymbols(array, symlist);
 
     euxmStackDrop(1);
 }
 
-static void proceseuxls_export_directive(euxlValue export_syms)
+///  processExportDirective
+static void processExportDirective(euxlValue export_syms)
 {
     euxlValue exports = euxmGetModuleExports(euxcCurrentModule);
 
@@ -2339,7 +2362,8 @@ static void proceseuxls_export_directive(euxlValue export_syms)
     euxmSetModuleExports(euxcCurrentModule, exports);
 }
 
-static void proceseuxls_expose_directive(euxlValue explist)
+///  processExposeDirective
+static void processExposeDirective(euxlValue explist)
 {
     euxlValue syms = filterImports(explist, euxmNil);
     euxmStackCheckPush(syms);
@@ -2380,7 +2404,8 @@ static void proceseuxls_expose_directive(euxlValue explist)
     euxmStackDrop(1);
 }
 
-static void proceseuxls_module_directives(euxlValue array, euxlValue directives)
+///  processModuleDirectives
+static void processModuleDirectives(euxlValue array, euxlValue directives)
 {
     euxmStackCheck(2);
     euxmStackPush(array);
@@ -2408,15 +2433,15 @@ static void proceseuxls_module_directives(euxlValue array, euxlValue directives)
         // current EuLisp definition
         if (directive == euxls_import || directive == euxls_syntax)
         {
-            proceseuxls_import_directive(array, value);
+            processImportDirective(array, value);
         }
         else if (directive == euxls_export)
         {
-            proceseuxls_export_directive(value);
+            processExportDirective(value);
         }
         else if (directive == euxls_expose)
         {
-            proceseuxls_expose_directive(value);
+            processExposeDirective(value);
         }
         else
         {
@@ -2498,6 +2523,7 @@ static void reinternModuleSymbols(euxlValue body)
     }
 }
 
+///  euxlReintern
 euxlValue euxlReintern()
 {
     static char *functionName = "reintern";
@@ -2511,6 +2537,7 @@ euxlValue euxlReintern()
 }
 
 #if 1
+///  euxlReinternSyntax
 euxlValue euxlReinternSyntax()
 {
     static char *functionName = "reintern-syntax";
@@ -2521,9 +2548,10 @@ euxlValue euxlReinternSyntax()
     return reinternSymbol(sym);
 }
 #else
-euxlValue reintern_syntax_form(), reintern_syntax_vector();
+euxlValue reinternSyntaxForm(), reinternSyntaxVector();
 
-euxlValue reintern_syntax_form(euxlValue form)
+///  reinternSyntaxForm
+euxlValue reinternSyntaxForm(euxlValue form)
 {
     if (euxmSymbolp(form))
     {
@@ -2531,11 +2559,11 @@ euxlValue reintern_syntax_form(euxlValue form)
     }
     else if (euxmConsp(form))
     {
-        return euxcCons(euxmCar(form), reintern_syntax_form(euxmCdr(form)));
+        return euxcCons(euxmCar(form), reinternSyntaxForm(euxmCdr(form)));
     }
     else if (euxmVectorp(form))
     {
-        return reintern_syntax_vector(form);
+        return reinternSyntaxVector(form);
     }
     else
     {
@@ -2543,19 +2571,21 @@ euxlValue reintern_syntax_form(euxlValue form)
     }
 }
 
-euxlValue reintern_syntax_vector(euxlValue form)
+///  reinternSyntaxVector
+euxlValue reinternSyntaxVector(euxlValue form)
 {
     int len = euxmGetSize(form);
     euxlValue new = euxcNewVector(len);
     euxmStackCheckPush(new);
     for (int i = 0; i < len; i++)
     {
-        euxmSetElement(new, i, reintern_syntax_form(euxmGetElement(form, i)));
+        euxmSetElement(new, i, reinternSyntaxForm(euxmGetElement(form, i)));
     }
     euxmStackDrop(1);
     return new;
 }
 
+///  euxlReinternSyntax
 euxlValue euxlReinternSyntax()
 {
     static char *functionName = "reintern-syntax";
@@ -2567,7 +2597,7 @@ euxlValue euxlReinternSyntax()
 
     if (euxmSymbolp(form) || euxmConsp(form) || euxmVectorp(form))
     {
-        form = reintern_syntax_form(form);
+        form = reinternSyntaxForm(form);
     }
 
     euxmStackDrop(1);
@@ -2575,6 +2605,7 @@ euxlValue euxlReinternSyntax()
 }
 #endif
 
+///  euxlModuleDirectives
 euxlValue euxlModuleDirectives()
 {
     static char *functionName = "module-directives";
@@ -2583,14 +2614,14 @@ euxlValue euxlModuleDirectives()
     euxlValue form = euxmGetArgList();
     euxmLastArg();
 
-    proceseuxls_module_directives(array, form);
+    processModuleDirectives(array, form);
 
     return euxs_t;
 }
 
 ///  load those modules that this one depends on
 //    implist is a list of module descriptors (i.e., names or filters)
-static void load_dependent_modules2(euxlValue implist)
+static void loadDependentModules2(euxlValue implist)
 {
     for (; implist; implist = euxmCdr(implist))
     {
@@ -2620,7 +2651,7 @@ static void load_dependent_modules2(euxlValue implist)
          || euxmCar(imp) == euxls_rename
         )
         {
-            load_dependent_modules2(euxmCdr(euxmCdr(imp)));
+            loadDependentModules2(euxmCdr(euxmCdr(imp)));
         }
         else
         {
@@ -2629,7 +2660,8 @@ static void load_dependent_modules2(euxlValue implist)
     }
 }
 
-static void load_dependent_modules(euxlValue directives)
+///  loadDependentModules
+static void loadDependentModules(euxlValue directives)
 {
     while (directives)
     {
@@ -2647,7 +2679,7 @@ static void load_dependent_modules(euxlValue directives)
 
         if (directive == euxls_import || directive == euxls_syntax)
         {
-            load_dependent_modules2(euxmCar(directives));
+            loadDependentModules2(euxmCar(directives));
         }
 
         directives = euxmCdr(directives);
@@ -2702,7 +2734,7 @@ static void compileDefmodule(euxlValue form, int cont)
 
     euxlValue array = euxmGetModuleSymbols(newmod);
 
-    load_dependent_modules(euxmCar(euxmCdr(form)));
+    loadDependentModules(euxmCar(euxmCdr(form)));
 
     euxlValue expr = euxcCons(euxls_set_module, euxcCons(newmod, euxmNil));
     compileExpr(expr, euxmContNext);
@@ -2784,6 +2816,7 @@ static void compileDefmodule(euxlValue form, int cont)
     euxmStackDrop(2);
 }
 
+///  compileExport
 static void compileExport(euxlValue form, int cont)
 {
     euxlValue exports = euxmGetModuleExports(euxcCurrentModule);
@@ -2810,6 +2843,7 @@ static void compileExport(euxlValue form, int cont)
     compileContinuation(cont);
 }
 
+///  euxcAppend
 euxlValue euxcAppend(euxlValue a, euxlValue b)
 {
     if (a == euxmNil)
@@ -2820,6 +2854,7 @@ euxlValue euxcAppend(euxlValue a, euxlValue b)
     return euxcCons(euxmCar(a), euxcAppend(euxmCdr(a), b));
 }
 
+///  compileExpose
 static void compileExpose(euxlValue form, int cont)
 {
     euxlValue exports = euxmGetModuleExports(euxcCurrentModule);
@@ -2854,7 +2889,8 @@ static void compileExpose(euxlValue form, int cont)
     euxmStackDrop(1);
 }
 
-static void compileEnter_module(euxlValue form, int cont)
+///  compileEnterModule
+static void compileEnterModule(euxlValue form, int cont)
 {
     if (euxmAtom(form))
     {
@@ -2888,6 +2924,7 @@ static void compileEnter_module(euxlValue form, int cont)
     euxmStackDrop(1);
 }
 
+///  compileReenterModule
 static void compileReenterModule(euxlValue form, int cont)
 {
     if (euxmAtom(form))
@@ -2901,7 +2938,7 @@ static void compileReenterModule(euxlValue form, int cont)
 
     euxmStackCheckPush(form);
 
-    int loaded = load_module(sym);
+    int loaded = loadModule(sym);
 
     euxlValue mod = euxcFindModule(sym);
     if (mod == euxmNil)
@@ -2979,6 +3016,7 @@ static void compileImport(euxlValue form, int cont)
     euxmStackDrop(1);
 }
 
+///  genargs
 static void genargs(euxlValue gf, euxlValue args)
 {
     if (!euxmConsp(args))
@@ -3005,8 +3043,8 @@ static void genargs(euxlValue gf, euxlValue args)
     )
     {
         euxlValue sym = euxmCar(euxmCdr(euxmCar(args)));
-        int lev, off;
-        if (findVariable(sym, &lev, &off))
+        int lev, off = findVariable(sym, &lev);
+        if (off)
         {
             compileEVariable(OP_EREF, lev, off);
         }
@@ -3039,6 +3077,7 @@ static void compileSet_genargs(euxlValue gf, euxlValue args)
     fixup(nxt);
 }
 
+///  compileDefineGeneric
 static void compileDefineGeneric(euxlValue form, int cont)
 {
     if (euxmAtom(form))
@@ -3046,22 +3085,19 @@ static void compileDefineGeneric(euxlValue form, int cont)
         euxcFail("missing body in defgeneric", euxls_syntax_error);
     }
 
-    if (!euxmConsp(euxmCar(form)))
-    {
-        euxmCompileError("bad name/args in defgeneric", euxmCar(form));
-    }
-
-    euxlValue name = euxmCar(euxmCar(form));
+    euxlValue name = euxmCar(form);
     if (!euxmSymbolp(name))
     {
         euxmCompileError("bad name in defgeneric", name);
     }
 
-    euxlValue args = euxmCdr(euxmCar(form));
+    euxlValue args = euxmCar(euxmCdr(form));
+
     if (!euxmListp(args))
     {
         euxmCompileError("bad arglist in defgeneric", euxmCar(form));
     }
+
     if (!euxmConsp(args))
     {
         euxmCompileError
@@ -3082,8 +3118,8 @@ static void compileDefineGeneric(euxlValue form, int cont)
     euxmSetGenericCache2(gf, euxmNil);
 
     compileLiteral(gf, euxmContNext);
-    int off;
-    if (findVariableCurrentFrame(name, &off))
+    int off = findVariableCurrentFrame(name);
+    if (off)
     {
         compileEVariable(OP_ESET, 0, off);
     }
@@ -3098,7 +3134,8 @@ static void compileDefineGeneric(euxlValue form, int cont)
     compileLiteral(name, cont);
 }
 
-static euxlValue define_method_args(euxlValue arglist)
+///  defineMethodArgs
+static euxlValue defineMethodArgs(euxlValue arglist)
 {
     if (!euxmConsp(arglist))
     {
@@ -3156,7 +3193,7 @@ static euxlValue define_method_args(euxlValue arglist)
 }
 
 ///  the required args classes
-static euxlValue define_method_classes(euxlValue arglist)
+static euxlValue defineMethodClasses(euxlValue arglist)
 {
     if (!euxmConsp(arglist))
     {
@@ -3232,8 +3269,8 @@ static int push_method_domain(euxlValue classes)
     }
 
     int len = push_method_domain(euxmCdr(classes));
-    int lev, off;
-    if (findVariable(euxmCar(classes), &lev, &off))
+    int lev, off = findVariable(euxmCar(classes), &lev);
+    if (off)
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3247,6 +3284,7 @@ static int push_method_domain(euxlValue classes)
     return len + 1;
 }
 
+///  compileDefineMethod
 static void compileDefineMethod(euxlValue form, int cont)
 {
     if (euxmAtom(form))
@@ -3254,22 +3292,19 @@ static void compileDefineMethod(euxlValue form, int cont)
         euxcFail("missing body in defmethod", euxls_syntax_error);
     }
 
-    if (!euxmConsp(euxmCar(form)))
-    {
-        euxmCompileError("bad name/args in defmethod", euxmCar(form));
-    }
-
-    euxlValue name = euxmCar(euxmCar(form));
+    euxlValue name = euxmCar(form);
     if (!(euxmSymbolp(name) || (euxmConsp(name) && euxmSymbolp(euxmCar(name)))))
     {
         euxmCompileError("bad name in defmethod", name);
     }
 
-    euxlValue arglist = euxmCdr(euxmCar(form));
+    euxlValue arglist = euxmCar(euxmCdr(form));
+
     if (!euxmListp(arglist))
     {
         euxmCompileError("bad arglist in defmethod", euxmCar(form));
     }
+
     if (!euxmConsp(arglist))
     {
         euxmCompileError
@@ -3280,9 +3315,9 @@ static void compileDefineMethod(euxlValue form, int cont)
     }
 
     euxmStackCheckPush(form);
-    euxlValue classes = define_method_classes(arglist);
+    euxlValue classes = defineMethodClasses(arglist);
     euxmStackCheckPush(classes);
-    euxlValue args = define_method_args(arglist);
+    euxlValue args = defineMethodArgs(arglist);
     euxmStackCheckPush(args);
 
     euxmStackDrop(1);
@@ -3317,7 +3352,7 @@ static void compileDefineMethod(euxlValue form, int cont)
     fixup(nxt2);
     putCodeByte(OP_PUSH);
 
-    euxlValue body = euxmCdr(form);
+    euxlValue body = euxmCdr(euxmCdr(form));
     compileFunction(name, args, body); // the method function
     putCodeByte(OP_PUSH);
 
@@ -3339,6 +3374,7 @@ static void compileDefineMethod(euxlValue form, int cont)
 
 }
 
+///  compileCnm
 static void compileCnm(euxlValue form, int cont)
 {
     if (form != euxmNil)
@@ -3353,8 +3389,8 @@ static void compileCnm(euxlValue form, int cont)
         nxt = putCodeWord(0);
     }
 
-    int lev, off;
-    if (findVariable(euxls_arg_list, &lev, &off))   // arg list
+    int lev, off = findVariable(euxls_arg_list, &lev);
+    if (off)   // arg list
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3365,7 +3401,7 @@ static void compileCnm(euxlValue form, int cont)
 
     putCodeByte(OP_PUSH);
 
-    if (findVariable(euxls_next_methods, &lev, &off))       // method list
+    if ((off = findVariable(euxls_next_methods, &lev)))       // method list
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3385,6 +3421,7 @@ static void compileCnm(euxlValue form, int cont)
 
 }
 
+///  compileNextMethodp
 static void compileNextMethodp(euxlValue form, int cont)
 {
     if (form != euxmNil)
@@ -3392,8 +3429,8 @@ static void compileNextMethodp(euxlValue form, int cont)
         euxmCompileError("extra forms in next-method?", form);
     }
 
-    int lev, off;
-    if (findVariable(euxls_next_methods, &lev, &off))       // arg list
+    int lev, off = findVariable(euxls_next_methods, &lev);
+    if (off)       // arg list
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3409,6 +3446,7 @@ static void compileNextMethodp(euxlValue form, int cont)
 
 }
 
+///  compileSuperclass
 static int compileSuperclass(euxlValue super)
 {
     if (super == euxmNil)
@@ -3419,8 +3457,8 @@ static int compileSuperclass(euxlValue super)
     putCodeByte(OP_NIL);
     putCodeByte(OP_PUSH);
 
-    int lev, off;
-    if (findVariable(super, &lev, &off))
+    int lev, off = findVariable(super, &lev);
+    if (off)
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3439,7 +3477,8 @@ static int compileSuperclass(euxlValue super)
 
 }
 
-static int compile_abstractp(euxlValue classopts)
+///  compileAbstractp
+static int compileAbstractp(euxlValue classopts)
 {
     for (; classopts; classopts = euxmCdr(euxmCdr(classopts)))
     {
@@ -3456,6 +3495,7 @@ static int compile_abstractp(euxlValue classopts)
     return 0;
 }
 
+///  compileSlots
 static int compileSlots(euxlValue slots)
 {
     if (slots == euxmNil)
@@ -3563,7 +3603,8 @@ static int compileSlots(euxlValue slots)
     return 2;
 }
 
-static int compile_keywords(euxlValue slots, euxlValue classopts)
+///  compileKeywords
+static int compileKeywords(euxlValue slots, euxlValue classopts)
 {
     int nargs = 0;
 
@@ -3636,6 +3677,7 @@ static int compile_keywords(euxlValue slots, euxlValue classopts)
     return nargs;
 }
 
+/// mkarg
 static euxlValue mkarg(int n)
 {
     char buf[128];
@@ -3644,7 +3686,8 @@ static euxlValue mkarg(int n)
     return euxmInternAndExport(buf);
 }
 
-static void compile_general_constructor(euxlValue classname, euxlValue name)
+///  compileGeneralConstructor
+static void compileGeneralConstructor(euxlValue classname, euxlValue name)
 {
     if (!euxmSymbolp(name))
     {
@@ -3661,8 +3704,8 @@ static void compile_general_constructor(euxlValue classname, euxlValue name)
     compileFunction(name, args, body);
     euxmStackDrop(1);
 
-    int lev, off;
-    if (findVariable(name, &lev, &off))
+    int lev, off = findVariable(name, &lev);
+    if (off)
     {
         compileEVariable(OP_ESET, lev, off);
     }
@@ -3672,6 +3715,8 @@ static void compile_general_constructor(euxlValue classname, euxlValue name)
     }
 }
 
+
+///  compileConstructor
 static void compileConstructor(euxlValue classname, euxlValue classopts)
 {
     for (; classopts; classopts = euxmCdr(euxmCdr(classopts)))
@@ -3687,7 +3732,7 @@ static void compileConstructor(euxlValue classname, euxlValue classopts)
             }
             else
             {
-                compile_general_constructor(classname, name);
+                compileGeneralConstructor(classname, name);
                 return;
             }
 
@@ -3722,8 +3767,8 @@ static void compileConstructor(euxlValue classname, euxlValue classopts)
             compileFunction(name, args, body);
             euxmStackDrop(2);
 
-            int lev, off;
-            if (findVariable(name, &lev, &off))
+            int lev, off = findVariable(name, &lev);
+            if (off)
             {
                 compileEVariable(OP_ESET, lev, off);
             }
@@ -3735,7 +3780,8 @@ static void compileConstructor(euxlValue classname, euxlValue classopts)
     }
 }
 
-static void compile_predicate(euxlValue classname, euxlValue classopts)
+///  compilePredicate
+static void compilePredicate(euxlValue classname, euxlValue classopts)
 {
     euxlValue euxls_claseuxls_of =
         euxcEnterModule("class-of", euxcRootModule);
@@ -3781,8 +3827,8 @@ static void compile_predicate(euxlValue classname, euxlValue classopts)
                 previous = euxmTrue;
             }
 
-            int lev, off;
-            if (findVariable(name, &lev, &off))
+            int lev, off = findVariable(name, &lev);
+            if (off)
             {
                 compileEVariable(OP_ESET, lev, off);
             }
@@ -3794,7 +3840,8 @@ static void compile_predicate(euxlValue classname, euxlValue classopts)
     }
 }
 
-static void compile_named_reader
+///  compileNamedReader
+static void compileNamedReader
 (
     euxlValue readername,
     euxlValue slotname,
@@ -3810,8 +3857,8 @@ static void compile_named_reader
     putCodeByte(OP_SAVE);
     int nxt4 = putCodeWord(0);
 
-    int lev, off;
-    if (findVariable(classname, &lev, &off))
+    int lev, off = findVariable(classname, &lev);
+    if (off)
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3842,7 +3889,7 @@ static void compile_named_reader
     nxt3 = putCodeWord(0);
     compileLiteral(euxls_object, euxmContNext);
     putCodeByte(OP_PUSH);
-    if (findVariable(classname, &lev, &off))
+    if ((off = findVariable(classname, &lev)))
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3880,7 +3927,7 @@ static void compile_named_reader
     putCodeByte(OP_CALL);
     putCodeByte(1);
     fixup(nxt1);
-    if (findVariable(readername, &lev, &off))
+    if ((off = findVariable(readername, &lev)))
     {
         compileEVariable(OP_ESET, lev, off);
     }
@@ -3890,7 +3937,8 @@ static void compile_named_reader
     }
 }
 
-static void compile_named_writer
+///  compileNamedWriter
+static void compileNamedWriter
 (
     euxlValue writername,
     euxlValue slotname,
@@ -3909,8 +3957,8 @@ static void compile_named_writer
     putCodeByte(OP_SAVE);
     int nxt4 = putCodeWord(0);
 
-    int lev, off;
-    if (findVariable(classname, &lev, &off))
+    int lev, off = findVariable(classname, &lev);
+    if (off)
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3944,7 +3992,7 @@ static void compile_named_writer
     compileLiteral(euxls_object, euxmContNext);
     putCodeByte(OP_PUSH);
 
-    if (findVariable(classname, &lev, &off))
+    if ((off = findVariable(classname, &lev)))
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -3993,7 +4041,7 @@ static void compile_named_writer
         nxt1 = putCodeWord(0);
         putCodeByte(OP_PUSH);
 
-        if (findVariable(writername, &lev, &off))
+        if ((off = findVariable(writername, &lev)))
         {
             compileEVariable(OP_EREF, lev, off);
         }
@@ -4017,7 +4065,7 @@ static void compile_named_writer
     }
     else
     {
-        if (findVariable(writername, &lev, &off))
+        if ((off = findVariable(writername, &lev)))
         {
             compileEVariable(OP_ESET, lev, off);
         }
@@ -4029,7 +4077,8 @@ static void compile_named_writer
 
 }
 
-static void compile_readers(euxlValue classname, euxlValue slots)
+///  compileReaders
+static void compileReaders(euxlValue classname, euxlValue slots)
 {
     for (; slots; slots = euxmCdr(slots))
     {
@@ -4054,7 +4103,7 @@ static void compile_readers(euxlValue classname, euxlValue slots)
                 }
                 if (euxmCar(slotl) == euxls_reader)
                 {
-                    compile_named_reader
+                    compileNamedReader
                     (
                         euxmCar(euxmCdr(slotl)),
                         euxmCar(slot),
@@ -4066,7 +4115,8 @@ static void compile_readers(euxlValue classname, euxlValue slots)
     }
 }
 
-static void compile_writers(euxlValue classname, euxlValue slots)
+///  compileWriters
+static void compileWriters(euxlValue classname, euxlValue slots)
 {
     for (; slots; slots = euxmCdr(slots))
     {
@@ -4091,7 +4141,7 @@ static void compile_writers(euxlValue classname, euxlValue slots)
                 }
                 if (euxmCar(slotl) == euxls_writer)
                 {
-                    compile_named_writer
+                    compileNamedWriter
                     (
                         euxmCar(euxmCdr(slotl)),
                         euxmCar(slot),
@@ -4104,7 +4154,8 @@ static void compile_writers(euxlValue classname, euxlValue slots)
     }
 }
 
-static void compileClaseuxls_class(euxlValue classopts)
+///  compileClassClass
+static void compileClassClass(euxlValue classopts)
 {
     euxlValue cls = euxmNil;
 
@@ -4136,6 +4187,7 @@ static void compileClaseuxls_class(euxlValue classopts)
     euxmStackDrop(1);
 }
 
+///  compileAccessors
 static void compileAccessors(euxlValue classname, euxlValue slots)
 {
     for (; slots; slots = euxmCdr(slots))
@@ -4160,14 +4212,14 @@ static void compileAccessors(euxlValue classname, euxlValue slots)
                 }
                 if (euxmCar(slotl) == euxls_accessor)
                 {
-                    compile_named_reader
+                    compileNamedReader
                     (
                         euxmCar(euxmCdr(slotl)),
                         euxmCar(slot),
                         classname
                     );
 
-                    compile_named_writer
+                    compileNamedWriter
                     (
                         euxmCar(euxmCdr(slotl)),
                         euxmCar(slot),
@@ -4180,6 +4232,7 @@ static void compileAccessors(euxlValue classname, euxlValue slots)
     }
 }
 
+///  checkSlotOptions
 static void checkSlotOptions(euxlValue slots)
 {
     for (; slots; slots = euxmCdr(slots))
@@ -4225,6 +4278,7 @@ static void checkSlotOptions(euxlValue slots)
     }
 }
 
+///  euxmCheckClassOptions
 static void euxmCheckClassOptions(euxlValue classopts)
 {
     if ((euxcListSize(classopts) & 1) == 1)
@@ -4249,6 +4303,7 @@ static void euxmCheckClassOptions(euxlValue classopts)
     }
 }
 
+///  compileDefclass
 static void compileDefclass(euxlValue form, int cont)
 {
     euxmStackCheckPush(form);
@@ -4295,10 +4350,10 @@ static void compileDefclass(euxlValue form, int cont)
     int nxt = putCodeWord(0);
 
     int nargs = 0;
-    nargs += compile_keywords(slots, classopts);
+    nargs += compileKeywords(slots, classopts);
     nargs += compileSlots(slots);
     nargs += compileSuperclass(super);
-    nargs += compile_abstractp(classopts);
+    nargs += compileAbstractp(classopts);
 
     compileLiteral(name, euxmContNext);
     putCodeByte(OP_PUSH);
@@ -4308,7 +4363,7 @@ static void compileDefclass(euxlValue form, int cont)
     putCodeByte(OP_PUSH);
     nargs++;
 
-    compileClaseuxls_class(classopts);
+    compileClassClass(classopts);
     nargs++;
 
     compileVariable(OP_GREF, euxls_make);
@@ -4316,8 +4371,8 @@ static void compileDefclass(euxlValue form, int cont)
     putCodeByte(nargs);
     fixup(nxt);
 
-    int lev, off;
-    if (findVariable(name, &lev, &off))
+    int lev, off = findVariable(name, &lev);
+    if (off)
     {
         compileEVariable(OP_ESET, lev, off);
     }
@@ -4327,9 +4382,9 @@ static void compileDefclass(euxlValue form, int cont)
     }
 
     compileConstructor(name, classopts);
-    compile_predicate(name, classopts);
-    compile_readers(name, slots);
-    compile_writers(name, slots);
+    compilePredicate(name, classopts);
+    compileReaders(name, slots);
+    compileWriters(name, slots);
     compileAccessors(name, slots);
 
     compileLiteral(name, cont);
@@ -4337,6 +4392,7 @@ static void compileDefclass(euxlValue form, int cont)
     euxmStackDrop(1);
 }
 
+///  compileSupercondition
 static int compileSupercondition(euxlValue super)
 {
     euxlValue euxls_condition =
@@ -4362,8 +4418,8 @@ static int compileSupercondition(euxlValue super)
     putCodeByte(OP_NIL);
     putCodeByte(OP_PUSH);
 
-    int lev, off;
-    if (findVariable(supercond, &lev, &off))
+    int lev, off = findVariable(supercond, &lev);
+    if (off)
     {
         compileEVariable(OP_EREF, lev, off);
     }
@@ -4381,6 +4437,7 @@ static int compileSupercondition(euxlValue super)
     return 2;
 }
 
+///  compileDefcondition
 static void compileDefcondition(euxlValue form, int cont)
 {
     euxmStackCheckPush(form);
@@ -4423,10 +4480,10 @@ static void compileDefcondition(euxlValue form, int cont)
     int nxt = putCodeWord(0);
 
     int nargs = 0;
-    nargs += compile_keywords(slots, classopts);
+    nargs += compileKeywords(slots, classopts);
     nargs += compileSlots(slots);
     nargs += compileSupercondition(super);
-    nargs += compile_abstractp(classopts);
+    nargs += compileAbstractp(classopts);
 
     compileLiteral(name, euxmContNext);
     putCodeByte(OP_PUSH);
@@ -4436,7 +4493,7 @@ static void compileDefcondition(euxlValue form, int cont)
     putCodeByte(OP_PUSH);
     nargs++;
 
-    compileClaseuxls_class(classopts);
+    compileClassClass(classopts);
     nargs++;
 
     compileVariable(OP_GREF, euxls_make);
@@ -4444,8 +4501,8 @@ static void compileDefcondition(euxlValue form, int cont)
     putCodeByte(nargs);
     fixup(nxt);
 
-    int lev, off;
-    if (findVariable(name, &lev, &off))
+    int lev, off = findVariable(name, &lev);
+    if (off)
     {
         compileEVariable(OP_ESET, lev, off);
     }
@@ -4455,9 +4512,9 @@ static void compileDefcondition(euxlValue form, int cont)
     }
 
     compileConstructor(name, classopts);
-    compile_predicate(name, classopts);
-    compile_readers(name, slots);
-    compile_writers(name, slots);
+    compilePredicate(name, classopts);
+    compileReaders(name, slots);
+    compileWriters(name, slots);
     compileAccessors(name, slots);
 
     compileLiteral(name, cont);
@@ -4465,6 +4522,7 @@ static void compileDefcondition(euxlValue form, int cont)
     euxmStackDrop(1);
 }
 
+///  euxlSyntaxError
 euxlValue euxlSyntaxError()
 {
     static char *functionName = "raise-syntax-error";
@@ -4476,58 +4534,6 @@ euxlValue euxlSyntaxError()
 
     return euxmNil; // not reached
 }
-
-///  instruction output formats
-#define FMT_NONE        0
-#define FMT_BYTE        1
-#define FMT_LOFF        2
-#define FMT_WORD        3
-#define FMT_EOFF        4
-#define FMT_LOFFL       5
-
-typedef struct
-{
-    int ot_code;
-    char *ot_name;
-    int ot_fmt;
-} OTDEF;
-OTDEF otab[] =
-{
-    {OP_BRT, "BRT", FMT_WORD},
-    {OP_BRF, "BRF", FMT_WORD},
-    {OP_BR, "BR", FMT_WORD},
-    {OP_LIT, "LIT", FMT_LOFF},
-    {OP_GREF, "GREF", FMT_LOFF},
-    {OP_GSET, "GSET", FMT_LOFF},
-    {OP_EREF, "EREF", FMT_EOFF},
-    {OP_ESET, "ESET", FMT_EOFF},
-    {OP_SAVE, "SAVE", FMT_WORD},
-    {OP_CALL, "CALL", FMT_BYTE},
-    {OP_RETURN, "RETURN", FMT_NONE},
-    {OP_T, "T", FMT_NONE},
-    {OP_NIL, "NIL", FMT_NONE},
-    {OP_PUSH, "PUSH", FMT_NONE},
-    {OP_CLOSE, "CLOSE", FMT_NONE},
-    {OP_DELAY, "DELAY", FMT_NONE},
-
-    {OP_FRAME, "FRAME", FMT_BYTE},
-    {OP_MVARG, "MVARG", FMT_BYTE},
-    {OP_MVOARG, "MVOARG", FMT_BYTE},
-    {OP_MVRARG, "MVRARG", FMT_BYTE},
-    {OP_ADROP, "ADROP", FMT_NONE},
-    {OP_ALAST, "ALAST", FMT_NONE},
-
-    {OP_AREF, "AREF", FMT_LOFF},
-    {OP_ASET, "ASET", FMT_LOFF},
-
-    {OP_CNM, "CALL-NEXT-METHOD", FMT_NONE},
-
-    {OP_GREFL, "GREFL", FMT_LOFFL},
-    {OP_GSETL, "GSETL", FMT_LOFFL},
-    {OP_LITL, "LITL", FMT_LOFFL},
-
-    {0, 0, 0}
-};
 
 ///  euxcDecodeProcedure - decode the instructions in a code object
 void euxcDecodeProcedure(euxlValue fptr, euxlValue fun)
@@ -4571,9 +4577,9 @@ int euxcDecodeInstruction(euxlValue fptr, euxlValue code, int lc, euxlValue env)
     euxcPutString(fptr, buf);
     fflush(euxmGetFile(fptr));
 
-    // print the operands
+    // Print the operands
     int i, n = 1;
-    for (OTDEF *op = otab; op->ot_name; ++op)
+    for (byteCodeFmtDef *op = otab; op->ot_name; ++op)
     {
         if (*cp == op->ot_code)
         {

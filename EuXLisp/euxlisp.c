@@ -49,9 +49,6 @@ char * const *clargv;  // array of command line arguments
 ///  Stack top
 euxmJmpBuf euxmStackTopLevel;
 
-///  Trace file pointer
-FILE *tfp = NULL;
-
 ///  Don't print prompt in script-mode
 int quiet;
 
@@ -533,10 +530,6 @@ void euxcFatal(const char *msg)
 ///  euxcWrapup - clean up and exit to the operating system
 void euxcWrapup(int n)
 {
-    if (tfp)
-    {
-        euxcOSClose(tfp);
-    }
     euxcOSFinish();
     exit(n);
 }

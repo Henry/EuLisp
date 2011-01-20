@@ -216,11 +216,11 @@ static void compileString(const char *str)
 void euxcInitSymbols()
 {
     // Enter the eof object
-    euxs_eof = euxcCons(euxmInternAndExport("**eof**"), euxmNil);
+    euxs_eof = euxcCons(euxmInternAndExport("*eof*"), euxmNil);
     euxmSetValue(euxmCar(euxs_eof), euxs_eof);
 
     // Enter the default object
-    euxs_default = euxcCons(euxmInternAndExport("**default**"), euxmNil);
+    euxs_default = euxcCons(euxmInternAndExport("*default*"), euxmNil);
 
     euxls_eval_cm = euxmInternAndExport("eval/cm");
 

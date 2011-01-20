@@ -1053,47 +1053,6 @@ euxlValue euxlOutputStreamp()
     return (euxmeuxmOStreamp(arg) ? euxs_t : euxmNil);
 }
 
-///  euxlTransciptOn - built-in function 'transcript-on'
-euxlValue euxlTransciptOn()
-{
-    static char *functionName = "transcript-on";
-
-    // get the file name and direction
-    char *name = euxmGetString(euxmGetArgString());
-    euxmLastArg();
-
-    // close any currently open transcript file
-    if (tfp)
-    {
-        euxcOSClose(tfp);
-        tfp = NULL;
-    }
-
-    // try to open the file
-    return ((tfp = euxcOSAOpen(name, "w")) == NULL ? euxmNil : euxs_t);
-}
-
-///  euxlTranscriptOff - built-in function 'transcript-off'
-euxlValue euxlTranscriptOff()
-{
-    static char *functionName = "transcript-off";
-
-    // make sure there aren't any arguments
-    euxmLastArg();
-
-    // make sure the transcript is open
-    if (tfp == NULL)
-    {
-        return (euxmNil);
-    }
-
-    // close the transcript and return successfully
-    euxcOSClose(tfp);
-    tfp = NULL;
-
-    return (euxs_t);
-}
-
 ///  euxlMakeString - built-in function 'make-string'
 euxlValue euxlMakeString()
 {

@@ -45,15 +45,19 @@
            %make-constant
            %import
 
-           main
-           **eof**
-           **default**
+           *eof*
+           *default*
            *unbound*
            *fpi-format*
            *flonum-format*
            *print-case*
 
            *gc-msgs*
+
+           %defgeneric
+           %defmethod
+
+           main
 
            ;; Standard streams
            stdin
@@ -78,9 +82,6 @@
            put-syntax
            qualified-symbols?
 
-           define-generic
-           define-method
-
            getbcode
            getliteral
            setivar
@@ -97,10 +98,10 @@
 
            %+))
 
-(define (getbcode closure)
+(%defun getbcode (closure)
         (%vector-ref (%car closure) 0))
 
-(define (getliteral closure n)
+(%defun getliteral (closure n)
         (%vector-ref (%car closure) n))
 
 ;;;-----------------------------------------------------------------------------

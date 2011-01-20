@@ -42,7 +42,6 @@
            eval)
    export (%=
            %-
-           define
            ;; Special operators
            deflocal
            defconstant
