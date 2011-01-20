@@ -1329,6 +1329,8 @@ given symbol SYM."
     (progn . 0)
     (if . 2)
     (cond . 0)
+    (when . 1)
+    (unless . 1)
     (unwind-protect . 1)
     (match . defun)
     (smatch . defun)
