@@ -135,7 +135,7 @@
     Uses automatic converters. Here is an example how atoi can be used from
     Lisp:
     #+BEGIN_SRC lisp
-      (defextern atoi () )
+      (defextern atoi (<string>) <fpi>)
     #+END_SRC
     If the desired external function foo is in library libbar.a and should be
     called baz in Lisp the following defining form is necessary:
