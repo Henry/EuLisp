@@ -24,6 +24,9 @@ platforms
 # Ignore corefiles
 core
 
+# Ignore EuXLisp FFI stubs directories
+euxl
+
 # Ignore intermediate build files from Youtoo components
 /Youtoo/Test/u2/*
 /Youtoo/Tools/u2/*
@@ -32,7 +35,6 @@ core
 /Examples/*/u2
 /Modules/*/u2
 /Modules/*/*/u2
-
 
 # Ignore personal test area
 /Examples/Test
