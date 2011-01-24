@@ -445,7 +445,7 @@ extern FILE *filein;
 ///  String access macros
 ///-----------------------------------------------------------------------------
 #define euxmGetString(x)        ((x)->value.vector.sdata)
-#define euxmGetStringlength(x)  ((x)->value.vector.size)
+#define euxmGetStringLength(x)  ((x)->value.vector.size)
 
 ///-----------------------------------------------------------------------------
 ///  Istream/Ostream access macros

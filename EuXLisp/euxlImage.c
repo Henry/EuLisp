@@ -133,7 +133,7 @@ int euxlSaveImage(const char *fname)
                 case euxmString:
                     setOffset();
                     euxcOSBPutc(p->type, fp);
-                    size = euxmGetStringlength(p);
+                    size = euxmGetStringLength(p);
                     writePtr((euxmOffType) size);
                     for
                     (

@@ -4644,7 +4644,7 @@ void euxcDecodeProcedure(euxlValue fptr, euxlValue fun)
 {
     euxlValue code = euxmGetCode(fun);
     euxlValue env = euxmGetCEnv(fun);
-    int len = euxmGetStringlength(euxmGetBCode(code));
+    int len = euxmGetStringLength(euxmGetBCode(code));
     for (int lc = 0; lc < len;)
     {
         lc += euxcDecodeInstruction(fptr, code, lc, env);

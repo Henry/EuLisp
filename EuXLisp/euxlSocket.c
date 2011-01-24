@@ -1037,7 +1037,7 @@ euxlValue euxcStreamXdrSendString()
 
     euxmLastArg();
 
-    int i = euxmGetStringlength(arg_string);
+    int i = euxmGetStringLength(arg_string);
 
     if (euxcXdrSendInt(handle, i) == euxmFalse)
     {

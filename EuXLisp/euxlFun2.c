@@ -1100,7 +1100,7 @@ euxlValue euxlStringLength()
     euxlValue str = euxmGetArgString();
     euxmLastArg();
 
-    return (euxcMakeFPI((euxmFPIType) (euxmGetStringlength(str) - 1)));
+    return (euxcMakeFPI((euxmFPIType) (euxmGetStringLength(str) - 1)));
 }
 
 ///  euxlStringNullp - built-in function 'string-null?'
@@ -1111,7 +1111,7 @@ euxlValue euxlStringNullp()
     euxlValue str = euxmGetArgString();
     euxmLastArg();
 
-    return (euxmGetStringlength(str) == 1 ? euxs_t : euxmNil);
+    return (euxmGetStringLength(str) == 1 ? euxs_t : euxmNil);
 }
 
 ///  euxlStringAppend - built-in function 'string-append'
@@ -1128,7 +1128,7 @@ euxlValue euxlStringAppend()
     for (len = 0; euxmMoreArgs();)
     {
         euxlValue tmp = euxmGetArgString();
-        len += (int)euxmGetStringlength(tmp) - 1;
+        len += (int)euxmGetStringLength(tmp) - 1;
     }
 
     // restore the argument list
@@ -1162,7 +1162,7 @@ euxlValue euxlStringRef()
 
     // range Check the index
     int n;
-    if ((n = (int)euxmGetFPI(num)) < 0 || n >= euxmGetStringlength(str) - 1)
+    if ((n = (int)euxmGetFPI(num)) < 0 || n >= euxmGetStringLength(str) - 1)
     {
         euxcCerror("index out of range in string-ref", num, euxmNil);
     }
@@ -1184,7 +1184,7 @@ euxlValue euxlStringSet()
 
     // range Check the index
     int n;
-    if ((n = (int)euxmGetFPI(num)) < 0 || n >= euxmGetStringlength(str) - 1)
+    if ((n = (int)euxmGetFPI(num)) < 0 || n >= euxmGetStringLength(str) - 1)
     {
         euxcCerror("index out of range in string-set", num, euxmNil);
     }
@@ -1206,7 +1206,7 @@ euxlValue euxlSubString()
     // get the starting position
     euxlValue dst = euxmGetArgFPI();
     int start = (int)euxmGetFPI(dst);
-    if (start < 0 || start > euxmGetStringlength(src) - 1)
+    if (start < 0 || start > euxmGetStringLength(src) - 1)
     {
         euxcCerror("index out of range in substring", dst, euxmNil);
     }
@@ -1217,14 +1217,14 @@ euxlValue euxlSubString()
     {
         dst = euxmGetArgFPI();
         end = (int)euxmGetFPI(dst);
-        if (end < 0 || end > euxmGetStringlength(src) - 1)
+        if (end < 0 || end > euxmGetStringLength(src) - 1)
         {
             euxcCerror("index out of range in substring", dst, euxmNil);
         }
     }
     else
     {
-        end = euxmGetStringlength(src) - 1;
+        end = euxmGetStringLength(src) - 1;
     }
 
     euxmLastArg();
@@ -1259,7 +1259,7 @@ euxlValue euxlStringToList()
 
     // make a list from the vector
     euxmStackCheckPush(str);
-    int size = euxmGetStringlength(str) - 1;
+    int size = euxmGetStringLength(str) - 1;
     char *p;
     for (euxcCurVal = euxmNil, p = &euxmGetString(str)[size]; --size >= 0;)
     {
@@ -1377,10 +1377,10 @@ static euxlValue stringCompare(int fcn, int icase)
     // setup the string pointers
     char *p1 = euxmGetString(str1);
     int start1 = 0;
-    int end1 = euxmGetStringlength(str1);
+    int end1 = euxmGetStringLength(str1);
     char *p2 = euxmGetString(str2);
     int start2 = 0;
-    int end2 = euxmGetStringlength(str2);
+    int end2 = euxmGetStringLength(str2);
 
     // compare the strings
     for (; start1 < end1 && start2 < end2; ++start1, ++start2)

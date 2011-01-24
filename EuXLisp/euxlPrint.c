@@ -228,7 +228,7 @@ static void print(euxlValue fptr, euxlValue vptr, int escflag, int depth)
                 (
                     fptr,
                     euxmGetString(vptr),
-                    euxmGetStringlength(vptr) - 1
+                    euxmGetStringLength(vptr) - 1
                 );
             }
             else
