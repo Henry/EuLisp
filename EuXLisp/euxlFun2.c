@@ -1117,7 +1117,7 @@ euxlValue euxlStringNullp()
 ///  euxlStringAppend - built-in function 'string-append'
 euxlValue euxlStringAppend()
 {
-    static char *functionName = "string-append?";
+    static char *functionName = "string-append";
 
     // save the argument list
     int saveargc = euxcArgC;

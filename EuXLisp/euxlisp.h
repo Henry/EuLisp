@@ -25,6 +25,7 @@
 #ifndef EUXLISP_H
 #define EUXLISP_H
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -182,7 +183,11 @@ extern FILE *filein;
     (euxmMoreArgs() ? (e) : euxcTooFew(functionName))
 
 #define euxmTypeArg(tp,n)                                                      \
-    (tp(*euxcStackPtr) ? euxmNextArg() : euxcBadType(*euxcStackPtr,n,functionName))
+    (                                                                          \
+        tp(*euxcStackPtr)                                                      \
+      ? euxmNextArg()                                                          \
+      : euxcBadType(*euxcStackPtr,n,functionName)                              \
+    )
 
 #define euxmNextArg()                                                          \
     (--euxcArgC, *euxcStackPtr++)
@@ -197,6 +202,7 @@ extern FILE *filein;
 #define euxmGetArgList()      (euxmTestArg(euxmTypeArg(euxmListp,"<list>")))
 #define euxmGetArgSymbol()    (euxmTestArg(euxmTypeArg(euxmSymbolp,"<symbol>")))
 #define euxmGetArgString()    (euxmTestArg(euxmTypeArg(euxmStringp,"<string>")))
+#define euxmGetArgBoolean()   (euxmTestArg(euxmNextArg()))
 #define euxmGetArgObject()    (euxmTestArg(euxmTypeArg(euxmObjectp,"<object>")))
 #define euxmGetArgFPI()       (euxmTestArg(euxmTypeArg(euxmFPIp,"<integer>")))
 #define euxmGetArgDoubleFloat() \
@@ -218,6 +224,7 @@ extern FILE *filein;
 #define euxmGetArgMethod()    (euxmTestArg(euxmTypeArg(euxmMethodp,"<method>")))
 #define euxmGetArgSlot()      (euxmTestArg(euxmTypeArg(euxmSlotp,"<slot>")))
 #define euxmGetArgTable()     (euxmTestArg(euxmTypeArg(euxmTablep,"<table>")))
+#define euxmGetArgPtr()       (euxmTestArg(euxmTypeArg(euxmPtrp,"ptr")))
 
 ///-----------------------------------------------------------------------------
 /// Node types
@@ -245,9 +252,10 @@ extern FILE *filein;
 #define euxmMethod          21
 #define euxmSlot            22
 #define euxmTable           23
+#define euxmPtr             24
 
 // Number of node types
-#define euxmNTypes          24
+#define euxmNTypes          25
 #define euxmNullType        euxmNTypes
 #define euxmKeyword         (euxmNTypes+1)
 #define euxmIStream         (euxmNTypes+2)
@@ -329,12 +337,13 @@ extern FILE *filein;
 #define euxmKeywordp(x)     (euxmSymbolp(x) && (euxmGetModule(x) == euxmNil))
 #define euxmSlotp(x)        ((x) && euxmNodeType(x) == euxmSlot)
 #define euxmTablep(x)       ((x) && euxmNodeType(x) == euxmTable)
+#define euxmPtrp(x)         ((x) && euxmNodeType(x) == euxmPtr)
 
 ///-----------------------------------------------------------------------------
 /// Vector update macro
 ///-----------------------------------------------------------------------------
-// This is necessary because the memory pointed to by the value.vector.data field
-// of a vector object can move during a garbage collection.  This macro
+// This is necessary because the memory pointed to by the value.vector.data
+// field of a vector object can move during a garbage collection.  This macro
 // guarantees that evaluation happens in the right order.
 #define euxmVupdate(x,i,v)                                                     \
     {                                                                          \
@@ -418,12 +427,13 @@ extern FILE *filein;
 #define euxmFirstLiteral    3
 
 ///-----------------------------------------------------------------------------
-///  FPI/float/character access macros
+///  FPI/float/character/boolean access macros
 ///-----------------------------------------------------------------------------
 #define euxmGetFPI(x)                                                          \
     ((euxmOffType)(x) & 1 ? euxmGetSmallFPI(x) : (x)->value.fpi)
 #define euxmGetDoubleFloat(x)     ((x)->value.euxcDoubleFloat)
 #define euxmGetCharCode(x)  ((x)->value.charCode)
+#define euxmGetBoolean(x)       ((x) == euxmNil ? 0 : 1)
 
 ///-----------------------------------------------------------------------------
 ///  Small FPI access macros
@@ -529,6 +539,12 @@ extern FILE *filein;
 #define euxmHashTableSize 31
 
 ///-----------------------------------------------------------------------------
+///  FFI pointer access macros
+///-----------------------------------------------------------------------------
+#define euxmGetPtr(x)                 ((x)->value.ptr)
+#define euxmSetPtr(x,p)               ((x)->value.ptr = (p))
+
+///-----------------------------------------------------------------------------
 /// Node structure
 ///-----------------------------------------------------------------------------
 typedef struct euxcNode euxcNode, *euxlValue;
@@ -587,6 +603,10 @@ struct euxcNode
             };
             int offset;         // Offset into funtab
         } fun;
+
+        // FFI C pointer
+        void *ptr;
+
     } value;
 };
 
@@ -647,7 +667,7 @@ extern euxlValue euxcModuleList;    // all the modules
 extern euxlValue euxcKeywordArray;  // all the keywords
 extern euxlValue euxcObArray;       // prototype symbols
 
-#define euxmInternAndExport(name)                                                        \
+#define euxmInternAndExport(name)                                              \
     euxcEnterModule(name, euxcCurrentModule)
 
 ///-----------------------------------------------------------------------------
@@ -694,7 +714,7 @@ extern euxlValue *euxmVecStackTop;     // stack top of vector space
 #include "euxlSymbols.h"
 
 ///-----------------------------------------------------------------------------
-/// External TELOS declarations
+/// TELOS macro and symbol declarations
 ///-----------------------------------------------------------------------------
 #include "euxlTelos.h"
 

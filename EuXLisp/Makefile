@@ -33,8 +33,8 @@ include ../Lib.$(ARCH)/Makefile
 ###-----------------------------------------------------------------------------
 ### Set the compilation flags for the particular achitecture
 ###-----------------------------------------------------------------------------
-CFLAGS=$(EUXLISP_CFLAGS)
-LIBS=$(EUXLISP_LIBS)
+CFLAGS=$(EUXLISP_CFLAGS) -fpic
+LIBS=$(EUXLISP_LIBS) -ldl
 
 ###-----------------------------------------------------------------------------
 ### Search and installation paths

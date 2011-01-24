@@ -210,7 +210,7 @@ euxlValue euxlSetModule()
     euxmLastArg();
 
     euxcCurrentModule = mod;
-    #ifdef TRACE_SETeuxmModule
+    #ifdef EUXM_TRACE_MODULE
     euxcPutString(euxlStdout(), "<1curmod=");
     euxcPrin1(euxcCurrentModule, euxlStdout());
     euxcPutString(euxlStdout(), ">");

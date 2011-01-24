@@ -88,7 +88,9 @@ euxlValue euxcCons(euxlValue x, euxlValue y)
         euxmStackPush(y);
         findMemory();
         if ((nnode = fnodes) == euxmNil)
+        {
             euxcAbort("insufficient node space");
+        }
         euxmStackDrop(2);
     }
 
@@ -255,6 +257,20 @@ euxlValue euxcMakeChar(int ch)
 {
     euxlValue val = allocNode(euxmChar);
     val->value.charCode = ch;
+    return (val);
+}
+
+///  euxcMakeBoolean - convert a bool to a boolean
+euxlValue euxcMakeBoolean(bool b)
+{
+    return (b ? euxs_t : euxmNil);
+}
+
+///  euxcMakePtr - convert an integer to a character node
+euxlValue euxcMakePtr(void* ptr)
+{
+    euxlValue val = allocNode(euxmPtr);
+    val->value.ptr = ptr;
     return (val);
 }
 

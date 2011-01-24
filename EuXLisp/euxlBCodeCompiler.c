@@ -25,6 +25,8 @@
 #include "euxlisp.h"
 #include "euxlBCodes.h"
 
+#include <dlfcn.h>
+
 ///-----------------------------------------------------------------------------
 /// Macros
 ///-----------------------------------------------------------------------------
@@ -177,9 +179,16 @@ static void compileNextMethodp(euxlValue form, int cont);
 static void compileDefclass(euxlValue form, int cont);
 
 static void compileDefcondition(euxlValue form, int cont);
-static euxlValue reinternSymbol(euxlValue a);
 
+static euxlValue reinternSymbol(euxlValue a);
 static euxlValue filterImports(euxlValue implist, euxlValue sofar);
+
+static FILE* createModuleFFI(const char* modname);
+static FILE* processDefextern(FILE* fffile, euxlValue form);
+static void closeModuleFFI(FILE* fffile);
+static void compileModuleFFI(const char* modname);
+static void loadModuleFFI(const char* modname);
+static void compileDefextern(euxlValue form, int cont);
 
 // Byte-coded functions
 typedef struct
@@ -266,8 +275,51 @@ specialFormDef specialFormTab[] =
     {"next-method?", compileNextMethodp},
     {"defclass", compileDefclass},
     {"defcondition", compileDefcondition},
+    {"defextern", compileDefextern},
     {(char *)0, (void (*)())0}
 };
+
+///-----------------------------------------------------------------------------
+/// Utility Functions
+///-----------------------------------------------------------------------------
+#include <stdarg.h>
+
+static euxlValue concat(const char *str, ...)
+{
+    // Sum sizes of all the argument strings
+    // in order to allocate the correct result string
+    size_t rlen = 1;
+
+    va_list ap;
+    va_start(ap, str);
+
+    for (const char *s = str; s != NULL; s = va_arg(ap, const char *))
+    {
+        rlen += strlen(s);
+    }
+
+    va_end(ap);
+
+
+    // Allocate the result string and concatenate arguments
+    euxlValue result = euxcNewString(rlen);
+    char *rp = euxmGetString(result);
+
+    va_start(ap, str);
+
+    for (const char *s = str; s != NULL; s = va_arg(ap, const char *))
+    {
+        size_t len = strlen(s);
+        rp = memcpy(rp, s, len) + len;
+    }
+
+    va_end(ap);
+
+    // Terminate the result string
+    *rp++ = '\0';
+
+    return result;
+}
 
 ///-----------------------------------------------------------------------------
 /// Functions
@@ -1882,16 +1934,13 @@ euxlValue euxcFindSym(euxlValue symbol, euxlValue list)
     return euxmNil;
 }
 
-///  try to load a module
+///  loadModule - try to load a module
 static int loadModule(euxlValue sym)
 {
-    char name[256];
-
     static int indent = 0;
     static char *spacy = "                    ";
 
-    char buf[256], path[256];
-
+    char name[256];
     if (euxmSymbolp(sym))
     {
         strcpy(name, euxmGetString(euxmGetPName(sym)));
@@ -1904,6 +1953,7 @@ static int loadModule(euxlValue sym)
 
     euxmStackCheckPush(sym);
 
+    char path[256];
     FILE *fp = euxcPathOpen(name, "EU_MODULE_PATH", module_search_path, path);
 
     if (fp == NULL)
@@ -1917,6 +1967,7 @@ static int loadModule(euxlValue sym)
 
     if (!quiet)
     {
+        char buf[256];
         if (strcmp(path, ".") == 0)
         {
             sprintf(buf, "%s<reading %s>\n", euxmSpaces(), name);
@@ -1931,7 +1982,7 @@ static int loadModule(euxlValue sym)
 
     euxlValue curmod = euxcCurrentModule;
     euxcCurrentModule = euxcRootModule;       // read the form in root module
-    #ifdef TRACE_SETeuxmModule
+    #ifdef EUXM_TRACE_MODULE
     euxcPutString(euxlStdout(), "<2curmod=root>");
     #endif
 
@@ -1942,12 +1993,15 @@ static int loadModule(euxlValue sym)
 
     if (readit)
     {
-        if (!euxmConsp(expr) ||
-        !euxmSymbolp(euxmCar(expr)) ||
-        strcmp(euxmGetString(euxmGetPName(euxmCar(expr))), "defmodule"))
+        if
+        (
+            !euxmConsp(expr)
+         || !euxmSymbolp(euxmCar(expr))
+         || strcmp(euxmGetString(euxmGetPName(euxmCar(expr))), "defmodule")
+        )
         {
             euxcCurrentModule = curmod;
-            #ifdef TRACE_SETeuxmModule
+            #ifdef EUXM_TRACE_MODULE
             euxcPutString(euxlStdout(), "<3curmod=");
             euxcPrin1(euxcCurrentModule, euxlStdout());
             euxcPutString(euxlStdout(), ">");
@@ -1964,7 +2018,7 @@ static int loadModule(euxlValue sym)
     }
 
     euxcCurrentModule = curmod;
-    #ifdef TRACE_SETeuxmModule
+    #ifdef EUXM_TRACE_MODULE
     euxcPutString(euxlStdout(), "<4curmod=");
     euxcPrin1(euxcCurrentModule, euxlStdout());
     euxcPutString(euxlStdout(), ">");
@@ -1973,6 +2027,7 @@ static int loadModule(euxlValue sym)
     indent -= 2;
     if (!quiet)
     {
+        char buf[256];
         sprintf(buf, "%s<read %s>\n", euxmSpaces(), name);
         euxcPutString(euxmGetValue(euxls_stderr), buf);
     }
@@ -2463,14 +2518,14 @@ static void processModuleDirectives(euxlValue array, euxlValue directives)
 //    in euxmInternAndExport
 static euxlValue reinternSymbol(euxlValue sym)
 {
-    char buf[euxmStringMax + 1];
-
     if (euxmKeywordp(sym) || euxmGetModule(sym) == euxcReinternModule)
     {
         return sym;
     }
 
+    char buf[euxmStringMax + 1];
     strcpy(buf, euxmGetString(euxmGetPName(sym)));
+
     return euxmInternAndExport(buf);
 }
 
@@ -2619,7 +2674,7 @@ euxlValue euxlModuleDirectives()
     return euxs_t;
 }
 
-///  load those modules that this one depends on
+///  loadDependentModules2 - load those modules that this one depends on
 //    implist is a list of module descriptors (i.e., names or filters)
 static void loadDependentModules2(euxlValue implist)
 {
@@ -2686,14 +2741,59 @@ static void loadDependentModules(euxlValue directives)
     }
 }
 
-///  compile a defmodule
-///     (defmodule foo (import a ..) body ...) ->
-///     (load-dependent-modules (import a ..))
-///     (set-module foo)
-///     (module-directives (import ...) current-module-euxcObArray)
-///     (reintern (begin body ...))
-///     ((compile (begin body ...)))     ; compile and run
-///     (set-module root)
+static void processFFI(const char* modname, euxlValue forms)
+{
+    bool usesFFI = false;
+
+    for (euxlValue rest = forms; rest; rest = euxmCdr(rest))
+    {
+        euxlValue form = euxmCar(rest);
+
+        if (euxmConsp(form) && euxmCar(form) == euxls_defextern)
+        {
+            usesFFI = true;
+        }
+    }
+
+    if (usesFFI)
+    {
+        FILE* fffile = createModuleFFI(modname);
+
+        euxlValue prev = euxmNil;
+        for (euxlValue rest = forms; rest; rest = euxmCdr(rest))
+        {
+            euxlValue form = euxmCar(rest);
+
+            if (euxmConsp(form) && euxmCar(form) == euxls_defextern)
+            {
+                //fprintf(stderr, "processing defextern\n");
+                processDefextern(fffile, euxmCdr(form));
+
+                // Remove the processed defextern from the module form
+                euxmSetCdr(prev, euxmCdr(rest));
+            }
+            else
+            {
+                prev = rest;
+            }
+        }
+
+        closeModuleFFI(fffile);
+
+        compileModuleFFI(modname);
+
+        loadModuleFFI(modname);
+    }
+}
+
+///  compileDefmodule - compile a defmodule
+//     (defmodule foo (import a ..) body ...) ->
+//     (load-dependent-modules (import a ..))
+//     (set-module foo)
+//     (module-directives (import ...) current-module-array)
+//     (reintern (begin body ...))
+//     ((compile (begin body ...)))     ; compile and run
+//     (set-module root)
 static void compileDefmodule(euxlValue form, int cont)
 {
     if (euxcCurrentModule != euxcRootModule)
@@ -2759,6 +2859,10 @@ static void compileDefmodule(euxlValue form, int cont)
     );
     compileExpr(expr, euxmContNext);
 
+    euxcCurrentModule = newmod;
+    processFFI(modname, euxmCdr(euxmCdr(form)));
+    euxcCurrentModule = euxcRootModule;
+
     euxlValue body = euxmCdr(euxmCdr(form));
     body = euxcCons(euxls_progn, body);
     body = euxcCons(euxls_quote, euxcCons(body, euxmNil));
@@ -2807,7 +2911,7 @@ static void compileDefmodule(euxlValue form, int cont)
         compileLiteral(euxmCar(form), cont);
 
     euxcCurrentModule = euxcRootModule;
-    #ifdef TRACE_SETeuxmModule
+    #ifdef EUXM_TRACE_MODULE
     euxcPutString(euxlStdout(), "<5curmod=");
     euxcPrin1(euxcCurrentModule, euxlStdout());
     euxcPutString(euxlStdout(), ">");
@@ -4719,5 +4823,331 @@ int euxcDecodeInstruction(euxlValue fptr, euxlValue code, int lc, euxlValue env)
     return (n);
 }
 
+typedef struct
+{
+    char *lType;                 // Lisp type
+    char *cType;                 // C type
+    char *argGetter;             // Argument getter
+    char *valueGetter;           // Value getter
+    char *makeLType;             // Value getter
+} euxcFFTypeMap;
+
+euxcFFTypeMap euxcFFTypeTab[] =
+{
+    {"<fpi>", "int",
+     "euxmGetArgFPI", "euxmGetFPI", "euxcMakeFPI"},
+
+    {"<character>", "char",
+     "euxmGetArgChar", "euxmGetCharCode", "euxcMakeChar"},
+
+    {"<double-float>", "double",
+     "euxmGetArgDoubleFloat", "euxmGetDoubleFloat", "euxcMakeDoubleFloat"},
+
+    {"<string>", "char*",
+     "euxmGetArgString", "euxmGetString", "euxcMakeString"},
+
+    {"boolean", "bool",
+     "euxmGetArgBoolean", "euxmGetBoolean", "euxcMakeBoolean"},
+
+    {"ptr", "void*",
+     "euxmGetArgPtr", "euxmGetPtr", "euxcMakePtr"},
+
+    // End of table marker
+    {0, "unknown",
+     "euxmGetArgUnknown", "euxmGetUnknown", "euxcMakeFPI"}
+};
+
+///  ffMakeReturn
+static const char* ffMakeReturn(euxlValue ret)
+{
+    const char* cret = euxmGetString(euxmGetPName(ret));
+
+    euxcFFTypeMap *ffmapp = euxcFFTypeTab;
+    for (; ffmapp->lType != NULL; ++ffmapp)
+    {
+        if (!strcmp(cret, ffmapp->lType))
+        {
+            return ffmapp->makeLType;
+        }
+    }
+
+    return ffmapp->makeLType;
+}
+
+///  ffGetArg
+static const char* ffGetArg(euxlValue arg)
+{
+    const char* carg = euxmGetString(euxmGetPName(arg));
+
+    euxcFFTypeMap *ffmapp = euxcFFTypeTab;
+    for (; ffmapp->lType != NULL; ++ffmapp)
+    {
+        if (!strcmp(carg, ffmapp->lType))
+        {
+            return ffmapp->argGetter;
+        }
+    }
+
+    return ffmapp->argGetter;
+}
+
+///  ffArgValue
+static const char* ffArgValue(euxlValue arg)
+{
+    const char* carg = euxmGetString(euxmGetPName(arg));
+
+    euxcFFTypeMap *ffmapp = euxcFFTypeTab;
+    for (; ffmapp->lType != NULL; ++ffmapp)
+    {
+        if (!strcmp(carg, ffmapp->lType))
+        {
+            return ffmapp->valueGetter;
+        }
+    }
+
+    return ffmapp->valueGetter;
+}
+
+///  createModuleFFI
+static FILE* createModuleFFI(const char* modname)
+{
+    euxlValue modFFICname = concat("euxl/", modname, "_ffi.c", NULL);
+    FILE* fffile = fopen(euxmGetString(modFFICname), "w");
+
+    fprintf
+    (
+        fffile,
+        "#include \"../euxlisp.h\"\n\n"
+    );
+
+    return fffile;
+}
+
+///  closeModuleFFI
+static void closeModuleFFI(FILE* fffile)
+{
+    fclose(fffile);
+}
+
+///  processDefextern - handle the (defextern ... ) form
+static FILE* processDefextern(FILE* fffile, euxlValue form)
+{
+    if (euxmAtom(form))
+    {
+        euxmCompileError("expecting function name symbol in defextern", form);
+    }
+
+    euxlValue funname = euxmCar(form);
+    if (!euxmSymbolp(funname) || euxmKeywordp(funname))
+    {
+        euxmCompileError
+        (
+            "expecting a function name symbol in defextern",
+            funname
+        );
+    }
+
+    form = euxmCdr(form);
+    if (!euxmConsp(form))
+    {
+        euxmCompileError("expecting argument list in defextern", funname);
+    }
+
+    euxlValue args = euxmCar(form);
+
+    form = euxmCdr(form);
+    if (!euxmConsp(form))
+    {
+        euxmCompileError("expecting return type in defextern", funname);
+    }
+
+    euxlValue ret = euxmCar(form);
+
+    form = euxmCdr(form);
+    euxlValue cname = euxmNil;
+    if (euxmConsp(form))
+    {
+        cname = euxmCar(form);
+        if (!euxmStringp(cname))
+        {
+            euxmCompileError("expecting c-name string in defextern", funname);
+        }
+    }
+
+    const char *cfunname = euxmGetString(euxmGetPName(funname));
+    char stubname[255];
+    sprintf(stubname, "ff_stub_%s",  cname ? euxmGetString(cname) : cfunname);
+
+    fprintf
+    (
+        fffile,
+        "static euxlValue %s()\n"
+        "{\n"
+        "    static char *functionName = \"%s\";\n",
+        stubname,
+        cfunname
+    );
+
+    // Get arguments
+    int nargs = 0;
+    if (euxmConsp(args))
+    {
+        fprintf(fffile, "\n");
+        euxlValue restArgs = args;
+        euxlValue arg = euxmCar(restArgs);
+        do
+        {
+            // Make sure the argument is a symbol
+            if (!euxmSymbolp(arg) || euxmKeywordp(arg))
+            {
+                euxmCompileError
+                (
+                    "variable in argument list must be a symbol",
+                    arg
+                );
+            }
+
+            fprintf
+            (
+                fffile,
+                "    euxlValue arg%d = %s();\n",
+                nargs++,
+                ffGetArg(arg)
+            );
+        } while
+            (
+                (restArgs = euxmCdr(restArgs))
+                && euxmConsp(restArgs)
+                && (arg = euxmCar(restArgs)) != euxmNil
+            );
+
+        fprintf
+        (
+            fffile,
+            "    euxmLastArg();\n\n"
+        );
+    }
+
+    fprintf
+    (
+        fffile,
+        "    return %s(%s(",
+        ffMakeReturn(ret),
+        cname ? euxmGetString(cname) : cfunname
+    );
+
+    // Generate argument list
+    if (nargs)
+    {
+        euxlValue restArgs = args;
+        euxlValue arg;
+        int argi = 0;
+        while (euxmConsp(restArgs) && (arg = euxmCar(restArgs)) != euxmNil)
+        {
+            fprintf
+            (
+                fffile,
+                "%s(arg%d)%s",
+                ffArgValue(arg),
+                argi,
+                ((argi < nargs-1) ? ", " : "")
+            );
+
+            argi++;
+
+            restArgs = euxmCdr(restArgs);
+        }
+    }
+
+    fprintf(fffile, "));\n}\n\n");
+
+    fprintf
+    (
+        fffile,
+        "void __attribute__ ((constructor)) ff_%s_init(void)\n"
+        "{\n"
+        "    euxcFun(\"%s\", euxmFun, &%s, 10000);\n"
+        "}\n",
+        stubname,
+        cfunname,
+        stubname
+    );
+
+    return fffile;
+}
+
+///  compileModuleFFI
+void compileModuleFFI(const char* modname)
+{
+    // Push the strings onto the stack to GC-protect
+    euxlValue modFFICname = euxmStackPush
+    (
+        concat("euxl/", modname, "_ffi.c", NULL)
+    );
+
+    euxlValue modFFILibName = euxmStackPush
+    (
+        concat("euxl/", modname, "_ffi.so", NULL)
+    );
+
+    euxlValue modFFICompileCmd = euxmStackPush
+    (
+        concat
+        (
+            "gcc -pipe -m64 -DWORD_LENGTH=64 -std=gnu99 -O3 -fpic ",
+            euxmGetString(modFFICname),
+            " platforms/x86_64/*.o -shared -o ",
+            euxmGetString(modFFILibName),
+            NULL
+        )
+    );
+
+    system(euxmGetString(modFFICompileCmd));
+
+    euxmStackDrop(3);
+}
+
+///  loadModuleFFI
+void loadModuleFFI(const char* modname)
+{
+    euxlValue modFFILibName = concat("euxl/", modname, "_ffi.so", NULL);
+
+    void* functionLibPtr =
+        dlopen(euxmGetString(modFFILibName), RTLD_LAZY|RTLD_GLOBAL);
+
+    if (!functionLibPtr)
+    {
+        fputs(dlerror(), stderr);
+        fputs("\n", stderr);
+    }
+}
+
+///  compileDefextern - handle the (defextern ... ) form interactively
+static void compileDefextern(euxlValue form, int cont)
+{
+    //fprintf(stderr, "compileDefextern\n");
+    euxlValue lname = euxmStackPush
+    (
+        concat
+        (
+            euxmGetString(euxmGetModuleName(euxcCurrentModule)),
+            "_",
+            euxmGetString(euxmGetPName(euxmCar(form))),
+            NULL
+        )
+    );
+    const char* name = euxmGetString(lname);
+
+    FILE* fffile = createModuleFFI(name);
+    processDefextern(fffile, form);
+    closeModuleFFI(fffile);
+    compileModuleFFI(name);
+    loadModuleFFI(name);
+    euxmStackDrop(1);
+
+    putCodeByte(OP_NULL);
+    putCodeByte(OP_NULL);
+    compileContinuation(cont);
+}
 
 ///-----------------------------------------------------------------------------

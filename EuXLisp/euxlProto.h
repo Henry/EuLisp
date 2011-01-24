@@ -107,6 +107,8 @@ extern euxlValue euxcMakeModule(const char *name);
 extern euxlValue euxcMakeFPI(long n);
 extern euxlValue euxcMakeDoubleFloat(double n);
 extern euxlValue euxcMakeChar(int ch);
+extern euxlValue euxcMakeBoolean(bool b);
+extern euxlValue euxcMakePtr(void* ptr);
 extern euxlValue euxcMakeClosure(euxlValue code, euxlValue env);
 extern euxlValue euxcMakePromise(euxlValue code, euxlValue env);
 extern euxlValue euxcMakeXFun(int type, euxcXFunType fcn, int offset);
@@ -356,7 +358,7 @@ extern euxlValue euxlExit();
 extern int euxlSaveImage(const char *fname);
 extern FILE *euxcPathOpen(const char *fname, const char *env_var_name, const char **builtin_path, char *found);
 extern int euxlRestoreImage(const char *fname);
-extern euxmOffType euxcMakePtr(euxlValue p);
+extern euxmOffType euxcPtrToOffset(euxlValue p);
 
 ///-----------------------------------------------------------------------------
 /// euxlInit.c

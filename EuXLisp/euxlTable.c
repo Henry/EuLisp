@@ -401,11 +401,11 @@ euxlValue euxlTableClear()
 }
 
 ///  tableHashEq - things may be relocated on image save/restore, thus use
-//    euxcMakePtr rather than direct address: slow perhaps, as hashing time is
+//    euxcPtrToOffset rather than direct address: slow perhaps, as hashing time is
 //    proportional to number of live segments
 static int tableHashEq(euxlValue key)
 {
-    int hash = euxcMakePtr(euxmSymbolp(key) ? euxmGetPName(key) : key)
+    int hash = euxcPtrToOffset(euxmSymbolp(key) ? euxmGetPName(key) : key)
     % euxmHashTableSize;
 
     #if 0

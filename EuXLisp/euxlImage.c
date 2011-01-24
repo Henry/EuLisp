@@ -75,18 +75,18 @@ int euxlSaveImage(const char *fname)
     writePtr((euxmOffType) (euxcStackTop - euxcStackBase));
 
     // write out various constants
-    writePtr(euxcMakePtr(euxs_eof));
-    writePtr(euxcMakePtr(euxs_default));
-    writePtr(euxcMakePtr(euxcRootModule));
-    writePtr(euxcMakePtr(euxcReinternModule));
-    writePtr(euxcMakePtr(euxcCurrentModule));
-    writePtr(euxcMakePtr(euxcModuleList));
-    writePtr(euxcMakePtr(euxlc_simple_class));
-    writePtr(euxcMakePtr(euxlc_class));
-    writePtr(euxcMakePtr(euxlc_object));
-    writePtr(euxcMakePtr(euxlc_vector));
-    writePtr(euxcMakePtr(euxcKeywordArray));
-    writePtr(euxcMakePtr(euxcObArray));
+    writePtr(euxcPtrToOffset(euxs_eof));
+    writePtr(euxcPtrToOffset(euxs_default));
+    writePtr(euxcPtrToOffset(euxcRootModule));
+    writePtr(euxcPtrToOffset(euxcReinternModule));
+    writePtr(euxcPtrToOffset(euxcCurrentModule));
+    writePtr(euxcPtrToOffset(euxcModuleList));
+    writePtr(euxcPtrToOffset(euxlc_simple_class));
+    writePtr(euxcPtrToOffset(euxlc_class));
+    writePtr(euxcPtrToOffset(euxlc_object));
+    writePtr(euxcPtrToOffset(euxlc_vector));
+    writePtr(euxcPtrToOffset(euxcKeywordArray));
+    writePtr(euxcPtrToOffset(euxcObArray));
 
     // setup the initial file offsets
     off = foff = (euxmOffType) 2;
@@ -108,8 +108,8 @@ int euxlSaveImage(const char *fname)
                 case euxmEnv:
                     setOffset();
                     euxcOSBPutc(p->type, fp);
-                    writePtr(euxcMakePtr(euxmCar(p)));
-                    writePtr(euxcMakePtr(euxmCdr(p)));
+                    writePtr(euxcPtrToOffset(euxmCar(p)));
+                    writePtr(euxcPtrToOffset(euxmCdr(p)));
                     foff += sizeof(euxcNode);
                     break;
                 case euxmSymbol:
@@ -127,7 +127,7 @@ int euxlSaveImage(const char *fname)
                     size = euxmGetSize(p);
                     writePtr((euxmOffType) size);
                     for (euxlValue *vp = p->value.vector.data; --size >= 0;)
-                        writePtr(euxcMakePtr(*vp++));
+                        writePtr(euxcPtrToOffset(*vp++));
                     foff += sizeof(euxcNode);
                     break;
                 case euxmString:
@@ -553,8 +553,8 @@ static euxlValue convertOffsetToPtr(euxmOffType o)
     return ((euxlValue) ((euxmOffType) & nseg->data[0] + o - off));
 }
 
-///  euxcMakePtr - convert a pointer on output
-euxmOffType euxcMakePtr(euxlValue p)
+///  euxcPtrToOffset - convert a pointer on output
+euxmOffType euxcPtrToOffset(euxlValue p)
 {
     euxmOffType off = (euxmOffType) 2;
     euxcNodeSegment *nseg;

@@ -49,6 +49,7 @@
            defun
            defgeneric
            defmethod
+           defextern
            quote
            lambda
            progn

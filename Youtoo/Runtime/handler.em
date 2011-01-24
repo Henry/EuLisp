@@ -94,7 +94,8 @@
 
 (defextern eul_double_as_eul_double_ref (ptr) ptr)
 (defextern eul_double_ref_as_c_double (ptr) <double-float>)
-(defextern eul_double_ref_ref (<double*> <fpi>) <double-float> "eul_c_vector_ref")
+(defextern eul_double_ref_ref (<double*> <fpi>) <double-float>
+           "eul_c_vector_ref")
 (defextern eul_double_ref_set (<double*> <fpi> <double-float>) <double-float>
            "eul_c_vector_set")
 

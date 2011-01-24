@@ -126,8 +126,14 @@ euxls_binary_divide,
 euxls_quotient,
 euxls_binary_less,
 euxls_binary_equal,
-euxls_current_thread,
+euxls_ptr,
+euxlc_fpi,
+euxlc_character,
+euxlc_double_float,
+euxlc_string,
+euxlc_boolean,
 euxlc_thread,
+euxls_current_thread,
 euxls_qualified_symbols,
 euxls_set_generic_args,
 euxls_syntax_error,
@@ -136,7 +142,8 @@ euxls_debug,
 euxls_xlframe,
 euxls_gcmsgs,
 euxls_arg_list,
-euxls_next_methods;
+euxls_next_methods,
+euxls_defextern;
 
 ///  Continuations
 euxlValue
@@ -378,8 +385,15 @@ void euxcInitSymbols()
     euxls_binary_less = euxmInternAndExport("binary<");
     euxls_binary_equal = euxmInternAndExport("binary=");
 
-    euxls_current_thread = euxmInternAndExport("current-self");
+    euxls_ptr = euxmInternAndExport("ptr");
+    euxlc_fpi = euxmInternAndExport("<fpi>");
+    euxlc_character = euxmInternAndExport("<character>");
+    euxlc_double_float = euxmInternAndExport("<double-float>");
+    euxlc_string = euxmInternAndExport("<string>");
+    euxlc_boolean = euxmInternAndExport("<boolean>");
+
     euxlc_thread = euxmInternAndExport("<thread>");
+    euxls_current_thread = euxmInternAndExport("current-self");
 
     euxls_qualified_symbols = euxmInternAndExport("qualified-symbols?");
     euxmSetValue(euxls_qualified_symbols, euxmNil);
@@ -396,6 +410,8 @@ void euxcInitSymbols()
 
     euxls_arg_list = euxmInternAndExport("arg-list");
     euxls_next_methods = euxmInternAndExport("next-methods");
+
+    euxls_defextern = euxmInternAndExport("defextern");
 
     #ifndef NO_CHECK_REF
     euxls_check_ref = euxmInternAndExport("check-ref");
