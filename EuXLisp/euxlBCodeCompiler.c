@@ -183,12 +183,13 @@ static void compileDefcondition(euxlValue form, int cont);
 static euxlValue reinternSymbol(euxlValue a);
 static euxlValue filterImports(euxlValue implist, euxlValue sofar);
 
+static void processFFI(const char* modname, euxlValue forms);
 static FILE* createModuleFFI(const char* modname);
+static void compileDefextern(euxlValue form, int cont);
 static FILE* processDefextern(FILE* fffile, euxlValue form);
 static void closeModuleFFI(FILE* fffile);
 static void compileModuleFFI(const char* modname);
 static void loadModuleFFI(const char* modname);
-static void compileDefextern(euxlValue form, int cont);
 
 // Byte-coded functions
 typedef struct
@@ -2741,51 +2742,6 @@ static void loadDependentModules(euxlValue directives)
     }
 }
 
-static void processFFI(const char* modname, euxlValue forms)
-{
-    bool usesFFI = false;
-
-    for (euxlValue rest = forms; rest; rest = euxmCdr(rest))
-    {
-        euxlValue form = euxmCar(rest);
-
-        if (euxmConsp(form) && euxmCar(form) == euxls_defextern)
-        {
-            usesFFI = true;
-        }
-    }
-
-    if (usesFFI)
-    {
-        FILE* fffile = createModuleFFI(modname);
-
-        euxlValue prev = euxmNil;
-        for (euxlValue rest = forms; rest; rest = euxmCdr(rest))
-        {
-            euxlValue form = euxmCar(rest);
-
-            if (euxmConsp(form) && euxmCar(form) == euxls_defextern)
-            {
-                //fprintf(stderr, "processing defextern\n");
-                processDefextern(fffile, euxmCdr(form));
-
-                // Remove the processed defextern from the module form
-                euxmSetCdr(prev, euxmCdr(rest));
-            }
-            else
-            {
-                prev = rest;
-            }
-        }
-
-        closeModuleFFI(fffile);
-
-        compileModuleFFI(modname);
-
-        loadModuleFFI(modname);
-    }
-}
-
 ///  compileDefmodule - compile a defmodule
 //     (defmodule foo (import a ..) body ...) ->
 //     (load-dependent-modules (import a ..))
@@ -4857,6 +4813,92 @@ euxcFFTypeMap euxcFFTypeTab[] =
      "euxmGetArgUnknown", "euxmGetUnknown", "euxcMakeFPI"}
 };
 
+static void processFFI(const char* modname, euxlValue forms)
+{
+    bool usesFFI = false;
+
+    for (euxlValue rest = forms; rest; rest = euxmCdr(rest))
+    {
+        euxlValue form = euxmCar(rest);
+
+        if (euxmConsp(form) && euxmCar(form) == euxls_defextern)
+        {
+            usesFFI = true;
+        }
+    }
+
+    if (usesFFI)
+    {
+        FILE* fffile = createModuleFFI(modname);
+
+        euxlValue prev = euxmNil;
+        for (euxlValue rest = forms; rest; rest = euxmCdr(rest))
+        {
+            euxlValue form = euxmCar(rest);
+
+            if (euxmConsp(form) && euxmCar(form) == euxls_defextern)
+            {
+                processDefextern(fffile, euxmCdr(form));
+
+                // Remove the processed defextern from the module form
+                euxmSetCdr(prev, euxmCdr(rest));
+            }
+            else
+            {
+                prev = rest;
+            }
+        }
+
+        closeModuleFFI(fffile);
+
+        compileModuleFFI(modname);
+
+        loadModuleFFI(modname);
+    }
+}
+
+///  compileDefextern - handle the (defextern ... ) form interactively
+static void compileDefextern(euxlValue form, int cont)
+{
+    euxlValue lname = euxmStackPush
+    (
+        concat
+        (
+            euxmGetString(euxmGetModuleName(euxcCurrentModule)),
+            "_",
+            euxmGetString(euxmGetPName(euxmCar(form))),
+            NULL
+        )
+    );
+    const char* name = euxmGetString(lname);
+
+    FILE* fffile = createModuleFFI(name);
+    processDefextern(fffile, form);
+    closeModuleFFI(fffile);
+    compileModuleFFI(name);
+    loadModuleFFI(name);
+    euxmStackDrop(1);
+
+    putCodeByte(OP_NULL);
+    putCodeByte(OP_NULL);
+    compileContinuation(cont);
+}
+
+///  createModuleFFI
+static FILE* createModuleFFI(const char* modname)
+{
+    euxlValue modFFICname = concat("euxl/", modname, "_ffi.c", NULL);
+    FILE* fffile = fopen(euxmGetString(modFFICname), "w");
+
+    fprintf
+    (
+        fffile,
+        "#include \"../euxlisp.h\"\n\n"
+    );
+
+    return fffile;
+}
+
 ///  ffMakeReturn
 static const char* ffMakeReturn(euxlValue ret)
 {
@@ -4906,27 +4948,6 @@ static const char* ffArgValue(euxlValue arg)
     }
 
     return ffmapp->valueGetter;
-}
-
-///  createModuleFFI
-static FILE* createModuleFFI(const char* modname)
-{
-    euxlValue modFFICname = concat("euxl/", modname, "_ffi.c", NULL);
-    FILE* fffile = fopen(euxmGetString(modFFICname), "w");
-
-    fprintf
-    (
-        fffile,
-        "#include \"../euxlisp.h\"\n\n"
-    );
-
-    return fffile;
-}
-
-///  closeModuleFFI
-static void closeModuleFFI(FILE* fffile)
-{
-    fclose(fffile);
 }
 
 ///  processDefextern - handle the (defextern ... ) form
@@ -5076,6 +5097,12 @@ static FILE* processDefextern(FILE* fffile, euxlValue form)
     return fffile;
 }
 
+///  closeModuleFFI
+static void closeModuleFFI(FILE* fffile)
+{
+    fclose(fffile);
+}
+
 ///  compileModuleFFI
 void compileModuleFFI(const char* modname)
 {
@@ -5120,34 +5147,6 @@ void loadModuleFFI(const char* modname)
         fputs(dlerror(), stderr);
         fputs("\n", stderr);
     }
-}
-
-///  compileDefextern - handle the (defextern ... ) form interactively
-static void compileDefextern(euxlValue form, int cont)
-{
-    //fprintf(stderr, "compileDefextern\n");
-    euxlValue lname = euxmStackPush
-    (
-        concat
-        (
-            euxmGetString(euxmGetModuleName(euxcCurrentModule)),
-            "_",
-            euxmGetString(euxmGetPName(euxmCar(form))),
-            NULL
-        )
-    );
-    const char* name = euxmGetString(lname);
-
-    FILE* fffile = createModuleFFI(name);
-    processDefextern(fffile, form);
-    closeModuleFFI(fffile);
-    compileModuleFFI(name);
-    loadModuleFFI(name);
-    euxmStackDrop(1);
-
-    putCodeByte(OP_NULL);
-    putCodeByte(OP_NULL);
-    compileContinuation(cont);
 }
 
 ///-----------------------------------------------------------------------------
