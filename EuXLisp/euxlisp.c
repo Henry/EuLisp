@@ -530,7 +530,9 @@ void euxcFatal(const char *msg)
 ///  euxcWrapup - clean up and exit to the operating system
 void euxcWrapup(int n)
 {
+    euxcFreeImage();
     euxcOSFinish();
+    euxcCloseDls();
     exit(n);
 }
 

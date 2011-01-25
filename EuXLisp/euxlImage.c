@@ -40,7 +40,6 @@ static const char *image_search_path[] = { IMAGE_SEARCH_PATH, 0 };
 ///-----------------------------------------------------------------------------
 /// Forward declarations
 ///-----------------------------------------------------------------------------
-static void freeImage();
 static void setOffset();
 static void writeNode(euxlValue node);
 static void writePtr(euxmOffType off);
@@ -277,7 +276,7 @@ int euxlRestoreImage(const char *fname)
     }
 
     // free the old memory image
-    freeImage();
+    euxcFreeImage();
 
     // read the stack size
     unsigned int ssize = (unsigned int)readPtr();
@@ -402,8 +401,8 @@ done:
     return (euxmTrue);
 }
 
-///  freeImage - free the current memory image
-static void freeImage()
+///  euxcFreeImage - free the current memory image
+void euxcFreeImage()
 {
     // close all open streams and free each node segment
     while (nsegments != NULL)

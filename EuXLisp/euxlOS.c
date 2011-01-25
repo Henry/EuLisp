@@ -27,6 +27,10 @@
 #include <errno.h>
 #include <unistd.h>
 #include <sys/times.h>
+#include <sys/stat.h>
+#include <stdarg.h>
+
+#include <dlfcn.h>
 
 #ifdef READLINE
 #include <readline/readline.h>
@@ -67,6 +71,49 @@ static int lposition;
 /// Forward declarations
 ///-----------------------------------------------------------------------------
 static void osFlushNl();
+
+///-----------------------------------------------------------------------------
+/// String and file utility functions
+///-----------------------------------------------------------------------------
+///  euxcStringConcat - Concatenate strings, return is dynamically allocated
+//    and must be freed
+char *euxcStringConcat(const char *str, ...)
+{
+    // Sum sizes of all the argument strings
+    // in order to allocate the correct result string
+    size_t rlen = 1;
+
+    va_list ap;
+    va_start(ap, str);
+
+    for (const char *s = str; s != NULL; s = va_arg(ap, const char *))
+    {
+        rlen += strlen(s);
+    }
+
+    va_end(ap);
+
+
+    // Allocate the result string and concatenate arguments
+    char *result = (char *)malloc(rlen);
+    char *rp = result;
+
+    va_start(ap, str);
+
+    for (const char *s = str; s != NULL; s = va_arg(ap, const char *))
+    {
+        size_t len = strlen(s);
+        rp = memcpy(rp, s, len) + len;
+    }
+
+    va_end(ap);
+
+    // Terminate the result string
+    *rp++ = '\0';
+
+    // NOTE! this result string in dynamically allocated and must be freed
+    return result;
+}
 
 ///-----------------------------------------------------------------------------
 /// Functions
@@ -136,6 +183,29 @@ void euxcOSError(const char *msg)
     euxcOSTPuts("error: ");
     euxcOSTPuts(msg);
     euxcOSTPutc('\n');
+}
+
+///  euxcOSFileExists - returns true if file exists
+int euxcOSFileExists(const char* filename)
+{
+    struct stat fileStat;
+    return (stat(filename, &fileStat) == 0);
+}
+
+///  euxcOSFileNewer - returns true if f1 is newer than f2
+int euxcOSFileNewer(const char* f1, const char* f2)
+{
+    struct stat f1Stat;
+    int f1Exists = (stat(f1, &f1Stat) == 0);
+
+    struct stat f2Stat;
+    int f2Exists = (stat(f2, &f2Stat) == 0);
+
+    return
+    (
+        (f1Exists && !f2Exists)
+        || (f1Exists && f2Exists && f1Stat.st_mtime > f2Stat.st_mtime)
+    );
 }
 
 ///  euxcOSRand - return a random number between 0 and n-1
@@ -644,5 +714,60 @@ euxlValue euxlPutenv()
     return new;
 }
 
+///-----------------------------------------------------------------------------
+/// Dynamic library support
+///-----------------------------------------------------------------------------
+
+static void **dlList = NULL;
+static int dlListUsed = 0;
+static int dlListSize = 0;
+
+///  eulcLoadDl
+void eulcLoadDl(const char* soname)
+{
+    void* libPtr = dlopen(soname, RTLD_NOW);
+
+    if (!libPtr)
+    {
+        fputs(dlerror(), stderr);
+        fputs("\n", stderr);
+    }
+
+    for (int libi = 0; libi < dlListUsed; libi++)
+    {
+        if (dlList[libi] == libPtr)
+        {
+            dlclose(libPtr);
+            return;
+        }
+    }
+
+    if (dlListUsed >= dlListSize)
+    {
+        int newSize = dlListUsed + 64;
+        void **newDlList = realloc(dlList, newSize);
+        if (!newDlList) return;
+        dlListSize = newSize;
+        dlList = newDlList;
+    }
+
+    // Store dl handle for euxcCloseDls
+    dlList[dlListUsed++] = libPtr;
+}
+
+///  euxcCloseDls
+void euxcCloseDls()
+{
+    for (int libi = dlListUsed - 1; libi >= 0; libi--)
+    {
+        void *libPtr = dlList[libi];
+        if (!libPtr) continue;
+        dlclose(libPtr);
+    }
+
+    free(dlList);
+    dlList = NULL;
+    dlListUsed = dlListSize = 0;
+}
 
 ///-----------------------------------------------------------------------------

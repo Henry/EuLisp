@@ -28,9 +28,12 @@
 ///-----------------------------------------------------------------------------
 /// euxlOS.c
 ///-----------------------------------------------------------------------------
+extern char *euxcStringConcat(const char *str, ...);
 extern void euxcOSInit(const char *banner);
 extern void euxcOSFinish();
 extern void euxcOSError(const char *msg);
+extern int euxcOSFileExists(const char* filename);
+extern int euxcOSFileNewer(const char* f1, const char* f2);
 extern int euxcOSRand(int n);
 extern FILE *euxcOSAOpen(const char *name, const char *mode);
 extern FILE *euxcOSBOpen(const char *name, const char *mode);
@@ -56,6 +59,8 @@ extern euxlValue euxlSystem();
 extern euxlValue euxlTmpFile();
 extern euxlValue euxlGetenv();
 extern euxlValue euxlPutenv();
+extern void eulcLoadDl(const char* soname);
+extern void euxcCloseDls();
 
 ///-----------------------------------------------------------------------------
 /// euxlisp.c
@@ -359,6 +364,7 @@ extern int euxlSaveImage(const char *fname);
 extern FILE *euxcPathOpen(const char *fname, const char *env_var_name, const char **builtin_path, char *found);
 extern int euxlRestoreImage(const char *fname);
 extern euxmOffType euxcPtrToOffset(euxlValue p);
+extern void euxcFreeImage();
 
 ///-----------------------------------------------------------------------------
 /// euxlInit.c

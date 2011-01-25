@@ -427,14 +427,14 @@ static void findMemory()
     if (nfree < (long)euxmNsSize)
     {
         euxcNExpand(euxmNsSize);
-        //nexpand(euxmNsSize);        // rjb
+        //euxcNExpand(euxmNsSize);        // rjb
     }
 }
 
 ///  euxcNExpand - expand node space
 int euxcNExpand(int size)
 {
-    euxcNodeSegment *euxcNewnsegment(), *newseg;
+    euxcNodeSegment *newseg;
 
     // allocate the new segment
     if ((newseg = euxcNewnsegment(size)) != NULL)
@@ -555,7 +555,7 @@ int euxcMakeVmemory(int size)
 ///  euxcVexpand - expand vector space
 int euxcVexpand(int size)
 {
-    euxcVectorSegment *euxcNewvsegment(), *vseg;
+    euxcVectorSegment *vseg;
 
     // allocate the new segment
     if ((vseg = euxcNewvsegment(size)) != NULL)

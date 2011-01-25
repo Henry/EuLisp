@@ -25,8 +25,6 @@
 #include "euxlisp.h"
 #include "euxlBCodes.h"
 
-#include <dlfcn.h>
-
 ///-----------------------------------------------------------------------------
 /// Macros
 ///-----------------------------------------------------------------------------
@@ -65,6 +63,59 @@ static unsigned char cbuff[euxmCodeBufferSize]; // base of code buffer
 static int cbase;                               // base for current function
 static int cptr;                                // code buffer pointer
 
+///  Byte-coded functions
+typedef struct
+{
+    char *name;
+    int code, args;
+} byteCodedFunDef;
+
+///  Byte-code map for builtin functions
+static byteCodedFunDef byteCodeFunTab[] =
+{
+    {"atom?", OP_ATOM, 1},
+    {"eq", OP_EQ, 2},
+    {"null?", OP_NULL, 1},
+    {"not", OP_NULL, 1},
+    {"cons", OP_CONS, 2},
+    {"car", OP_CAR, 1},
+    {"cdr", OP_CDR, 1},
+    {"set-car", OP_SETCAR, 2},
+    {"set-cdr", OP_SETCDR, 2},
+    {"%+", OP_ADD, -2},
+    {"%-", OP_SUB, -2},
+    {"%*", OP_MUL, -2},
+    {"%/", OP_DIV, -2},
+    {"%quotient", OP_QUO, -2},
+    {"%<", OP_LSS, -2},
+    {"%=", OP_EQL, -2},
+    {"%>", OP_GTR, -2},
+    {"class-of", OP_CLASSOF, 1},
+    {"%GETIVAR", OP_GETIVAR, 2},
+    {"%SETIVAR", OP_SETIVAR, 3},
+    {"get", OP_GET, 2},
+    {"put", OP_PUT, 3},
+    {"current-module", OP_CURMOD, 0},
+    {"cons?", OP_CONSP, 1},
+    {"symbol?", OP_SYMBOLP, 1},
+    {"vector?", OP_VECTORP, 1},
+    {"append", OP_APPEND, -2},
+    {"list", OP_LIST, -2},
+    {"list-size", OP_SIZE, 1},
+    {"reverse", OP_REVERSE, 1},
+    {"caar", OP_CAAR, 1},
+    {"cadr", OP_CADR, 1},
+    {"cdar", OP_CDAR, 1},
+    {"cddr", OP_CDDR, 1},
+    {"get-syntax", OP_GETSYNTAX, 2},
+    {"put-syntax", OP_PUTSYNTAX, 3},
+    #ifndef NO_CHECK_REF
+    {"check-ref", OP_CHECKREF, 2},
+    #endif
+    {(char *)0, 0, 0}
+};
+
+///  Output format for byte-code
 typedef struct
 {
     int ot_code;
@@ -72,6 +123,7 @@ typedef struct
     int ot_fmt;
 } byteCodeFmtDef;
 
+///  Output format table for byte-codes
 byteCodeFmtDef otab[] =
 {
     {OP_BRT, "BRT", FMT_WORD},
@@ -109,6 +161,14 @@ byteCodeFmtDef otab[] =
 
     {0, 0, 0}
 };
+
+///  Module file names
+typedef struct
+{
+    char *name;   // Module source file .em
+    char *cname;  // FFI .c file
+    char *soname; // FFI .so file
+} moduleFilesDef;
 
 ///-----------------------------------------------------------------------------
 /// Forward declarations
@@ -183,65 +243,21 @@ static void compileDefcondition(euxlValue form, int cont);
 static euxlValue reinternSymbol(euxlValue a);
 static euxlValue filterImports(euxlValue implist, euxlValue sofar);
 
+///  FFI functions
 static void processFFI(const char* modname, euxlValue forms);
-static FILE* createModuleFFI(const char* modname);
+static FILE* createModuleFFI(const moduleFilesDef* modfiles);
 static void compileDefextern(euxlValue form, int cont);
 static FILE* processDefextern(FILE* fffile, euxlValue form);
 static void closeModuleFFI(FILE* fffile);
-static void compileModuleFFI(const char* modname);
-static void loadModuleFFI(const char* modname);
+static void compileModuleFFI(const moduleFilesDef* modfiles);
+static void loadModuleFFI(const moduleFilesDef* modfiles);
+static void freeModuleFiles(moduleFilesDef* modfiles);
 
-// Byte-coded functions
-typedef struct
-{
-    char *name;
-    int code, args;
-} byteCodedFunDef;
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
 
-static byteCodedFunDef byteCodeFunTab[] =
-{
-    {"atom?", OP_ATOM, 1},
-    {"eq", OP_EQ, 2},
-    {"null?", OP_NULL, 1},
-    {"not", OP_NULL, 1},
-    {"cons", OP_CONS, 2},
-    {"car", OP_CAR, 1},
-    {"cdr", OP_CDR, 1},
-    {"set-car", OP_SETCAR, 2},
-    {"set-cdr", OP_SETCDR, 2},
-    {"%+", OP_ADD, -2},
-    {"%-", OP_SUB, -2},
-    {"%*", OP_MUL, -2},
-    {"%/", OP_DIV, -2},
-    {"%quotient", OP_QUO, -2},
-    {"%<", OP_LSS, -2},
-    {"%=", OP_EQL, -2},
-    {"%>", OP_GTR, -2},
-    {"class-of", OP_CLASSOF, 1},
-    {"%GETIVAR", OP_GETIVAR, 2},
-    {"%SETIVAR", OP_SETIVAR, 3},
-    {"get", OP_GET, 2},
-    {"put", OP_PUT, 3},
-    {"current-module", OP_CURMOD, 0},
-    {"cons?", OP_CONSP, 1},
-    {"symbol?", OP_SYMBOLP, 1},
-    {"vector?", OP_VECTORP, 1},
-    {"append", OP_APPEND, -2},
-    {"list", OP_LIST, -2},
-    {"list-size", OP_SIZE, 1},
-    {"reverse", OP_REVERSE, 1},
-    {"caar", OP_CAAR, 1},
-    {"cadr", OP_CADR, 1},
-    {"cdar", OP_CDAR, 1},
-    {"cddr", OP_CDDR, 1},
-    {"get-syntax", OP_GETSYNTAX, 2},
-    {"put-syntax", OP_PUTSYNTAX, 3},
-    #ifndef NO_CHECK_REF
-    {"check-ref", OP_CHECKREF, 2},
-    #endif
-    {(char *)0, 0, 0}
-};
-
+///  Function map for special forms
 specialFormDef specialFormTab[] =
 {
     {"quote", compileQuote},
@@ -279,48 +295,6 @@ specialFormDef specialFormTab[] =
     {"defextern", compileDefextern},
     {(char *)0, (void (*)())0}
 };
-
-///-----------------------------------------------------------------------------
-/// Utility Functions
-///-----------------------------------------------------------------------------
-#include <stdarg.h>
-
-static euxlValue concat(const char *str, ...)
-{
-    // Sum sizes of all the argument strings
-    // in order to allocate the correct result string
-    size_t rlen = 1;
-
-    va_list ap;
-    va_start(ap, str);
-
-    for (const char *s = str; s != NULL; s = va_arg(ap, const char *))
-    {
-        rlen += strlen(s);
-    }
-
-    va_end(ap);
-
-
-    // Allocate the result string and concatenate arguments
-    euxlValue result = euxcNewString(rlen);
-    char *rp = euxmGetString(result);
-
-    va_start(ap, str);
-
-    for (const char *s = str; s != NULL; s = va_arg(ap, const char *))
-    {
-        size_t len = strlen(s);
-        rp = memcpy(rp, s, len) + len;
-    }
-
-    va_end(ap);
-
-    // Terminate the result string
-    *rp++ = '\0';
-
-    return result;
-}
 
 ///-----------------------------------------------------------------------------
 /// Functions
@@ -4829,7 +4803,16 @@ static void processFFI(const char* modname, euxlValue forms)
 
     if (usesFFI)
     {
-        FILE* fffile = createModuleFFI(modname);
+        moduleFilesDef mfiles;
+
+        mfiles.name = euxcStringConcat(modname, ".em", NULL);
+        mfiles.cname = euxcStringConcat("euxl/", modname, "_ffi.c", NULL);
+        mfiles.soname = euxcStringConcat("euxl/", modname, "_ffi.so", NULL);
+
+        int createFFI = euxcOSFileNewer(mfiles.name, mfiles.cname);
+
+        FILE* fffile = NULL;
+        if (createFFI) fffile = createModuleFFI(&mfiles);
 
         euxlValue prev = euxmNil;
         for (euxlValue rest = forms; rest; rest = euxmCdr(rest))
@@ -4838,7 +4821,7 @@ static void processFFI(const char* modname, euxlValue forms)
 
             if (euxmConsp(form) && euxmCar(form) == euxls_defextern)
             {
-                processDefextern(fffile, euxmCdr(form));
+                if (createFFI) processDefextern(fffile, euxmCdr(form));
 
                 // Remove the processed defextern from the module form
                 euxmSetCdr(prev, euxmCdr(rest));
@@ -4849,35 +4832,41 @@ static void processFFI(const char* modname, euxlValue forms)
             }
         }
 
-        closeModuleFFI(fffile);
+        if (createFFI) closeModuleFFI(fffile);
+        if (createFFI) compileModuleFFI(&mfiles);
 
-        compileModuleFFI(modname);
+        loadModuleFFI(&mfiles);
 
-        loadModuleFFI(modname);
+        freeModuleFiles(&mfiles);
     }
 }
 
 ///  compileDefextern - handle the (defextern ... ) form interactively
 static void compileDefextern(euxlValue form, int cont)
 {
-    euxlValue lname = euxmStackPush
-    (
-        concat
-        (
-            euxmGetString(euxmGetModuleName(euxcCurrentModule)),
-            "_",
-            euxmGetString(euxmGetPName(euxmCar(form))),
-            NULL
-        )
-    );
-    const char* name = euxmGetString(lname);
+    moduleFilesDef mfiles;
 
-    FILE* fffile = createModuleFFI(name);
+    char* name = euxcStringConcat
+    (
+        euxmGetString(euxmGetModuleName(euxcCurrentModule)),
+        "_",
+        euxmGetString(euxmGetPName(euxmCar(form))),
+        NULL
+    );
+
+    mfiles.name = euxcStringConcat
+    (
+        euxmGetString(euxmGetModuleName(euxcCurrentModule)), ".em", NULL
+    );
+    mfiles.cname = euxcStringConcat("euxl/", name, "_ffi.c", NULL);
+    mfiles.soname = euxcStringConcat("euxl/", name, "_ffi.so", NULL);
+
+    FILE* fffile = createModuleFFI(&mfiles);
     processDefextern(fffile, form);
     closeModuleFFI(fffile);
-    compileModuleFFI(name);
-    loadModuleFFI(name);
-    euxmStackDrop(1);
+    compileModuleFFI(&mfiles);
+    loadModuleFFI(&mfiles);
+    freeModuleFiles(&mfiles);
 
     putCodeByte(OP_NULL);
     putCodeByte(OP_NULL);
@@ -4885,10 +4874,9 @@ static void compileDefextern(euxlValue form, int cont)
 }
 
 ///  createModuleFFI
-static FILE* createModuleFFI(const char* modname)
+static FILE* createModuleFFI(const moduleFilesDef* modfiles)
 {
-    euxlValue modFFICname = concat("euxl/", modname, "_ffi.c", NULL);
-    FILE* fffile = fopen(euxmGetString(modFFICname), "w");
+    FILE* fffile = fopen(modfiles->cname, "w");
 
     fprintf
     (
@@ -5036,11 +5024,11 @@ static FILE* processDefextern(FILE* fffile, euxlValue form)
                 ffGetArg(arg)
             );
         } while
-            (
-                (restArgs = euxmCdr(restArgs))
-                && euxmConsp(restArgs)
-                && (arg = euxmCar(restArgs)) != euxmNil
-            );
+        (
+            (restArgs = euxmCdr(restArgs))
+            && euxmConsp(restArgs)
+            && (arg = euxmCar(restArgs)) != euxmNil
+        );
 
         fprintf
         (
@@ -5104,49 +5092,34 @@ static void closeModuleFFI(FILE* fffile)
 }
 
 ///  compileModuleFFI
-void compileModuleFFI(const char* modname)
+void compileModuleFFI(const moduleFilesDef* modfiles)
 {
-    // Push the strings onto the stack to GC-protect
-    euxlValue modFFICname = euxmStackPush
+    char* modFFICompileCmd = euxcStringConcat
     (
-        concat("euxl/", modname, "_ffi.c", NULL)
+        "gcc -pipe -m64 -DWORD_LENGTH=64 -std=gnu99 -O3 -fpic ",
+        modfiles->cname,
+        " platforms/x86_64/*.o -shared -o ",
+        modfiles->soname,
+        NULL
     );
 
-    euxlValue modFFILibName = euxmStackPush
-    (
-        concat("euxl/", modname, "_ffi.so", NULL)
-    );
+    system(modFFICompileCmd);
 
-    euxlValue modFFICompileCmd = euxmStackPush
-    (
-        concat
-        (
-            "gcc -pipe -m64 -DWORD_LENGTH=64 -std=gnu99 -O3 -fpic ",
-            euxmGetString(modFFICname),
-            " platforms/x86_64/*.o -shared -o ",
-            euxmGetString(modFFILibName),
-            NULL
-        )
-    );
-
-    system(euxmGetString(modFFICompileCmd));
-
-    euxmStackDrop(3);
+    free(modFFICompileCmd);
 }
 
 ///  loadModuleFFI
-void loadModuleFFI(const char* modname)
+void loadModuleFFI(const moduleFilesDef* modfiles)
 {
-    euxlValue modFFILibName = concat("euxl/", modname, "_ffi.so", NULL);
+    eulcLoadDl(modfiles->soname);
+}
 
-    void* functionLibPtr =
-        dlopen(euxmGetString(modFFILibName), RTLD_LAZY|RTLD_GLOBAL);
-
-    if (!functionLibPtr)
-    {
-        fputs(dlerror(), stderr);
-        fputs("\n", stderr);
-    }
+///  freeModuleFiles
+void freeModuleFiles(moduleFilesDef* modfiles)
+{
+    free(modfiles->name);
+    free(modfiles->cname);
+    free(modfiles->soname);
 }
 
 ///-----------------------------------------------------------------------------
