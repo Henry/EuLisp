@@ -196,18 +196,18 @@
     [[file:Doc/bindings.txt][bindings.txt]]
 
 * Modules
-*** [[file:Modules/Bignum/README.org][GNU Bignum]]: /Modules/Bignum/
+*** [[file:../Modules/Bignum/README.org][GNU Bignum]]: /Modules/Bignum/
     Danius Michaelides wrote a port to the GNU bignum library (gmp).
-*** [[file:Modules/MPI/README.org][MPI]]: /Modules/MPI/
-*** [[file:Modules/TclTk/README.org][Tcl/Tk]]: /Modules/TclTk/
-*** [[file:Modules/Fthread/README.org][Foreign thread libraries]]: /Modules/Fthread/
-*** [[file:Modules/Matching/README.org][Matching]]: /Modules/Match/
+*** [[file:../Modules/MPI/README.org][MPI]]: /Modules/MPI/
+*** [[file:../Modules/TclTk/README.org][Tcl/Tk]]: /Modules/TclTk/
+*** [[file:../Modules/Fthread/README.org][Foreign thread libraries]]: /Modules/Fthread/
+*** [[file:../Modules/Matching/README.org][Matching]]: /Modules/Match/
     Modulized version of match-slib.scm badly hacked for EuLisp.
-*** [[file:Modules/OS/README.org][Object serialisation]]: /Modules/OS/
+*** [[file:../Modules/OS/README.org][Object serialisation]]: /Modules/OS/
     includes support for closures and threads.
-*** [[file:Modules/OPS5/README.org][OPS5 rule-based system]] : /Modules/OPS5/
+*** [[file:../Modules/OPS5/README.org][OPS5 rule-based system]] : /Modules/OPS5/
     An object-oriented version of the OPS5 rule-based system.
-***  [[file:Modules/Pipe/README.org][Pipes and forked child processes]]:  /Modules/Pipe/
+***  [[file:../Modules/Pipe/README.org][Pipes and forked child processes]]:  /Modules/Pipe/
     Thanks to Rob Simmons there is support for pipes to forked child
     processes.
 

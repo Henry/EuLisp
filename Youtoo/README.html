@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*Youtoo*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-12-19 23:38:18 GMT"/>
+<meta name="generated" content="2011-01-26 15:48:37 GMT"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -21,6 +21,9 @@ lang="en" xml:lang="en">
   .target { }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
   p.verse { margin-left: 3% }
   pre {
 	border: 1pt solid #AEBDCC;
@@ -31,7 +34,13 @@ lang="en" xml:lang="en">
         overflow:auto;
   }
   table { border-collapse: collapse; }
-  td, th { vertical-align: top; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
   dt { font-weight: bold; }
   div.figure { padding: 0.5em; }
   div.figure p { text-align: center; }
@@ -320,7 +329,7 @@ Lisp:
 
 
 
-<pre class="src src-lisp">(defextern atoi () )
+<pre class="src src-lisp">(defextern atoi (&lt;string&gt;) &lt;fpi&gt;)
 </pre>
 
 
@@ -344,21 +353,21 @@ be given with <code>-L&lt;bar-path&gt;</code> in the list of <code>$CFLAGS</code
 The following automatic converters are available:
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption></caption>
-<colgroup><col align="left" /><col align="left" />
+<colgroup><col class="left" /><col class="left" />
 </colgroup>
 <thead>
-<tr><th scope="col">Lisp</th><th scope="col">C (C99)</th></tr>
+<tr><th scope="col" class="left">Lisp</th><th scope="col" class="left">C (C99)</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;fpi&gt;</code></td><td><code>int</code></td></tr>
-<tr><td><code>&lt;character&gt;</code></td><td><code>char</code></td></tr>
-<tr><td><code>&lt;double-float&gt;</code></td><td><code>double</code></td></tr>
-<tr><td><code>&lt;string&gt;</code></td><td><code>char*</code></td></tr>
-<tr><td><code>boolean</code></td><td><code>bool</code></td></tr>
-<tr><td><code>ptr</code></td><td><code>void*</code></td></tr>
-<tr><td><code>&lt;int*&gt;</code></td><td><code>int*</code></td></tr>
-<tr><td><code>&lt;double*&gt;</code></td><td><code>double*</code></td></tr>
-<tr><td><code>&lt;string*&gt;</code></td><td><code>char**</code></td></tr>
+<tr><td class="left"><code>&lt;fpi&gt;</code></td><td class="left"><code>int</code></td></tr>
+<tr><td class="left"><code>&lt;character&gt;</code></td><td class="left"><code>char</code></td></tr>
+<tr><td class="left"><code>&lt;double-float&gt;</code></td><td class="left"><code>double</code></td></tr>
+<tr><td class="left"><code>&lt;string&gt;</code></td><td class="left"><code>char*</code></td></tr>
+<tr><td class="left"><code>boolean</code></td><td class="left"><code>bool</code></td></tr>
+<tr><td class="left"><code>ptr</code></td><td class="left"><code>void*</code></td></tr>
+<tr><td class="left"><code>&lt;int*&gt;</code></td><td class="left"><code>int*</code></td></tr>
+<tr><td class="left"><code>&lt;double*&gt;</code></td><td class="left"><code>double*</code></td></tr>
+<tr><td class="left"><code>&lt;string*&gt;</code></td><td class="left"><code>char**</code></td></tr>
 </tbody>
 </table>
 
@@ -433,39 +442,39 @@ The current set of supported bindings in Youtoo are in the file
 <div class="outline-text-2" id="text-4">
 
 <ul>
-<li id="sec-4_1"><a href="Modules/Bignum/README.html">GNU Bignum</a>: <i>Modules/Bignum</i> <br/>
+<li id="sec-4_1"><a href="../Modules/Bignum/README.html">GNU Bignum</a>: <i>Modules/Bignum</i> <br/>
 Danius Michaelides wrote a port to the GNU bignum library (gmp).
 </li>
 </ul>
 <ul>
-<li id="sec-4_2"><a href="Modules/MPI/README.html">MPI</a>: <i>Modules/MPI</i> <br/>
+<li id="sec-4_2"><a href="../Modules/MPI/README.html">MPI</a>: <i>Modules/MPI</i> <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-4_3"><a href="Modules/TclTk/README.html">Tcl/Tk</a>: <i>Modules/TclTk</i> <br/>
+<li id="sec-4_3"><a href="../Modules/TclTk/README.html">Tcl/Tk</a>: <i>Modules/TclTk</i> <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-4_4"><a href="Modules/Fthread/README.html">Foreign thread libraries</a>: <i>Modules/Fthread</i> <br/>
+<li id="sec-4_4"><a href="../Modules/Fthread/README.html">Foreign thread libraries</a>: <i>Modules/Fthread</i> <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-4_5"><a href="Modules/Matching/README.html">Matching</a>: <i>Modules/Match</i> <br/>
+<li id="sec-4_5"><a href="../Modules/Matching/README.html">Matching</a>: <i>Modules/Match</i> <br/>
 Modulized version of match-slib.scm badly hacked for EuLisp.
 </li>
 </ul>
 <ul>
-<li id="sec-4_6"><a href="Modules/OS/README.html">Object serialisation</a>: <i>Modules/OS</i> <br/>
+<li id="sec-4_6"><a href="../Modules/OS/README.html">Object serialisation</a>: <i>Modules/OS</i> <br/>
 includes support for closures and threads.
 </li>
 </ul>
 <ul>
-<li id="sec-4_7"><a href="Modules/OPS5/README.html">OPS5 rule-based system</a> : <i>Modules/OPS5</i> <br/>
+<li id="sec-4_7"><a href="../Modules/OPS5/README.html">OPS5 rule-based system</a> : <i>Modules/OPS5</i> <br/>
 An object-oriented version of the OPS5 rule-based system.
 </li>
 </ul>
 <ul>
-<li id="sec-4_8"><a href="Modules/Pipe/README.html">Pipes and forked child processes</a>:  <i>Modules/Pipe</i> <br/>
+<li id="sec-4_8"><a href="../Modules/Pipe/README.html">Pipes and forked child processes</a>:  <i>Modules/Pipe</i> <br/>
 Thanks to Rob Simmons there is support for pipes to forked child
 processes.
 
@@ -566,8 +575,8 @@ EuLisp-1.0.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-12-19 23:38:18 GMT</p>
-<p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
+<p class="date"> Date: 2011-01-26 15:48:37 GMT</p>
+<p class="creator">HTML generated by org-mode 7.4 in emacs 23</p>
 </div>
 </div>
 </body>
