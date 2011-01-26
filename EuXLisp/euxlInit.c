@@ -143,7 +143,8 @@ euxls_xlframe,
 euxls_gcmsgs,
 euxls_arg_list,
 euxls_next_methods,
-euxls_defextern;
+euxls_defextern,
+euxls_readline;
 
 ///  Continuations
 euxlValue
@@ -161,10 +162,6 @@ euxlValue euxls_check_ref;
 
 #ifdef SOCK
 euxlValue euxls_socket_error;
-#endif
-
-#ifdef READLINE
-euxlValue euxls_readline;
 #endif
 
 ///-----------------------------------------------------------------------------
@@ -417,9 +414,11 @@ void euxcInitSymbols()
     euxls_check_ref = euxmInternAndExport("check-ref");
     #endif
 
-    #ifdef READLINE
     euxls_readline = euxmInternAndExport("*readline*");
+    #ifdef READLINE
     euxmSetValue(euxls_readline, euxs_t);
+    #else
+    euxmSetValue(euxls_readline, euxmNil);
     #endif
 
     // Setup some synonyms

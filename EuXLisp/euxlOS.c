@@ -58,8 +58,9 @@ int reading;
 ///-----------------------------------------------------------------------------
 /// Local variables
 ///-----------------------------------------------------------------------------
-#ifdef READLINE
 static char* lbuf;
+
+#ifdef READLINE
 static char rl_histfile[255];
 #endif
 
