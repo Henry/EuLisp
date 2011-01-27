@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-10-23 20:05:00" /> 
+<meta name="date" content="2010-12-19 18:27:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -120,9 +120,10 @@ class="cmtt-9">generic-lambda</span></a><a
  </p><!--l. 54--><p class="noindent" >Methods can either be defined at the same time as the generic
  function, or else defined separately using the <a 
 href="eulispcl17.html#x22-947001r2"><span 
-class="cmtt-9">defmethod</span></a> macro,
- which adds a new method to an existing generic function. This
- macro is described in detail later in this section.
+class="cmtt-9">defmethod</span></a> syntax
+ operator, which adds a new method to an existing generic
+ function. This syntax operator is described in detail later in this
+ section.
  </p><!--l. 95--><p class="noindent" >
  </p>
  <h4 class="sclauseHead"> 11.1 <a 
@@ -2009,13 +2010,13 @@ class="cmtt-9">)</span></td></tr></table>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-9000011.4.6.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 202--><p class="noindent" >This macro is used for defining new methods on generic functions.
-A new method object is defined with the specified body and with
-the domain given by the specialized-lambda-list. This method is
-added to the generic function bound to <a 
+<!--l. 202--><p class="noindent" >This syntax operator is used for defining new methods on generic
+functions. A new method object is defined with the specified body
+and with the domain given by the specialized-lambda-list. This
+method is added to the generic function bound to <a 
 href="#x13-8300011.4.5.1"><span 
-class="cmti-9">gf-name</span></a>, which is an
-identifier, or a form denoting a setter function or a converter
+class="cmti-9">gf-name</span></a>, which
+is an identifier, or a form denoting a setter function or a converter
 function. If the specialized-lambda-list is not congruent with that
 of the generic function, an error is signalled (condition class:
 <a 
