@@ -35,7 +35,6 @@ lang="en" xml:lang="en">
   dt { font-weight: bold; }
   div.figure { padding: 0.5em; }
   div.figure p { text-align: center; }
-  textarea { overflow-x: auto; }
   .linenr { font-size:smaller }
   .code-highlighted {background-color:#ffff00;}
   .org-info-js_info-navigation { border-style:none; }
@@ -67,7 +66,6 @@ lang="en" xml:lang="en">
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
 <div id="content">
@@ -142,7 +140,7 @@ For <code>match-let</code> and <code>destructuring-bind</code> type uses there i
 hit.
 </p>
 <ul>
-<li id="sec-3_1">Original: Portable hygienic pattern matcher <br/>
+<li id="sec-3.1">Original: Portable hygienic pattern matcher <br/>
 The original version was written on 2006/11/29 and described in the
 following Usenet post:
 <a href="http://groups.google.com/group/comp.lang.scheme/msg/0941234de7112ffd">http://groups.google.com/group/comp.lang.scheme/msg/0941234de7112ffd</a> and is
@@ -184,6 +182,7 @@ clause ::= (pat body) | (pat =&gt; exp)
 
 
 
+
 <p>
 The <code>match-lambda</code> and <code>match-lambda*</code> forms are convenient combinations of
 <code>match</code> and <code>lambda</code>, and can be explained as follows:
@@ -194,6 +193,7 @@ The <code>match-lambda</code> and <code>match-lambda*</code> forms are convenien
 
 (match-lambda* (pat body) ...)  =  (<span style="color: #0000ff; font-weight: bold;">lambda</span> x (match x (pat body) ...))
 </pre>
+
 
 
 <p>
@@ -210,6 +210,7 @@ following expression:
 
 <pre class="src src-lisp">(match-let (((x y z) (list 1 2 3))) $body$)
 </pre>
+
 
 
 <p>
@@ -292,42 +293,33 @@ qp  ::= ()                              the empty list
 
 
 
+
 <p>
 The names <code>(quote, quasiquote, unquote, unquote-splicing, ?, _, $, and, or,   not, set, get, ..., ___)</code> cannot be used as pattern variables.
 </p>
 <ul>
-<li id="sec-5_1"><i>identifier</i> <br/>
+<li id="sec-5.1"><i>identifier</i> <br/>
 (excluding the reserved names <code>?</code>, <code>$</code>, <code>_</code>, <code>and</code>, <code>or</code>,
 <code>not</code>, <code>set</code>, <code>get</code>, <code>...</code>, and <code>(..</code> <i>k</i> <code>)</code> for non-negative integers
 <i>k</i>): matches anything, and binds a variable of this name to the matching
 value in the body.
 </li>
-</ul>
-<ul>
-<li id="sec-5_2"><code>_</code> <br/>
+<li id="sec-5.2"><code>_</code> <br/>
 matches anything, without binding any variables.
 </li>
-</ul>
-<ul>
-<li id="sec-5_3"><code>()</code>, <code>t</code>, <i>string</i>, <i>number</i>, <i>character</i>,  <i>​'s-expression</i> <br/>
+<li id="sec-5.3"><code>()</code>, <code>t</code>, <i>string</i>, <i>number</i>, <i>character</i>,  <i>​'s-expression</i> <br/>
 These constant patterns match themselves, ie., the corresponding value
 must be <code>equal?</code> to the pattern.
 </li>
-</ul>
-<ul>
-<li id="sec-5_4"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
+<li id="sec-5.4"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
 matches a proper list of <i>n</i> elements that match <i>pat<sub>1</sub></i> through
 <i>pat<sub>n</sub></i>.
 </li>
-</ul>
-<ul>
-<li id="sec-5_5"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub> . pat<sub>n+1</sub></i> <code>)</code> <br/>
+<li id="sec-5.5"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub> . pat<sub>n+1</sub></i> <code>)</code> <br/>
 matches a (possibly improper) list of at least <i>n</i> elements that ends in
 something matching <i>pat<sub>n+1</sub></i>.
 </li>
-</ul>
-<ul>
-<li id="sec-5_6"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub> pat<sub>n+1</sub> &hellip;</i> <code>)</code> <br/>
+<li id="sec-5.6"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub> pat<sub>n+1</sub> &hellip;</i> <code>)</code> <br/>
 matches a proper list of <i>n</i> or more elements, where each element of the
 tail matches <i>pat<sub>n+1</sub></i>.  Each pattern variable in <i>pat<sub>n+1</sub></i> is bound
 to a list of the matching values. For example, the expression:
@@ -339,52 +331,39 @@ to a list of the matching values. For example, the expression:
 </pre>
 
 
+
 <p>
 binds binding to the list <code>​'(x y)</code>, values to the list <code>​'(1 2)</code>, and exp
 to 'z in the body of the match- expression. For the special case where
 <i>pat<sub>n+1</sub></i> is a pattern variable, the list bound to that variable may
 share with the matched value.<br/>
 </p></li>
-</ul>
-<ul>
-<li id="sec-5_7"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub> pat<sub>n+1</sub></i> <code>(..</code> <i>k</i> <code>))</code> <br/>
+<li id="sec-5.7"><code>(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub> pat<sub>n+1</sub></i> <code>(..</code> <i>k</i> <code>))</code> <br/>
 This pattern is similar to the previous pattern, but the tail must be at
 least <i>k</i> elements long. The pattern keywords <code>(.. 0) and =...</code> are
 equivalent.
 </li>
-</ul>
-<ul>
-<li id="sec-5_8"><code>#(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
+<li id="sec-5.8"><code>#(</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
 matches a vector of length <i>n</i>, whose elements match <i>pat<sub>1</sub></i> through
 <i>pat<sub>n</sub></i>.
 </li>
-</ul>
-<ul>
-<li id="sec-5_9"><code>($</code> <i>class</i> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
+<li id="sec-5.9"><code>($</code> <i>class</i> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
 matches a class declared with <code>defclass</code>.
 </li>
-</ul>
-<ul>
-<li id="sec-5_10"><code>(and</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
+<li id="sec-5.10"><code>(and</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
 matches if all of the sub-patterns match. This pattern is often used as
 <code>(and</code> <i>x pat</i> <code>)</code> to bind <i>x</i> to the entire value that matches <i>pat</i>
 (cf. "as-patterns" in ML or Haskell).
 </li>
-</ul>
-<ul>
-<li id="sec-5_11"><code>(or</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
+<li id="sec-5.11"><code>(or</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
 matches if any of the sub-patterns match. At least one subpattern must be
 present.  All sub-patterns must bind the same set of pattern variables.
 </li>
-</ul>
-<ul>
-<li id="sec-5_12"><code>(not</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
+<li id="sec-5.12"><code>(not</code> <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
 matches if none of the sub-patterns match. The sub-patterns may not bind
 any pattern variables.
 </li>
-</ul>
-<ul>
-<li id="sec-5_13"><code>(?</code> <i>predicate pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
+<li id="sec-5.13"><code>(?</code> <i>predicate pat<sub>1</sub> &hellip; pat<sub>n</sub></i> <code>)</code> <br/>
 In this pattern, predicate must be an expression evaluating to a single
 argument function. This pattern matches if predicate applied to the
 corresponding value is true, and the sub-patterns <i>pat<sub>1</sub> &hellip; pat<sub>n</sub></i>
@@ -394,9 +373,7 @@ order. The predicate expression is bound in the same scope as the match
 expression, <i>i.e.</i>, free variables in predicate are not bound by pattern
 variables.
 </li>
-</ul>
-<ul>
-<li id="sec-5_14"><code>(set</code> <i>identifier</i> <code>)</code> <br/>
+<li id="sec-5.14"><code>(set</code> <i>identifier</i> <code>)</code> <br/>
 matches anything, and binds identifier to a procedure of one argument that
 mutates the corresponding field of the matching value. This pattern must
 be nested within a pair, vector or class pattern. For example,
@@ -409,20 +386,17 @@ the expression:
 </pre>
 
 
+
 <p>
 mutates the <code>cadadr</code> of <code>x</code> to 4, so that <code>x</code> is <code>​'(1 (2 4))</code>.
 </p></li>
-</ul>
-<ul>
-<li id="sec-5_15"><code>(get</code> <i>identifier</i> <code>)</code> <br/>
+<li id="sec-5.15"><code>(get</code> <i>identifier</i> <code>)</code> <br/>
 matches anything, and binds identifier to a procedure of zero arguments
 that accesses the corresponding field of the matching value. This pattern
 is the complement to <code>set</code>.  As with <code>set</code>, this pattern must be nested
 within a pair, vector, or class pattern.
 </li>
-</ul>
-<ul>
-<li id="sec-5_16">Quasipatterns <br/>
+<li id="sec-5.16">Quasipatterns <br/>
 Quasiquote introduces a quasipattern, in which identifiers are considered
 to be symbolic constants. Like Scheme's quasiquote for data, <code>unquote</code>
 (=,=) and <code>unquote-splicing</code> (=,@=) escape back to normal patterns.
@@ -452,10 +426,9 @@ Complete support of classes
 </li>
 <li>
 Complete set of tests
+
 </li>
 </ul>
-
-
 </div>
 
 </div>
@@ -472,14 +445,14 @@ Run 'make' in directory <i>Modules/Smatch</i>.
 Run 'make test' in directory <i>Modules/Smatch</i>.
 </li>
 </ul>
-
 </div>
 </div>
 <div id="postamble">
 <p class="author"> Author:
+<a href="mailto:no-reply">&lt;no-reply&gt;</a>
 </p>
 <p class="date"> Date: November 2010</p>
-<p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
+<p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
 </div>
 </div>
 </body>

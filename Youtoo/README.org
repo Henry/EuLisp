@@ -193,7 +193,7 @@
 
 *** Bindings
     The current set of supported bindings in Youtoo are in the file
-    [[file:Doc/bindings.txt][bindings.txt]]
+    [[file:../Doc/bindings.txt][bindings.txt]]
 
 * Modules
 *** [[file:../Modules/Bignum/README.org][GNU Bignum]]: /Modules/Bignum/
@@ -201,7 +201,7 @@
 *** [[file:../Modules/MPI/README.org][MPI]]: /Modules/MPI/
 *** [[file:../Modules/TclTk/README.org][Tcl/Tk]]: /Modules/TclTk/
 *** [[file:../Modules/Fthread/README.org][Foreign thread libraries]]: /Modules/Fthread/
-*** [[file:../Modules/Matching/README.org][Matching]]: /Modules/Match/
+*** [[file:../Modules/Match/README.org][Matching]]: /Modules/Match/
     Modulized version of match-slib.scm badly hacked for EuLisp.
 *** [[file:../Modules/OS/README.org][Object serialisation]]: /Modules/OS/
     includes support for closures and threads.

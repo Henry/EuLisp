@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 lang="en" xml:lang="en">
 <head>
-<title>*Youtoo*</title>
+<title><b>Youtoo</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-01-26 15:48:37 GMT"/>
+<meta name="generated" content="2011-01-27 22:51:05 GMT"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -21,9 +21,6 @@ lang="en" xml:lang="en">
   .target { }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
   p.verse { margin-left: 3% }
   pre {
 	border: 1pt solid #AEBDCC;
@@ -34,17 +31,10 @@ lang="en" xml:lang="en">
         overflow:auto;
   }
   table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  td, th { vertical-align: top; }
   dt { font-weight: bold; }
   div.figure { padding: 0.5em; }
   div.figure p { text-align: center; }
-  textarea { overflow-x: auto; }
   .linenr { font-size:smaller }
   .code-highlighted {background-color:#ffff00;}
   .org-info-js_info-navigation { border-style:none; }
@@ -76,7 +66,6 @@ lang="en" xml:lang="en">
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
 <div id="content">
@@ -137,18 +126,16 @@ Youtoo in the file <a href="../COPYING">COPYING</a>.  If not, see <a href="http:
 <div class="outline-text-2" id="text-3">
 
 <ul>
-<li id="sec-3_1">~/.eulrc.${ARCH} <br/>
+<li id="sec-3.1">~/.eulrc.${ARCH} <br/>
 For private customisation, put a copy of <i>.eulrc.${ARCH}</i> in your home
 directory.  For example, remove the optimisation flag of the C compiler.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_2">EuLisp Module Files <br/>
+<li id="sec-3.2">EuLisp Module Files <br/>
 Have the extension <i>.em</i>.
 
 <ul>
-<li id="sec-3_2_1">EuLisp Language Level-1 <br/>
+<li id="sec-3.2.1">EuLisp Language Level-1 <br/>
 Level-1 is provided by the library <i>liblevel-1.a</i>.  Standard syntax
 operators are defined in the module syntax-1. Thus, the default module
 body looks like this:
@@ -166,44 +153,35 @@ body looks like this:
 
 
 
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li id="sec-3_3">Pretty Printing <br/>
-The function pprint provides generic pretty printing.
 
 </li>
 </ul>
-<ul>
-<li id="sec-3_4">Main <br/>
+</li>
+<li id="sec-3.3">Pretty Printing <br/>
+The function pprint provides generic pretty printing.
+
+</li>
+<li id="sec-3.4">Main <br/>
 There is no main entry function Top-level forms in modules are executed with
 with respect to the module hierarchy. Global variables <code>*argc*</code> and <code>*argv*</code>
 are provided.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_5">Standard Bindings <br/>
+<li id="sec-3.5">Standard Bindings <br/>
 See <i>Doc/bindings.txt</i> for a list of standard bindings.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_6">Module Compilation <br/>
+<li id="sec-3.6">Module Compilation <br/>
 The compiler checks before compiling a module which (directly and
 indirectly) imported modules really need to be (re)compiled. This feature
 can be switched off with <code>-no_recompile</code>.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_7">Standard C foreign-functions <br/>
+<li id="sec-3.7">Standard C foreign-functions <br/>
 in <i>Youtoo/include/eulisp.h</i>
 
 <ul>
-<li id="sec-3_7_1">Data conversion from EuLisp to C: <br/>
+<li id="sec-3.7.1">Data conversion from EuLisp to C: <br/>
 
 
 
@@ -218,10 +196,9 @@ in <i>Youtoo/include/eulisp.h</i>
 
 
 
+
 </li>
-</ul>
-<ul>
-<li id="sec-3_7_2">Data conversion from C to EuLisp: <br/>
+<li id="sec-3.7.2">Data conversion from C to EuLisp: <br/>
 
 
 
@@ -232,10 +209,9 @@ in <i>Youtoo/include/eulisp.h</i>
 
 
 
+
 </li>
-</ul>
-<ul>
-<li id="sec-3_7_3">Creating symbols and keywords: <br/>
+<li id="sec-3.7.3">Creating symbols and keywords: <br/>
 
 
 
@@ -245,10 +221,9 @@ eul_intern_keyword(<span style="color: #0000ff;">LispRef</span> <span style="col
 
 
 
+
 </li>
-</ul>
-<ul>
-<li id="sec-3_7_4">EuLisp data allocation: <br/>
+<li id="sec-3.7.4">EuLisp data allocation: <br/>
 
 
 
@@ -263,10 +238,9 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 
 
 
+
 </li>
-</ul>
-<ul>
-<li id="sec-3_7_5">EuLisp constants: <br/>
+<li id="sec-3.7.5">EuLisp constants: <br/>
 
 
 
@@ -276,10 +250,9 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 
 
 
+
 </li>
-</ul>
-<ul>
-<li id="sec-3_7_6">EuLisp data access: <br/>
+<li id="sec-3.7.6">EuLisp data access: <br/>
 
 
 
@@ -295,10 +268,9 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 
 
 
+
 </li>
-</ul>
-<ul>
-<li id="sec-3_7_7">EuLisp data predicates: <br/>
+<li id="sec-3.7.7">EuLisp data predicates: <br/>
 
 
 
@@ -318,12 +290,11 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 
 
 
+
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li id="sec-3_8">Using the foreign-function interface <br/>
+<li id="sec-3.8">Using the foreign-function interface <br/>
 Uses automatic converters. Here is an example how atoi can be used from
 Lisp:
 
@@ -331,6 +302,7 @@ Lisp:
 
 <pre class="src src-lisp">(defextern atoi (&lt;string&gt;) &lt;fpi&gt;)
 </pre>
+
 
 
 <p>
@@ -343,31 +315,32 @@ called baz in Lisp the following defining form is necessary:
 </pre>
 
 
+
 <p>
 To link the library <i>libbar.a</i>, put a copy of <i>.eulrc.${ARCH}</i> in your
 home directory and add -lbar to the list of <code>$CLIBS</code>; the library path must
 be given with <code>-L&lt;bar-path&gt;</code> in the list of <code>$CFLAGS</code>.
 </p>
 <ul>
-<li id="sec-3_8_1">Automatic type conversion <br/>
+<li id="sec-3.8.1">Automatic type conversion <br/>
 The following automatic converters are available:
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption></caption>
-<colgroup><col class="left" /><col class="left" />
+<colgroup><col align="left" /><col align="left" />
 </colgroup>
 <thead>
-<tr><th scope="col" class="left">Lisp</th><th scope="col" class="left">C (C99)</th></tr>
+<tr><th scope="col">Lisp</th><th scope="col">C (C99)</th></tr>
 </thead>
 <tbody>
-<tr><td class="left"><code>&lt;fpi&gt;</code></td><td class="left"><code>int</code></td></tr>
-<tr><td class="left"><code>&lt;character&gt;</code></td><td class="left"><code>char</code></td></tr>
-<tr><td class="left"><code>&lt;double-float&gt;</code></td><td class="left"><code>double</code></td></tr>
-<tr><td class="left"><code>&lt;string&gt;</code></td><td class="left"><code>char*</code></td></tr>
-<tr><td class="left"><code>boolean</code></td><td class="left"><code>bool</code></td></tr>
-<tr><td class="left"><code>ptr</code></td><td class="left"><code>void*</code></td></tr>
-<tr><td class="left"><code>&lt;int*&gt;</code></td><td class="left"><code>int*</code></td></tr>
-<tr><td class="left"><code>&lt;double*&gt;</code></td><td class="left"><code>double*</code></td></tr>
-<tr><td class="left"><code>&lt;string*&gt;</code></td><td class="left"><code>char**</code></td></tr>
+<tr><td><code>&lt;fpi&gt;</code></td><td><code>int</code></td></tr>
+<tr><td><code>&lt;character&gt;</code></td><td><code>char</code></td></tr>
+<tr><td><code>&lt;double-float&gt;</code></td><td><code>double</code></td></tr>
+<tr><td><code>&lt;string&gt;</code></td><td><code>char*</code></td></tr>
+<tr><td><code>boolean</code></td><td><code>bool</code></td></tr>
+<tr><td><code>ptr</code></td><td><code>void*</code></td></tr>
+<tr><td><code>&lt;int*&gt;</code></td><td><code>int*</code></td></tr>
+<tr><td><code>&lt;double*&gt;</code></td><td><code>double*</code></td></tr>
+<tr><td><code>&lt;string*&gt;</code></td><td><code>char**</code></td></tr>
 </tbody>
 </table>
 
@@ -377,14 +350,10 @@ The <code>ptr</code> converter can be used to pass arbitrary C99 structures to L
 so that they can be passed back to C at a later stage. The ptr converter
 is also useful to pass a Lisp object unconverted to C99.
 </p></li>
-</ul>
-<ul>
-<li id="sec-3_8_2"><code>defextern</code> <br/>
+<li id="sec-3.8.2"><code>defextern</code> <br/>
 <code>defextern</code> definitions can not be linked dynamically.
 </li>
-</ul>
-<ul>
-<li id="sec-3_8_3"><code>DEFINTERN</code> <br/>
+<li id="sec-3.8.3"><code>DEFINTERN</code> <br/>
 Foreign in-calls have to use the DEFINTERN() syntax operator. Examples for
 in/out-calls to/from Lisp can be found in the directories <i>Examples/Misc</i>,
 <i>Examples/Fortran</i>, and <i>Examples/C++</i>.
@@ -392,44 +361,32 @@ in/out-calls to/from Lisp can be found in the directories <i>Examples/Misc</i>,
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li id="sec-3_9">Macro expansion <br/>
+<li id="sec-3.9">Macro expansion <br/>
 is un-hygienic.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_10">EuLisp Scripts <br/>
+<li id="sec-3.10">EuLisp Scripts <br/>
 Use <i>#!</i>../youtoo &ndash;script/ to write EuLisp scripts (see
 <i>Examples/Misc/script.em</i>).
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_11">Inter-operation with other languages <br/>
+<li id="sec-3.11">Inter-operation with other languages <br/>
 The examples in directory C++ and Fortran show how to interoperate with
 these languages.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_12">List operators <br/>
+<li id="sec-3.12">List operators <br/>
 Arithmetic functions <code>+</code>, <code>-</code> and <code>/</code> operate as set union, difference and
 intersection on lists.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_13">Examples <br/>
+<li id="sec-3.13">Examples <br/>
 Directory <i>Examples</i> contains modules for explanation and reuse.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_14">Bindings <br/>
+<li id="sec-3.14">Bindings <br/>
 The current set of supported bindings in Youtoo are in the file
-<a href="Doc/bindings.txt">bindings.txt</a>
+<a href="../Doc/bindings.txt">bindings.txt</a>
 
 </li>
 </ul>
@@ -442,39 +399,25 @@ The current set of supported bindings in Youtoo are in the file
 <div class="outline-text-2" id="text-4">
 
 <ul>
-<li id="sec-4_1"><a href="../Modules/Bignum/README.html">GNU Bignum</a>: <i>Modules/Bignum</i> <br/>
+<li id="sec-4.1"><a href="../Modules/Bignum/README.html">GNU Bignum</a>: <i>Modules/Bignum</i> <br/>
 Danius Michaelides wrote a port to the GNU bignum library (gmp).
 </li>
-</ul>
-<ul>
-<li id="sec-4_2"><a href="../Modules/MPI/README.html">MPI</a>: <i>Modules/MPI</i> <br/>
+<li id="sec-4.2"><a href="../Modules/MPI/README.html">MPI</a>: <i>Modules/MPI</i> <br/>
 </li>
-</ul>
-<ul>
-<li id="sec-4_3"><a href="../Modules/TclTk/README.html">Tcl/Tk</a>: <i>Modules/TclTk</i> <br/>
+<li id="sec-4.3"><a href="../Modules/TclTk/README.html">Tcl/Tk</a>: <i>Modules/TclTk</i> <br/>
 </li>
-</ul>
-<ul>
-<li id="sec-4_4"><a href="../Modules/Fthread/README.html">Foreign thread libraries</a>: <i>Modules/Fthread</i> <br/>
+<li id="sec-4.4"><a href="../Modules/Fthread/README.html">Foreign thread libraries</a>: <i>Modules/Fthread</i> <br/>
 </li>
-</ul>
-<ul>
-<li id="sec-4_5"><a href="../Modules/Matching/README.html">Matching</a>: <i>Modules/Match</i> <br/>
+<li id="sec-4.5"><a href="../Modules/Match/README.html">Matching</a>: <i>Modules/Match</i> <br/>
 Modulized version of match-slib.scm badly hacked for EuLisp.
 </li>
-</ul>
-<ul>
-<li id="sec-4_6"><a href="../Modules/OS/README.html">Object serialisation</a>: <i>Modules/OS</i> <br/>
+<li id="sec-4.6"><a href="../Modules/OS/README.html">Object serialisation</a>: <i>Modules/OS</i> <br/>
 includes support for closures and threads.
 </li>
-</ul>
-<ul>
-<li id="sec-4_7"><a href="../Modules/OPS5/README.html">OPS5 rule-based system</a> : <i>Modules/OPS5</i> <br/>
+<li id="sec-4.7"><a href="../Modules/OPS5/README.html">OPS5 rule-based system</a> : <i>Modules/OPS5</i> <br/>
 An object-oriented version of the OPS5 rule-based system.
 </li>
-</ul>
-<ul>
-<li id="sec-4_8"><a href="../Modules/Pipe/README.html">Pipes and forked child processes</a>:  <i>Modules/Pipe</i> <br/>
+<li id="sec-4.8"><a href="../Modules/Pipe/README.html">Pipes and forked child processes</a>:  <i>Modules/Pipe</i> <br/>
 Thanks to Rob Simmons there is support for pipes to forked child
 processes.
 
@@ -503,16 +446,14 @@ This process allows changes and developments to be made to the Youtoo
 implementation of EuLisp.
 </p>
 <ul>
-<li id="sec-5_1">Limitations <br/>
+<li id="sec-5.1">Limitations <br/>
 Currently the dependency analysis is not sufficient to cover all the
 possible ways in which the changes to the EuLisp modules in Youtoo interact
 and the rebuilds required to create a consistent Youtoo executable.  Thus to
 be sure of success <i>make boot-clean</i> maybe required before every <i>make     boot</i>.
 
 </li>
-</ul>
-<ul>
-<li id="sec-5_2">Notes <br/>
+<li id="sec-5.2">Notes <br/>
 The syntax files _.*0.em are used to enable the transition between old and
 new function names during the bootstrapping process.  If functions change
 which affect the syntax files first change the non "_" versions,
@@ -531,7 +472,7 @@ again.  This ensures a consistent final version.
 <div class="outline-text-2" id="text-6">
 
 <ul>
-<li id="sec-6_1">Support for 64bit Operation <br/>
+<li id="sec-6.1">Support for 64bit Operation <br/>
 The main change to support 64bit pointers is that on such architectures the
 <code>Instruction</code> is a 16bit integer rather than an 8bit <code>char</code> so that 4
 <code>Instructions</code> still fit exactly in a pointer.  This allows most of the
@@ -540,24 +481,18 @@ number of small changes were also necessary.  The C-files are compatible
 between the 32bit and 64bit versions.
 
 </li>
-</ul>
-<ul>
-<li id="sec-6_2">C99 Compliance <br/>
+<li id="sec-6.2">C99 Compliance <br/>
 The code is now C99 compliant and uses C99 data types and constructs so a
 C99 compiler is required e.g. <code>gcc-4.?.?</code>.
 
 </li>
-</ul>
-<ul>
-<li id="sec-6_3">Rationalisation of the Makefiles <br/>
+<li id="sec-6.3">Rationalisation of the Makefiles <br/>
 The <code>Makefiles</code> have been rationalised and simplified by using many features
 in the GNU version of <code>make</code>, <code>gmake</code> which is now required to build
 <code>youtoo</code>.
 
 </li>
-</ul>
-<ul>
-<li id="sec-6_4">The start of the EuLisp-1.0 compliance process <br/>
+<li id="sec-6.4">The start of the EuLisp-1.0 compliance process <br/>
 Many small changes to improve consistency between the Youtoo implementation
 and the EuLisp-0.99 definition and the documents relating to the creation of
 EuLisp-1.0.
@@ -575,8 +510,8 @@ EuLisp-1.0.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2011-01-26 15:48:37 GMT</p>
-<p class="creator">HTML generated by org-mode 7.4 in emacs 23</p>
+<p class="date"> Date: 2011-01-27 22:51:05 GMT</p>
+<p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
 </div>
 </div>
 </body>
