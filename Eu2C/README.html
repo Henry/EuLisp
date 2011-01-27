@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 lang="en" xml:lang="en">
 <head>
-<title>*Eu2C*</title>
+<title><b>Eu2C</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-10-29 12:49:26 BST"/>
+<meta name="generated" content="2011-01-27 22:51:06 GMT"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -35,7 +35,6 @@ lang="en" xml:lang="en">
   dt { font-weight: bold; }
   div.figure { padding: 0.5em; }
   div.figure p { text-align: center; }
-  textarea { overflow-x: auto; }
   .linenr { font-size:smaller }
   .code-highlighted {background-color:#ffff00;}
   .org-info-js_info-navigation { border-style:none; }
@@ -67,7 +66,6 @@ lang="en" xml:lang="en">
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
 <div id="content">
@@ -130,7 +128,7 @@ APPLY funded by the German Ministry of Research and Technology under the
 project code ITW9102D5.  The final release in July 1994 is publicly available
 from <a href="http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c/v94_07/eu2c.tgz">eu2c.tgz</a> however the terms of use are not specified.  This release of
 Eu2C is derived from the eu2c-94-07-EUPL version kindly prepared and provided
-by E. Ulrich Kriegel and released by Fraunhofer ISST under the <a href="http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1">EUPL version 1.1 </a> (see <a href="#README.orig">README.orig</a>).  However, due to the inclusion of EuLisp code from
+by E. Ulrich Kriegel and released by Fraunhofer ISST under the <a href="http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1">EUPL version 1.1 </a> (see <a href="#sec-2">README.orig</a>).  However, due to the inclusion of EuLisp code from
 Youtoo, which is released under the GPL version 2, this version of Eu2C
 inherits the GPL version 2 (see above) as specifically permitted under the
 compatibility terms of the EUPL version 1.1.  Future versions of the EUPL may
@@ -212,10 +210,7 @@ Lisp data types are represented similar to C datatypes in order to avoid
 incompatibility with hardwara datatypes and in order to enable easy data
 exchange with non-Lisp programs.
 </li>
-</ul>
-
-<ul>
-<li id="sec-3_1">Project Partners <br/>
+<li id="sec-3.1">Project Partners <br/>
 <ul>
 <li>
 GMD-FIT (St. Augustin, Germany)
@@ -230,11 +225,8 @@ VW-GEDAS (Berlin, Germany)
 CAU Kiel (Kiel, Germany)
 </li>
 </ul>
-
 </li>
-</ul>
-<ul>
-<li id="sec-3_2">GC <br/>
+<li id="sec-3.2">GC <br/>
 These decisions require to use a conservative pointer finding strategy for
 gc.
 
@@ -242,9 +234,7 @@ gc.
 The implementation comprises EuLisp-0.99 level-0.
 </p>
 </li>
-</ul>
-<ul>
-<li id="sec-3_3">Compilation strategies <br/>
+<li id="sec-3.3">Compilation strategies <br/>
 Two compilation strategies are supported:
 <ul>
 <li>
@@ -264,16 +254,12 @@ runtime system is not possible, but due to the precompiled runtime-system
 the compilation process is much faster.
 </p>
 </li>
-</ul>
-<ul>
-<li id="sec-3_4">Threads are supported <br/>
+<li id="sec-3.4">Threads are supported <br/>
 but use setjmp/longjmp rather than pthreads or equivalent so do not
 currently take advantage of multi-core CPUs.
 
 </li>
-</ul>
-<ul>
-<li id="sec-3_5">Reports and Papers <br/>
+<li id="sec-3.5">Reports and Papers <br/>
 <ul>
 <li>
 <a href="ftp://ftp1.fraunhofer.de/archive/gmd/apply">Apply Papers</a>
@@ -294,11 +280,8 @@ Heicking, Winfried; Rosenmüller, Rainer: „Machine description“, Berlin
 </ol>
 </li>
 </ul>
-
 </li>
-</ul>
-<ul>
-<li id="sec-3_6">See Also <br/>
+<li id="sec-3.6">See Also <br/>
 <ul>
 <li>
 <a href="http://publica.fraunhofer.de/dokumente/PX-46999.html">Fraunhofer Eu2C Abstract</a>
@@ -316,7 +299,6 @@ Heicking, Winfried; Rosenmüller, Rainer: „Machine description“, Berlin
 <a href="http://www.rhinocerus.net/forum/lang-lisp/47271-need-help-building-eu2c.html">Previous compilation attempt</a>
 </li>
 </ul>
-
 </li>
 </ul>
 </div>
@@ -328,9 +310,9 @@ Heicking, Winfried; Rosenmüller, Rainer: „Machine description“, Berlin
 <div class="outline-text-2" id="text-4">
 
 <ul>
-<li id="sec-4_1">Requirements to install and run the EuLisp-&gt;C compiler <br/>
+<li id="sec-4.1">Requirements to install and run the EuLisp-&gt;C compiler <br/>
 <ul>
-<li id="sec-4_1_1">CMUCL Common Lisp compiler <br/>
+<li id="sec-4.1.1">CMUCL Common Lisp compiler <br/>
 Tested with version 20a but older should work.
 
 <p>
@@ -350,17 +332,13 @@ Eu2C but the indications are that this should be possible with a modest
 amount of work.
 </p>
 </li>
-</ul>
-<ul>
-<li id="sec-4_1_2">GNU c compiler gcc <br/>
+<li id="sec-4.1.2">GNU c compiler gcc <br/>
 Tested with version gcc-4.4.3 but older and newer should work.
 
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li id="sec-4_2">Installation Procedure <br/>
+<li id="sec-4.2">Installation Procedure <br/>
 <ul>
 <li>
 Pull the latest version from the GitHub repository:
@@ -438,11 +416,8 @@ module. Therefore, he default name will be
 </ul>
 </li>
 </ul>
-
 </li>
-</ul>
-<ul>
-<li id="sec-4_3">Compilation of EuLisp-Modules <br/>
+<li id="sec-4.3">Compilation of EuLisp-Modules <br/>
 There are 2 different strategies for the compilation of EuLisp modules:
 <ul>
 <li>
@@ -467,12 +442,11 @@ compilation process.  In order to compile an EuLisp Module into C and then
 create an application simply call:
 </p><ul>
 <li>
-=Bin/eu2c [switches] &lt;path expression&gt; [C-compiler switches and additional
+<code>Bin/eu2c [switches] &lt;path expression&gt; [C-compiler switches and additional     C files]</code>
 </li>
 </ul>
 
-<p>C files]=
-<i>e.g.</i> in the <code>Examples</code> sub-directory
+<p><i>e.g.</i> in the <code>Examples</code> sub-directory
 </p><ul>
 <li>
 <code>../Bin/eu2c -bs level-0 hello</code>
@@ -549,11 +523,8 @@ increased on demand in correspondence with the configuration of the
 Mem4C[++]-library.
 </li>
 </ul>
-
 </li>
-</ul>
-<ul>
-<li id="sec-4_4">Examples <br/>
+<li id="sec-4.4">Examples <br/>
 In the sub-directory <code>Examples</code> some example EuLisp programs are
 given, some of them require to be compiled with the module <code>level-0</code>
 and some must be compiled with the <code>level-0x</code>-module.
@@ -577,11 +548,8 @@ cd Examples
 ../Bin/eu2c -bs level-0x command-line
 </li>
 </ul>
-
 </li>
-</ul>
-<ul>
-<li id="sec-4_5">Makefile <br/>
+<li id="sec-4.5">Makefile <br/>
 For the easy installation we provide a script for make. The following macros
 are used:
 <ul>
@@ -655,9 +623,7 @@ system.
 If you plan to use Eu2C with the precompiled basic system we recommend to
 run make with the targets clean_runtime_sources and clean_eu2c_image.
 </p></li>
-</ul>
-<ul>
-<li id="sec-4_6">Building 32bit on a 64bit machine: <br/>
+<li id="sec-4.6">Building 32bit on a 64bit machine: <br/>
 It is possible to compile 32bit on 64bit machines using the <code>ARCH=i686</code>
 option to build the run-time and the <code>-arch i686</code> option when building the
 applications, e.g.
@@ -678,7 +644,6 @@ applications, e.g.
 <code>./gtakl2</code>
 </li>
 </ul>
-
 </li>
 </ul>
 </div>
@@ -690,7 +655,7 @@ applications, e.g.
 <div class="outline-text-2" id="text-5">
 
 <ul>
-<li id="sec-5_1">Not yet implemented: <br/>
+<li id="sec-5.1">Not yet implemented: <br/>
 <ul>
 <li>
 <code>generic-lambda</code>.
@@ -699,21 +664,15 @@ applications, e.g.
 <code>scan</code>: the function read can be used instead.
 </li>
 </ul>
-
 </li>
-</ul>
-<ul>
-<li id="sec-5_2">Not yet complete: <br/>
+<li id="sec-5.2">Not yet complete: <br/>
 <ul>
 <li>
 <code>format</code>: the directives <code>~e</code>, <code>~f</code> and <code>~g</code> are not yet present.
 </li>
 </ul>
-
 </li>
-</ul>
-<ul>
-<li id="sec-5_3">Known problems: <br/>
+<li id="sec-5.3">Known problems: <br/>
 <ul>
 <li>
 Symbol case: During compilation (when the modules are read in) the symbol
@@ -741,8 +700,6 @@ function level is incorrect:
 
 </li>
 </ul>
-</li>
-</ul>
 
 <p>But in all other cases the right code is generated:
 </p>
@@ -754,13 +711,13 @@ function level is incorrect:
 </pre>
 
 
-<ul>
+
+</li>
 <li>
 Tables can not currently be used.
+
 </li>
 </ul>
-
-
 </li>
 </ul>
 </div>
@@ -784,7 +741,7 @@ standard specifies either "d" or "D".
 </li>
 </ul>
 
-<p>Eu2C now includes a patch file <a href="Apply/cmu.lisp">Apply/cmu.lisp</a> which adds support for
+<p>Eu2C now includes a patch file <a href="Apply/cmu.lisp">file:Apply/cmu.lisp</a> which adds support for
 both of the above into the CMUCL-20a/b CL compiler.  The equivalent would have
 to be created for other CL implementations e.g. SBCL or CLisp if they are to
 be used to compile Eu2C.
@@ -813,6 +770,7 @@ as in the following example.
   .
   )
 </pre>
+
 
 
 
@@ -852,6 +810,7 @@ as in the following example.
 ./hello
 
 </pre>
+
 
 
 
@@ -924,6 +883,7 @@ hello.inst...
 
 
 
+
 </div>
 
 </div>
@@ -987,6 +947,7 @@ The file associated with the module <code>takl</code> has to have the name <code
 </span>  )                     <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">end of module
 </span><span style="color: #ff00ff; font-weight: bold;">;;;</span><span style="color: #ff00ff;">-----------------------------------------------------------------------------
 </span></pre>
+
 
 
 
@@ -1064,6 +1025,7 @@ The file associated with the module <code>test-takl</code> has to have the name
 
 
 
+
 </div>
 
 </div>
@@ -1075,8 +1037,8 @@ The file associated with the module <code>test-takl</code> has to have the name
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-10-29 12:49:26 BST</p>
-<p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
+<p class="date"> Date: 2011-01-27 22:51:06 GMT</p>
+<p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
 </div>
 </div>
 </body>
