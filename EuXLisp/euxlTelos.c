@@ -1328,31 +1328,48 @@ static void initBuiltinClasses()
     // incl. euxmNullType, euxmKeyword, euxmIStream, euxmOStream, IeuxmOStream
     euxlc_vector = euxcNewVector(euxmNTypes + euxmExtraTypes);
 
+    euxlValue char_cl =
+        initClass(-1, "<char>", euxlc_object, euxs_t);
+    initClass(euxmChar, "<simple-char>", char_cl, euxmNil);
+
+    // condition is created in Level-0/condition.em
+
+    euxlValue function_cl =
+        initClass(-1, "<function>", euxlc_object, euxs_t);
+    initClass(euxmContinuation, "<continuation>", function_cl, euxmNil);
+    euxlValue simplefun_cl =
+        initClass(-1, "<simple-function>", function_cl, euxmNil);
+    euxlValue generic_cl =
+        initClass(-1, "<generic>", function_cl, euxs_t);
+    initClass(euxmGeneric, "<simple-generic>", generic_cl, euxmNil);
+
     euxlValue collection_cl =
         initClass(-1, "<collection>", euxlc_object, euxs_t);
     euxlValue sequence_cl =
         initClass(-1, "<sequence>", collection_cl, euxs_t);
-    euxlValue character_sequence_cl =
-        initClass(-1, "<character-sequence>", sequence_cl, euxs_t);
-    initClass(euxmString, "<string>", character_sequence_cl, euxmNil);
-    initClass(euxmVector, "<vector>", sequence_cl, euxmNil);
     euxlValue list_cl =
         initClass(-1, "<list>", sequence_cl, euxs_t);
     initClass(euxmCons, "<cons>", list_cl, euxmNil);
     initClass(euxmNTypes, "<null>", list_cl, euxmNil);
+    euxlValue character_sequence_cl =
+    initClass(-1, "<character-sequence>", sequence_cl, euxs_t);
+    initClass(euxmString, "<string>", character_sequence_cl, euxmNil);
+    initClass(euxmVector, "<vector>", sequence_cl, euxmNil);
+    euxlValue table_cl =
+    initClass(-1, "<table>", collection_cl, euxs_t);
+    initClass(euxmTable, "<hash-table>", table_cl, euxmNil);
+
+    initClass(-1, "<lock>", euxlc_object, euxs_t);
 
     euxlValue number_cl =
         initClass(-1, "<number>", euxlc_object, euxs_t);
     euxlValue integer_cl =
         initClass(-1, "<integer>", number_cl, euxs_t);
     initClass(euxmFPI, "<fpi>", integer_cl, euxmNil);
+
     euxlValue float_cl =
         initClass(-1, "<float>", number_cl, euxs_t);
     initClass(euxmDoubleFloat, "<double-float>", float_cl, euxmNil);
-
-    euxlValue symbol_cl =
-        initClass(euxmSymbol, "<symbol>", euxlc_object, euxmNil);
-    initClass(euxmKeyword, "<keyword>", symbol_cl, euxmNil);
 
     euxlValue stream_cl =
         initClass(euxmStream, "<stream>", euxlc_object, euxs_t);
@@ -1360,35 +1377,29 @@ static void initBuiltinClasses()
     initClass(euxmOStream, "<output-stream>", stream_cl, euxmNil);
     initClass(IeuxmOStream, "<i/o-stream>", stream_cl, euxmNil);
 
-    euxlValue char_cl =
-        initClass(-1, "<char>", euxlc_object, euxs_t);
-    initClass(euxmChar, "<simple-char>", char_cl, euxmNil);
+    euxlValue name_cl =
+        initClass(euxmSymbol, "<name>", euxlc_object, euxs_t);
+    initClass(euxmSymbol, "<symbol>", name_cl, euxmNil);
+    initClass(euxmKeyword, "<keyword>", name_cl, euxmNil);
+
+    // EuXLisp specific built-in classes
 
     initClass(euxmPromise, "<promise>", euxlc_object, euxmNil);
     initClass(euxmEnv, "<env>", euxlc_object, euxmNil);
     initClass(euxmCode, "<code>", euxlc_object, euxmNil);
     initClass(euxmModule, "<module>", euxlc_object, euxmNil);
-    euxlValue table_cl =
-        initClass(-1, "<table>", euxlc_object, euxs_t);
-    initClass(euxmTable, "<hash-table>", table_cl, euxmNil);
 
-    euxlValue function_cl =
-        initClass(-1, "<function>", euxlc_object, euxs_t);
-    euxlValue simplefun_cl =
-        initClass(-1, "<simple-function>", function_cl, euxmNil);
     initClass(euxmClosure, "<closure>", simplefun_cl, euxmNil);
     initClass(euxmFun, "<fun>", simplefun_cl, euxmNil);
     initClass(euxmXFun, "<xfun>", euxlc_object, euxmNil);
     initClass(euxmXFunCont, "<xfuncont>", euxlc_object, euxmNil);
-    initClass(euxmContinuation, "<continuation>", function_cl, euxmNil);
 
-    euxlValue generic_cl = initClass(-1, "<generic>", function_cl, euxs_t);
-    initClass(euxmGeneric, "<simple-generic>", generic_cl, euxmNil);
-
-    euxlValue method_cl = initClass(-1, "<method>", euxlc_object, euxs_t);
+    euxlValue method_cl =
+        initClass(-1, "<method>", euxlc_object, euxs_t);
     initClass(euxmMethod, "<simple-method>", method_cl, euxmNil);
 
-    euxlValue slot_cl = initClass(-1, "<slot>", euxlc_object, euxs_t);
+    euxlValue slot_cl =
+        initClass(-1, "<slot>", euxlc_object, euxs_t);
     initClass(euxmSlot, "<local-slot>", slot_cl, euxmNil);
 }
 
