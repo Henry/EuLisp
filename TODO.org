@@ -377,7 +377,8 @@
     CLOSED: [2010-07-01 Thu 23:04]
 *** DONE Add =flush= and =sflush=
     CLOSED: [2010-06-27 Sun 22:59]
-*** TODO Update the class hierarchy
+*** DONE Update the class hierarchy
+    CLOSED: [2011-02-27 Sun 18:24]
     + remove =<simple-string>=, =<simple-vector>= /etc./
     + add =<sequence>=, =<character-sequence>= /etc./
 *** DONE Remove the export of =<make-...>= functions
@@ -407,12 +408,32 @@
     CLOSED: [2010-07-05 Mon 11:42]
 *** DONE Rename =simple-vector= -> =vector=
     CLOSED: [2010-07-05 Mon 22:03]
-*** TODO Complete =double-float= functionality in =arith.em=
+*** TODO Complete =double-float= functionality
     See =Youtoo/Runtime/double.em=
-*** TODO Consider replacing the built-in GC with =xalloc= from Eu2C
+*** DONE Consider replacing the built-in GC with =xalloc= from Eu2C
+    CLOSED: [2011-02-27 Sun 17:57]
+    It is not clear this would provide much advantage as the current
+    inefficiencies in EuXLisp are associated with the number of times the GC is
+    called rather than the cost of the call.
 *** DONE Rename =labels= -> =letfuns=
     CLOSED: [2010-11-08 Mon 22:43]
-
+*** Reorganise the FFI code in =euxlBCodeCompiler.c=
+    and make the strings associated with FFI stub compilation configurable; see
+    =void compileModuleFFI(const moduleFilesDef* modfiles)=.
+*** TODO Add support for building EuXLisp and FFI code with =tinycc=
+    Issues:
+    1. Currently =tinycc= does not support C99-style for-loop variable
+       declarations which are used extensively in EuXLisp.  It would be possible
+       to add this support to =tinycc= but it is not clear how long it would
+       take or if the developers would be interested.
+    2. Another problem is the lack of support for =__attribute__
+       ((constructor))= which is a gcc-ism for defining automatic initialisation
+       functions in dynamic libraries used in the ffi stub loading.  Again this
+       functionality could be added to the ELF support in =tinycc= but it might
+       be tricky and it is not clear if the developers of =tinycc= would be
+       interested.  An alternative would be to simulate the automatic calling of
+       initialisation functions by looking them up with =dlsym= and calling them
+       explicitly.
 * Eu2C
 *** DONE Hack CMUCL to write exponent "e"
     CLOSED: [2010-08-30 Mon 11:15]
@@ -524,5 +545,5 @@
 *** DONE Include emacs eulisp-mode.el in the git repository
     CLOSED: [2010-06-19 Sat 22:46]
 *** TODO Complete emacs inferior-mode inf-eulisp.el
-    for Youtoo and EuXLisp, it would not be useful for Eu2C which is
+    for Youtoo and EuXLisp.  It would not be useful for Eu2C which is
     non-interactive, i.e. no REPL.
