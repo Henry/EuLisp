@@ -33,13 +33,13 @@ YOUTOO_NOGC = $(EUL_BIN_DIR)/youtoo_nogc
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
-EUL_APPL_C = eul-appl.c
-EUL_APPL_O = $(EUL_APPL_C:%.c=$(EUL_LIB_DIR)/%.o)
+U2_APPL_C = eul-appl.c
+U2_APPL_O = $(U2_APPL_C:%.c=$(EUL_LIB_DIR)/%.o)
 
 GC_FAKE_C = gc-fake.c
 FAKE_GC_O = $(GC_FAKE_C:%.c=$(EUL_LIB_DIR)/%.o)
 
-ALL_C = $(EUL_APPL_C) $(GC_FAKE_C)
+ALL_C = $(U2_APPL_C) $(GC_FAKE_C)
 
 LIBS = libeulvm libboot libtelos liblevel-1 libmath libeval libmain
 YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.a)
@@ -59,18 +59,18 @@ youtoo:	$(YOUTOO)
 .PHONY: shared
 shared:	$(YOUTOO)
 
-$(YOUTOO): $(EUL_APPL_O) $(YOUTOO_LIBS)
+$(YOUTOO): $(U2_APPL_O) $(YOUTOO_LIBS)
 	$(CC) $(CFLAGS) -o $(YOUTOO) \
-		$(EUL_APPL_O) -L$(EUL_LIB_DIR) \
-		$(CLIBS) -lgc -lpthread
+		$(U2_APPL_O) -L$(EUL_LIB_DIR) \
+		$(U2_LIBS) -lgc -lpthread
 
 .PHONY: nogc
 nogc: $(YOUTOO_NOGC)
 
-$(YOUTOO_NOGC): $(EUL_APPL_O) $(FAKE_GC_O)
+$(YOUTOO_NOGC): $(U2_APPL_O) $(FAKE_GC_O)
 	$(CC) $(CFLAGS) -o $(YOUTOO_NOGC) \
-		$(EUL_APPL_O) $(FAKE_GC_O) -L$(EUL_LIB_DIR) \
-	 	$(CLIBS) -lpthread
+		$(U2_APPL_O) $(FAKE_GC_O) -L$(EUL_LIB_DIR) \
+	 	$(U2_LIBS) -lpthread
 
 $(EUL_LIB_DIR)/%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -88,6 +88,6 @@ clean:
 .PHONY: distclean
 distclean: clean
 	@rm -rf platforms
-	@rm -f $(EUL_APPL_O) $(FAKE_GC_O)
+	@rm -f $(U2_APPL_O) $(FAKE_GC_O)
 
 ###-----------------------------------------------------------------------------

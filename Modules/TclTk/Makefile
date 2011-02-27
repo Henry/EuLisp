@@ -90,7 +90,7 @@ $(EUL_BIN_DIR)/you2tk: $(EUL_MODULE_LIB) you2tk.em You2tk_.c | $(ARCH_DIR)/.
 	$(CC) $(CFLAGS) $(EUL_TK_FLAGS) -o $(EUL_BIN_DIR)/you2tk \
 		you2tk.c You2tk_.c you2tki.c \
 	  	$(EUL_LIB_DIR)/eul-appl.o \
-		-L$(EUL_LIB_DIR) -ltcltk $(CLIBS) $(EUL_TK_LIBS) -lgc
+		-L$(EUL_LIB_DIR) -ltcltk $(U2_LIBS) $(EUL_TK_LIBS) -lgc
 
 ###-----------------------------------------------------------------------------
 ### Test

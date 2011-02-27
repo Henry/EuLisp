@@ -1,6 +1,6 @@
 #!/bin/sh
 ### Copyright 1997 A. Kind & University of Bath
-### Copyright 2010 Henry G. Weller
+### Copyright 2010-2011 Henry G. Weller
 ###-----------------------------------------------------------------------------
 ##  This file is part of
 ### ---                         EuLisp System 'Youtoo'
@@ -24,7 +24,7 @@
 ##    which overrides the default
 ### Description:
 ##    To use a pre-installed version of the Boehm memory management system
-##    set EUL_GC_DIR to its directory.
+##    for Youtoo set U2_GC_DIR to the appropriate directory.
 ##
 ##    Give an empty gabage collector directory if you don't want to use the
 ##    garbage collector at all. This is not recommended as you will have
@@ -56,9 +56,12 @@ fi
 EUL_VERSION=pre-0.991
 
 EUL_DIR=`pwd`
-EUL_GC_DIR=/usr/local
-
 EUL_BOOT_DIR=${EUL_DIR}.boot
+
+###-----------------------------------------------------------------------------
+### Set GC installation directory for Youtoo
+###-----------------------------------------------------------------------------
+U2_GC_DIR=/usr/local
 
 ###-----------------------------------------------------------------------------
 ### C compiler
@@ -79,7 +82,6 @@ EMACS=eemacs
 ### Specify the default shell and where to find mv and rm
 ###-----------------------------------------------------------------------------
 EUL_SHELL=/bin/sh
-UNIX_DIR=/bin
 
 ###-----------------------------------------------------------------------------
 ### Foreign thread library
@@ -98,10 +100,8 @@ THRTYPE=DEFAULT
 #EUL_MIT_THR_DIR=
 
 ###-----------------------------------------------------------------------------
-### Set paths for Youtoo, binaries, scripts and libraries
+### Set paths for binaries, scripts and libraries
 ###-----------------------------------------------------------------------------
-U2_DIR=$EUL_DIR/Youtoo
-U2_C_DIR=u2
 EUL_BIN_DIR=$EUL_DIR/Bin.$ARCH
 EUL_LIB_DIR=$EUL_DIR/Lib.$ARCH
 
@@ -111,6 +111,12 @@ EUL_LIB_DIR=$EUL_DIR/Lib.$ARCH
 ##    and over-write it during the build
 ###-----------------------------------------------------------------------------
 EUL_BOOT_BIN_DIR=$EUL_BOOT_DIR/Bin.$ARCH
+
+###-----------------------------------------------------------------------------
+### Set path for Youtoo and Youtoo specefic build files
+###-----------------------------------------------------------------------------
+U2_DIR=$EUL_DIR/Youtoo
+U2_C_DIR=u2
 
 ###-----------------------------------------------------------------------------
 ### Verify the some settings
@@ -125,15 +131,15 @@ then
 fi
 rm ./$FOO
 
-if [ ! -z "$EUL_GC_DIR" ]
+if [ ! -z "$U2_GC_DIR" ]
 then
-    if [ ! -d $EUL_GC_DIR ]
+    if [ ! -d $U2_GC_DIR ]
     then
-        echo "*** ERROR [configure]: bad EUL_GC_DIR directory: " $EUL_GC_DIR
+        echo "*** ERROR [configure]: bad U2_GC_DIR directory: " $U2_GC_DIR
     fi
 fi
 
-EUL_GC_INCLUDE="-I${EUL_GC_DIR} -I${EUL_GC_DIR}/include"
+U2_GC_INCLUDE="-I${U2_GC_DIR} -I${U2_GC_DIR}/include"
 
 ###-----------------------------------------------------------------------------
 ### Set CC if currently unset
@@ -146,24 +152,28 @@ then
     if [ "$gcc" = gcc ]
     then
         CC=gcc
-        CFLAGS="-std=gnu99 -Wall -Wno-sequence-point -fPIC -O3 -fno-strict-aliasing"
+        U2_CFLAGS="-std=gnu99 -Wall -Wno-sequence-point -fPIC -O2 -fno-strict-aliasing"
+        EUXL_CFLAGS="-std=gnu99 -Wall -O2 -fpic -Wl,--export-dynamic"
     else
         CC=cc
-        CFLAGS=
+        U2_CFLAGS=
     fi
 fi
 
 ###-----------------------------------------------------------------------------
 ### Set basic flags and libraries
 ###-----------------------------------------------------------------------------
-CLIBS="-lmain -leval -lmath -llevel-0 -llevel-1 -leval -ltelos -lboot -leulvm -lm"
-CFLAGS="$CFLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm"
+U2_CFLAGS="$U2_CFLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm"
+U2_LIBS="-lmain -leval -lmath -llevel-0 -llevel-1 -leval -ltelos -lboot -leulvm -lm"
+EUXL_LIBS="-ldl -lm"
 
 ###-----------------------------------------------------------------------------
 ### Readline library (optional)
 ###-----------------------------------------------------------------------------
-CFLAGS="$CFLAGS -DREADLINE"
-CLIBS="$CLIBS -lreadline"
+U2_CFLAGS="$U2_CFLAGS -DREADLINE"
+U2_LIBS="$U2_LIBS -lreadline"
+EUXL_CFLAGS="$EUXL_CFLAGS -DREADLINE"
+EUXL_LIBS="$EUXL_LIBS -lreadline"
 
 ###-----------------------------------------------------------------------------
 ### Tcl/Tk libraries
@@ -194,18 +204,16 @@ Linux)
     CC="gcc"
     AR="ar cruv"
     RANLIB="ranlib"
-    CFLAGS="$CFLAGS -m$WORD_LENGTH"
+    U2_CFLAGS="$U2_CFLAGS -m$WORD_LENGTH"
+    EUXL_CFLAGS="$EUXL_CFLAGS -m$WORD_LENGTH"
 
     if [ $THRTYPE = PPCR ]
     then
-        CFLAGS="$CFLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_GC_DIR}/gc"
+        U2_CFLAGS="$U2_CFLAGS -DWITH_PCR_TREADS -I${U2_GC_DIR}/posix -I${U2_GC_DIR} -I${U2_GC_DIR}/include -I${U2_GC_DIR}/gc"
     else
-        CFLAGS="$CFLAGS ${EUL_GC_INCLUDE}"
-        CLIBS="$CLIBS -lpthread"
+        U2_CFLAGS="$U2_CFLAGS ${U2_GC_INCLUDE}"
+        U2_LIBS="$U2_LIBS -lpthread"
     fi
-
-    EUXLISP_CFLAGS="-m$WORD_LENGTH -DWORD_LENGTH=$WORD_LENGTH -std=gnu99 -Wall -O3 -DREADLINE"
-    EUXLISP_LIBS="-m$WORD_LENGTH -lm -lreadline"
     ;;
 
 ###-----------------------------------------------------------------------------
@@ -226,17 +234,14 @@ FreeBSD)
     CC="gcc"
     AR="ar cruv"
     RANLIB="ranlib"
-    CFLAGS="$CFLAGS -m$WORD_LENGTH"
+    U2_CFLAGS="$U2_CFLAGS -m$WORD_LENGTH"
 
     if [ $THRTYPE = PPCR ]
     then
-        CFLAGS="$CFLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR}  -I${EUL_GC_DIR}/gc"
+        U2_CFLAGS="$U2_CFLAGS -DWITH_PCR_TREADS -I${U2_GC_DIR}/posix -I${U2_GC_DIR}  -I${U2_GC_DIR}/gc"
     else
-        CFLAGS="$CFLAGS ${EUL_GC_INCLUDE}"
+        U2_CFLAGS="$U2_CFLAGS ${U2_GC_INCLUDE}"
     fi
-
-    EUXLISP_CFLAGS="-m$WORD_LENGTH -DWORD_LENGTH=$WORD_LENGTH -std=gnu99 -Wall -O3 -DREADLINE"
-    EUXLISP_LIBS="-m$WORD_LENGTH -lm -lreadline"
     ;;
 
 ###-----------------------------------------------------------------------------
@@ -247,19 +252,19 @@ SunOS)
     if [ $THRTYPE = UI ]
     then
         CC="cc"
-        CFLAGS="$CFLAGS -DWITH_STRERROR -DWITH_UI_THREADS ${EUL_GC_INCLUDE}"
-        CLIBS="$CLIBS -lnls -lnsl -lsocket -ldl -lthread"
+        U2_CFLAGS="$U2_CFLAGS -DWITH_STRERROR -DWITH_UI_THREADS ${U2_GC_INCLUDE}"
+        U2_LIBS="$U2_LIBS -lnls -lnsl -lsocket -ldl -lthread"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif [ $CC = gcc ]
     then
-        CFLAGS="$CFLAGS -fPIC -DWITH_STRERROR ${EUL_GC_INCLUDE}"
-        CLIBS="$CLIBS -lnls -lnsl -lsocket"
+        U2_CFLAGS="$U2_CFLAGS -fPIC -DWITH_STRERROR ${U2_GC_INCLUDE}"
+        U2_LIBS="$U2_LIBS -lnls -lnsl -lsocket"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     else
-        CFLAGS="$CFLAGS -DWITH_STRERROR ${EUL_GC_INCLUDE}"
-        CLIBS="$CLIBS -lnls -lnsl -lsocket"
+        U2_CFLAGS="$U2_CFLAGS -DWITH_STRERROR ${U2_GC_INCLUDE}"
+        U2_LIBS="$U2_LIBS -lnls -lnsl -lsocket"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     fi
@@ -273,23 +278,23 @@ IRIX)
     if [ $THRTYPE = PPCR ]
     then
         CC="cc"
-        CFLAGS="$CFLAGS -Olimit 4000 -common -DWITH_PCR_THREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR}/gc"
+        U2_CFLAGS="$U2_CFLAGS -Olimit 4000 -common -DWITH_PCR_THREADS -I${U2_GC_DIR}/posix -I${U2_GC_DIR}/gc"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif [ $THRTYPE = MIT ]
     then
         CC="gcc"
-        CFLAGS="$CFLAGS -DMIT_PTHREADS -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_MIT_THR_DIR}/include -L${EUL_MIT_THR_DIR}/obj"
-        CLIBS="-lpthread $CLIBS -lgcc -lpthread"
+        U2_CFLAGS="$U2_CFLAGS -DMIT_PTHREADS -I${U2_GC_DIR} -I${U2_GC_DIR}/include -I${EUL_MIT_THR_DIR}/include -L${EUL_MIT_THR_DIR}/obj"
+        U2_LIBS="-lpthread $U2_LIBS -lgcc -lpthread"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif [ $CC = gcc ]
     then
-        CFLAGS="$CFLAGS ${EUL_GC_INCLUDE}"
+        U2_CFLAGS="$U2_CFLAGS ${U2_GC_INCLUDE}"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     else
-        CFLAGS="$CFLAGS -Olimit 4000 -common ${EUL_GC_INCLUDE}"
+        U2_CFLAGS="$U2_CFLAGS -Olimit 4000 -common ${U2_GC_INCLUDE}"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     fi
@@ -300,11 +305,11 @@ IRIX)
 ###-----------------------------------------------------------------------------
 AIX)
     WORD_LENGTH=64
-    CFLAGS="$CFLAGS ${EUL_GC_INCLUDE} -DWITH_STRERROR"
+    U2_CFLAGS="$U2_CFLAGS ${U2_GC_INCLUDE} -DWITH_STRERROR"
     AR="ar cruv"
     RANLIB="ranlib"
-    EUXLISP_CFLAGS="-D_ALL_SOURCE -DSOCK"
-    EUXLISP_LIBS="-lm"
+    EUXL_CFLAGS="-D_ALL_SOURCE -DSOCK"
+    EUXL_LIBS="-lm"
     ;;
 
 ###-----------------------------------------------------------------------------
@@ -333,18 +338,29 @@ WORD_LEN_OP=-DWORD_LENGTH=$WORD_LENGTH
 chmod ug+x ${U2_DIR}/Tools/make*.*
 
 ###-----------------------------------------------------------------------------
-### Prompting configuration
+### Printing configuration of Youtoo
 ###-----------------------------------------------------------------------------
-echo "CONFIGURING youtoo ..."
-echo "  Dir: $EUL_DIR"
+echo "CONFIGURING Youtoo ..."
+echo "  Dir: $EUL_DIR/Youtoo"
 echo "  Architecture: $ARCH"
 echo "  System: $OSTYPE"
 echo "  Compiler: $CC"
-echo "  Compiler flags: $CFLAGS"
-echo "  Libraries: $CLIBS"
+echo "  Compiler flags: $U2_CFLAGS"
+echo "  Libraries: $U2_LIBS"
 echo "  Archive: $AR"
 echo "  Ranlib: $RANLIB"
 echo "  Threads: $THRTYPE"
+
+###-----------------------------------------------------------------------------
+### Printing configuration of EuXLisp
+###-----------------------------------------------------------------------------
+echo "CONFIGURING EuXLisp ..."
+echo "  Dir: $EUL_DIR/EuXLisp"
+echo "  Architecture: $ARCH"
+echo "  System: $OSTYPE"
+echo "  Compiler: $CC"
+echo "  Compiler flags: $EUXL_CFLAGS"
+echo "  Libraries: $EUXL_LIBS"
 
 ###-----------------------------------------------------------------------------
 ### Create Lib and Bin directory
@@ -363,6 +379,7 @@ fi
 ### Create resource file
 ###-----------------------------------------------------------------------------
 name_rc=${EUL_DIR}/.eulrc.${ARCH}
+echo "WRITING CONFIGURATION ..."
 echo "  Creating ${EUL_DIR}/.eulrc.${ARCH} ..."
 echo ";;; Copyright 1997 A. Kind & University of Bath" > $name_rc
 echo ";;; Copyright 2010 Henry G. Weller" >> $name_rc
@@ -373,8 +390,8 @@ echo ";;;-----------------------------------------------------------------------
 echo >> $name_rc
 echo \( >> $name_rc
 echo \(CC \. \"${CC}\"\) >> $name_rc
-echo \(CFLAGS \. \"${WORD_LEN_OP} ${CFLAGS} \"\) >> $name_rc
-echo \(CLIBS \. \"${CLIBS}\"\) >> $name_rc
+echo \(CFLAGS \. \"${WORD_LEN_OP} ${U2_CFLAGS} \"\) >> $name_rc
+echo \(CLIBS \. \"${U2_LIBS}\"\) >> $name_rc
 echo \(AR \. \"${AR}\"\) >> $name_rc
 echo \(RANLIB \. \"${RANLIB}\"\) >> $name_rc
 echo \(ARCH \. \"${ARCH}\"\) >> $name_rc
@@ -396,8 +413,8 @@ echo "### ---                         EuLisp System 'Youtoo'" >> $name
 echo "###-----------------------------------------------------------------------------" >> $name
 echo >> $name
 echo CC = ${CC} >> $name
-echo "CFLAGS = ${WORD_LEN_OP} ${EUL_DIR_OP} ${EUL_ARCH_OP} ${CFLAGS}" >> $name
-echo "EUXLISP_CFLAGS = ${EUXLISP_CFLAGS}" >> $name
+echo "CFLAGS = ${U2_CFLAGS} ${WORD_LEN_OP} ${EUL_DIR_OP} ${EUL_ARCH_OP}" >> $name
+echo "EUXL_CFLAGS = ${EUXL_CFLAGS} ${WORD_LEN_OP}" >> $name
 echo 'ARCH_DIR = platforms/$(ARCH)' >> $name
 echo '.PRECIOUS: %/.' >> $name
 echo '%/.:' >> $name
@@ -407,8 +424,8 @@ echo '.DEFAULT_GOAL :=' >> $name
 echo '$(ARCH_DIR)/%.o : %.c | $(ARCH_DIR)/.' >> $name
 echo '	mkdir -p $(@D)' >> $name
 echo '	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@' >> $name
-echo CLIBS = ${CLIBS} >> $name
-echo "EUXLISP_LIBS = ${EUXLISP_LIBS}" >> $name
+echo U2_LIBS = ${U2_LIBS} >> $name
+echo "EUXL_LIBS = ${EUXL_LIBS}" >> $name
 echo AR = ${AR} >> $name
 echo RANLIB = ${RANLIB} >> $name
 echo ARCH = ${ARCH} >> $name
@@ -423,9 +440,8 @@ echo U2_DIR = ${EUL_DIR}/Youtoo >> $name
 echo U2 = ${EUL_BIN_DIR}/youtoo >> $name
 echo U2_BOOT = ${EUL_BOOT_BIN_DIR}/youtoo.sh >> $name
 echo U2_C_DIR = ${U2_C_DIR} >> $name
-echo EUL_GC_DIR = ${EUL_GC_DIR} >> $name
-echo EUL_GC_CFLAGS = ${EUL_GC_CFLAGS} >> $name
-echo UNIX_DIR = ${UNIX_DIR} >> $name
+echo U2_GC_DIR = ${U2_GC_DIR} >> $name
+echo U2_GC_CFLAGS = ${U2_GC_CFLAGS} >> $name
 echo EUL_TK_VERSION = ${EUL_TK_VERSION} >> $name
 echo EUL_TK_FLAGS = ${EUL_TK_FLAGS} >> $name
 echo >> $name
@@ -456,14 +472,14 @@ then
     rm -f Vm/gc.h
 fi
 
-if [ ! -z "${EUL_GC_DIR}" ]
+if [ ! -z "${U2_GC_DIR}" ]
 then
     if [ $THRTYPE = PPCR ]
     then
-        ln -s ${EUL_GC_DIR}/base/libpcr.a $EUL_LIB_DIR/libgc.a
-    elif [ -f ${EUL_GC_DIR}/gc.a ]
+        ln -s ${U2_GC_DIR}/base/libpcr.a $EUL_LIB_DIR/libgc.a
+    elif [ -f ${U2_GC_DIR}/gc.a ]
     then
-        ln -s ${EUL_GC_DIR}/gc.a $EUL_LIB_DIR/libgc.a
+        ln -s ${U2_GC_DIR}/gc.a $EUL_LIB_DIR/libgc.a
     fi
 else
     touch Vm/gc.h

@@ -10,7 +10,7 @@ lib%.a : %.em
 
 .PHONY: all
 all:	_telos0 libboot.a libtelos.a
-	${UNIX_DIR}/mv -f libboot.* libtelos.* ../Lib.${ARCH}
+	@mv -f libboot.* libtelos.* ../Lib.${ARCH}
 
 
 ## --------------------------------------------------------------------
@@ -20,6 +20,6 @@ all:	_telos0 libboot.a libtelos.a
 .PHONY: touch
 touch:
 	@echo ".TOUCHING youtoo modules ..."
-	${UNIX_DIR}/rm -f Lib.${OSTYPE}/lib{boot,telos}.so*
-	${UNIX_DIR}/rm -f libboot.i libtelos.i liblevel-1.i libmath.i
+	@rm -f Lib.${OSTYPE}/lib{boot,telos}.so*
+	@rm -f libboot.i libtelos.i liblevel-1.i libmath.i
 	touch boot0.em mop-gf0.em mop-meth0.em mop-defcl0.em telos0.em

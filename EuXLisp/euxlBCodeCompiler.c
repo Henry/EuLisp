@@ -5096,9 +5096,9 @@ void compileModuleFFI(const moduleFilesDef* modfiles)
 {
     char* modFFICompileCmd = euxcStringConcat
     (
-        "gcc -pipe -m64 -DWORD_LENGTH=64 -std=gnu99 -O3 -fpic ",
+        "gcc -pipe -m64 -DWORD_LENGTH=64 -std=gnu99 -O2 -fpic ",
         modfiles->cname,
-        " platforms/x86_64/*.o -shared -o ",
+        " -shared -o ",
         modfiles->soname,
         NULL
     );

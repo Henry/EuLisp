@@ -1,5 +1,5 @@
 ### Copyright 1994 Russell Bradford
-### Copyright 2010, 2011 Henry G. Weller
+### Copyright 2010-2011 Henry G. Weller
 ###-----------------------------------------------------------------------------
 ##  This file is part of
 ### ---                           EuLisp System 'Eu2C'
@@ -22,19 +22,13 @@
 ###  Note: set Eu2CROOT e.g. export Eu2CROOT=`pwd`
 ### Usage: make [options]
 ### Options:
-###   ARCH=<achitectuer: i686, x86_64...>
+###   ARCH=<achitecture: i686, x86_64...>
 ### Optional Flags:
 ###   -DSOCK to include socket code, but beware: it is possibly buggy
 ###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
-
-###-----------------------------------------------------------------------------
-### Set the compilation flags for the particular achitecture
-###-----------------------------------------------------------------------------
-CFLAGS=$(EUXLISP_CFLAGS) -fpic
-LIBS=$(EUXLISP_LIBS) -ldl
 
 ###-----------------------------------------------------------------------------
 ### Search and installation paths
@@ -59,8 +53,12 @@ IMAGE_PLATFORM = $(EUL_LIB_DIR)/$(IMAGE)
 IMAGE_MOD = euxlisp_mod.wks
 IMAGE_MOD_PLATFORM = $(EUL_LIB_DIR)/$(IMAGE_MOD)
 
+### Set CFLAGS
+# used in the $(ARCH_DIR)/%.o : %.c rule
+CFLAGS = $(EUXL_CFLAGS)
+
 ###  Transfer paths to the compiler
-# Note: CPPFLAGS is used here because it is already on the used in the
+# Note: CPPFLAGS is set here because it is used in the
 # $(ARCH_DIR)/%.o : %.c rule
 CPPFLAGS = -DIMAGE='"$(IMAGE)"' -DIMAGE_MOD='"$(IMAGE_MOD)"' \
          -DMODULE_SEARCH_PATH='$(MODULE_SEARCH_PATH)' \
@@ -94,7 +92,7 @@ euxlisp: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
 $(EULX_O) : $(EUXL_H)
 
 $(EUL_BIN_DIR)/euxlisp: $(EULX_O) | $(EUL_BIN_DIR)/.
-	$(CC) $(LDFLAGS) $(EULX_O) $(LIBS) -o $@
+	$(CC) $(EUXL_CFLAGS) $(EULX_O) $(EUXL_LIBS) -o $@
 
 $(IMAGE_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) saveimage
 	EU_MODULE_PATH=Level-0 $(EUL_BIN_DIR)/euxlisp -n < saveimage

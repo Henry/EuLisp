@@ -30,7 +30,7 @@
 * Installation
   + Run 'make' in directory /Modules/Pipe/.
   + Run 'make test' in directory /Modules/Pipe/.
-  + Add -lpipe to CLIBS in /youtoo/\.eulrc.${ARCH}/.
+  + Add -lpipe to U2_LIBS in /youtoo/\.eulrc.${ARCH}/.
 
 * Files
   The pipe library consists of single EuLisp module:

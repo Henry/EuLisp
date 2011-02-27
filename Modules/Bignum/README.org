@@ -29,7 +29,7 @@
 * Installation
   + Run 'make' in directory /Modules/Bignum/.
   + Run 'make test' in directory /Modules/Bignum/.
-  + Add -lbignum to CLIBS in /youtoo/\.eulrc.${ARCH}/.
+  + Add -lbignum to U2_LIBS in /youtoo/\.eulrc.${ARCH}/.
 
 * Files
   The bignum library consists of a number of EuLisp modules:

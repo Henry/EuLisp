@@ -143,7 +143,7 @@
       (defextern baz (...) ... "foo")
     #+END_SRC
     To link the library /libbar.a/, put a copy of /.eulrc.${ARCH}/ in your
-    home directory and add -lbar to the list of ~$CLIBS~; the library path must
+    home directory and add -lbar to the list of ~$U2_LIBS~; the library path must
     be given with ~-L<bar-path>~ in the list of ~$CFLAGS~.
 
 ***** Automatic type conversion

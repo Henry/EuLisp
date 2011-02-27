@@ -154,12 +154,12 @@ Edit the <i>Makefile</i> (if necessary).
 Run 'make' in directory <i>TclTk</i>
 </li>
 <li>
-Add '-ltcltk -lX11 -ltk83 -ltcl83' to CLIBS in <i>youtoo</i>\.eulrc.${ARCH}/;
+Add '-ltcltk -lX11 -ltk83 -ltcl83' to U2_LIBS in <i>youtoo</i>\.eulrc.${ARCH}/;
 perhaps also -ldl (eg for Linux) is necessary
 </li>
 <li>
 Add '-L&lt;EUL_X_LIB_DIR&gt; -L&lt;EUL_TCL_LIB_DIR&gt; -L&lt;EUL_TK_LIB_DIR&gt;'
-to CLIBS in EuLysses/.eulrc if necessary.
+to U2_LIBS in EuLysses/.eulrc if necessary.
 </li>
 <li>
 Add '-I&lt;EUL_X_INCLUDE_DIR&gt; -I&lt;EUL_TCL_INCLUDE_DIR&gt; -I&lt;EUL_TK_INCLUDE_DIR&gt;"
